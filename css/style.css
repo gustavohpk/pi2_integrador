@@ -46,7 +46,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 #main-menu li:hover, #account-menu li:hover{ background: #CCC; }
 #main-menu a:hover, #account-menu a:hover{ color: #000; }
 .navbar-text{ font-style: italic; font-weight: bold; }
-.navbar .nav, .navbar .nav > li { float:none; display:inline-block; vertical-align: top; }
+.main-menu, .main-menu > li, .account-menu, .account-menu > li { float:none; display:inline-block; vertical-align: top; }
 
 
 /* Banner home */
