@@ -111,22 +111,22 @@
 			  		<div id="media-thumbnail" class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"><h5>FOTOS E VÍDEOS DOS ÚLTIMOS EVENTOS</h5>
 							<div class="row">
 								<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
-								  	<a href="media/image/image1.jpg" class="fancybox" title="Formatura de TSI 2014" rel="lightbox"><img class="thumbnail" src="media/image/image1.jpg" alt="Formatura TSI"/>FORMATURA TSI</a>
+								  	<a href="media/image/image1.jpg" class="fancybox" title="Formatura de TSI 2014" rel="lightbox"><img class="thumbnail" src="media/image/image1.jpg" alt="Formatura TSI"/><span class="glyphicon glyphicon-camera"></span><br/>FORMATURA TSI</a>
 								</div>
 								<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
-								  	<a href="http://www.youtube.com/watch?v=Qv4-m-cIZf4" class="fancybox" title="Imagem 2" rel="lightbox"><img class="thumbnail" src="http://img.youtube.com/vi/Qv4-m-cIZf4/0.jpg" alt="Vídeo 1"/>NOMEDOEVENTO</a>
+								  	<a href="http://www.youtube.com/watch?v=Qv4-m-cIZf4" class="fancybox" title="Imagem 2" rel="lightbox"><img class="thumbnail" src="http://img.youtube.com/vi/Qv4-m-cIZf4/0.jpg" alt="Vídeo 1"/><span class="glyphicon glyphicon-facetime-video"></span><br/>NOMEDOEVENTO</a>
 								</div>
 								<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
-								  	<a href="media/image/image2.jpg" class="fancybox" title="III Mostra de Talentos Campus Guarapuava" rel="lightbox"><img class="thumbnail" src="media/image/image2.jpg" alt="Mostra de Talentos"/>MOSTRA DE TALENTOS</a>
+								  	<a href="media/image/image2.jpg" class="fancybox" title="III Mostra de Talentos Campus Guarapuava" rel="lightbox"><img class="thumbnail" src="media/image/image2.jpg" alt="Mostra de Talentos"/><span class="glyphicon glyphicon-camera"></span><br/>MOSTRA DE TALENTOS</a>
 								</div>
 								<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
-								  	<a href="media/image/image3.jpg" class="fancybox" title="Formatura de TSI 2014" rel="lightbox"><img class="thumbnail" src="media/image/image3.jpg" alt="Formatura TSI"/>FORMATURA TSI</a>
+								  	<a href="media/image/image3.jpg" class="fancybox" title="Formatura de TSI 2014" rel="lightbox"><img class="thumbnail" src="media/image/image3.jpg" alt="Formatura TSI"/><span class="glyphicon glyphicon-camera"></span><br/>FORMATURA TSI</a>
 								</div>
 								<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
-								  	<a href="media/image/image4.jpg" class="fancybox" title="Despedida do campus da Unicentro" rel="lightbox"><img class="thumbnail" src="media/image/image4.jpg" alt="Mudança de Campus"/>MUDANÇA DE CAMPUS</a>
+								  	<a href="media/image/image4.jpg" class="fancybox" title="Despedida do campus da Unicentro" rel="lightbox"><img class="thumbnail" src="media/image/image4.jpg" alt="Mudança de Campus"/><span class="glyphicon glyphicon-camera"></span><br/>MUDANÇA DE CAMPUS</a>
 								</div>
 								<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
-								  	<a href="media/image/image5.jpg" class="fancybox" title="UTFPR Campus Guarapuava" rel="lightbox"><img class="thumbnail" src="media/image/image5.jpg" alt="Novo Campus"/>NOVO CAMPUS</a>
+								  	<a href="media/image/image5.jpg" class="fancybox" title="UTFPR Campus Guarapuava" rel="lightbox"><img class="thumbnail" src="media/image/image5.jpg" alt="Novo Campus"/><span class="glyphicon glyphicon-camera"></span><br/>NOVO CAMPUS</a>
 								</div>
 							</div>
 			  		</div>
