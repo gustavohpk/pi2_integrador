@@ -14,7 +14,7 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="main-menu-contents">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav main-menu">
         	<li><a href="index.php">HOME</a></li>
           <li><a href="#">PRÓXIMOS EVENTOS</a></li>
           <li><a href="#">EVENTOS ANTERIORES</a></li>

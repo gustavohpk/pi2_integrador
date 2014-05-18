@@ -20,7 +20,7 @@
 		                <span class="icon-bar"></span>
 		              </button>
 		            </div> -->
-		              <ul class="nav navbar-nav">
+		              <ul class="nav navbar-nav account-menu">
 		                <li><a id="btn-account-login" href="#">LOGIN</a></li>
 		                <li><a id="btn-account-register" href="#">CADASTRO</a></li>
 		              </ul>
@@ -76,6 +76,22 @@
 								</div>
 								<div class="col-xs-6">
 									<input type="text" class="form-control" placeholder="CPF">
+								</div>
+							</div>
+							<br/>
+
+							<div class="row">
+								<div class="col-xs-6">
+									<div class="input-group">
+										<span class="input-group-addon glyphicon glyphicon-phone-alt"></span>
+									  <input type="text" class="form-control input-glyphicon" placeholder="Telefone">
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="input-group">
+										<span class="input-group-addon glyphicon glyphicon-earphone"></span>
+									  <input type="text" class="form-control input-glyphicon" placeholder="Telefone 2">
+									</div>
 								</div>
 							</div>
 							<br/>
