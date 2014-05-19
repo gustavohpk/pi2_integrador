@@ -152,5 +152,7 @@
 		<?php require_once "includes/footer.php";?>
 		</div>
 		<?php require_once "includes/modals.php";?>
+		<?php require_once "includes/foot.php";?>	
 	</body>
+
 </html>
