@@ -14,8 +14,14 @@
 						    <h3 class="panel-title">Lista de eventos cadastrados</h3>
 						  </div>
 						  <div class="panel-body">
-								<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
-								<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
+						  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
+								<div class="row">
+									<div class="col-xs-12 general-actions">
+										<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
+										<div class="" style="float:right; font-size: 10px;"><a href="" target="blank">Acessar a página PRÓXIMOS EVENTOS <span class="glyphicon glyphicon-new-window"></span></a></div><br/>
+										<div class="" style="float:right; font-size: 10px;"><a href="" target="blank">Acessar a página EVENTOS ANTERIORES <span class="glyphicon glyphicon-new-window"></span></a></div>
+									</div>
+								</div>
 							</div>
 							<table class="table">
 								<tr>
@@ -92,8 +98,7 @@
 			</div>
 		</div>
 
+		<?php require_once "includes/foot.php";?>
 	</body>
-
-	<?php require_once "includes/foot.php";?>
 
 </html>

@@ -18,8 +18,8 @@ img{ width: 100%; }
 #news-list img.thumbnail{ max-height: 80px; min-height: 70px;}
 #account-cadastro, #account-login{ text-align: center; }
 .nivo-directionNav a{ top: 80% !important; }
-.pagination li.active a{ background-color: #AAA; border-color: #000; }
-.pagination li.active a:hover{ background-color: #000; border-color: #000; }
+/*.pagination li.active a{ background-color: #AAA; border-color: #000; }
+.pagination li.active a:hover{ background-color: #000; border-color: #000; }*/
 
 
 /* Eventos */
@@ -100,3 +100,4 @@ ul.left-menu a{ padding: 5px 5px !important; text-align:left; width: 100%; }
 ul.left-menu span{ text-align: left; }
 #account-register .col-xs-3, #account-register .col-xs-4, #account-register .col-xs-6, #account-register .col-xs-9, #account-register .col-xs-10, #account-register .col-xs-12{ padding-bottom: 10px; }
 #account-register span{ margin-bottom: 1px; }
+.general-actions { margin-top: 10px; }

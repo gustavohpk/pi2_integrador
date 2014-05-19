@@ -16,8 +16,8 @@
       <div class="collapse navbar-collapse" id="main-menu-contents">
         <ul class="nav navbar-nav main-menu">
         	<li><a href="index.php">HOME</a></li>
-          <li><a href="#">PRÓXIMOS EVENTOS</a></li>
-          <li><a href="#">EVENTOS ANTERIORES</a></li>
+          <li><a href="next-events.php">PRÓXIMOS EVENTOS</a></li>
+          <li><a href="prev-events.php">EVENTOS ANTERIORES</a></li>
           <li><a href="news.php">NOTÍCIAS</a></li>
           <li><a href="#">FOTOS E VÍDEOS</a></li>
           <li><a href="contact.php">CONTATO</a></li>
