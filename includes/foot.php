@@ -10,7 +10,8 @@
 <script type="text/javascript" src="plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript" src="plugins/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
 <script type="text/javascript" src="plugins/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-<script src="plugins/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+<script type="text/javascript" src="plugins/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript" src="plugins/mask/jquery.maskedinput.js"></script>
   
 <script>
     $(document).ready(function() {

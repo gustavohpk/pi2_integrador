@@ -19,7 +19,7 @@
           <li><a href="next-events.php">PRÓXIMOS EVENTOS</a></li>
           <li><a href="prev-events.php">EVENTOS ANTERIORES</a></li>
           <li><a href="news.php">NOTÍCIAS</a></li>
-          <li><a href="#">FOTOS E VÍDEOS</a></li>
+          <li><a href="media.php">FOTOS E VÍDEOS</a></li>
           <li><a href="contact.php">CONTATO</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->

@@ -49,7 +49,7 @@
 								<div class="col-xs-12">
 									<div class="input-group">
 									  <span class="input-group-addon glyphicon glyphicon-user"></span>
-									  <input type="text" class="form-control input-glyphicon" placeholder="Nome">
+									  <input id="name" type="text" class="form-control input-glyphicon" placeholder="Nome">
 									</div>
 								</div>
 							</div>
@@ -58,13 +58,13 @@
 								<div class="col-xs-6">
 									<div class="input-group">
 										<span class="input-group-addon glyphicon glyphicon-envelope"></span>
-									  <input type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
+									  <input id="email" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="input-group">
 									  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
-									  <input type="text" class="form-control input-glyphicon" placeholder="Senha">
+									  <input id="password" type="text" class="form-control input-glyphicon" placeholder="Senha">
 									</div>
 								</div>
 							</div>
@@ -72,10 +72,10 @@
 							<br/>
 							<div class="row">
 								<div class="col-xs-6">
-									<input type="text" class="form-control" placeholder="R.G.">
+									<input id="rg" type="text" class="form-control" placeholder="R.G.">
 								</div>
 								<div class="col-xs-6">
-									<input type="text" class="form-control" placeholder="CPF">
+									<input id="cpf" type="text" class="form-control" placeholder="CPF">
 								</div>
 							</div>
 							<br/>
@@ -84,13 +84,13 @@
 								<div class="col-xs-6">
 									<div class="input-group">
 										<span class="input-group-addon glyphicon glyphicon-phone-alt"></span>
-									  <input type="text" class="form-control input-glyphicon" placeholder="Telefone">
+									  <input id="phone1" type="text" class="form-control input-glyphicon" placeholder="Telefone">
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="input-group">
 										<span class="input-group-addon glyphicon glyphicon-earphone"></span>
-									  <input type="text" class="form-control input-glyphicon" placeholder="Telefone 2">
+									  <input id="phone2" type="text" class="form-control input-glyphicon" placeholder="Telefone 2">
 									</div>
 								</div>
 							</div>
@@ -98,28 +98,34 @@
 
 							<div class="row">
 								<div class="col-xs-9">
-									<input type="text" class="form-control" placeholder="Rua">
+									<input id="street" type="text" class="form-control" placeholder="Rua">
 								</div>
 								<div class="col-xs-3">
-									<input type="text" class="form-control" placeholder="Número">
+									<input id="number" type="text" class="form-control" placeholder="Número">
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-xs-6">
-									<input type="text" class="form-control" placeholder="Bairro">
+								<div class="col-xs-7">
+									<input id="district" type="text" class="form-control" placeholder="Bairro">
 								</div>
-								<div class="col-xs-6">
-									<input type="text" class="form-control" placeholder="Complemento">
+								<div class="col-xs-5">
+									<input id="cep" type="text" class="form-control" placeholder="CEP">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-xs-12">
+									<input id="complement" type="text" class="form-control" placeholder="Complemento">
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-xs-8">
-									<input type="text" class="form-control" placeholder="Cidade">
+									<input id="city" type="text" class="form-control" placeholder="Cidade">
 								</div>
 								<div class="col-xs-4">
-									<select class="form-control" placeholder="Nome">
+									<select id="state" class="form-control" placeholder="Estado">
 										<option selected disabled>Estado</option>
 									</select>
 								</div>
@@ -132,8 +138,9 @@
 		<?php require_once "includes/footer.php";?>
 		</div>
 
+		<?php require_once "includes/foot.php";?>
+
 	</body>
 
-	<?php require_once "includes/foot.php";?>
 
 </html>

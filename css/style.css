@@ -85,6 +85,12 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 #login-bar{ border-bottom-left-radius: 50%; border-bottom-right-radius: 50%; }
 #login-bar:hover a{ display: inline; }
 
+/* ACCOUNT */
+#account-register .col-xs-3, #account-register .col-xs-4, #account-register .col-xs-5, #account-register .col-xs-6, #account-register .col-xs-7, #account-register .col-xs-9, #account-register .col-xs-10, #account-register .col-xs-12{ padding-bottom: 10px; }
+#account-register span{ margin-bottom: 1px; }
+.general-actions { margin-top: 10px; }
+
+
 
 /* Comentários do Facebook */
 .fb-comments{ margin-top: 25px; }
@@ -98,6 +104,9 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 .dropdown:hover .dropdown-menu { display: block; }
 ul.left-menu a{ padding: 5px 5px !important; text-align:left; width: 100%; }
 ul.left-menu span{ text-align: left; }
-#account-register .col-xs-3, #account-register .col-xs-4, #account-register .col-xs-6, #account-register .col-xs-9, #account-register .col-xs-10, #account-register .col-xs-12{ padding-bottom: 10px; }
-#account-register span{ margin-bottom: 1px; }
-.general-actions { margin-top: 10px; }
+
+
+.progress-bar {
+  -webkit-transition: width 2.5s ease-in-out;
+  transition: width 2.5s ease-in-out;
+}
