@@ -32,11 +32,11 @@
 					<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-sm-offset-1">
 						<div class="input-group">
 							<span class="input-group-addon glyphicon glyphicon-envelope"></span>
-						  <input type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
+						  <input type="email" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
 						</div>
 						<div class="input-group">
 						  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
-						  <input type="text" class="form-control input-glyphicon" placeholder="Senha">
+						  <input type="password" class="form-control input-glyphicon" placeholder="Senha">
 						</div>
 						<button type="submit" class="btn btn-default btn-lg">Login</button>
 					</div>
@@ -125,7 +125,7 @@
 									<input id="city" type="text" class="form-control" placeholder="Cidade">
 								</div>
 								<div class="col-xs-4">
-									<select id="state" class="form-control" placeholder="Estado">
+									<select id="state" class="form-control">
 										<option selected disabled>Estado</option>
 									</select>
 								</div>

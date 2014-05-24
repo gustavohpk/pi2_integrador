@@ -38,44 +38,56 @@
 			    	</div>
 		    	</div>
 		    	<div class="row photos-list" style="display:none">
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 1" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 1"/></span></a>
-          	</div>
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 2" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 2"/></a>
-          	</div>
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 3" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 3"/></a>
-          	</div>
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 4" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 4"/></span></a>
-          	</div>
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 5" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 5"/></a>
-          	</div>
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 6" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 6"/></a>
-          	</div>
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 7" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 7"/></span></a>
-          	</div>
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 8" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 8"/></a>
-          	</div>
-          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 9" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 9"/></a>
-          	</div>
-          </div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 1" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 1"/></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 2" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 2"/></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 3" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 3"/></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 4" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 4"/></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 5" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 5"/></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 6" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 6"/></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 7" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 7"/></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 8" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 8"/></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 9" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 9"/></a>
+		          	</div>
 				</div>
 				<div id="media-videos" class="row" style="display:none">
 					<h3>Vídeos</h3>
+				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+						<div id="progress-videos" class="progress progress-striped active">
+			        <div id="progressbar2" aria-valuemax="100" aria-valuemin="100" aria-valuenow="100" class="progress-bar progress-bar-default" role="progressbar" style="width: 100%">Carregando...
+			         	<span class="sr-only">Progress Bar</span>
+			        </div>
+		    	</div>
+		    	<div class="row videos-list" style="display:none">
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 1" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 1"/></span></a>
+		          	</div>
+		          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		          		<a href="img/placeholder-evento.png" class="fancybox" title="Foto 2" rel="lightbox"><img class="thumbnail" src="img/placeholder-evento.png" alt="Foto 2"/></a>
+		          	</div>
 				</div>
 			</div>
 		<?php require_once "includes/footer.php";?>
 		</div>
 
-	</body>
+		<?php require_once "includes/foot.php";?>
 
-	<?php require_once "includes/foot.php";?>
+	</body>
 
 </html>

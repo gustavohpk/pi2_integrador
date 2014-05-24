@@ -45,7 +45,52 @@ $("#btn-media-videos").click(function(){
  });
 
 $(document).ready(function(){
-  $('#phone1').mask("(00) 000000009", {placeholder: "(__) - _________"});
-  $('#phone2').mask("(00) 000000009", {placeholder: "(__) - _________"});
-  $('#cpf').mask("000.000.000-00", {placeholder: "___.___.___-__"});
+	$('#phone1').mask("(99) 99999999?9");
+	$('#phone2').mask("(99) 99999999?9");
+	$('#cpf').mask("999.999.999-99");
+});
+
+// ADMIN
+
+function hideDivs(){
+	$('.events-list').hide();
+	$('.news-list').hide();
+	$('.users-list').hide();
+	$('.media-list').hide();
+	$('.inscriptions-list').hide();
+	$('.dropdown-events').removeClass('active');
+	$('.dropdown-news').removeClass('active');
+	$('.dropdown-users').removeClass('active');
+	$('.dropdown-media').removeClass('active');
+	$('.dropdown-inscriptions').removeClass('active');
+}
+
+$("#btn-events-list").click(function(){
+	hideDivs();
+	$('.events-list').fadeIn();
+	$('.dropdown-events').addClass('active');
+});
+
+$("#btn-news-list").click(function(){
+	hideDivs();
+	$('.news-list').fadeIn();
+	$('.dropdown-news').addClass('active');
+});
+
+$("#btn-users-list").click(function(){
+	hideDivs();
+	$('.users-list').fadeIn();
+	$('.dropdown-users').addClass('active');
+});
+
+$("#btn-media-list").click(function(){
+	hideDivs();
+	$('.media-list').fadeIn();
+	$('.dropdown-media').addClass('active');
+});
+
+$("#btn-inscriptions-list").click(function(){
+	hideDivs();
+	$('.inscriptions-list').fadeIn();
+	$('.dropdown-inscriptions').addClass('active');
 });

@@ -16,22 +16,34 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="dropdown">
+            <li class="dropdown dropdown-events">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos</a>
               <ul class="dropdown-menu">
-                <li><a href="#">Listar</a></li>
+                <li><a id="btn-events-list" href="#">Listar</a></li>
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown dropdown-news">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notícias</a>
               <ul class="dropdown-menu">
-                <li><a href="#">Listar</a></li>
+                <li><a id="btn-news-list" href="#">Listar</a></li>
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown dropdown-users">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuários</a>
               <ul class="dropdown-menu">
-                <li><a href="#">Listar</a></li>
+                <li><a id="btn-users-list" href="#">Listar</a></li>
+              </ul>
+            </li>
+            <li class="dropdown dropdown-media">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mídia</a>
+              <ul class="dropdown-menu">
+                <li><a id="btn-media-list" href="#">Listar</a></li>
+              </ul>
+            </li>
+            <li class="dropdown dropdown-inscriptions">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inscrições</a>
+              <ul class="dropdown-menu">
+                <li><a id="btn-inscriptions-list" href="#">Listar</a></li>
               </ul>
             </li>
             <li class="dropdown">
