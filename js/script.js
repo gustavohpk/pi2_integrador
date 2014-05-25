@@ -58,11 +58,15 @@ function hideDivs(){
 	$('.users-list').hide();
 	$('.media-list').hide();
 	$('.inscriptions-list').hide();
+	$('.config').hide();
+	$('.config-template').hide();
+	$('.config-banners').hide();
 	$('.dropdown-events').removeClass('active');
 	$('.dropdown-news').removeClass('active');
 	$('.dropdown-users').removeClass('active');
 	$('.dropdown-media').removeClass('active');
 	$('.dropdown-inscriptions').removeClass('active');
+	$('.dropdown-config').removeClass('active');
 }
 
 $("#btn-events-list").click(function(){
@@ -93,4 +97,22 @@ $("#btn-inscriptions-list").click(function(){
 	hideDivs();
 	$('.inscriptions-list').fadeIn();
 	$('.dropdown-inscriptions').addClass('active');
+});
+
+$("#btn-config").click(function(){
+	hideDivs();
+	$('.config').fadeIn();
+	$('.dropdown-config').addClass('active');
+});
+
+$("#btn-config-template").click(function(){
+	hideDivs();
+	$('.config-template').fadeIn();
+	$('.dropdown-config').addClass('active');
+});
+
+$("#btn-config-banners").click(function(){
+	hideDivs();
+	$('.config-banners').fadeIn();
+	$('.dropdown-config').addClass('active');
 });

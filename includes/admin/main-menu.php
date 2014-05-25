@@ -46,12 +46,12 @@
                 <li><a id="btn-inscriptions-list" href="#">Listar</a></li>
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown dropdown-config">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuração</a>
               <ul class="dropdown-menu">
-                <li><a href="#">Configurações Gerais</a></li>
-                <li><a href="#">Tema e template</a></li>
-                <li><a href="#">Banners homepage</a></li>
+                <li><a id="btn-config" href="#">Configurações Gerais</a></li>
+                <li><a id="btn-config-template" href="#">Tema e template</a></li>
+                <li><a id="btn-config-banners" href="#">Banners homepage</a></li>
               </ul>
             </li>
           </ul>
