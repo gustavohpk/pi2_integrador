@@ -19,39 +19,44 @@
             <li class="dropdown dropdown-events">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-events-list" href="#">Listar</a></li>
+                <li><a id="btn-events-list" href="#"><span class="glyphicon glyphicon-list-alt"></span> Listar</a></li>
+                <li><a id="btn-events-new" href="#"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a></li>
               </ul>
             </li>
             <li class="dropdown dropdown-news">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notícias</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-news-list" href="#">Listar</a></li>
+                <li><a id="btn-news-list" href="#"><span class="glyphicon glyphicon-list-alt"> Listar</a></li>
+                <li><a id="btn-news-new" href="#"><span class="glyphicon glyphicon-plus"> Cadastrar</a></li>
               </ul>
             </li>
             <li class="dropdown dropdown-users">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuários</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-users-list" href="#">Listar</a></li>
+                <li><a id="btn-users-list" href="#"><span class="glyphicon glyphicon-list-alt"> Listar</a></li>
+                <li><a id="btn-users-new" href="#"><span class="glyphicon glyphicon-plus"> Cadastrar</a></li>
               </ul>
             </li>
             <li class="dropdown dropdown-media">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mídia</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-media-list" href="#">Listar</a></li>
+                <li><a id="btn-media-list" href="#"><span class="glyphicon glyphicon-list-alt"> Listar</a></li>
+                <li><a id="btn-media-new" href="#"><span class="glyphicon glyphicon-plus"> Cadastrar</a></li>
               </ul>
             </li>
             <li class="dropdown dropdown-inscriptions">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Inscrições</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-inscriptions-list" href="#">Listar</a></li>
+                <li><a id="btn-inscriptions-list" href="#"><span class="glyphicon glyphicon-list-alt"> Listar</a></li>
+                <li><a id="btn-inscriptions-new" href="#"><span class="glyphicon glyphicon-plus"> Cadastrar</a></li>
               </ul>
             </li>
             <li class="dropdown dropdown-config">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuração</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-config" href="#">Configurações Gerais</a></li>
-                <li><a id="btn-config-template" href="#">Tema e template</a></li>
-                <li><a id="btn-config-banners" href="#">Banners homepage</a></li>
+                <li><a id="btn-config" href="#"><span class="glyphicon glyphicon-cog"></span> Configurações Gerais</a></li>
+                <li><a id="btn-config-template" href="#"><span class="glyphicon glyphicon-pencil"></span> Tema e template</a></li>
+                <li><a id="btn-config-banners" href="#"><span class="glyphicon glyphicon-picture"></span> Banners homepage</a></li>
               </ul>
             </li>
           </ul>

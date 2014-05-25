@@ -21,6 +21,7 @@
           <li><a href="news.php">NOTÍCIAS</a></li>
           <li><a href="media.php">FOTOS E VÍDEOS</a></li>
           <li><a href="contact.php">CONTATO</a></li>
+          <li><a href="account.php">PAINEL</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

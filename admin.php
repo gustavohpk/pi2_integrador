@@ -12,6 +12,7 @@
 					<?php require_once "includes/admin/main-menu.php";?>
 					<?php require_once "includes/admin/events-list.php";?>
 					<?php require_once "includes/admin/news-list.php";?>
+					<?php require_once "includes/admin/news-edit.php";?>
 					<?php require_once "includes/admin/users-list.php";?>
 					<?php require_once "includes/admin/media-list.php";?>
 					<?php require_once "includes/admin/config.php";?>

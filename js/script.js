@@ -55,6 +55,7 @@ $(document).ready(function(){
 function hideDivs(){
 	$('.events-list').hide();
 	$('.news-list').hide();
+	$('.news-edit').hide();
 	$('.users-list').hide();
 	$('.media-list').hide();
 	$('.inscriptions-list').hide();
@@ -78,6 +79,12 @@ $("#btn-events-list").click(function(){
 $("#btn-news-list").click(function(){
 	hideDivs();
 	$('.news-list').fadeIn();
+	$('.dropdown-news').addClass('active');
+});
+
+$("#btn-news-new").click(function(){
+	hideDivs();
+	$('.news-edit').fadeIn();
 	$('.dropdown-news').addClass('active');
 });
 
