@@ -1,4 +1,16 @@
-Observações:
+Estrutura do Framework
 
-- Alterar a tabela de mídia para suportar links de vídeos do youtube
-- Adicionar o campo telefone2 (não obrigatório) na tabela de participante
+app/ - Arquivos da aplicação
+	app/resources/ - Recursos da aplicação (css, javascript, imagens do template, etc).
+	app/model/ - Modelos da aplicação
+	app/view/ - Visões da aplicação
+	app/controller - Controladores da aplicação
+
+config/ - Arquivos de configuração
+
+lib/ - Biblioteca do framework (validações, testes e funções do tipo)
+
+main/ - Arquivos do framework
+	main/model/ - Modelos do framework
+	main/view/ - Visões do framework
+	main/controller/ - Controladores do framework
