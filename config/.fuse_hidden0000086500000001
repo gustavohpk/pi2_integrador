@@ -1,6 +1,6 @@
 <?php
   define('APP_NAME', 'UTFPR - Controle de Eventos');
-  define('SITE_ROOT', '/pi2/ProjetoIntegrador/pi2_integrador');
+  define('SITE_ROOT', '/pi2/ProjetoIntegrador/RECUPERADO/pi2_integrador');
   define('APP_ROOT_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/' . SITE_ROOT);
 
 	/* Adicionar pastas defaults para inclução de arquivos com as funções require e include */

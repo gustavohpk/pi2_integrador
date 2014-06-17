@@ -1,11 +1,14 @@
 <?php 
 	class UsersController extends BaseController{
+		protected $user;
+		protected $userName;
+
 		public function beforeAction(){
-			echo "Antes<br>";
+			$this->user = new Users();
 		}
 
 		public function afterAction(){
-			echo "Depois<br>";
+			$this->userName = $this->user->getName($this->params[":id"]);
 		}
 
    		public function remove(){
