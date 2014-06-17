@@ -17,3 +17,4 @@ main/ - Arquivos do framework
 
 ----------------------------------
 .htaccess - Regra direciona todas as requisições para o /config/routers.php
+na sequencia main.php é iniciado, criado as constantes
