@@ -1,0 +1,21 @@
+# Não permite acessar diretórios
+Options -Indexes
+
+# Display errors
+php_flag display_errors on
+
+# Ativa o suporte à reescrita de URL.
+RewriteEngine On
+
+# Não aplica a condição para arquivos que existam. Isso significa que as imagens, CSS, JS e outros arquivos que já existem continuarão funcionando.
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Arquivo para onde deve ser direcionado as requisições.
+RewriteRule ^$ config/routes.php [L]
+
+# Necessário duas configurações por causa dos endereços com / e sem /
+# Não aplica a condição para arquivos e diretórios que existam na aplicação
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Arquivo para onde deve ser direcionado as requisições.
+RewriteRule .(/)?$ config/routes.php
