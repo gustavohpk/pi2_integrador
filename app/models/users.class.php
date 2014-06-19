@@ -8,8 +8,14 @@
 				echo $row["nome"]."<br>";
 			}
 			*/
+			$usuarios = array(
+				"users" => array(
+				array('nome' => 'Rodrigo Miss', 'Idade'=>27), 
+				array('nome' => 'Samuel Pereira Miss', 'Idade'=>1)
+				)
+			);
 
-			return "Rodrigo Miss";
+			return $usuarios;
 		}		
 	}
 ?>

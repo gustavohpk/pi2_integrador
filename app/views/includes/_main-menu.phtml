@@ -15,10 +15,10 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="main-menu-contents">
         <ul class="nav navbar-nav main-menu">
-        	<li><a href="index.php">HOME</a></li>
-          <li><a href="next-events.php">PRÓXIMOS EVENTOS</a></li>
-          <li><a href="prev-events.php">EVENTOS ANTERIORES</a></li>
-          <li><a href="news.php">NOTÍCIAS</a></li>
+        	<li><a href="<?php echo SITE_ROOT; ?>">HOME</a></li>
+          <li><a href="<?php echo SITE_ROOT.'/events/next'; ?>">PRÓXIMOS EVENTOS</a></li>
+          <li><a href="<?php echo SITE_ROOT.'/events/previous'; ?>">EVENTOS ANTERIORES</a></li>
+          <li><a href="<?php echo SITE_ROOT.'/news/list'; ?>">NOTÍCIAS</a></li>
           <li><a href="media.php">FOTOS E VÍDEOS</a></li>
           <li><a href="contact.php">CONTATO</a></li>
           <li><a href="account.php">PAINEL</a></li>

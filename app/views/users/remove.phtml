@@ -1,3 +1,8 @@
 <?php 
-	echo "Removendo Usuário : ". $this->id_usuario . " " . $this->userName;
+	echo "Listando usuários que serão removidos: <br><br>";
+
+	foreach ($users as $rows) {
+		echo "Nome: {$rows["nome"]} - idade: {$rows["Idade"]} <br>";	
+	}
+	
 ?>

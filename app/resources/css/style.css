@@ -1,0 +1,132 @@
+/* CSS Principal */
+body{ background-image: url(../img/background-main.png) }
+ul, ol{ list-style-type: none; }
+img{ width: 100%; }
+h2 { background-color: #FFF; padding: 5px; border: 1px solid #DDD;}
+.container-fluid, .container{ text-align: center; }
+.btn:hover, a, .facebook-link, .youtube-link, .utfpr-link, .utfpr-link img, #main-menu li, #account-menu li, span{ webkit-transition: all .3s ease-in-out;	transition: all .3s ease-in-out; }
+.col-bordered{ border: 1px solid #AAA; }
+
+
+/* Elementos */
+#header{ background: transparent; }
+#title-banner-img{ width: 100%; margin-top:15px; margin-bottom:15px; }
+#main-menu nav, #account-menu, .media-item .thumbnail{ background: #FFF; border-radius: 0; }
+#login-bar{ background: #FFF; font-size: 12px; padding: 5px; }
+#login-bar button{ width: 70px; }
+#news-list .list-group{ text-align: left; }
+#news-list, #news-list a.list-group-item, .event div.thumbnail{ border-radius: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
+#news-list img.thumbnail{ max-height: 80px; min-height: 70px;}
+#account-cadastro, #account-login{ text-align: center; }
+.nivo-directionNav a{ top: 80% !important; }
+.pagination li.active a, .pagination li.active a:hover{ background-color: #e7e7e7; border-color: #BBB; color: #555 ; }
+.pagination li a { color: #777; }
+.pagination li a:hover{ color: #000; background-color: #AAA; border-color: #AAA;}
+
+
+/* Eventos */
+.event div.thumbnail:hover{ background-color: #CCC; }
+.event div.thumbnail img{ border: 1px solid #CCC; }
+img.thumbnail:hover{ background-color: #AAA; border-radius: 5%; }
+/*a.fancybox span { padding: 3px; }
+a.fancybox:hover span{ background-color: #CCC; border-radius: 15%;}*/
+.event-thumbnail{ width: 80%; margin-top: 5px; }
+.modal-body{ text-align: center; }
+.event-link{ text-decoration: none !important; cursor: pointer; }
+a.event-related-link{ padding: 2px; }
+a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radius: 5px;}
+.events{ border-top: 1px solid #BBB; border-bottom: 1px solid #BBB; padding-top: 5px; }
+
+
+/* Correacao Glyphicon */
+#account-register input.input-glyphicon, #account-login input.input-glyphicon, #contact-form input.input-glyphicon{ margin-top: 1px !important; margin-bottom: -1px !important; }
+
+
+/* Contato */
+#contact-form button{ margin-top: 15px; }
+
+
+/* Menu */
+#main-menu li:hover, #account-menu li:hover{ background: #CCC; }
+#main-menu a:hover, #account-menu a:hover{ color: #000; }
+.navbar-text{ font-style: italic; font-weight: bold; }
+.main-menu, .main-menu > li, .account-menu, .account-menu > li { float:none; display:inline-block; vertical-align: top; }
+
+
+/* Banner home */
+#banner-slider{ background: transparent; }
+#banner-slider img{ width: 100% !important; }
+
+
+/* Footer */
+#footer{ margin-top: 10px; padding-top: 10px; background: #FFF; border-top: 1px solid #BBB; margin-bottom: 30px;}
+.utfpr-link { padding-top: 8px; }
+.utfpr-link img{ width: 49px; height: 49px; }
+.utfpr-link:hover img{ content: url("../img/utfpr-hover.png"); }
+.facebook-link{ width: 64px; height: 64px; background-image: url("../img/facebook.png"); background-repeat: no-repeat; }
+.facebook-link:hover{ background-image: url("../img/facebook-hover.png"); }
+.youtube-link{ width: 64px; height: 64px; background-image: url("../img/youtube.png"); background-repeat: no-repeat; }
+.youtube-link:hover{ background-image: url("../img/youtube-hover.png"); }
+#footer-links{ border-right: 1px solid #BBB; }
+
+
+/* Notícias */
+.older-news{ float:right; }
+.navbar-toggle{ float: center; }
+#news-list .list-group img.thumbnail, { width:100% !important; }
+#news-list .list-group-item{ min-height: 105px; webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out; }
+#news-list .list-group-item:hover{ background-color: #CCC; }
+#news-list .list-group-item{ min-height: 140px; }
+
+
+/* Fotos e vídeos */
+#media-thumbnail img{ margin-bottom: 0; }
+#media-thumbnail a{ text-decoration: none; color: #000; font-size: 10px; }
+.media-item{ margin-bottom: 5px; }
+.media-largeicons { cursor: pointer; color:#333; }
+.media-largeicons:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
+.media-largeicons .glyphicon { font-size: 100px; padding-bottom: 10px;}
+.media-largeicons .glyphicon:hover{ font-size: 100px; padding-bottom: 10px;}
+
+
+ /* Login Bar */
+#login-bar a{ display: none; }
+#login-bar{ border-bottom-left-radius: 50%; border-bottom-right-radius: 50%; border: 1px solid #BBB;}
+#login-bar:hover a{ display: inline; }
+
+/* ACCOUNT */
+#account-register, #account-login { background-color: #FFF; }
+#account-register .col-xs-3, #account-register .col-xs-4, #account-register .col-xs-5, #account-register .col-xs-6, #account-register .col-xs-7, #account-register .col-xs-9, #account-register .col-xs-10, #account-register .col-xs-12{ padding-bottom: 10px; }
+#account-register span{ margin-bottom: 1px; }
+.general-actions { margin-top: 10px; }
+
+
+
+/* Comentários do Facebook */
+.fb-comments{ margin-top: 25px; }
+
+
+/* Breadcrumbs */
+.breadcrumb{ display:inline-block; }
+
+
+/* PAINEL DO ADMIN */
+.dropdown:hover .dropdown-menu { display: block; }
+ul.left-menu a{ padding: 5px 5px !important; text-align:left; width: 100%; }
+ul.left-menu span{ text-align: left; }
+
+
+.progress-bar { -webkit-transition: width 2.5s ease-in-out; transition: width 2.5s ease-in-out; }
+
+.config-template input[type="file"]{ margin: 0 auto; }
+.config-template img { width: 64px; height: 64px;}
+.config-template select { width: 200px; margin: 0 auto;}
+
+.config-banners input{ margin: 0 auto; }
+.config-banners img{ max-height: 100px; max-width: 100px; }
+
+.admin-shortcut { padding: 10px; cursor: pointer; color:#333;}
+.admin-shortcut label { cursor: pointer; }
+.admin-shortcut:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
+.admin-shortcut .glyphicon { font-size: 70px; padding-bottom: 10px;}
+.admin-shortcut .glyphicon:hover{ font-size: 70px; padding-bottom: 10px;}

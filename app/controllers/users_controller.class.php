@@ -1,18 +1,15 @@
 <?php 
 	class UsersController extends BaseController{
-		protected $user;
-		protected $userName;
-
+		private $user;
+		
 		public function beforeAction(){
 			$this->user = new Users();
 		}
 
-		public function afterAction(){
-			$this->userName = $this->user->getName($this->params[":id"]);
-		}
+		public function afterAction(){}
 
    		public function remove(){
-      		$this->id_usuario = $this->params[":id"];
+   			$this->data = $this->user->getName($this->params[":id"]);
    		}
 	} 
 ?>

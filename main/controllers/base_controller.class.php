@@ -1,9 +1,11 @@
-<?php
+	<?php
 	class BaseController{
 		protected $params;
 		protected $layout;
 		protected $view;
+		protected $viewPath;
 		protected $controllerName;
+		protected $data = array(); //dados/variáveis que serão exportados para as views
 
 		public function __construct(){
 			$this->layout = "layout/layout.phtml";
@@ -17,21 +19,7 @@
 			$this->view = $view;
 		}
 
-		public function setControllerName($controllerName){
-			$this->controllerName = $controllerName;
-		}
-
-		public function render($view = null, $data = array()){
-			if ($view !== null){
-				$this->view = $view;
-			}
-
-			$view = $this->getViewPath();
-			extract($data);
-			require "views/".$this->layout;
-		}
-
-		private function getViewPath(){
+		private function setViewPath(){
 			$controller = lcfirst(str_replace('Controller', '', $this->controllerName)); //não considera a string Controller no nome do arquivo
 			$controller = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $controller)); //camel to snak
 			$view = $this->view;
@@ -41,7 +29,25 @@
 				return 'views' . $this->view . '.phtml';
 			}
 			*/
-			return 'views/' . $controller . '/' . $view . '.phtml';
+			$this->viewPath = 'views/' . $controller . '/' . $view . '.phtml';
+		}
+
+		function getViewPath(){
+			return $this->viewPath;
+		}
+
+		public function setControllerName($controllerName){
+			$this->controllerName = $controllerName;
+		}
+
+		public function render($view = null){
+			if ($view !== null){
+				$this->view = $view;
+			}
+
+			$this->setViewPath();
+			extract($this->data);
+			require "views/".$this->layout;
 		}
 
 		public function beforeAction(){}
