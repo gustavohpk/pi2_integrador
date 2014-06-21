@@ -4,6 +4,9 @@
 		
    		public function item(){}
    
-   		public function show(){}
+   		public function show(){
+   			$this->title = "Notícias";
+      		$this->setHeadTitle("Notícias");
+   		}
 	} 
 ?>

@@ -19,6 +19,23 @@
 			$this->view = $view;
 		}
 
+
+		//Título para tag title da tag head
+		public function setHeadTitle($pageTitle = null){
+			if ($pageTitle){
+				$this->headTitle = $pageTitle . " - " . APP_NAME;
+			}
+			else{
+				$this->headTitle = APP_NAME;
+			}
+			return $this->headTitle;
+		}
+
+		public function getHeadTitle(){
+			return $this->headTitle;
+		}
+
+		//Caminho da visão
 		private function setViewPath(){
 			$controller = lcfirst(str_replace('Controller', '', $this->controllerName)); //não considera a string Controller no nome do arquivo
 			$controller = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $controller)); //camel to snak
@@ -36,6 +53,7 @@
 			return $this->viewPath;
 		}
 
+		//Seta o controllador
 		public function setControllerName($controllerName){
 			$this->controllerName = $controllerName;
 		}

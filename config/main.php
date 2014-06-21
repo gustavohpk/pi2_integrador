@@ -1,5 +1,5 @@
 <?php
-  define('APP_NAME', 'UTFPR - Controle de Eventos');
+  define('APP_NAME', 'UTFPR Eventos');
   define('SITE_ROOT', '/pi2/ProjetoIntegrador/pi2_integrador');
   define('APP_ROOT_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/' . SITE_ROOT);
 

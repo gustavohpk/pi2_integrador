@@ -13,8 +13,20 @@
    	$router->get('/news/list', array('controller' => 'NewsController', 'action' => 'show'));
    	$router->get('/news/item', array('controller' => 'NewsController', 'action' => 'item'));
 
+    //rotas para mídia
+    $router->get('/media/gallery', array('controller' => 'MediaController', 'action' => 'gallery'));
+
+    //rotas para contato
+    $router->get('/contacts', array('controller' => 'ContactsController', 'action' => 'index'));
+
+    //rotas para login/cadastro/painel
+    $router->get('/contacts', array('controller' => 'ContactsController', 'action' => 'index'));
+    $router->get('/contacts', array('controller' => 'ContactsController', 'action' => 'index'));
+
    	//rota apenas para teste >> remover usuários
-    $router->get('/users/:id/remove', array('controller' => 'UsersController', 'action' => 'remove'));
-    
+    $router->get('/account/login', array('controller' => 'AccountController', 'action' => 'login'));
+    $router->get('/account/register', array('controller' => 'AccountController', 'action' => 'register'));
+
+
     $router->load();
 ?>

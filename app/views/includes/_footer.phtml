@@ -3,12 +3,13 @@
 		<div class="row">
 			<div id="footer-links" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<ul>
-					<li><a href="index.php">Home</a></li>
-					<li><a href="">Próximos Eventos</a></li>
-					<li><a href="">Eventos Anteriores</a></li>
-					<li><a href="news.php">Notícias</a></li>
-					<li><a href="">Fotos e Vídeos</a></li>
-					<li><a href="">Contato</a></li>
+					<li><a href="<?php echo SITE_ROOT; ?>">Home</a></li>
+					<li><a href="<?php echo SITE_ROOT.'/events/next'; ?>">Próximos Eventos</a></li>
+					<li><a href="<?php echo SITE_ROOT.'/events/previous'; ?>">Eventos Anteriores</a></li>
+					<li><a href="<?php echo SITE_ROOT.'/news/list'; ?>">Notícias</a></li>
+					<li><a href="<?php echo SITE_ROOT.'/media/gallery'; ?>">Fotos e Vídeos</a></li>
+					<li><a href="<?php echo SITE_ROOT.'/contacts'; ?>">Contato</a></li>
+					<li><a href="<?php echo SITE_ROOT.'/account/login'; ?>">Painel</a></li>
 				</ul>
 			</div>
 			<div id="footer-links2" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

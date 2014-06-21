@@ -1,3 +1,15 @@
+----- Atualização 001 (20/06) -----
+
+- Controllers e views para as demais páginas criadas
+- Função setHeaderTitle e getHeaderTitle adicionadas, sendo usadas nos controlles e no _head.phtml respectivamente (extenderemos posteriormente pra poder setar através da configuração da tabela de configurações)
+- Pequenas modificações de layout
+
+* Acho que antes de continuarmos o site, melhor começarmos o admin desde já
+
+-----
+
+
+
 Estrutura do Framework
 
 app/ - Arquivos da aplicação
