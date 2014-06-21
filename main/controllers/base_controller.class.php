@@ -40,14 +40,15 @@
 			$controller = lcfirst(str_replace('Controller', '', $this->controllerName)); //não considera a string Controller no nome do arquivo
 			$controller = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $controller)); //camel to snak
 			$controller = str_replace('\\', '/', $controller); # for namespace
-		   
-		   	/*
-		    if (substr($this->view, 0, 1) == '_') {
+		  
+		  	//em alguns métodos tais como _list e _new, remove-se o _ na busca pelo arquivo
+		    if (substr($this->view, 0, 1) == '_'){
 		      $view = substr($this->view, 1, strlen($this->view));
 		    } else {
 		      $view = $this->view;
 		    }
 
+		    /*
 		    if (substr($view, 0, 1) == '/') {
 		    	$this->viewPath = 'views' . $this->view . '.phtml';
 		    }
@@ -56,7 +57,7 @@
 		    }
 		    */
 
-		    $this->viewPath = 'views/' . $controller . '/' . $this->view . '.phtml';
+		    $this->viewPath = 'views/' . $controller . '/' . $view . '.phtml';
 		}
 
 		public function getViewPath(){

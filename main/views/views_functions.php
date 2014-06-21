@@ -31,6 +31,15 @@
 		}
 	}
 
+	function createJavascriptTag(){
+		$params = func_get_args();
+
+		foreach ($params as $param) {
+			$path = RESOURCES_FOLDER."/$param";
+			echo "<script src='$path' type='text/javascript'></script>";
+		}
+	}
+
 	function createShortCutIcon($path){
 		$path = RESOURCES_FOLDER."/img/$path";
 		echo "<link href='$path' rel='shortcut icon' />";

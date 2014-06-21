@@ -1,3 +1,7 @@
+----- Atualização 003 (21/06) -----
+- Implementado view para Admin\events
+- Pequenas modificações no Admin\layout
+
 ----- Atualização 002 (21/06) -----
 - Adicionado arquivo "views_functions.php" em "/main/views" visando implementar funções para auxiliar a manutenção das views, tais como criação de tags, liks e urls
 - Removido o arquivo "/views/includes/_head.phtml". Na tag <head> de "/views/layout/layout.phtml" utilizado funções para gerar as tags de inclusão de stylesheets e shortcut icon

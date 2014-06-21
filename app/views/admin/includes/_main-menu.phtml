@@ -19,8 +19,8 @@
             <li class="dropdown dropdown-events">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-events-list" href="#"><span class="glyphicon glyphicon-list-alt"></span> Listar</a></li>
-                <li><a id="btn-events-new" href="#"><span class="glyphicon glyphicon-plus"></span> Cadastrar</a></li>
+                <li><?= createLinkTo('/admin/events/list', '<span class="glyphicon glyphicon-list-alt"></span> Listar')?></li>
+                <li><?= createLinkTo('/admin/events/new', '<span class="glyphicon glyphicon-plus"></span> Cadastrar')?></li>
               </ul>
             </li>
             <li class="dropdown dropdown-news">

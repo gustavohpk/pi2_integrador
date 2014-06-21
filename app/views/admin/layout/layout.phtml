@@ -19,7 +19,20 @@
 </head>
 	<body>
 		<div id="admin" class="container">
-			<?php require_once $this->getViewPath() ?>		
+			<div id="header">
+				<h3>Painel do Administrador</h3>
+			</div>
+			<div class="row">
+				<div id="content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<?php 
+						require_once "views/admin/includes/_main-menu.phtml";
+						require_once $this->getViewPath();
+					?>		
+				</div>
+			</div>
+			<div id="footer">
+				<h6>Painel do administrador - Sistema de Eventos UTFPR</h6>
+			</div>	
 		</div>
 
 		<?php require_once "views/admin/includes/_foot.phtml" ?>

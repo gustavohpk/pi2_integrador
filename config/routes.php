@@ -23,12 +23,18 @@
     $router->get('/contacts', array('controller' => 'ContactsController', 'action' => 'index'));
     $router->get('/contacts', array('controller' => 'ContactsController', 'action' => 'index'));
 
-   	//rota apenas para teste >> remover usuários
+   	//rota para login/cadastro - usuários
     $router->get('/account/login', array('controller' => 'AccountController', 'action' => 'login'));
     $router->get('/account/register', array('controller' => 'AccountController', 'action' => 'register'));
 
     //rota para root do admin
     $router->get('/admin', array('controller' => 'Admin\HomeController', 'action' => 'index'));
+
+    //rota para eventos - area admin
+    $router->get('/admin/events/list', array('controller' => 'Admin\EventsController', 'action' => '_list'));
+    $router->get('/admin/events/new', array('controller' => 'Admin\EventsController', 'action' => '_new'));
+    $router->get('/admin/events/:id/edit', array('controller' => 'Admin\EventsController', 'action' => '_edit'));
+    $router->get('/admin/events/:id/remove', array('controller' => 'Admin\EventsController', 'action' => 'remove'));
 
     $router->load();
 ?>
