@@ -1,19 +1,11 @@
------ Atualização 002 (21/06) -----
-- Adicionado arquivo "views_functions.php" em "/main/views" visando implementar funções para auxiliar a manutenção das views, tais como criação de tags, liks e urls
-- Removido o arquivo "/views/includes/_head.phtml". Na tag <head> de "/views/layout/layout.phtml" utilizado funções para gerar as tags de inclusão de stylesheets e shortcut icon
-- Criado layout para administrador em "/views/admin/layout/layout.php"
-- Iniciado implementação do controlador Admin\HomeController
-
------ Atualização 001 (20/06) -----
-
+----- Atualização 002 (20/06) -----
 - Controllers e views para as demais páginas criadas
 - Função setHeaderTitle e getHeaderTitle adicionadas, sendo usadas nos controlles e no _head.phtml respectivamente (extenderemos posteriormente pra poder setar através da configuração da tabela de configurações)
 - Pequenas modificações de layout
 
 * Acho que antes de continuarmos o site, melhor começarmos o admin desde já
 
------ Atualização 000 (19/06) -----
-
+----- Atualização 001 (19/06) -----
 - Iniciado implementação dos Controllers, Views, Models e Layout
 
 

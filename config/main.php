@@ -10,12 +10,10 @@
   set_include_path(get_include_path() . PATH_SEPARATOR . APP_ROOT_FOLDER );
   set_include_path(get_include_path() . PATH_SEPARATOR . APP_ROOT_FOLDER . '/main');
   set_include_path(get_include_path() . PATH_SEPARATOR . APP_ROOT_FOLDER . '/app');
-  set_include_path(get_include_path() . PATH_SEPARATOR . APP_ROOT_FOLDER . '/app/views');
-  set_include_path(get_include_path() . PATH_SEPARATOR . APP_ROOT_FOLDER . '/app/resources');
-  
+    
   date_default_timezone_set('America/Sao_Paulo');
   header('Content-Type: text/html; charset=UTF-8');
 
-  require_once "classes/auto_load_classes.class.php";
+  require_once 'classes/auto_load_classes.class.php';
   AutoLoadClasses::autoload_register();
 ?>

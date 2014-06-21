@@ -18,17 +18,10 @@
   ?>
 </head>
 	<body>
-		<div class="container">			
-			<?php 
-				require_once "views/includes/_header.phtml";
-				require_once "views/includes/_main-menu.phtml";
-				require_once $this->getViewPath();
-				require_once "views/includes/_footer.phtml";
-			?>
+		<div id="admin" class="container">
+			<?php require_once $this->getViewPath() ?>		
 		</div>
 
-		<?php require_once "views/includes/_modals.html";?>
+		<?php require_once "views/admin/includes/_foot.phtml" ?>
 	</body>
-
-	<?php require_once "views/includes/_foot.phtml";?>
 </html>

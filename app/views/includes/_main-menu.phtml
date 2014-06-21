@@ -15,13 +15,13 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="main-menu-contents">
         <ul class="nav navbar-nav main-menu">
-        	<li><a href="<?php echo SITE_ROOT; ?>">HOME</a></li>
-          <li><a href="<?php echo SITE_ROOT.'/events/next'; ?>">PRÓXIMOS EVENTOS</a></li>
-          <li><a href="<?php echo SITE_ROOT.'/events/previous'; ?>">EVENTOS ANTERIORES</a></li>
-          <li><a href="<?php echo SITE_ROOT.'/news/list'; ?>">NOTÍCIAS</a></li>
-          <li><a href="<?php echo SITE_ROOT.'/media/gallery'; ?>">FOTOS E VÍDEOS</a></li>
-          <li><a href="<?php echo SITE_ROOT.'/contacts'; ?>">CONTATO</a></li>
-          <li><a href="<?php echo SITE_ROOT.'/account/login'; ?>">PAINEL</a></li>
+        	<li><?= createLinkTo('/', 'HOME')?></li>
+          <li><?= createLinkTo('/events/next', 'PRÓXIMOS EVENTOS')?></li>
+          <li><?= createLinkTo('/events/previous', 'EVENTOS ANTERIORES')?></li>
+          <li><?= createLinkTo('/news/list', 'NOTÍCIAS')?></li>
+          <li><?= createLinkTo('/media/gallery', 'FOTOS E VÍDEOS')?></li>
+          <li><?= createLinkTo('/contacts', 'CONTATO')?></li>
+          <li><?= createLinkTo('/account/login', 'PAINEL')?></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

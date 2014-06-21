@@ -27,6 +27,8 @@
     $router->get('/account/login', array('controller' => 'AccountController', 'action' => 'login'));
     $router->get('/account/register', array('controller' => 'AccountController', 'action' => 'register'));
 
+    //rota para root do admin
+    $router->get('/admin', array('controller' => 'Admin\HomeController', 'action' => 'index'));
 
     $router->load();
 ?>

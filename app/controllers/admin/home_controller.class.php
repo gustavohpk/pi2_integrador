@@ -1,5 +1,7 @@
 <?php 
-	class HomeController extends BaseController{
+	namespace Admin;
+	
+	class HomeController extends BaseAdminController{
    		public function index() {
       		$this->setHeadTitle();
    		}
