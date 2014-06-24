@@ -1,7 +1,12 @@
 
 ----- Atualização 004 (23/06) -----
 - Criadas funções getUri, getMedia e getResource, que retornam a constante referente ao caminho junto com o parâmetro passado
-- Substituídas as constantes da home-site
+- Criada função getApplicationName, que retorna a constante com o nome da aplicação. A princípio é só utilizada na função getHeaderTitle.
+- Substituídas as constantes da home-site, account, events
+
+- OBS.: Podemos integrar essas funções get dentro das views_functions.php e deixar padrão no site todo, pra usarmos o mínimo possível de constantes no código
+
+- Criada view inicial para login no painel do admin (está em views/admin/home/login.phtml, mas provavelmente ficará separada)
 
 ----- Atualização 003 (21/06) -----
 - Implementado view para Admin\events
