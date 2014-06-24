@@ -23,16 +23,49 @@
 		//Título para tag title da tag head
 		public function setHeadTitle($pageTitle = null){
 			if ($pageTitle){
-				$this->headTitle = $pageTitle . " - " . APP_NAME;
+				$this->headTitle = $pageTitle . " - " . $this->getApplicationName();
 			}
 			else{
-				$this->headTitle = APP_NAME;
+				$this->headTitle = $this->getApplicationName();
 			}
 			return $this->headTitle;
 		}
 
 		public function getHeadTitle(){
 			return $this->headTitle;
+		}
+
+		//Retorna constantes
+
+		public function getApplicationName(){
+			return APP_NAME;
+		}
+
+		public function getUri($uri = null){
+			if (!$uri){
+				return SITE_ROOT;
+			}
+			else{
+				return SITE_ROOT . "/" . $uri;
+			}
+		}
+
+		public function getMedia($media = null){
+			if ($media){
+				return MEDIA_FOLDER . "/" . $media;
+			}
+			else{
+				return false;
+			}
+		}
+
+		public function getResource($resource = null){
+			if ($resource){
+				return RESOURCES_FOLDER . "/" . $resource;
+			}
+			else{
+				return false;
+			}
 		}
 
 		//Caminho da visão

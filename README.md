@@ -1,3 +1,8 @@
+
+----- Atualização 004 (23/06) -----
+- Criadas funções getUri, getMedia e getResource, que retornam a constante referente ao caminho junto com o parâmetro passado
+- Substituídas as constantes da home-site
+
 ----- Atualização 003 (21/06) -----
 - Implementado view para Admin\events
 - Pequenas modificações no Admin\layout
