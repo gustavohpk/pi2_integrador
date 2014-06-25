@@ -1,3 +1,9 @@
+----- Atualização 005 (24/06) -----
+- Criadas rotas para as settings (configurações) do admin
+- Criadas views e controllers
+- Foi criada a página configuração de pagamento, para posteriormente adicionarmos a API do PagSeguro
+- Criada página para configurações de contato
+
 
 ----- Atualização 004 (23/06) -----
 - Criadas funções getUri, getMedia e getResource, que retornam a constante referente ao caminho junto com o parâmetro passado

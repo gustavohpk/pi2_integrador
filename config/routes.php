@@ -36,5 +36,11 @@
     $router->get('/admin/events/:id/edit', array('controller' => 'Admin\EventsController', 'action' => '_edit'));
     $router->get('/admin/events/:id/remove', array('controller' => 'Admin\EventsController', 'action' => 'remove'));
 
+    //rota para configuracoes do admin
+    $router->get('/admin/settings/general', array('controller' => 'Admin\SettingsController', 'action' => 'general'));
+    $router->get('/admin/settings/theme', array('controller' => 'Admin\SettingsController', 'action' => 'theme'));
+    $router->get('/admin/settings/banners', array('controller' => 'Admin\SettingsController', 'action' => 'banners'));
+    $router->get('/admin/settings/payment', array('controller' => 'Admin\SettingsController', 'action' => 'payment'));
+    $router->get('/admin/settings/contacts', array('controller' => 'Admin\SettingsController', 'action' => 'contacts'));
     $router->load();
 ?>
