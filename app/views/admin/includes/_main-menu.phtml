@@ -40,8 +40,8 @@
             <li class="dropdown dropdown-media">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mídia</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-media-list" href="#"><span class="glyphicon glyphicon-list-alt"> Listar</a></li>
-                <li><a id="btn-media-new" href="#"><span class="glyphicon glyphicon-plus"> Cadastrar</a></li>
+                <li><?= createLinkTo('/admin/media/list', '<span class="glyphicon glyphicon-list-alt"></span> Listar')?></li>
+                <li><?= createLinkTo('/admin/media/new', '<span class="glyphicon glyphicon-plus"></span> Cadastrar')?></li>
               </ul>
             </li>
             <li class="dropdown dropdown-inscriptions">

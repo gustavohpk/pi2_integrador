@@ -1,8 +1,9 @@
------ Atualização 005 (24/06) -----
+----- Atualização 005 (24/06 - 25/06) -----
 - Criadas rotas para as settings (configurações) do admin
 - Criadas views e controllers
 - Foi criada a página configuração de pagamento, para posteriormente adicionarmos a API do PagSeguro
 - Criada página para configurações de contato
+- Criadas rotas, views e controllers para Media
 
 
 ----- Atualização 004 (23/06) -----
