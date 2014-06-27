@@ -75,10 +75,10 @@
 	</div>
 	<br/>
 	<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
-	<a href="<?= createUriFor('/admin/events/list')?>">
+	<a href="<?= createUriFor('/admin/eventos/lista')?>">
 		<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
 	</a>
-	<a href="<?= createUriFor('/admin/events/'.$this->events->getIdEvent().'/remove')?>">
+	<a href="<?= createUriFor('/admin/eventos/'.$this->events->getIdEvent().'/remover')?>">
 		<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
 	</a>
 </form>

@@ -1,3 +1,6 @@
+----- Atualização 007 (27/06) -----
+- Alterado rotas para exibir "uri" no idioma pt-br para adequar o projeto com a materia de IHC
+
 ----- Atualização 006 (22/06 - 26/06) -----
 - Modificado o tipo de retorno de dados para as views.... Agora ao renderizar é retornado um objeto, sendo este objeto responsável por executar os métodos acessadores "gets" para alimentar as view
 - Implementado função "redirectTo" em "/main/controllers/base_controllers.class.php"

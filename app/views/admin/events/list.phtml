@@ -7,7 +7,7 @@
 	  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
 			<div class="row">
 				<div class="col-xs-12 general-actions">
-					<a href="<?= createUriFor('/admin/events/new')?>">
+					<a href="<?= createUriFor('/admin/eventos/novo')?>">
 						<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
 					</a>
 					<div class="col-lg-4">
@@ -48,12 +48,12 @@
 						<td>{$event->getName()}</td>
 						<td>{$event->getEventType()} $span_sub_event</td>
 						<td>
-							<a href=\"".createUriFor("/admin/events/{$event->getIdEvent()}/edit")."\">
+							<a href=\"".createUriFor("/admin/eventos/{$event->getIdEvent()}/alterar")."\">
 								<button class='btn btn-primary btn-sm' title='Editar'>
 									<span class='glyphicon glyphicon-edit'></span>
 								</button>
 							</a>
-							<a href=\"".createUriFor("/admin/events/{$event->getIdEvent()}/remove")."\">
+							<a href=\"".createUriFor("/admin/eventos/{$event->getIdEvent()}/remover")."\">
 								<button class='btn btn-danger btn-sm' title='Excluir'>
 									<span class='glyphicon glyphicon-trash'></span>
 								</button>
