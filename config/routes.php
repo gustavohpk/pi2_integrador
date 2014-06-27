@@ -40,5 +40,16 @@
 
     $router->get('/admin/events/:id/remove', array('controller' => 'Admin\EventsController', 'action' => 'remove'));
 
+    //rota para mídia - area admin
+    $router->get('/admin/media/list', array('controller' => 'Admin\MediaController', 'action' => '_list'));
+    $router->get('/admin/media/new', array('controller' => 'Admin\MediaController', 'action' => '_new'));
+    $router->get('/admin/media/:id/edit', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
+
+    //rota para configuracoes do admin
+    $router->get('/admin/settings/general', array('controller' => 'Admin\SettingsController', 'action' => 'general'));
+    $router->get('/admin/settings/theme', array('controller' => 'Admin\SettingsController', 'action' => 'theme'));
+    $router->get('/admin/settings/banners', array('controller' => 'Admin\SettingsController', 'action' => 'banners'));
+    $router->get('/admin/settings/payment', array('controller' => 'Admin\SettingsController', 'action' => 'payment'));
+    $router->get('/admin/settings/contacts', array('controller' => 'Admin\SettingsController', 'action' => 'contacts'));
     $router->load();
 ?>
