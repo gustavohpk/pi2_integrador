@@ -7,7 +7,9 @@
 	  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
 			<div class="row">
 				<div class="col-xs-12 general-actions">
-					<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					<a href="<?= createUriFor('/admin/events/new')?>">
+						<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					</a>
 					<div class="col-lg-4">
 					  <div class="input-group">
 					    <input type="text" class="form-control">
@@ -37,51 +39,29 @@
 				<th>Tipo</th>
 				<th>Ações</th>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>Semana Acadêmica de TSI 2014</td>
-				<td>Semana Acadêmica</td>
-				<td>
-					<a href="<?= createUrlFor('/admin/events/1/edit')?>"><button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button></a>
-					<a href="<?= createUrlFor('/admin/events/1/remove')?>"><button class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></button></a>
-				</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>Semana Acadêmica de EM 2014</td>
-				<td>Semana Acadêmica</td>
-				<td>
-					<button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>
-					<button class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></button>
-				</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>Minicurso de Linux</td>
-				<td>Minicurso<span class="badge pull-right"><span class="glyphicon glyphicon-link" title="Subevento"></span></span></td>
-				<td>
-					<button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>
-					<button class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></button>
-				</td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>Palestra TSI 1</td>
-				<td>Palestra<span class="badge pull-right"><span class="glyphicon glyphicon-link" title="Subevento"></span></span></td>
-				<td>
-					<button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>
-					<button class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></button>
-				</td>
-			</tr>
-			<tr>
-				<td>5</td>
-				<td>Palestra 1</td>
-				<td>Palestra</td>
-				<td>
-					<button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>
-					<button class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></button>
-				</td>
-			</tr>
+			<?php
+				foreach ($this->events as $event){
+					$span_sub_event = $event->isSubEvent() ? '<span class="badge pull-right"><span class="glyphicon glyphicon-link" title="Subevento"></span></span>' : '';
+					echo
+					"<tr>
+						<td>{$event->getIdEvent()}</td>
+						<td>{$event->getName()}</td>
+						<td>{$event->getEventType()} $span_sub_event</td>
+						<td>
+							<a href=\"".createUriFor("/admin/events/{$event->getIdEvent()}/edit")."\">
+								<button class='btn btn-primary btn-sm' title='Editar'>
+									<span class='glyphicon glyphicon-edit'></span>
+								</button>
+							</a>
+							<a href=\"".createUriFor("/admin/events/{$event->getIdEvent()}/remove")."\">
+								<button class='btn btn-danger btn-sm' title='Excluir'>
+									<span class='glyphicon glyphicon-trash'></span>
+								</button>
+							</a>
+						</td>					
+					</tr>";
+				}	
+			?>
 		</table>
 		<div class="panel-footer">
 			<div class="row">

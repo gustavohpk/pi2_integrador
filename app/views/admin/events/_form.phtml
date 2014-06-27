@@ -1,13 +1,14 @@
-<div class="row">
+<form action="<?= $this->actionForm?>" method="post">
+	<div class="row">
 		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 			<h4>ID</h4>
-			<input type="number" class="form-control" disabled/>
+			<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getIdEvent()?>" disabled/>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<h4>Título do Evento</h4>
-			<input type="text" class="form-control"/>
+			<input type="text" class="form-control" name="event[name]" value="<?= $this->events->getName()?>"/>
 		</div>
 	</div>
 	<div class="row">
@@ -24,13 +25,13 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<h4>Ministrante</h4>
-			<input type="text" class="form-control"/>
+			<input type="text" class="form-control" name="event[teacher]" value="<?= $this->events->getTeacher()?>"/>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<h4>Local</h4>
-			<input type="text" class="form-control"/>
+			<input type="text" class="form-control" name="event[local]" value="<?= $this->events->getLocal()?>"/>
 		</div>
 	</div>
 	<div class="row">
@@ -39,15 +40,15 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h5>Início</h5>
-					<input type="date" class="form-control"/>
+					<input type="date" class="form-control" name="event[start_date]" value="<?= $this->events->getStartDate()?>"/>
 					<br/>
-					<input type="time" class="form-control"/>
+					<input type="time" class="form-control" value="<?= $this->events->getStartDate()?>"/>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<h5>Fim</h5>
-					<input type="date" class="form-control"/>
+					<input type="date" class="form-control" name="event[end_date]" value="<?= $this->events->getEndDate()?>"/>
 					<br/>
-					<input type="time" class="form-control"/>
+					<input type="time" class="form-control" value="<?= $this->events->getEndDate()?>"/>
 				</div>
 			</div>
 		</div>
@@ -55,7 +56,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 			<h4>Vagas</h4>
-			<input type="number" class="form-control"/>
+			<input type="number" class="form-control" name="event[spaces]" value="<?= $this->events->getSpaces()?>"/>
 		</div>
 	</div>
 	<div class="row">
@@ -69,6 +70,15 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 			<h4>Descrição</h4>
-			<textarea id="event-content"></textarea>
+			<textarea id="event-content" name="event[details]"><?= $this->events->getDetails()?></textarea>
 		</div>
 	</div>
+	<br/>
+	<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
+	<a href="<?= createUriFor('/admin/events/list')?>">
+		<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+	</a>
+	<a href="<?= createUriFor('/admin/events/'.$this->events->getIdEvent().'/remove')?>">
+		<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+	</a>
+</form>

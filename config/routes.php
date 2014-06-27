@@ -32,8 +32,12 @@
 
     //rota para eventos - area admin
     $router->get('/admin/events/list', array('controller' => 'Admin\EventsController', 'action' => '_list'));
+    
     $router->get('/admin/events/new', array('controller' => 'Admin\EventsController', 'action' => '_new'));
-    $router->get('/admin/events/:id/edit', array('controller' => 'Admin\EventsController', 'action' => '_edit'));
+    $router->post('/admin/events', array('controller' => 'Admin\EventsController', 'action' => 'create'));    
+    $router->get('/admin/events/:id/edit', array('controller' => 'Admin\EventsController', 'action' => 'edit'));
+    $router->post('/admin/events/:id', array('controller' => 'Admin\EventsController', 'action' => 'update'));
+
     $router->get('/admin/events/:id/remove', array('controller' => 'Admin\EventsController', 'action' => 'remove'));
 
     $router->load();

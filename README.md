@@ -1,3 +1,9 @@
+----- Atualização 006 (26/06) -----
+- Modificado o tipo de retorno de dados para as views.... Agora ao renderizar é retornado um objeto, sendo este objeto responsável por executar os métodos acessadores "gets" para alimentar as view
+- Implementado função "redirectTo" em "/main/controllers/base_controllers.class.php"
+- criado pasta "db" -> incluido nela o diagrama e script para criação do banco de dados
+- Implementado base para models em "/main/models/base_models.class.php" com a idéia de automatizar os métodos modificadores das classes (set) pra carregar os dados do banco de dados nos atributos da classe. Por exemplo ao executar um select em uma tabela e retornar um campo "name", será executado o método "setName()" da classe...
+- Implementado model, view e controller para "Admin\Events/"
 
 ----- Atualização 004 (23/06) -----
 - Criadas funções getUri, getMedia e getResource, que retornam a constante referente ao caminho junto com o parâmetro passado

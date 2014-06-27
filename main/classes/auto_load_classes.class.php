@@ -10,9 +10,9 @@
 			$files[] = APP_ROOT_FOLDER . '/main/controllers/' . $class_name;
 			$files[] = APP_ROOT_FOLDER . '/main/models/' . $class_name;
 		
-			$files[] = APP_ROOT_FOLDER . '/app/controllers/' . $class_name;
-			
+			$files[] = APP_ROOT_FOLDER . '/app/controllers/' . $class_name;			
 			$files[] = APP_ROOT_FOLDER . '/app/models/' . $class_name;
+			$files[] = APP_ROOT_FOLDER . '/app/models/admin/' . $class_name;
 
 			foreach ($files as $file){
 				if (file_exists($file) == true) {

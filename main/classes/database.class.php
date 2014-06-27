@@ -1,5 +1,5 @@
 <?php
-	class Database{
+	class Database{		
 		public static function getConnection(){
 			require "database_config.php";
 

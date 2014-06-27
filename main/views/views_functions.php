@@ -1,6 +1,6 @@
 <?php
-	function createUrlFor($path){
-		return SITE_ROOT.$path;
+	function createUriFor($path){
+		return SITE_ROOT . $path;
 	}
 
 	/*
@@ -44,4 +44,8 @@
 		$path = RESOURCES_FOLDER."/img/$path";
 		echo "<link href='$path' rel='shortcut icon' />";
 	}
+
+    function snakToCamelCase($value) {
+      return preg_replace('/_/', '', $value);
+    }	
 ?>

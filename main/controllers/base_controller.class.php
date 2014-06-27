@@ -35,8 +35,12 @@
 			return $this->headTitle;
 		}
 
-		//Retorna constantes
+		//funcões auxiliares
+		public function redirectTo($uri){
+			header("Location: " . $this->getUri($uri));
+		}
 
+		//Retorna constantes
 		public function getApplicationName(){
 			return APP_NAME;
 		}
