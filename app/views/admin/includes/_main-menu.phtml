@@ -64,8 +64,8 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <p class="navbar-text">Logado como <a href="#" class="navbar-link">Admin01</a></p>
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
+            <p class="navbar-text">Logado como <a href="<?= createUriFor('/admin/logout')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></p>
+            <li><a href="<?= createUriFor('/admin/logout')?>"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

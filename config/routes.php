@@ -38,6 +38,11 @@
     //root do admin
     $router->get('/admin', array('controller' => 'Admin\HomeController', 'action' => 'index'));
 
+    //rota para login
+    $router->get('/admin/login', array('controller' => 'Admin\LoginController', 'action' => 'index'));
+    $router->post('/admin/login', array('controller' => 'Admin\LoginController', 'action' => 'login'));
+    $router->get('/admin/logout', array('controller' => 'Admin\LoginController', 'action' => 'logout'));
+
     //rota para eventos
     $router->get('/admin/eventos/lista', array('controller' => 'Admin\EventsController', 'action' => '_list'));    
     $router->get('/admin/eventos/novo', array('controller' => 'Admin\EventsController', 'action' => '_new'));

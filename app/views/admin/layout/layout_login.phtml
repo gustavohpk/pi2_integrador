@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title><?= $this->getHeadTitle() ?></title>
+   
+  <?= 
+	  createStylesheetTag(
+	    'css/bootstrap/css/bootstrap.min.css',
+	    'css/style.css',
+	    'plugins/fancybox/jquery.fancybox.css',
+	    'plugins/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7',
+	    'plugins/nivo-slider/nivo-slider.css',
+	    'plugins/nivo-slider/themes/default/default.css'
+	  );
+
+	  createShortCutIcon('favicon.png');
+  ?>
+</head>
+	<body>
+		<div id="admin" class="container">
+			<div id="header">
+				<h3>Painel do Administrador</h3>
+			</div>
+			<div class="row">
+				<div id="content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<?php 
+						require_once $this->getViewPath();
+					?>		
+				</div>
+			</div>
+			<div id="footer">
+				<h6>Painel do administrador - Sistema de Eventos UTFPR</h6>
+			</div>	
+		</div>
+
+		<?php require_once "views/admin/includes/_foot.phtml" ?>
+	</body>
+</html>

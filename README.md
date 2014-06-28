@@ -1,3 +1,8 @@
+----- Atualização 008 (27/06) -----
+- Implementado controller "Admin/login" para login do administrador, para isto alterado
+- Pequenas modificações em "base_admin_controller" para auxiliar login admin
+- Implementado "Admin/models/administrator.class.php" para auxiliar no login e para uso posterior no aplicação
+
 ----- Atualização 007 (27/06) -----
 - Alterado rotas para exibir "uri" no idioma pt-br para adequar o projeto com a materia de IHC
 
