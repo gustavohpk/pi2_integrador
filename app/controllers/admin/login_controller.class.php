@@ -26,7 +26,7 @@
 
       public function logout(){
          Administrator::logout();
-         $this->redirectTo("");
+         $this->redirectTo("admin/login");
       }
 	} 
 ?>

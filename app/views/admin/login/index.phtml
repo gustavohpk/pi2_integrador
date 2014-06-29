@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="row">
 		<div id="title-banner" class="col-lg-2 col-lg-offset-5 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
-			<a href="index.php"><img id="title-banner-img" src="img/title-header.png" alt="UTFPR Eventos"/></a>
+			<a href="index.php"><img id="title-banner-img" src="<?php echo $this->getResource('img/title-header.png'); ?>" alt="UTFPR Eventos"/></a>
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -18,6 +18,7 @@
 					  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
 					  <input type="password" name="admin[password]" class="form-control input-glyphicon" placeholder="Senha">
 					</div>
+					<br/>
 					<button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-log-in"></span> Login</button>
 					<br/><br/>
 					<a href="">Acessar o site <span class="glyphicon glyphicon-new-window"></span></a>

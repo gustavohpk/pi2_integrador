@@ -51,3 +51,27 @@ function openEvent(link){
 		window.open(eventLink);
 	}
 };
+
+//Admin Media edit/new
+
+window.onload = function() {
+	checked = $("input[name='mediatype']:checked").val();
+	if (checked == "photo"){
+		$("#video-source").hide();
+		$("#photo-source").show();
+	}else if (checked == "video"){
+		$("#photo-source").hide();
+		$("#video-source").show();
+	}
+};
+
+$("input[name='mediatype']").change(function() {
+	checked = $("input[name='mediatype']:checked").val();
+	if (checked == "photo"){
+		$("#video-source").hide();
+		$("#photo-source").show();
+	}else if (checked == "video"){
+		$("#photo-source").hide();
+		$("#video-source").show();
+	}
+});
