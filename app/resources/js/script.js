@@ -41,111 +41,13 @@ $(document).ready(function(){
 	$('#cpf').mask("999.999.999-99");
 });
 
-// ADMIN
 
-function hideDivs(){
-	$('.admin-main').hide();
-	$('.events-list').hide();
-	$('.event-edit').hide();
-	$('.news-list').hide();
-	$('.news-edit').hide();
-	$('.users-list').hide();
-	$('.media-list').hide();
-	$('.media-edit').hide();
-	$('.users-list').hide();
-	$('.user-edit').hide();
-	$('.inscriptions-list').hide();
-	$('.inscription-edit').hide();
-	$('.config').hide();
-	$('.config-template').hide();
-	$('.config-banners').hide();
-	$('.dropdown-events').removeClass('active');
-	$('.dropdown-news').removeClass('active');
-	$('.dropdown-users').removeClass('active');
-	$('.dropdown-media').removeClass('active');
-	$('.dropdown-inscriptions').removeClass('active');
-	$('.dropdown-config').removeClass('active');
-}
-
-$("#btn-events-list").click(function(){
-	hideDivs();
-	$('.events-list').fadeIn();
-	$('.dropdown-events').addClass('active');
-});
-
-$("#btn-events-new").click(function(){
-	hideDivs();
-	$('.event-edit').fadeIn();
-	$('.dropdown-events').addClass('active');
-});
-
-$("#btn-news-list").click(function(){
-	hideDivs();
-	$('.news-list').fadeIn();
-	$('.dropdown-news').addClass('active');
-});
-
-$("#btn-news-new").click(function(){
-	hideDivs();
-	$('.news-edit').fadeIn();
-	$('.dropdown-news').addClass('active');
-});
-
-$("#btn-users-list").click(function(){
-	hideDivs();
-	$('.users-list').fadeIn();
-	$('.dropdown-users').addClass('active');
-});
-
-$("#btn-user-new").click(function(){
-	hideDivs();
-	$('.user-edit').fadeIn();
-	$('.dropdown-users').addClass('active');
-});
-
-$("#btn-media-list").click(function(){
-	hideDivs();
-	$('.media-list').fadeIn();
-	$('.dropdown-media').addClass('active');
-});
-
-$("#btn-media-new").click(function(){
-	hideDivs();
-	$('.media-edit').fadeIn();
-	$('.dropdown-media').addClass('active');
-});
-
-$("#btn-inscriptions-list").click(function(){
-	hideDivs();
-	$('.inscriptions-list').fadeIn();
-	$('.dropdown-inscriptions').addClass('active');
-});
-
-$("#btn-inscription-new").click(function(){
-	hideDivs();
-	$('.inscription-edit').fadeIn();
-	$('.dropdown-inscriptions').addClass('active');
-});
-
-$("#btn-config").click(function(){
-	hideDivs();
-	$('.config').fadeIn();
-	$('.dropdown-config').addClass('active');
-});
-
-$("#btn-config-template").click(function(){
-	hideDivs();
-	$('.config-template').fadeIn();
-	$('.dropdown-config').addClass('active');
-});
-
-$("#btn-config-banners").click(function(){
-	hideDivs();
-	$('.config-banners').fadeIn();
-	$('.dropdown-config').addClass('active');
-});
-
-$("#btn-admin-main").click(function(){
-	hideDivs();
-	$('.admin-main').fadeIn();
-});
+//ADMIN
+function openEvent(link){
+	eventId = $("#event-id").val();
+	if (eventId){
+		eventLink = $("#event-link").val();
+		eventLink = eventLink.replace("idevento", eventId);
+		window.open(eventLink);
+	}
+};

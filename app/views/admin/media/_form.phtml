@@ -21,10 +21,12 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 		<h4>ID evento</h4>
+
 		<div class="input-group">
-	    <input type="number" class="form-control">
+	    <input id="event-id" type="number" class="form-control">
+	    <input id="event-link" type="hidden" value="<?= createUriFor('/admin/eventos/idevento/alterar')?>"></input>
 	    <div class="input-group-btn">
-	      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Acessar evento"><span class="glyphicon glyphicon-new-window"></span></button>
+	      <button id="event-access" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Acessar evento" onclick="openEvent()"><span class="glyphicon glyphicon-new-window"></span></button>
 	    </div>
 	  </div>
 	</div>

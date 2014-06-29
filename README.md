@@ -1,5 +1,6 @@
 ----- Atualização 010 (29/06) -----
 - Iniciados controllers e views de Usuários e Inscrições (enrollments)
+- Criada função javascript openEvent, que é utilizada no cadastro/edição de inscrições e mídia. Podemos otimizá-la posteriormente
 
 ----- Atualização 009 (28/06) -----
 - Pequenas alterações no model Admin/events -> implementado opção para salvar as datas (melhorar isso depois)
