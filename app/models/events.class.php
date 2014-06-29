@@ -10,7 +10,9 @@
 		private $teacher;
 		private $local;
 		private $startDate;
+		private $startTime;
 		private $endDate;
+		private $endTime;
 		private $spaces;
 		private $idPaymentType;				
 		private $typeEvent;
@@ -50,12 +52,22 @@
 			$this->local = $local;
 		}
 
-		public function setStartDate($startDate){
-			$this->startDate = $startDate;
+		public function setStartDate($startDate){			
+			$this->startDate = $this->formatDateTime($startDate, "Y-m-d");
+			$this->setStartTime($startDate);
+		}
+
+		public function setStartTime($startTime){
+			$this->startTime =  $this->formatDateTime($startTime, "H:i:s");
 		}
 
 		public function setEndDate($endDate){
-			$this->endDate = $endDate;
+			$this->endDate = $this->formatDateTime($endDate, "Y-m-d");
+			$this->setEndTime($endDate);
+		}
+
+		public function setEndTime($endTime){
+			$this->endTime =  $this->formatDateTime($endTime, "H:i:s");	
 		}
 
 		public function setSpaces($spaces){
@@ -87,7 +99,7 @@
 		}
 
 		public function getIdEventType(){
-			return $this->getIdEventType;
+			return $this->idEventType;
 		}
 
 		public function getEventType(){
@@ -111,11 +123,19 @@
 		}
 
 		public function getStartDate(){
-			return $this->startDate;;
+			return $this->formatDateTime($this->startDate, "d/m/Y");
+		}
+
+		public function getStartTime(){
+			return $this->startTime;
 		}
 
 		public function getEndDate(){
-			return $this->endDate;
+			return $this->formatDateTime($this->endDate, "d/m/Y");
+		}
+
+		public function getEndTime(){
+			return $this->endTime;
 		}
 
 		public function getSpaces(){
@@ -134,7 +154,7 @@
 			return $this->endDateRegistration;
 		}
 
-		public static function all(){
+		public static function find($params = null){
 			$sql = 
 			"SELECT 
 				event.*, event_type.event_type
@@ -143,28 +163,9 @@
 			NATURAL JOIN 
 				event_type";
 
-			$pdo = \Database::getConnection();
-			$rs = $pdo->prepare($sql);
-			$rs->execute();
-			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
-			$events = array();			
-
-			foreach ($rows as $row) {
-				$events[] = new Events($row);
+			if (!is_null($params)){
+				$sql .= " WHERE " . $params['paramsName'];
 			}
-				
-			return $events;
-		}	
-
-		public static function find($params){
-			$sql = 
-			"SELECT 
-				event.*, event_type.event_type
-			FROM 
-				event
-			NATURAL JOIN 
-				event_type
-			WHERE " . $params['paramsName'];
 
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
@@ -179,13 +180,25 @@
 			return $events;
 		}
 
+		public static function all(){
+			return self::find();
+		}
+
 		public static function findById($id){
 			$params = array("paramsName" => "id_event = :id_event", "paramsValue" => array(":id_event" => $id));
 			//retorna apenas o primeiro objeto (no caso o unico)
-			return self::find($params)[0];
+			$events = self::find($params);
+			return count($events) > 0 ? $events[0] : NULL;
 		}
 
 		public function update($data = array()){
+			$data["start_date"] .= " " . $data["start_time"];
+			$data["start_date"] = $this->formatDateTime($data["start_date"]);
+			$data["end_date"] .= " " . $data["end_time"];
+			$data["end_date"] = $this->formatDateTime($data["end_date"]);
+			unset($data["start_time"]);
+			unset($data["end_time"]);
+
 			$this->setData($data);
 
 			$keys = array_keys($data);
@@ -204,7 +217,7 @@
 			foreach ($keys as $key){
 				$param[":$key"] = $data[$key];
 			}
-
+	
 			$statment->execute($param);
 		}
 
@@ -218,19 +231,18 @@
 				:spaces, :id_payment_type, :start_date_registration, :end_date_registration)";
 
 			$params = array(
-					":id_event_type" => 1,
+					":id_event_type" => $this->getIdEventType(),
 					":name" => $this->getName(),
 					":details" => $this->getDetails(),
 					":teacher" => $this->getTeacher(),
 					":local" => $this->getLocal(),
-					":start_date" => $this->getStartDate(),
-					":end_date" => $this->getEndDate(),
+					":start_date" => $this->startDate . " " . $this->startTime,
+					":end_date" => $this->endDate . " " . $this->endTime,
 					":spaces" => $this->getSpaces(),
 					":id_payment_type" => 1,
 					":start_date_registration" => date('Y-m-d'),
 					":end_date_registration" => date('Y-m-d')
 				);
-
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($params);

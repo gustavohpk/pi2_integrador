@@ -1,3 +1,7 @@
+----- Atualização 009 (28/06) -----
+- Pequenas alterações no model Admin/events -> implementado opção para salvar as datas (melhorar isso depois)
+- Implementado model, view, controller para Admin/events_type 
+
 ----- Atualização 008 (27/06) -----
 - Implementado controller "Admin/login" para login do administrador, para isto alterado
 - Pequenas modificações em "base_admin_controller" para auxiliar login admin

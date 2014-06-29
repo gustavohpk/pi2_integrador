@@ -43,6 +43,14 @@
     $router->post('/admin/login', array('controller' => 'Admin\LoginController', 'action' => 'login'));
     $router->get('/admin/logout', array('controller' => 'Admin\LoginController', 'action' => 'logout'));
 
+    //rota para tipos de eventos
+    $router->get('/admin/eventos/tipos', array('controller' => 'Admin\EventsTypeController', 'action' => '_list')); 
+    $router->get('/admin/eventos/tipos/novo', array('controller' => 'Admin\EventsTypeController', 'action' => '_new')); 
+    $router->post('/admin/eventos/tipos/novo', array('controller' => 'Admin\EventsTypeController', 'action' => 'create')); 
+    $router->get('/admin/eventos/tipos/:id/alterar', array('controller' => 'Admin\EventsTypeController', 'action' => 'edit')); 
+    $router->post('/admin/eventos/tipos/:id/alterar', array('controller' => 'Admin\EventsTypeController', 'action' => 'update')); 
+    $router->get('/admin/eventos/tipos/:id/remover', array('controller' => 'Admin\EventsTypeController', 'action' => 'remove')); 
+
     //rota para eventos
     $router->get('/admin/eventos/lista', array('controller' => 'Admin\EventsController', 'action' => '_list'));    
     $router->get('/admin/eventos/novo', array('controller' => 'Admin\EventsController', 'action' => '_new'));
