@@ -1,3 +1,6 @@
+----- Atualização 010 (29/06) -----
+- Iniciados controllers e views de Usuários e Inscrições (enrollments)
+
 ----- Atualização 009 (28/06) -----
 - Pequenas alterações no model Admin/events -> implementado opção para salvar as datas (melhorar isso depois)
 - Implementado model, view, controller para Admin/events_type 

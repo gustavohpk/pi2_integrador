@@ -64,6 +64,17 @@
     $router->get('/admin/midia/nova', array('controller' => 'Admin\MediaController', 'action' => '_new'));
     $router->get('/admin/midia/:id/alterar', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
 
+    //rota para inscrições
+    $router->get('/admin/inscricoes/lista', array('controller' => 'Admin\EnrollmentsController', 'action' => '_list'));
+    $router->get('/admin/inscricoes/nova', array('controller' => 'Admin\EnrollmentsController', 'action' => '_new'));
+    $router->get('/admin/inscricoes/:id/alterar', array('controller' => 'Admin\EnrollmentsController', 'action' => '_edit'));
+
+    //rota para usuários
+    $router->get('/admin/usuarios/lista', array('controller' => 'Admin\UsersController', 'action' => '_list'));
+    $router->get('/admin/usuarios/novo', array('controller' => 'Admin\UsersController', 'action' => '_new'));
+    $router->get('/admin/usuarios/:id/alterar', array('controller' => 'Admin\UsersController', 'action' => '_edit'));
+
+
     //rota para configuracoes
     $router->get('/admin/config/geral', array('controller' => 'Admin\SettingsController', 'action' => 'general'));
     $router->get('/admin/config/tema', array('controller' => 'Admin\SettingsController', 'action' => 'theme'));
