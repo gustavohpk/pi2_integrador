@@ -1,6 +1,10 @@
 ----- Atualização 011 (29/06) -----
 - Criados modelos e atualizadas visões e controladores de mídia
 - OBS.: No momento está funcionando apenas cadastro de vídeos, e ainda não há validações para link e para id de evento.
+- Campo 'legend' da tabela media alterado para 'label'
+- Na visão da mídia foi usada uma forma diferente de código de if/else e foreach, para evitar echos com todo o conteúdo.
+- Iniciada classe FlashMessage, no main
+- Iniciada função stylizeFlashMessage na views_function.php
 
 ----- Atualização 010 (29/06) -----
 - Iniciados controllers e views de Usuários e Inscrições (enrollments)

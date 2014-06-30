@@ -47,5 +47,16 @@
 
     function snakToCamelCase($value) {
       return preg_replace('/_/', '', $value);
-    }	
+    }
+
+    function stylizeFlashMessages($messages, $type){
+    	foreach ($messages as $message => $i) {
+    		$stylizedMessage = "<div class='alert alert-$type'>";
+    		$stylizedMessage .= "$message";
+    		$stylizedMessage .= "</div>";
+
+    		$stylizedMessages[$i] = $stylizedMessage;
+    	}
+    	return $stylizedMessages;
+    }
 ?>
