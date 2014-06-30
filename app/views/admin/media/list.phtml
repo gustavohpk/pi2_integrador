@@ -7,7 +7,9 @@
 	  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
 			<div class="row">
 				<div class="col-xs-12 general-actions">
-					<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					<a href="<?= createUriFor('/admin/midia/nova')?>">
+						<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					</a>
 					<div class="col-lg-4">
 					  <div class="input-group">
 					    <input type="text" class="form-control">
@@ -31,24 +33,29 @@
 				<th>Tipo</th>
 				<th>Ações</th>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>Foto 1</td>
-				<td><span class="glyphicon glyphicon-camera" title="Foto"></span></td>
-				<td>
-					<button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>
-					<button class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></button>
-				</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>Vídeo 1</td>
-				<td><span class="glyphicon glyphicon-facetime-video" title="Vídeo"></span></td>
-				<td>
-					<button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>
-					<button class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></button>
-				</td>
-			</tr>
+			<?php foreach ($this->media as $media) : ?>
+				<tr>
+					<td><?= $media->getIdMedia() ?></td>
+					<td><?= $media->getLabel() ?></td>
+					<?php if ($media->getMediaType() == 'f') : ?>
+						<td><span class="glyphicon glyphicon-camera" title="Foto"></span></td>
+					<?php else : ?>
+						<td><span class="glyphicon glyphicon-facetime-video" title="Vídeo"></span></td>
+					<?php endif; ?>
+					<td>
+						<a href="<?= createUriFor("/admin/midia/{$media->getIdMedia()}/alterar") ?>">
+							<button class='btn btn-primary btn-sm' title='Editar'>
+								<span class='glyphicon glyphicon-edit'></span>
+							</button>
+						</a>
+						<a href="<?= createUriFor("/admin/midia/{$media->getIdMedia()}/remover") ?>">
+							<button class='btn btn-danger btn-sm' title='Excluir'>
+								<span class='glyphicon glyphicon-trash'></span>
+							</button>
+						</a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
 		</table>
 		<div class="panel-footer">
 			<div class="row">

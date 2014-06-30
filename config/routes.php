@@ -63,6 +63,9 @@
     $router->get('/admin/midia/lista', array('controller' => 'Admin\MediaController', 'action' => '_list'));
     $router->get('/admin/midia/nova', array('controller' => 'Admin\MediaController', 'action' => '_new'));
     $router->get('/admin/midia/:id/alterar', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
+    $router->post('/admin/midia', array('controller' => 'Admin\MediaController', 'action' => 'create'));    
+    $router->post('/admin/midia/:id', array('controller' => 'Admin\MediaController', 'action' => 'update'));
+    $router->get('/admin/midia/:id/remover', array('controller' => 'Admin\MediaController', 'action' => 'remove'));
 
     //rota para inscrições
     $router->get('/admin/inscricoes/lista', array('controller' => 'Admin\EnrollmentsController', 'action' => '_list'));

@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   `id_media` int(11) NOT NULL AUTO_INCREMENT,
   `media_type` char(1) COLLATE utf8_unicode_ci NOT NULL,
   `id_event` int(11) DEFAULT NULL,
-  `legend` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `label` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `path` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_media`),
   KEY `fk_media_event` (`id_event`)

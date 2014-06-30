@@ -1,3 +1,7 @@
+----- Atualização 011 (29/06) -----
+- Criados modelos e atualizadas visões e controladores de mídia
+- OBS.: No momento está funcionando apenas cadastro de vídeos, e ainda não há validações para link e para id de evento.
+
 ----- Atualização 010 (29/06) -----
 - Iniciados controllers e views de Usuários e Inscrições (enrollments)
 - Criada função javascript openEvent, que é utilizada no cadastro/edição de inscrições e mídia. Podemos otimizá-la posteriormente

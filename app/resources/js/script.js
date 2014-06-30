@@ -56,10 +56,10 @@ function openEvent(link){
 
 window.onload = function() {
 	checked = $("input[name='mediatype']:checked").val();
-	if (checked == "photo"){
+	if (checked == "p"){
 		$("#video-source").hide();
 		$("#photo-source").show();
-	}else if (checked == "video"){
+	}else if (checked == "v"){
 		$("#photo-source").hide();
 		$("#video-source").show();
 	}
@@ -67,10 +67,10 @@ window.onload = function() {
 
 $("input[name='mediatype']").change(function() {
 	checked = $("input[name='mediatype']:checked").val();
-	if (checked == "photo"){
+	if (checked == "p"){
 		$("#video-source").hide();
 		$("#photo-source").show();
-	}else if (checked == "video"){
+	}else if (checked == "v"){
 		$("#photo-source").hide();
 		$("#video-source").show();
 	}
