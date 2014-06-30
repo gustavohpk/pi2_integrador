@@ -49,12 +49,15 @@
       return preg_replace('/_/', '', $value);
     }
 
-    function stylizeFlashMessages($messages, $type){
-    	foreach ($messages as $message => $i) {
+    function stylizeFlashMessages($messages){
+    	//var_dump($messages); exit;
+    	$stylizedMessages = array();
+    	foreach ($messages as $i => $message) {
+    		$content = $message['content'];
+    		$type = $message['type'];
     		$stylizedMessage = "<div class='alert alert-$type'>";
-    		$stylizedMessage .= "$message";
+    		$stylizedMessage .= "$content";
     		$stylizedMessage .= "</div>";
-
     		$stylizedMessages[$i] = $stylizedMessage;
     	}
     	return $stylizedMessages;

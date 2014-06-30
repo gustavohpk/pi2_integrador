@@ -22,7 +22,7 @@ class FlashMessage {
 		self::startSession();
 		$_SESSION["flash"][] = array(
 			'content' => $msg, 
-			'type' => $type);	
+			'type' => $type);
 	}
 
 	private static function startSession() {
@@ -34,7 +34,7 @@ class FlashMessage {
 	static function getMessages() {
 		self::startSession();
 		$messages = $_SESSION["flash"];
-		$_SESSION["flash"] = array();
+		//$_SESSION["flash"] = array();
 		return $messages;
 	}
 

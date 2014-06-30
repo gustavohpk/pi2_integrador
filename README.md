@@ -1,3 +1,6 @@
+----- Atualização 012 (30/06) -----
+- Criadas Flash Messages
+
 ----- Atualização 011 (29/06) -----
 - Criados modelos e atualizadas visões e controladores de mídia
 - OBS.: No momento está funcionando apenas cadastro de vídeos, e ainda não há validações para link e para id de evento.
