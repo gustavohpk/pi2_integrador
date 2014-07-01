@@ -50,7 +50,6 @@
     }
 
     function stylizeFlashMessages($messages){
-    	//var_dump($messages); exit;
     	$stylizedMessages = array();
     	foreach ($messages as $i => $message) {
     		$content = $message['content'];

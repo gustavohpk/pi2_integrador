@@ -21,6 +21,7 @@
 
       public function login(){         
          $admin = Administrator::login($this->params["admin"]["login"], $this->params["admin"]["password"]);
+         var_dump($admin); var_dump('teste');
          $this->redirectTo($admin ? "admin" : "admin/login");
       }
 

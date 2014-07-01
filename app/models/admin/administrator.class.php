@@ -161,6 +161,7 @@
 				return $admin[0];
 			}
 			else{
+				\FlashMessage::errorMessage("Usuário ou senha incorretos.");
 				return NULL;
 			}
 		}

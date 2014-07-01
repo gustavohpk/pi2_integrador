@@ -34,7 +34,7 @@ class FlashMessage {
 	static function getMessages() {
 		self::startSession();
 		$messages = $_SESSION["flash"];
-		//$_SESSION["flash"] = array();
+		$_SESSION["flash"] = array();
 		return $messages;
 	}
 

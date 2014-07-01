@@ -118,7 +118,6 @@
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($params);
-			FlashMessage::successMessage("A mídia foi criada com sucesso.");
 		}
 
 		public function remove(){
