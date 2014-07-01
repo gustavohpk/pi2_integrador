@@ -1,3 +1,7 @@
+----- Atualização 012 (30/06) -----
+- Criado modelo, controlador e visão para Forma de Pagamento (otimizar posteriormente implementando a API do PagSeguro)
+- Finalizado area Admin\Events ... (Falta implementar filtros, msgFlash e validações ...)
+
 ----- Atualização 011 (29/06) -----
 - Criados modelos e atualizadas visões e controladores de mídia
 - OBS.: No momento está funcionando apenas cadastro de vídeos, e ainda não há validações para link e para id de evento.

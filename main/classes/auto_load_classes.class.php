@@ -18,7 +18,7 @@
 				if (file_exists($file) == true) {
 					return require_once $file;
 				}
-			}
+			} 
 		}
 
 		static function autoload_register(){

@@ -84,11 +84,11 @@
     $router->get('/admin/config/banners', array('controller' => 'Admin\SettingsController', 'action' => 'banners'));
     //forma de pgto
     $router->get('/admin/config/pagamento', array('controller' => 'Admin\PaymentTypeController', 'action' => '_list'));
-    $router->get('/admin/config/pagamento/nova', array('controller' => 'Admin\PaymentTypeController', 'action' => '_new'));
-    $router->post('/admin/config/pagamento/nova', array('controller' => 'Admin\PaymentTypeController', 'action' => 'create'));
-    $router->get('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\PaymentTypeController', 'action' => 'edit'));
-    $router->post('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\PaymentTypeController', 'action' => 'update'));
-    $router->get('/admin/config/pagamento/:id/remover', array('controller' => 'Admin\PaymentTypeController', 'action' => 'remove'));
+    $router->get('/admin/config/pagamento/nova', array('controller' => 'Admin\Settings/PaymentTypeController', 'action' => '_new'));
+    $router->post('/admin/config/pagamento/nova', array('controller' => 'Admin\Settings/PaymentTypeController', 'action' => 'create'));
+    $router->get('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\Settings/PaymentTypeController', 'action' => 'edit'));
+    $router->post('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\Settings/PaymentTypeController', 'action' => 'update'));
+    $router->get('/admin/config/pagamento/:id/remover', array('controller' => 'Admin\Settings/PaymentTypeController', 'action' => 'remove'));
     $router->get('/admin/config/contato', array('controller' => 'Admin\SettingsController', 'action' => 'contacts'));
     $router->load();
 ?>

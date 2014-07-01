@@ -239,7 +239,7 @@
 					":start_date" => $this->startDate . " " . $this->startTime,
 					":end_date" => $this->endDate . " " . $this->endTime,
 					":spaces" => $this->getSpaces(),
-					":id_payment_type" => 1,
+					":id_payment_type" => $this->getIdPaymentType,
 					":start_date_registration" => date('Y-m-d'),
 					":end_date_registration" => date('Y-m-d')
 				);

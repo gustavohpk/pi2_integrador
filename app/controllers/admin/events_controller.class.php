@@ -4,6 +4,7 @@
 	class EventsController extends BaseAdminController{
 		protected $events;
       protected $eventsType;
+      protected $paymentsType;
       protected $actionForm;
 
 		public function _list() {
@@ -15,6 +16,7 @@
          //prepara formulario para inserção de novo evento
 			$this->setHeadTitle("Novo Evento");
          $this->eventsType = \EventsType::all();
+         $this->paymentsType = \PaymentType::all();
 			$this->events = new \Events();
          $this->actionForm = $this->getUri("admin/eventos");
          $this->titleBtnSubmit = "Cadastrar";
@@ -40,6 +42,7 @@
          //prepara formulario para edição do evento
 			$this->setHeadTitle("Editar Evento");
          $this->eventsType = \EventsType::all();
+         $this->paymentsType = \PaymentType::all();
 			$this->events = \Events::findById($this->params[":id"]);
          $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
          $this->titleBtnSubmit = "Salvar";

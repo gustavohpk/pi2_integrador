@@ -1,13 +1,13 @@
-<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 events-list">
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 config-template">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-	    <h3 class="panel-title">Lista de eventos cadastrados</h3>
+	    <h3 class="panel-title">Configurações de Pagamento</h3>
 	  </div>
 	  <div class="panel-body">
 	  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
 			<div class="row">
 				<div class="col-xs-12 general-actions">
-					<a href="<?= createUriFor('/admin/eventos/novo')?>">
+					<a href="<?= createUriFor('/admin/config/pagamento/nova')?>">
 						<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
 					</a>
 					<div class="col-lg-4">
@@ -17,18 +17,11 @@
 					      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Procurar"><span class="glyphicon glyphicon-search"></span> <span class="caret"></span></button>
 					      <ul class="dropdown-menu pull-right">
 				          <li><a href="#">ID</a></li>
-				          <li><a href="#">Nome</a></li>
-				          <li><a href="#">Tipo</a></li>
-				          <li><a href="#">Data de início</a></li>
-				          <li><a href="#">Data do final</a></li>
-				          <li><a href="#">Ministrante</a></li>
-				          <li><a href="#">Local</a></li>
+				          <li><a href="#">Nome</a></li>				          
 				        </ul>
 					    </div>
 					  </div>
 					</div>
-					<div class="" style="float:right; font-size: 10px;"><a href="" target="blank">Acessar a página PRÓXIMOS EVENTOS <span class="glyphicon glyphicon-new-window"></span></a></div><br/>
-					<div class="" style="float:right; font-size: 10px;"><a href="" target="blank">Acessar a página EVENTOS ANTERIORES <span class="glyphicon glyphicon-new-window"></span></a></div>
 				</div>
 			</div>
 		</div>
@@ -36,31 +29,25 @@
 			<tr>
 				<th>ID</th>
 				<th>Nome</th>
-				<th>Tipo</th>
-				<th>Ações</th>
+				<th width="20%">Ações</th>
 			</tr>
-			<?php foreach ($this->events as $event) : ?>
+			<?php foreach ($this->paymentsType as $paymentType) :?>						
 				<tr>
-					<td align="right"><?= $event->getIdEvent() ?></td>
-					<td align="left"><?= $event->getName() ?></td>
-					<?php if ($event->isSubEvent()) : ?>
-						<td align="left"><?= $event->getEventType() ?><span class="badge pull-right"><span class="glyphicon glyphicon-link" title="Subevento"></span></span></td>
-					<?php else : ?>
-						<td align="left"><?= $event->getEventType()?></td>
-					<?php endif; ?>					
-					<td>
-						<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/alterar") ?>">
+					<td align='right'><?= $paymentType->getIdPaymentType() ?></td>
+					<td align='left'><?= $paymentType->getName() ?></td>
+					<td align='left'>
+						<a href="<?= createUriFor("/admin/config/pagamento/{$paymentType->getIdPaymentType()}/alterar")?>"
 							<button class='btn btn-primary btn-sm' title='Editar'>
 								<span class='glyphicon glyphicon-edit'></span>
 							</button>
 						</a>
-						<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/remover") ?>">
+						<a href="<?= createUriFor("/admin/config/pagamento/{$paymentType->getIdPaymentType()}/remover")?>">
 							<button class='btn btn-danger btn-sm' title='Excluir'>
 								<span class='glyphicon glyphicon-trash'></span>
 							</button>
 						</a>
 					</td>					
-				</tr>
+				</tr>	
 			<?php endforeach; ?>
 		</table>
 		<div class="panel-footer">
