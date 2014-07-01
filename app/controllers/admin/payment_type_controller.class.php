@@ -22,8 +22,18 @@
 		public function create(){
 			//salva inserção no db
 			$this->paymentsType = new \PaymentType($this->params["payment_type"]);
-			$this->paymentsType->save();
-			$this->redirectTo("admin/config/pagamento");
+
+			if ($this->paymentsType->save()){
+				\FlashMessage::successMessage("Forma de pagamento cadastrada com sucesso.");
+				$this->redirectTo("admin/config/pagamento");
+			}
+			else{
+				\FlashMessage::errorMessage("Erro ao cadastrar a forma de pagamento.");
+				$this->setHeadTitle("Nova Forma de Pagamento");
+	         	$this->actionForm = $this->getUri("admin/config/pagamento/nova");
+	         	$this->titleBtnSubmit = "Cadastrar";
+	         	$this->render("_new");
+			}			
 		}
 
 		public function edit(){
@@ -37,13 +47,24 @@
 		public function update(){
 			//salva edição no db  
 			$this->paymentsType = \PaymentType::findById($this->params[":id"]);
-			$this->paymentsType->update($this->params['payment_type']);
-			$this->redirectTo("admin/config/pagamento");
+
+			if ($this->paymentsType->update($this->params['payment_type'])){
+				\FlashMessage::successMessage("A forma de pagamento foi atualiza com sucesso.");
+				$this->redirectTo("admin/config/pagamento");
+			}
+			else{
+				\FlashMessage::errorMessage("Erro ao alterar a forma de pagamento.");
+	   			$this->setHeadTitle("Editar Forma de Pagamento");
+	   			$this->actionForm = $this->getUri("admin/config/pagamento/{$this->paymentsType->getIdPaymentType()}/alterar");
+	   			$this->titleBtnSubmit = "Salvar";  
+	   			$this->render("edit");
+			}
 		}
 
 		public function remove(){
 			$this->paymentsType = \PaymentType::findById($this->params[":id"]);
 			$this->paymentsType->remove();
+			\FlashMessage::successMessage("Forma de pagamento removida com sucesso.");
 			$this->redirectTo("admin/config/pagamento");
 		}
 	} 

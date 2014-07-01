@@ -218,7 +218,7 @@
 				$param[":$key"] = $data[$key];
 			}
 	
-			$statment->execute($param);
+			return $statment->execute($param);
 		}
 
 		public function save(){
@@ -239,13 +239,13 @@
 					":start_date" => $this->startDate . " " . $this->startTime,
 					":end_date" => $this->endDate . " " . $this->endTime,
 					":spaces" => $this->getSpaces(),
-					":id_payment_type" => $this->getIdPaymentType,
+					":id_payment_type" => $this->getIdPaymentType(),
 					":start_date_registration" => date('Y-m-d'),
 					":end_date_registration" => date('Y-m-d')
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment->execute($params);
+			return $statment->execute($params);
 		}
 
 		public function remove(){
@@ -253,7 +253,7 @@
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_event" => $this->getIdEvent());
-			$statment->execute($params);
+			return $statment->execute($params);
 		}
 	}
 ?>

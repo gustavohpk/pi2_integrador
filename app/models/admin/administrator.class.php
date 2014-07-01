@@ -117,7 +117,7 @@
 				$param[":$key"] = $data[$key];
 			}
 
-			$statment->execute($param);
+			return $statment->execute($param);
 		}
 
 		public function save(){
@@ -137,7 +137,7 @@
 
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment->execute($params);
+			return $statment->execute($params);
 		}
 
 		public function remove(){
@@ -145,7 +145,7 @@
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_administrator" => $this->getIdAdministrator());
-			$statment->execute($params);
+			return $statment->execute($params);
 		}
 
 		public static function login($login, $password){
@@ -161,7 +161,6 @@
 				return $admin[0];
 			}
 			else{
-				\FlashMessage::errorMessage("Usuário ou senha incorretos.");
 				return NULL;
 			}
 		}

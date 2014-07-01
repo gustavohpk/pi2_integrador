@@ -1,6 +1,5 @@
 <?php
 	namespace Admin;
-	session_start();
 
 	class BaseAdminController extends \BaseController{
 		public function __construct(){

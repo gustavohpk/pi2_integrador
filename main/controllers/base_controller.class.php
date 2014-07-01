@@ -1,4 +1,6 @@
 	<?php
+	session_start();
+
 	class BaseController{
 		protected $params;
 		protected $layout;
@@ -38,6 +40,7 @@
 		//funcões auxiliares
 		public function redirectTo($uri){
 			header("Location: " . $this->getUri($uri));
+			exit();
 		}
 
 		//Retorna constantes
@@ -107,7 +110,7 @@
 		}
 
 		public function render($view = null){
-			require "main/views/views_functions.php";
+			require_once "main/views/views_functions.php";
 
 			if ($view !== null){
 				$this->view = $view;
@@ -116,6 +119,7 @@
 			$this->setViewPath();
 			extract($this->data);
 			require 'views/'.$this->layout;
+			exit();
 		}
 
 		public function beforeAction(){}

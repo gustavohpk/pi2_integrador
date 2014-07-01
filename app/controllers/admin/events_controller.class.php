@@ -34,8 +34,19 @@
          unset($params["end_time"]);
 
          $this->events = new \Events($params);
-         $this->events->save();
-         $this->redirectTo("admin/eventos/lista");
+         if ($this->events->save()){
+            \FlashMessage::successMessage("Evento cadastrado com sucesso.");
+            $this->redirectTo("admin/eventos/lista");
+         }
+         else{
+            \FlashMessage::errorMessage("Erro ao cadastrar o evento.");
+            $this->setHeadTitle("Novo Evento");
+            $this->eventsType = \EventsType::all();
+            $this->paymentsType = \PaymentType::all();            
+            $this->actionForm = $this->getUri("admin/eventos");
+            $this->titleBtnSubmit = "Cadastrar";
+            $this->render("_new");
+         }
       }
 
 		public function edit(){
@@ -51,13 +62,25 @@
       public function update(){
          //salva edição do evento no db  
          $this->events = \Events::findById($this->params[":id"]);
-         $this->events->update($this->params['event']);
-         $this->redirectTo("admin/eventos/lista");
+         if ($this->events->update($this->params['event'])){
+            \FlashMessage::successMessage("Evento cadastrado com sucesso.");
+            $this->redirectTo("admin/eventos/lista");
+         }
+         else{
+            \FlashMessage::errorMessage("Erro ao alterar o evento.");
+            $this->setHeadTitle("Editar Evento");
+            $this->eventsType = \EventsType::all();
+            $this->paymentsType = \PaymentType::all();
+            $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
+            $this->titleBtnSubmit = "Salvar";
+            $this->render("edit");
+         }
       }
 
 		public function remove(){
          $this->events = \Events::findById($this->params[":id"]);
          $this->events->remove();
+         \FlashMessage::successMessage("Evento removido com sucesso.");
          $this->redirectTo("admin/eventos/lista");
 		}
 	} 

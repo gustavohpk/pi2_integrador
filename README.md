@@ -2,6 +2,7 @@
 - Criado modelo, controlador e visão para Forma de Pagamento (otimizar posteriormente implementando a API do PagSeguro)
 - Finalizado area Admin\Events ... (Falta implementar filtros, msgFlash e validações ...)
 - Criadas Flash Messages
+- Implementado Flash Messages no Controladores de Login, Forma de Pgto, Tipos de Eventos e Eventos
 
 ----- Atualização 011 (29/06) -----
 - Criados modelos e atualizadas visões e controladores de mídia

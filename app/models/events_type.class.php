@@ -70,7 +70,7 @@
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment->execute($params);
+			return $statment->execute($params);
 		}
 
 		public function update($data = array()){
@@ -93,7 +93,7 @@
 				$param[":$key"] = $data[$key];
 			}
 	
-			$statment->execute($param);
+			return $statment->execute($param);
 		}
 
 		public function remove(){
@@ -101,7 +101,7 @@
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_event_type" => $this->getIdEventType());
-			$statment->execute($params);
+			return $statment->execute($params);
 		}
 	}
 ?>
