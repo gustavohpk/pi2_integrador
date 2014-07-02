@@ -47,12 +47,15 @@
 			return $this->path;
 		}
 
-		public static function find($params = null){
+		public static function find($params = null, $limit = 3, $page = 1){
+			$start = ($page * $limit) - $limit;
 			$sql = "SELECT * FROM media";
 
 			if (!is_null($params)){
 				$sql .= " WHERE " . $params['paramsName'];
 			}
+
+			$sql .= " LIMIT $start, $limit";
 
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
@@ -65,6 +68,15 @@
 			}
 				
 			return $media;
+		}
+
+		public static function count(){
+			$sql = "SELECT * FROM media";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+			return count($rows);
 		}
 
 		public static function all(){
@@ -98,7 +110,7 @@
 				$param[":$key"] = $data[$key];
 			}
 	
-			$statment->execute($param);
+			return $statment->execute($param);
 		}
 
 		public function save(){
@@ -117,7 +129,7 @@
 			//var_dump($params); exit;
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment->execute($params);
+			return $statment->execute($params);
 		}
 
 		public function remove(){
@@ -125,7 +137,7 @@
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_media" => $this->getIdMedia());
-			$statment->execute($params);
+			return $statment->execute($params);
 		}
 	}
 ?>

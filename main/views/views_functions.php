@@ -54,7 +54,8 @@
     	foreach ($messages as $i => $message) {
     		$content = $message['content'];
     		$type = $message['type'];
-    		$stylizedMessage = "<div class='alert alert-$type'>";
+    		$stylizedMessage = "<div class='alert alert-$type alert-dismissible' role='alert'>";
+    		$stylizedMessage .= "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span><span class='sr-only'>Fechar</span></button>";
     		$stylizedMessage .= "$content";
     		$stylizedMessage .= "</div>";
     		$stylizedMessages[$i] = $stylizedMessage;

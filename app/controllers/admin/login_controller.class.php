@@ -11,7 +11,7 @@
       */
       public function beforeAction(){
          if (Administrator::getCurrentAdminLogged()){
-            $this->redirectTo("admin");
+            //$this->redirectTo("admin");
          }
       } 
 
@@ -19,9 +19,10 @@
    		$this->setHeadTitle("Login");
 		}
 
-      public function login(){         
+      public function login(){       
          $admin = Administrator::login($this->params["admin"]["login"], $this->params["admin"]["password"]);
          if ($admin){
+            \FlashMessage::infoMessage('[teste] Olá. Nas últimas <strong>24 horas</strong> foram realizadas <strong>8 inscrições</strong>.');
             $this->redirectTo("admin");
          }
          else{

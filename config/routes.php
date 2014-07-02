@@ -61,6 +61,9 @@
 
     //rota para mídia
     $router->get('/admin/midia/lista', array('controller' => 'Admin\MediaController', 'action' => '_list'));
+    $router->get('/admin/midia/lista/pagina/:p', array('controller' => 'Admin\MediaController', 'action' => '_list'));
+
+
     $router->get('/admin/midia/nova', array('controller' => 'Admin\MediaController', 'action' => '_new'));
     $router->get('/admin/midia/:id/alterar', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
     $router->post('/admin/midia', array('controller' => 'Admin\MediaController', 'action' => 'create'));    

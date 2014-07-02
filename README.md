@@ -1,3 +1,11 @@
+----- Atualização 013 (01/07) -----
+- Estilização das mensagens flash modificada - agora é possível fechar a 'janela' das mensagens flash.
+- Novas mensagens flash adicionadas
+- Classe Pager criada, paginação adicionada nas mídias com limite fixo de 3 itens por página para teste - precisa ser otimizado
+- Para a paginação também foi alterado o método find do modelo media, recebendo o parâmetro página (que é a página atual) e também o parâmetro limite (limite de itens por página)
+- Alguns bugs de links resolvidos
+- Desativada função do beforeAction da classe login
+
 ----- Atualização 012 (30/06) -----
 - Criado modelo, controlador e visão para Forma de Pagamento (otimizar posteriormente implementando a API do PagSeguro)
 - Finalizado area Admin\Events ... (Falta implementar filtros, msgFlash e validações ...)
