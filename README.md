@@ -2,6 +2,7 @@
 - Paginação incluída em admin/eventos
 - Iniciada listagem de eventos no site, área próximos eventos (porém está listando todos não importando a data), limitando a 6 eventos por página por enquanto.
 - _modals.html alterado para _modals.phtml
+- Modals criados. Eles serão carregados apenas para os eventos referentes à página.
 
 ----- Atualização 013 (01/07) -----
 - Estilização das mensagens flash modificada - agora é possível fechar a 'janela' das mensagens flash.

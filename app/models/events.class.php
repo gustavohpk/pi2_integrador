@@ -58,7 +58,7 @@
 		}
 
 		public function setStartTime($startTime){
-			$this->startTime =  $this->formatDateTime($startTime, "H:i:s");
+			$this->startTime =  $this->formatDateTime($startTime, "H:i");
 		}
 
 		public function setEndDate($endDate){
@@ -67,7 +67,7 @@
 		}
 
 		public function setEndTime($endTime){
-			$this->endTime =  $this->formatDateTime($endTime, "H:i:s");	
+			$this->endTime =  $this->formatDateTime($endTime, "H:i");	
 		}
 
 		public function setSpaces($spaces){

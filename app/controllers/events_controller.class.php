@@ -6,7 +6,7 @@
 	    protected $actionForm;
 
 		public function next() {
-
+			$this->setHeadTitle("Próximos Eventos");
 	        if (isset($this->params[":p"])) {
 	           $page = $this->params[":p"];
 	        } else {
