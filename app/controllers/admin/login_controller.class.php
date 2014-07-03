@@ -9,14 +9,15 @@
       /* importante declarar o método beforeAction para subescrever
       * o método da superclasse pra não entrar em loop infinito por causa dos redirecionamento para login
       */
-      public function beforeAction(){
-         if (Administrator::getCurrentAdminLogged()){
-            //$this->redirectTo("admin");
-         }
-      } 
+      public function beforeAction(){}
 
 		public function index(){
-   		$this->setHeadTitle("Login");
+         if (Administrator::getCurrentAdminLogged()){
+            $this->redirectTo("admin");
+         }
+         else{
+   		 $this->setHeadTitle("Login");
+         }
 		}
 
       public function login(){       
