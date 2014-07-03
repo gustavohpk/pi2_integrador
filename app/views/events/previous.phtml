@@ -1,38 +1,35 @@
-<div id="next-events">
+<div id="prev-events">
 	<h2>Eventos Anteriores</h2>
 	<div class="row">
-	  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	  	<a class="event-link" data-toggle="modal" data-target="#modalevent1">
-		    <div class="thumbnail">
-		      <img class="event-thumbnail" src="<?php echo $this->getResource('img/placeholder-evento-2.png'); ?>" alt="...">
-		      <div class="caption">
-		        <h3>Evento 1</h3>
-		        <p>18/04/14</p>
-		      </div>
-	    	</div>
-	    </a>
-	  </div>
-	  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	    <a class="event-link" data-toggle="modal" data-target="#modalevent2">
-	    	<div class="thumbnail">
-	      <img class="event-thumbnail" src="<?php echo $this->getResource('img/placeholder-evento-2.png'); ?>" alt="...">
-	      <div class="caption">
-	        <h3>Evento 2</h3>
-	        <p>14/04/14</p>
-	      </div>
-	    </div>
-	   </a>
-	  </div>
-	  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	    <a class="event-link" data-toggle="modal" data-target="#modalsubevent1">
-	    	<div class="thumbnail">
-	      <img class="event-thumbnail" src="<?php echo $this->getResource('img/placeholder-evento.png'); ?>" alt="...">
-	      <div class="caption">
-	        <h3>Evento 3</h3>
-	        <p>20/03/14</p>
-	      </div>
-	    </div>
-	   </a>
-	  </div>
+		<?php $i=0;?>
+		<?php foreach ($this->events as $event) : ?>
+			<?php if ($i == 4) : ?>
+				</div>
+				<div class="row">
+			<?php endif; ?>
+		  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		  	<a class="event-link" data-toggle="modal" data-target="#event<?= $event->getIdEvent();?>-modal">
+			    <div class="thumbnail">
+			      <img class="event-thumbnail" src="<?php echo $this->getResource('img/placeholder-evento.png'); ?>" alt="...">
+			      <div class="caption">
+			        <h3><?= $event->getName() ?></h3>
+			        <?php if ($event->getStartDate() == $event->getEndDate()) : ?>
+			        	<p> <?= $event->getStartDate() ?></p>
+			        <?php else : ?>
+			        	<p>De <?= $event->getStartDate() ?> a <?= $event->getStartDate() ?></p>
+			        <?php endif; ?>
+			      </div>
+		    	</div>
+		    </a>
+		  </div>
+		  <?php $i++;?>
+		<?php endforeach; ?>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="pagination">
+			  <?php echo $this->pagination->getPageAnchors("{$this->getUri('eventos/anteriores')}");?>
+			</ul>
+		</div>
 	</div>
 </div>
