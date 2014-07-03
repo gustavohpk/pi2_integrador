@@ -2,6 +2,7 @@
 - Área de eventos atualizada. Os eventos estão sendo exibidos corretamente nas áreas Próximos Eventos e Eventos Anteriores
 - Modais atualizados
 - Serão exibidas labels "HOJE" e "AGORA" caso se apliquem, na listagem dos eventos
+- Iniciadas visões admin/noticias
 
 ----- Atualização 014 (02/07) -----
 - Paginação incluída em admin/eventos
