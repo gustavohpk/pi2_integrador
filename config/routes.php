@@ -11,7 +11,11 @@
    	
    	//rotas para eventos
    	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
-   	$router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
+    $router->get('/eventos/proximos/pagina/:p', array('controller' => 'EventsController', 'action' => 'next'));
+
+    $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
+    //$router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
+
 
    	//rotas para notícias
    	$router->get('/noticias/lista', array('controller' => 'NewsController', 'action' => 'show'));
@@ -52,7 +56,8 @@
     $router->get('/admin/eventos/tipos/:id/remover', array('controller' => 'Admin\EventsTypeController', 'action' => 'remove')); 
 
     //rota para eventos
-    $router->get('/admin/eventos/lista', array('controller' => 'Admin\EventsController', 'action' => '_list'));    
+    $router->get('/admin/eventos/lista', array('controller' => 'Admin\EventsController', 'action' => '_list'));
+    $router->get('/admin/eventos/lista/pagina/:p', array('controller' => 'Admin\EventsController', 'action' => '_list'));
     $router->get('/admin/eventos/novo', array('controller' => 'Admin\EventsController', 'action' => '_new'));
     $router->post('/admin/eventos', array('controller' => 'Admin\EventsController', 'action' => 'create'));    
     $router->get('/admin/eventos/:id/alterar', array('controller' => 'Admin\EventsController', 'action' => 'edit'));

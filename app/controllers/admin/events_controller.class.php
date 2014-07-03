@@ -9,7 +9,15 @@
 
 		public function _list() {
    		$this->setHeadTitle("Lista de Eventos");
-   		$this->events = \Events::all();
+         if (isset($this->params[":p"])) {
+            $page = $this->params[":p"];
+         } else {
+            $page = 1;
+         }
+         $limit = 3;
+         $this->events = \Events::find(null, $limit, $page);
+         $this->count = \Events::count();
+         $this->pagination = new \Pager($this->count, $limit, $page);
 		}
 
 		public function _new(){

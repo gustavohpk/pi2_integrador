@@ -71,7 +71,7 @@
 		}
 
 		public static function count(){
-			$sql = "SELECT * FROM media";
+			$sql = "SELECT id_media FROM media";
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
 			$rs->execute();

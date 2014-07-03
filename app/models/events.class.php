@@ -154,7 +154,8 @@
 			return $this->endDateRegistration;
 		}
 
-		public static function find($params = null){
+		public static function find($params = null, $limit = 3, $page = 1){
+			$start = ($page * $limit) - $limit;
 			$sql = 
 			"SELECT 
 				event.*, event_type.event_type
@@ -166,6 +167,8 @@
 			if (!is_null($params)){
 				$sql .= " WHERE " . $params['paramsName'];
 			}
+
+			$sql .= " LIMIT $start, $limit";
 
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
@@ -182,6 +185,15 @@
 
 		public static function all(){
 			return self::find();
+		}
+
+		public static function count(){
+			$sql = "SELECT id_event FROM event";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+			return count($rows);
 		}
 
 		public static function findById($id){
