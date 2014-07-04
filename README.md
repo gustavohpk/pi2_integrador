@@ -1,3 +1,12 @@
+----- Atualização 015 (02/07 - 04/07) -----
+- Na base_model foi implementado um array errors[] que será usado nos models para armazenar os erros durante as validações.
+- Implementado assinatura para função validateData() em base_model que sera implementado de forma diferente em cada modelo. Nesta função alimentamos o array errors[] com os erros....
+- Implementado funçao getErrors() em base_models para retornar para o array errors() para os controllers...
+- Implementado model, view e controller para Participant (POR ENQUANTO PRA FUNCIONAR a cidade e estado deve ser cadastrada diretamente no banco de dados, e no cadastro do participante informar o codigo da cidade no campo cidade .... depois terminarei para deixar tudo dinamico .... por enquanto é pra teste)
+- Implementado Login do Participante em ParticipantController e ParticipantModel
+- Alterado Banco de Dados -> campo password da tabela participant alterado tamanho para varchar(32) por causa da criptografia da senha
+- Implementado funções auxiliares em base_models para auxiliar a validação de email e cpf nos models.
+
 ----- Atualização 014 (02/07) -----
 - Paginação incluída em admin/eventos
 - Iniciada listagem de eventos no site, área próximos eventos (porém está listando todos não importando a data), limitando a 6 eventos por página por enquanto.
