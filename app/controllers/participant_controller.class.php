@@ -48,7 +48,9 @@
 		}
 
 		public function create(){
+			$this->checkCity();
 			$this->participant = new Participant($this->params["participant"]);
+			
 			if ($this->participant->save()){
 				FlashMessage::successMessage("Cadastro realizado com sucesso.");
 				$this->redirectTo("conta/login");
@@ -93,6 +95,17 @@
 	         	$this->titleBtnSubmit = "Salvar";
 	         	$this->render("edit");
 			}
+		}
+
+		private function checkCity(){
+			$state = new State($this->params["state"]);
+			$state = $state->save(); //salva estado no banco caso não exista
+
+			$this->params["city"]["id_state"] = $state->getIdState();					
+			$city = new City($this->params["city"]);
+			$city = $city->save();	//salva cidade no banco caso não exista
+			//adiciona a cidade no formulario preenchido com dados do participante
+			$this->params["participant"]["id_city"] = $city->getIdCity();
 		}
 	} 
 ?>

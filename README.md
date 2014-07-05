@@ -1,3 +1,10 @@
+----- Atualização 016 (04/07) -----
+- Implementado biblioteca para listar cidades em /resources/js
+- Implementado cadastro dinamico das cidades no cadastro do participante
+- Implementado validações no cadastro do participante (falta otimizar)
+- Implementado controller e model para State
+- Implementado controller e model para City
+
 ----- Atualização 015 (02/07 - 04/07) -----
 - Na base_model foi implementado um array errors[] que será usado nos models para armazenar os erros durante as validações.
 - Implementado assinatura para função validateData() em base_model que sera implementado de forma diferente em cada modelo. Nesta função alimentamos o array errors[] com os erros....
