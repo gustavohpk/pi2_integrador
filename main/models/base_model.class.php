@@ -1,5 +1,9 @@
 <?php
 	class BaseModel{		
+		protected $errors = array();
+
+		public function validateData(){}
+
 		public function __construct($data = array()){
 			$this->setData($data);
 		}
@@ -11,6 +15,19 @@
 			}
 		}
 
+	    public function isValidData(){
+	    	$this->errors = array();
+	    	$this->validateData();
+	    	return empty($this->errors);
+	    }
+
+	    public function getErrors(){
+	    	return $this->errors;
+	    }
+
+	    /*
+	    * Funções auxiliares para os models
+	    */
 		//função para conveter campos do DB do formato snak_case para formato camelCase utilizado nas classes
 	    public function snakToCamelCase($value){
 			$value = str_replace("_", " ", $value);
@@ -19,9 +36,41 @@
 	    }
 
 	    //retorna data no formato yyyy-mm-dd hh:mm:ss
-	    function formatDateTime($date, $format = "Y-m-d H:i:s"){
+	    public function formatDateTime($date, $format = "Y-m-d H:i:s"){
 			$date = str_replace("/", "-", trim($date));
 			return (strlen($date) < 10) ? NULL : date($format, strtotime($date));
 	    }
+
+	    public function validateEmail($email){
+			return (!eregi("^[a-z0-9_\.\-]+@[a-z0-9_\.\-]*[a-z0-9_\-]+\.[a-z]{2,4}$", $email));
+		}
+
+		public function validateCpf($cpf){ 
+			$cpf = preg_replace("/[^0-9]/", "", $cpf);
+			$digitoUm = 0;
+			$digitoDois = 0;
+			
+			if (strlen($cpf) < 11) return false;
+			for($i = 0, $x = 10; $i <= 8; $i++, $x--){
+			    $digitoUm += $cpf[$i] * $x;
+			}
+			
+			for($i = 0, $x = 11; $i <= 9; $i++, $x--){
+				if (str_repeat($i, 11) == $cpf){
+				    return false;
+				}
+				$digitoDois += $cpf[$i] * $x;
+			}
+
+			$calculoUm  = (($digitoUm%11) < 2) ? 0 : 11-($digitoUm%11);
+			$calculoDois = (($digitoDois%11) < 2) ? 0 : 11-($digitoDois%11);
+			
+			if ($calculoUm <> $cpf[9] || $calculoDois <> $cpf[10]){
+			    return false;
+			}
+			else{
+				return true;
+			}
+		}
 	}
 ?>

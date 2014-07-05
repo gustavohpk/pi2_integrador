@@ -27,13 +27,15 @@
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
 
-    //rotas para login/cadastro/painel
-    $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
+    //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
 
    	//rota para login/cadastro - usuários
-    $router->get('/conta/login', array('controller' => 'AccountController', 'action' => 'login'));
-    $router->get('/conta/registro', array('controller' => 'AccountController', 'action' => 'register'));
+    $router->get('/conta/login', array('controller' => 'ParticipantController', 'action' => 'login'));
+    $router->post('/conta/login', array('controller' => 'ParticipantController', 'action' => 'validateLogin'));
+    $router->get('/conta/sair', array('controller' => 'ParticipantController', 'action' => 'logout'));
+    $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
+    $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
 
     /*
     * rotas para area do admin

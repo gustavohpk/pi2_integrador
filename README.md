@@ -1,8 +1,17 @@
------ Atualização 015 (03/07) -----
+----- Atualização 016 (03/07) -----
 - Área de eventos atualizada. Os eventos estão sendo exibidos corretamente nas áreas Próximos Eventos e Eventos Anteriores
 - Modais atualizados
 - Serão exibidas labels "HOJE" e "AGORA" caso se apliquem, na listagem dos eventos
 - Iniciadas visões admin/noticias
+
+----- Atualização 015 (02/07 - 04/07) -----
+- Na base_model foi implementado um array errors[] que será usado nos models para armazenar os erros durante as validações.
+- Implementado assinatura para função validateData() em base_model que sera implementado de forma diferente em cada modelo. Nesta função alimentamos o array errors[] com os erros....
+- Implementado funçao getErrors() em base_models para retornar para o array errors() para os controllers...
+- Implementado model, view e controller para Participant (POR ENQUANTO PRA FUNCIONAR a cidade e estado deve ser cadastrada diretamente no banco de dados, e no cadastro do participante informar o codigo da cidade no campo cidade .... depois terminarei para deixar tudo dinamico .... por enquanto é pra teste)
+- Implementado Login do Participante em ParticipantController e ParticipantModel
+- Alterado Banco de Dados -> campo password da tabela participant alterado tamanho para varchar(32) por causa da criptografia da senha
+- Implementado funções auxiliares em base_models para auxiliar a validação de email e cpf nos models.
 
 ----- Atualização 014 (02/07) -----
 - Paginação incluída em admin/eventos

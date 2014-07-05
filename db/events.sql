@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `participant` (
   `phone` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone2` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_participant`),
   KEY `fk_participant_city` (`id_city`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

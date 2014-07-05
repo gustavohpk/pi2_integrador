@@ -1,0 +1,95 @@
+<form name="participant" method="POST" action="<?= $this->actionForm ?>">
+	<div class="row">
+		<div class="col-xs-9">
+			<div class="input-group">
+			  <span class="input-group-addon glyphicon glyphicon-user"></span>
+			  <input id="name" name="participant[name]" value="<?= $this->participant->getName()?>" type="text" class="form-control input-glyphicon" placeholder="Nome">
+			</div>
+		</div>
+		<div class="col-xs-3">
+			<div class="input-group well well-sm">
+				<span class="label label-default">Sexo</span>
+				<span> M </span><input id="masc" type="radio" name="participant[gender]" value="M" <?php if (strtoupper($this->participant->getGender()) == "M")echo "checked"?>>
+				<span> F </span><input id="masc" type="radio" name="participant[gender]" value="F" <?php if (strtoupper($this->participant->getGender()) == "F") echo "checked"?>>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-envelope"></span>
+			  <input id="email" name="participant[email]" value="<?= $this->participant->getEmail()?>" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-group">
+			  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
+			  <input id="password" name="participant[password]" type="password" class="form-control input-glyphicon" placeholder="Senha">
+			</div>
+		</div>
+	</div>
+
+	<br/>
+	<div class="row">
+		<div class="col-xs-6">
+			<input id="rg" name="participant[rg]" value="<?= $this->participant->getRg()?>" type="text" class="form-control" placeholder="R.G.">
+		</div>
+		<div class="col-xs-6">
+			<input id="cpf" name="participant[cpf]" value="<?= $this->participant->getCpf()?>" type="text" class="form-control" placeholder="CPF">
+		</div>
+	</div>
+	<br/>
+
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-phone-alt"></span>
+			  <input id="phone1" name="participant[phone]" value="<?= $this->participant->getPhone()?>" type="text" class="form-control input-glyphicon" placeholder="Telefone">
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-earphone"></span>
+			  <input id="phone2" name="participant[phone2]" value="<?= $this->participant->getPhone2()?>" type="text" class="form-control input-glyphicon" placeholder="Telefone 2">
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<div class="row">
+		<div class="col-xs-9">
+			<input id="street" name="participant[address]" value="<?= $this->participant->getAddress()?>" type="text" class="form-control" placeholder="Rua">
+		</div>
+		<div class="col-xs-3">
+			<input id="number" name="participant[number]" value="<?= $this->participant->getNumber()?>" type="text" class="form-control" placeholder="Número">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-7">
+			<input id="district" name="participant[district]" value="<?= $this->participant->getDistrict()?>" type="text" class="form-control" placeholder="Bairro">
+		</div>
+		<div class="col-xs-5">
+			<input id="cep" name="participant[zipcode]" value="<?= $this->participant->getZipcode()?>" type="text" class="form-control" placeholder="CEP">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<input id="complement" name="participant[complement]" value="<?= $this->participant->getComplement()?>" type="text" class="form-control" placeholder="Complemento">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-8">
+			<input id="city" name="participant[id_city]" type="text" class="form-control" placeholder="Cidade">
+		</div>
+		<div class="col-xs-4">
+			<select id="state" class="form-control">
+				<option selected disabled>Estado</option>
+			</select>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-default btn-lg"><?= $this->titleBtnSubmit ?></button>
+</form>
