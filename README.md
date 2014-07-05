@@ -1,7 +1,11 @@
------ Atualização 018 (05/07) -----
+----- Atualização 019 (05/07) -----
 - Concluido as validações no cadastro do participante
 - Criado função getParamsSQL() em base_model, destinado a otimizar as consultas ... esta funçao retorna um array contendo uma string com os parametros de comparação para o comando SQL e um array com os parametros que serão executados pelo statment.... facilita nas consultas, porque podemos chamandar a função assim: find(array(campos), array(valores), operador, comparador)
 - Colocado pagina atual e limite por pagina em base_model....
+
+----- Atualização 018 (05/07) -----
+- Alterando alguns comentários do código
+- Iniciando controller de notícias
 
 ----- Atualização 017 (04/07) -----
 - Implementado biblioteca para listar cidades em /resources/js
