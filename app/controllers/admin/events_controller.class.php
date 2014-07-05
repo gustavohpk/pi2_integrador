@@ -22,7 +22,7 @@
          }
          else{
             $this->events = \Events::find();
-            $this->pagination = new \Pager(count($this->events), \Events::getLimitByPage(), $page);
+            $this->pagination = new \Pager(\Events::count(), \Events::getLimitByPage(), $page);
          }
 		}
 

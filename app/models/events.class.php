@@ -197,6 +197,15 @@
 			return self::find();
 		}
 
+		public static function count(){
+			$sql = "SELECT count(id_event) as count FROM event";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetch();
+			return $rows["count"];
+		}
+
 		public static function countNext(){
 			$date = date("d-m-Y");
 			return count(self::findNext($date));			
