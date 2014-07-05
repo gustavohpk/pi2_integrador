@@ -58,7 +58,7 @@
 		}
 
 		public function setStartTime($startTime){
-			$this->startTime =  $this->formatDateTime($startTime, "H:i:s");
+			$this->startTime =  $this->formatDateTime($startTime, "H:i");
 		}
 
 		public function setEndDate($endDate){
@@ -67,7 +67,7 @@
 		}
 
 		public function setEndTime($endTime){
-			$this->endTime =  $this->formatDateTime($endTime, "H:i:s");	
+			$this->endTime =  $this->formatDateTime($endTime, "H:i");	
 		}
 
 		public function setSpaces($spaces){
@@ -183,17 +183,61 @@
 			return $events;
 		}
 
+		public static function findNext($date, $limit = 3, $page = 1){
+			$params = array(
+				"paramsName" => "start_date >= :current_date ORDER BY start_date", 
+				"paramsValue" => array(":current_date" => $date)
+			);
+			$events = self::find($params, $limit, $page);
+			return $events;
+		}
+
+		public static function findPrev($date, $limit = 3, $page = 1){
+			$params = array(
+				"paramsName" => "start_date < :current_date ORDER BY start_date desc", 
+				"paramsValue" => array(":current_date" => $date)
+			);
+			$events = self::find($params, $limit, $page);
+			return $events;			
+		}
+
 		public static function all(){
 			return self::find();
 		}
 
-		public static function count(){
+		public static function count($params = null){
+
 			$sql = "SELECT id_event FROM event";
+			if (!is_null($params)){
+				$sql .= " WHERE " . $params['paramsName'];
+			}
+
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
-			$rs->execute();
+			$rs->execute($params["paramsValue"]);
 			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+			$events = array();
 			return count($rows);
+		}
+
+		public static function countNext(){
+			$date = date("d-m-Y");
+			$params = array(
+				"paramsName" => "start_date >= :current_date", 
+				"paramsValue" => array(":current_date" => $date)
+			);
+			$count = self::count($params);
+			return $count;			
+		}
+
+		public static function countPrev(){
+			$date = date("d-m-Y");
+			$params = array(
+				"paramsName" => "start_date < :current_date", 
+				"paramsValue" => array(":current_date" => $date)
+			);
+			$count = self::count($params);
+			return $count;			
 		}
 
 		public static function findById($id){

@@ -1,63 +1,36 @@
-<div id="modalevent1" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-      	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      	<div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        	<img class="event-thumbnail" src="<?php echo MEDIA_FOLDER.'/image/event1.png'; ?>" alt="...">
-        </div>
-        <div class="caption">
-	        <h2>Semana Acadêmica de TSI 2014</h2>
-	        <h4>De 22/09/14 a 26/09/14</h4>
-	        <p>Palestras, minicursos e atividades relacionadas à Tecnologia em Sistemas para Internet</p>
-	      </div>
-	      <a href="event-special.php" class="btn btn-default" role="button">Ir para a página do evento</a>
-	      <button type="button" class="btn btn-default">Inscrever-se</button>
-	      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-      </div>
-    </div>
-  </div>
-</div>
+<?php if (isset($this->events)) : ?>
+  <?php foreach ($this->events as $event) : ?>
+    <div id="event<?= $event->getIdEvent();?>-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+          	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          	<div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            	<img class="event-thumbnail" src="<?= $this->getResource('img/placeholder-evento.png'); ?>" alt="...">
+            </div>
+            <div class="caption">
+    	        <h2><?= $event->getName() ?></h2>
+               <?php if ($event->getStartDate() == $event->getEndDate()) : ?>
+                <h4> <?= $event->getStartDate() ?></h4>
+              <?php else : ?>
+                <h4>De <?= $event->getStartDate() ?> a <?= $event->getStartDate() ?></h4>
+              <?php endif; ?>
 
-<div id="modalevent2" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-      	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      	<div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        	<img class="event-thumbnail" src="<?php echo MEDIA_FOLDER.'/image/event2.jpg'; ?>" alt="...">
+              <?php if ($event->getStartTime() == $event->getEndTime()) : ?>
+                <h5> <?= $event->getStartTime() ?></h4>
+              <?php else : ?>
+                <h5>Das <?= $event->getStartTime() ?> às <?= $event->getStartTime() ?></h4>
+              <?php endif; ?>
+    	        <p>Acesse a página do evento para mais detalhes.</p>
+    	      </div>
+    	      <a href="#" class="btn btn-default" role="button">Ir para a página do evento</a>
+            <?php if (!($event->getStartDate() > date("d/m/Y"))) : ?>
+    	       <a role="button" class="btn btn-default">Inscrever-se</a>
+            <?php endif; ?>
+    	      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          </div>
         </div>
-        <div class="caption">
-	        <h2>Semana Acadêmica de EM 2014</h2>
-	        <h4>De 22/09/14 a 26/09/14</h4>
-	        <p>Palestras, minicursos e atividades relacionadas à Engenharia Mecânica</p>
-	      </div>
-	      <button type="button" class="btn btn-default">Ir para a página do evento</button>
-	      <button type="button" class="btn btn-default disabled">Inscrever-se</button>
-	      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
       </div>
     </div>
-  </div>
-</div>
-
-<div id="modalsubevent1" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <img class="event-thumbnail" src="<?php echo MEDIA_FOLDER.'/image/event1.png'; ?>" alt="...">
-        </div>
-        <div class="caption">
-          <h2>Minicurso de Linux</h2>
-          <h4>26/09/14</h4>
-          <p>Minicurso de Linux para iniciantes</p>
-          <h3><span class="label label-info">Este evento faz parte do evento: <a class="event-related-link" href="event-special.php">Semana Academica de TSI</a></span></h3>
-        </div>
-        <a href="event.php" class="btn btn-default" role="button">Ir para a página do evento</a>
-        <button type="button" class="btn btn-default">Inscrever-se</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-      </div>
-    </div>
-  </div>
-</div>
+  <?php endforeach; ?>
+<?php endif; ?>

@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<h4>Título do Evento</h4>
-			<input type="text" class="form-control" name="event[name]" value="<?= $this->events->getName()?>"/>
+			<input type="text" class="form-control" name="event[name]" value="<?= $this->events->getName()?>" required/>
 		</div>
 	</div>
 	<div class="row">
@@ -30,13 +30,13 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<h4>Ministrante</h4>
-			<input type="text" class="form-control" name="event[teacher]" value="<?= $this->events->getTeacher()?>"/>
+			<input type="text" class="form-control" name="event[teacher]" value="<?= $this->events->getTeacher()?>" required/>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<h4>Local</h4>
-			<input type="text" class="form-control" name="event[local]" value="<?= $this->events->getLocal()?>"/>
+			<input type="text" class="form-control" name="event[local]" value="<?= $this->events->getLocal()?>" required/>
 		</div>
 	</div>
 	<div class="row">
@@ -45,15 +45,15 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h5>Início</h5>
-					<input type="date" class="form-control" name="event[start_date]" value="<?= $this->events->getStartDate()?>"/>
+					<input type="date" class="form-control" name="event[start_date]" value="<?= $this->events->getStartDate()?>" required/>
 					<br/>
-					<input type="time" class="form-control" name="event[start_time]" value="<?= $this->events->getStartTime()?>"/>
+					<input type="time" class="form-control" name="event[start_time]" value="<?= $this->events->getStartTime()?>" required/>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<h5>Fim</h5>
-					<input type="date" class="form-control" name="event[end_date]" value="<?= $this->events->getEndDate()?>"/>
+					<input type="date" class="form-control" name="event[end_date]" value="<?= $this->events->getEndDate()?>" required/>
 					<br/>
-					<input type="time" class="form-control" name="event[end_time]" value="<?= $this->events->getEndTime()?>"/>
+					<input type="time" class="form-control" name="event[end_time]" value="<?= $this->events->getEndTime()?>" required/>
 				</div>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 			<h4>Vagas</h4>
-			<input type="number" class="form-control" name="event[spaces]" value="<?= $this->events->getSpaces()?>"/>
+			<input type="number" class="form-control" name="event[spaces]" value="<?= $this->events->getSpaces()?>" required/>
 		</div>
 	</div>
 	<div class="row">

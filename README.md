@@ -1,9 +1,18 @@
------ Atualização 016 (04/07) -----
+----- Atualização 017 (04/07) -----
 - Implementado biblioteca para listar cidades em /resources/js
 - Implementado cadastro dinamico das cidades no cadastro do participante
 - Implementado validações no cadastro do participante (falta otimizar)
 - Implementado controller e model para State
 - Implementado controller e model para City
+
+----- Atualização 016 (03/07 - 04/07) -----
+- Área de eventos atualizada. Os eventos estão sendo exibidos corretamente nas áreas Próximos Eventos e Eventos Anteriores
+- Modais atualizados
+- Serão exibidas labels "HOJE" e "AGORA" caso se apliquem, na listagem dos eventos
+- Iniciadas visões admin/noticias
+- Criadas funções e visões para registro de presença
+- Adicionadas algumas validações em HTML5
+
 
 ----- Atualização 015 (02/07 - 04/07) -----
 - Na base_model foi implementado um array errors[] que será usado nos models para armazenar os erros durante as validações.
@@ -18,6 +27,7 @@
 - Paginação incluída em admin/eventos
 - Iniciada listagem de eventos no site, área próximos eventos (porém está listando todos não importando a data), limitando a 6 eventos por página por enquanto.
 - _modals.html alterado para _modals.phtml
+- Modals criados. Eles serão carregados apenas para os eventos referentes à página.
 
 ----- Atualização 013 (01/07) -----
 - Estilização das mensagens flash modificada - agora é possível fechar a 'janela' das mensagens flash.

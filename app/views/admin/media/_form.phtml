@@ -15,7 +15,7 @@
 		<h4>ID evento</h4>
 
 		<div class="input-group">
-	    <input id="event-id" type="number" class="form-control" name="media[id_event]" value="<?= $this->media->getIdEvent()?>">
+	    <input id="event-id" type="number" class="form-control" name="media[id_event]" value="<?= $this->media->getIdEvent()?>" required>
 	    <input id="event-link" type="hidden" value="<?= createUriFor('/admin/eventos/idevento/alterar')?>"></input>
 	    <div class="input-group-btn">
 	      <button id="event-access" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Acessar evento" onclick="openEvent()"><span class="glyphicon glyphicon-new-window"></span></button>
