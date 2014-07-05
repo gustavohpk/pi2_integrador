@@ -4,6 +4,7 @@
 - Serão exibidas labels "HOJE" e "AGORA" caso se apliquem, na listagem dos eventos
 - Iniciadas visões admin/noticias
 - Criadas funções e visões para registro de presença
+- Adicionadas algumas validações em HTML5
 
 ----- Atualização 015 (02/07 - 04/07) -----
 - Na base_model foi implementado um array errors[] que será usado nos models para armazenar os erros durante as validações.
