@@ -177,12 +177,16 @@
    			if (strlen($this->getName()) < 4) $this->errors[] = "O nome deve ter no mínimo 4 caracteres.";
    			if ($this->getGender() != "M" && $this->getGender() != "F") $this->errors[] = "Sexo não informado corretamente.";
 			if ($this->validateEmail($this->getEmail())) $this->errors[] = "Email inválido.";
+			if (self::findByEmail($this->getEmail())) $this->errors[] = "O email informado já está sendo usado por outro participante";
    			if (is_null($this->getPassword())) $this->errors[] = "Nenhuma senha foi informado.";
    			if (!$this->validateCpf($this->getCpf())) $this->errors[] = "CPF inválido";   			
+   			if (self::findByCpf($this->getCpf())) $this->errors[] = "O CPF informado já esta sendo usado por outro participante.";
    			if ((int) $this->getIdCity() < 1) $this->errors[] = "O nome da cidade é um campo obrigatório.";   			
    		}
 
-		public static function find($params = null){
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
+			
 			$sql = 
 			"SELECT 
 				participant.*, city.name AS city, city.id_state, state.state 
@@ -192,10 +196,10 @@
 				city ON city.id_city = participant.id_city
 			INNER JOIN
 				state ON state.id_state = city.id_state" . 
-				(!is_null($params) ? " WHERE " . $params['paramsName'] : "");
+				(!is_null($paramsName) ? " WHERE " . $paramsName : "");
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment->execute($params["paramsValue"]);
+			$statment->execute($paramsValue);
 			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
 			$participants = array();			
 
@@ -211,13 +215,19 @@
 		}
 
 		public static function findById($id){
-			$params = array(
-				"paramsName" => "id_participant = :id_participant", 
-				"paramsValue" => array(":id_participant" => $id)
-			);
 			//retorna apenas o primeiro objeto (no caso o unico)
-			$participant = self::find($params);
+			$participant = self::find(array("id_participant"), array($id));
 			return count($participant) > 0 ? $participant[0] : NULL;
+		}
+
+		public static function findByCpf($cpf){
+			$participant = self::find(array("cpf"), array($cpf));
+			return count($participant) > 0 ? $participant : NULL;
+		}
+
+		public static function findByEmail($email){
+			$participant = self::find(array("email"), array($email));
+			return count($participant) > 0 ? $participant : NULL;
 		}
 
 		public function save(){
@@ -286,22 +296,14 @@
 		}
 
 		public function login($email, $password){
-			$params = array(
-				"paramsName" => "email = :email", 
-				"paramsValue" => array(":email" => $email)
-			);
-			$participant = self::find($params);
+			$participant = self::findByEmail($email);
 
 			if (count($participant) == 0){
 				$this->errors = array("Email incorreto!");
 				return false;
 			}
 			
-			$params = array(
-				"paramsName" => "email = :email AND password = :password", 
-				"paramsValue" => array(":email" => $email, ":password" => md5($password))
-			);
-			$participant = self::find($params);
+			$participant = self::find(array("password"), array(md5($password)));
 
 			if (count($participant) == 0){
 				$this->errors = array("Senha incorreta!");

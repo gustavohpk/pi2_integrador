@@ -19,11 +19,16 @@
    			return $this->state;
    		}
 
-		public static function find($params = null){
-			$sql = "SELECT * FROM state" . (!is_null($params) ? " WHERE " . $params['paramsName'] : "");
+   		public function validateData(){
+   			if (strlen($this->getState()) < 2) $this->errors[] = "Estado não informado.";
+   		}
+
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
+			$sql = "SELECT * FROM state" . (!is_null($paramsName) ? " WHERE " . $paramsName : "");
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment->execute($params["paramsValue"]);
+			$statment->execute($paramsValue);
 			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
 			$states = array();			
 
@@ -39,26 +44,19 @@
 		}
 
 		public static function findById($id){
-			$params = array(
-				"paramsName" => "id_state = :id_state", 
-				"paramsValue" => array(":id_state" => $id)
-			);
 			//retorna apenas o primeiro objeto (no caso o unico)
-			$state = self::find($params);
+			$state = self::find(array("id_state"), array($id));
 			return count($state) > 0 ? $state[0] : NULL;
 		}
 
 		public static function findByName($state){
-			$params = array(
-				"paramsName" => "state = :state", 
-				"paramsValue" => array(":state" => $state)
-			);
-			$states = self::find($params);
+			$states = self::find(array("state"), array($state));
 			return count($states) > 0 ? $states : NULL;
 		}
 
 		public function save(){
 			if ($exists = $this->exists()) return $exists;
+			if (!$this->isValidData()) return false;
 			
 			$sql = 
 			"INSERT INTO state

@@ -37,7 +37,13 @@
    			return $this->state;
    		}
 
-		public static function find($params = null){
+   		public function validateData(){
+   			if (strlen(trim($this->getName())) < 4) $this->errors[] = "Cidade não informada.";
+   		}
+
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
+
 			$sql = 
 			"SELECT 
 				city.*, state.state 
@@ -45,10 +51,10 @@
 				city
 			INNER JOIN
 				state ON state.id_state = city.id_state" . 
-				(!is_null($params) ? " WHERE " . $params['paramsName'] : "");
+				(!is_null($paramsName) ? " WHERE " . $paramsName : "");
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment->execute($params["paramsValue"]);
+			$statment->execute($paramsValue);
 			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
 			$citys = array();			
 
@@ -64,26 +70,18 @@
 		}
 
 		public static function findById($id){
-			$params = array(
-				"paramsName" => "id_city = :id_city", 
-				"paramsValue" => array(":id_city" => $id)
-			);
 			//retorna apenas o primeiro objeto (no caso o unico)
-			$city = self::find($params);
+			$city = self::find(array("id_city"), array($id));
 			return count($city) > 0 ? $city[0] : NULL;
 		}
 
 		public static function findByName($name){
-			$params = array(
-				"paramsName" => "name = :name", 
-				"paramsValue" => array(":name" => $name)
-			);
-			//retorna apenas o primeiro objeto (no caso o unico)
-			return self::find($params);
+			return self::find(array("name"), array($name));
 		}
 
 		public function save(){
 			if ($exists = $this->exists()) return $exists;
+			if (!$this->isValidData()) return false;
 
 			$sql = 
 			"INSERT INTO city
@@ -104,14 +102,10 @@
 
 		//retorna primeira cidade ou false se não existir
 		public function exists(){
-			$params = array(
-				"paramsName" => "name = :name AND state.id_state = :id_state", 
-				"paramsValue" => array(
-						":name" => $this->getName(),
-						":id_state" => $this->getIdState()
-					)
-			);
-			$city = self::find($params);
+			$city = self::find(
+						array("name", "state.id_state"), 
+						array($this->getName(), $this->getIdState())
+					);
 			return $city ? $city[0] : false;
 		}
 	}

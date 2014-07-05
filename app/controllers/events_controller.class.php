@@ -12,11 +12,11 @@
 	        } else {
 	           $page = 1;
 	        }
-	        $limit = 6;
+	        Events::setLimitByPage(6);
+	        Events::setCurrentPage($page);
 	        $date = date("d-m-Y");
-	        $this->events = Events::findNext($date, $limit, $page);
-	        $this->count = Events::countNext();
-	        $this->pagination = new Pager($this->count, $limit, $page);
+	        $this->events = Events::findNext($date);
+	        $this->pagination = new Pager(count($this->events), Events::getlimitByPage(), $page);
    		}
 
    		public function previous(){
@@ -26,11 +26,11 @@
 	        } else {
 	           $page = 1;
 	        }
-	        $limit = 6;
+	        Events::setLimitByPage(6);
+	        Events::setCurrentPage($page);
 	        $date = date("d-m-Y");
-	        $this->events = Events::findPrev($date, $limit, $page);
-	        $this->count = Events::countPrev();
-	        $this->pagination = new Pager($this->count, $limit, $page);
+	        $this->events = Events::findPrev($date);
+	        $this->pagination = new Pager(count($this->events), Events::getLimitByPage(), $page);
    		}
 	} 
 ?>

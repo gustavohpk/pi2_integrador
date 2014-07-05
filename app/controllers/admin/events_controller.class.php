@@ -14,10 +14,16 @@
          } else {
             $page = 1;
          }
-         $limit = 3;
-         $this->events = \Events::find(null, $limit, $page);
-         $this->count = \Events::count();
-         $this->pagination = new \Pager($this->count, $limit, $page);
+         \Events::setCurrentPage($page);
+
+         if (isset($this->params[":id"])){
+            $this->events = \Events::findById($this->params[":id"]);
+            $this->pagination = new \Pager(count($this->events), \Events::getLimitByPage(), $page);
+         }
+         else{
+            $this->events = \Events::find();
+            $this->pagination = new \Pager(count($this->events), \Events::getLimitByPage(), $page);
+         }
 		}
 
 		public function _new(){
@@ -62,14 +68,14 @@
 			$this->setHeadTitle("Editar Evento");
          $this->eventsType = \EventsType::all();
          $this->paymentsType = \PaymentType::all();
-			$this->events = \Events::findById($this->params[":id"]);
+			$this->events = \Events::findById($this->params[":id"])[0];
          $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
          $this->titleBtnSubmit = "Salvar";
 		}
 
       public function update(){
          //salva edição do evento no db  
-         $this->events = \Events::findById($this->params[":id"]);
+         $this->events = \Events::findById($this->params[":id"])[0];
          if ($this->events->update($this->params['event'])){
             \FlashMessage::successMessage("Evento cadastrado com sucesso.");
             $this->redirectTo("admin/eventos/lista");
@@ -86,7 +92,7 @@
       }
 
 		public function remove(){
-         $this->events = \Events::findById($this->params[":id"]);
+         $this->events = \Events::findById($this->params[":id"])[0];
          $this->events->remove();
          \FlashMessage::successMessage("Evento removido com sucesso.");
          $this->redirectTo("admin/eventos/lista");

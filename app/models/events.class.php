@@ -154,25 +154,25 @@
 			return $this->endDateRegistration;
 		}
 
-		public static function find($params = null, $limit = 3, $page = 1){
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
+			$limit = self::getLimitByPage();
+			$page = self::getCurrentPage();
 			$start = ($page * $limit) - $limit;
+
 			$sql = 
 			"SELECT 
 				event.*, event_type.event_type
 			FROM 
 				event
 			NATURAL JOIN 
-				event_type";
-
-			if (!is_null($params)){
-				$sql .= " WHERE " . $params['paramsName'];
-			}
+				event_type" .($paramsName ? " WHERE $paramsName" : "");
 
 			$sql .= " LIMIT $start, $limit";
 
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
-			$rs->execute($params["paramsValue"]);
+			$rs->execute($paramsValue);
 			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
 			$events = array();			
 
@@ -183,21 +183,13 @@
 			return $events;
 		}
 
-		public static function findNext($date, $limit = 3, $page = 1){
-			$params = array(
-				"paramsName" => "start_date >= :current_date ORDER BY start_date", 
-				"paramsValue" => array(":current_date" => $date)
-			);
-			$events = self::find($params, $limit, $page);
+		public static function findNext($date){
+			$events = self::find(array("start_date"), array($date), ">=");
 			return $events;
 		}
 
-		public static function findPrev($date, $limit = 3, $page = 1){
-			$params = array(
-				"paramsName" => "start_date < :current_date ORDER BY start_date desc", 
-				"paramsValue" => array(":current_date" => $date)
-			);
-			$events = self::find($params, $limit, $page);
+		public static function findPrev($date){
+			$events = self::find(array("start_date"), array($date), "<");
 			return $events;			
 		}
 
@@ -205,46 +197,19 @@
 			return self::find();
 		}
 
-		public static function count($params = null){
-
-			$sql = "SELECT id_event FROM event";
-			if (!is_null($params)){
-				$sql .= " WHERE " . $params['paramsName'];
-			}
-
-			$pdo = \Database::getConnection();
-			$rs = $pdo->prepare($sql);
-			$rs->execute($params["paramsValue"]);
-			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
-			$events = array();
-			return count($rows);
-		}
-
 		public static function countNext(){
 			$date = date("d-m-Y");
-			$params = array(
-				"paramsName" => "start_date >= :current_date", 
-				"paramsValue" => array(":current_date" => $date)
-			);
-			$count = self::count($params);
-			return $count;			
+			return count(self::findNext($date));			
 		}
 
 		public static function countPrev(){
 			$date = date("d-m-Y");
-			$params = array(
-				"paramsName" => "start_date < :current_date", 
-				"paramsValue" => array(":current_date" => $date)
-			);
-			$count = self::count($params);
-			return $count;			
+			return count(self::findPrev($data));
 		}
 
 		public static function findById($id){
-			$params = array("paramsName" => "id_event = :id_event", "paramsValue" => array(":id_event" => $id));
-			//retorna apenas o primeiro objeto (no caso o unico)
-			$events = self::find($params);
-			return count($events) > 0 ? $events[0] : NULL;
+			$events = self::find(array("id_event"), array($id));
+			return count($events) > 0 ? $events : NULL;
 		}
 
 		public function update($data = array()){

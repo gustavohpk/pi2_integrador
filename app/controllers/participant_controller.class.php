@@ -4,6 +4,9 @@
     	protected $actionForm;
     	protected $titleBtnSubmit;
 
+    	/*
+    	* LOGIN E LOGOUT DO PARTICIPANTE
+    	*/
        	public function login(){
        		if (isset($_SESSION["participant"])){
        			$this->redirectTo("");
@@ -14,17 +17,18 @@
 			}
        	}
 
-       	public function validateLogin(){			
+       	public function executeLogin(){			
 			$this->participant = new Participant();
+			$email = $this->params["participant"]["email"];
+			$password = $this->params["participant"]["password"];
 
-			if ($this->participant->login($this->params["participant"]["email"], $this->params["participant"]["password"])){
+			if ($this->participant->login($email, $password)){
 				FlashMessage::successMessage("Login OK");
 				$this->redirectTo("");
 			}
 			else{
 				FlashMessage::errorMessage("Os seguintes ocorreram ao tentar acessar sua conta:");
 				$errors = $this->participant->getErrors();
-
 				foreach ($errors as $error){
 					FlashMessage::errorMessage($error);
 				}
@@ -36,15 +40,29 @@
        	}
 
        	public function logout(){
-       		$this->participant = Participant::logout();
+       		Participant::logout();
        		$this->redirectTo("conta/login");
        	}
 
+       	/*
+       	* Cadastro do Participante
+       	*/
+       	public function prepareNew($saveError = false){
+       		$this->setHeadTitle("Cadastro de Participante");
+       		$this->actionForm = $this->getUri("conta/nova");
+       		$this->titleBtnSubmit = "Cadastrar";
+
+       		if ($saveError){
+				$this->participant = new Participant($this->params["participant"]);
+				$this->render("_new");
+			}
+			else{
+				$this->participant = new Participant();	
+			}
+       	}
+
 		public function _new(){
-         	$this->participant = new Participant();
-			$this->setHeadTitle("Cadastro de Participante");
-         	$this->actionForm = $this->getUri("conta/nova");
-         	$this->titleBtnSubmit = "Cadastrar";
+			$this->prepareNew();
 		}
 
 		public function create(){
@@ -57,16 +75,12 @@
 			}
 			else{
 				FlashMessage::errorMessage("Os seguintes ocorreram ao tentar realizar o cadastro:");
-				$errors = $this->participant->getErrors();
-				
+				$errors = $this->participant->getErrors();				
 				foreach ($errors as $error){
 					FlashMessage::errorMessage($error);
-				}
-				$this->setHeadTitle("Cadastro de Participante");
-				$this->participant = new Participant($this->params["participant"]);
-         		$this->actionForm = $this->getUri("conta/nova");
-         		$this->titleBtnSubmit = "Cadastrar";
-	         	$this->render("_new");
+				}	
+
+				$this->prepareNew(true);
 			}
 		}
 
@@ -97,15 +111,22 @@
 			}
 		}
 
+		/*
+		* função auxiliar para criar o cadastro do participante:
+		* Cria cadastro de cidade de estado caso os mesmos não sejam
+		* encontrados no banco de dados
+		*/
 		private function checkCity(){
-			$state = new State($this->params["state"]);
-			$state = $state->save(); //salva estado no banco caso não exista
+			$state = new State($this->params["state"]);	
+					
+			if ($state = $state->save()){
+				$this->params["city"]["id_state"] = $state->getIdState();
+				$city = new City($this->params["city"]);
 
-			$this->params["city"]["id_state"] = $state->getIdState();					
-			$city = new City($this->params["city"]);
-			$city = $city->save();	//salva cidade no banco caso não exista
-			//adiciona a cidade no formulario preenchido com dados do participante
-			$this->params["participant"]["id_city"] = $city->getIdCity();
+				if ($city = $city->save()){	
+					$this->params["participant"]["id_city"] = $city->getIdCity();
+				}
+			}
 		}
 	} 
 ?>

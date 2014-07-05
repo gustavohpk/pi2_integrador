@@ -1,6 +1,8 @@
 <?php
 	class BaseModel{		
 		protected $errors = array();
+		private static $limitByPage = 3;
+		private static $currentPage = 1;
 
 		public function validateData(){}
 
@@ -25,9 +27,43 @@
 	    	return $this->errors;
 	    }
 
+	    public static function setLimitByPage($limitByPage){
+	    	self::$limitByPage = $limitByPage;
+	    }
+
+	    public static function setCurrentPage($currentPage){
+	    	self::$currentPage = $currentPage;
+	    }
+
+	    public static function getLimitByPage(){
+	    	return self::$limitByPage;
+	    }
+
+	    public static function getCurrentPage(){
+	    	return self::$currentPage;
+	    }
+
 	    /*
 	    * Funções auxiliares para os models
 	    */
+	    //retorna parametros para funcao find()
+		protected function getParamsSQL($params, $values, $operator, $compare){
+			$paramsValue = array();
+			$i = 0;
+			$paramsName = "";
+
+			foreach ($params as $param){
+				$aux = str_replace(".", "", $param);
+				$paramsName .= "$param $operator :$aux $compare ";
+				$paramsValue[":$aux"] = $values[$i]; 
+				$i++;
+			}
+
+			//remove o operador de comparação do final da string
+			$paramsName = substr($paramsName, 0, (strlen($compare)+2)*(-1));
+			return array($paramsName, $paramsValue);
+		}
+
 		//função para conveter campos do DB do formato snak_case para formato camelCase utilizado nas classes
 	    public function snakToCamelCase($value){
 			$value = str_replace("_", " ", $value);

@@ -32,7 +32,7 @@
 
    	//rota para login/cadastro - usuários
     $router->get('/conta/login', array('controller' => 'ParticipantController', 'action' => 'login'));
-    $router->post('/conta/login', array('controller' => 'ParticipantController', 'action' => 'validateLogin'));
+    $router->post('/conta/login', array('controller' => 'ParticipantController', 'action' => 'executeLogin'));
     $router->get('/conta/sair', array('controller' => 'ParticipantController', 'action' => 'logout'));
     $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
     $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
@@ -60,6 +60,7 @@
     //rota para eventos
     $router->get('/admin/eventos/lista', array('controller' => 'Admin\EventsController', 'action' => '_list'));
     $router->get('/admin/eventos/lista/pagina/:p', array('controller' => 'Admin\EventsController', 'action' => '_list'));
+    $router->get('/admin/eventos/lista/id/:id', array('controller' => 'Admin\EventsController', 'action' => '_list'));
     $router->get('/admin/eventos/novo', array('controller' => 'Admin\EventsController', 'action' => '_new'));
     $router->post('/admin/eventos', array('controller' => 'Admin\EventsController', 'action' => 'create'));    
     $router->get('/admin/eventos/:id/alterar', array('controller' => 'Admin\EventsController', 'action' => 'edit'));
