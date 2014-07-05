@@ -1,8 +1,9 @@
------ Atualização 016 (03/07) -----
+----- Atualização 016 (03/07 - 04/07) -----
 - Área de eventos atualizada. Os eventos estão sendo exibidos corretamente nas áreas Próximos Eventos e Eventos Anteriores
 - Modais atualizados
 - Serão exibidas labels "HOJE" e "AGORA" caso se apliquem, na listagem dos eventos
 - Iniciadas visões admin/noticias
+- Criadas funções e visões para registro de presença
 
 ----- Atualização 015 (02/07 - 04/07) -----
 - Na base_model foi implementado um array errors[] que será usado nos models para armazenar os erros durante as validações.
