@@ -1,3 +1,7 @@
+----- Atualização 018 (05/07) -----
+- Alterando alguns comentários do código
+- Iniciando controller de notícias
+
 ----- Atualização 017 (04/07) -----
 - Implementado biblioteca para listar cidades em /resources/js
 - Implementado cadastro dinamico das cidades no cadastro do participante

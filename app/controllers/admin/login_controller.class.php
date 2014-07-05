@@ -23,7 +23,7 @@
       public function login(){       
          $admin = Administrator::login($this->params["admin"]["login"], $this->params["admin"]["password"]);
          if ($admin){
-            \FlashMessage::infoMessage('[teste] Olá. Nas últimas <strong>24 horas</strong> foram realizadas <strong>8 inscrições</strong>.');
+            \FlashMessage::infoMessage('<span class="glyphicon glyphicon-info-sign"></span> [teste] Olá. Nas últimas <strong>24 horas</strong> foram realizadas <strong>8 inscrições</strong>.');
             $this->redirectTo("admin");
          }
          else{

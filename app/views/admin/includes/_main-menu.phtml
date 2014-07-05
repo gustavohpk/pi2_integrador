@@ -2,7 +2,6 @@
   <div id="main-menu" class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -13,7 +12,6 @@
           <a id="btn-admin-main" class="navbar-brand" href="<?= $this->getUri('admin') ?>">UTFPR Eventos</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="dropdown dropdown-events">
@@ -27,8 +25,8 @@
             <li class="dropdown dropdown-news">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notícias</a>
               <ul class="dropdown-menu">
-                <li><a id="btn-news-list" href="#"><span class="glyphicon glyphicon-list-alt"> Listar</a></li>
-                <li><a id="btn-news-new" href="#"><span class="glyphicon glyphicon-plus"> Cadastrar</a></li>
+                <li><?= createLinkTo('/admin/noticias/lista', '<span class="glyphicon glyphicon-list-alt"></span> Listar')?></li>
+                <li><?= createLinkTo('/admin/noticias/nova', '<span class="glyphicon glyphicon-plus"></span> Cadastrar')?></li>
               </ul>
             </li>
             <li class="dropdown dropdown-users">
@@ -69,8 +67,8 @@
             <p class="navbar-text">Logado como <a href="<?= createUriFor('/admin/logout')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></p>
             <li><a href="<?= createUriFor('/admin/logout')?>"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
     </nav>
   </div>
 </div>

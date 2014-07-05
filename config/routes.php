@@ -44,12 +44,12 @@
     //root do admin
     $router->get('/admin', array('controller' => 'Admin\HomeController', 'action' => 'index'));
 
-    //rota para login
+    //rotas para login
     $router->get('/admin/login', array('controller' => 'Admin\LoginController', 'action' => 'index'));
     $router->post('/admin/login', array('controller' => 'Admin\LoginController', 'action' => 'login'));
     $router->get('/admin/logout', array('controller' => 'Admin\LoginController', 'action' => 'logout'));
 
-    //rota para tipos de eventos
+    //rotas para tipos de eventos
     $router->get('/admin/eventos/tipos', array('controller' => 'Admin\EventsTypeController', 'action' => '_list')); 
     $router->get('/admin/eventos/tipos/novo', array('controller' => 'Admin\EventsTypeController', 'action' => '_new')); 
     $router->post('/admin/eventos/tipos/novo', array('controller' => 'Admin\EventsTypeController', 'action' => 'create')); 
@@ -57,7 +57,7 @@
     $router->post('/admin/eventos/tipos/:id/alterar', array('controller' => 'Admin\EventsTypeController', 'action' => 'update')); 
     $router->get('/admin/eventos/tipos/:id/remover', array('controller' => 'Admin\EventsTypeController', 'action' => 'remove')); 
 
-    //rota para eventos
+    //rotas para eventos
     $router->get('/admin/eventos/lista', array('controller' => 'Admin\EventsController', 'action' => '_list'));
     $router->get('/admin/eventos/lista/pagina/:p', array('controller' => 'Admin\EventsController', 'action' => '_list'));
     $router->get('/admin/eventos/novo', array('controller' => 'Admin\EventsController', 'action' => '_new'));
@@ -66,30 +66,37 @@
     $router->post('/admin/eventos/:id', array('controller' => 'Admin\EventsController', 'action' => 'update'));
     $router->get('/admin/eventos/:id/remover', array('controller' => 'Admin\EventsController', 'action' => 'remove'));
 
-    //rota para mídia
+    //rotas para notícias
+    $router->get('/admin/noticias/lista', array('controller' => 'Admin\NewsController', 'action' => '_list'));
+    $router->get('/admin/noticias/lista/pagina/:p', array('controller' => 'Admin\NewsController', 'action' => '_list'));
+    $router->get('/admin/noticias/nova', array('controller' => 'Admin\NewsController', 'action' => '_new'));
+    $router->post('/admin/noticias', array('controller' => 'Admin\NewsController', 'action' => 'create'));    
+    $router->get('/admin/noticias/:id/alterar', array('controller' => 'Admin\NewsController', 'action' => '_edit'));
+    $router->post('/admin/noticias/:id', array('controller' => 'Admin\NewsController', 'action' => 'update'));
+    $router->get('/admin/noticias/:id/remover', array('controller' => 'Admin\NewsController', 'action' => 'remove'));    
+
+    //rotas para mídia
     $router->get('/admin/midia/lista', array('controller' => 'Admin\MediaController', 'action' => '_list'));
     $router->get('/admin/midia/lista/pagina/:p', array('controller' => 'Admin\MediaController', 'action' => '_list'));
-
-
     $router->get('/admin/midia/nova', array('controller' => 'Admin\MediaController', 'action' => '_new'));
     $router->get('/admin/midia/:id/alterar', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
     $router->post('/admin/midia', array('controller' => 'Admin\MediaController', 'action' => 'create'));    
     $router->post('/admin/midia/:id', array('controller' => 'Admin\MediaController', 'action' => 'update'));
     $router->get('/admin/midia/:id/remover', array('controller' => 'Admin\MediaController', 'action' => 'remove'));
 
-    //rota para inscrições
+    //rotas para inscrições
     $router->get('/admin/inscricoes/lista', array('controller' => 'Admin\EnrollmentsController', 'action' => '_list'));
     $router->get('/admin/inscricoes/nova', array('controller' => 'Admin\EnrollmentsController', 'action' => '_new'));
     $router->get('/admin/inscricoes/:id/alterar', array('controller' => 'Admin\EnrollmentsController', 'action' => '_edit'));
     $router->get('/admin/inscricoes/presenca', array('controller' => 'Admin\EnrollmentsController', 'action' => 'attendance'));
 
-    //rota para usuários
+    //rotas para usuários
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\UsersController', 'action' => '_list'));
     $router->get('/admin/usuarios/novo', array('controller' => 'Admin\UsersController', 'action' => '_new'));
     $router->get('/admin/usuarios/:id/alterar', array('controller' => 'Admin\UsersController', 'action' => '_edit'));
 
 
-    //rota para configuracoes
+    //rotas para configuracoes
     $router->get('/admin/config/geral', array('controller' => 'Admin\SettingsController', 'action' => 'general'));
     $router->get('/admin/config/tema', array('controller' => 'Admin\SettingsController', 'action' => 'theme'));
     $router->get('/admin/config/banners', array('controller' => 'Admin\SettingsController', 'action' => 'banners'));
