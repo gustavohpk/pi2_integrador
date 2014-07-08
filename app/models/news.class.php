@@ -45,11 +45,11 @@
 		}
 
 		public function getCreationDate(){
-			return $this->formatDateTime($this->creationDate, "d/m/Y");
+			return $this->formatDateTime($this->creationDate, "d/m/Y H:i");
 		}
 
 		public function getModificationDate(){
-			return $this->formatDateTime($this->modificationDate, "d/m/Y");
+			return $this->formatDateTime($this->modificationDate, "d/m/Y H:i");
 		}
 
 		public function getTitle(){
@@ -72,7 +72,7 @@
 			$start = ($page * $limit) - $limit;
 
 			$sql = 
-			"SELECT *FROM news";
+			"SELECT * FROM news" .($paramsName ? " WHERE $paramsName" : "");
 
 			$sql .= " LIMIT $start, $limit";
 
@@ -103,11 +103,13 @@
 		}
 
 		public static function findById($id){
-			$news = self::find(array("id_event"), array($id));
+			$news = self::find(array("id_news"), array($id));
 			return count($news) > 0 ? $news : NULL;
 		}
 
 		public function update($data = array()){
+
+			$data["modification_date"] = date('Y-m-d H:i');
 
 			$this->setData($data);
 
@@ -137,11 +139,10 @@
 				(id_event, creation_date, modification_date, title, subtitle, content)
 			VALUES
 				(:id_event, :creation_date, :modification_date, :title, :subtitle, :content)";
-
 			$params = array(
 					":id_event" => $this->getIdEvent(),
-					":creation_date" => $this->getCreationDate(),
-					":modification_date" => $this->getModificationDate(),
+					":creation_date" => date('Y-m-d H:i'),
+					":modification_date" => date('Y-m-d H:i'),
 					":title" => $this->getTitle(),
 					":subtitle" => $this->getSubtitle(),
 					":content" => $this->getContent()

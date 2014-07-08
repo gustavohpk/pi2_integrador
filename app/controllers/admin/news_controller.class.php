@@ -33,7 +33,6 @@
 
 		public function _edit(){
 		$this->setHeadTitle("Modificar notícia");
-		$this->setHeadTitle("Modificar notícia");
       $this->news = \News::findById($this->params[":id"])[0];
         $this->actionForm = $this->getUri("admin/noticias/{$this->news->getIdNews()}");
         $this->titleBtnSubmit = "Salvar";

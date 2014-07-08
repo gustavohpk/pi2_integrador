@@ -4,7 +4,9 @@
 - Campo 'date' da tabela 'news' alterado para 'creation_date'
 - Campo 'modification_date' criado na tabela 'news'
 - Campo 'subtitle' criado na tabela 'news'
-- Área de notícias funcional (admin) (ainda falta arrumar a data, pra salvar automaticamente a data e hora no momento da criação/modificação)
+- Área de notícias funcional (admin)
+- Adicionada confirmação em javascript para todos os botões de exclusão (btn-danger)
+- Data de criação e modificação corrigidas
 
 ----- Atualização 019 (05/07) -----
 - Concluido as validações no cadastro do participante
