@@ -160,9 +160,11 @@ CREATE TABLE IF NOT EXISTS `media` (
 CREATE TABLE IF NOT EXISTS `news` (
   `id_news` int(11) NOT NULL AUTO_INCREMENT,
   `id_event` int(11) DEFAULT NULL,
-  `date` datetime NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modification_date` datetime NOT NULL,
   `title` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `news` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `subtitle` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_news`),
   KEY `fk_news_event` (`id_event`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

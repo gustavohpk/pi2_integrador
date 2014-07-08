@@ -1,3 +1,11 @@
+----- Atualização 020 (06/07 - 07/07) -----
+- Atualizações na área de notícias
+- Campo 'news' da tabela 'news' alterado para 'content'
+- Campo 'date' da tabela 'news' alterado para 'creation_date'
+- Campo 'modification_date' criado na tabela 'news'
+- Campo 'subtitle' criado na tabela 'news'
+- Área de notícias funcional (admin) (ainda falta arrumar a data, pra salvar automaticamente a data e hora no momento da criação/modificação)
+
 ----- Atualização 019 (05/07) -----
 - Concluido as validações no cadastro do participante
 - Criado função getParamsSQL() em base_model, destinado a otimizar as consultas ... esta funçao retorna um array contendo uma string com os parametros de comparação para o comando SQL e um array com os parametros que serão executados pelo statment.... facilita nas consultas, porque podemos chamandar a função assim: find(array(campos), array(valores), operador, comparador)
