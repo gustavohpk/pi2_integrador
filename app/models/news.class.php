@@ -89,6 +89,11 @@
 			return $news;
 		}
 
+		public static function findLast($date){
+			$news = self::find(array("modification_date"), array($date), ">=");
+			return $news;
+		}
+
 		public static function all(){
 			return self::find();
 		}

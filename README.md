@@ -1,3 +1,9 @@
+----- Atualização 021 (08/07) -----
+
+- Listagem de notícias adicionada na página de notícias do site, com limite de 8 por página, como estava no layout.
+- Pequenas modificações na área de notícias do admin
+
+
 ----- Atualização 020 (06/07 - 07/07) -----
 - Atualizações na área de notícias
 - Campo 'news' da tabela 'news' alterado para 'content'

@@ -19,7 +19,8 @@
 
    	//rotas para notícias
    	$router->get('/noticias/lista', array('controller' => 'NewsController', 'action' => 'show'));
-   	$router->get('/noticias/item', array('controller' => 'NewsController', 'action' => 'item'));
+    $router->get('/noticias/lista/pagina/:p', array('controller' => 'NewsController', 'action' => 'show'));
+    $router->get('/noticias/item', array('controller' => 'NewsController', 'action' => 'item'));
 
     //rotas para mídia
     $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'gallery'));
