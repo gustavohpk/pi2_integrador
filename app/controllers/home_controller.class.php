@@ -7,7 +7,7 @@
 	        News::setCurrentPage($page);
 	        $date = date("d-m-Y");
 	        $this->news = News::all();
-	        Media::setLimitByPage(6);
+	        Media::setLimitByPage(3);
 	        Media::setCurrentPage($page);
 	        $this->media = Media::all();
    		}

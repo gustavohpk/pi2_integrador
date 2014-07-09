@@ -47,7 +47,7 @@
 			return $this->path;
 		}
 
-		public static function find($params = null, $limit = 3, $page = 1){
+		public static function find($params = null, $limit = 6, $page = 1){
 			$start = ($page * $limit) - $limit;
 			$sql = "SELECT * FROM media";
 
