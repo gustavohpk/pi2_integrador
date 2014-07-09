@@ -36,7 +36,6 @@
       public function create(){
          $params = $this->params["media"];
          $this->media = new \Media($params);
-         $this->media->save();
          if ($this->media->save()){
             \FlashMessage::successMessage("Mídia cadastrada com sucesso.");
             $this->redirectTo("admin/midia/lista");

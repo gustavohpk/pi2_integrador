@@ -24,6 +24,7 @@
 
     //rotas para mídia
     $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'gallery'));
+    $router->get('/midia/galeria/pagina/:p', array('controller' => 'MediaController', 'action' => 'gallery'));
 
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));

@@ -2,6 +2,8 @@
 
 - Listagem de notícias adicionada na página de notícias do site, com limite de 8 por página, como estava no layout.
 - Pequenas modificações na área de notícias do admin
+- Listagem de mídia no site adicionada, faltam alguns ajustes, inclusive na paginação
+- Criada função que pega imagem de miniatura do vídeo do youtube a partir do link
 
 
 ----- Atualização 020 (06/07 - 07/07) -----
