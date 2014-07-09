@@ -5,6 +5,7 @@
 - Listagem de mídia no site adicionada, faltam alguns ajustes, inclusive na paginação
 - Criada função que pega imagem de miniatura do vídeo do youtube a partir do link
 - Listagem de notícias na home, com no máximo 3 notícias, e listagem de mídia na home, com no máximo 6 mídias (para ambas ainda faltam ajustes, como filtro e order by)
+- Pequenas modificações de layout
 
 
 ----- Atualização 020 (06/07 - 07/07) -----
