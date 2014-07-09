@@ -2,7 +2,16 @@
 <div class="row">
 	<?php foreach($this->media as $mediaItem) : ?>
       	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-      		<a href="<?= $mediaItem->getPath() ?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?php echo getThumbnail($mediaItem->getPath()) ?>" alt="<?= $mediaItem->getLabel() ?>"/></a>
+      		<a href="<?= $mediaItem->getPath() ?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= getThumbnail($mediaItem->getPath()) ?>" alt="<?= $mediaItem->getLabel() ?>"/>
+			<?php if ($mediaItem->getMediaType() == 'f') : ?>
+				<td><span class="glyphicon glyphicon-camera" title="Foto"></span></td>
+			<?php else : ?>
+				<td><span class="glyphicon glyphicon-facetime-video" title="Vídeo"></span></td>
+			<?php endif; ?>
+      		<br/>
+      		<?= $mediaItem->getLabel() ?>
+      		</a>
+      		<br/><br/>
       	</div>
 	<?php endforeach; ?>
 </div>

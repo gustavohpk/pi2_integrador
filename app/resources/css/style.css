@@ -81,6 +81,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 
 
 /* Fotos e vídeos */
+a.fancybox:link { text-decoration: none; color: #000; }
 #media-thumbnail img{ margin-bottom: 0; }
 #media-thumbnail a{ text-decoration: none; color: #000; font-size: 10px; }
 .media-item{ margin-bottom: 5px; }
