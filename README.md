@@ -1,5 +1,8 @@
------ Atualização 023 (09/07) -----
+----- Atualização 024 (09/07) -----
 - Iniciado implementação das incrições na área Admin
+
+----- Atualização 023 (09/07) -----
+- Iniciados controller e views para pesquisa no site.
 
 ----- Atualização 022 (06-07 - 09/07) -----
 - Renomeado tabela registration -> enrollment, e alterado alguns campos da tabela <verificar diagrama>
