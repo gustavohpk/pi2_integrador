@@ -8,6 +8,7 @@
 - Implementado cart.class.php em /app/models (carrinho de "compras")
 - Implementado cost_event.class.php em /app/models para tratar dos preços dos eventos
 - Implementado enrollment_controller e enrollment.class (controller e model para inscrições)
+- Alterado item "Painel" do menu topo para "Área Administrador"
 
 ----- Atualização 021 (08/07) -----
 
