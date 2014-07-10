@@ -21,7 +21,7 @@
           <li><?= createLinkTo('/noticias/lista', 'NOTÍCIAS')?></li>
           <li><?= createLinkTo('/midia/galeria', 'FOTOS E VÍDEOS')?></li>
           <li><?= createLinkTo('/contato', 'CONTATO')?></li>
-          <li><?= createLinkTo('/admin', 'ÁREA RESTRITA')?></li>
+          <li><?= createLinkTo('/conta/login', 'PAINEL')?></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
