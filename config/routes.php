@@ -12,6 +12,7 @@
    	//rotas para eventos
    	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
     $router->get('/eventos/proximos/pagina/:p', array('controller' => 'EventsController', 'action' => 'next'));
+
     $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
     //$router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
 
@@ -28,9 +29,6 @@
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
 
-    //rotas para contato
-    $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
-
    	//rota para login/cadastro - usuários
     $router->get('/conta/login', array('controller' => 'ParticipantController', 'action' => 'login'));
     $router->post('/conta/login', array('controller' => 'ParticipantController', 'action' => 'executeLogin'));
@@ -38,12 +36,13 @@
     $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
     $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
 
-    /*
-    * rotas para area do participant
-    */
-    $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => 'add'));
-    $router->get('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'close'));
-
+    //rotas para pesquisa
+    $router->get('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'events'));
+    $router->get('/pesquisa/eventos/pagina/:p', array('controller' => 'SearchController', 'action' => 'events'));
+    $router->get('/pesquisa/noticias', array('controller' => 'SearchController', 'action' => 'news'));
+    $router->get('/pesquisa/noticias/pagina/:p', array('controller' => 'SearchController', 'action' => 'news'));
+    $router->get('/pesquisa/midia', array('controller' => 'SearchController', 'action' => 'media'));
+    $router->get('/pesquisa/midia/pagina/:p', array('controller' => 'SearchController', 'action' => 'media'));
     /*
     * rotas para area do admin
     */ 

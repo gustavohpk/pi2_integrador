@@ -1,0 +1,28 @@
+<h2>Pesquisa por eventos</h2>
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		<?php require_once "views/includes/_search.html" ?>
+	</div>
+</div>
+<h4>Sua pesquisa por "semana academica" retornou 7 resultados</h4>
+<div class="row">
+	<div id="news-list" class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+		<div class="list-group">
+			  <a href="#" class="list-group-item">
+			  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+			  		<img class="thumbnail" src="<?=$this->getResource('img/placeholder-evento.png'); ?>" alt="...">
+			  	</div>
+			    <h4 class="list-group-item-heading">titulo</h4>
+			    <p class="list-group-item-text">texto</p>
+			    <h6>15/07/14 - 20:00</h6>
+			  </a>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<ul class="pagination">
+		  <?php //echo $this->pagination->getPageAnchors("{$this->getUri('noticias/lista')}");?>
+		</ul>
+	</div>
+</div>
