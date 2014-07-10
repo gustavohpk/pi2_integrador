@@ -215,19 +215,15 @@
 		}
 
 		public static function findById($id){
-			//retorna apenas o primeiro objeto (no caso o unico)
-			$participant = self::find(array("id_participant"), array($id));
-			return count($participant) > 0 ? $participant[0] : NULL;
+			return self::find(array("id_participant"), array($id));
 		}
 
 		public static function findByCpf($cpf){
-			$participant = self::find(array("cpf"), array($cpf));
-			return count($participant) > 0 ? $participant : NULL;
+			return self::find(array("cpf"), array($cpf));
 		}
 
 		public static function findByEmail($email){
-			$participant = self::find(array("email"), array($email));
-			return count($participant) > 0 ? $participant : NULL;
+			return self::find(array("email"), array($email));
 		}
 
 		public function save(){

@@ -120,11 +120,11 @@
 			$state = new State($this->params["state"]);	
 					
 			if ($state = $state->save()){
-				$this->params["city"]["id_state"] = $state->getIdState();
+				$this->params["city"]["id_state"] = $state[0]->getIdState();
 				$city = new City($this->params["city"]);
 
 				if ($city = $city->save()){	
-					$this->params["participant"]["id_city"] = $city->getIdCity();
+					$this->params["participant"]["id_city"] = $city[0]->getIdCity();
 				}
 			}
 		}

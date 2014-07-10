@@ -106,7 +106,7 @@
 						array("name", "state.id_state"), 
 						array($this->getName(), $this->getIdState())
 					);
-			return $city ? $city[0] : false;
+			return $city ? $city : false;
 		}
 	}
 ?>

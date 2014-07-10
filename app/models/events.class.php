@@ -16,8 +16,8 @@
 		private $spaces;
 		private $idPaymentType;				
 		private $typeEvent;
-		private $startDateRegistration;
-		private $endDateRegistration;	
+		private $startDateEnrollment;
+		private $endDateEnrollment;	
 
 		public function setIdEvent($idEvent){
 			$this->idEvent = $idEvent;
@@ -78,12 +78,12 @@
 			$this->idPaymentType = $idPaymentType;
 		}
 
-		public function setStartDateRegistration($startDateRegistration){
-			$this->startDateRegistration = $startDateRegistration;
+		public function setStartDateEnrollment($startDateEnrollment){
+			$this->startDateEnrollment = $startDateEnrollment;
 		}
 
-		public function setEndDateRegistration($endDateRegistration){
-			$this->endDateRegistration = $endDateRegistration;
+		public function setEndDateEnrollment($endDateEnrollment){
+			$this->endDateEnrollment = $endDateEnrollment;
 		}
 
 		public function getIdEvent(){
@@ -146,12 +146,12 @@
 			return $this->idPaymentType;
 		}
 
-		public function getStartDateRegistration(){
-			return $this->startDateRegistration;
+		public function getStartDateEnrollment(){
+			return $this->startDateEnrollment;
 		}
 
-		public function getEndDateRegistration(){
-			return $this->endDateRegistration;
+		public function getEndDateEnrollment(){
+			return $this->endDateEnrollment;
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
@@ -217,8 +217,7 @@
 		}
 
 		public static function findById($id){
-			$events = self::find(array("id_event"), array($id));
-			return count($events) > 0 ? $events : NULL;
+			return self::find(array("id_event"), array($id));
 		}
 
 		public function update($data = array()){
@@ -255,10 +254,10 @@
 			$sql = 
 			"INSERT INTO event
 				(id_event_type, name, details, teacher, local, start_date, end_date, 
-				spaces, id_payment_type, start_date_registration, end_date_registration)
+				spaces, id_payment_type, start_date_enrollment, end_date_enrollment)
 			VALUES
 				(:id_event_type, :name, :details, :teacher, :local, :start_date, :end_date,
-				:spaces, :id_payment_type, :start_date_registration, :end_date_registration)";
+				:spaces, :id_payment_type, :start_date_enrollment, :end_date_enrollment)";
 
 			$params = array(
 					":id_event_type" => $this->getIdEventType(),
@@ -270,8 +269,8 @@
 					":end_date" => $this->endDate . " " . $this->endTime,
 					":spaces" => $this->getSpaces(),
 					":id_payment_type" => $this->getIdPaymentType(),
-					":start_date_registration" => date('Y-m-d'),
-					":end_date_registration" => date('Y-m-d')
+					":start_date_enrollment" => date('Y-m-d'),
+					":end_date_enrollment" => date('Y-m-d')
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);

@@ -12,7 +12,6 @@
    	//rotas para eventos
    	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
     $router->get('/eventos/proximos/pagina/:p', array('controller' => 'EventsController', 'action' => 'next'));
-
     $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
     //$router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
 
@@ -36,6 +35,12 @@
     $router->get('/conta/sair', array('controller' => 'ParticipantController', 'action' => 'logout'));
     $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
     $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
+
+    /*
+    * rotas para area do participant
+    */
+    $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => 'add'));
+    $router->get('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'close'));
 
     /*
     * rotas para area do admin

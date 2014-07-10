@@ -20,7 +20,7 @@
 			        <?php elseif ($event->getStartDate() == $event->getEndDate()) : ?>
 			        	<p> <?= $event->getStartDate() ?></p>
 			        <?php else : ?>
-			        	<p>De <?= $event->getStartDate() ?> a <?= $event->getStartDate() ?></p>
+			        	<p>De <?= $event->getStartDate() ?> a <?= $event->getEndDate() ?></p>
 			        <?php endif; ?>
 			      </div>
 		    	</div>

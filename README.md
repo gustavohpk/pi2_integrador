@@ -1,3 +1,11 @@
+----- Atualização 020 (06-07 - 09/07) -----
+- Renomeado tabela registration -> enrollment, e alterado alguns campos da tabela <verificar diagrama>
+- Renomeado campos date_start_registration e date_end_registration na tabela de events <verificar diagrama>
+- Implementado base_participant_controller em /app/controllers, os controladores que precisem de login obrigatório do participante devem herdar deste controlador ...
+- Implementado cart.class.php em /app/models (carrinho de "compras")
+- Implementado cost_event.class.php em /app/models para tratar dos preços dos eventos
+- Implementado enrollment_controller e enrollment.class (controller e model para inscrições)
+
 ----- Atualização 019 (05/07) -----
 - Concluido as validações no cadastro do participante
 - Criado função getParamsSQL() em base_model, destinado a otimizar as consultas ... esta funçao retorna um array contendo uma string com os parametros de comparação para o comando SQL e um array com os parametros que serão executados pelo statment.... facilita nas consultas, porque podemos chamandar a função assim: find(array(campos), array(valores), operador, comparador)

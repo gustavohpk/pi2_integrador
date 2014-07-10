@@ -83,8 +83,8 @@ CREATE TABLE IF NOT EXISTS `event` (
   `end_date` datetime NOT NULL,
   `spaces` int(11) NOT NULL,
   `id_payment_type` int(11) NOT NULL,
-  `start_date_enrollment` datetime NOT NULL,
-  `end_date_enrollment` datetime NOT NULL,
+  `start_date_registration` datetime NOT NULL,
+  `end_date_registration` datetime NOT NULL,
   PRIMARY KEY (`id_event`),
   KEY `fk_event_event` (`id_parent_event`),
   KEY `fk_event_event_type` (`id_event_type`),
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- Extraindo dados da tabela `event`
 --
 
-INSERT INTO `event` (`id_event`, `id_parent_event`, `id_event_type`, `name`, `details`, `teacher`, `local`, `start_date`, `end_date`, `spaces`, `id_payment_type`, `start_date_enrollment`, `end_date_enrollment`) VALUES
+INSERT INTO `event` (`id_event`, `id_parent_event`, `id_event_type`, `name`, `details`, `teacher`, `local`, `start_date`, `end_date`, `spaces`, `id_payment_type`, `start_date_registration`, `end_date_registration`) VALUES
 (1, NULL, 1, 'Semana Acadêmica 2014', '<p>Melhor semana que UTFPR ter&aacute;</p>', 'Leandro', 'UTFPR', '2014-07-01 00:00:00', '2014-07-31 00:00:00', 30, 1, '2014-07-01 00:00:00', '2014-07-15 00:00:00'),
 (2, 1, 1, 'Evento mixiruca', '<p>asdfasdf</p>\r\n<p>hahaha</p>\r\n<p>hahah</p>', 'Fulanão da Silva Sauro', 'local a saber', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 10, 1, '2014-06-26 00:00:00', '2014-06-26 00:00:00');
 
@@ -300,7 +300,7 @@ ALTER TABLE `participant`
 ALTER TABLE `enrollment`
   ADD CONSTRAINT `fk_enrollment_event` FOREIGN KEY (`id_event`) REFERENCES `event` (`id_event`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_enrollment_participant` FOREIGN KEY (`id_participant`) REFERENCES `participant` (`id_participant`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_enrollment_payment_type` FOREIGN KEY (`id_payment_type`) REFERENCES `payment_type` (`id_payment_type`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_registration_payment_type` FOREIGN KEY (`id_payment_type`) REFERENCES `payment_type` (`id_payment_type`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -77,7 +77,7 @@
 		//retorna primeiro state ou false se não existir
 		public function exists(){
 			$states = self::findByName($this->getState());
-			return $states ? $states[0] : false;
+			return $states ? $states : false;
 		}
 	}
 ?>

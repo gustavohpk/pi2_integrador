@@ -13,19 +13,19 @@
                <?php if ($event->getStartDate() == $event->getEndDate()) : ?>
                 <h4> <?= $event->getStartDate() ?></h4>
               <?php else : ?>
-                <h4>De <?= $event->getStartDate() ?> a <?= $event->getStartDate() ?></h4>
+                <h4>De <?= $event->getStartDate() ?> a <?= $event->getEndDate() ?></h4>
               <?php endif; ?>
 
               <?php if ($event->getStartTime() == $event->getEndTime()) : ?>
                 <h5> <?= $event->getStartTime() ?></h4>
               <?php else : ?>
-                <h5>Das <?= $event->getStartTime() ?> às <?= $event->getStartTime() ?></h4>
+                <h5>Das <?= $event->getStartTime() ?> às <?= $event->getEndTime() ?></h4>
               <?php endif; ?>
     	        <p>Acesse a página do evento para mais detalhes.</p>
     	      </div>
     	      <a href="#" class="btn btn-default" role="button">Ir para a página do evento</a>
-            <?php if (!($event->getStartDate() > date("d/m/Y"))) : ?>
-    	       <a role="button" class="btn btn-default">Inscrever-se</a>
+            <?php if (date("Y-m-d") >= $event->getStartDateEnrollment() && date("Y-m-d") <= $event->getEndDateEnrollment()) : ?>
+    	       <a role="button" class="btn btn-default" href="<?= createUriFor("/inscricao/evento/{$event->getIdEvent()}")?>">Inscrever-se</a>
             <?php endif; ?>
     	      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
           </div>
