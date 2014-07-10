@@ -1,10 +1,30 @@
------ Atualização 020 (06-07 - 09/07) -----
+----- Atualização 022 (06-07 - 09/07) -----
 - Renomeado tabela registration -> enrollment, e alterado alguns campos da tabela <verificar diagrama>
 - Renomeado campos date_start_registration e date_end_registration na tabela de events <verificar diagrama>
 - Implementado base_participant_controller em /app/controllers, os controladores que precisem de login obrigatório do participante devem herdar deste controlador ...
 - Implementado cart.class.php em /app/models (carrinho de "compras")
 - Implementado cost_event.class.php em /app/models para tratar dos preços dos eventos
 - Implementado enrollment_controller e enrollment.class (controller e model para inscrições)
+
+----- Atualização 021 (08/07) -----
+
+- Listagem de notícias adicionada na página de notícias do site, com limite de 8 por página, como estava no layout.
+- Pequenas modificações na área de notícias do admin
+- Listagem de mídia no site adicionada, faltam alguns ajustes, inclusive na paginação
+- Criada função que pega imagem de miniatura do vídeo do youtube a partir do link
+- Listagem de notícias na home, com no máximo 3 notícias, e listagem de mídia na home, com no máximo 6 mídias (para ambas ainda faltam ajustes, como filtro e order by)
+- Pequenas modificações de layout
+
+
+----- Atualização 020 (06/07 - 07/07) -----
+- Atualizações na área de notícias
+- Campo 'news' da tabela 'news' alterado para 'content'
+- Campo 'date' da tabela 'news' alterado para 'creation_date'
+- Campo 'modification_date' criado na tabela 'news'
+- Campo 'subtitle' criado na tabela 'news'
+- Área de notícias funcional (admin)
+- Adicionada confirmação em javascript para todos os botões de exclusão (btn-danger)
+- Data de criação e modificação corrigidas
 
 ----- Atualização 019 (05/07) -----
 - Concluido as validações no cadastro do participante

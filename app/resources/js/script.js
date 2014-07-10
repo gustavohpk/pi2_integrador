@@ -75,3 +75,7 @@ $("input[name='mediatype']").change(function() {
 		$("#video-source").show();
 	}
 });
+
+    $('.btn-danger').click(function() {
+        return window.confirm("Você realmente deseja excluir?");
+    });

@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5">
+		<h4>ID</h4>
+		<input type="number" class="form-control" name="news[id_news]" value="<?= $this->news->getIdNews()?>" disabled/>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5">
+		<h4>ID evento</h4>
+
+		<div class="input-group">
+	    <input id="event-id" type="number" class="form-control" name="news[id_event]" value="<?= $this->news->getIdEvent()?>" required>
+	    <input id="event-link" type="hidden" value="<?= createUriFor('/admin/eventos/idevento/alterar')?>"></input>
+	    <div class="input-group-btn">
+	      <button id="event-access" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Acessar evento" onclick="openEvent()"><span class="glyphicon glyphicon-new-window"></span></button>
+	    </div>
+	  </div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+		<h4>Data de Criação</h4>
+		<input type="text" class="form-control" name="news[creation_date]" value="<?= $this->news->getCreationDate()?>" title="Data de Criação (preenchida automaticamente)" disabled/>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+		<h4>Data de Modificação</h4>
+		<input type="text" class="form-control" name="news[modification_date]" value="<?= $this->news->getModificationDate()?>" title="Data de Modificação (preenchida automaticamente)" disabled/>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+		<h4>Título</h4>
+		<input type="text" class="form-control" name="news[title]" value="<?= $this->news->getTitle()?>" required/>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+		<h4>Subtítulo</h4>
+		<input type="text" class="form-control" name="news[subtitle]" value="<?= $this->news->getSubtitle()?>"/>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		<h4>Descrição</h4>
+		<textarea id="news-content" name="news[content]"><?= $this->news->getContent()?></textarea>
+	</div>
+</div>
