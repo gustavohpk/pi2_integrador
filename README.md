@@ -1,3 +1,6 @@
+----- Atualização 024 (09/07) -----
+- Iniciado implementação das incrições na área Admin
+
 ----- Atualização 023 (09/07) -----
 - Iniciados controller, views e models para pesquisa no site.
 - Parâmetro :s na pesquisa (s referenciando string)
