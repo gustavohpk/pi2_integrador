@@ -1,5 +1,8 @@
 ----- Atualização 023 (09/07) -----
-- Iniciados controller e views para pesquisa no site.
+- Iniciados controller, views e models para pesquisa no site.
+- Parâmetro :s na pesquisa (s referenciando string)
+- Função criada no base_model para remover acentos dos caracteres, para utilizar na pesquisa
+- Pesquisa de eventos iniciada, por enquanto está pesquisando somente pelo título do evento.
 
 ----- Atualização 022 (06-07 - 09/07) -----
 - Renomeado tabela registration -> enrollment, e alterado alguns campos da tabela <verificar diagrama>

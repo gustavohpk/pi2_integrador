@@ -183,6 +183,15 @@
 			return $events;
 		}
 
+		public static function customerSearch($searchValue){
+
+			$serachValue = preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $searchValue ) );
+			$serachValue = utf8_encode($searchValue);
+			$searchValue = '%' . $searchValue . '%';
+			$events = self::find(array("name"), array($searchValue), "LIKE");
+			return $events;
+		}
+
 		public static function findNext($date){
 			$events = self::find(array("start_date"), array($date), ">=");
 			return $events;

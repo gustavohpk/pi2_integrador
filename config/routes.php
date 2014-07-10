@@ -38,6 +38,9 @@
 
     //rotas para pesquisa
     $router->get('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'events'));
+    $router->get('/pesquisa/eventos/:s', array('controller' => 'SearchController', 'action' => 'events'));
+    $router->post('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'findEvents'));
+    $router->get('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'events'));
     $router->get('/pesquisa/eventos/pagina/:p', array('controller' => 'SearchController', 'action' => 'events'));
     $router->get('/pesquisa/noticias', array('controller' => 'SearchController', 'action' => 'news'));
     $router->get('/pesquisa/noticias/pagina/:p', array('controller' => 'SearchController', 'action' => 'news'));
