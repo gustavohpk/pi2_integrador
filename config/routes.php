@@ -93,10 +93,12 @@
     $router->get('/admin/midia/:id/remover', array('controller' => 'Admin\MediaController', 'action' => 'remove'));
 
     //rotas para inscrições
-    $router->get('/admin/inscricoes/lista', array('controller' => 'Admin\EnrollmentsController', 'action' => '_list'));
-    $router->get('/admin/inscricoes/nova', array('controller' => 'Admin\EnrollmentsController', 'action' => '_new'));
-    $router->get('/admin/inscricoes/:id/alterar', array('controller' => 'Admin\EnrollmentsController', 'action' => '_edit'));
-    $router->get('/admin/inscricoes/presenca', array('controller' => 'Admin\EnrollmentsController', 'action' => 'attendance'));
+    $router->get('/admin/inscricoes/lista', array('controller' => 'Admin\EnrollmentController', 'action' => '_list'));
+    $router->get('/admin/inscricoes/lista/pagina/:p', array('controller' => 'Admin\EnrollmentController', 'action' => '_list'));
+    $router->get('/admin/inscricoes/:id/remover', array('controller' => 'Admin\EnrollmentController', 'action' => 'remove'));
+    $router->get('/admin/inscricoes/nova', array('controller' => 'Admin\EnrollmentController', 'action' => '_new'));
+    $router->get('/admin/inscricoes/:id/alterar', array('controller' => 'Admin\EnrollmentController', 'action' => '_edit'));
+    $router->get('/admin/inscricoes/presenca', array('controller' => 'Admin\EnrollmentController', 'action' => 'attendance'));
 
     //rotas para usuários
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\UsersController', 'action' => '_list'));

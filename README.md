@@ -1,3 +1,6 @@
+----- Atualização 023 (09/07) -----
+- Iniciado implementação das incrições na área Admin
+
 ----- Atualização 022 (06-07 - 09/07) -----
 - Renomeado tabela registration -> enrollment, e alterado alguns campos da tabela <verificar diagrama>
 - Renomeado campos date_start_registration e date_end_registration na tabela de events <verificar diagrama>

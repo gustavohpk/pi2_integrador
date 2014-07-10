@@ -2,6 +2,7 @@
 	class Enrollment extends BaseModel{
 		private $idEnrollment;
 		private $idParticipant;
+		private $participant;
 		public $event;
 		private $dateEnrollment;
 		private $datePayment;
@@ -24,6 +25,14 @@
 			return $this->idParticipant;
 		}
 
+		public function setParticipant($participant){
+			$this->participant = $participant;
+		}
+
+		public function getParticipant(){
+			return $this->participant;
+		}
+
 		protected function setIdEvent($idEvent){
 			$event = Events::findById($idEvent);
 			$this->setEvent($event[0]);
@@ -39,6 +48,14 @@
 
 		public function getDateEnrollment(){
 			return $this->dateEnrollment;
+		}
+
+		public function setDatePayment($datePayment){
+			$this->datePayment = $datePayment;
+		}
+
+		public function getDatePayment(){
+			return $this->datePayment;
 		}
 
 		public function setIdPaymentType($idPaymentType){
@@ -69,9 +86,12 @@
 
 			$sql = 
 			"SELECT 
-				enrollment.*
+				enrollment.*, participant.name AS participant
 			FROM
-				enrollment"; ($paramsName ? " WHERE " . $paramsName : "");
+				enrollment			
+			INNER JOIN
+				participant ON participant.id_participant = enrollment.id_participant" . 
+				($paramsName ? " WHERE " . $paramsName : "");
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($paramsValue);
@@ -115,6 +135,14 @@
 			$statment = $statment->execute($params);
 			$this->setIdEnrollment($pdo->lastInsertId());
 			return $statment ? $this : false;
+		}
+
+		public function remove(){
+			$sql = "DELETE FROM enrollment WHERE id_enrollment = :id_enrollment";
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			$params = array(":id_enrollment" => $this->getIdEnrollment());
+			return $statment->execute($params);
 		}
 	}
 ?>
