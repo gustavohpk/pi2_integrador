@@ -1,22 +1,35 @@
-<h2>Pesquisa por eventos</h2>
+<h2>Pesquisa por notícias</h2>
 <div class="row">
-	<div id="news-list" class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
-		<div class="list-group">
-			  <a href="#" class="list-group-item">
-			  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-			  		<img class="thumbnail" src="<?=$this->getResource('img/placeholder-evento.png'); ?>" alt="...">
-			  	</div>
-			    <h4 class="list-group-item-heading">titulo</h4>
-			    <p class="list-group-item-text">texto</p>
-			    <h6></h6>
-			  </a>
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		<?php require_once "views/includes/_search.html" ?>
+	</div>
+</div>
+<?php if(isset($this->news)) : ?>
+	<h4>Sua pesquisa retornou <?= count($this->news) ?> resultado(s)</h4>
+	<div class="row">
+		<div id="news-list" class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+			<div class="list-group">
+				<?php foreach($this->news as $newsItem) : ?>
+				  <a href="#" class="list-group-item">
+				  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+				  		<img class="thumbnail" src="<?=$this->getResource('img/placeholder-evento.png'); ?>" alt="...">
+				  	</div>
+				    <h4 class="list-group-item-heading"><?= $newsItem->getTitle() ?></h4>
+				    <p class="list-group-item-text">
+				    	<?= $newsItem->getSubtitle() ?><br/>
+				    	<?= $newsItem->getModificationDate() ?>
+				    </p>
+				  </a>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12">
-		<ul class="pagination">
-		  <?php //echo $this->pagination->getPageAnchors("{$this->getUri('noticias/lista')}");?>
-		</ul>
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="pagination">
+			<?php $string = $this->params[":s"] ?>
+			  <?php echo $this->pagination->getPageAnchors("{$this->getUri('pesquisa/noticias/' . $this->params[":s"])}");?>
+			</ul>
+		</div>
 	</div>
-</div>
+<?php endif; ?>

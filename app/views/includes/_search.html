@@ -1,13 +1,13 @@
 <br/>
-<form id="search_form" method="post" action="<?= createUriFor('/pesquisa/eventos')?>">
+<form id="search_form" method="post" action="">
   <div class="input-group">
     <input type="search" id="searchValue" class="form-control" name="searchValue" placeholder="Pesquise no site">
     <span class="input-group-btn">
       <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span> <span class="caret"></span></button>
       <ul class="dropdown-menu pull-right">
   		<li><a onclick='submitForm("<?= createUriFor('/pesquisa/eventos')?>")'>Eventos</a></li>
-  		<li><a href="">Notícias</a></li>
-  		<li><a href="">Fotos e vídeos</a></li>
+  		<li><a onclick='submitForm("<?= createUriFor('/pesquisa/noticias')?>")'>Notícias</a></li>
+  		<!-- <li><a onclick='submitForm("<?//= createUriFor('/pesquisa/midia')?>")'>Fotos e Vídeos</a></li> -->
   	</ul>
     </span>
   </div>
@@ -17,7 +17,7 @@
 <script type="text/javascript">
     function submitForm(action)
     {
-      $("#search_form").action = action;
+      $("#search_form").attr("action", action);
       $("#search_form").submit();
     }
 </script>

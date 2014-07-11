@@ -3,23 +3,23 @@
 
    		public function events(){
       		$this->setHeadTitle("Pesquisa por eventos");
-	         // if (isset($this->params[":p"])) {
-	         //    $page = $this->params[":p"];
-	         // } else {
+	         if (isset($this->params[":p"])) {
+	            $page = $this->params[":p"];
+	         } else {
 	             $page = 1;
-	         // }
-	         // \Events::setCurrentPage($page);
+	         }
+	         Events::setLimitByPage(8);
+	         Events::setCurrentPage($page);
 	         if (isset($this->params[":s"])){
 	         	if ($this->params[":s"] != ""){
-	            	$this->events = \Events::customerSearch($this->params[":s"]);
-	            	//$this->pagination = new \Pager(count($this->events), \Events::getLimitByPage(), $page);
+	            	$this->events = Events::customerSearch($this->params[":s"]);
+	            	$this->pagination = new Pager(Events::count(), Events::getLimitByPage(), $page);
 	         	} else{
 					FlashMessage::warningMessage("Digite algo para pesquisar.");
 	         	}
 	         }
-	         else{
-	            				
-	            //$this->pagination = new \Pager(\Events::count(), \Events::getLimitByPage(), $page);
+	         else{			
+	            $this->pagination = new Pager(Events::count(), Events::getLimitByPage(), $page);
 			}
    		}
 
@@ -27,29 +27,35 @@
 			$searchValue = $_POST["searchValue"];
 			$searchValue = Search::formatSearchString($searchValue);
 			$this->redirectTo("pesquisa/eventos/" . $searchValue);
-			// $this->result = new Search($this->params["participant"]);
-			
-			// if ($this->participant->save()){
-			// 	FlashMessage::successMessage("Cadastro realizado com sucesso.");
-			// 	$this->redirectTo("conta/login");
-			// }
-			// else{
-			// 	FlashMessage::errorMessage("Os seguintes ocorreram ao tentar realizar o cadastro:");
-			// 	$errors = $this->participant->getErrors();				
-			// 	foreach ($errors as $error){
-			// 		FlashMessage::errorMessage($error);
-			// 	}	
-
-			// 	$this->prepareNew(true);
-			// }
 		}
 
    		public function news(){
       		$this->setHeadTitle("Pesquisa por notícias");
+	         if (isset($this->params[":p"])) {
+	            $page = $this->params[":p"];
+	         } else {
+	             $page = 1;
+	         }
+	         News::setLimitByPage(8);
+	         News::setCurrentPage($page);
+	         if (isset($this->params[":s"])){
+	         	if ($this->params[":s"] != ""){
+	            	$this->news = News::customerSearch($this->params[":s"]);
+	            	$this->pagination = new Pager(News::count(), News::getLimitByPage(), $page);
+	         	} else{
+					FlashMessage::warningMessage("Digite algo para pesquisar.");
+	         	}
+	         }
+	         else{			
+	            $this->pagination = new \Pager(\News::count(), \News::getLimitByPage(), $page);
+			}
    		}
 
-   		public function media(){
-      		$this->setHeadTitle("Pesquisa por fotos e vídeos");
-   		}
+		public function findNews(){
+			$searchValue = $_POST["searchValue"];
+			$searchValue = Search::formatSearchString($searchValue);
+			$this->redirectTo("pesquisa/noticias/" . $searchValue);
+		}
+
 	} 
 ?>

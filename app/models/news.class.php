@@ -89,6 +89,16 @@
 			return $news;
 		}
 
+		public static function customerSearch($searchValue){
+
+			$serachValue = preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $searchValue ) );
+			$serachValue = utf8_encode($searchValue);
+			$searchValue = str_replace('%20', ' ', $searchValue);
+			$searchValue = '%' . $searchValue . '%';
+			$news = self::find(array("title"), array($searchValue), "LIKE");
+			return $news;
+		}
+
 		public static function findLast($date){
 			$news = self::find(array("modification_date"), array($date), ">=");
 			return $news;
