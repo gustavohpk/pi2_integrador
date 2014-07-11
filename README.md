@@ -8,6 +8,7 @@
 - Pesquisa de mídia desativada temporariamente, por questões de tempo para entrega do projeto
 - A pesquisa de eventos e notícias (por nome) está quase finalizada, porém ainda há problemas na paginação
 - Pequenas alterações e correções
+- Correção de glyphicons dentro de input-group-addon
 - Criada view para "não encontrada". Está no base controller por enquanto, não sei se é o correto deixarmos assim.
 
 ----- Atualização 022 (06-07 - 09/07) -----
