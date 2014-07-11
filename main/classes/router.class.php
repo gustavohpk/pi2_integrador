@@ -45,7 +45,16 @@
         }
       }
 
-      echo "Página não encontrada"; //melhorar isso depois
+      $controller = new BaseController;
+      $controller->setView('not_found');
+      $controller->setControllerName('BaseController');
+       $controller->beforeAction();
+       $controller->notFound();
+       $controller->afterAction();
+       $controller->render();
+       return;
+
+      //echo "Página não encontrada"; //melhorar isso depois
 	}
 
   private function isRightRoute($route, &$params) {

@@ -22,6 +22,7 @@ h2 { background-color: #FFF; padding: 5px; border: 1px solid #DDD;}
 .pagination li.active a, .pagination li.active a:hover{ background-color: #e7e7e7; border-color: #BBB; color: #555 ; }
 .pagination li a { color: #777; }
 .pagination li a:hover{ color: #000; background-color: #AAA; border-color: #AAA;}
+.search-btn-group li { cursor: pointer; }
 
 
 /* Eventos */

@@ -124,5 +124,9 @@
 
 		public function beforeAction(){}
 		public function afterAction(){}
+
+		public function notFound(){
+			
+		}
 	}
 ?>
