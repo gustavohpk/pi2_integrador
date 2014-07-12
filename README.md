@@ -10,11 +10,15 @@
 ----- Atualização 024 (09/07) -----
 - Iniciado implementação das incrições na área Admin
 
------ Atualização 023 (09/07) -----
+----- Atualização 023 (09/07 - 10/07) -----
 - Iniciados controller, views e models para pesquisa no site.
 - Parâmetro :s na pesquisa (s referenciando string)
 - Função criada no base_model para remover acentos dos caracteres, para utilizar na pesquisa
-- Pesquisa de eventos iniciada, por enquanto está pesquisando somente pelo título do evento.
+- Pesquisa de mídia desativada temporariamente, por questões de tempo para entrega do projeto
+- A pesquisa de eventos e notícias (por nome) está quase finalizada, porém ainda há problemas na paginação
+- Pequenas alterações e correções
+- Correção de glyphicons dentro de input-group-addon
+- Criada view para "não encontrada". Está no base controller por enquanto, não sei se é o correto deixarmos assim.
 
 ----- Atualização 022 (06-07 - 09/07) -----
 - Renomeado tabela registration -> enrollment, e alterado alguns campos da tabela <verificar diagrama>

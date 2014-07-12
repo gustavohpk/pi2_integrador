@@ -7,7 +7,7 @@
 				<?php if ($participant) : ?>
 					<?= "Bem vindo, {$participant->getName()} <br />"; ?>
 					<a href="<?= createUriFor('/conta/sair')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
-					<a href="<?= createUriFor('')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-log-in"></span> Minha Conta</a>
+					<a href="<?= createUriFor('')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-user"></span> Minha Conta</a>
 				<?php else : ?>		
 					Bem vindo, visitante<br />
 					<a href="<?= createUriFor('/conta/login')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-log-in"></span> Login</a>

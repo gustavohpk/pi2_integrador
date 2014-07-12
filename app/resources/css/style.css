@@ -22,6 +22,7 @@ h2 { background-color: #FFF; padding: 5px; border: 1px solid #DDD;}
 .pagination li.active a, .pagination li.active a:hover{ background-color: #e7e7e7; border-color: #BBB; color: #555 ; }
 .pagination li a { color: #777; }
 .pagination li a:hover{ color: #000; background-color: #AAA; border-color: #AAA;}
+.search-btn-group li { cursor: pointer; }
 
 
 /* Eventos */
@@ -99,7 +100,6 @@ a.fancybox:link { text-decoration: none; color: #000; }
 #login-bar:hover a{ display: inline; }
 
 /* ACCOUNT */
-#account-register, #account-login { background-color: #FFF; }
 #account-register .col-xs-3, #account-register .col-xs-4, #account-register .col-xs-5, #account-register .col-xs-6, #account-register .col-xs-7, #account-register .col-xs-9, #account-register .col-xs-10, #account-register .col-xs-12{ padding-bottom: 10px; }
 #account-register span{ margin-bottom: 1px; }
 .general-actions { margin-top: 10px; }
@@ -134,3 +134,14 @@ ul.left-menu span{ text-align: left; }
 .admin-shortcut:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
 .admin-shortcut .glyphicon { font-size: 70px; padding-bottom: 10px;}
 .admin-shortcut .glyphicon:hover{ font-size: 70px; padding-bottom: 10px;}
+
+/* Há um bug no bootstrap quando são colocados glyphicons dentro de input-group-addons */
+/* Algumas correções aqui */
+form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-group-addon{ top: 0;}
+#contact-form span.input-group-addon{ padding-top: 11px; padding-bottom: 9px; }
+#account-login span.glyphicon-envelope,
+#account-login span.glyphicon-asterisk,
+#account-register span.glyphicon-user,
+#account-register span.glyphicon-phone-alt,
+#account-register span.glyphicon-earphone { padding-top: 11px; padding-bottom: 9px; }
+#account-register span.glyphicon-road {  padding-top: 11px; padding-bottom: 9px; top:0;}

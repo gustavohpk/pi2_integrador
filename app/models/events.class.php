@@ -177,6 +177,7 @@
 		public static function customerSearch($searchValue) {
 			$serachValue = preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $searchValue ) );
 			$serachValue = utf8_encode($searchValue);
+			$searchValue = str_replace('%20', ' ', $searchValue);
 			$searchValue = '%' . $searchValue . '%';
 			$events = self::find(array("name"), array($searchValue), "LIKE");
 			return $events;

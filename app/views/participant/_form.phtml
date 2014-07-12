@@ -11,14 +11,14 @@
 
 <form name="participant" method="POST" action="<?= $this->actionForm ?>">
 	<div class="row">
-		<div class="col-xs-9">
+		<div class="col-xs-12 col-sm-9">
 			<div class="input-group">
 			  <span class="input-group-addon glyphicon glyphicon-user"></span>
 			  <input id="name" name="participant[name]" value="<?= $this->participant->getName()?>" type="text" class="form-control input-glyphicon" placeholder="Nome">
 			</div>
 		</div>
-		<div class="col-xs-3">
-			<div class="input-group well well-sm">
+		<div class="col-xs-12 col-sm-3">
+			<div class="input-group well well-sm form-control">
 				<span class="label label-default">Sexo</span>
 				<span> M </span><input id="masc" type="radio" name="participant[gender]" value="M" <?php if (strtoupper($this->participant->getGender()) == "M")echo "checked"?>>
 				<span> F </span><input id="masc" type="radio" name="participant[gender]" value="F" <?php if (strtoupper($this->participant->getGender()) == "F") echo "checked"?>>
@@ -27,13 +27,13 @@
 	</div>
 
 	<div class="row">
-		<div class="col-xs-6">
+		<div class="col-xs-12 col-sm-6">
 			<div class="input-group">
 				<span class="input-group-addon glyphicon glyphicon-envelope"></span>
 			  <input id="email" name="participant[email]" value="<?= $this->participant->getEmail()?>" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
 			</div>
 		</div>
-		<div class="col-xs-6">
+		<div class="col-xs-12 col-sm-6">
 			<div class="input-group">
 			  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
 			  <input id="password" name="participant[password]" type="password" class="form-control input-glyphicon" placeholder="Senha">
@@ -53,13 +53,13 @@
 	<br/>
 
 	<div class="row">
-		<div class="col-xs-6">
+		<div class="col-xs-12 col-sm-6">
 			<div class="input-group">
 				<span class="input-group-addon glyphicon glyphicon-phone-alt"></span>
 			  <input id="phone1" name="participant[phone]" value="<?= $this->participant->getPhone()?>" type="text" class="form-control input-glyphicon" placeholder="Telefone">
 			</div>
 		</div>
-		<div class="col-xs-6">
+		<div class="col-xs-12 col-sm-6">
 			<div class="input-group">
 				<span class="input-group-addon glyphicon glyphicon-earphone"></span>
 			  <input id="phone2" name="participant[phone2]" value="<?= $this->participant->getPhone2()?>" type="text" class="form-control input-glyphicon" placeholder="Telefone 2">
@@ -69,10 +69,13 @@
 	<br/>
 
 	<div class="row">
-		<div class="col-xs-9">
-			<input id="street" name="participant[address]" value="<?= $this->participant->getAddress()?>" type="text" class="form-control" placeholder="Rua">
+		<div class="col-xs-8 col-sm-9">
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-road"></span>
+				<input id="street" name="participant[address]" value="<?= $this->participant->getAddress()?>" type="text" class="form-control" placeholder="Endereço">
+			</div>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-4 col-sm-3">
 			<input id="number" name="participant[number]" value="<?= $this->participant->getNumber()?>" type="text" class="form-control" placeholder="Número">
 		</div>
 	</div>
@@ -93,10 +96,10 @@
 	</div>
 
 	<div class="row">
-		<div class="col-xs-4">
+		<div class="col-xs-12 col-sm-5">
 			<select id="estado" name="state[state]" class="form-control"></select>
 		</div>
-		<div class="col-xs-8">
+		<div class="col-xs-12 col-sm-7">
 			<select id="cidade" name="city[name]" class="form-control"></select>
 		</div>
 	</div>
