@@ -1,0 +1,117 @@
+<?php 
+	class EnrollmentController extends BaseParticipantController {   
+      protected $events;
+      protected $paymentsType;   
+
+      public function __construct() {
+         parent::__construct();
+         $this->setLoginRequired(true);
+      }
+
+      public function _new() {
+         $this->events = Events::findById($this->params[":id"]);
+         $this->paymentsType = PaymentType::all();
+      }
+
+      public function close() {
+         $params = $this->params["enrollment"];
+         foreach ($params["id_event"] as $id_event) {
+            $cost = CostEvent::findByIdEvent($id_event);
+            $cost = ($cost ? $cost[0]->getCostOfDay() : 0);
+            $data = array(
+                  "id_participant" => $this->currentParticipant->getIdParticipant(),
+                  "id_event" => $id_event,
+                  "id_payment_type" => $params["id_payment_type"],
+                  "cost" => $cost
+               );
+            $enrollment = new Enrollment($data);
+
+            if ($enrollment->save()) {
+               FlashMessage::successMessage(
+                     "Cód. Inscrição: {$enrollment->getIdEnrollment()}<br>
+                     {$enrollment->event->getName()}<br> OK."
+                  );
+            }
+            else {
+               $errors = $enrollment->getErrors();
+               $msg = "";
+               foreach ($errors as $error) {
+                  $msg .= "$error<br>";
+               }
+               FlashMessage::errorMessage("Erro ao tentar realizar a inscrição no evento: {$enrollment->event->getName()}<br>$msg");
+            }
+         }
+
+         $this->redirectTo("inscricao/fim");
+         
+         /*
+
+         foreach ($events as $event) {
+            $item["id_participant"] = $this->currentParticipant->getIdParticipant();
+            $enrollment = new Enrollment($item);
+            if ($enrollment->save()) {
+               FlashMessage::successMessage(
+                     "Cód. Inscrição: {$enrollment->getIdEnrollment()}<br>
+                     {$enrollment->event->getName()}<br> OK."
+                  );
+            }
+            else {
+               $errors = $enrollment->getErrors();
+               $msg = "";
+               foreach ($errors as $error) {
+                  $msg .= "$error<br>";
+               }
+               FlashMessage::errorMessage("Erro ao tentar realizar a inscrição no evento: {$enrollment->event->getName()}<br>$msg");
+            }
+         }
+         */
+      }
+
+		public function add() {
+   		$cart = new Cart();
+         if ($cart->add($this->params[":id"])) {
+            FlashMessage::successMessage(
+                  "O evento foi adicionado na lista de inscrição com sucesso.<br>
+                  Total a Pagar: <strong> R$ {$cart->getSum()} </strong><br>
+                  <a href={$this->getUri('inscricao/finalizar')} class='btn btn-default btn-larg'>
+                     <span class='glyphicon glyphicon-log-in'></span> Finalizar Inscrição
+                  </a>"
+               );
+         }
+         else {
+            $errors = $cart->getErrors();
+            foreach ($errors as $error) {
+               FlashMessage::errorMessage($error);
+            }
+         }
+         //$this->redirectTo("eventos/proximos");
+		}
+
+      /*public function close() {
+         $cart = new Cart();
+         $items = $cart->getItems();
+
+         foreach ($items as $item) {
+            $item["id_participant"] = $this->currentParticipant->getIdParticipant();
+            $enrollment = new Enrollment($item);
+            if ($enrollment->save()) {
+               FlashMessage::successMessage(
+                     "Cód. Inscrição: {$enrollment->getIdEnrollment()}<br>
+                     {$enrollment->event->getName()}<br> OK."
+                  );
+            }
+            else {
+               $errors = $enrollment->getErrors();
+               $msg = "";
+               foreach ($errors as $error) {
+                  $msg .= "$error<br>";
+               }
+               FlashMessage::errorMessage("Erro ao tentar realizar a inscrição no evento: {$enrollment->event->getName()}<br>$msg");
+            }
+         }
+
+         $cart->close();
+         $this->redirectTo("eventos/proximos");
+      }*/
+	} 
+?>

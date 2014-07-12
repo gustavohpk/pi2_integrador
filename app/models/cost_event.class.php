@@ -66,15 +66,24 @@
 			return self::find(array("id_cost_event"), array($id));
 		}
 
-		public static function findByIdEvent($idEvent, $listAll = false) {
-			if ($listAll) {
-				return self::find(array("id_event"), array($idEvent));
-			}
-			else{
-				//return self::find(array("id_event", "date_max"), array($idEvent, date("Y-m-d")), "");
-				return self::find(array("id_event"), array($idEvent));
-			}
+		public static function findByIdEvent($idEvent) {
+			return self::find(array("id_event"), array($idEvent));
 		}
 
+		public function getCostOfDay($date = null) {
+			$date = is_null($date) ? date("Y-m-d") : $date;
+			$sql = 
+			"SELECT 
+				MIN(date_max), cost
+			FROM
+				cost_event
+			WHERE
+				date_max >= :date AND id_event = :id_event";
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			$statment->execute(array(":date" => $date, ":id_event" => $this->getIdEvent()));
+			$row = $statment->fetch($pdo::FETCH_ASSOC);
+			return (float) $row["cost"];
+		}
 	}
 ?>

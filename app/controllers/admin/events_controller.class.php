@@ -38,22 +38,18 @@
 
       public function create(){
          //salva evento no db
-         //unde data com hora e coloca no formato correto ... melhorar esta funcao depois.
          $params = $this->params["event"];
-         $params["start_date"] = str_replace("/", "-", $params["start_date"]) . " " . $params["start_time"];
-         $params["start_date"] = $params["start_date"] < 10 ? null : date("Y-m-d H:i:s", strtotime($params["start_date"]));
-         $params["end_date"] = str_replace("/", "-", $params["end_date"]) . " " . $params["end_time"];
-         $params["end_date"] = $params["end_date"] < 10 ? null : date("Y-m-d H:i:s", strtotime($params["end_date"]));
-         unset($params["start_time"]);
-         unset($params["end_time"]);
-
          $this->events = new \Events($params);
          if ($this->events->save()){
             \FlashMessage::successMessage("Evento cadastrado com sucesso.");
             $this->redirectTo("admin/eventos/lista");
          }
          else{
-            \FlashMessage::errorMessage("Erro ao cadastrar o evento.");
+            $errors = $this->events->getErrors();
+            foreach ($errors as $error) {
+               \FlashMessage::errorMessage($error);
+            }
+            
             $this->setHeadTitle("Novo Evento");
             $this->eventsType = \EventsType::all();
             $this->paymentsType = \PaymentType::all();            
@@ -81,7 +77,11 @@
             $this->redirectTo("admin/eventos/lista");
          }
          else{
-            \FlashMessage::errorMessage("Erro ao alterar o evento.");
+            $errors = $this->events->getErrors();
+            foreach ($errors as $error) {
+               \FlashMessage::errorMessage($error);
+            }
+
             $this->setHeadTitle("Editar Evento");
             $this->eventsType = \EventsType::all();
             $this->paymentsType = \PaymentType::all();

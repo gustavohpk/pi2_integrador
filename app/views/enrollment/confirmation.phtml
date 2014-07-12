@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h2>Confirmação de Inscrição</h2>
+		<br/>
+		<h3><span class="glyphicon glyphicon-ok-sign"></span> As inscrições foram processadas.</h3>
+	</div>
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			<ul class="list-group" style="text-align: left">
+				<?php $messages = $this->enrollment->getMessagesConfirmation() ?>
+				<?php foreach ($messages as $message) : ?>
+					<?php if ($message["type"] == "success") : ?>
+						<li class="list-group-item list-group-item-success">
+							<span class="glyphicon glyphicon-ok-circle"></span>
+							<?= $message["message"] ?>
+						</li>
+					<?php else : ?>
+						<li class="list-group-item list-group-item-danger">
+							<span class="glyphicon glyphicon-remove-circle"></span>
+							<?= $message["message"] ?>
+						</li>
+					<?php endif ?>
+				<?php endforeach ?>
+			</ul>
+			<a href="<?= createUriFor('/eventos/proximos') ?>"><button class="btn btn-default">Voltar à lista de eventos</button></a>
+		</div>
+	</div>
+</div>
+

@@ -1,3 +1,12 @@
+----- Atualização xxx (10/07 - 11/07) -----
+- Cart (carrinho) deixado em desuso 
+- Finalizado e Alterado a maneira de fazer inscricao em eventos (falta implementar PGTO).
+- Area admin adicionado campo "Vinculado com Evento ID", "Data Inicio e Fim para Inscrição" em cadastro de eventos
+- Corrigido bugs dos modals quando exibição de datas e horas corretas, e habitar_desabilitar botão para inscrição
+- No cadastro de eventos unido campos "data e hora" para facilidar insercao e alteração no banco de dados
+- Implementado validações no cadastro de eventos (falta apenas implementar PREÇOS dos eventos)
+
+
 ----- Atualização 024 (09/07) -----
 - Iniciado implementação das incrições na área Admin
 

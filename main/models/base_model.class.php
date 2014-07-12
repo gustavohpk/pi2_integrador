@@ -71,14 +71,13 @@
 			return $value;
 	    }
 
-	    //retorna data no formato yyyy-mm-dd hh:mm:ss
-	    public function formatDateTime($date, $format = "Y-m-d H:i:s"){
-			$date = str_replace("/", "-", trim($date));
-			return (strlen($date) < 10) ? NULL : date($format, strtotime($date));
-	    }
-
 	    public function validateEmail($email){
 			return (!eregi("^[a-z0-9_\.\-]+@[a-z0-9_\.\-]*[a-z0-9_\-]+\.[a-z]{2,4}$", $email));
+		}
+
+		public function is_date($date) {
+			$date = explode("/", $date);
+			return checkdate($date[1], $date[0], $date[2]);
 		}
 
 		public function validateCpf($cpf){ 

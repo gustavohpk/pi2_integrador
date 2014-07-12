@@ -10,148 +10,139 @@
 		private $teacher;
 		private $local;
 		private $startDate;
-		private $startTime;
 		private $endDate;
-		private $endTime;
 		private $spaces;
 		private $idPaymentType;				
 		private $typeEvent;
 		private $startDateEnrollment;
 		private $endDateEnrollment;	
+		public $cost;
 
 		public function setIdEvent($idEvent){
 			$this->idEvent = $idEvent;
-		}
-
-		public function setIdParentEvent($idParentEvent){
-			$this->idParentEvent = $idParentEvent;
-			$this->isSubEvent = $idParentEvent > 0;
-		}
-
-		public function setIdEventType($idEventType){
-			$this->idEventType = $idEventType;
-		}
-
-		public function setEventType($eventType){
-			$this->eventType = $eventType;
-		}
-
-		public function setName($name){
-			$this->name = $name;
-		}
-
-		public function setDetails($details){
-			$this->details = $details;
-		}
-
-		public function setTeacher($teacher){
-			$this->teacher = $teacher;
-		}
-
-		public function setLocal($local){
-			$this->local = $local;
-		}
-
-		public function setStartDate($startDate){			
-			$this->startDate = $this->formatDateTime($startDate, "Y-m-d");
-			$this->setStartTime($startDate);
-		}
-
-		public function setStartTime($startTime){
-			$this->startTime =  $this->formatDateTime($startTime, "H:i");
-		}
-
-		public function setEndDate($endDate){
-			$this->endDate = $this->formatDateTime($endDate, "Y-m-d");
-			$this->setEndTime($endDate);
-		}
-
-		public function setEndTime($endTime){
-			$this->endTime =  $this->formatDateTime($endTime, "H:i");	
-		}
-
-		public function setSpaces($spaces){
-			$this->spaces = $spaces;
-		}
-
-		public function setIdPaymentType($idPaymentType){
-			$this->idPaymentType = $idPaymentType;
-		}
-
-		public function setStartDateEnrollment($startDateEnrollment){
-			$this->startDateEnrollment = $startDateEnrollment;
-		}
-
-		public function setEndDateEnrollment($endDateEnrollment){
-			$this->endDateEnrollment = $endDateEnrollment;
+			$this->cost = CostEvent::findByIdEvent($idEvent);
 		}
 
 		public function getIdEvent(){
 			return $this->idEvent;
 		}
 
-		public function getIdParentEvent(){
-			return $this->idParentEvent;
+		public function setIdParentEvent($idParentEvent){
+			$this->idParentEvent = ($idParentEvent > 0 ? $idParentEvent : null);
+			$this->isSubEvent = $idParentEvent > 0;
 		}
 
 		public function isSubEvent(){
 			return $this->isSubEvent;
 		}
 
+		public function getIdParentEvent(){
+			return $this->idParentEvent;
+		}
+
+		public function setIdEventType($idEventType){
+			$this->idEventType = $idEventType;
+		}
+
 		public function getIdEventType(){
 			return $this->idEventType;
+		}
+
+		public function setEventType($eventType){
+			$this->eventType = $eventType;
 		}
 
 		public function getEventType(){
 			return $this->eventType;
 		}
 
+		public function setName($name){
+			$this->name = $name;
+		}
+
 		public function getName(){
 			return $this->name;
+		}
+
+		public function setDetails($details){
+			$this->details = $details;
 		}
 
 		public function getDetails(){
 			return $this->details;
 		}
 
+		public function setTeacher($teacher){
+			$this->teacher = $teacher;
+		}
+
 		public function getTeacher(){
 			return $this->teacher;
+		}
+
+		public function setLocal($local){
+			$this->local = $local;
 		}
 
 		public function getLocal(){
 			return $this->local;
 		}
 
-		public function getStartDate(){
-			return $this->formatDateTime($this->startDate, "d/m/Y");
+		public function setStartDate($startDate){			
+			$this->startDate = empty($startDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $startDate)));
 		}
 
-		public function getStartTime(){
-			return $this->startTime;
+		public function getStartDate($format = "Y-m-d H:i:s"){
+			return is_null($this->startDate) ? null : date($format, strtotime($this->startDate));
 		}
 
-		public function getEndDate(){
-			return $this->formatDateTime($this->endDate, "d/m/Y");
+		public function setEndDate($endDate){
+			$this->endDate = empty($endDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $endDate)));
 		}
 
-		public function getEndTime(){
-			return $this->endTime;
+		public function getEndDate($format = "Y-m-d H:i:s"){
+			return is_null($this->endDate) ? null : date($format, strtotime($this->endDate));
+		}
+
+		public function setStartDateEnrollment($startDateEnrollment){
+			$this->startDateEnrollment = empty($startDateEnrollment) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $startDateEnrollment)));
+		}
+
+		public function getStartDateEnrollment($format = "Y-m-d H:i:s"){
+			return is_null($this->startDateEnrollment) ? null : date($format, strtotime($this->startDateEnrollment));
+		}
+
+		public function setEndDateEnrollment($endDateEnrollment){
+			$this->endDateEnrollment = empty($endDateEnrollment) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $endDateEnrollment)));
+		}
+
+		public function getEndDateEnrollment($format = "Y-m-d H:i:s"){
+			return is_null($this->endDateEnrollment) ? null : date($format, strtotime($this->endDateEnrollment));
+		}
+
+		public function setSpaces($spaces){
+			$this->spaces = $spaces;
 		}
 
 		public function getSpaces(){
 			return $this->spaces;
 		}
 
+		public function setIdPaymentType($idPaymentType){
+			$this->idPaymentType = $idPaymentType;
+		}
+
 		public function getIdPaymentType(){
 			return $this->idPaymentType;
 		}
 
-		public function getStartDateEnrollment(){
-			return $this->startDateEnrollment;
-		}
-
-		public function getEndDateEnrollment(){
-			return $this->endDateEnrollment;
+		function validateData() {
+			if (strlen(trim($this->getName())) < 3) $this->errors[] = "Título do evento muito curto [min. 3 caracteres].";
+			if ($this->getSpaces() < 1) $this->errors[] = "Informe a quantidade de vagas disponíveis.";
+			if ($this->getStartDate() > $this->getEndDate()) $this->errors[] = "A data e hora de início do evento deve ser menor que a data de término";
+			if ($this->getStartDateEnrollment() > $this->getEndDateEnrollment()) $this->errors[] = "A data e hora de início das inscrições deve ser menor que a data de término";
+			if ($this->getIdParentEvent() && !$this->findById($this->getIdParentEvent())) $this->errors[] = "Evento à ser vinculado não foi localizado.";
+			if (!PaymentType::findById($this->getIdPaymentType())) $this->errors[] = "Forma de pagamento não informada corretamente.";
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
@@ -183,8 +174,7 @@
 			return $events;
 		}
 
-		public static function customerSearch($searchValue){
-
+		public static function customerSearch($searchValue) {
 			$serachValue = preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $searchValue ) );
 			$serachValue = utf8_encode($searchValue);
 			$searchValue = '%' . $searchValue . '%';
@@ -193,17 +183,21 @@
 		}
 
 		public static function findNext($date){
-			$events = self::find(array("start_date"), array($date), ">=");
+			$events = self::find(array("end_date"), array($date), ">=");
 			return $events;
 		}
 
 		public static function findPrev($date){
-			$events = self::find(array("start_date"), array($date), "<");
+			$events = self::find(array("end_date"), array($date), "<");
 			return $events;			
 		}
 
 		public static function all(){
 			return self::find();
+		}
+
+		public function getSubEvents() {
+			return self::find(array("id_parent_event"), array($this->getIdEvent()));
 		}
 
 		public static function count(){
@@ -229,37 +223,9 @@
 			return self::find(array("id_event"), array($id));
 		}
 
-		public function update($data = array()){
-			$data["start_date"] .= " " . $data["start_time"];
-			$data["start_date"] = $this->formatDateTime($data["start_date"]);
-			$data["end_date"] .= " " . $data["end_time"];
-			$data["end_date"] = $this->formatDateTime($data["end_date"]);
-			unset($data["start_time"]);
-			unset($data["end_time"]);
-
-			$this->setData($data);
-
-			$keys = array_keys($data);
-			foreach ($keys as $key) {
-				$params .= "$key = :$key, ";
-			}
-
-			//remove a ultima (",") virgula
-			$params = substr($params, 0, -2);
-			$sql = "UPDATE event SET %s WHERE id_event = ".$this->getIdEvent();
-			$sql = sprintf($sql, $params);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			
-			$param = array();
-			foreach ($keys as $key){
-				$param[":$key"] = $data[$key];
-			}
-	
-			return $statment->execute($param);
-		}
-
 		public function save(){
+			if (!$this->isValidData()) return false;
+
 			$sql = 
 			"INSERT INTO event
 				(id_event_type, name, details, teacher, local, start_date, end_date, 
@@ -274,12 +240,55 @@
 					":details" => $this->getDetails(),
 					":teacher" => $this->getTeacher(),
 					":local" => $this->getLocal(),
-					":start_date" => $this->startDate . " " . $this->startTime,
-					":end_date" => $this->endDate . " " . $this->endTime,
+					":start_date" => $this->getStartDate(), 
+					":end_date" => $this->getEndDate(),
 					":spaces" => $this->getSpaces(),
 					":id_payment_type" => $this->getIdPaymentType(),
-					":start_date_enrollment" => date('Y-m-d'),
-					":end_date_enrollment" => date('Y-m-d')
+					":start_date_enrollment" => $this->getStartDateEnrollment(),
+					":end_date_enrollment" => $this->getEndDateEnrollment()
+				);
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			return $statment->execute($params);
+		}
+
+		public function update($data = array()){
+			$this->setData($data);
+			if (!$this->isValidData()) return false;
+
+			$sql = 
+			"UPDATE
+				event
+			SET
+				id_event_type = :id_event_type,
+				id_parent_event = :id_parent_event,
+				name = :name,
+				details = :details,
+				teacher = :teacher, 
+				local = :local,
+				start_date = :start_date, 
+				end_date = :end_date, 
+				spaces = :spaces,
+				id_payment_type = :id_payment_type, 
+				start_date_enrollment = :start_date_enrollment, 
+				end_date_enrollment = :end_date_enrollment
+			WHERE
+				id_event = :id_event";
+
+			$params = array(
+					":id_event_type" => $this->getIdEventType(),
+					":id_parent_event" => $this->getIdParentEvent(),
+					":name" => $this->getName(),
+					":details" => $this->getDetails(),
+					":teacher" => $this->getTeacher(),
+					":local" => $this->getLocal(),
+					":start_date" => $this->getStartDate(), 
+					":end_date" => $this->getEndDate(),
+					":spaces" => $this->getSpaces(),
+					":id_payment_type" => $this->getIdPaymentType(),
+					":start_date_enrollment" => $this->getStartDateEnrollment(),
+					":end_date_enrollment" => $this->getEndDateEnrollment(),
+					":id_event" => $this->getIdEvent()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);

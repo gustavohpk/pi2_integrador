@@ -74,6 +74,28 @@
 			return $this->cost;
 		}
 
+		// mensagens exibidas para confirmação da inscrição do participante
+		private function setMessage($message, $type) {
+			if (!isset($_SESSION["msg_enrollment"])) {
+				$_SESSION["msg_enrollment"] = array();
+			}
+			$_SESSION["msg_enrollment"][] = array("type" => $type, "message" => $message);
+		}
+
+		public function setMessageSuccess($message) {
+			$this->setMessage($message, "success");
+		}
+
+		public function setMessageError($message) {
+			$this->setMessage($message, "error");
+		}
+
+		public function getMessagesConfirmation() {
+			$messages = (isset($_SESSION["msg_enrollment"]) ? $_SESSION["msg_enrollment"] : array());
+			unset($_SESSION["msg_enrollment"]);
+			return $messages;
+		}
+
 		public function validateData(){
 			if ($this->getIdParticipant() < 1) $this->errors[] = "Nome do participante não informado.";
 			if ($this->event->getIdEvent() < 1) $this->errors[] = "Evento não informado.";

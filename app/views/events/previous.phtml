@@ -13,10 +13,10 @@
 			      <img class="event-thumbnail" src="<?php echo $this->getResource('img/placeholder-evento.png'); ?>" alt="...">
 			      <div class="caption">
 			        <h3><?= $event->getName() ?></h3>
-			        <?php if ($event->getStartDate() == $event->getEndDate()) : ?>
-			        	<p> <?= $event->getStartDate() ?></p>
+			        <?php if ($event->getStartDate("d/m/Y") == $event->getEndDate("d/m/Y")) : ?>
+			        	<p> <?= $event->getStartDate("d/m/Y") ?></p>
 			        <?php else : ?>
-			        	<p>De <?= $event->getStartDate() ?> a <?= $event->getStartDate() ?></p>
+			        	<p>De <?= $event->getStartDate("d/m/Y") ?> a <?= $event->getStartDate("d/m/Y") ?></p>
 			        <?php endif; ?>
 			      </div>
 		    	</div>

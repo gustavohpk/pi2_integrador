@@ -14,8 +14,7 @@
 	        }
 	        Events::setLimitByPage(6);
 	        Events::setCurrentPage($page);
-	        $date = date("d-m-Y");
-	        $this->events = Events::findNext($date);
+	        $this->events = Events::findNext(date("Y-m-d"));
 	        $this->pagination = new Pager(Events::count(), Events::getlimitByPage(), $page);
    		}
 
@@ -28,8 +27,7 @@
 	        }
 	        Events::setLimitByPage(6);
 	        Events::setCurrentPage($page);
-	        $date = date("d-m-Y");
-	        $this->events = Events::findPrev($date);
+	        $this->events = Events::findPrev(date("Y-m-d"));
 	        $this->pagination = new Pager(Events::count(), Events::getLimitByPage(), $page);
    		}
 	} 

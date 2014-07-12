@@ -1,54 +1,64 @@
 <?php 
 	class EnrollmentController extends BaseParticipantController {   
+      protected $enrollment;
+      protected $events;
+      protected $paymentsType;   
+
       public function __construct() {
+         parent::__construct();
          $this->setLoginRequired(true);
       }
 
-		public function add() {
-   		$cart = new Cart();
-         if ($cart->add($this->params[":id"])) {
-            FlashMessage::successMessage(
-                  "O evento foi adicionado na lista de inscrição com sucesso.<br>
-                  Total a Pagar: <strong> R$ {$cart->getSum()} </strong><br>
-                  <a href={$this->getUri('inscricao/finalizar')} class='btn btn-default btn-larg'>
-                     <span class='glyphicon glyphicon-log-in'></span> Finalizar Inscrição
-                  </a>"
-               );
+      public function _new() {
+         if ($this->events = Events::findById($this->params[":id"])) {
+            if ($this->events[0]->getEndDate() < date("Y-m-d H:i:s")) {
+               flashMessage::errorMessage($this->events[0]->getName() . " - ENCERRADO.");
+               $this->redirectTo("eventos/proximos");
+            }
+            if ($this->events[0]->getStartDateEnrollment() > date("Y-m-d H:i:s") ||
+                  $this->events[0]->getEndDateEnrollment() < date("Y-m-d H:i:s")) {
+               flashMessage::errorMessage($this->events[0]->getName() . " - Fora do prazo de inscrição.");
+               $this->redirectTo("eventos/proximos");
+            }
          }
          else {
-            $errors = $cart->getErrors();
-            foreach ($errors as $error) {
-               FlashMessage::errorMessage($error);
-            }
+            flashMessage::errorMessage("Evento não encontrado.");
+            $this->redirectTo("eventos/proximos");
          }
-         $this->redirectTo("eventos/proximos");
-		}
 
-      public function close() {
-         $cart = new Cart();
-         $items = $cart->getItems();
+         $this->paymentsType = PaymentType::all();
+      }
 
-         foreach ($items as $item) {
-            $item["id_participant"] = $this->currentParticipant->getIdParticipant();
-            $enrollment = new Enrollment($item);
-            if ($enrollment->save()) {
-               FlashMessage::successMessage(
-                     "Cód. Inscrição: {$enrollment->getIdEnrollment()}<br>
-                     {$enrollment->event->getName()}<br> OK."
-                  );
+      public function save() {
+         $params = $this->params["enrollment"];
+         foreach ($params["id_event"] as $id_event) {
+            $cost = CostEvent::findByIdEvent($id_event);
+            $cost = ($cost ? $cost[0]->getCostOfDay() : 0);
+            $data = array(
+                  "id_participant" => $this->currentParticipant->getIdParticipant(),
+                  "id_event" => $id_event,
+                  "id_payment_type" => $params["id_payment_type"],
+                  "cost" => $cost
+               );
+            $this->enrollment = new Enrollment($data);
+
+            if ($this->enrollment->save()) {
+               $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()}");
             }
             else {
-               $errors = $enrollment->getErrors();
-               $msg = "";
+               $errors = $this->enrollment->getErrors();
                foreach ($errors as $error) {
-                  $msg .= "$error<br>";
+                  $this->enrollment->setMessageError("{$this->enrollment->event->getName()} - $error");
                }
-               FlashMessage::errorMessage("Erro ao tentar realizar a inscrição no evento: {$enrollment->event->getName()}<br>$msg");
             }
          }
 
-         $cart->close();
-         $this->redirectTo("eventos/proximos");
+         $this->redirectTo("inscricao/confirmacao");
+      }
+
+      public function confirmation() {
+         $this->setHeadTitle("Confirmação");
+         $this->enrollment = new Enrollment();
       }
 	} 
 ?>
