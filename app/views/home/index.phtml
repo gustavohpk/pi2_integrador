@@ -66,16 +66,16 @@
 				<div class="row">
 				<?php foreach($this->media as $mediaItem) : ?>
 					<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
-					  	<a href="<?= $mediaItem->getPath() ?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= getThumbnail($mediaItem->getPath()) ?>" alt="<?= $mediaItem->getLabel() ?>"/>
-						<?php if ($mediaItem->getMediaType() == 'f') : ?>
+						<?php if ($mediaItem->getMediaType() == 'p') : ?>
+		  					<a href="<?= $this->getMedia("/image/{$mediaItem->getPath()}")?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= $this->getMedia("/image/{$mediaItem->getPath()}")?>" alt="<?= $mediaItem->getLabel() ?>"/>
 							<td><span class="glyphicon glyphicon-camera" title="Foto"></span></td>
 						<?php else : ?>
+		  					<a href="<?= $mediaItem->getPath() ?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= getThumbnail($mediaItem->getPath()) ?>" alt="<?= $mediaItem->getLabel() ?>"/>
 							<td><span class="glyphicon glyphicon-facetime-video" title="Vídeo"></span></td>
 						<?php endif; ?>
 						<br/>
 						<?= $mediaItem->getLabel() ?>
 					  	</a>
-
 					</div>
 				<?php endforeach; ?>
 				</div>

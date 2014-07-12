@@ -20,13 +20,13 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
 		<h4>Data de Criação</h4>
-		<input type="text" class="form-control" name="news[creation_date]" value="<?= $this->news->getCreationDate()?>" title="Data de Criação (preenchida automaticamente)" disabled/>
+		<input type="text" class="form-control" name="news[creation_date]" value="<?= $this->news->getCreationDate("d/m/Y H:i")?>" title="Data de Criação (preenchida automaticamente)" disabled/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
 		<h4>Data de Modificação</h4>
-		<input type="text" class="form-control" name="news[modification_date]" value="<?= $this->news->getModificationDate()?>" title="Data de Modificação (preenchida automaticamente)" disabled/>
+		<input type="text" class="form-control" name="news[modification_date]" value="<?= $this->news->getModificationDate("d/m/Y H:i")?>" title="Data de Modificação (preenchida automaticamente)" disabled/>
 	</div>
 </div>
 <div class="row">

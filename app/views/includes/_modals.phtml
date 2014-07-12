@@ -2,7 +2,7 @@
   if (isset($this->eventsRelated)) {
     $events = $this->eventsRelated;
   }
-  else {
+  elseif (isset($this->events)) {
     $events = $this->events; 
   }
 ?>  

@@ -44,7 +44,12 @@
 		}
 
 		public function getPath(){
-			return "event/$this->idEvent/$this->path";
+			if ($this->getMediaType() == "p") {
+				return "event/$this->idEvent/$this->path";
+			} 
+			else {
+				return $this->path;
+			}
 		}
 
 		public static function find($params = null, $limit = 6, $page = 1){
@@ -139,7 +144,7 @@
 					":media_type" => $this->getMediaType(),
 					":id_event" => $this->getIdEvent(),
 					":label" => $this->getLabel(),
-					":path" => $this->getPath()
+					":path" => $this->path
 				);
 			//var_dump($params); exit;
 			$pdo = \Database::getConnection();

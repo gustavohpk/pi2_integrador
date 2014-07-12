@@ -17,11 +17,13 @@
 		}
 
 		public function setCreationDate($creationDate){
-			$this->creationDate = $creationDate;
+			//$this->creationDate = $creationDate;
+			$this->creationDate = empty($creationDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $creationDate)));
 		}
 
 		public function setModificationDate($modificationDate){
-			$this->modificationDate = $modificationDate;
+			//$this->modificationDate = $modificationDate;
+			$this->modificationDate = empty($modificationDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $modificationDate)));
 		}
 
 		public function setTitle($title){
@@ -44,12 +46,15 @@
 			return $this->idEvent;
 		}
 
-		public function getCreationDate(){
-			return $this->formatDateTime($this->creationDate, "d/m/Y H:i");
+		public function getCreationDate($format = "Y-m-d H:i:s"){
+			//return date("d/m/Y H:i", $this->creationDate);
+			if (empty($this->idNews)) $this->creationDate = date("Y-m-d H:i:s");
+			return is_null($this->creationDate) ? null : date($format, strtotime($this->creationDate));
 		}
 
-		public function getModificationDate(){
-			return $this->formatDateTime($this->modificationDate, "d/m/Y H:i");
+		public function getModificationDate($format = "Y-m-d H:i:s"){
+			//return date("d/m/Y H:i", $this->modificationDate);
+			return is_null($this->modificationDate) ? null : date($format, strtotime($this->modificationDate));
 		}
 
 		public function getTitle(){

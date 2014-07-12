@@ -36,7 +36,7 @@
       public function create(){
          $params = $this->params["media"];
 
-         if (isset($_FILES)) {
+         if ($params["media_type"] == "p") {
             $params["path"] = $_FILES["media"]["name"];
          }         
 
@@ -60,7 +60,7 @@
 
       public function update(){
          //salva edição da midia no db  
-         if (isset($_FILES)) {
+         if ($this->params["media"]["media_type"] == "p") {
             $this->params["media"]["path"] = $_FILES["media"]["name"];
          }   
 

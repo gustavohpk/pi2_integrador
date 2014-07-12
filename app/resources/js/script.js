@@ -54,9 +54,9 @@ function openEvent(link){
 
 //Admin Media edit/new
 
-/*
+
 window.onload = function() {
-	checked = $("input[name='media[media_type]']").val();
+	checked = $("input[name='media[media_type]']:checked").val();
 	if (checked == "p"){
 		$("#video-source").hide();
 		$("#photo-source").show();
@@ -65,7 +65,7 @@ window.onload = function() {
 		$("#video-source").show();
 	}
 };
-*/
+
 
 $("input[name='media[media_type]']").change(function() {
 	checked = $("input[name='media[media_type]']:checked").val();
