@@ -1,4 +1,4 @@
------ Atualização xxx (10/07 - 11/07) -----
+----- Atualização 025 (10/07 - 11/07) -----
 - Cart (carrinho) deixado em desuso 
 - Finalizado e Alterado a maneira de fazer inscricao em eventos (falta implementar PGTO).
 - Area admin adicionado campo "Vinculado com Evento ID", "Data Inicio e Fim para Inscrição" em cadastro de eventos
