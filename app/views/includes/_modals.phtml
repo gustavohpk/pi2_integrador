@@ -1,15 +1,24 @@
-<?php if (isset($this->events)) : ?>
-  <?php foreach ($this->events as $event) : ?>
-    <div id="event<?= $event->getIdEvent();?>-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<?php 
+  if (isset($this->events)) {
+    $events = $this->events;
+  }
+  elseif (isset($this->eventsRelated)) {
+    $events = $this->eventsRelated;
+  }
+?>
+
+<?php if (isset($events)) : ?>
+  <?php foreach ($events as $event) : ?>
+    <div id="event<?=$event->getIdEvent()?>-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
-          	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          	<div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            	<img class="event-thumbnail" src="<?= $this->getResource('img/placeholder-evento.png'); ?>" alt="...">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <img class="event-thumbnail" src="<?= $this->getResource('img/placeholder-evento.png'); ?>" alt="...">
             </div>
             <div class="caption">
-    	        <h2><?= $event->getName() ?></h2>
+              <h2><?= $event->getName() ?></h2>
                <?php if ($event->getStartDate("d/m/Y") == $event->getEndDate("d/m/Y")) : ?>
                 <h4> <?= $event->getStartDate("d/m/Y") ?></h4>
               <?php else : ?>
@@ -21,13 +30,13 @@
               <?php else : ?>
                 <h5>Das <?= $event->getStartDate("H:i") ?> às <?= $event->getEndDate("H:i") ?></h4>
               <?php endif; ?>
-    	        <p>Acesse a página do evento para mais detalhes.</p>
-    	      </div>
-    	      <a href="#" class="btn btn-default" role="button">Ir para a página do evento</a>
-            <?php if (date("Y-m-d H:i:s") >= $event->getStartDateEnrollment() && date("Y-m-d H:i:s") <= $event->getEndDateEnrollment() && date("Y-m-d H:i:s") <= $event->getEndDate()) : ?>
-    	       <a role="button" class="btn btn-default" href="<?= createUriFor("/inscricao/evento/{$event->getIdEvent()}")?>">Inscrever-se</a>
+              <p>Acesse a página do evento para mais detalhes.</p>
+            </div>
+            <a href="<?= createUriFor("/eventos/{$event->getIdEvent()}/ver")?>" class="btn btn-default" role="button">Ir para a página do evento</a>
+            <?php if ($event->canEnrollment()) : ?>
+             <a role="button" class="btn btn-default" href="<?= createUriFor("/inscricao/evento/{$event->getIdEvent()}")?>">Inscrever-se</a>
             <?php endif; ?>
-    	      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
           </div>
         </div>
       </div>

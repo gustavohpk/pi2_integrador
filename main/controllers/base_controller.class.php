@@ -43,6 +43,12 @@
 			exit();
 		}
 
+		public function back() {
+			if (isset($_SERVER['HTTP_REFERER'])) {
+				return $_SERVER['HTTP_REFERER']; 
+			}
+		}
+
 		//Retorna constantes
 		public function getApplicationName(){
 			return APP_NAME;

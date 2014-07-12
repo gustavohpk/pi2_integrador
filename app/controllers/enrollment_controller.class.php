@@ -2,30 +2,35 @@
 	class EnrollmentController extends BaseParticipantController {   
       protected $enrollment;
       protected $events;
+      protected $eventsRelated;
       protected $paymentsType;   
+      protected $uriBack;
 
       public function __construct() {
          parent::__construct();
          $this->setLoginRequired(true);
+         $this->uriBack = $this->back();
       }
 
       public function _new() {
-         if ($this->events = Events::findById($this->params[":id"])) {
-            if ($this->events[0]->getEndDate() < date("Y-m-d H:i:s")) {
-               flashMessage::errorMessage($this->events[0]->getName() . " - ENCERRADO.");
-               $this->redirectTo("eventos/proximos");
-            }
-            if ($this->events[0]->getStartDateEnrollment() > date("Y-m-d H:i:s") ||
-                  $this->events[0]->getEndDateEnrollment() < date("Y-m-d H:i:s")) {
-               flashMessage::errorMessage($this->events[0]->getName() . " - Fora do prazo de inscrição.");
-               $this->redirectTo("eventos/proximos");
-            }
+         if (!$this->events = Events::findById($this->params[":id"])) {
+            flashMessage::errorMessage("Evento não encontrado.");
+            $this->redirectTo($this->back());
          }
          else {
-            flashMessage::errorMessage("Evento não encontrado.");
-            $this->redirectTo("eventos/proximos");
+            $this->events = $this->events[0];
+            if ($this->events->eventFinalized()) {
+               flashMessage::errorMessage($this->events->getName() . " - ENCERRADO.");
+               $this->redirectTo($this->back());
+            }
+            if (!$this->events->canEnrollment()) {
+               flashMessage::errorMessage($this->events->getName() . " - Fora do prazo de inscrição.");
+               $this->redirectTo($this->back());
+            }
          }
+  
 
+         $this->eventsRelated = $this->events->getEventsRelated();
          $this->paymentsType = PaymentType::all();
       }
 

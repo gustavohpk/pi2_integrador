@@ -2,6 +2,7 @@
 	class Events extends BaseModel{
 		private $idEvent;
 		private $idParentEvent;
+		public $parentEvent;
 		private $isSubEvent;
 		private $idEventType;		
 		private $eventType;
@@ -30,6 +31,10 @@
 		public function setIdParentEvent($idParentEvent){
 			$this->idParentEvent = ($idParentEvent > 0 ? $idParentEvent : null);
 			$this->isSubEvent = $idParentEvent > 0;
+
+			if ($this->idParentEvent && $parentEvent = Events::findById($this->idParentEvent)) {
+				$this->parentEvent = $parentEvent[0];
+			}
 		}
 
 		public function isSubEvent(){
@@ -196,9 +201,44 @@
 		public static function all(){
 			return self::find();
 		}
+		
+		public function getEventsRelated() {
+			if ($this->isSubEvent()) {
+				// retorna evento pai e outros subeventos relacionados com evento pai
+				return self::find(
+					array("id_event", "id_parent_event"), 
+					array($this->getIdParentEvent(), $this->getIdParentEvent()),
+					"=",
+					"OR"
+				);		
+			}
+			else {
+				// retorna subeventos
+				return self::find(array("id_parent_event"), array($this->getIdEvent()));
+			}
+		}
 
-		public function getSubEvents() {
-			return self::find(array("id_parent_event"), array($this->getIdEvent()));
+		public function canEnrollment() {
+			return (
+				$this->eventInitiated() && !$this->eventFinalized() && 
+				$this->enrollmentInitiated() && !$this->enrollmentFinalized()
+			);
+		}
+
+		public function eventInitiated() {
+			return ($this->getStartDate() <= date("Y-m-d H:i:s"));
+		}
+
+		public function eventFinalized() {
+			return ($this->getEndDate() < date("Y-m-d H:i:s"));
+		}
+
+		public function enrollmentInitiated() {
+			return ($this->getStartDateEnrollment() <= date("Y-m-d H:i:s"));
+		}
+
+		public function enrollmentFinalized() {
+			return ($this->getEndDateEnrollment() < date("Y-m-d H:i:s"));
 		}
 
 		public static function count(){

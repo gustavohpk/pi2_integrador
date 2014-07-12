@@ -1,3 +1,10 @@
+----- Atualização 026 (11 - 12/07) -----
+- Iniciado implementação da lista de eventos na pagina inicial
+- Alterado tamanho e tipo dos campos "local" e "details" em tabela "events"
+- Em modelo Events foi criado função para verificar se evento iniciou, finalizou, abriu inscrições, encerrou inscrições e finalmente canEnrollment() para faciliar as comparações na hora de habilitar_desabilitar botões para inscrição
+- Implementado links para "ver evento" e "inscreva-se" em todas as paginas que exibem eventos
+
+
 ----- Atualização 025 (10/07 - 11/07) -----
 - Cart (carrinho) deixado em desuso 
 - Finalizado e Alterado a maneira de fazer inscricao em eventos (falta implementar PGTO).

@@ -90,6 +90,15 @@
 			return count($media) > 0 ? $media[0] : NULL;
 		}
 
+		public static function findImageOfEvent($idEvent) {
+			$sql = "SELECT path FROM media WHERE id_event = :id_event LIMIT 1";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute(array(":id_event" => $idEvent));
+			$rows = $rs->fetch();
+			return  ($rows["path"] ? $rows["path"] : null);
+		}
+
 		public function update($data = array()){
 			$this->setData($data);
 

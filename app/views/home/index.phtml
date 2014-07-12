@@ -36,50 +36,25 @@
 		</div>
 
 		<div class="row events">
-		  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  	<a class="event-link" data-toggle="modal" data-target="#modalevent1">
-			    <div class="thumbnail">
-			      <img class="event-thumbnail" src="<?php echo $this->getMedia('image/event1.png'); ?>" alt="...">
-			      <div class="caption">
-			        <h3>Semana Acadêmica de TSI 2014</h3>
-			        <p>De 22/09/14 a 26/09/14</p>
-			      </div>
-		    	</div>
-		    </a>
-		  </div>
-		  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    <a class="event-link" data-toggle="modal" data-target="#modalevent2">
-		    	<div class="thumbnail">
-		      <img class="event-thumbnail" src="<?php echo $this->getMedia('image/event2.jpg'); ?>" alt="...">
-		      <div class="caption">
-		        <h3>Semana Acadêmica EM 2014</h3>
-		        <p>De 06/10/14 a 10/10/14</p>
-		      </div>
-		    </div>
-		   </a>
-		  </div>
-		  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    <a class="event-link" data-toggle="modal" data-target="#modalsubevent1">
-		    	<div class="thumbnail">
-		      <img class="event-thumbnail" src="<?php echo $this->getMedia('image/event1.png'); ?>" alt="...">
-		      <div class="caption">
-		        <h3>Minicurso de Linux</h3>
-		        <p>26/09/14</p>
-		      </div>
-		    </div>
-		   </a>
-		  </div>
-		  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    <a class="event-link" data-toggle="modal" data-target="#modalevent4">
-		    	<div class="thumbnail">
-		      <img class="event-thumbnail" src="<?php echo $this->getResource('img/placeholder-evento-2.png'); ?>" alt="...">
-		      <div class="caption">
-		        <h3>Evento 4</h3>
-		        <p>30/05/14</p>
-		      </div>
-		    </div>
-		   </a>
-		  </div>
+			<?php foreach ($this->events as $event) : ?>
+				<?php $img = Media::findImageOfEvent($event->getIdEvent()) ?>
+				<?php $img = is_null($img) ? $this->getResource("/img/placeholder-evento.png") : $this->getMedia("/image/$img") ?>
+				<div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<a class="event-link" data-toggle="modal" data-target="#event<?=$event->getIdEvent()?>-modal">
+				    <div class="thumbnail">
+				      <img class="event-thumbnail" src="<?=$img?>" alt="...">
+				      <div class="caption">
+				        <h3><?= $event->getName()?></h3>
+				        <?php if ($event->getStartDate() == $event->getEndDate()) : ?>
+				        	<p>De <?= $event->getStartDate("d/m/Y")?> a <?= $event->getEndDate("d/m/Y")?></p>
+				       	<?php else : ?>
+				       		<p><?= $event->getStartDate("d/m/Y")?></p>
+				       	<?php endif ?>
+				      </div>
+					</div>
+				</a>
+				</div>
+			<?php endforeach ?>
 		</div>
 		
 		<div class="row">

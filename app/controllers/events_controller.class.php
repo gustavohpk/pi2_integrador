@@ -1,9 +1,22 @@
 <?php 
 	class EventsController extends BaseController{
 	    protected $events;
+	    protected $eventsRelated;
 	    protected $eventsType;
 	    protected $paymentsType;
 	    protected $actionForm;
+
+	    public function show() {
+	    	$this->setHeadTitle("Ver Evento");
+	    	if ($this->events = Events::findById($this->params[":id"])) {
+	    		$this->events = $this->events[0];
+	    		$this->eventsRelated = $this->events->getEventsRelated();
+	    	}
+	    	else {
+	    		flashMessage::errorMessage("O evento que você está tentando acessar não existe.");
+	    		$this->redirectTo($this->back());
+	    	}
+	    }
 
 		public function next() {
 			$this->setHeadTitle("Próximos Eventos");

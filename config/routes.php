@@ -12,9 +12,9 @@
    	//rotas para eventos
    	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
     $router->get('/eventos/proximos/pagina/:p', array('controller' => 'EventsController', 'action' => 'next'));
-
     $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
     //$router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
+    $router->get('/eventos/:id/ver', array('controller' => 'EventsController', 'action' => 'show'));
 
 
    	//rotas para notícias
