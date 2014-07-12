@@ -28,13 +28,13 @@
 		<h4>Tipo</h4>
 		<div class="input-group well well-md media-type-define">
 			<input id="media-type" type="hidden" class="form-control" name="media[media_type]" value="v">
-			<?php //if ($this->media->getMediaType() == 'v') : ?>
-<!-- 				<span> Foto </span><input id="foto" type="radio" name="mediatype" value="p" >
-				<span> Vídeo </span><input id="video" type="radio" name="mediatype" value="v" checked> -->
-			<?php //else : ?>
-<!-- 				<span> Foto </span><input id="foto" type="radio" name="mediatype" value="p" checked>
-				<span> Vídeo </span><input id="video" type="radio" name="mediatype" value="v"> -->
-			<?php //endif; ?>
+			<?php if ($this->media->getMediaType() == 'v') : ?>
+				<span> Foto </span><input id="foto" type="radio" name="mediatype" value="p" >
+				<span> Vídeo </span><input id="video" type="radio" name="mediatype" value="v" checked>
+			<?php else : ?>
+ 				<span> Foto </span><input id="foto" type="radio" name="mediatype" value="p" checked>
+				<span> Vídeo </span><input id="video" type="radio" name="mediatype" value="v">
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
@@ -43,7 +43,7 @@
 		<h4>Selecione a imagem</h4>
 		<span class="label label-default">OBS.: Selecione uma imagem no formato JPG, PNG ou GIF</span>
 		<br/><br/>
-		<input type="file" accept=".jpg,.png,.gif">
+		<input type="file" name="media" accept=".jpg,.png,.gif">
 	</div>
 	<div id="video-source" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="">
 		<h4>Link</h4>

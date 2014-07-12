@@ -218,6 +218,10 @@
 			}
 		}
 
+		public function getMedia($type = "i") {
+			return Media::findByIdEvent($this->getIdEvent(), $type);
+		}
+
 		public function canEnrollment() {
 			return (
 				$this->eventInitiated() && !$this->eventFinalized() && 

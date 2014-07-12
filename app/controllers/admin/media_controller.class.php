@@ -35,6 +35,17 @@
 
       public function create(){
          $params = $this->params["media"];
+         //echo "<pre>"; print_r($_FILES); echo "<br>Aki>"; exit;
+         
+         if (isset($_FILES)) {
+            //$this->setPa($_FILES["userfile"]["name"])
+            $path = $this->getMedia("image/");
+            move_uploaded_file($_FILES["media"]["tmp_name"], $path . $_FILES["media"]["name"]);
+            exit;
+         }
+
+         
+
          $this->media = new \Media($params);
          if ($this->media->save()){
             \FlashMessage::successMessage("Mídia cadastrada com sucesso.");

@@ -1,7 +1,7 @@
 <?php 
 	class HomeController extends BaseController{
 		protected $events;
-		
+
    		public function index() {
       		$this->setHeadTitle();
 	        $page = 1;
@@ -12,7 +12,6 @@
 	        Media::setLimitByPage(3);
 	        Media::setCurrentPage($page);
 	        $this->media = Media::all();
-
 	        Events::setLimitByPage(4);
 	        $this->events = Events::all();
    		}
