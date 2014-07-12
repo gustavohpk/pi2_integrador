@@ -44,7 +44,7 @@
 		}
 
 		public function getPath(){
-			return $this->path;
+			return "event/$this->idEvent/$this->path";
 		}
 
 		public static function find($params = null, $limit = 6, $page = 1){
@@ -90,7 +90,7 @@
 			return count($media) > 0 ? $media[0] : NULL;
 		}
 
-		public function findByIdEvent($idEvent, $type = "i") {
+		public function findByIdEvent($idEvent, $type = "p") {
 			$sql = "SELECT * FROM media WHERE id_event = :id_event AND media_type = :media_type";
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);

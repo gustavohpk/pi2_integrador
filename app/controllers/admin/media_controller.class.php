@@ -35,19 +35,17 @@
 
       public function create(){
          $params = $this->params["media"];
-         //echo "<pre>"; print_r($_FILES); echo "<br>Aki>"; exit;
-         
-         if (isset($_FILES)) {
-            //$this->setPa($_FILES["userfile"]["name"])
-            $path = $this->getMedia("image/");
-            move_uploaded_file($_FILES["media"]["tmp_name"], $path . $_FILES["media"]["name"]);
-            exit;
-         }
 
-         
+         if (isset($_FILES)) {
+            $params["path"] = $_FILES["media"]["name"];
+         }         
 
          $this->media = new \Media($params);
          if ($this->media->save()){
+            if (isset($_FILES)) {
+               $path = $this->getUploadFolder("/image/event/" . $this->media->getIdEvent());
+               move_uploaded_file($_FILES["media"]["tmp_name"], $path . $_FILES["media"]["name"]);
+            } 
             \FlashMessage::successMessage("Mídia cadastrada com sucesso.");
             $this->redirectTo("admin/midia/lista");
          }
@@ -62,8 +60,16 @@
 
       public function update(){
          //salva edição da midia no db  
+         if (isset($_FILES)) {
+            $this->params["media"]["path"] = $_FILES["media"]["name"];
+         }   
+
          $this->media = \Media::findById($this->params[":id"]);
          if ($this->media->update($this->params['media'])){
+            if (isset($_FILES)) {
+               $path = $this->getUploadFolder("/image/event/" . $this->media->getIdEvent());
+               move_uploaded_file($_FILES["media"]["tmp_name"], $path . $_FILES["media"]["name"]);
+            }
             \FlashMessage::successMessage("Mídia alterada com sucesso.");
             $this->redirectTo("admin/midia/lista");
          }

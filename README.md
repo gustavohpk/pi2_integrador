@@ -4,6 +4,7 @@
 - Em modelo Events foi criado função para verificar se evento iniciou, finalizou, abriu inscrições, encerrou inscrições e finalmente canEnrollment() para faciliar as comparações na hora de habilitar_desabilitar botões para inscrição
 - Implementado links para "ver evento" e "inscreva-se" em todas as paginas que exibem eventos
 - Setado imagens dos eventos de todas as telas e no Modals
+- Pequenas alterações na Area Admin/midia ....
 
 
 ----- Atualização 025 (10/07 - 11/07) -----

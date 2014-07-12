@@ -27,13 +27,12 @@
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
 		<h4>Tipo</h4>
 		<div class="input-group well well-md media-type-define">
-			<input id="media-type" type="hidden" class="form-control" name="media[media_type]" value="v">
-			<?php if ($this->media->getMediaType() == 'v') : ?>
-				<span> Foto </span><input id="foto" type="radio" name="mediatype" value="p" >
-				<span> Vídeo </span><input id="video" type="radio" name="mediatype" value="v" checked>
+			<?php if ($this->media->getMediaType() == 'v' || empty($this->media->getMediaType)) : ?>
+				<span> Foto </span><input id="foto" type="radio" name="media[media_type]" value="p" >
+				<span> Vídeo </span><input id="video" type="radio" name="media[media_type]" value="v" checked>
 			<?php else : ?>
- 				<span> Foto </span><input id="foto" type="radio" name="mediatype" value="p" checked>
-				<span> Vídeo </span><input id="video" type="radio" name="mediatype" value="v">
+ 				<span> Foto </span><input id="foto" type="radio" name="media[media_type]" value="p" checked>
+				<span> Vídeo </span><input id="video" type="radio" name="media[media_type]" value="v">
 			<?php endif; ?>
 		</div>
 	</div>

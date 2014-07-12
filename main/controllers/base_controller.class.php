@@ -81,6 +81,13 @@
 			}
 		}
 
+		public function getUploadFolder($resource = null){
+			if (!file_exists(UPLOAD_FOLDER . $resource)){
+				mkdir(UPLOAD_FOLDER . $resource, 644, true);
+			}
+			return UPLOAD_FOLDER . "$resource/";
+		}
+
 		//Caminho da visão
 		private function setViewPath(){
 			$controller = lcfirst(str_replace('Controller', '', $this->controllerName)); //não considera a string Controller no nome do arquivo

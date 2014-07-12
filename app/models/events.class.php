@@ -218,7 +218,7 @@
 			}
 		}
 
-		public function getMedia($type = "i") {
+		public function getMedia($type = "p") {
 			return Media::findByIdEvent($this->getIdEvent(), $type);
 		}
 
