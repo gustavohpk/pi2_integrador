@@ -31,8 +31,8 @@
 							<input type="checkbox" name="enrollment[id_event][]" value="<?= $subEvent->getIdEvent()?>" onClick="selectSubEvent(<?=$subEvent->getIdEvent()?>, this.checked)">
 							<?= $subEvent->getName() ?>
 						</li>
-					<?php endif ?>
-				<?php endforeach ?>
+					<?php endif; ?>
+				<?php endforeach; ?>
 			</ul>
 			<h4>Total: R$ <span id="sum"><?= number_format($costEvent, 2) ?></span></h4>
 		</div>		
@@ -46,7 +46,7 @@
 						<input type="radio" name="enrollment[id_payment_type]" value="<?= $paymentType->getIdPaymentType()?>">
 						<img class="" src="img/pagseguro-logo.png" style="width: 20%" alt="<?= $paymentType->getName() ?>">
 					</li>
-				<? endforeach ?>
+				<?php endforeach; ?>
 			</ul>
 		</div>
 

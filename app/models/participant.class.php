@@ -242,7 +242,7 @@
 					":cpf" => $this->getCpf(),
 					":rg" => $this->getRg(),
 					":gender" => $this->getGender(),
-					":birthday" => date('Y-m-d'), //$this->getBirthday(),
+					":birthday" => $this->getBirthday(),
 					":id_city" => $this->getIdCity(),
 					":address" => $this->getAddress(),
 					":number" => $this->getNumber(),
