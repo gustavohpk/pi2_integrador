@@ -81,6 +81,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 #news-list .list-group-item:hover h4 { color: #000; }
 #news-list .list-group-item:hover h6 { color: #333; }
 #news-list .list-group-item{ min-height: 140px; }
+.news-item .news-content {text-align: justify;}
 
 
 /* Fotos e vídeos */

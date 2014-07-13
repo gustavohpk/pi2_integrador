@@ -70,6 +70,10 @@
 			return $this->content;
 		}
 
+		public function getMedia($type = "p") {
+			return Media::findByIdEvent($this->getIdEvent(), $type);
+		}
+
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
 			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
 			$limit = self::getLimitByPage();

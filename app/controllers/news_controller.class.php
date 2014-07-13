@@ -1,6 +1,15 @@
 <?php 
 	class NewsController extends BaseController{
-   		public function item(){}
+		protected $news;
+
+   		public function item(){
+   			if (!$this->news = News::findById($this->params[":id"])) {
+   				flashMessage::errorMessage("A notícia que você está tentando acessar não existe").
+   				$this->redirectTo("noticias/lista");
+   			}
+
+   			$this->setHeadTitle("Notícia");
+   		}
    
    		public function show(){
       		$this->setHeadTitle("Notícias");
