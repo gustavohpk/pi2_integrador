@@ -12,7 +12,7 @@
          } else {
             $page = 1;
          }
-         $limit = 3;
+         $limit = 15;
          $this->media = \Media::find(null, $limit, $page);
          $this->count = \Media::count();
          $this->pagination = new \Pager($this->count, $limit, $page);

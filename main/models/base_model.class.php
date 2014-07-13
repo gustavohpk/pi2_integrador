@@ -1,7 +1,7 @@
 <?php
 	class BaseModel{		
 		protected $errors = array();
-		private static $limitByPage = 3;
+		private static $limitByPage = 15;
 		private static $currentPage = 1;
 
 		public function validateData(){}

@@ -5,6 +5,9 @@
 - Adicionado campo data de nascimento/aniversário no cadastro de usuário
 - Adicionada nova fonte no site
 - Pasta media adicionada ao .gitignore
+- Limite por página alterado padrão para 15
+- Diversas correções e alterações pequenas
+- Iniciado painel do usuário
 
 ----- Atualização 026 (11 - 12/07) -----
 - Iniciado implementação da lista de eventos na pagina inicial

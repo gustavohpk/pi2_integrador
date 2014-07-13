@@ -47,7 +47,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 
 /* Contato */
 #contact-form button{ margin-top: 15px; }
-#contact-form { background-color: #FFF; border-radius: 5px; padding: 10px;}
+#contact-form { border-radius: 5px; padding: 10px;}
 
 
 /* Menu */

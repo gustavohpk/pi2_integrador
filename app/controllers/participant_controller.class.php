@@ -128,5 +128,9 @@
 				}
 			}
 		}
+
+		public function dashboard(){
+			$this->setHeadTitle("Painel do usuário");
+		}
 	} 
 ?>

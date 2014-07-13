@@ -35,6 +35,7 @@
     $router->get('/conta/sair', array('controller' => 'ParticipantController', 'action' => 'logout'));
     $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
     $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
+    $router->get('/conta/painel', array('controller' => 'ParticipantController', 'action' => 'dashboard'));
 
     //rotas para pesquisa
     $router->get('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'events'));

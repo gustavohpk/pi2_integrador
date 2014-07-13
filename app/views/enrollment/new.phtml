@@ -44,7 +44,7 @@
 				<?php foreach ($this->paymentsType as $paymentType) : ?>
 					<li class="list-group-item">
 						<input type="radio" name="enrollment[id_payment_type]" value="<?= $paymentType->getIdPaymentType()?>">
-						<img class="" src="img/pagseguro-logo.png" style="width: 20%" alt="<?= $paymentType->getName() ?>">
+						<img class="" src="<?= $this->getResource('img/pagseguro-logo.png'); ?>" style="width: 20%" alt="<?= $paymentType->getName() ?>">
 					</li>
 				<?php endforeach; ?>
 			</ul>
