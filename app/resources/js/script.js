@@ -55,16 +55,16 @@ function openEvent(link){
 //Admin Media edit/new
 
 
-window.onload = function() {
-	checked = $("input[name='media[media_type]']:checked").val();
-	if (checked == "p"){
-		$("#video-source").hide();
-		$("#photo-source").show();
-	}else if (checked == "v"){
-		$("#photo-source").hide();
-		$("#video-source").show();
-	}
-};
+// window.onload = function() {
+// 	checked = $("input[name='media[media_type]']:checked").val();
+// 	if (checked == "p"){
+// 		$("#video-source").hide();
+// 		$("#photo-source").show();
+// 	}else if (checked == "v"){
+// 		$("#photo-source").hide();
+// 		$("#video-source").show();
+// 	}
+// };
 
 
 $("input[name='media[media_type]']").change(function() {
@@ -78,6 +78,12 @@ $("input[name='media[media_type]']").change(function() {
 	}
 });
 
-    $('.btn-danger').click(function() {
-        return window.confirm("Você realmente deseja excluir?");
-    });
+$('.btn-danger').click(function() {
+    return window.confirm("Você realmente deseja excluir?");
+});
+
+$(document).ready(function() {
+
+    $("[data-toggle=tooltip]").tooltip();
+
+});

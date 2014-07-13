@@ -1,3 +1,11 @@
+----- Atualização 027 (12/05) -----
+- Adicionadas validações html5 no formulário de cadastro de usuário
+- Removido bug do script.js e reativado
+- Inseridas novas máscaras e caixas de ajuda
+- Adicionado campo data de nascimento/aniversário no cadastro de usuário
+- Adicionada nova fonte no site
+- Pasta media adicionada ao .gitignore
+
 ----- Atualização 026 (11 - 12/07) -----
 - Iniciado implementação da lista de eventos na pagina inicial
 - Alterado tamanho e tipo dos campos "local" e "details" em tabela "events"
