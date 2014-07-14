@@ -1,19 +1,27 @@
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
 		<h2 class="event-title"><?= $this->events->getName() ?></h2>
-		<?php if ($this->events->getStartDate() == $this->events->getEndDate()) : ?>
-			<h3 class="event-date"><?= $this->events->getStartDate("d/m/Y")?></h3>
-		<?php else : ?>
-			<h3 class="event-date"><?= $this->events->getStartDate("d/m/Y")?> a <?= $this->events->getEndDate("d/m/Y")?></h3>
-		<?php endif ?>
-		<h4 class="event-address"><?= $this->events->getLocal()?></h4>
-		<?php if ($this->events->isSubEvent()) : ?>
-			<h3><span class="label label-info">Este evento faz parte do evento: <a class="event-related-link" href="<?= createUriFor("/eventos/{$this->events->parentEvent->getIdEvent()}/ver")?>"><?= $this->events->parentEvent->getName() ?></a></span></h3>
-		<?php endif ?>
-		<br/>
-		<p class="event-short-description"></p>
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+			
+			<?php if ($this->events->getStartDate("d/m/Y") == $this->events->getEndDate("d/m/Y")) : ?>
+				<h3 class="event-date">Data: <?= $this->events->getStartDate("d/m/Y")?></h3>
+				<?php if ($this->events->getStartDate("H:i") == $this->events->getEndDate("H:i")) : ?>
+					<h3 class="event-date">Horário: <?= $this->events->getStartDate("H:i")?></h3>
+				<?php else : ?>
+					<h3 class="event-date">Das <?= $this->events->getStartDate("H:i")?> às <?= $this->events->getEndDate("H:i")?></h3>
+				<?php endif ?>
+			<?php else : ?>
+				<h3 class="event-date">Data: <?= $this->events->getStartDate("d/m/Y")?> a <?= $this->events->getEndDate("d/m/Y")?></h3>
+			<?php endif ?>
+			<h4 class="event-address">Local do evento: <?= $this->events->getLocal()?></h4>
+			<?php if ($this->events->isSubEvent()) : ?>
+				<h5><span class="label label-info">Este evento faz parte do evento: <a class="event-related-link" href="<?= createUriFor("/eventos/{$this->events->parentEvent->getIdEvent()}/ver")?>"><?= $this->events->parentEvent->getName() ?></a></span></h5>
+			<?php endif ?>
+		</div>
+
+		<!-- <p class="event-short-description"></p> -->
 	</div>
-	<div class="col-bordered col-lg-4 col-md-4 col-sm-5 col-xs-12">
+	<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
 		<?php if ($media = $this->events->getMedia()) : ?>
 			<?php $media = $media[0] ?>
 			<?php $image = $this->getMedia("/image/{$media->getPath()}") ?>
@@ -24,21 +32,21 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-12">
-		<p class="event-long-description"><?= $this->events->getDetails()?></p>
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 event-long-description">
+		<?= $this->events->getDetails()?>
 	</div>
-	<?php if ($this->events->canEnrollment()) : ?>
-		<div class="col-xs-12">
-			<a href="<?= createUriFor("/inscricao/evento/{$this->events->getIdEvent()}")?>"><button type="button" class="btn btn-default btn-lg">Inscrever-se</button></a>
-		</div>
-	<?php endif ?>
+	<div class="col-xs-12">
+		<?php if (strtotime($this->events->getStartDate()) > strtotime(date("Y-m-d H:i:s"))) : ?>
+			<span style="display:inline-block" data-toggle="tooltip" data-placement="bottom" <?php echo (!$this->events->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->events->getStartDateEnrollment("d/m/Y"). " às " . $this->events->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
+				<a role="button" href="<?= createUriFor("/inscricao/evento/{$this->events->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-lg"  <?php echo (!$this->events->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
+			</span>
+		<?php endif; ?>
+	</div>
 </div>
-<br/><br/>
-
 <?php if ($this->eventsRelated) : ?>
+	<br/><br/>
 	<div class="row events">
 		<h4>Eventos relacionados</h4>
-
 		<?php foreach ($this->eventsRelated as $event) : ?>
 			<div class="event col-lg-2 col-md-2 col-sm-4 col-xs-6">
 				<a class="event-link" data-toggle="modal" data-target="#event<?=$event->getIdEvent()?>-modal">
@@ -65,4 +73,4 @@
 	</div>
 <?php endif ?>
 
-<div class="fb-comments" data-href="<?= createUriFor("/eventos/{$this->events->getIdEvent()}/ver")?>" data-numposts="5" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://localhost<?= createUriFor("/eventos/{$this->events->getIdEvent()}/ver")?>" data-numposts="5" data-colorscheme="light"></div>

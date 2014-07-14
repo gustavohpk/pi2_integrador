@@ -39,8 +39,10 @@
               <p>Acesse a página do evento para mais detalhes.</p>
             </div>
             <a href="<?= createUriFor("/eventos/{$event->getIdEvent()}/ver")?>" class="btn btn-default" role="button">Ir para a página do evento</a>
-            <?php if ($event->canEnrollment()) : ?>
-             <a role="button" class="btn btn-default" href="<?= createUriFor("/inscricao/evento/{$event->getIdEvent()}")?>">Inscrever-se</a>
+            <?php if (strtotime($event->getStartDate()) > strtotime(date("Y-m-d H:i:s"))) : ?>
+              <span style="display:inline-block" data-toggle="tooltip" data-placement="top" <?php echo (!$event->canEnrollment()?"disabled title='As inscrições abrem dia " . $event->getStartDateEnrollment("d/m/Y"). " às " . $event->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
+                <a role="button" href="<?= createUriFor("/inscricao/evento/{$event->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-md"  <?php echo (!$event->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
+              </span>
             <?php endif; ?>
             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
           </div>

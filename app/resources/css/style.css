@@ -39,6 +39,8 @@ a.fancybox:hover span{ background-color: #CCC; border-radius: 15%;}*/
 a.event-related-link{ padding: 2px; }
 a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radius: 5px;}
 .events{ border-top: 1px solid #BBB; border-bottom: 1px solid #BBB; padding-top: 5px; }
+.event-long-description { text-align: left; }
+.event-long-description img { width: initial; }
 
 
 /* Correacao Glyphicon */
@@ -153,3 +155,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 /* Ícones de ajuda */
 #help-cpf { float: right; top: -22px; left: -7px; }
+
+.btn.disabled {
+    pointer-events: auto;
+}

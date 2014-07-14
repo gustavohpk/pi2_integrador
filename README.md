@@ -1,3 +1,19 @@
+----- Atualização 028 (13/05) -----
+- Realizadas otimizações nas áreas de eventos do site
+- Na página do evento e do modal, o botão inscrever-se foi modificado{
+	- Se for evento anterior, o botão não aparecerá
+	- Se for próximo e as inscrições ainda não abriram, aparecerá o botão desabilitado, com um tooltip informando a data que abrirá a inscrição
+}
+- Novo .sql criado{
+	- Tamanho do campo title da tablela notícia e do campo name da tabela evento alterado para 60
+	- Criada tabela de configuração, funcionará da seguinte maneira{
+		- São três colunas: id_setting, description e value. A description é para inserir o que essa linha vai configurar, ex: site_name, favicon, etc.
+		- A value é o valor, ex: UTFPR Eventos, /media/img/favicon.png
+	}
+	- Dessa forma é possível inserir várias configurações no banco, sem criar novas tabelas.
+}
+- Adicionado botão "Lista de presença" nas ações da lista de eventos no admin
+
 ----- Atualização 027 (12/05) -----
 - Adicionadas validações html5 no formulário de cadastro de usuário
 - Removido bug do script.js e reativado

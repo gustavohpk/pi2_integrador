@@ -15,7 +15,7 @@
 				  		<img class="thumbnail" src="<?=$this->getResource('img/placeholder-evento.png'); ?>" alt="...">
 				  	</div>
 				    <h4 class="list-group-item-heading"><?= $event->getName() ?></h4>
-				    <p class="list-group-item-text"><?= $event->getStartTime() ?></p>
+				    <p class="list-group-item-text"><?= $event->getStartDate("d/m/Y H:i") ?></p>
 				  </a>
 				<?php endforeach; ?>
 			</div>

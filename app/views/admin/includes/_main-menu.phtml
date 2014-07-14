@@ -48,7 +48,6 @@
               <ul class="dropdown-menu">
                 <li><?= createLinkTo('/admin/inscricoes/lista', '<span class="glyphicon glyphicon-list-alt"></span> Listar')?></li>
                 <li><?= createLinkTo('/admin/inscricoes/nova', '<span class="glyphicon glyphicon-plus"></span> Cadastrar')?></li>
-                <li><?= createLinkTo('/admin/inscricoes/presenca', '<span class="glyphicon glyphicon-check"></span> Registrar Presença')?></li>
               </ul>
             </li>
             <li class="dropdown dropdown-config">
@@ -64,7 +63,8 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <p class="navbar-text">Logado como <a href="<?= createUriFor('/admin/logout')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></p>
+            <p class="navbar-text"><a href="<?= createUriFor('/')?>" target="_blank" class="navbar-link">Acessar site</a></p>
+            <p class="navbar-text">Logado como <a href="<?= createUriFor('/admin')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></p>
             <li><a href="<?= createUriFor('/admin/logout')?>"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
           </ul>
         </div>

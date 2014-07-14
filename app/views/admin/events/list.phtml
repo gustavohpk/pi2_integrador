@@ -57,6 +57,11 @@
 						<td align="left"><?= $event->getEventType()?></td>
 					<?php endif; ?>					
 					<td>
+						<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/presenca") ?>">
+							<button class='btn btn-warning btn-sm' title='Lista de Presença'>
+								<span class='glyphicon glyphicon-check'></span>
+							</button>
+						</a>
 						<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/alterar") ?>">
 							<button class='btn btn-primary btn-sm' title='Editar'>
 								<span class='glyphicon glyphicon-edit'></span>
