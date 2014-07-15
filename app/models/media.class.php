@@ -44,12 +44,7 @@
 		}
 
 		public function getPath(){
-			if ($this->getMediaType() == "p") {
-				return "event/$this->idEvent/$this->path";
-			} 
-			else {
-				return $this->path;
-			}
+			return $this->path;
 		}
 
 		public static function find($params = null, $limit = 6, $page = 1){
@@ -133,7 +128,10 @@
 			return $statment->execute($param);
 		}
 
-		public function save(){
+		public function save($path){
+			if ($this->getMediaType() == "p") {
+	            $this->setPath($this->imagePath($_FILES["media"], $path));
+	        }       
 			$sql = 
 			"INSERT INTO media
 				(media_type, id_event, label, path)
@@ -144,12 +142,14 @@
 					":media_type" => $this->getMediaType(),
 					":id_event" => $this->getIdEvent(),
 					":label" => $this->getLabel(),
-					":path" => $this->path
+					":path" => $this->getPath()
 				);
 			//var_dump($params); exit;
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			return $statment->execute($params);
+			$statment->execute($params);
+			$this->setIdMedia($pdo->lastInsertId());
+			return $statment ? $this : false;
 		}
 
 		public function remove(){
@@ -159,5 +159,23 @@
 			$params = array(":id_media" => $this->getIdMedia());
 			return $statment->execute($params);
 		}
+
+		public function imagePath($image, $path){
+			switch ($image["type"]) {
+				case 'image/png': $type = '.png'; break;
+				case 'image/jpeg': case 'image/jpg': $type = '.jpg'; break;
+				case 'image/gif': $type = '.gif'; break;
+			}
+			$absolutePath = '/var/www' . $path . 'event' . $this->getIdEvent() . '_' . 'image1' . $type;
+
+			while (file_exists($absolutePath)){
+				$number = substr($absolutePath, -5, 1);
+				$number = intval($number);
+				$number++;
+				$absolutePath = '/var/www' . $path . 'event' . $this->getIdEvent() . '_' . 'image' . strval($number) . $type;
+			}
+			return $absolutePath;
+		}
+
 	}
 ?>

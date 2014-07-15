@@ -73,7 +73,7 @@
          //salva edição do evento no db  
          $this->events = \Events::findById($this->params[":id"])[0];
          if ($this->events->update($this->params['event'])){
-            \FlashMessage::successMessage("Evento cadastrado com sucesso.");
+            \FlashMessage::successMessage("Evento modificado com sucesso.");
             $this->redirectTo("admin/eventos/lista");
          }
          else{

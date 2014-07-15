@@ -10,7 +10,7 @@
 	    <h3 class="panel-title">Lista de eventos cadastrados</h3>
 	  </div>
 	  <div class="panel-body">
-	  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
+	  	<span class="glyphicon glyphicon-question-sign" style="float:right;" title="Nesta área é possível gerenciar todos os eventos do sistema. Além de criar e editar, também é possível registrar a presença dos inscritos." data-toggle="tooltip" data-placement="left"></span>
 			<div class="row">
 				<div class="col-xs-12 general-actions">
 					<a href="<?= createUriFor('/admin/eventos/novo')?>">
@@ -57,11 +57,13 @@
 						<td align="left"><?= $event->getEventType()?></td>
 					<?php endif; ?>					
 					<td>
-						<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/presenca") ?>">
-							<button class='btn btn-warning btn-sm' title='Lista de Presença'>
-								<span class='glyphicon glyphicon-check'></span>
-							</button>
-						</a>
+						<?php if($event->getEventType() != 'sem_inscricao') : ?>
+							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/presenca") ?>">
+								<button class='btn btn-warning btn-sm' title='Lista de Presença'>
+									<span class='glyphicon glyphicon-check'></span>
+								</button>
+							</a>
+						<?php endif; ?>
 						<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/alterar") ?>">
 							<button class='btn btn-primary btn-sm' title='Editar'>
 								<span class='glyphicon glyphicon-edit'></span>

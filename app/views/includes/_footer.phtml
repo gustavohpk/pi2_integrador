@@ -3,13 +3,14 @@
 		<div class="row">
 			<div id="footer-links" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<ul>
-					<li><a href="<?php echo $this->getUri(); ?>">Home</a></li>
-					<li><a href="<?php echo $this->getUri('eventos/proximos'); ?>">Próximos Eventos</a></li>
-					<li><a href="<?php echo $this->getUri('eventos/anteriores'); ?>">Eventos Anteriores</a></li>
-					<li><a href="<?php echo $this->getUri('noticias/lista'); ?>">Notícias</a></li>
-					<li><a href="<?php echo $this->getUri('midia/galeria'); ?>">Fotos e Vídeos</a></li>
-					<li><a href="<?php echo $this->getUri('contato'); ?>">Contato</a></li>
-					<li><a href="<?php echo $this->getUri('conta/login'); ?>">Painel</a></li>
+					<li><a href="<?= $this->getUri(); ?>">Home</a></li>
+					<li><a href="<?= $this->getUri('eventos/proximos'); ?>">Próximos Eventos</a></li>
+					<li><a href="<?= $this->getUri('eventos/anteriores'); ?>">Eventos Anteriores</a></li>
+					<li><a href="<?= $this->getUri('noticias/lista'); ?>">Notícias</a></li>
+					<li><a href="<?= $this->getUri('midia/galeria'); ?>">Fotos e Vídeos</a></li>
+					<li><a href="<?= $this->getUri('contato'); ?>">Contato</a></li>
+					<li><a href="<?= $this->getUri('conta/login'); ?>">Painel</a></li>
+					<li><a href="<?= $this->getUri('admin'); ?>">Painel do Administrador</a></li>
 				</ul>
 			</div>
 			<div id="footer-links2" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

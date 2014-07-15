@@ -1,3 +1,6 @@
+----- Atualização 029 (14/05) -----
+- Diversas modificações
+
 ----- Atualização 028 (13/05) -----
 - Realizadas otimizações nas áreas de eventos do site
 - Na página do evento e do modal, o botão inscrever-se foi modificado{

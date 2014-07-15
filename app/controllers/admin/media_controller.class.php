@@ -34,19 +34,13 @@
 		}
 
       public function create(){
-         $params = $this->params["media"];
-
-         if ($params["media_type"] == "p") {
-            $params["path"] = $_FILES["media"]["name"];
-         }         
+         $params = $this->params["media"];        
 
          $this->media = new \Media($params);
-         if ($this->media->save()){
-            if (isset($_FILES)) {
-               $path = $this->getUploadFolder("/image/event/" . $this->media->getIdEvent());
-               move_uploaded_file($_FILES["media"]["tmp_name"], $path . $_FILES["media"]["name"]);
-            } 
+         $uri = $this->getUri("media/image/event/");
+         if ($this->media->save($uri)){
             \FlashMessage::successMessage("Mídia cadastrada com sucesso.");
+            move_uploaded_file($_FILES["media"]["tmp_name"], $this->media->getPath());
             $this->redirectTo("admin/midia/lista");
          }
          else{

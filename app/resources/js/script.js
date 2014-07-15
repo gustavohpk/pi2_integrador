@@ -49,14 +49,6 @@ $(document).ready(function(){
 
 
 //ADMIN
-function openEvent(link){
-	eventId = $("#event-id").val();
-	if (eventId){
-		eventLink = $("#event-link").val();
-		eventLink = eventLink.replace("idevento", eventId);
-		window.open(eventLink);
-	}
-};
 
 
 

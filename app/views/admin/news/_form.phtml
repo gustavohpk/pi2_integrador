@@ -12,7 +12,7 @@
 	    <input id="event-id" type="number" class="form-control" name="news[id_event]" value="<?= $this->news->getIdEvent()?>" required>
 	    <input id="event-link" type="hidden" value="<?= createUriFor('/admin/eventos/idevento/alterar')?>"></input>
 	    <div class="input-group-btn">
-	      <button id="event-access" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Acessar evento" onclick="openEvent()"><span class="glyphicon glyphicon-new-window"></span></button>
+	      <a id="event-access" href="<?= createUriFor('/admin/eventos/lista') ?>" target="_blank" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Lista de eventos" ><span class="glyphicon glyphicon-list"></span></a>
 	    </div>
 	  </div>
 	</div>
