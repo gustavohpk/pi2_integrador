@@ -72,7 +72,7 @@
       public function remove(){
          $this->media = \Media::findById($this->params[":id"]);
          if ($this->media->remove()){
-            \FlashMessage::successMessage("Mídia alterada com sucesso.");
+            \FlashMessage::successMessage("Mídia removida com sucesso.");
             unlink("/var/www/" . $this->media->getPath());
          }
          else {
