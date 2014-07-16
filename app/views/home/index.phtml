@@ -25,7 +25,7 @@
 			  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
 					<?php if ($media = $newsItem->getMedia()) : ?>
 						<?php $media = $media[0] ?>
-						<?php $image = $this->getMedia("/image/{$media->getPath()}") ?>
+						<?php $image = $media->getPath()?>
 					<?php else : ?>
 						<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
 					<?php endif ?>
@@ -45,7 +45,7 @@
 			<?php foreach ($this->events as $event) : ?>
 				<?php if ($media = $event->getMedia()) : ?>
 					<?php $media = $media[0] ?>
-					<?php $image = $this->getMedia("/image/{$media->getPath()}") ?>
+					<?php $image = $media->getPath()?>
 				<?php else : ?>
 					<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
 				<?php endif ?>
@@ -79,7 +79,7 @@
 				<?php foreach($this->media as $mediaItem) : ?>
 					<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
 						<?php if ($mediaItem->getMediaType() == 'p') : ?>
-		  					<a href="<?= $this->getMedia("/image/{$mediaItem->getPath()}")?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= $this->getMedia("/image/{$mediaItem->getPath()}")?>" alt="<?= $mediaItem->getLabel() ?>"/>
+		  					<a href="<?=$mediaItem->getPath()?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?=$mediaItem->getPath()?>" alt="<?= $mediaItem->getLabel() ?>"/>
 							<td><span class="glyphicon glyphicon-camera" title="Foto"></span></td>
 						<?php else : ?>
 		  					<a href="<?= $mediaItem->getPath() ?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= getThumbnail($mediaItem->getPath()) ?>" alt="<?= $mediaItem->getLabel() ?>"/>

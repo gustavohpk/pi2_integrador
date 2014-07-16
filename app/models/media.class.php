@@ -167,14 +167,17 @@
 				case 'image/gif': $type = '.gif'; break;
 			}
 			$absolutePath = '/var/www' . $path . 'event' . $this->getIdEvent() . '_' . 'image1' . $type;
+			$relativePath = $path . 'event' . $this->getIdEvent() . '_' . 'image1' . $type;
 
 			while (file_exists($absolutePath)){
 				$number = substr($absolutePath, -5, 1);
 				$number = intval($number);
 				$number++;
 				$absolutePath = '/var/www' . $path . 'event' . $this->getIdEvent() . '_' . 'image' . strval($number) . $type;
+				$relativePath = $path . 'event' . $this->getIdEvent() . '_' . 'image' . strval($number) . $type;
 			}
-			return $absolutePath;
+			//echo $relativePath; exit;
+			return $relativePath;
 		}
 
 	}

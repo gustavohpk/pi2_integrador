@@ -3,7 +3,7 @@
 	<?php foreach($this->media as $mediaItem) : ?>
       	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<?php if ($mediaItem->getMediaType() == 'p') : ?>
-      			<a href="<?= $this->getMedia("/image/{$mediaItem->getPath()}")?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= $this->getMedia("/image/{$mediaItem->getPath()}")?>" alt="<?= $mediaItem->getLabel() ?>"/>
+      			<a href="<?=$mediaItem->getPath()?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?=$mediaItem->getPath()?>" alt="<?= $mediaItem->getLabel() ?>"/>
 				<td><span class="glyphicon glyphicon-camera" title="Foto"></span></td>
 			<?php else : ?>
       			<a href="<?= $mediaItem->getPath() ?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= getThumbnail($mediaItem->getPath()) ?>" alt="<?= $mediaItem->getLabel() ?>"/>

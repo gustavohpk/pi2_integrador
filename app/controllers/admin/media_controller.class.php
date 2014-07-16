@@ -40,7 +40,9 @@
          $uri = $this->getUri("media/image/event/");
          if ($this->media->save($uri)){
             \FlashMessage::successMessage("Mídia cadastrada com sucesso.");
-            move_uploaded_file($_FILES["media"]["tmp_name"], $this->media->getPath());
+            if ($this->media->getMediaType() == "p") {
+               move_uploaded_file($_FILES["media"]["tmp_name"], "/var/www/" . $this->media->getPath());
+            }
             $this->redirectTo("admin/midia/lista");
          }
          else{
@@ -52,18 +54,9 @@
          }
       }
 
-      public function update(){
-         //salva edição da midia no db  
-         if ($this->params["media"]["media_type"] == "p") {
-            $this->params["media"]["path"] = $_FILES["media"]["name"];
-         }   
-
+      public function update(){ 
          $this->media = \Media::findById($this->params[":id"]);
          if ($this->media->update($this->params['media'])){
-            if (isset($_FILES)) {
-               $path = $this->getUploadFolder("/image/event/" . $this->media->getIdEvent());
-               move_uploaded_file($_FILES["media"]["tmp_name"], $path . $_FILES["media"]["name"]);
-            }
             \FlashMessage::successMessage("Mídia alterada com sucesso.");
             $this->redirectTo("admin/midia/lista");
          }
@@ -80,6 +73,7 @@
          $this->media = \Media::findById($this->params[":id"]);
          if ($this->media->remove()){
             \FlashMessage::successMessage("Mídia alterada com sucesso.");
+            unlink("/var/www/" . $this->media->getPath());
          }
          else {
             \FlashMessage::errorMessage("Não foi possível excluír a mídia.");

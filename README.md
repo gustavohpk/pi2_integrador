@@ -1,3 +1,8 @@
+----- Atualização 030 (16/05) -----
+- Corrigido bug getMedia() do model Media
+- Implementado remoção da imagem ao remover o registro do banco de dados
+- View editar Media -> no modo edição liberado apenas para alterar o label da media
+
 ----- Atualização 029 (14/05) -----
 - Diversas modificações
 

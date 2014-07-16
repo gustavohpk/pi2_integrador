@@ -8,7 +8,7 @@
 			  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
 					<?php if ($media = $newsItem->getMedia()) : ?>
 						<?php $media = $media[0] ?>
-						<?php $image = $this->getMedia("/image/{$media->getPath()}") ?>
+						<?php $image = $media->getPath() ?>
 					<?php else : ?>
 						<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
 					<?php endif ?>

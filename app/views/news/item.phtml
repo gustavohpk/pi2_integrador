@@ -9,7 +9,7 @@
 	<div class="col-bordered col-lg-4 col-md-4 col-sm-5 col-xs-12">
 		<?php if ($media = $news->getMedia()) : ?>
 			<?php $media = $media[0] ?>
-			<?php $image = $this->getMedia("/image/{$media->getPath()}") ?>
+			<?php $image = $media->getPath() ?>
 		<?php else : ?>
 			<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
 		<?php endif ?>
