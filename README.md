@@ -1,12 +1,19 @@
------ Atualização 030 (16/05) -----
+----- Atualização 031 (17/07) -----
+- Iniciando página de ajuda do painel do admin
+- Correções em media.class.php
+- Adicionando ORDER BY na função find da news.class.php
+- Arrumando layout da listagem de mídia
+- Outras pequenas modificações
+
+----- Atualização 030 (16/07) -----
 - Corrigido bug getMedia() do model Media
 - Implementado remoção da imagem ao remover o registro do banco de dados
 - View editar Media -> no modo edição liberado apenas para alterar o label da media
 
------ Atualização 029 (14/05) -----
+----- Atualização 029 (14/07) -----
 - Diversas modificações
 
------ Atualização 028 (13/05) -----
+----- Atualização 028 (13/07) -----
 - Realizadas otimizações nas áreas de eventos do site
 - Na página do evento e do modal, o botão inscrever-se foi modificado{
 	- Se for evento anterior, o botão não aparecerá
@@ -22,7 +29,7 @@
 }
 - Adicionado botão "Lista de presença" nas ações da lista de eventos no admin
 
------ Atualização 027 (12/05) -----
+----- Atualização 027 (12/07) -----
 - Adicionadas validações html5 no formulário de cadastro de usuário
 - Removido bug do script.js e reativado
 - Inseridas novas máscaras e caixas de ajuda

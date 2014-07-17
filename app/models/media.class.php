@@ -166,15 +166,17 @@
 				case 'image/jpeg': case 'image/jpg': $type = '.jpg'; break;
 				case 'image/gif': $type = '.gif'; break;
 			}
-			$absolutePath = $path . 'event' . $this->getIdEvent() . '_' . 'image1' . $type;
+			$number = 1;
+			$absolutePath = '/var/www/' . $path . 'event' . $this->getIdEvent() . '_' . 'image' . strval($number) . $type;
 
 			while (file_exists($absolutePath)){
 				$number = substr($absolutePath, -5, 1);
 				$number = intval($number);
 				$number++;
-				$absolutePath = $path . 'event' . $this->getIdEvent() . '_' . 'image' . strval($number) . $type;
+				$absolutePath = '/var/www/' . $path . 'event' . $this->getIdEvent() . '_' . 'image' . strval($number) . $type;
 			}
-			return $absolutePath;
+			$relativePath = $path . 'event' . $this->getIdEvent() . '_' . 'image' . strval($number) . $type;
+			return $relativePath;
 		}
 
 	}

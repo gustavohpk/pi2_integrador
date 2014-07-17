@@ -1,7 +1,12 @@
 <h2>Galeria de Mídia</h2>
 <div class="row">
+	<?php $i=0;?>
 	<?php foreach($this->media as $mediaItem) : ?>
-      	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+		<?php if ($i == 3) : ?>
+			</div>
+			<div class="row">
+		<?php endif; ?>
+      	<div class="col-xs-12 col-sm-4">
 			<?php if ($mediaItem->getMediaType() == 'p') : ?>
       			<a href="<?=$mediaItem->getPath()?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?=$mediaItem->getPath()?>" alt="<?= $mediaItem->getLabel() ?>"/>
 				<td><span class="glyphicon glyphicon-camera" title="Foto"></span></td>
@@ -14,6 +19,7 @@
       		</a>
       		<br/><br/>
       	</div>
+      	<?php $i++;?>
 	<?php endforeach; ?>
 </div>
 <div class="row">
