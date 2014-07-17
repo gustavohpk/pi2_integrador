@@ -116,9 +116,9 @@
     $router->get('/admin/inscricoes/presenca', array('controller' => 'Admin\EnrollmentController', 'action' => 'attendance'));
 
     //rotas para usuários
-    $router->get('/admin/usuarios/lista', array('controller' => 'Admin\UsersController', 'action' => '_list'));
-    $router->get('/admin/usuarios/novo', array('controller' => 'Admin\UsersController', 'action' => '_new'));
-    $router->get('/admin/usuarios/:id/alterar', array('controller' => 'Admin\UsersController', 'action' => '_edit'));
+    $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));
+    $router->get('/admin/usuarios/novo', array('controller' => 'Admin\AdministratorController', 'action' => '_new'));
+    $router->get('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => '_edit'));
 
 
     //rotas para configuracoes

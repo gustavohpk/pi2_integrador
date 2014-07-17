@@ -1,3 +1,6 @@
+----- Atualização 032 (16/05) -----
+- Iniciado implementação do cadastro de administradores area Admin
+
 ----- Atualização 030 (16/05) -----
 - Corrigido bug getMedia() do model Media
 - Implementado remoção da imagem ao remover o registro do banco de dados

@@ -1,0 +1,99 @@
+<form action="POST" action="<?=$this->actionForm?>">
+	<div class="row">
+		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+			<h4>ID</h4>
+			<input type="number" class="form-control" value="<?=$this->administrators->getIdAdministrator()?>" disabled/>
+		</div>
+	</div>
+	<h4>Cadastro de Usuário</h4>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="input-group">
+			  <span class="input-group-addon glyphicon glyphicon-user"></span>
+			  <input id="name" name="admin[name]" type="text" class="form-control input-glyphicon" placeholder="Nome" value="<?=$this->administrators->getName()?>">
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-envelope"></span>
+			  <input id="email" name="admin[email]" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-group">
+			  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
+			  <input id="password" name="password" type="text" class="form-control input-glyphicon" placeholder="Senha" value="<?=$this->administrators->getPassword()?>">
+			</div>
+		</div>
+	</div>
+
+	<br/>
+	<div class="row">
+		<div class="col-xs-6">
+			<input id="rg" name="admin[rg]" type="text" class="form-control" placeholder="R.G." value="<?=$this->administrators->getRg()?>">
+		</div>
+		<div class="col-xs-6">
+			<input id="cpf" name="admin[cpf]" type="text" class="form-control" placeholder="CPF" value="<?=$this->administrators->getCpf()?>">
+		</div>
+	</div>
+	<br/>
+
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-phone-alt"></span>
+			  <input id="phone1" name="admmin[phone]" type="text" class="form-control input-glyphicon" placeholder="Telefone" value="<?=$this->administrators->getPhone()?>">
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-group">
+				<span class="input-group-addon glyphicon glyphicon-earphone"></span>
+			  <input id="phone2" name="admin[phone2]" type="text" class="form-control input-glyphicon" placeholder="Telefone 2" value="<?=$this->administrators->getPhone2()?>">
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<div class="row">
+		<div class="col-xs-9">
+			<input id="street" name="admin[street]" type="text" class="form-control" placeholder="Rua" value="<?=$this->administrators->getStreet()?>">
+		</div>
+		<div class="col-xs-3">
+			<input id="number" name="admin[street_number]" type="text" class="form-control" placeholder="Número" value="<?=$this->administrators->getStreetNumber()?>">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-7">
+			<input id="district" name="admin[district]" type="text" class="form-control" placeholder="Bairro" value="<?=$this->administrators->getDistrict()?>">
+		</div>
+		<div class="col-xs-5">
+			<input id="cep" name="admin[zipcode]" type="text" class="form-control" placeholder="CEP" value="<?=$this->administrators->getZipcode()?>">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<input id="complement" name="admin[complement]" type="text" class="form-control" placeholder="Complemento" value="<?=$this->administrators->getComplement()?>">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-8">
+			<input id="city" type="text" class="form-control" placeholder="Cidade">
+		</div>
+		<div class="col-xs-4">
+			<select id="state" class="form-control">
+				<option selected disabled>Estado</option>
+			</select>
+		</div>
+	</div>
+
+	<br/>
+	<button class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Cadastrar</button>
+	<button class="btn btn-warning"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+	<button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+</form>
