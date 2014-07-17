@@ -41,10 +41,10 @@ $(document).ready(function(){
 	$('#cpf').mask("999.999.999-99");
 	$("#cep").mask("99.999-999");
 	$("#birthday").mask("99/99/9999");
-	$("input[name='event[start_date]").mask("99/99/9999 99:99");
-	$("input[name='event[end_date]").mask("99/99/9999 99:99");
-	$("input[name='event[start_date_enrollment]").mask("99/99/9999 99:99");
-	$("input[name='event[end_date_enrollment]").mask("99/99/9999 99:99");
+	$("input[name='event[start_date]']").mask("99/99/9999 99:99");
+	$("input[name='event[end_date]']").mask("99/99/9999 99:99");
+	$("input[name='event[start_date_enrollment]']").mask("99/99/9999 99:99");
+	$("input[name='event[end_date_enrollment]']").mask("99/99/9999 99:99");
 });
 
 
@@ -84,7 +84,7 @@ $('.btn-danger').click(function() {
 
 $(document).ready(function() {
 
-    $("[data-toggle=tooltip]").tooltip();
+    //$("[data-toggle=tooltip]").tooltip();
 });
 
 $("#address-button").click(function(){

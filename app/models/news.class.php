@@ -74,14 +74,14 @@
 			return Media::findByIdEvent($this->getIdEvent(), $type);
 		}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_news", $direction ="DESC"){
 			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
 			$limit = self::getLimitByPage();
 			$page = self::getCurrentPage();
 			$start = ($page * $limit) - $limit;
 
 			$sql = 
-			"SELECT * FROM news" .($paramsName ? " WHERE $paramsName" : "");
+			"SELECT * FROM news" .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
 
 			$sql .= " LIMIT $start, $limit";
 
