@@ -1,3 +1,7 @@
+----- Atualização 034 (18/07) -----
+- Update na área de ajuda
+- Corrigido _foot da área do admin
+
 ----- Atualização 033 (17/07) -----
 - Finalizado implementação do cadastro de administradores area Admin
 - Alterado estrutura da tabela administrators (verificar diagrama)
