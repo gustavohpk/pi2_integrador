@@ -118,10 +118,7 @@
     //rotas para usuários
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));
     $router->get('/admin/usuarios/novo', array('controller' => 'Admin\AdministratorController', 'action' => '_new'));
-    $router->post('/admin/usuarios/novo', array('controller' => 'Admin\AdministratorController', 'action' => 'save'));
-    $router->get('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'edit'));
-    $router->post('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'update'));
-    $router->get('/admin/usuarios/:id/remover', array('controller' => 'Admin\AdministratorController', 'action' => 'remove'));
+    $router->get('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => '_edit'));
 
 
     //rotas para configuracoes

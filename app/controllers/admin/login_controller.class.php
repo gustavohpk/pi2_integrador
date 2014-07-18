@@ -21,13 +21,13 @@
 		}
 
       public function login(){       
-         $admin = Administrator::login($this->params["admin"]["login"], $this->params["admin"]["password"]);
+         $admin = Administrator::login($this->params["admin"]["email"], $this->params["admin"]["password"]);
          if ($admin){
             \FlashMessage::infoMessage('<span class="glyphicon glyphicon-info-sign"></span> [teste] Olá. Nas últimas <strong>24 horas</strong> foram realizadas <strong>8 inscrições</strong>.');
             $this->redirectTo("admin");
          }
          else{
-            \FlashMessage::errorMessage("Usuário ou senha incorretos.");
+            \FlashMessage::errorMessage("Email ou senha incorreta.");
             $this->redirectTo("admin/login");
          }
       }

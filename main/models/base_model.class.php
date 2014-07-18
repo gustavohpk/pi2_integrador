@@ -72,7 +72,7 @@
 	    }
 
 	    public function validateEmail($email){
-			return (!eregi("^[a-z0-9_\.\-]+@[a-z0-9_\.\-]*[a-z0-9_\-]+\.[a-z]{2,4}$", $email));
+			return (eregi("^[a-z0-9_\.\-]+@[a-z0-9_\.\-]*[a-z0-9_\-]+\.[a-z]{2,4}$", $email));
 		}
 
 		public function is_date($date) {

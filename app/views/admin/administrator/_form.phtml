@@ -1,11 +1,13 @@
-<form action="POST" action="<?=$this->actionForm?>">
+<h4>Cadastro de Usuário</h4>
+<form method="POST" action="<?=$this->actionForm?>">
 	<div class="row">
 		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 			<h4>ID</h4>
 			<input type="number" class="form-control" value="<?=$this->administrators->getIdAdministrator()?>" disabled/>
 		</div>
 	</div>
-	<h4>Cadastro de Usuário</h4>
+	<br/>
+
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="input-group">
@@ -14,18 +16,19 @@
 			</div>
 		</div>
 	</div>
+	<br/>
 
 	<div class="row">
 		<div class="col-xs-6">
 			<div class="input-group">
 				<span class="input-group-addon glyphicon glyphicon-envelope"></span>
-			  <input id="email" name="admin[email]" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
+			  <input id="email" name="admin[email]" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail" value="<?=$this->administrators->getEmail()?>">
 			</div>
 		</div>
 		<div class="col-xs-6">
 			<div class="input-group">
 			  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
-			  <input id="password" name="password" type="text" class="form-control input-glyphicon" placeholder="Senha" value="<?=$this->administrators->getPassword()?>">
+			  <input id="password" name="admin[password]" type="password" class="form-control input-glyphicon" placeholder="Senha">
 			</div>
 		</div>
 	</div>
@@ -45,7 +48,7 @@
 		<div class="col-xs-6">
 			<div class="input-group">
 				<span class="input-group-addon glyphicon glyphicon-phone-alt"></span>
-			  <input id="phone1" name="admmin[phone]" type="text" class="form-control input-glyphicon" placeholder="Telefone" value="<?=$this->administrators->getPhone()?>">
+			  <input id="phone1" name="admin[phone]" type="text" class="form-control input-glyphicon" placeholder="Telefone" value="<?=$this->administrators->getPhone()?>">
 			</div>
 		</div>
 		<div class="col-xs-6">
@@ -57,43 +60,8 @@
 	</div>
 	<br/>
 
-	<div class="row">
-		<div class="col-xs-9">
-			<input id="street" name="admin[street]" type="text" class="form-control" placeholder="Rua" value="<?=$this->administrators->getStreet()?>">
-		</div>
-		<div class="col-xs-3">
-			<input id="number" name="admin[street_number]" type="text" class="form-control" placeholder="Número" value="<?=$this->administrators->getStreetNumber()?>">
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-7">
-			<input id="district" name="admin[district]" type="text" class="form-control" placeholder="Bairro" value="<?=$this->administrators->getDistrict()?>">
-		</div>
-		<div class="col-xs-5">
-			<input id="cep" name="admin[zipcode]" type="text" class="form-control" placeholder="CEP" value="<?=$this->administrators->getZipcode()?>">
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-12">
-			<input id="complement" name="admin[complement]" type="text" class="form-control" placeholder="Complemento" value="<?=$this->administrators->getComplement()?>">
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-8">
-			<input id="city" type="text" class="form-control" placeholder="Cidade">
-		</div>
-		<div class="col-xs-4">
-			<select id="state" class="form-control">
-				<option selected disabled>Estado</option>
-			</select>
-		</div>
-	</div>
-
 	<br/>
-	<button class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Cadastrar</button>
-	<button class="btn btn-warning"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
-	<button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+	<button class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> <?=is_null($this->administrators->getIdAdministrator()) ? "Cadastrar" : "Salvar"?></button>
+	<a role="button" class="btn btn-warning" href="<?=$this->getUri("admin/usuarios/lista")?>"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+	<a role="button" class="btn btn-danger" href="<?=$this->getUri("admin/usuarios/{$this->administrators->getIdAdministrator()}/remover")?>"><span class="glyphicon glyphicon-trash"></span> Excluir</a>
 </form>

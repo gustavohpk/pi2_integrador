@@ -23,12 +23,14 @@ DROP TABLE IF EXISTS `administrator`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `administrator` (
-  `id_administrator` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `login` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `id_administrator` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(60) NOT NULL ,
+  `email` VARCHAR(45) NOT NULL ,
+  `password` VARCHAR(32) NOT NULL ,
+  `rg` VARCHAR(15) NULL ,
+  `cpf` VARCHAR(11) NOT NULL ,
+  `phone` VARCHAR(11) NOT NULL ,
+  `phone2` VARCHAR(11) NULL ,
   PRIMARY KEY (`id_administrator`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
