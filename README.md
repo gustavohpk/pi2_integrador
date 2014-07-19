@@ -3,6 +3,14 @@
 - Alterado constraint fk_cost_event_event para fazer remoção em cascata, qdo remove evento -> remover preços
 - Implementado cadastro de preços no momento de cadastrar evento
 
+----- Atualização 034 (18/07) -----
+- Update na área de ajuda
+- Corrigido _foot da área do admin
+- Adicionada busca na página de notícias, próximos eventos e eventos anteriores
+- Adicionada função que bloqueia a tecla enter no campo search
+- Atualizações na área de participante
+- Outras pequenas correções
+
 ----- Atualização 033 (17/07) -----
 - Finalizado implementação do cadastro de administradores area Admin
 - Alterado estrutura da tabela administrators (verificar diagrama)

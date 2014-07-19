@@ -8,6 +8,7 @@
         );
     }
 </script>
+
 <form name="participant" method="POST" action="<?= $this->actionForm ?>">
 	<div class="row">
 		<div class="col-xs-12">
@@ -38,7 +39,7 @@
 		<div class="col-xs-12 col-sm-6">
 			<div class="input-group">
 				<span class="input-group-addon glyphicon glyphicon-envelope"></span>
-			  <input id="email" name="participant[email]" value="<?= $this->participant->getEmail()?>" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail" required>
+			  <input id="email" name="participant[email]" value="<?= $this->participant->getEmail()?>" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail" required <?php echo ($_SESSION["participant"]->getIdParticipant()?"disabled title='Este dado não pode ser modificado.'" : '') ?>>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6">

@@ -32,6 +32,8 @@
    	//rota para login/cadastro - usuários
     $router->get('/conta/login', array('controller' => 'ParticipantController', 'action' => 'login'));
     $router->post('/conta/login', array('controller' => 'ParticipantController', 'action' => 'executeLogin'));
+    $router->get('/conta/alterar', array('controller' => 'ParticipantController', 'action' => 'edit')); 
+    $router->post('/conta/alterar', array('controller' => 'ParticipantController', 'action' => 'update')); 
     $router->get('/conta/sair', array('controller' => 'ParticipantController', 'action' => 'logout'));
     $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
     $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));

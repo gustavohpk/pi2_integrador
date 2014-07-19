@@ -1,17 +1,17 @@
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="<?php echo RESOURCES_FOLDER.'/js/jquery.min.js'; ?>"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="<?php echo RESOURCES_FOLDER.'/js/bootstrap.min.js'; ?>"></script>
-
-	<!-- Javascript tema -->
-	<script src="<?php echo RESOURCES_FOLDER.'/js/script.js'; ?>"></script>
 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-	<script type="text/javascript" src="<?php echo RESOURCES_FOLDER.'/plugins/fancybox/jquery.fancybox.pack.js'; ?>"></script>
-	<script type="text/javascript" src="<?php echo RESOURCES_FOLDER.'/plugins/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6'; ?>"></script>
-	<script type="text/javascript" src="<?php echo RESOURCES_FOLDER.'/plugins/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7'; ?>"></script>
-	<script type="text/javascript" src="<?php echo RESOURCES_FOLDER.'/plugins/nivo-slider/jquery.nivo.slider.pack.js'; ?>"></script>
-	<script type="text/javascript" src="<?php echo RESOURCES_FOLDER.'/plugins/mask/jquery.maskedinput.js'; ?>"></script>
+<?php
+	createJavascriptTag(
+			"js/jquery.min.js",
+			"js/bootstrap.min.js",
+			"plugins/fancybox/jquery.fancybox.pack.js",
+			"plugins/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6",
+			"plugins/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7",
+			"plugins/nivo-slider/jquery.nivo.slider.pack.js",
+			"plugins/mask/jquery.maskedinput.js",
+			"js/script.js"
+		);
+?>
 	  
 	<script>
 	    $(document).ready(function() {

@@ -85,7 +85,7 @@ $('.btn-danger').click(function() {
 
 $(document).ready(function() {
 
-    //$("[data-toggle=tooltip]").tooltip();
+    $("[data-toggle=tooltip]").tooltip();
 });
 
 $("#address-button").click(function(){
@@ -94,4 +94,13 @@ $("#address-button").click(function(){
 
 $("#cost-add_button").click(function() {
 	$("#cost_event").append($(".first-cost").html());
+});
+
+$('#searchValue').bind('keypress', function(e)
+{
+   if(e.keyCode == 13)
+   {
+   		$("#form-button").click();
+   		return false;
+   }
 });

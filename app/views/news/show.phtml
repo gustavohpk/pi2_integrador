@@ -1,6 +1,9 @@
 
 <h2>Notícias</h2>
 <div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		<?php require_once "views/includes/_search.phtml" ?>
+	</div>
 	<div id="news-list" class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
 		<div class="list-group">
 			<?php foreach($this->news as $newsItem) : ?>
