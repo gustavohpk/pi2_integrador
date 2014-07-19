@@ -35,18 +35,19 @@
       }
 
       public function save() {
+         $participant = $this->currentParticipant;
          $params = $this->params["enrollment"];
          foreach ($params["id_event"] as $id_event) {
             $cost = CostEvent::findByIdEvent($id_event);
             $cost = ($cost ? $cost[0]->getCostOfDay() : 0);
-            $data = array(
-                  "id_participant" => $this->currentParticipant->getIdParticipant(),
+            $i++;
+            $data[$i] = array(
+                  "id_participant" => $participant->getIdParticipant(),
                   "id_event" => $id_event,
                   "id_payment_type" => $params["id_payment_type"],
                   "cost" => $cost
                );
-            $this->enrollment = new Enrollment($data);
-
+            $this->enrollment = new Enrollment($data[$i]);
             if ($this->enrollment->save()) {
                $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()}");
             }
@@ -58,6 +59,8 @@
             }
          }
 
+         $url = $this->enrollment->executePayment($data);
+         $this->enrollment->setMessageSuccess("<a href='{$url}' target='_blank'>Clique aqui</a> para fazer o pagamento");
          $this->redirectTo("inscricao/confirmacao");
       }
 

@@ -34,7 +34,7 @@
 			<?php foreach ($this->enrollments as $enrollment) : ?>
 				<tr>				
 					<td align="left"><?= $enrollment->getIdEnrollment() ?></td>
-					<td align="left"><?= $enrollment->getParticipant() ?></td>
+					<td align="left"><?= $enrollment->participant->getName() ?></td>
 					<td align="left"><?= $enrollment->event->getName() ?></td>
 					<td>
 						<button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>

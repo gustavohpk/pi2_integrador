@@ -2,7 +2,7 @@
 	class Enrollment extends BaseModel{
 		private $idEnrollment;
 		private $idParticipant;
-		private $participant;
+		public $participant;
 		public $event;
 		private $dateEnrollment;
 		private $datePayment;
@@ -18,19 +18,11 @@
 		}
 
 		public function setIdParticipant($idParticipant){
-			$this->idParticipant = $idParticipant;
+			$this->participant = Participant::findById($idParticipant)[0];
 		}
 
 		public function getIdParticipant(){
 			return $this->idParticipant;
-		}
-
-		public function setParticipant($participant){
-			$this->participant = $participant;
-		}
-
-		public function getParticipant(){
-			return $this->participant;
 		}
 
 		protected function setIdEvent($idEvent){
@@ -97,7 +89,7 @@
 		}
 
 		public function validateData(){
-			if ($this->getIdParticipant() < 1) $this->errors[] = "Nome do participante não informado.";
+			if ($this->participant->getIdParticipant() < 1) $this->errors[] = "Nome do participante não informado.";
 			if ($this->event->getIdEvent() < 1) $this->errors[] = "Evento não informado.";
 			if ($this->getIdPaymentType() < 1) $this->errors[] = "Forma de pagamento não localizada.";
 			if ($this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
@@ -108,12 +100,9 @@
 
 			$sql = 
 			"SELECT 
-				enrollment.*, participant.name AS participant
+				enrollment.*
 			FROM
-				enrollment			
-			INNER JOIN
-				participant ON participant.id_participant = enrollment.id_participant" . 
-				($paramsName ? " WHERE " . $paramsName : "");
+				enrollment" . ($paramsName ? " WHERE " . $paramsName : "");
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($paramsValue);
@@ -145,7 +134,7 @@
 				(:id_participant, :id_event, :date_enrollment, :date_payment, :id_payment_type, :cost)";
 
 			$params = array(
-					":id_participant" => $this->getIdParticipant(),
+					":id_participant" => $this->participant->getIdParticipant(),
 					":id_event" => $this->event->getIdEvent(),
 					":date_enrollment" => date("Y-m-d"),
 					":date_payment" => null,
@@ -165,6 +154,43 @@
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_enrollment" => $this->getIdEnrollment());
 			return $statment->execute($params);
+		}
+
+		public function executePayment($items = array()) {
+			require_once APP_ROOT_FOLDER . '/main/classes/pagseguro/PagSeguroLibrary/PagSeguroLibrary.php';
+         	$pagseguro = new PagSeguroPaymentRequest();
+       
+         	foreach ($items as $item) {
+         		if ($event = Events::findById($item["id_event"])) {
+         			$event = $event[0];
+       				$pagseguro->addItem(
+					        $event->getIdEvent(),
+					        $event->getName(),
+					        1,
+					        $event->cost[0]->getCostOfDay(),
+					        0
+					     );
+				}
+         	}
+			$pagseguro->setCurrency("BRL");
+			$pagseguro->setShippingType(3); //Frete 3 = não especificado
+			$pagseguro->setReference(15);
+			$pagseguro->setSender(
+					$this->participant->getName(), 
+					$this->participant->getEmail(),
+					substr($this->participant->getPhone(), 0, 2), 
+					substr($this->participant->getPhone(), 2)
+				);
+			$pagseguro->setShippingAddress(
+					$this->participant->getZipcode(), 
+					$this->participant->getAddress(), 
+					$this->participant->getNumber(), 
+					$this->participant->getComplement(),  
+					$this->participant->getDistrict(),
+					$this->participant->getCity(), 'uf', 'BRA'
+				);
+			$credenciais = new PagSeguroAccountCredentials('rodrigomiss@hotmail.com', 'A3F7B6573E8B40E4AF0A58F0F059F6DA');
+			return $pagseguro->register($credenciais);
 		}
 	}
 ?>

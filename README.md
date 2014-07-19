@@ -1,3 +1,6 @@
+----- Atualização 036 (19/07) -----
+- Iniciado implementação PagSeguro .... para funcionar deve instalar o curl [no terminal digitar apt-get install php5-curl]
+
 ----- Atualização 035 (18 - 19/07) -----
 - Removido Forma de Pgto da tabela de events (verificar diagrama)
 - Alterado constraint fk_cost_event_event para fazer remoção em cascata, qdo remove evento -> remover preços
