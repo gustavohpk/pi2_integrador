@@ -1,6 +1,9 @@
 <div id="prev-events">
 	<h2>Eventos Anteriores</h2>
 	<div class="row">
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+			<?php require_once "views/includes/_search.phtml" ?>
+		</div>
 		<?php $i=0;?>
 		<?php foreach ($this->events as $event) : ?>
 			<?php if ($i == 4) : ?>

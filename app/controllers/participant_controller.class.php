@@ -85,7 +85,7 @@
 		}
 
 		public function edit(){
-			$this->participant = Participant::findById($this->params[":id"]);
+			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant())[0];
    			$this->setHeadTitle("Editar Cadastro de Participante");
    			$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
@@ -93,7 +93,7 @@
 
 		public function update(){
 			$this->participant = Participant::findById($this->params[":id"]);
-			if ($this->participant->update($this->params['participant'])){
+			if ($this->participant->update($_SESSION["participant"]->getIdParticipant())){
 				FlashMessage::successMessage("Cadastro do participante alterado com sucesso.");
 				$this->redirectTo("conta/nova");
 			}
@@ -130,6 +130,9 @@
 		}
 
 		public function dashboard(){
+       		if (!isset($_SESSION["participant"])){
+       			$this->redirectTo("conta/login");
+       		}
 			$this->setHeadTitle("Painel do usuário");
 		}
 	} 

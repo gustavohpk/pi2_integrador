@@ -1,6 +1,8 @@
 ----- Atualização 034 (18/07) -----
 - Update na área de ajuda
 - Corrigido _foot da área do admin
+- Adicionada busca na página de notícias, próximos eventos e eventos anteriores
+- Adicionada função que bloqueia a tecla enter no campo search
 
 ----- Atualização 033 (17/07) -----
 - Finalizado implementação do cadastro de administradores area Admin

@@ -89,4 +89,13 @@ $(document).ready(function() {
 
 $("#address-button").click(function(){
 	$("input[name='event[local]']").val("UTFPR - Câmpus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR");
-})
+});
+
+$('#searchValue').bind('keypress', function(e)
+{
+   if(e.keyCode == 13)
+   {
+   		$("#form-button").click();
+   		return false;
+   }
+});
