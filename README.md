@@ -1,3 +1,8 @@
+----- Atualização 035 (18 - 19/07) -----
+- Removido Forma de Pgto da tabela de events (verificar diagrama)
+- Alterado constraint fk_cost_event_event para fazer remoção em cascata, qdo remove evento -> remover preços
+- Implementado cadastro de preços no momento de cadastrar evento
+
 ----- Atualização 033 (17/07) -----
 - Finalizado implementação do cadastro de administradores area Admin
 - Alterado estrutura da tabela administrators (verificar diagrama)

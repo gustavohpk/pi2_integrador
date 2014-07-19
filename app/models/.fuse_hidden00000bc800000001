@@ -6,7 +6,7 @@
 		private $cost;
 
 		public function setIdCostEvent($idCostEvent) {
-			$this->idCostEvent = $idCostEvent;
+			$this->setIdCostEvent = $idCostEvent;
 		}
 
 		public function getIdCostEvent() {
@@ -40,7 +40,7 @@
 		public function validateData() {
 			if ((intval($this->getIdEvent())) < 1) $this->errors[] = "Não foi informado nenhum evento para o preço cadastrado.";
 			if (is_null($this->getDateMax())) $this->errors[] = "Data Máxima para o preço não foi definida.";
-			if ((floatval($this->getCost())) <= 0) $this->errors[] = "O preço do evento não pode ser 0.";
+			if ((floatval($this->getIdEvent())) <= 0) $this->errors[] = "O preço do evento não pode ser 0.";
 		}
 
  		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
@@ -97,7 +97,7 @@
 
 			$sql = 
 			"INSERT INTO cost_event
-				(id_event, date_max, cost)
+				(id_event, data_max, cost)
 			VALUES
 				(:id_event, :data_max, :cost)";
 			$params = array(
@@ -109,29 +109,6 @@
 			$statment = $pdo->prepare($sql);
 			$statment = $statment->execute($params);
 			$this->setIdCostEvent($pdo->lastInsertId());
-			return $statment ? $this : false;
-		}
-
-		public function update($data){
-			$this->setData($data);
-			if (!$this->isValidData()) return false;
-
-			$sql = 
-			"UPDATE 
-				cost_event
-			SET
-				date_max = :data_max,
-				cost = :cost
-			WHERE
-				id_cost_event = :id_cost_event";
-			$params = array(
-					":data_max" => $this->getDateMax(),
-					":cost" => $this->getCost(),
-					":id_cost_event" => $this->getIdCostEvent()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment = $statment->execute($params);
 			return $statment ? $this : false;
 		}
 	}

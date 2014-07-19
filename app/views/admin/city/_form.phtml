@@ -1,0 +1,32 @@
+<h4>Cadastro de Cidades</h4>
+<form method="POST" action="<?=$this->actionForm?>">
+	<div class="row">
+		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+			<h4>ID</h4>
+			<input type="number" class="form-control" value="<?=$this->cities->getIdCity()?>" disabled/>
+		</div>
+	</div>
+	<br/>
+
+	<div class="row">
+		<div class="col-xs-8">
+			<div class="input-group">
+			  <span class="input-group-addon glyphicon glyphicon-user"></span>
+			  <input id="name" name="city[name]" type="text" class="form-control input-glyphicon" placeholder="Nome da Cidade" value="<?=$this->cities->getName()?>">
+			</div>
+		</div>
+		<div class="col-xs-4">
+			<select id="state" class="form-control">
+				<option selected disabled>Estado</option>
+			</select>
+		</div>
+	</div>
+	<br/>
+
+	<br/>
+	<button class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> <?=is_null($this->cities->getIdCity()) ? "Cadastrar" : "Salvar"?></button>
+	<a role="button" class="btn btn-warning" href="<?=$this->getUri("admin/cidades/lista")?>"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+	<?php if (!is_null($this->cities->getIdCity())) : ?>
+		<a role="button" class="btn btn-danger" href="<?=$this->getUri("admin/cidades/{$this->cities->getIdCity()}/remover")?>"><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+	<?php endif ?>
+</form>

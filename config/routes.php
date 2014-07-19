@@ -123,6 +123,10 @@
     $router->post('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'update'));
     $router->get('/admin/usuarios/:id/remover', array('controller' => 'Admin\AdministratorController', 'action' => 'remove'));
 
+    //rotas para cidades
+    $router->get('/admin/cidades/lista', array('controller' => 'Admin\CityController', 'action' => '_list'));
+    $router->get('/admin/cidades/nova', array('controller' => 'Admin\CityController', 'action' => '_new'));
+    $router->get('/admin/cidades/:id/alterar', array('controller' => 'Admin\CityController', 'action' => 'edit'));
 
     //rotas para configuracoes
     $router->get('/admin/config/geral', array('controller' => 'Admin\SettingsController', 'action' => 'general'));

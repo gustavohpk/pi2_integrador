@@ -45,6 +45,7 @@ $(document).ready(function(){
 	$("input[name='event[end_date]']").mask("99/99/9999 99:99");
 	$("input[name='event[start_date_enrollment]']").mask("99/99/9999 99:99");
 	$("input[name='event[end_date_enrollment]']").mask("99/99/9999 99:99");
+	$("input[name='cost[date_max][]']").mask("99/99/9999");
 });
 
 
@@ -90,3 +91,7 @@ $(document).ready(function() {
 $("#address-button").click(function(){
 	$("input[name='event[local]']").val("UTFPR - Câmpus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR");
 })
+
+$("#cost-add_button").click(function() {
+	$("#cost_event").append($(".first-cost").html());
+});

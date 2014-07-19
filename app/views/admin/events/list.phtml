@@ -57,22 +57,17 @@
 						<td align="left"><?= $event->getEventType()?></td>
 					<?php endif; ?>					
 					<td>
-						<?php if($event->getEventType() != 'sem_inscricao') : ?>
-							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/presenca") ?>">
-								<button class='btn btn-warning btn-sm' title='Lista de Presença'>
-									<span class='glyphicon glyphicon-check'></span>
-								</button>
+						<?php if($event->getEventType() != 'sem_inscricao') : ?>							
+							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/presenca")?>" role="button" class='btn btn-warning btn-sm' title='Lista de Presença'>
+								<span class='glyphicon glyphicon-check'></span>
 							</a>
 						<?php endif; ?>
-						<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/alterar") ?>">
-							<button class='btn btn-primary btn-sm' title='Editar'>
+							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/alterar") ?>" role="button" class='btn btn-primary btn-sm' title='Editar'>
 								<span class='glyphicon glyphicon-edit'></span>
-							</button>
-						</a>
-						<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/remover") ?>">
-							<button class='btn btn-danger btn-sm' title='Excluir'>
+							</a>					
+							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/remover") ?>" role="button" class='btn btn-danger btn-sm' title='Excluir'>
 								<span class='glyphicon glyphicon-trash'></span>
-							</button>
+							</a>
 						</a>
 					</td>					
 				</tr>

@@ -18,8 +18,8 @@
 			<h4><?= $event->getName() ?></h4>
 			<h4>Valor: R$ <?= number_format($costEvent, 2) ?></h4>
 			<ul class="list-group" style="text-align: left">
-				<?php $subEvents = $event->getEventsRelated() ?>
-				<?php foreach ($subEvents as $subEvent) : ?>
+				<?php $subEvents = $this->eventsRelated; ?>
+				<?php foreach ($subEvents as $subEvent) :?>
 					<?php if ($subEvent->canEnrollment()) : ?>
 						<?php $costSubEvent = ($subEvent->cost ? $subEvent->cost[0]->getCostOfDay() : 0) ?>
 						<li class="list-group-item">
@@ -29,7 +29,7 @@
 								</span>
 							</span>
 							<input type="checkbox" name="enrollment[id_event][]" value="<?= $subEvent->getIdEvent()?>" onClick="selectSubEvent(<?=$subEvent->getIdEvent()?>, this.checked)">
-							<?= $subEvent->getName() ?>
+							<?=$subEvent->getName() ?>
 						</li>
 					<?php endif; ?>
 				<?php endforeach; ?>
@@ -49,40 +49,6 @@
 				<?php endforeach; ?>
 			</ul>
 		</div>
-
-		<!--
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<h4>Evento: Semana Acadêmica de TSI</h4>
-			<h4>Valor: R$ 15,00</h4>
-			<ul class="list-group" style="text-align: left">
-				<li class="list-group-item">
-					<span class="badge">R$ 5,00</span>
-					<input type="checkbox">
-					Minicurso de Linux
-				</li>
-				<li class="list-group-item">
-					<span class="badge">R$ 5,00</span>
-					<input type="checkbox">
-					Palestra sobre Arduino
-				</li>
-			</ul>
-			<h4>Total: R$ 25,00</h4>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<h4>Método de Pagamento</h4>
-			<h5>Selecione um dos métodos de pagamento a seguir</h5>
-			<ul class="list-group" style="text-align: left">
-				<li class="list-group-item">
-					<input type="radio">
-					<img class="" src="img/pagseguro-logo.png" style="width: 20%" alt="...">
-				</li>
-				<li class="list-group-item">
-					<input type="radio">
-					Boleto Bancário
-				</li>
-			</ul>
-		</div>
-		-->
 	</div>
 	<div class="row">
 		<a href="<?= $this->uriBack?>"><button type="button" class="btn btn-lg btn-default" style="width: 150px; margin-right: 10px">

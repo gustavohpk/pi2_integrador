@@ -1,0 +1,62 @@
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 users-list" style="">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+	    <h3 class="panel-title">Lista de cidades cadastradas</h3>
+	  </div>
+	  <div class="panel-body">
+	  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
+			<div class="row">
+				<div class="col-xs-12 general-actions">
+					<a href="<?=$this->getUri("admin/cidades/nova")?>" role="button" class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></a>
+					<div class="col-lg-4">
+					  <div class="input-group">
+					    <input type="text" class="form-control">
+					    <div class="input-group-btn">
+					      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Procurar"><span class="glyphicon glyphicon-search"></span></button>
+					    </div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<th>Cidade</th>
+				<th>Ações</th>
+			</tr>
+			<?php foreach ($this->cities as $city) : ?>
+				<tr>
+					<td><?=$city->getIdCity()?></td>
+					<td align="left"><?=$city->getName()?></td>
+					<td>
+						<a href="<?=$this->getUri("admin/cidades/{$city->getIdCity()}/alterar")?>" role="button" class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
+						<a href="<?=$this->getUri("admin/cidades/{$city->getIdCity()}/remover")?>" role="button" class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></a>
+					</td>
+				</tr>
+			<?php endforeach ?>
+		</table>
+		<div class="panel-footer">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+					<select class="form-control">
+						<option selected>Exibir no máximo 10 itens por página</option>
+						<option>Exibir no máximo 20 itens por página</option>
+						<option>Exibir no máximo 40 itens por página</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<ul class="pagination">
+					  <li class="disabled"><a href="#">&laquo;</a></li>
+					  <li class="active"><a href="#">1 <span class="sr-only">Atual</span></a></li>
+					  <li class=""><a href="#">2</a></li>
+					  <li class=""><a href="#">3</a></li>
+					  <li class=""><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

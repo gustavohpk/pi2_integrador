@@ -4,7 +4,6 @@
 	class EventsController extends BaseAdminController{
 		protected $events;
       protected $eventsType;
-      protected $paymentsType;
       protected $actionForm;
 
 		public function _list() {
@@ -30,18 +29,23 @@
          //prepara formulario para inserção de novo evento
 			$this->setHeadTitle("Novo Evento");
          $this->eventsType = \EventsType::all();
-         $this->paymentsType = \PaymentType::all();
 			$this->events = new \Events();
          $this->actionForm = $this->getUri("admin/eventos");
          $this->titleBtnSubmit = "Cadastrar";
 		}
 
       public function create(){
-         //salva evento no db
          $params = $this->params["event"];
+         $cost = $this->params["cost"];
          $this->events = new \Events($params);
          if ($this->events->save()){
             \FlashMessage::successMessage("Evento cadastrado com sucesso.");
+            if (!$this->events->setCost($cost)) {
+               $errors = $this->events->cost[0]->getErrors();
+               foreach ($errors as $error) {
+                  \FlashMessage::errorMessage($error);
+               }
+            }
             $this->redirectTo("admin/eventos/lista");
          }
          else{
@@ -52,7 +56,6 @@
             
             $this->setHeadTitle("Novo Evento");
             $this->eventsType = \EventsType::all();
-            $this->paymentsType = \PaymentType::all();            
             $this->actionForm = $this->getUri("admin/eventos");
             $this->titleBtnSubmit = "Cadastrar";
             $this->render("_new");
@@ -63,8 +66,8 @@
          //prepara formulario para edição do evento
 			$this->setHeadTitle("Editar Evento");
          $this->eventsType = \EventsType::all();
-         $this->paymentsType = \PaymentType::all();
 			$this->events = \Events::findById($this->params[":id"])[0];
+         //echo "<pre>"; print_r($this->events); exit;
          $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
          $this->titleBtnSubmit = "Salvar";
 		}
@@ -72,8 +75,15 @@
       public function update(){
          //salva edição do evento no db  
          $this->events = \Events::findById($this->params[":id"])[0];
+         $cost = $this->params["cost"];
          if ($this->events->update($this->params['event'])){
             \FlashMessage::successMessage("Evento modificado com sucesso.");
+            if (!$this->events->setCost($cost)) {
+               $errors = $this->events->cost[0]->getErrors();
+               foreach ($errors as $error) {
+                  \FlashMessage::errorMessage($error);
+               }
+            }
             $this->redirectTo("admin/eventos/lista");
          }
          else{

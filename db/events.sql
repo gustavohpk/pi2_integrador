@@ -86,7 +86,7 @@ CREATE TABLE `cost_event` (
   `cost` float NOT NULL,
   PRIMARY KEY (`id_cost_event`),
   KEY `fk_cost_event_event` (`id_event`),
-  CONSTRAINT `fk_cost_event_event` FOREIGN KEY (`id_event`) REFERENCES `event` (`id_event`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_cost_event_event` FOREIGN KEY (`id_event`) REFERENCES `event` (`id_event`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -151,16 +151,13 @@ CREATE TABLE `event` (
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `spaces` int(11) NOT NULL,
-  `id_payment_type` int(11) NOT NULL,
   `start_date_enrollment` datetime NOT NULL,
   `end_date_enrollment` datetime NOT NULL,
   PRIMARY KEY (`id_event`),
   KEY `fk_event_event` (`id_parent_event`),
   KEY `fk_event_event_type` (`id_event_type`),
-  KEY `fk_event_payment_type` (`id_payment_type`),
   CONSTRAINT `fk_event_event` FOREIGN KEY (`id_parent_event`) REFERENCES `event` (`id_event`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_event_event_type` FOREIGN KEY (`id_event_type`) REFERENCES `event_type` (`id_event_type`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_event_payment_type` FOREIGN KEY (`id_payment_type`) REFERENCES `payment_type` (`id_payment_type`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_event_event_type` FOREIGN KEY (`id_event_type`) REFERENCES `event_type` (`id_event_type`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

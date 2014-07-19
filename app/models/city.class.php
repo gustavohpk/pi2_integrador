@@ -51,17 +51,15 @@
 				city
 			INNER JOIN
 				state ON state.id_state = city.id_state" . 
-				(!is_null($paramsName) ? " WHERE " . $paramsName : "");
+				($paramsName ? " WHERE " . $paramsName : "");
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($paramsValue);
 			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
-			$citys = array();			
-
+			$citys = array();
 			foreach ($rows as $row) {
 				$citys[] = new City($row);
 			}
-			
 			return $citys;
 		}
 

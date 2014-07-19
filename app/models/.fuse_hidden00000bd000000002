@@ -13,6 +13,7 @@
 		private $startDate;
 		private $endDate;
 		private $spaces;
+		private $idPaymentType;				
 		private $typeEvent;
 		private $startDateEnrollment;
 		private $endDateEnrollment;	
@@ -132,12 +133,21 @@
 			return $this->spaces;
 		}
 
+		public function setIdPaymentType($idPaymentType){
+			$this->idPaymentType = $idPaymentType;
+		}
+
+		public function getIdPaymentType(){
+			return $this->idPaymentType;
+		}
+
 		function validateData() {
 			if (strlen(trim($this->getName())) < 3) $this->errors[] = "Título do evento muito curto [min. 3 caracteres].";
 			if ($this->getSpaces() < 1) $this->errors[] = "Informe a quantidade de vagas disponíveis.";
 			if ($this->getStartDate() > $this->getEndDate()) $this->errors[] = "A data e hora de início do evento deve ser menor que a data de término";
 			if ($this->getStartDateEnrollment() > $this->getEndDateEnrollment()) $this->errors[] = "A data e hora de início das inscrições deve ser menor que a data de término";
 			if ($this->getIdParentEvent() && !$this->findById($this->getIdParentEvent())) $this->errors[] = "Evento à ser vinculado não foi localizado.";
+			if (!PaymentType::findById($this->getIdPaymentType())) $this->errors[] = "Forma de pagamento não informada corretamente.";
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
@@ -193,32 +203,19 @@
 		}
 		
 		public function getEventsRelated() {
-			// retorna OUTROS subeventos relacionados com evento pai
-			$sql = 
-			"SELECT 
-				event.*, event_type.event_type
-			FROM 
-				event
-			NATURAL JOIN 
-				event_type
-			WHERE
-				(event.id_event = :id_parent_event) 
-				OR (id_parent_event = :id_event AND event.id_event <> :id_event)";
-			$params = array(
-				":id_parent_event" => $this->getIdParentEvent(),
-				":id_event" => $this->getIdEvent()
-			);
-			$pdo = \Database::getConnection();
-			$rs = $pdo->prepare($sql);
-			$rs->execute($params);
-			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
-			$events = array();			
-
-			foreach ($rows as $row) {
-				$events[] = new Events($row);
+			if ($this->isSubEvent()) {
+				// retorna evento pai e outros subeventos relacionados com evento pai
+				return self::find(
+					array("id_event", "id_parent_event"), 
+					array($this->getIdParentEvent(), $this->getIdParentEvent()),
+					"=",
+					"OR"
+				);		
 			}
-				
-			return $events;
+			else {
+				// retorna subeventos
+				return self::find(array("id_parent_event"), array($this->getIdEvent()));
+			}
 		}
 
 		public function getMedia($type = "p") {
@@ -271,18 +268,23 @@
 			return self::find(array("id_event"), array($id));
 		}
 
-		public function setCost($costs) {
-			foreach ($costs["cost"] as $key => $value) {
-				$data = array(
-						"id_cost_event" => isset($costs["id_cost_event"][$key]) ? $costs["id_cost_event"][$key] : null,
+		private function prepareToSetCost($cost) {
+			foreach ($cost["cost"] as $key => $value) {
+				$costEvent =  array(
+						"id_cost_event" => isset($cost["id_cost_event"][$key]) ? $cost["id_cost_event"][$key] : null,
 						"id_event" => $this->getIdEvent(),
 						"cost" => $value, 
-						"date_max" => $costs["date_max"][$key]
+						"date_max" => $cost["date_max"][$key]
 					);
-				$cost = &$this->cost[];
-				$cost = new CostEvent($data);	
+				$this->cost[] = new CostEvent($costEvent);
+			}
+		}
+
+		public function setCost($cost) {
+			$this->prepareToSetCost($cost);
+			foreach ($this->cost as $cost) {
 				if ($cost->getIdCostEvent()) {
-					$cost->update($data);
+					$cost->update();
 				}
 				else {
 					$cost->save();
@@ -296,10 +298,10 @@
 			$sql = 
 			"INSERT INTO event
 				(id_event_type, name, details, teacher, local, start_date, end_date, 
-				spaces, start_date_enrollment, end_date_enrollment)
+				spaces, id_payment_type, start_date_enrollment, end_date_enrollment)
 			VALUES
 				(:id_event_type, :name, :details, :teacher, :local, :start_date, :end_date,
-				:spaces, :start_date_enrollment, :end_date_enrollment)";
+				:spaces, :id_payment_type, :start_date_enrollment, :end_date_enrollment)";
 
 			$params = array(
 					":id_event_type" => $this->getIdEventType(),
@@ -310,14 +312,13 @@
 					":start_date" => $this->getStartDate(), 
 					":end_date" => $this->getEndDate(),
 					":spaces" => $this->getSpaces(),
+					":id_payment_type" => $this->getIdPaymentType(),
 					":start_date_enrollment" => $this->getStartDateEnrollment(),
 					":end_date_enrollment" => $this->getEndDateEnrollment()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment = $statment->execute($params);
-			$this->setIdEvent($pdo->lastInsertId());
-			return $statment ? $this : false;
+			return $statment->execute($params);
 		}
 
 		public function update($data = array()){
@@ -337,6 +338,7 @@
 				start_date = :start_date, 
 				end_date = :end_date, 
 				spaces = :spaces,
+				id_payment_type = :id_payment_type, 
 				start_date_enrollment = :start_date_enrollment, 
 				end_date_enrollment = :end_date_enrollment
 			WHERE
@@ -352,6 +354,7 @@
 					":start_date" => $this->getStartDate(), 
 					":end_date" => $this->getEndDate(),
 					":spaces" => $this->getSpaces(),
+					":id_payment_type" => $this->getIdPaymentType(),
 					":start_date_enrollment" => $this->getStartDateEnrollment(),
 					":end_date_enrollment" => $this->getEndDateEnrollment(),
 					":id_event" => $this->getIdEvent()
