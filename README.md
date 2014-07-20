@@ -1,4 +1,7 @@
------ Atualização 036 (19/07) -----
+Atualização 037 (20/07) -----
+- Corrigido bug cadastro participant
+
+ Atualização 036 (19/07) -----
 - Iniciado implementação PagSeguro .... para funcionar deve instalar o curl [no terminal digitar apt-get install php5-curl]
 
 ----- Atualização 035 (18 - 19/07) -----

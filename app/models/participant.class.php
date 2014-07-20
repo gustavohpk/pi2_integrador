@@ -29,6 +29,8 @@
    		}
 
    		public function setCpf($cpf){
+   			$cpf = str_replace(".", "", $cpf);
+   			$cpf = str_replace("-", "", $cpf);
    			$this->cpf = $cpf;
    		}
 
@@ -41,7 +43,7 @@
    		}
 
    		public function setBirthday($birthday){
-   			$this->birthday = $birthday;
+   			$this->birthday = empty($birthday) ? null : date("Y-m-d", strtotime(str_replace("/", "-", $birthday)));
    		}
 
    		public function setIdCity($idCity){
@@ -73,6 +75,8 @@
    		}
 
    		public function setZipcode($zipcode){
+   			$zipcode = str_replace(".", "", $zipcode);
+   			$zipcode = str_replace("-", "", $zipcode);
    			$this->zipcode = $zipcode;
    		}
 
@@ -81,10 +85,16 @@
    		}
 
    		public function setPhone($phone){
+   			$phone = str_replace("(", "", $phone);
+   			$phone = str_replace(")", "", $phone);
+   			$phone = str_replace("-", "", $phone);
    			$this->phone = $phone;
    		}
 
    		public function setPhone2($phone2){
+   			$phone2 = str_replace("(", "", $phone2);
+   			$phone2 = str_replace(")", "", $phone2);
+   			$phone2 = str_replace("-", "", $phone2);
    			$this->phone2 = $phone2;
    		}
 
@@ -117,8 +127,8 @@
    			return $this->gender;
    		}
 
-   		public function getBirthday(){
-   			return $this->birthday;
+   		public function getBirthday($format = "Y-m-d"){
+   			return is_null($this->birthday) ? null : date($format, strtotime($this->birthday));
    		}
 
    		public function getIdCity(){
@@ -133,7 +143,7 @@
    			return $this->idState;
    		}
 
-   		public function getState($state){
+   		public function getState(){
    			return $this->state;
    		}
 
@@ -176,11 +186,19 @@
    		public function validateData(){
    			if (strlen($this->getName()) < 4) $this->errors[] = "O nome deve ter no mínimo 4 caracteres.";
    			if ($this->getGender() != "M" && $this->getGender() != "F") $this->errors[] = "Sexo não informado corretamente.";
-			if ($this->validateEmail($this->getEmail())) $this->errors[] = "Email inválido.";
-			if (self::findByEmail($this->getEmail())) $this->errors[] = "O email informado já está sendo usado por outro participante";
+			if (!$this->validateEmail($this->getEmail())) $this->errors[] = "Email inválido.";
+			if ($email = self::findByEmail($this->getEmail())) {
+				$email = $email[0];
+				if ($email->getIdParticipant() != $this->getIdParticipant())
+					$this->errors[] = "O email informado já está sendo usado por outro participante";	
+			} 
    			if (is_null($this->getPassword())) $this->errors[] = "Nenhuma senha foi informado.";
    			if (!$this->validateCpf($this->getCpf())) $this->errors[] = "CPF inválido";   			
-   			if (self::findByCpf($this->getCpf())) $this->errors[] = "O CPF informado já esta sendo usado por outro participante.";
+   			if ($cpf = self::findByCpf($this->getCpf())) {
+   				$cpf = $cpf[0];
+   				if ($cpf->getIdParticipant() != $this->getIdParticipant())
+   					$this->errors[] = "O CPF informado já esta sendo usado por outro participante.";	
+   			} 
    			if ((int) $this->getIdCity() < 1) $this->errors[] = "O nome da cidade é um campo obrigatório.";   			
    		}
 
@@ -189,7 +207,7 @@
 			
 			$sql = 
 			"SELECT 
-				participant.*, city.name AS city, city.id_state, state.state 
+				participant.*, city.name AS city, city.id_state, state.state as state
 			FROM
 				participant
 			INNER JOIN
@@ -202,11 +220,9 @@
 			$statment->execute($paramsValue);
 			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
 			$participants = array();			
-
 			foreach ($rows as $row) {
 				$participants[] = new Participant($row);
 			}
-			
 			return $participants;
 		}
 
@@ -236,7 +252,6 @@
 			VALUES
 				(:name, :cpf, :rg, :gender, :birthday, :id_city, :address, :number, :district, :zipcode, 
 				:complement, :phone, :phone2, :email, :password)";
-
 			$params = array(
 					":name" => $this->getName(),
 					":cpf" => $this->getCpf(),
@@ -263,24 +278,50 @@
 			$this->setData($data);
 			if (!$this->isValidData()) return false;
 
-			$keys = array_keys($data);
-			foreach ($keys as $key) {
-				$params .= "$key = :$key, ";
-			}
-
-			//remove a ultima (",") virgula
-			$params = substr($params, 0, -2);
-			$sql = "UPDATE participant SET %s WHERE id_participant = ".$this->getIdParticipant();
-			$sql = sprintf($sql, $params);
+			$sql = 
+			"UPDATE
+				participant
+			SET
+				name = :name, 
+				cpf = :cpf, 
+				rg = :rg, 
+				gender = :gender, 
+				birthday = :birthday, 
+				id_city = :id_city, 
+				address = :address, 
+				number = :number, 
+				district = :district, 
+				zipcode = :zipcode, 
+				complement = :complement, 
+				phone = :phone, 
+				phone2 = :phone2, 
+				email = :email, 
+				password = :password
+			WHERE
+				id_participant = :id_participant";
+			$params = array(
+					":name" => $this->getName(),
+					":cpf" => $this->getCpf(),
+					":rg" => $this->getRg(),
+					":gender" => $this->getGender(),
+					":birthday" => $this->getBirthday(),
+					":id_city" => $this->getIdCity(),
+					":address" => $this->getAddress(),
+					":number" => $this->getNumber(),
+					":district" => $this->getDistrict(),
+					":zipcode" => $this->getZipcode(),
+					":complement" => $this->getComplement(),
+					":phone" => $this->getPhone(),
+					":phone2" => $this->getPhone2(),
+					":email" => $this->getEmail(),
+					":password" => $this->getPassword(),
+					":id_participant" => $this->getIdParticipant()
+				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			
-			$param = array();
-			foreach ($keys as $key){
-				$param[":$key"] = $data[$key];
-			}
-	
-			return $statment->execute($param);
+			$statment = $statment->execute($params);	
+			//echo "<pre>"; var_dump($this); exit;
+			return $statment ? $this : false;
 		}
 
 		public function remove(){
