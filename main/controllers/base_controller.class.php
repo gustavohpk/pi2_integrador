@@ -24,11 +24,12 @@
 
 		//Título para tag title da tag head
 		public function setHeadTitle($pageTitle = null){
+			$siteTitle = Settings::getSiteTitle()->getValue();
 			if ($pageTitle){
-				$this->headTitle = $pageTitle . " - " . $this->getApplicationName();
+				$this->headTitle = $pageTitle . " - " . $siteTitle;
 			}
 			else{
-				$this->headTitle = $this->getApplicationName();
+				$this->headTitle = $siteTitle;
 			}
 			return $this->headTitle;
 		}
@@ -40,6 +41,11 @@
 		//funcões auxiliares
 		public function redirectTo($uri){
 			header("Location: " . $this->getUri($uri));
+			exit();
+		}
+
+		public function returnToLastPage(){
+			header("Location: " . $this->back());
 			exit();
 		}
 

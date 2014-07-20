@@ -148,5 +148,7 @@
     $router->post('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\PaymentTypeController', 'action' => 'update'));
     $router->get('/admin/config/pagamento/:id/remover', array('controller' => 'Admin\PaymentTypeController', 'action' => 'remove'));
     $router->get('/admin/config/contato', array('controller' => 'Admin\SettingsController', 'action' => 'contacts'));
+    $router->post('/admin/config', array('controller' => 'Admin\SettingsController', 'action' => 'update'));
+
     $router->load();
 ?>

@@ -14,6 +14,8 @@
 	        $this->media = Media::all();
 	        Events::setLimitByPage(4);
 	        $this->events = Events::all();
+	        $this->bannersNames = Settings::find(array("description"), array("banner%_name"), "LIKE");
+         	$this->bannersPaths = Settings::find(array("description"), array("banner%_path"), "LIKE");
    		}
 	} 
 ?>

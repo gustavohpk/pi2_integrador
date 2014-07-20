@@ -137,7 +137,8 @@ ul.left-menu span{ text-align: left; }
 .config-banners img{ max-height: 100px; max-width: 100px; }
 
 .admin-shortcut { padding: 10px; cursor: pointer; color:#333;}
-.admin-shortcut label { cursor: pointer; }
+.admin-shortcut-title { cursor: pointer; text-decoration: none; font-weight: bold;}
+a.admin-shortcut-link { text-decoration: none;}
 .admin-shortcut:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
 .admin-shortcut .glyphicon { font-size: 70px; padding-bottom: 10px;}
 .admin-shortcut .glyphicon:hover{ font-size: 70px; padding-bottom: 10px;}

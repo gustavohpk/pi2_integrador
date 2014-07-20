@@ -64,8 +64,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a class="help-link" data-toggle="modal" data-target="#help-modal">Ajuda</a></li>
-            <p class="navbar-text"><a href="<?= createUriFor('/')?>" target="_blank" class="navbar-link">Acessar site</a></p>
-            <p class="navbar-text">Logado como <a href="<?= createUriFor('/admin')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></p>
+            <span class="navbar-text"><a href="<?= createUriFor('/')?>" target="_blank" class="navbar-link">Acessar site</a></span>
+            <span class="navbar-text">Logado como <a href="<?= createUriFor('/admin')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></span>
             <li><a href="<?= createUriFor('/admin/logout')?>"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
           </ul>
         </div>

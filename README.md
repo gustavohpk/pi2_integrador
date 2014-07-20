@@ -3,6 +3,13 @@
 - Retirados selects "Exibir no máximo ** itens por página"
 - Criada view para lista de inscrições no painel do usuário (estática por enquanto)
 - Algumas pequenas correções e alterações
+- Criada função returnToLastPage()
+- Área de configuração:
+- - Geral OK
+- - Contato OK
+- - Banners +- (está puxando os cadastrados, inclusive na home, mas ainda não está alterando)
+- Charset ISO-8859-1 mudado para windows-1252
+- Outras correções para validar na W3C
 
 ----- Atualização 037 (20/07) -----
 - Corrigido bug cadastro participant

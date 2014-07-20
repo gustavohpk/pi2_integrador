@@ -5,30 +5,15 @@
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 		<h3>Banners da página principal</h3>
 		<ul class="list-group">
-		  <li class="list-group-item">
-		  	<h4>Imagem 1</h4>
-		  	<input type="file">
-		  	<br/>
-		  	<img src="media/image/banner_slider_1.png" alt="" />
-		  </li>
-		  <li class="list-group-item">
-		  	<h4>Imagem 2</h4>
-		  	<input type="file">
-		  	<br/>
-		  	<img src="img/placeholder-evento-2.png" alt="" />
-		  </li>
-		  <li class="list-group-item">
-		  	<h4>Imagem 3</h4>
-		  	<input type="file">
-		  	<br/>
-		  	<img src="img/placeholder-evento.png" alt="" />
-		  </li>
-		  <li class="list-group-item">
-		  	<h4>Imagem 4</h4>
-		  	<input type="file">
-		  	<br/>
-		  	<img src="img/placeholder-evento-2.png" alt="" />
-		  </li>
+			<?php foreach ($this->bannersNames as $key => $bannerName) : ?>
+				<?php $path = $this->bannersPaths[$key]->getValue(); ?>
+				<li class="list-group-item">
+					<h4><?= $bannerName->getValue() ?></h4>
+					<input type="file">
+					<br/>
+					<img src='<?= createUriFor("/$path") ?>' alt="<?= $bannerName->getValue() ?>" />
+				</li>
+			<?php endforeach; ?>
 		</ul>
 	</div>
 </div>

@@ -36,7 +36,7 @@
 
 		foreach ($params as $param) {
 			$path = RESOURCES_FOLDER."/$param";
-			echo "<script src='$path' type='text/javascript' charset='ISO-8859-1'></script>";
+			echo "<script src='$path' type='text/javascript' charset='windows-1252'></script>";
 		}
 	}
 

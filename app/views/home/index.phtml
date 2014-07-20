@@ -10,11 +10,11 @@
   			<div class="row">
   				<div id="banner-slider" class="slider-wrapper theme-default col-xs-12">
   					<div id="slider" class="nivoSlider">
-					    <a href="event-special.php"><img src="<?php echo $this->getMedia('image/banner_slider_1.png'); ?>" alt="" /></a>
-					    <img src="<?php echo $this->getResource('img/placeholder-evento-2.png'); ?>" alt="" /></a>
-					    <img src="<?php echo $this->getResource('img/placeholder-evento.png'); ?>" alt="" />
-					    <img src="<?php echo $this->getResource('img/placeholder-evento-2.png'); ?>" alt="" />
-						</div>
+  					<?php foreach ($this->bannersNames as $key => $bannerName) : ?>
+						<?php $path = $this->bannersPaths[$key]->getValue(); ?>
+						<img src="<?= $path ?>" alt="<?= $bannerName->getValue() ?>"/>
+					<?php endforeach; ?>
+					</div>
   				</div>
   			</div>
   		</div>
