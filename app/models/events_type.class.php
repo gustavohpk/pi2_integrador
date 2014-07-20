@@ -54,7 +54,7 @@
 			);
 			//retorna apenas o primeiro objeto (no caso o unico)
 			$eventsType = self::find($params);
-			return count($eventsType) > 0 ? $eventsType[0] : NULL;
+			return count($eventsType) > 0 ? $eventsType : NULL;
 		}
 
 		public function save(){

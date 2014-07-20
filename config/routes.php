@@ -29,6 +29,9 @@
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
 
+    /*
+    * rotas para area do participant
+    */
    	//rota para login/cadastro - usuários
     $router->get('/conta/login', array('controller' => 'ParticipantController', 'action' => 'login'));
     $router->post('/conta/login', array('controller' => 'ParticipantController', 'action' => 'executeLogin'));
@@ -38,6 +41,12 @@
     $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
     $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
     $router->get('/conta/painel', array('controller' => 'ParticipantController', 'action' => 'dashboard'));
+    $router->get('/conta/inscricoes', array('controller' => 'EnrollmentController', 'action' => '_list'));    
+    $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));        
+
+    $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
+    $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
+    $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
 
     //rotas para pesquisa
     $router->get('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'events'));
@@ -53,13 +62,6 @@
 
     $router->get('/pesquisa/midia', array('controller' => 'SearchController', 'action' => 'media'));
     $router->get('/pesquisa/midia/pagina/:p', array('controller' => 'SearchController', 'action' => 'media'));
-
-    /*
-    * rotas para area do participant
-    */
-    $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
-    $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
-    $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
 
     /*
     * rotas para area do admin

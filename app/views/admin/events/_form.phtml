@@ -27,7 +27,7 @@
 			<h4>Tipo</h4>
 			<select class="form-control" name="event[id_event_type]">
 				<?php foreach ($this->eventsType as $eventType) : ?>
-					<?php if ($this->events->getIdEventType() == $eventType->getIdEventType()) : ?>
+					<?php if ($this->events->eventType->getIdEventType() == $eventType->getIdEventType()) : ?>
 						<option selected value="<?=$eventType->getIdEventType()?>"><?=$eventType->getEventType()?></option>
 					<?php else :?>
 						<option value="<?=$eventType->getIdEventType()?>"><?=$eventType->getEventType()?></option>

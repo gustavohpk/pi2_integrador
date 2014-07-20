@@ -1,5 +1,9 @@
 Atualização 037 (20/07) -----
 - Corrigido bug cadastro participant
+- Implementado JS na view _form do cadastro participant para buscar no DB e setar o <option> da cidade e estado
+- Implementado consulta à inscrições na area do participant, opção para clicar no link para pagamento
+- Adicionado campo uri_payment tabela enrollment
+- Feito várias pequenas modificações com relaçao a encapsulamente de classes
 
  Atualização 036 (19/07) -----
 - Iniciado implementação PagSeguro .... para funcionar deve instalar o curl [no terminal digitar apt-get install php5-curl]

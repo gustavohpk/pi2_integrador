@@ -12,6 +12,14 @@
          $this->uriBack = $this->back();
       }
 
+      public function _list() {
+         $this->enrollment = Enrollment::findByIdParticipant($this->currentParticipant->getIdParticipant());
+      }
+
+      public function show() {
+         $this->enrollment = Enrollment::findById($this->params[":id"])[0];
+      }
+
       public function _new() {
          if (!$this->events = Events::findById($this->params[":id"])) {
             flashMessage::errorMessage("Evento não encontrado.");

@@ -4,7 +4,8 @@
 		private $idParentEvent;
 		public $parentEvent;
 		private $isSubEvent;
-		public $eventType;
+		public $eventType;		
+		private $eventType;
 		private $name;
 		private $details;
 		private $teacher;
@@ -44,7 +45,15 @@
 		}
 
 		public function setIdEventType($idEventType){
-			$this->eventType = EventsType::findById($idEventType)[0];
+			$this->eventType = EventType::findById($idEventType)[0];
+		}
+
+		public function setEventType($eventType){
+			$this->eventType = $eventType;
+		}
+
+		public function getEventType(){
+			return $this->eventType;
 		}
 
 		public function setName($name){
@@ -143,7 +152,8 @@
 			$rs = $pdo->prepare($sql);
 			$rs->execute($paramsValue);
 			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
-			$events = array();		
+			$events = array();			
+
 			foreach ($rows as $row) {
 				$events[] = new Events($row);
 			}
@@ -178,12 +188,14 @@
 			// retorna OUTROS subeventos relacionados com evento pai
 			$sql = 
 			"SELECT 
-				*
+				event.*, event_type.event_type
 			FROM 
 				event
+			NATURAL JOIN 
+				event_type
 			WHERE
-				(id_event = :id_parent_event) 
-				OR (id_parent_event = :id_event AND id_event <> :id_event)";
+				(event.id_event = :id_parent_event) 
+				OR (id_parent_event = :id_event AND event.id_event <> :id_event)";
 			$params = array(
 				":id_parent_event" => $this->getIdParentEvent(),
 				":id_event" => $this->getIdEvent()
@@ -282,7 +294,7 @@
 				:spaces, :start_date_enrollment, :end_date_enrollment)";
 
 			$params = array(
-					":id_event_type" => $this->eventType->getIdEventType(),
+					":id_event_type" => $this->getIdEventType(),
 					":name" => $this->getName(),
 					":details" => $this->getDetails(),
 					":teacher" => $this->getTeacher(),
@@ -323,7 +335,7 @@
 				id_event = :id_event";
 
 			$params = array(
-					":id_event_type" => $this->eventType->getIdEventType(),
+					":id_event_type" => $this->getIdEventType(),
 					":id_parent_event" => $this->getIdParentEvent(),
 					":name" => $this->getName(),
 					":details" => $this->getDetails(),

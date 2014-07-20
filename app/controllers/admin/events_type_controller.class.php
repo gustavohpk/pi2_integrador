@@ -37,7 +37,7 @@
 
 		public function edit(){
 			//prepara formulario para edicao
-			$this->eventsType = \EventsType::findById($this->params[":id"]);
+			$this->eventsType = \EventsType::findById($this->params[":id"])[0];
    			$this->setHeadTitle("Editar Tipo de Evento");
    			$this->actionForm = $this->getUri("admin/eventos/tipos/{$this->eventsType->getIdEventType()}/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
@@ -45,7 +45,7 @@
 
 		public function update(){
 			//salva edição no db  
-			$this->eventsType = \EventsType::findById($this->params[":id"]);
+			$this->eventsType = \EventsType::findById($this->params[":id"])[0];
 			if ($this->eventsType->update($this->params['event_type'])){
 				\FlashMessage::successMessage("Tipo de evento alterado com sucesso.");
 				$this->redirectTo("admin/eventos/tipos");

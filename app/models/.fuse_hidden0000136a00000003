@@ -39,16 +39,16 @@
 			$this->dateEnrollment = $dateEnrollment;
 		}
 
-		public function getDateEnrollment($format = "Y-m-d H:i:s"){
-			return is_null($this->dateEnrollment) ? null : date($format, strtotime($this->dateEnrollment));
+		public function getDateEnrollment(){
+			return $this->dateEnrollment;
 		}
 
 		public function setDatePayment($datePayment){
 			$this->datePayment = $datePayment;
 		}
 
-		public function getDatePayment($format = "Y-m-d H:i:s"){
-			return is_null($this->datePayment) ? null : date($format, strtotime($this->datePayment));
+		public function getDatePayment(){
+			return $this->datePayment;
 		}
 
 		public function setIdPaymentType($idPaymentType){
@@ -149,7 +149,7 @@
 			$params = array(
 					":id_participant" => $this->participant->getIdParticipant(),
 					":id_event" => $this->event->getIdEvent(),
-					":date_enrollment" => date("Y-m-d H:i:s"),
+					":date_enrollment" => date("Y-m-d"),
 					":date_payment" => null,
 					":id_payment_type" => $this->getIdPaymentType(),
 					":cost" => $this->getCost()
@@ -167,18 +167,6 @@
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_enrollment" => $this->getIdEnrollment());
 			return $statment->execute($params);
-		}
-
-		private function modifyUriPayment($uri) {
-			$sql = "UPDATE enrollment SET uri_payment = :uri_payment WHERE id_enrollment = :id_enrollment";
-			$params = array(
-					":id_enrollment" => $this->getIdEnrollment(),
-					":uri_payment" => $this->getUriPayment()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment = $statment->execute($params);		
-			return $statment;
 		}
 
 		public function executePayment($items = array()) {
@@ -199,7 +187,7 @@
          	}
 			$pagseguro->setCurrency("BRL");
 			$pagseguro->setShippingType(3); //Frete 3 = não especificado
-			$pagseguro->setReference($this->getIdEnrollment());
+			$pagseguro->setReference(15);
 			$pagseguro->setSender(
 					$this->participant->getName(), 
 					$this->participant->getEmail(),
@@ -215,9 +203,7 @@
 					$this->participant->getCity(), 'uf', 'BRA'
 				);
 			$credenciais = new PagSeguroAccountCredentials('rodrigomiss@hotmail.com', 'A3F7B6573E8B40E4AF0A58F0F059F6DA');
-			$this->uriPayment = $pagseguro->register($credenciais);
-			$this->modifyUriPayment($this->uriPayment);
-			return $this->getUriPayment();
+			return $pagseguro->register($credenciais);
 		}
 	}
 ?>
