@@ -114,6 +114,7 @@ CREATE TABLE `enrollment` (
   `date_payment` datetime DEFAULT NULL,
   `id_payment_type` int(11) DEFAULT NULL,
   `cost` float NOT NULL,
+  `uri_payment` VARCHAR(200) NULL,
   PRIMARY KEY (`id_enrollment`),
   KEY `fk_enrollment_participant` (`id_participant`),
   KEY `fk_enrollment_event` (`id_event`),
