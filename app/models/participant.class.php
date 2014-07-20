@@ -88,6 +88,7 @@
    			$phone = str_replace("(", "", $phone);
    			$phone = str_replace(")", "", $phone);
    			$phone = str_replace("-", "", $phone);
+   			$phone = str_replace(" ", "", $phone);
    			$this->phone = $phone;
    		}
 
@@ -95,6 +96,7 @@
    			$phone2 = str_replace("(", "", $phone2);
    			$phone2 = str_replace(")", "", $phone2);
    			$phone2 = str_replace("-", "", $phone2);
+   			$phone2 = str_replace(" ", "", $phone2);
    			$this->phone2 = $phone2;
    		}
 

@@ -86,7 +86,7 @@
 		public function edit(){
 			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant())[0];
    			$this->setHeadTitle("Editar Cadastro de Participante");
-   			$this->actionForm = $this->getUri("conta/alterar");
+   			$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
 		}
 
