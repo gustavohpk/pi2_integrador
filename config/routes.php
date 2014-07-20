@@ -49,7 +49,7 @@
     $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
     $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
 
-    $router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
+    //$router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
 
 
     //rotas para pesquisa
