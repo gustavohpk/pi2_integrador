@@ -23,8 +23,7 @@
 			$password = $this->params["participant"]["password"];
 
 			if ($this->participant->login($email, $password)){
-				FlashMessage::successMessage("Login OK");
-				$this->redirectTo("");
+				$this->redirectTo("conta/painel");
 			}
 			else{
 				FlashMessage::errorMessage("Os seguintes ocorreram ao tentar acessar sua conta:");
@@ -92,21 +91,23 @@
 		}
 
 		public function update(){
-			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant())[0];
-			if ($this->participant->update($_SESSION["participant"]->getIdParticipant())){
-				FlashMessage::successMessage("Cadastro do participante alterado com sucesso.");
-				$this->redirectTo("conta/painel");
-			}
-			else{
-				$errors = $this->participant->getErrors();
-
-				foreach ($errors as $error){
-					FlashMessage::errorMessage($error);
+			$this->checkCity();
+			if ($this->participant = Participant::findById($this->params[":id"])) {
+				$this->participant = $this->participant[0];	
+				if ($this->participant->update($this->params["participant"])) {
+					FlashMessage::successMessage("Cadastro do participante alterado com sucesso.");
+					$this->redirectTo("conta/painel");
 				}
-				$this->setHeadTitle("Editar Tipo de Evento");
-	         	$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
-	         	$this->titleBtnSubmit = "Salvar";
-	         	$this->render("edit");
+				else{
+					$errors = $this->participant->getErrors();
+					foreach ($errors as $error){
+						FlashMessage::errorMessage($error);
+					}
+					$this->setHeadTitle("Editar Tipo de Evento");
+		         	$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
+		         	$this->titleBtnSubmit = "Salvar";
+		         	$this->render("edit");
+				}
 			}
 		}
 

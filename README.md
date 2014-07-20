@@ -1,11 +1,11 @@
------ Atualização 037 (20/07) -----
-- Alteração na tabela participant, para corrigir o salvamento de valores com máscaras:
-- - Campo CPF > tamanho alterado de 45 para 14
-- - Campo zipcode > tamanho alterado de 8 para 10
-- - Campos phone e phone2 > tamanho alterado de 11 para 14
+----- Atualização 038 (20/07) -----
 - Finalizando manual de ajuda
 - Retirados selects "Exibir no máximo ** itens por página"
 - Criada view para lista de inscrições no painel do usuário (estática por enquanto)
+- Algumas pequenas correções e alterações
+
+----- Atualização 037 (20/07) -----
+- Corrigido bug cadastro participant
 
 ----- Atualização 036 (19/07) -----
 - Iniciado implementação PagSeguro .... para funcionar deve instalar o curl [no terminal digitar apt-get install php5-curl]
