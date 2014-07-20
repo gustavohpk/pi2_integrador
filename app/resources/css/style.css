@@ -68,7 +68,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 
 /* Footer */
 #footer{ margin-top: 10px; padding-top: 10px; background: #FFF; border-top: 1px solid #BBB; margin-bottom: 30px;}
-.utfpr-link { padding-top: 8px; }
+.utfpr-link { padding-top: 8px; width: 70px;}
 .utfpr-link img{ width: 49px; height: 49px; }
 .utfpr-link:hover img{ content: url("../img/utfpr-hover.png"); }
 .facebook-link{ width: 64px; height: 64px; background-image: url("../img/facebook.png"); background-repeat: no-repeat; }
@@ -141,6 +141,8 @@ ul.left-menu span{ text-align: left; }
 .admin-shortcut:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
 .admin-shortcut .glyphicon { font-size: 70px; padding-bottom: 10px;}
 .admin-shortcut .glyphicon:hover{ font-size: 70px; padding-bottom: 10px;}
+
+.help-button, .help-link { cursor: pointer; }
 
 /* Há um bug no bootstrap quando são colocados glyphicons dentro de input-group-addons */
 /* Algumas correções aqui */

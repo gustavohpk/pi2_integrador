@@ -1,11 +1,17 @@
-Atualização 037 (20/07) -----
+----- Atualização 038 (20/07) -----
+- Finalizando manual de ajuda
+- Retirados selects "Exibir no máximo ** itens por página"
+- Criada view para lista de inscrições no painel do usuário (estática por enquanto)
+- Algumas pequenas correções e alterações
+
+----- Atualização 037 (20/07) -----
 - Corrigido bug cadastro participant
 - Implementado JS na view _form do cadastro participant para buscar no DB e setar o <option> da cidade e estado
 - Implementado consulta à inscrições na area do participant, opção para clicar no link para pagamento
 - Adicionado campo uri_payment tabela enrollment
 - Feito várias pequenas modificações com relaçao a encapsulamente de classes
 
- Atualização 036 (19/07) -----
+----- Atualização 036 (19/07) -----
 - Iniciado implementação PagSeguro .... para funcionar deve instalar o curl [no terminal digitar apt-get install php5-curl]
 
 ----- Atualização 035 (18 - 19/07) -----

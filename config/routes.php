@@ -41,12 +41,16 @@
     $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
     $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
     $router->get('/conta/painel', array('controller' => 'ParticipantController', 'action' => 'dashboard'));
+
     $router->get('/conta/inscricoes', array('controller' => 'EnrollmentController', 'action' => '_list'));    
     $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));        
 
     $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
     $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
     $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
+
+    $router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
+
 
     //rotas para pesquisa
     $router->get('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'events'));

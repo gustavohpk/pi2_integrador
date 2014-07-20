@@ -86,7 +86,7 @@
 		public function edit(){
 			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant())[0];
    			$this->setHeadTitle("Editar Cadastro de Participante");
-   			$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
+   			$this->actionForm = $this->getUri("conta/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
 		}
 
@@ -134,6 +134,12 @@
        			$this->redirectTo("conta/login");
        		}
 			$this->setHeadTitle("Painel do usuário");
+		}
+		public function enrollments(){
+       		if (!isset($_SESSION["participant"])){
+       			$this->redirectTo("conta/login");
+       		}
+			$this->setHeadTitle("Lista de inscrições");
 		}
 	} 
 ?>
