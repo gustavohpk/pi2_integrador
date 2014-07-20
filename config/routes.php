@@ -38,6 +38,7 @@
     $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
     $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
     $router->get('/conta/painel', array('controller' => 'ParticipantController', 'action' => 'dashboard'));
+    $router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
 
     //rotas para pesquisa
     $router->get('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'events'));

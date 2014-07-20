@@ -87,18 +87,17 @@
 		public function edit(){
 			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant())[0];
    			$this->setHeadTitle("Editar Cadastro de Participante");
-   			$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
+   			$this->actionForm = $this->getUri("conta/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
 		}
 
 		public function update(){
-			$this->participant = Participant::findById($this->params[":id"]);
+			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant())[0];
 			if ($this->participant->update($_SESSION["participant"]->getIdParticipant())){
 				FlashMessage::successMessage("Cadastro do participante alterado com sucesso.");
-				$this->redirectTo("conta/nova");
+				$this->redirectTo("conta/painel");
 			}
 			else{
-				FlashMessage::errorMessage("Os seguintes ocorreram ao alterar o cadastro do participante:");
 				$errors = $this->participant->getErrors();
 
 				foreach ($errors as $error){
@@ -134,6 +133,12 @@
        			$this->redirectTo("conta/login");
        		}
 			$this->setHeadTitle("Painel do usuário");
+		}
+		public function enrollments(){
+       		if (!isset($_SESSION["participant"])){
+       			$this->redirectTo("conta/login");
+       		}
+			$this->setHeadTitle("Lista de inscrições");
 		}
 	} 
 ?>

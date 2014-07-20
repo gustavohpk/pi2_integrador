@@ -176,9 +176,9 @@
    		public function validateData(){
    			if (strlen($this->getName()) < 4) $this->errors[] = "O nome deve ter no mínimo 4 caracteres.";
    			if ($this->getGender() != "M" && $this->getGender() != "F") $this->errors[] = "Sexo não informado corretamente.";
-			if ($this->validateEmail($this->getEmail())) $this->errors[] = "Email inválido.";
-			if (self::findByEmail($this->getEmail())) $this->errors[] = "O email informado já está sendo usado por outro participante";
-   			if (is_null($this->getPassword())) $this->errors[] = "Nenhuma senha foi informado.";
+			if (!$this->validateEmail($this->getEmail())) $this->errors[] = "O e-mail informado é inválido";
+			if (self::findByEmail($this->getEmail())) $this->errors[] = "O e-mail informado já está sendo usado por outro participante";
+   			if (is_null($this->getPassword())) $this->errors[] = "Nenhuma senha foi informada.";
    			if (!$this->validateCpf($this->getCpf())) $this->errors[] = "CPF inválido";   			
    			if (self::findByCpf($this->getCpf())) $this->errors[] = "O CPF informado já esta sendo usado por outro participante.";
    			if ((int) $this->getIdCity() < 1) $this->errors[] = "O nome da cidade é um campo obrigatório.";   			

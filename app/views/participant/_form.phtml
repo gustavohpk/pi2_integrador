@@ -18,6 +18,7 @@
 			</div>
 		</div>
 	</div>
+	<br/>
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-6">
@@ -39,7 +40,7 @@
 		<div class="col-xs-12 col-sm-6">
 			<div class="input-group">
 				<span class="input-group-addon glyphicon glyphicon-envelope"></span>
-			  <input id="email" name="participant[email]" value="<?= $this->participant->getEmail()?>" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail" required <?php echo ($_SESSION["participant"]->getIdParticipant()?"disabled title='Este dado não pode ser modificado.'" : '') ?>>
+			  <input id="email" name="participant[email]" value="<?= $this->participant->getEmail()?>" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail" required>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6">
@@ -88,6 +89,7 @@
 			<input id="number" name="participant[number]" value="<?= $this->participant->getNumber()?>" type="text" class="form-control" placeholder="Número" required>
 		</div>
 	</div>
+	<br/>
 
 	<div class="row">
 		<div class="col-xs-5">
@@ -104,6 +106,7 @@
 			<input id="complement" name="participant[complement]" value="<?= $this->participant->getComplement()?>" type="text" class="form-control" placeholder="Complemento">
 		</div>
 	</div>
+	<br/>
 
 	<div class="row">
 		<div class="col-xs-12 col-sm-5">
@@ -113,6 +116,7 @@
 			<select id="cidade" name="city[name]" class="form-control"></select>
 		</div>
 	</div>
+	<br/>
 
 	<!--
 	<div class="row">
