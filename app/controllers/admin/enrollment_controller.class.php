@@ -41,9 +41,5 @@
 		public function _edit(){
 			$this->setHeadTitle("Modificar inscrição");
 		}
-
-      public function attendance() {
-         $this->setHeadTitle("Registrar presença");
-      }
 	} 
 ?>

@@ -2,6 +2,7 @@
 	class Enrollment extends BaseModel{
 		private $idEnrollment;
 		private $idParticipant;
+		private $participantName;
 		public $participant;
 		public $event;
 		private $dateEnrollment;
@@ -9,6 +10,7 @@
 		private $idPaymentType;
 		private $cost;
 		private $uriPayment;
+		private $attendance;
 
 		public function setIdEnrollment($idEnrollment){
 			$this->idEnrollment = $idEnrollment;
@@ -47,6 +49,18 @@
 			$this->datePayment = $datePayment;
 		}
 
+		public function setAttendance($attendance){
+			$this->attendance = $attendance;
+		}
+
+		public function setParticipantName($participantName){
+			$this->participantName = $participantName;
+		}
+
+		public function getParticipantName(){
+			return $this->participantName;
+		}
+
 		public function getDatePayment($format = "Y-m-d H:i:s"){
 			return is_null($this->datePayment) ? null : date($format, strtotime($this->datePayment));
 		}
@@ -73,6 +87,10 @@
 
 		public function getUriPayment() {
 			return $this->uriPayment;
+		}
+
+		public function getAttendance() {
+			return $this->attendance;
 		}
 
 		// mensagens exibidas para confirmação da inscrição do participante
@@ -123,6 +141,23 @@
 			}
 			
 			return $enrollments;
+		}
+
+ 		public static function attendanceList($eventId){
+
+			$sql = "SELECT enrollment.id_enrollment, participant.name AS participant_name FROM enrollment INNER JOIN participant ON enrollment.id_participant = participant.id_participant WHERE enrollment.id_event = " . $eventId;
+
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			$statment->execute();
+			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
+			$attendanceList = array();			
+
+			foreach ($rows as $row) {
+				$attendanceList[] = new Enrollment($row);
+			}
+			
+			return $attendanceList;
 		}
 
 		public static function all(){

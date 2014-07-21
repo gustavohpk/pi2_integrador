@@ -107,5 +107,19 @@
          \FlashMessage::successMessage("Evento removido com sucesso.");
          $this->redirectTo("admin/eventos/lista");
 		}
+
+
+      public function attendance() {
+         $this->setHeadTitle("Registrar presença");
+         $this->events = \Events::findById($this->params[":id"])[0];
+         //$this->enrollments = \Enrollment::find(array("id_event"), array($this->params[":id"]));
+         $this->attendanceList = \Enrollment::attendanceList($this->params[":id"]);
+         $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}/presenca");
+         $this->titleBtnSubmit = "Salvar";
+      }
+
+      public function checkAttendance() {
+         var_dump($_POST); exit;
+      }
 	} 
 ?>

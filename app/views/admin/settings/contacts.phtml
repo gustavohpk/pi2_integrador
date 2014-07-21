@@ -4,7 +4,7 @@
 	</div>
 	<h4>E-mail para contato</h4>
 	<div class="row">
-		<form enctype="multipart/form-data" action="<?= $this->actionForm ?>" method="post">
+		<form action="<?= $this->actionForm ?>" method="post">
 			<div class="col-xs-6 col-xs-offset-3">
 				<input type="hidden" name="section" value="<?= $this->configSection ?>"/>
 				<input type="email" class="form-control" name="setting[value]" value="<?= $this->settings->getValue() ?>">

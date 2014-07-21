@@ -28,6 +28,7 @@
 
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
+    $router->post('/contato', array('controller' => 'ContactsController', 'action' => 'sendMessage'));
 
     /*
     * rotas para area do participant
@@ -96,6 +97,8 @@
     $router->get('/admin/eventos/:id/alterar', array('controller' => 'Admin\EventsController', 'action' => 'edit'));
     $router->post('/admin/eventos/:id', array('controller' => 'Admin\EventsController', 'action' => 'update'));
     $router->get('/admin/eventos/:id/remover', array('controller' => 'Admin\EventsController', 'action' => 'remove'));
+    $router->get('/admin/eventos/:id/presenca', array('controller' => 'Admin\EventsController', 'action' => 'attendance'));
+    $router->post('/admin/eventos/:id/presenca', array('controller' => 'Admin\EventsController', 'action' => 'checkAttendance'));
 
     //rotas para notícias
     $router->get('/admin/noticias/lista', array('controller' => 'Admin\NewsController', 'action' => '_list'));
@@ -121,7 +124,6 @@
     $router->get('/admin/inscricoes/:id/remover', array('controller' => 'Admin\EnrollmentController', 'action' => 'remove'));
     $router->get('/admin/inscricoes/nova', array('controller' => 'Admin\EnrollmentController', 'action' => '_new'));
     $router->get('/admin/inscricoes/:id/alterar', array('controller' => 'Admin\EnrollmentController', 'action' => '_edit'));
-    $router->get('/admin/inscricoes/presenca', array('controller' => 'Admin\EnrollmentController', 'action' => 'attendance'));
 
     //rotas para usuários
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));

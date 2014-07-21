@@ -23,16 +23,16 @@ DROP TABLE IF EXISTS `administrator`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `administrator` (
-  `id_administrator` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `rg` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cpf` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `phone2` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_administrator` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(60) NOT NULL ,
+  `email` VARCHAR(45) NOT NULL ,
+  `password` VARCHAR(32) NOT NULL ,
+  `rg` VARCHAR(15) NULL ,
+  `cpf` VARCHAR(11) NOT NULL ,
+  `phone` VARCHAR(11) NOT NULL ,
+  `phone2` VARCHAR(11) NULL ,
   PRIMARY KEY (`id_administrator`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `administrator` (
 
 LOCK TABLES `administrator` WRITE;
 /*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
+INSERT INTO `administrator` VALUES (1,'Default','admin@defaultadmin.com','55555555555','defaultadmin','default8580admin');
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +87,7 @@ CREATE TABLE `cost_event` (
   PRIMARY KEY (`id_cost_event`),
   KEY `fk_cost_event_event` (`id_event`),
   CONSTRAINT `fk_cost_event_event` FOREIGN KEY (`id_event`) REFERENCES `event` (`id_event`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +96,6 @@ CREATE TABLE `cost_event` (
 
 LOCK TABLES `cost_event` WRITE;
 /*!40000 ALTER TABLE `cost_event` DISABLE KEYS */;
-INSERT INTO `cost_event` VALUES (1,11,'2014-08-20',15),(2,11,'2014-09-19',20),(3,12,'2014-07-30',15);
 /*!40000 ALTER TABLE `cost_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,8 +114,7 @@ CREATE TABLE `enrollment` (
   `date_payment` datetime DEFAULT NULL,
   `id_payment_type` int(11) DEFAULT NULL,
   `cost` float NOT NULL,
-  `uri_payment` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `attendance` tinyint(1) NOT NULL,
+  `uri_payment` VARCHAR(200) NULL,
   PRIMARY KEY (`id_enrollment`),
   KEY `fk_enrollment_participant` (`id_participant`),
   KEY `fk_enrollment_event` (`id_event`),
@@ -123,7 +122,7 @@ CREATE TABLE `enrollment` (
   CONSTRAINT `fk_enrollment_event` FOREIGN KEY (`id_event`) REFERENCES `event` (`id_event`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_enrollment_participant` FOREIGN KEY (`id_participant`) REFERENCES `participant` (`id_participant`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_enrollment_payment_type` FOREIGN KEY (`id_payment_type`) REFERENCES `payment_type` (`id_payment_type`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +159,7 @@ CREATE TABLE `event` (
   KEY `fk_event_event_type` (`id_event_type`),
   CONSTRAINT `fk_event_event` FOREIGN KEY (`id_parent_event`) REFERENCES `event` (`id_event`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_event_event_type` FOREIGN KEY (`id_event_type`) REFERENCES `event_type` (`id_event_type`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +168,7 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (11,NULL,1,'Semana Acadêmica TSI 2014','<p>descricao teste 1</p>','ministrante 1','UTFPR - Câmpus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR','2014-09-22 19:00:00','2014-09-26 22:00:00',150,'2014-07-30 00:00:00','2014-09-19 23:55:00'),(12,NULL,3,'Palestra teste 1','<p>palestra 1</p>','Palestrante 01','UTFPR - Câmpus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR','2014-07-31 19:00:00','2014-07-31 21:00:00',80,'2014-07-21 00:00:00','2014-07-30 23:55:00');
+INSERT INTO `event` VALUES (7,NULL,1,'Semana Acadêmica TSI 2014','<p><strong>Semana Acad&ecirc;mica de Tecnologia e Sistemas para Internet - 2014<br /><br /></strong>Na semana acad&ecirc;mica haver&atilde;o palestras e minicursos relacionadas ao curso. Entre&nbsp;eles est&atilde;o:</p>\r\n<ul style=\"list-style-type: disc;\">\r\n<li>Minicurso: Linux (iniciante)</li>\r\n<li>Palestra: O mercado de trabalho e o profissional de TI<br /><br /><img src=\"http://desafioweb.tsi.gp.utfpr.edu.br/assets/img/mascote.png\" alt=\"TSI\" width=\"248\" height=\"220\" /></li>\r\n</ul>\r\n<p>As inscri&ccedil;&otilde;es poder&atilde;o ser feitas <em>entre 25 de agosto e 19 de setembro</em>.</p>','Coordenador 01','UTFPR Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR','2014-09-22 19:00:00','2014-09-26 22:00:00',150,1,'2014-08-25 00:00:00','2014-09-19 23:55:00'),(8,7,2,'Minicurso: Linux (iniciante)','<p>Minicurso para iniciantes sobre o sistema operacional Linux</p>','Professor 02','UTFPR Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR','2014-09-24 19:00:00','2014-09-24 20:30:00',20,1,'2014-08-25 00:00:00','2014-09-19 23:55:00'),(9,7,3,'O mercado de trabalho e o profissional de TI','<p>Uma palestra sobre o mercado de trabalho atualmente na &aacute;rea da Tecnologia da Informa&ccedil;&atilde;o.</p>','Palestrante 01','UTFPR Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR','2014-09-25 19:00:00','2014-09-25 21:00:00',100,1,'2014-08-25 00:00:00','2014-09-19 23:55:00'),(10,NULL,4,'III Mostra de Talentos - UTFPR Guarapuava','<p>Terceira Mostra de Talentos da UTFPR - C&acirc;mpus Guarapuava</p>','nenhum','UTFPR Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR','2014-04-15 19:00:00','2014-04-15 21:00:00',15,2,'2014-04-01 00:00:00','2014-04-14 23:55:00');
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +312,7 @@ CREATE TABLE `participant` (
   PRIMARY KEY (`id_participant`),
   KEY `fk_participant_city` (`id_city`),
   CONSTRAINT `fk_participant_city` FOREIGN KEY (`id_city`) REFERENCES `city` (`id_city`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -322,6 +321,7 @@ CREATE TABLE `participant` (
 
 LOCK TABLES `participant` WRITE;
 /*!40000 ALTER TABLE `participant` DISABLE KEYS */;
+INSERT INTO `participant` VALUES (1,'Gustavo Henrique Pchek Kwaczynski','088.396.219-54','10.665.568-5','M','0000-00-00',1,'Rua Coroados','931','Vila Carli','85.040-2','','(42) 362441','','ghpk88@gmail.com','735fa1ff956d1a2c5094a7bb59aae10f');
 /*!40000 ALTER TABLE `participant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,4 +407,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-21  2:22:47
+-- Dump completed on 2014-07-14 23:57:16

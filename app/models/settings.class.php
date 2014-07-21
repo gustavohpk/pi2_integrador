@@ -66,6 +66,11 @@
 			return count($siteTitle) > 0 ? $siteTitle : NULL;
 		}
 
+		public static function getContactEmail(){
+			$contactEmail = self::find(array("description"), array("contact_mail"))[0];
+			return count($contactEmail) > 0 ? $contactEmail : NULL;
+		}
+
 		public function update($data = array()){
 
 			$this->setData($data);

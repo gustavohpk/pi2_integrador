@@ -8,7 +8,6 @@
    		$this->setHeadTitle("Configurações Gerais");
          $this->settings = \Settings::find(array("description"), array("site_title"))[0];
          $this->actionForm = $this->getUri("admin/config");
-         $this->titleBtnSubmit = "Alterar";
          $this->configSection = 'site_title';
 		}
 
