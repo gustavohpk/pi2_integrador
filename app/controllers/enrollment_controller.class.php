@@ -25,15 +25,19 @@
             flashMessage::errorMessage("Evento não encontrado.");
             $this->redirectTo($this->back());
          }
+         elseif ($this->events[0]->eventType->getEventType() == "sem_inscricao") {
+            flashMessage::warningMessage("Para participar deste evento não precisa se increver.");
+            $this->returnToLastPage();
+         }
          else {
             $this->events = $this->events[0];
             if ($this->events->eventFinalized()) {
                flashMessage::errorMessage($this->events->getName() . " - ENCERRADO.");
-               $this->redirectTo($this->back());
+               $this->returnToLastPage();
             }
             if (!$this->events->canEnrollment()) {
                flashMessage::errorMessage($this->events->getName() . " - Fora do prazo de inscrição.");
-               $this->redirectTo($this->back());
+               $this->returnToLastPage();
             }
          }
   
@@ -46,18 +50,26 @@
          $participant = $this->currentParticipant;
          $params = $this->params["enrollment"];
          foreach ($params["id_event"] as $id_event) {
-            $cost = CostEvent::findByIdEvent($id_event);
-            $cost = ($cost ? $cost[0]->getCostOfDay() : 0);
-            $i++;
-            $data[$i] = array(
+            $this->events = Events::findById($id_event)[0]; 
+            $cost = ($this->events->cost ? $this->events->cost[0]->getCostOfDay() : 0);            
+            $data = array(
                   "id_participant" => $participant->getIdParticipant(),
-                  "id_event" => $id_event,
+                  "id_event" => $this->events->getIdEvent(),
                   "id_payment_type" => $params["id_payment_type"],
                   "cost" => $cost
                );
-            $this->enrollment = new Enrollment($data[$i]);
+            $this->enrollment = new Enrollment($data);
             if ($this->enrollment->save()) {
-               $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()}");
+               if ($this->events->eventType->getEventType() == "sem_pagamento") {
+                  $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()}");
+               }
+               else {
+                  $url = $this->enrollment->executePayment($data);
+                  $this->enrollment->setMessageSuccess("
+                        #{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()}
+                        <a href='{$url}' target='_blank'>Clique aqui</a> para fazer o pagamento"
+                     );
+               }
             }
             else {
                $errors = $this->enrollment->getErrors();
@@ -67,8 +79,6 @@
             }
          }
 
-         $url = $this->enrollment->executePayment($data);
-         $this->enrollment->setMessageSuccess("<a href='{$url}' target='_blank'>Clique aqui</a> para fazer o pagamento");
          $this->redirectTo("inscricao/confirmacao");
       }
 

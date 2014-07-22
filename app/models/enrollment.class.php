@@ -191,9 +191,9 @@
        				$pagseguro->addItem(
 					        $event->getIdEvent(),
 					        $event->getName(),
-					        1,
+					        1, //quantidade
 					        $event->cost[0]->getCostOfDay(),
-					        0
+					        0 //peso
 					     );
 				}
          	}
@@ -212,7 +212,7 @@
 					$this->participant->getNumber(), 
 					$this->participant->getComplement(),  
 					$this->participant->getDistrict(),
-					$this->participant->getCity(), 'uf', 'BRA'
+					$this->participant->getCity(), $this->participant->getState(), 'BRA'
 				);
 			$credenciais = new PagSeguroAccountCredentials('rodrigomiss@hotmail.com', 'A3F7B6573E8B40E4AF0A58F0F059F6DA');
 			$this->uriPayment = $pagseguro->register($credenciais);
