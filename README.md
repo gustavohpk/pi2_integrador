@@ -1,3 +1,7 @@
+----- Atualização 039 (21/07) -----
+- Iniciando área de testes
+- Finalizando Lista de Chamada
+
 ----- Atualização 038 (20/07 - 21/07) -----
 - Finalizando manual de ajuda
 - Retirados selects "Exibir no máximo ** itens por página"

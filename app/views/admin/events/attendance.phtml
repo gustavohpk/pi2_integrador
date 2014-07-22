@@ -15,13 +15,13 @@
 						<th>Código da Inscrição</th>
 						<th>Nome</th>
 					</tr>
-					<?php foreach($this->attendanceList as $listItem) : ?>
+					<?php foreach($this->enrollments as $listItem) : ?>
 						<!-- Input hidden para mandar valor para POST caso a checkbox estiver desmarcada -->
 						<input type="hidden" name="enrollment[<?= $listItem->getIdEnrollment() ?>]"/>
 						<tr>
-							<td><input type="checkbox" name="enrollment[<?= $listItem->getIdEnrollment() ?>]"/></td>
+							<td><input type="checkbox" name="enrollment[<?= $listItem->getIdEnrollment() ?>]" <?php echo ($listItem->getAttendance() == 1? 'checked' : '') ?>/></td>
 							<td><?= $listItem->getIdEnrollment() ?></td>
-							<td><?= $listItem->getParticipantName() ?></td>
+							<td><?= $listItem->participant->getName() ?></td>
 						</tr>
 					<?php endforeach; ?>
 				</table>

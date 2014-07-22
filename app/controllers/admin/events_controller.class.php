@@ -108,18 +108,25 @@
          $this->redirectTo("admin/eventos/lista");
 		}
 
+      public function checkAttendance() {
+         $idEvent = $this->params[":id"];
+         //var_dump($idEvent);
+         $this->enrollments = \Enrollment::find(array("id_event"), array($idEvent))[0];
+         //var_dump($this->enrollments);
+         //var_dump(get_class_methods($this->enrollments)); exit;
+         $this->enrollments->checkAttendance($this->params["enrollment"]);
+         \FlashMessage::successMessage("A lista de presença foi atualizada.");
+         $this->redirectTo("admin/eventos/lista");
+      }
 
       public function attendance() {
          $this->setHeadTitle("Registrar presença");
          $this->events = \Events::findById($this->params[":id"])[0];
-         //$this->enrollments = \Enrollment::find(array("id_event"), array($this->params[":id"]));
-         $this->attendanceList = \Enrollment::attendanceList($this->params[":id"]);
+         $this->enrollments = \Enrollment::find(array("id_event"), array($this->params[":id"]));
+         //$this->attendanceList = \Enrollment::attendanceList($this->params[":id"]);
+         //var_dump($this->enrollments); exit;
          $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}/presenca");
          $this->titleBtnSubmit = "Salvar";
-      }
-
-      public function checkAttendance() {
-         var_dump($_POST); exit;
       }
 	} 
 ?>
