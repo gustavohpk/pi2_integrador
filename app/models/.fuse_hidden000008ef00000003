@@ -190,21 +190,22 @@
 			return $statment;
 		}
 
-		public function executePayment($item) {
+		public function executePayment($items = array()) {
 			require_once APP_ROOT_FOLDER . '/main/classes/pagseguro/PagSeguroLibrary/PagSeguroLibrary.php';
-         	$pagseguro = new PagSeguroPaymentRequest();       
-         	
-     		if ($event = Events::findById($item["id_event"])) {
-     			$event = $event[0];
-   				$pagseguro->addItem(
-				        $event->getIdEvent(),
-				        $event->getName(),
-				        1, //QTDE
-				        $event->cost[0]->getCostOfDay(),
-				        0 //PESO
-				     );
-			}
-         	
+         	$pagseguro = new PagSeguroPaymentRequest();
+       
+         	foreach ($items as $item) {
+         		if ($event = Events::findById($item["id_event"])) {
+         			$event = $event[0];
+       				$pagseguro->addItem(
+					        $event->getIdEvent(),
+					        $event->getName(),
+					        1, //quantidade
+					        $event->cost[0]->getCostOfDay(),
+					        0 //peso
+					     );
+				}
+         	}echo "<pre>"; var_dump($this->participant->getState()); exit;
 			$pagseguro->setCurrency("BRL");
 			$pagseguro->setShippingType(3); //Frete 3 = não especificado
 			$pagseguro->setReference($this->getIdEnrollment());
