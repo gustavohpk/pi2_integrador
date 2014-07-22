@@ -1,4 +1,8 @@
------ Atualização 038 (20/07) -----
+----- Atualização 039 (21/07) -----
+- Iniciando área de testes
+- Finalizando Lista de Chamada
+
+----- Atualização 038 (20/07 - 21/07) -----
 - Finalizando manual de ajuda
 - Retirados selects "Exibir no máximo ** itens por página"
 - Criada view para lista de inscrições no painel do usuário (estática por enquanto)
@@ -10,6 +14,12 @@
 - - Banners +- (está puxando os cadastrados, inclusive na home, mas ainda não está alterando)
 - Charset ISO-8859-1 mudado para windows-1252
 - Outras correções para validar na W3C
+- Iniciada função de e-mail de contato
+- Iniciada lista de presença
+> Criada função attendanceList() que traz os dados necessários para a lista de presença, no enrollments.class.php
+> Criadas funções set e get participantName, para utilizar na anterior
+> Criada coluna "attendance" (boolean) na tabela enrollment OBS.: o banco exibe como tinyint(1)
+- Ocultando o método de pagamento "sem_pagamento" na tela de inscrição
 
 ----- Atualização 037 (20/07) -----
 - Corrigido bug cadastro participant

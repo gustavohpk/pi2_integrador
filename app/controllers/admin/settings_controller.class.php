@@ -8,7 +8,6 @@
    		$this->setHeadTitle("Configurações Gerais");
          $this->settings = \Settings::find(array("description"), array("site_title"))[0];
          $this->actionForm = $this->getUri("admin/config");
-         $this->titleBtnSubmit = "Alterar";
          $this->configSection = 'site_title';
 		}
 
@@ -51,6 +50,12 @@
             \FlashMessage::errorMessage("Erro ao alterar a configuração.");
             $this->redirectTo("admin/config/geral");
          }
+      }
+
+      public function developer(){
+         $this->setHeadTitle("Programador");
+         $tests = \Settings::tests();
+         var_dump($tests); exit;
       }
 
 	} 

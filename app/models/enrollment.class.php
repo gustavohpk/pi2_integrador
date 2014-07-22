@@ -9,6 +9,7 @@
 		private $idPaymentType;
 		private $cost;
 		private $uriPayment;
+		private $attendance;
 
 		public function setIdEnrollment($idEnrollment){
 			$this->idEnrollment = $idEnrollment;
@@ -47,6 +48,10 @@
 			$this->datePayment = $datePayment;
 		}
 
+		public function setAttendance($attendance){
+			$this->attendance = $attendance;
+		}
+
 		public function getDatePayment($format = "Y-m-d H:i:s"){
 			return is_null($this->datePayment) ? null : date($format, strtotime($this->datePayment));
 		}
@@ -73,6 +78,10 @@
 
 		public function getUriPayment() {
 			return $this->uriPayment;
+		}
+
+		public function getAttendance() {
+			return $this->attendance;
 		}
 
 		// mensagens exibidas para confirmação da inscrição do participante
@@ -218,6 +227,19 @@
 			$this->uriPayment = $pagseguro->register($credenciais);
 			$this->modifyUriPayment($this->uriPayment);
 			return $this->getUriPayment();
+		}
+
+		public function checkAttendance($params){
+			//var_dump($params); exit;
+			foreach ($params as $key => $enrollmentStatus) {
+				//var_dump($key);
+				//var_dump($enrollment); exit;
+				$status = $enrollmentStatus? true : false;
+				$sql = "UPDATE enrollment SET attendance = :attendance WHERE id_enrollment = :id_enrollment";
+				$pdo = \Database::getConnection();
+				$statment = $pdo->prepare($sql);
+				$statment->execute(array(":attendance"=>$status, ":id_enrollment"=>$key));
+			}
 		}
 	}
 ?>
