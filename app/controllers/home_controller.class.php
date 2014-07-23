@@ -9,7 +9,7 @@
 	        News::setCurrentPage($page);
 	        $date = date("d-m-Y");
 	        $this->news = News::find(array(), array(), "=", "AND", "modification_date");
-	        Media::setLimitByPage(3);
+	        Media::setLimitByPage(6);
 	        Media::setCurrentPage($page);
 	        $this->media = Media::all();
 	        Events::setLimitByPage(4);
