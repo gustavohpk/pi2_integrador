@@ -1,6 +1,7 @@
 <?php
+ini_set("display_errors", false);
   define('APP_NAME', 'UTFPR Eventos');
-  define('SITE_ROOT', '/pi2/ProjetoIntegrador/pi2_integrador');
+  define('SITE_ROOT', '/pi2_integrador');
   define('APP_ROOT_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/' . SITE_ROOT);
 
   define('RESOURCES_FOLDER', SITE_ROOT.'/app/resources');
