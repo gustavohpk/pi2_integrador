@@ -1,9 +1,12 @@
+----- Atualização 041 (23/07) -----
 - Corrigido vários detalhes concernentes a labels para informar que o evento é gratuito ou sem inscrição
 - Alterado controller para permitir cadastrar evento com valor zerado caso seja evento sem_pagamento
 - Alterado para não exibir botão para selecionar forma de pagamento caso o evento seja gratuito
 - Implementado botão "definir como pago" na view de inscrições na area admin
 - Implementado tela para ver inscrições na area do admin
 
+----- Atualização 040 (22/07) -----
+- Testes funcionando
 
 ----- Atualização 039 (21/07) -----
 - Iniciando área de testes

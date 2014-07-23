@@ -54,8 +54,7 @@
 
       public function developer(){
          $this->setHeadTitle("Programador");
-         $tests = \Settings::tests();
-         var_dump($tests); exit;
+         $this->tests = \Settings::tests();
       }
 
 	} 
