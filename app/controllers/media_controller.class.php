@@ -7,7 +7,7 @@
 	        } else {
 	           $page = 1;
 	        }
-	        Media::setLimitByPage(1);
+	        Media::setLimitByPage(15);
 	        Media::setCurrentPage($page);
 	        $date = date("d-m-Y");
 	        $this->media = Media::all();

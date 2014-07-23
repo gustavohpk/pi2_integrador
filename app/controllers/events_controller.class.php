@@ -25,10 +25,10 @@
 	        } else {
 	           $page = 1;
 	        }
-	        Events::setLimitByPage(6);
+	        Events::setLimitByPage(4);
 	        Events::setCurrentPage($page);
 	        $this->events = Events::findNext(date("Y-m-d"));
-	        $this->pagination = new Pager(Events::count(), Events::getlimitByPage(), $page);
+	        $this->pagination = new Pager(Events::countNext(), Events::getlimitByPage(), $page);
    		}
 
    		public function previous(){
@@ -41,7 +41,7 @@
 	        Events::setLimitByPage(6);
 	        Events::setCurrentPage($page);
 	        $this->events = Events::findPrev(date("Y-m-d"));
-	        $this->pagination = new Pager(Events::count(), Events::getLimitByPage(), $page);
+	        $this->pagination = new Pager(Events::countPrev(), Events::getLimitByPage(), $page);
    		}
 	} 
 ?>

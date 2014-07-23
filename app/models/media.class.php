@@ -47,28 +47,52 @@
 			return $this->path;
 		}
 
-		public static function find($params = null, $limit = 6, $page = 1){
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
+			$limit = self::getLimitByPage();
+			$page = self::getCurrentPage();
 			$start = ($page * $limit) - $limit;
-			$sql = "SELECT * FROM media";
 
-			if (!is_null($params)){
-				$sql .= " WHERE " . $params['paramsName'];
-			}
-
+			$sql = 
+			"SELECT 
+				*
+			FROM 
+				media " .($paramsName ? " WHERE $paramsName" : "");
 			$sql .= " LIMIT $start, $limit";
-
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
-			$rs->execute($params["paramsValue"]);
+			$rs->execute($paramsValue);
 			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
-			$media = array();			
-
+			$media = array();		
 			foreach ($rows as $row) {
 				$media[] = new Media($row);
 			}
 				
 			return $media;
 		}
+
+		// public static function find($params = null, $limit = 6, $page = 1){
+		// 	$start = ($page * $limit) - $limit;
+		// 	$sql = "SELECT * FROM media";
+
+		// 	if (!is_null($params)){
+		// 		$sql .= " WHERE " . $params['paramsName'];
+		// 	}
+
+		// 	$sql .= " LIMIT $start, $limit";
+
+		// 	$pdo = \Database::getConnection();
+		// 	$rs = $pdo->prepare($sql);
+		// 	$rs->execute($params["paramsValue"]);
+		// 	$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+		// 	$media = array();			
+
+		// 	foreach ($rows as $row) {
+		// 		$media[] = new Media($row);
+		// 	}
+				
+		// 	return $media;
+		// }
 
 		public static function count(){
 			$sql = "SELECT id_media FROM media";

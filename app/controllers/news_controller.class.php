@@ -18,7 +18,7 @@
 	        } else {
 	           $page = 1;
 	        }
-	        News::setLimitByPage(8);
+	        News::setLimitByPage(5);
 	        News::setCurrentPage($page);
 	        $date = date("d-m-Y");
 	        $this->news = News::find(array(), array(), "=", "AND", "modification_date");

@@ -238,13 +238,24 @@
 		}
 
 		public static function countNext(){
-			$date = date("d-m-Y");
-			return count(self::findNext($date));			
+			$date = date("Y-m-d");
+			$sql = "SELECT count(id_event) as count FROM event WHERE end_date > CURDATE()";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetch();
+			return $rows["count"];
+
 		}
 
 		public static function countPrev(){
-			$date = date("d-m-Y");
-			return count(self::findPrev($data));
+			$date = date("Y-m-d");
+			$sql = "SELECT count(id_event) as count FROM event WHERE end_date < CURDATE()";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetch();
+			return $rows["count"];
 		}
 
 		public static function findById($id){
