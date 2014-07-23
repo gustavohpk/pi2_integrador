@@ -10,9 +10,15 @@
 		<div id="news-list" class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
 			<div class="list-group">
 				<?php foreach($this->events as $event) : ?>
-				  <a href="#" class="list-group-item">
+				  <a href="<?= createUriFor("/eventos/{$event->getIdEvent()}/ver")?>" class="list-group-item">
 				  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-				  		<img class="thumbnail" src="<?=$this->getResource('img/placeholder-evento.png'); ?>" alt="...">
+					  	<?php if ($media = $event->getMedia()) : ?>
+							<?php $media = $media[0] ?>
+							<?php $image = $media->getPath() ?>
+						<?php else : ?>
+							<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
+						<?php endif ?>
+						<img class="event-thumbnail" src="<?=$image?>" alt="<?=($media ? $media->getLabel() : "")?>">
 				  	</div>
 				    <h4 class="list-group-item-heading"><?= $event->getName() ?></h4>
 				    <p class="list-group-item-text"><?= $event->getStartDate("d/m/Y H:i") ?></p>

@@ -21,7 +21,7 @@
 	        News::setLimitByPage(8);
 	        News::setCurrentPage($page);
 	        $date = date("d-m-Y");
-	        $this->news = News::all();
+	        $this->news = News::find(array(), array(), "=", "AND", "modification_date");
 	        $this->pagination = new Pager(News::count(), News::getlimitByPage(), $page);
    		}
 	} 

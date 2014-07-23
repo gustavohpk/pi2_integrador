@@ -12,7 +12,13 @@
 				<?php foreach($this->news as $newsItem) : ?>
 				  <a href="#" class="list-group-item">
 				  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-				  		<img class="thumbnail" src="<?=$this->getResource('img/placeholder-evento.png'); ?>" alt="...">
+						<?php if ($media = $newsItem->getMedia()) : ?>
+							<?php $media = $media[0] ?>
+							<?php $image = $media->getPath() ?>
+						<?php else : ?>
+							<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
+						<?php endif ?>
+				  		<img class="thumbnail" src="<?=$image?>" alt="<?=($media ? $media->getLabel() : "")?>">
 				  	</div>
 				    <h4 class="list-group-item-heading"><?= $newsItem->getTitle() ?></h4>
 				    <p class="list-group-item-text">
