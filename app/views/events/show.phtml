@@ -72,5 +72,4 @@
 		<?php endforeach ?>
 	</div>
 <?php endif ?>
-
-<div class="fb-comments" data-href="http://localhost<?= createUriFor("/eventos/{$this->events->getIdEvent()}/ver")?>" data-numposts="5" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://<?=$_SERVER['HTTP_HOST'] ?><?= createUriFor("/eventos/{$this->events->getIdEvent()}/ver")?>" data-numposts="5" data-colorscheme="light"></div>
