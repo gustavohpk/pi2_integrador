@@ -46,7 +46,7 @@
 
 		public function returnToLastPage(){
 			header("Location: " . $this->back());
-			exit();
+			exit(); 
 		}
 
 		public function back() {

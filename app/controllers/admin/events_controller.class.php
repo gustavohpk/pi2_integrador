@@ -67,7 +67,6 @@
 			$this->setHeadTitle("Editar Evento");
          $this->eventsType = \EventsType::all();
 			$this->events = \Events::findById($this->params[":id"])[0];
-         //echo "<pre>"; print_r($this->events); exit;
          $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
          $this->titleBtnSubmit = "Salvar";
 		}

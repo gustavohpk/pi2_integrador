@@ -123,7 +123,9 @@
     $router->get('/admin/inscricoes/lista/pagina/:p', array('controller' => 'Admin\EnrollmentController', 'action' => '_list'));
     $router->get('/admin/inscricoes/:id/remover', array('controller' => 'Admin\EnrollmentController', 'action' => 'remove'));
     $router->get('/admin/inscricoes/nova', array('controller' => 'Admin\EnrollmentController', 'action' => '_new'));
-    $router->get('/admin/inscricoes/:id/alterar', array('controller' => 'Admin\EnrollmentController', 'action' => '_edit'));
+    $router->get('/admin/inscricoes/:id/ver', array('controller' => 'Admin\EnrollmentController', 'action' => 'show'));
+    $router->get('/admin/inscricoes/:id/pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'payment'));
+    $router->get('/admin/inscricoes/:id/cancela-pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment'));    
 
     //rotas para usuários
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));

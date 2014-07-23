@@ -37,10 +37,16 @@
 					<td align="left"><?= $enrollment->participant->getName() ?></td>
 					<td align="left"><?= $enrollment->event->getName() ?></td>
 					<td>
-						<button class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></button>
-						<a href="<?= createUriFor("/admin/inscricoes/{$enrollment->getIdEnrollment()}/remover") ?>">
-							<button class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></button>
+						<a href="<?=createUriFor("/admin/inscricoes/{$enrollment->getIdEnrollment()}/ver")?>" role="button" class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
+						<a href="<?= createUriFor("/admin/inscricoes/{$enrollment->getIdEnrollment()}/remover") ?>" role="button" class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span>
 						</a>
+						<?php if ($enrollment->getDatePayment()) :?>
+							<a href="<?= createUriFor("/admin/inscricoes/{$enrollment->getIdEnrollment()}/cancela-pagamento") ?>" role="button" class="btn btn-default btn-sm" title="Cancelar Pagamento"><span class="glyphicon glyphicon-usd"></span>
+							</a>
+						<?php else :?>
+							<a href="<?= createUriFor("/admin/inscricoes/{$enrollment->getIdEnrollment()}/pagamento") ?>" role="button" class="btn btn-success btn-sm" title="Definir como Pago"><span class="glyphicon glyphicon-usd"></span>
+							</a>
+						<?php endif ?>
 					</td>
 				</tr>
 			<?php endforeach ?>

@@ -109,8 +109,8 @@
 		public function validateData(){
 			if ($this->participant->getIdParticipant() < 1) $this->errors[] = "Nome do participante não informado.";
 			if ($this->event->getIdEvent() < 1) $this->errors[] = "Evento não informado.";
-			if ($this->event->eventType->getEventType() != "sem_pagamento" && $this->getIdPaymentType() < 1) $this->errors[] = "Forma de pagamento não localizada.";
-			if ($this->event->eventType->getEventType() != "sem_pagamento" && $this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
+			if ($this->getIdPaymentType() < 1) $this->errors[] = "Forma de pagamento não localizada.";
+			if ($this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
 		}
 
  		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
@@ -120,9 +120,7 @@
 			"SELECT 
 				enrollment.*
 			FROM
-				enrollment" . ($paramsName ? " WHERE " . $paramsName : "") . 
-			" ORDER BY 
-				id_enrollment DESC";
+				enrollment" . ($paramsName ? " WHERE " . $paramsName : "");
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($paramsValue);
@@ -241,38 +239,6 @@
 				$statment = $pdo->prepare($sql);
 				$statment->execute(array(":attendance"=>$status, ":id_enrollment"=>$key));
 			}
-		}
-
-		public function setPayment($date = null){
-			$date = is_null($date) ? date("Y-m-d H:i:s") : $date;
-			$sql = 
-			"UPDATE
-				enrollment
-			SET 
-				date_payment = :date_payment
-			WHERE
-				id_enrollment = :id_enrollment";
-			$params = array(				
-					":date_payment" => $date,
-					":id_enrollment" => $this->getIdEnrollment()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			return $statment->execute($params);
-		}
-
-		public function cancelPayment(){
-			$sql = 
-			"UPDATE
-				enrollment
-			SET 
-				date_payment = null
-			WHERE
-				id_enrollment = :id_enrollment";
-			$params = array(":id_enrollment" => $this->getIdEnrollment());
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			return $statment->execute($params);
 		}
 	}
 ?>

@@ -32,6 +32,8 @@
 						<?php endif; ?>
 						<?php if ($enrollment->getDatePayment()) : ?>
 							<span class="label label-success">PAGO</span>
+						<?php elseif ($enrollment->getCost() == 0) : ?>
+							<span class="label label-success">GRATUÍTO</span>
 						<?php else : ?>
 							<span class="label label-danger">NÃO PAGO</span>
 						<?php endif ?>

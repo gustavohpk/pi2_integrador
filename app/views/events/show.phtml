@@ -18,8 +18,6 @@
 				<h5><span class="label label-info">Este evento faz parte do evento: <a class="event-related-link" href="<?= createUriFor("/eventos/{$this->events->parentEvent->getIdEvent()}/ver")?>"><?= $this->events->parentEvent->getName() ?></a></span></h5>
 			<?php endif ?>
 		</div>
-
-		<!-- <p class="event-short-description"></p> -->
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
 		<?php if ($media = $this->events->getMedia()) : ?>
@@ -35,11 +33,15 @@
 	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 event-long-description">
 		<?= $this->events->getDetails()?>
 	</div>
-	<div class="col-xs-12">
-		<span style="display:inline-block" data-toggle="tooltip" data-placement="bottom" <?php echo (!$this->events->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->events->getStartDateEnrollment("d/m/Y"). " às " . $this->events->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
-		<a role="button" href="<?= createUriFor("/inscricao/evento/{$this->events->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-lg"  <?php echo (!$this->events->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
-	</span>
-	</div>
+    <?php if ($this->events->eventType->getEventType() == "sem_inscricao") : ?>
+		<h4><span class="label label-info">Para participar deste evento não é necessário fazer inscrição.</span></h4>
+    <?php elseif (!$this->events->eventInitiated() && $this->events->eventType->getEventType() != "sem_inscricao") : ?>
+		<div class="col-xs-12">
+			<span style="display:inline-block" data-toggle="tooltip" data-placement="bottom" <?php echo (!$this->events->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->events->getStartDateEnrollment("d/m/Y"). " às " . $this->events->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
+			<a role="button" href="<?= createUriFor("/inscricao/evento/{$this->events->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-lg"  <?php echo (!$this->events->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
+			</span>
+		</div>
+	<?php endif ?>
 </div>
 <?php if ($this->eventsRelated) : ?>
 	<br/><br/>

@@ -34,12 +34,45 @@
          $this->redirectTo("admin/inscricoes/lista");
       }
 
-		public function _new(){
-			$this->setHeadTitle("Criar inscrição");
+		public function show(){
+			$this->setHeadTitle("Visualizar Inscrição");
+         if ($this->enrollments = \Enrollment::findById($this->params[":id"])) {
+            $this->enrollments = $this->enrollments[0];
+         }
+         else {
+            \FlashMessage::errorMessage("A inscrição que você está tentando visualizar não foi localizada.");
+            $this->redirectTo("admin/inscricoes/lista");
+         }
 		}
 
-		public function _edit(){
-			$this->setHeadTitle("Modificar inscrição");
-		}
+      public function payment() {
+         if ($this->enrollments = \Enrollment::findById($this->params[":id"])) {
+            if ($this->enrollments[0]->setPayment()) {
+               \FlashMessage::successMessage("Inscrição definada como pago.");
+            }
+            else {
+               \FlashMessage::errorMessage("Problemas ao tentar definir pagamento da incrição.");
+            }
+         }
+         else {
+            \FlashMessage::errorMessage("A inscrição informada para definir pagamento não foi localizada.");
+         }
+         $this->redirectTo("admin/inscricoes/lista");
+      }
+
+      public function cancelPayment() {
+         if ($this->enrollments = \Enrollment::findById($this->params[":id"])) {
+            if ($this->enrollments[0]->cancelPayment()) {
+               \FlashMessage::successMessage("O pagamento da inscrição foi cancelado.");
+            }
+            else {
+               \FlashMessage::errorMessage("Problemas ao tentar cancelar o pagamento da incrição.");
+            }
+         }
+         else {
+            \FlashMessage::errorMessage("A inscrição informada para cancelar o pagamento não foi localizada.");
+         }
+         $this->redirectTo("admin/inscricoes/lista");
+      }
 	} 
 ?>
