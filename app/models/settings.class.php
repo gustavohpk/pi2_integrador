@@ -125,91 +125,91 @@
 
 			$base = new BaseModel();
 
-			$tests[$i]["result"] = $this->validateCpf('');
+			$tests[$i]["result"] = $base->validateCpf('');
 			$tests[$i]["test"] = "Validação de CPF";
 			$tests[$i]["operation"] = "CPF nulo";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateCpf('303.29');
+			$tests[$i]["result"] = $base->validateCpf('303.29');
 			$tests[$i]["test"] = "Validação de CPF";
 			$tests[$i]["operation"] = "CPF incompleto";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateCpf('352683543');
+			$tests[$i]["result"] = $base->validateCpf('352683543');
 			$tests[$i]["test"] = "Validação de CPF";
 			$tests[$i]["operation"] = "CPF incompleto 2";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateCpf('87596741258');
+			$tests[$i]["result"] = $base->validateCpf('87596741258');
 			$tests[$i]["test"] = "Validação de CPF";
 			$tests[$i]["operation"] = "Número aleatório";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateCpf('33158327813');
+			$tests[$i]["result"] = $base->validateCpf('33158327813');
 			$tests[$i]["test"] = "Validação de CPF";
 			$tests[$i]["operation"] = "CPF válido";
 			$tests[$i]["expected"] = true;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateCpf('872.388.686-28');
+			$tests[$i]["result"] = $base->validateCpf('872.388.686-28');
 			$tests[$i]["test"] = "Validação de CPF";
 			$tests[$i]["operation"] = "CPF válido com máscara";
 			$tests[$i]["expected"] = true;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateCpf('a7h8dy-326#');
+			$tests[$i]["result"] = $base->validateCpf('a7h8dy-326#');
 			$tests[$i]["test"] = "Validação de CPF";
 			$tests[$i]["operation"] = "String aleatória";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateCpf("$at8'fx'aa");
+			$tests[$i]["result"] = $base->validateCpf("'fx'aa");
 			$tests[$i]["test"] = "Validação de CPF";
-			$tests[$i]["operation"] = "String aleatória com cifrão e aspas";
+			$tests[$i]["operation"] = "String aleatória com aspas";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateEmail("aswkhyuwe");
+			$tests[$i]["result"] = $base->validateEmail("aswkhyuwe");
 			$tests[$i]["test"] = "Validação de E-mail";
 			$tests[$i]["operation"] = "String aleatória";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateEmail("e74hu5#v^asx");
+			$tests[$i]["result"] = $base->validateEmail("e74hu5#v^asx");
 			$tests[$i]["test"] = "Validação de E-mail";
 			$tests[$i]["operation"] = "String aleatória com números e caracteres especiais";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateEmail("e74hu5#v^asx");
+			$tests[$i]["result"] = $base->validateEmail("e74hu5#v^asx");
 			$tests[$i]["test"] = "Validação de E-mail";
 			$tests[$i]["operation"] = "String aleatória com números e caracteres especiais";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateEmail("testmail0203@testmail");
+			$tests[$i]["result"] = $base->validateEmail("testmail0203@testmail");
 			$tests[$i]["test"] = "Validação de E-mail";
 			$tests[$i]["operation"] = "E-mail sem .com";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateEmail("testmail0203@testmail.");
+			$tests[$i]["result"] = $base->validateEmail("testmail0203@testmail.");
 			$tests[$i]["test"] = "Validação de E-mail";
 			$tests[$i]["operation"] = "E-mail sem 'com'";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateEmail("testmail0203testmail.com");
+			$tests[$i]["result"] = $base->validateEmail("testmail0203testmail.com");
 			$tests[$i]["test"] = "Validação de E-mail";
 			$tests[$i]["operation"] = "E-mail sem '@'";
 			$tests[$i]["expected"] = false;
 			$i++;
 
-			$tests[$i]["result"] = $this->validateEmail("testmail0203@testmail.com");
+			$tests[$i]["result"] = $base->validateEmail("testmail0203@testmail.com");
 			$tests[$i]["test"] = "Validação de E-mail";
 			$tests[$i]["operation"] = "E-mail válido";
 			$tests[$i]["expected"] = true;

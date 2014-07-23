@@ -2,5 +2,30 @@
 	<div class="page-header">
   		<h2>Programador</h2>
 	</div>
-	<div id="tests"></div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Teste</th>
+				<th>Operação</th>
+			</tr>
+		</thead>
+		<tfoot>
+			
+		</tfoot>
+		<tbody>
+			<?php foreach ($this->tests as $test) : ?>
+				<?php if($test["result"] == $test["expected"]) : ?>
+					<tr style="background-color: #5cb85c; color: #FFF">
+						<td><span class="glyphicon glyphicon-ok-sign" style="font-size: 20px">
+				<?php else : ?>
+					<tr style="background-color: #d9534f; color: #FFF">
+						<td><span class="glyphicon glyphicon-remove-sign" style="font-size: 20px"></span></td>
+				<?php endif; ?>
+				<td><?= $test["test"] ?></td>
+				<td><?= $test["operation"] ?></td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
 </div>

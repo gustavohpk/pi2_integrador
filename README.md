@@ -1,3 +1,6 @@
+----- Atualização 040 (22/07) -----
+- Testes funcionando
+
 ----- Atualização 039 (21/07) -----
 - Iniciando área de testes
 - Finalizando Lista de Chamada
