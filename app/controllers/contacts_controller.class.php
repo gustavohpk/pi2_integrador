@@ -8,6 +8,7 @@
 
    		public function sendMessage(){
    			$to = Settings::getContactEmail()->getValue();
+   			var_dump($to); exit;
    			$name = $this->params["name"];
    			$subject = "Contato UTFPR Eventos: Mensagem Enviada por $name";
 			$message = $this->params["message"];
