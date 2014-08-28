@@ -75,6 +75,12 @@
 			return (eregi("^[a-z0-9_\.\-]+@[a-z0-9_\.\-]*[a-z0-9_\-]+\.[a-z]{2,4}$", $email));
 		}
 
+		public function validateYoutubeLink($link){
+			if (strpos($link, 'youtube.com/watch?v=') != false){
+				return true;
+			}
+		}
+
 		public function is_date($date) {
 			$date = explode("/", $date);
 			return checkdate($date[1], $date[0], $date[2]);

@@ -1,3 +1,9 @@
+----- Atualização 042 (28/08) -----
+- Deletados arquivos .fuse_hidden
+- Criado arquivo PERMISSIONS.md para documentarmos temporariamente as permissões
+- Iniciada função para validar link do youtube
+
+
 ----- Atualização 041 (23/07) -----
 - Corrigido vários detalhes concernentes a labels para informar que o evento é gratuito ou sem inscrição
 - Alterado controller para permitir cadastrar evento com valor zerado caso seja evento sem_pagamento

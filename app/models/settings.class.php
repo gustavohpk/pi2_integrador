@@ -68,6 +68,7 @@
 
 		public static function getContactEmail(){
 			$contactEmail = self::find(array("description"), array("contact_mail"))[0];
+			var_dump($contactEmail);
 			return count($contactEmail) > 0 ? $contactEmail : NULL;
 		}
 
@@ -213,6 +214,24 @@
 			$tests[$i]["test"] = "Validação de E-mail";
 			$tests[$i]["operation"] = "E-mail válido";
 			$tests[$i]["expected"] = true;
+			$i++;
+
+			$tests[$i]["result"] = $base->validateYoutubeLink("www.youtube.com");
+			$tests[$i]["test"] = "Validação de link do Youtube";
+			$tests[$i]["operation"] = "Site do youtube";
+			$tests[$i]["expected"] = false;
+			$i++;
+
+			$tests[$i]["result"] = $base->validateYoutubeLink("https://www.youtube.com/watch?v=pAgnJDJN4VA");
+			$tests[$i]["test"] = "Validação de link do Youtube";
+			$tests[$i]["operation"] = "Estrutura de link válida";
+			$tests[$i]["expected"] = true;
+			$i++;
+
+			$tests[$i]["result"] = $base->validateYoutubeLink("https://www.youtube.com/watchv=pAgnJDJN4VA");
+			$tests[$i]["test"] = "Validação de link do Youtube";
+			$tests[$i]["operation"] = "Estrutura de link inválida";
+			$tests[$i]["expected"] = false;
 			$i++;
 
 			return $tests;
