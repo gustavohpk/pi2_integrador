@@ -1,153 +1,215 @@
 <form action="<?= $this->actionForm?>" method="post">
 	<div class="row">
-		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
-			<h4>ID</h4>
-			<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getIdEvent()?>" disabled/>
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+			<ul class="nav nav-pills nav-justified" id="myTab">
+			  <li class="active"><a href="#section1" role="tab" data-toggle="pill">Principal</a></li>
+			  <li><a href="#section2" role="tab" data-toggle="pill">Datas e Vagas</a></li>
+			  <li><a href="#section3" role="tab" data-toggle="pill">Preços</a></li>
+			</ul>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
-			<h4>Vinculado com Evento ID</h4>
-			<div class="input-group">
-			    <input type="number" min="1" class="form-control" name="event[id_parent_event]" value="<?=$this->events->getIdParentEvent()?>">
-			    <div class="input-group-btn">
-			      <a id="event-access" href="<?= createUriFor('/admin/eventos/lista') ?>" target="_blank" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Lista de eventos" ><span class="glyphicon glyphicon-list"></span></a>
-			    </div>
-		    </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-			<h4>Título do Evento</h4>
-			<input type="text" class="form-control" name="event[name]" value="<?= $this->events->getName()?>" required/>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-			<h4>Tipo</h4>
-			<select class="form-control" name="event[id_event_type]">
-				<?php foreach ($this->eventsType as $eventType) : ?>
-					<?php if (isset($this->events->eventType)) : ?>
-						<?php if ($this->events->eventType->getIdEventType() == $eventType->getIdEventType()) : ?>
-							<option selected value="<?=$eventType->getIdEventType()?>"><?=$eventType->getEventType()?></option>
-						<?php else :?>
-							<option value="<?=$eventType->getIdEventType()?>"><?=$eventType->getEventType()?></option>
-						<?php endif ?>
-					<?php else : ?>
-						<option value="<?=$eventType->getIdEventType()?>"><?=$eventType->getEventType()?></option>
-					<?php endif; ?>
-				<?php endforeach ?>
-			</select>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-			<h4>Ministrante</h4>
-			<input type="text" class="form-control" name="event[teacher]" value="<?= $this->events->getTeacher()?>" required/>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-			<h4>Local</h4>
-			<div class="input-group">
-			    <input type="text" class="form-control" name="event[local]" value="<?= $this->events->getLocal()?>" required/>
-			    <div class="input-group-btn">
-			      <button id="address-button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir endereço da UTFPR">UTFPR</button>
-			    </div>
-		    </div>	
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-			<h4>Data e Horário do Evento</h4>
+	<div class="tab-content">
+		<div id="section1" class="tab-pane fade in active">
 			<div class="row">
-				<div class="col-xs-12 col-sm-6">
-					<h5>Início</h5>
-					<input type="text" class="form-control" name="event[start_date]" value="<?=$this->events->getStartDate('d/m/Y H:i')?>" maxlength="16" required/>
-					<br/>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<h5>Fim</h5>
-					<input type="text" class="form-control" name="event[end_date]" value="<?=$this->events->getEndDate('d/m/Y H:i')?>" maxlength="16" required/>
+				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+					<h4>ID</h4>
+					<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getIdEvent()?>" disabled/>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-			<h4>Data e Horário de Inscrição</h4>
 			<div class="row">
-				<div class="col-xs-12 col-sm-6">
-					<h5>Início</h5>
-					<input type="text" class="form-control" name="event[start_date_enrollment]" value="<?=$this->events->getStartDateEnrollment('d/m/Y H:i')?>" maxlength="16" required/>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<h5>Fim</h5>
-					<input type="text" class="form-control" name="event[end_date_enrollment]" value="<?= $this->events->getEndDateEnrollment('d/m/Y H:i')?>" maxlength="16" required/>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
-			<h4>Vagas</h4>
-			<input type="number" min="1" class="form-control" name="event[spaces]" value="<?= $this->events->getSpaces()?>" required/>
-		</div>
-	</div>
-
-	<?php if (!$this->events->getIdEvent() || !$this->events->cost) : ?>
-		<div class="row first-cost">
-			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-				<h4>Preços</h4>
-				<div class="row">
-					<div class="col-xs-12 col-sm-6">
-						<h5>Preço</h5>
-						<input type="number" min="0" class="form-control" name="cost[cost][]" />
-					</div>
-					<div class="col-xs-12 col-sm-6">
-						<h5>Preço válido até dia</h5>
-						<input type="text" class="form-control" name="cost[date_max][]" />
-					</div>
+				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+					<h4>Vinculado com Evento ID</h4>
+					<div class="input-group">
+					    <input type="number" min="1" class="form-control" name="event[id_parent_event]" value="<?=$this->events->getIdParentEvent()?>">
+					    <div class="input-group-btn">
+					      <a id="event-access" href="<?/=/ createUriFor('/admin/eventos/lista') ?>" target="_blank" class="btn btn-default" data-toggle="modal" data-target="#event-list-modal" ><span class="glyphicon glyphicon-list"></span></a>
+					    </div>
+				    </div>
 				</div>
 			</div>
-		</div>
-	<?php else : ?>
-		<?php foreach ($this->events->cost as $cost) :?>
-			<input type="hidden" name="cost[id_cost_event][]" value="<?=$cost->getIdCostEvent()?>"/>
-			<div class="row first-cost">
+			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-					<h4>Preços</h4>
+					<h4>Título do Evento</h4>
+					<input type="text" class="form-control" name="event[name]" value="<?= $this->events->getName()?>" required/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+					<h4>Tipo</h4>
+					<select class="form-control" name="event[id_event_type]">
+						<?php foreach ($this->eventsType as $eventType) : ?>
+							<?php if (isset($this->events->eventType)) : ?>
+								<?php if ($this->events->eventType->getIdEventType() == $eventType->getIdEventType()) : ?>
+									<option selected value="<?=$eventType->getIdEventType()?>"><?=$eventType->getEventType()?></option>
+								<?php else :?>
+									<option value="<?=$eventType->getIdEventType()?>"><?=$eventType->getEventType()?></option>
+								<?php endif ?>
+							<?php else : ?>
+								<option value="<?=$eventType->getIdEventType()?>"><?=$eventType->getEventType()?></option>
+							<?php endif; ?>
+						<?php endforeach ?>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<h4>Ministrante</h4>
+					<input type="text" class="form-control" name="event[teacher]" value="<?= $this->events->getTeacher()?>" required/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<h4>Local</h4>
+					<div class="input-group">
+					    <input type="text" class="form-control" name="event[local]" value="<?= $this->events->getLocal()?>" required/>
+					    <div class="input-group-btn">
+					      <button id="address-button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir endereço da UTFPR">UTFPR</button>
+					    </div>
+				    </div>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<h4>Descrição</h4>
+					<textarea id="event-content" name="event[details]"><?= $this->events->getDetails()?></textarea>
+				</div>
+			</div>
+		</div>
+
+		<div id="section2" class="tab-pane fade">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<h4>Data e Horário do Evento</h4>
 					<div class="row">
 						<div class="col-xs-12 col-sm-6">
-							<h5>Preço</h5>
-							<input type="number" min="0" class="form-control" name="cost[cost][]" value="<?=$cost->getCost()?>"/>
+							<h5>Início</h5>
+							<input type="text" class="form-control" name="event[start_date]" value="<?=$this->events->getStartDate('d/m/Y H:i')?>" maxlength="16" required/>
+							<br/>
 						</div>
 						<div class="col-xs-12 col-sm-6">
-							<h5>Preço válido até dia</h5>
-							<input type="text" class="form-control" name="cost[date_max][]" value="<?=$cost->getDateMax("d/m/Y")?>" />
+							<h5>Fim</h5>
+							<input type="text" class="form-control" name="event[end_date]" value="<?=$this->events->getEndDate('d/m/Y H:i')?>" maxlength="16" required/>
 						</div>
 					</div>
 				</div>
 			</div>
-		<?php endforeach?>
-	<?php endif ?>
-	<br>
-	<button id="cost-add_button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir novo preço">Adicionar Valor</button>
-	<div id="cost_event"></div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<h4>Data e Horário de Inscrição</h4>
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<h5>Início</h5>
+							<input type="text" class="form-control" name="event[start_date_enrollment]" value="<?=$this->events->getStartDateEnrollment('d/m/Y H:i')?>" maxlength="16" required/>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<h5>Fim</h5>
+							<input type="text" class="form-control" name="event[end_date_enrollment]" value="<?= $this->events->getEndDateEnrollment('d/m/Y H:i')?>" maxlength="16" required/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+					<h4>Vagas</h4>
+					<input type="number" min="1" class="form-control" name="event[spaces]" value="<?= $this->events->getSpaces()?>" required/>
+				</div>
+			</div>
+		</div>
 
-	<div class="row">
-		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-			<h4>Descrição</h4>
-			<textarea id="event-content" name="event[details]"><?= $this->events->getDetails()?></textarea>
+		<div id="section3" class="tab-pane fade">
+			<?php if (!$this->events->getIdEvent() || !$this->events->cost) : ?>
+				<div class="row first-cost">
+					<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+						<h4>Preços</h4>
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<h5>Preço</h5>
+								<input type="number" min="0" class="form-control" name="cost[cost][]" />
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<h5>Preço válido até dia</h5>
+								<input type="text" class="form-control" name="cost[date_max][]" />
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php else : ?>
+				<?php foreach ($this->events->cost as $cost) :?>
+					<input type="hidden" name="cost[id_cost_event][]" value="<?=$cost->getIdCostEvent()?>"/>
+					<div class="row first-cost">
+						<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+							<h4>Preços</h4>
+							<div class="row">
+								<div class="col-xs-12 col-sm-6">
+									<h5>Preço</h5>
+									<input type="number" min="0" class="form-control" name="cost[cost][]" value="<?=$cost->getCost()?>"/>
+								</div>
+								<div class="col-xs-12 col-sm-6">
+									<h5>Preço válido até dia</h5>
+									<input type="text" class="form-control" name="cost[date_max][]" value="<?=$cost->getDateMax("d/m/Y")?>" />
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php endforeach?>
+			<?php endif ?>
+			<br/>
+			<button id="cost-add_button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir novo preço">Adicionar Valor</button>
+			<div id="cost_event"></div>
+			<br/>
 		</div>
 	</div>
+	<br>
 	<br/>
-	<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
-	<a href="<?= createUriFor('/admin/eventos/lista')?>">
-		<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
-	</a>
-	<a href="<?= createUriFor('/admin/eventos/'.$this->events->getIdEvent().'/remover')?>">
-		<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
-	</a>
+	<div class="row">
+		<div class="col-xs-12">
+			<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
+			<a href="<?= createUriFor('/admin/eventos/lista')?>">
+				<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+			</a>
+			<a href="<?= createUriFor('/admin/eventos/'.$this->events->getIdEvent().'/remover')?>">
+				<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+			</a>
+		</div>
+	</div>
+
 </form>
+
+<div id="event-list-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <h2 class="modal-title">Lista de eventos</h2>
+              <table class="table">
+				<tr>
+					<th></th>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Tipo</th>
+				</tr>
+				<?php //foreach ($this->events as $event) : ?>
+					<tr>
+						<td><input type="checkbox"></input></td>
+						<td >1</td>
+						<td >evento1</td>
+						<?php //if ($event->isSubEvent()) : ?>
+							<td align="left"><span class="badge pull-right"><span class="glyphicon glyphicon-link" title="Subevento"></span></span></td>
+						<?php //else : ?>
+							<td align="left">palestra</td>
+						<?php //endif; ?>					
+						<td>
+							
+						</td>					
+					</tr>
+				<?php //endforeach; ?>
+			</table>
+            </div>
+            <div class="caption">
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          </div>
+       </div>
+    </div>
+</div>

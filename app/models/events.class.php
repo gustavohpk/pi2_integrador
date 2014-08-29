@@ -127,7 +127,7 @@
 			if ($this->getIdParentEvent() && !$this->findById($this->getIdParentEvent())) $this->errors[] = "Evento à ser vinculado não foi localizado.";
 		}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_event", $direction ="DESC"){
 			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
 			$limit = self::getLimitByPage();
 			$page = self::getCurrentPage();
@@ -137,7 +137,7 @@
 			"SELECT 
 				*
 			FROM 
-				event " .($paramsName ? " WHERE $paramsName" : "");
+				event " .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
 			$sql .= " LIMIT $start, $limit";
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
@@ -161,12 +161,12 @@
 		}
 
 		public static function findNext($date){
-			$events = self::find(array("end_date"), array($date), ">=");
+			$events = self::find(array("end_date"), array($date), ">=", "AND" ,"start_date", "ASC");
 			return $events;
 		}
 
 		public static function findPrev($date){
-			$events = self::find(array("end_date"), array($date), "<");
+			$events = self::find(array("end_date"), array($date), "<", "AND", "end_date", "DESC");
 			return $events;			
 		}
 

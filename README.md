@@ -1,8 +1,13 @@
+----- Atualização 043 (29/08) -----
+- Adicionado ORDER BY no find de eventos
+- Corrigida ordenação de eventos nas áreas de evento
+- Adicionadas tabs nas páginas de criação e modificação de eventos
+- Outras pequenas modificações
+
 ----- Atualização 042 (28/08) -----
 - Deletados arquivos .fuse_hidden
 - Criado arquivo PERMISSIONS.md para documentarmos temporariamente as permissões
 - Iniciada função para validar link do youtube
-
 
 ----- Atualização 041 (23/07) -----
 - Corrigido vários detalhes concernentes a labels para informar que o evento é gratuito ou sem inscrição

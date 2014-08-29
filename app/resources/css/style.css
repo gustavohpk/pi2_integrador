@@ -67,7 +67,8 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 
 
 /* Footer */
-#footer{ margin-top: 10px; padding-top: 10px; background: #FFF; border-top: 1px solid #BBB; margin-bottom: 30px;}
+#footer{ margin-top: 10px; padding-top: 10px; background: #FFF; border-top: 1px solid #BBB; margin-bottom: 30px; font-size: 12px;}
+#footer a{color: #777;}
 .utfpr-link { padding-top: 8px; width: 70px;}
 .utfpr-link img{ width: 49px; height: 49px; }
 .utfpr-link:hover img{ content: url("../img/utfpr-hover.png"); }
