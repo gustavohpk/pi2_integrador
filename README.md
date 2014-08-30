@@ -3,6 +3,13 @@
 - Corrigida ordenação de eventos nas áreas de evento
 - Adicionadas tabs nas páginas de criação e modificação de eventos
 - Outras pequenas modificações
+- Iniciada lista de eventos em modal na criação ou edição de evento
+
+- Iniciado layout da área 'Manutenção'
+- Validação na lista de presença adicionada
+- Alguns nomes e textos alterados
+- Removidos alguns arquivos desnecessários
+
 
 ----- Atualização 042 (28/08) -----
 - Deletados arquivos .fuse_hidden

@@ -1,35 +1,49 @@
 <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 enrollment-list" style="">
 	<h2>Registro de Presença</h2>
+	<h3><?= $this->events->getName() ?></h3>
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-		    <h3 class="panel-title">Lista de inscritos (confirmados)</h3>
-		  </div>
-		  <div class="panel-body">
-		  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
-			</div>
-			<form action="<?= $this->actionForm ?>" method="post">
-				<table class="table">
-					<tr>
-						<th></th>
-						<th>Código da Inscrição</th>
-						<th>Nome</th>
-					</tr>
-					<?php foreach($this->enrollments as $listItem) : ?>
-						<!-- Input hidden para mandar valor para POST caso a checkbox estiver desmarcada -->
-						<input type="hidden" name="enrollment[<?= $listItem->getIdEnrollment() ?>]"/>
-						<tr>
-							<td><input type="checkbox" name="enrollment[<?= $listItem->getIdEnrollment() ?>]" <?php echo ($listItem->getAttendance() == 1? 'checked' : '') ?>/></td>
-							<td><?= $listItem->getIdEnrollment() ?></td>
-							<td><?= $listItem->participant->getName() ?></td>
-						</tr>
-					<?php endforeach; ?>
-				</table>
-				<div class="panel-footer">
-					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Salvar</button>
-					<a role="button" href="<?= createUriFor("/admin/eventos/lista") ?>" class="btn btn-warning"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+		<?php if($this->events->eventType->getEventType() == "sem_inscricao") : ?>
+			<br/>
+			<p>Não é possível registrar presença pois é um evento que não aceita inscrições.</p>
+			<br/>
+			<a href="<?=createUriFor("/admin/eventos/lista")?>" role="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+		<?php elseif (strtotime($this->events->getStartDate("d-m-Y H:i")) < strtotime(date("d-m-Y H:i"))) : ?>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			    <h3 class="panel-title">Lista de inscritos (confirmados)</h3>
+			  </div>
+			  <div class="panel-body">
+			  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
 				</div>
-			</form>
-		</div>
+				<form action="<?= $this->actionForm ?>" method="post">
+					<table class="table">
+						<tr>
+							<th></th>
+							<th>Código da Inscrição</th>
+							<th>Nome</th>
+						</tr>
+						<?php foreach($this->enrollments as $listItem) : ?>
+							<!-- Input hidden para mandar valor para POST caso a checkbox estiver desmarcada -->
+							<input type="hidden" name="enrollment[<?= $listItem->getIdEnrollment() ?>]"/>
+							<tr>
+								<td><input type="checkbox" name="enrollment[<?= $listItem->getIdEnrollment() ?>]" <?php echo ($listItem->getAttendance() == 1? 'checked' : '') ?>/></td>
+								<td><?= $listItem->getIdEnrollment() ?></td>
+								<td><?= $listItem->participant->getName() ?></td>
+							</tr>
+						<?php endforeach; ?>
+					</table>
+					<div class="panel-footer">
+						<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Salvar</button>
+						<a role="button" href="<?= createUriFor("/admin/eventos/lista") ?>" class="btn btn-warning"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+					</div>
+				</form>
+			</div>
+		<?php else : ?>
+			<br/>
+			<p>Não é possível registrar presença pois o evento ainda não iniciou.</p>
+			<p>O evento inicia dia <?= $this->events->getStartDate("d/m/Y") ?> às <?= $this->events->getStartDate("H:i") ?>.</p>
+			<br/>
+			<a href="<?=createUriFor("/admin/eventos/lista")?>" role="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+		<?php endif; ?>
 	</div>
 </div>
