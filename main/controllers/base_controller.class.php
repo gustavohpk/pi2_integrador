@@ -11,7 +11,11 @@
 		protected $data = array(); //dados/variáveis que serão exportados para as views
 
 		public function __construct(){
-			$this->layout = "layout/layout.phtml";
+			if(Settings::checkMaintenance() == '1'){
+				$this->layout = "layout/layout_maintenance.phtml";
+			}else{
+				$this->layout = "layout/layout.phtml";
+			}
 		}
 
 		public function setParams($params){

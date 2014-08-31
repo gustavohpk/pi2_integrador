@@ -9,6 +9,7 @@
          $this->settings = \Settings::find(array("description"), array("site_title"))[0];
          $this->actionForm = $this->getUri("admin/config");
          $this->configSection = 'site_title';
+         $this->maintenance = \Settings::checkMaintenance();
 		}
 
 		public function theme(){
@@ -55,6 +56,12 @@
       public function developer(){
          $this->setHeadTitle("Programador");
          $this->tests = \Settings::tests();
+      }
+
+      public function maintenance(){
+         $this->maintenance = \Settings::maintenance();
+         echo $this->maintenance;
+         exit;
       }
 
 	} 

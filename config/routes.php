@@ -142,6 +142,7 @@
 
     //rotas para configuracoes
     $router->get('/admin/config/geral', array('controller' => 'Admin\SettingsController', 'action' => 'general'));
+    $router->get('/admin/config/geral/manutencao', array('controller' => 'Admin\SettingsController', 'action' => 'maintenance'));
     $router->get('/admin/config/tema', array('controller' => 'Admin\SettingsController', 'action' => 'theme'));
     $router->get('/admin/config/banners', array('controller' => 'Admin\SettingsController', 'action' => 'banners'));
     //forma de pgto

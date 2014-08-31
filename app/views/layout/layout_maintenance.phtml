@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title><?= $this->getHeadTitle() ?></title>
+   
+  <?php 
+	  createStylesheetTag(
+	    'css/bootstrap/css/bootstrap.min.css',
+	    'css/style.css',
+	    'plugins/fancybox/jquery.fancybox.css',
+	    'plugins/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7',
+	    'plugins/nivo-slider/nivo-slider.css',
+	    'plugins/nivo-slider/themes/default/default.css'
+	  );
+
+	  createShortCutIcon('favicon.png');
+  ?>
+</head>
+	<body>
+		<div class="container">			
+			<?php 
+				require_once "views/includes/_maintenance.phtml";
+			?>
+		</div>
+	</body>
+	<?php require_once "views/includes/_foot.phtml";?>
+</html>

@@ -236,5 +236,42 @@
 
 			return $tests;
 		}
+
+		public function checkMaintenance(){
+			$sql = "SELECT value FROM setting WHERE description = 'maintenance_status' ";
+
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+			$settings = array();
+				
+			$value = $rows[0]["value"];
+
+			return $value;
+		}
+
+		public function maintenance(){
+
+			$value = self::checkMaintenance();
+			$change = '0';
+
+			if ($value=='0') {
+				$change = '1';
+			}
+
+			$sql = "UPDATE setting SET value = " . $change . " WHERE description = 'maintenance_status'";
+
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			
+			if($statment->execute()){
+				return $change;
+			} else{
+				return $value;
+			}
+
+		}
+
 	}
 ?>

@@ -4,15 +4,23 @@
 	</div>
 	<h4>Manutenção</h4>
 	<div class="row">
-		<form action="<?= $this->actionForm ?>" method="post">
-			<div class="col-xs-6 col-xs-offset-3">
-				<span class="label label-success">Site Online</span>
+		<div class="col-xs-6 col-xs-offset-3">
+			<?php if($this->maintenance == '1') : ?>
+				<span id="label-status" class="label label-danger">Site Offline</span>
 				<br/><br/>
-				<p>Ativando o modo de manutenção, todo o site (exceto o painel de administração) ficará inacessível, e uma mensagem será exibida informando a manutenção.</p>
-				<br/>
-				<button class="btn btn-warning">Ativar manutenção</button>
-			</div>
-		</form>
+				<button id="btn-maintenance" class="btn btn-warning" onclick="maintenance();">
+					Desativar Manutenção</button>
+			<?php else : ?>
+				<span id="label-status" class="label label-success">Site Online</span>
+				<br/><br/>
+				<button id="btn-maintenance" class="btn btn-warning" onclick="maintenance();">
+					Ativar Manutenção</button>
+			<?php endif; ?>
+			<br/>
+			<br/>
+			<p>Ativando o modo de manutenção, todo o site (exceto o painel de administração) ficará inacessível, e uma mensagem será exibida informando a manutenção.</p>
+			<br/>
+		</div>
 	</div>
 	<br/>
 	<h4>Título do site</h4>
@@ -28,3 +36,28 @@
 	</div>
 	<hr/>
 </div>
+
+<script type="text/javascript">
+	function maintenance(){
+		if (confirm('Você realmente deseja ativar/desativar o modo de manutenção?')){
+			$("#btn-maintenance").attr("disabled", "disabled");
+			$.ajax({
+				url: '<?=createUriFor("/admin/config/geral/manutencao")?>',
+				success: function(data) {
+					if(data == 1){
+						$("#btn-maintenance").text("Desativar Manutenção");
+						$("#label-status").text("Site Offline");
+						$("#label-status").removeClass("label-success");
+						$("#label-status").addClass("label-danger");
+					} else if(data == 0){
+						$("#btn-maintenance").text("Ativar Manutenção");
+						$("#label-status").text("Site Online");
+						$("#label-status").removeClass("label-danger");
+						$("#label-status").addClass("label-success");		
+					}
+				}
+			});
+			$("#btn-maintenance").removeAttr("disabled");
+		}
+	}
+</script>

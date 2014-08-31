@@ -1,3 +1,8 @@
+----- Atualização 044 (30/08 - 31/08) -----
+- Modo manutenção adicionado, na área Configurações Gerais
+- Adicionados via ajax algumas coisas referente à manutenção, mas acho que precisamos aprimorar
+- Dividida lista de links alternativos no footer
+
 ----- Atualização 043 (29/08) -----
 - Adicionado ORDER BY no find de eventos
 - Corrigida ordenação de eventos nas áreas de evento
