@@ -3,6 +3,9 @@
 - Adicionados via ajax algumas coisas referente à manutenção, mas acho que precisamos aprimorar
 - Dividida lista de links alternativos no footer
 
+- Iniciado relatório de inscrições
+- Iniciado sistema de log, em funcionamento nos Eventos e Notícias no painel de admin
+
 ----- Atualização 043 (29/08) -----
 - Adicionado ORDER BY no find de eventos
 - Corrigida ordenação de eventos nas áreas de evento

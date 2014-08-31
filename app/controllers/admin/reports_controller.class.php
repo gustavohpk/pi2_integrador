@@ -1,34 +1,34 @@
 <?php 
 	namespace Admin;
 	
-	class NewsController extends BaseAdminController{
-      protected $news;
+	class ReportsController extends BaseAdminController{
+      protected $report;
       protected $actionForm;
 
-		public function _list() {
-         $this->setHeadTitle("Lista de Notícias");
-         if (isset($this->params[":p"])) {
-            $page = $this->params[":p"];
-         } else {
-            $page = 1;
-         }
-         \News::setCurrentPage($page);
+		// public function _list() {
+  //        $this->setHeadTitle("Lista de Notícias");
+  //        if (isset($this->params[":p"])) {
+  //           $page = $this->params[":p"];
+  //        } else {
+  //           $page = 1;
+  //        }
+  //        \News::setCurrentPage($page);
 
-         if (isset($this->params[":id"])){
-            $this->news = \News::findById($this->params[":id"]);
-            $this->pagination = new \Pager(count($this->news), \News::getLimitByPage(), $page);
-         }
-         else{
-            $this->news = \News::find();
-            $this->pagination = new \Pager(\News::count(), \News::getLimitByPage(), $page);
-         }
-      }
+  //        if (isset($this->params[":id"])){
+  //           $this->news = \News::findById($this->params[":id"]);
+  //           $this->pagination = new \Pager(count($this->news), \News::getLimitByPage(), $page);
+  //        }
+  //        else{
+  //           $this->news = \News::find();
+  //           $this->pagination = new \Pager(\News::count(), \News::getLimitByPage(), $page);
+  //        }
+  //     }
 
 		public function _new(){
-		$this->setHeadTitle("Cadastrar notícia");
-		$this->news = new \News();
-        $this->actionForm = $this->getUri("admin/noticias");
-        $this->titleBtnSubmit = "Cadastrar";
+		$this->setHeadTitle("Relatório de Eventos");
+		$this->report = new \Reports();
+        $this->actionForm = $this->getUri("admin/relatorios/eventos/gerar");
+        $this->titleBtnSubmit = "Gerar";
 		}
 
 		public function _edit(){
@@ -42,7 +42,6 @@
          $params = $this->params["news"];
          $this->news = new \News($params);
          if ($this->news->save()){
-            \Logger::creationLog($_SESSION["admin"]->getName(), "Notícias", $this->news->getIdNews());
             \FlashMessage::successMessage("Notícia cadastrada com sucesso.");
             $this->redirectTo("admin/noticias/lista");
          }
@@ -58,7 +57,6 @@
       public function update(){  
          $this->news = \News::findById($this->params[":id"])[0];
          if ($this->news->update($this->params['news'])){
-            \Logger::updateLog($_SESSION["admin"]->getName(), "Notícias", $this->news->getIdNews());
             \FlashMessage::successMessage("Notícia alterada com sucesso.");
             $this->redirectTo("admin/noticias/lista");
          }
@@ -74,7 +72,6 @@
       public function remove(){
          $this->news = \News::findById($this->params[":id"])[0];
          if ($this->news->remove()){
-            \Logger::deletionLog($_SESSION["admin"]->getName(), "Notícias", $this->news->getIdNews());
             \FlashMessage::successMessage("Notícia excluída com sucesso.");
          }
          else {

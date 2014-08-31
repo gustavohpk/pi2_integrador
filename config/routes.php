@@ -157,5 +157,9 @@
     $router->post('/admin/config', array('controller' => 'Admin\SettingsController', 'action' => 'update'));
     $router->get('/admin/config/programador', array('controller' => 'Admin\SettingsController', 'action' => 'developer'));
 
+    //rotas para relatorios
+    $router->get('/admin/relatorios/inscricoes', array('controller' => 'Admin\ReportsController', 'action' => '_new'));
+    $router->post('/admin/relatorios/inscricoes/gerar', array('controller' => 'Admin\ReportsController', 'action' => 'generate'));
+
     $router->load();
 ?>

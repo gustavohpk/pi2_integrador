@@ -39,6 +39,7 @@
          $cost = $this->params["cost"];
          $this->events = new \Events($params);
          if ($this->events->save()){
+            \Logger::creationLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
             \FlashMessage::successMessage("Evento cadastrado com sucesso.");
             if (!$this->events->setCost($cost)) {
                $errors = $this->events->cost[0]->getErrors();
@@ -76,6 +77,7 @@
          $this->events = \Events::findById($this->params[":id"])[0];
          $cost = $this->params["cost"];
          if ($this->events->update($this->params['event'])){
+            \Logger::updateLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
             \FlashMessage::successMessage("Evento modificado com sucesso.");
             if (!$this->events->setCost($cost)) {
                $errors = $this->events->cost[0]->getErrors();
@@ -103,6 +105,7 @@
 		public function remove(){
          $this->events = \Events::findById($this->params[":id"])[0];
          $this->events->remove();
+         \Logger::deletionLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
          \FlashMessage::successMessage("Evento removido com sucesso.");
          $this->redirectTo("admin/eventos/lista");
 		}

@@ -1,77 +1,31 @@
 <?php
-	class News extends BaseModel{
-		private $idNews;
-		private $idEvent;
-		private $creationDate;
-		private $modificationDate;
-		private $title;
-		private $subtitle;		
-		private $content;
+	class Reports extends BaseModel{
+		private $dateFrom;
+		private $dateTo;
+		private $event;
 
-		public function setIdNews($idNews){
-			$this->idNews = $idNews;
+		public function setDateFrom($dateFrom){
+			$this->dateFrom = empty($dateFrom) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $dateFrom)));
 		}
 
-		public function setIdEvent($idEvent){
-			$this->idEvent = $idEvent;
+		public function setDateTo($dateTo){
+			$this->dateTo = empty($dateTo) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $dateTo)));
 		}
 
-		public function setCreationDate($creationDate){
-			//$this->creationDate = $creationDate;
-			$this->creationDate = empty($creationDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $creationDate)));
+		public function setEvent($event){
+			$this->event = $event;
 		}
 
-		public function setModificationDate($modificationDate){
-			//$this->modificationDate = $modificationDate;
-			$this->modificationDate = empty($modificationDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $modificationDate)));
+		public function getDateFrom(){
+			return is_null($this->dateFrom) ? null : date($format, strtotime($this->dateFrom));
 		}
 
-		public function setTitle($title){
-			$this->title = $title;
+		public function getDateTo(){
+			return is_null($this->dateTo) ? null : date($format, strtotime($this->dateTo));
 		}
 
-		public function setSubtitle($subtitle){
-			$this->subtitle = $subtitle;
-		}
-
-		public function setContent($content){
-			$this->content = $content;
-		}
-
-		public function getIdNews(){
-			return $this->idNews;
-		}
-
-		public function getIdEvent(){
-			return $this->idEvent;
-		}
-
-		public function getCreationDate($format = "Y-m-d H:i:s"){
-			//return date("d/m/Y H:i", $this->creationDate);
-			if (empty($this->idNews)) $this->creationDate = date("Y-m-d H:i:s");
-			return is_null($this->creationDate) ? null : date($format, strtotime($this->creationDate));
-		}
-
-		public function getModificationDate($format = "Y-m-d H:i:s"){
-			//return date("d/m/Y H:i", $this->modificationDate);
-			return is_null($this->modificationDate) ? null : date($format, strtotime($this->modificationDate));
-		}
-
-		public function getTitle(){
-			return $this->title;
-		}
-
-		public function getSubtitle(){
-			return $this->subtitle;
-		}
-
-
-		public function getContent(){
-			return $this->content;
-		}
-
-		public function getMedia($type = "p") {
-			return Media::findByIdEvent($this->getIdEvent(), $type);
+		public function getEvent(){
+			return $this->event;
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_news", $direction ="DESC"){
@@ -173,9 +127,7 @@
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$statment = $statment->execute($params);
-			$this->setIdNews($pdo->lastInsertId());
-			return $statment ? $this : false;
+			return $statment->execute($params);
 		}
 
 		public function remove(){
