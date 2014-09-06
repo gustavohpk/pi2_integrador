@@ -25,6 +25,27 @@
          }
 		}
 
+      public function selectionList() {
+         $this->layout = "admin/layout/layout_empty.phtml";
+         $this->setHeadTitle("Seleção de Eventos");
+         if (isset($this->params[":p"])) {
+            $page = $this->params[":p"];
+         } else {
+            $page = 1;
+         }
+         \Events::setLimitByPage(5);
+         \Events::setCurrentPage($page);
+
+         if (isset($this->params[":id"])){
+            $this->events = \Events::findById($this->params[":id"]);
+            $this->pagination = new \Pager(count($this->events), \Events::getLimitByPage(), $page);
+         }
+         else{
+            $this->events = \Events::find();
+            $this->pagination = new \Pager(\Events::count(), \Events::getLimitByPage(), $page);
+         }
+      }
+
 		public function _new(){
          //prepara formulario para inserção de novo evento
 			$this->setHeadTitle("Novo Evento");

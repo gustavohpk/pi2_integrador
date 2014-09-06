@@ -90,7 +90,29 @@ $(document).ready(function() {
 
 $("#address-button").click(function(){
 	$("input[name='event[local]']").val("UTFPR - Câmpus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR");
-})
+});
+
+//Relatorios
+$.datepicker.setDefaults({
+    dateFormat: 'dd/mm/yy',
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab','Dom'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    nextText: 'Próximo',
+    prevText: 'Anterior'
+});
+
+
+$("input[name='reports[date_from]']").datepicker();
+$("input[name='reports[date_to]']").datepicker();
+$("input[name='reports[time_from]']").mask("99:99");
+$("input[name='reports[time_to]']").mask("99:99");
+
+
+
+
 
 $("#cost-add_button").click(function() {
 	$("#cost_event").append($(".first-cost").html());

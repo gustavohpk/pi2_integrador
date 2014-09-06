@@ -1,3 +1,13 @@
+----- Atualização 045 (04/09 - 05/09) -----
+- Adicionada listagem de eventos com Ajax na página de criação/edição de evento
+- Adicionado jQueryUI
+- Pequeno progresso na área de relatórios
+- Iniciada área de participantes no painel de admin (rotas, controladores)
+- Layout vazio (que exibe apenas o conteúdo, para ser usado em ajax ou iframes) criado
+- Pequenas correções para validar na W3C
+- Tabela de preços de evento iniciada (apenas html)
+
+
 ----- Atualização 044 (30/08 - 31/08) -----
 - Modo manutenção adicionado, na área Configurações Gerais
 - Adicionados via ajax algumas coisas referente à manutenção, mas acho que precisamos aprimorar

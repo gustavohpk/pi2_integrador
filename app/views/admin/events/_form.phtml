@@ -1,7 +1,7 @@
 <form action="<?= $this->actionForm?>" method="post">
 	<div class="row">
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-			<ul class="nav nav-pills nav-justified" id="myTab">
+			<ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
 			  <li class="active"><a href="#section1" role="tab" data-toggle="pill">Principal</a></li>
 			  <li><a href="#section2" role="tab" data-toggle="pill">Datas e Vagas</a></li>
 			  <li><a href="#section3" role="tab" data-toggle="pill">Preços</a></li>
@@ -17,15 +17,64 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
-					<h4>Vinculado com Evento ID</h4>
-					<div class="input-group">
-					    <input type="number" min="1" class="form-control" name="event[id_parent_event]" value="<?=$this->events->getIdParentEvent()?>">
-					    <div class="input-group-btn">
-					      <a id="event-access" href="<?/=/ createUriFor('/admin/eventos/lista') ?>" target="_blank" class="btn btn-default" data-toggle="modal" data-target="#event-list-modal" ><span class="glyphicon glyphicon-list"></span></a>
-					    </div>
-				    </div>
+				<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+					<h4>Eventos vinculados</h4>
+					<a id="event-access" target="_blank" onclick='javascript:$(".ajax-loader").hide();' class="btn btn-default" data-toggle="modal" data-target="#event-list-modal" ><span class="glyphicon glyphicon-list"></span> Selecione os eventos</a>
 				</div>
+			</div>
+			<div id="event-list-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+			        <div class="modal-content">
+			          <div class="modal-body">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				            <h2 class="modal-title">Lista de eventos</h2>
+				            <h5>Selecione um evento para vincular. O evento atual se tornará <u>subevento</u> do evento selecionado.</h5>
+				            <table class="table table-hover" id="event-list-table">
+								<tr>
+									<th></th>
+									<th>ID</th>
+									<th>Nome</th>
+									<th>Tipo</th>
+									<th></th>
+								</tr>
+								<tr>
+									<td><input id="option_0" checked type="radio" name="event[id_parent_event]" value="0"/></td>
+									<td><label for="option_0">0</label></td>
+									<td><label for="option_0">Nenhum</label></td>
+									<td><label for="option_0"></label></td>				
+									<td>					
+									</td>					
+								</tr>
+								<?php if($this->events->isSubEvent()) : ?>
+									<tr class="info">
+										<td><input id="option_<?= $this->events->parentEvent->getIdEvent() ?>" checked type="radio" name="event[id_parent_event]" value="<?= $this->events->parentEvent->getIdEvent() ?>"/></td>
+										<td><label for="option_<?= $this->events->parentEvent->getIdEvent() ?>"><?= $this->events->parentEvent->getIdEvent() ?></label></td>
+										<td><label for="option_<?= $this->events->parentEvent->getIdEvent() ?>"><?= $this->events->parentEvent->getName() ?></label></td>
+										<td><label for="option_<?= $this->events->parentEvent->getIdEvent() ?>"><?= $this->events->parentEvent->eventType->getEventType()?></label></td>				
+										<td>
+											<a href="<?= createUriFor("/admin/eventos/{$this->events->parentEvent->getIdEvent()}/alterar") ?>" role="button" target="_blank" class='btn btn-default btn-sm' title='Acessar página do evento'>
+												<span class='glyphicon glyphicon-new-window'></span>
+											</a>					
+										</td>					
+									</tr>
+								<?php endif; ?>
+							</table>
+							<div class="ajax-loader"></div>
+							</br>
+							<span class="info" style="height:15px; width: 25px; border: 1px solid gray; display: inline-block; background: #d9edf7"></span>
+							<span style="font-size: 12px; margin-bottom: 3px">Anteriormente selecionado</span>
+							<br/><br/>
+							<button id="btn-load" type="button" class="btn btn-default btn-xs" onclick="loadEvents();">Carregar mais</button>
+							<br/>
+							<br/>
+			            </div>
+			            <div class="caption">
+			            </div>
+			            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			          </div>
+			       </div>
+			    </div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -157,6 +206,24 @@
 			<button id="cost-add_button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir novo preço">Adicionar Valor</button>
 			<div id="cost_event"></div>
 			<br/>
+			<div class="row">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<table class="table" style="background: #FFF">
+					<tr>
+						<th>Preço</th>
+						<th>Preço válido até dia</th>
+						<th><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Adicionar preço</button></th>
+					</tr>
+					
+					<tr>
+						<td><input type="text" class="form-control"/></td>
+						<td><input type="text" class="form-control"/></td>
+						<td><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
 		</div>
 	</div>
 	<br>
@@ -175,41 +242,23 @@
 
 </form>
 
-<div id="event-list-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <h2 class="modal-title">Lista de eventos</h2>
-              <table class="table">
-				<tr>
-					<th></th>
-					<th>ID</th>
-					<th>Nome</th>
-					<th>Tipo</th>
-				</tr>
-				<?php //foreach ($this->events as $event) : ?>
-					<tr>
-						<td><input type="checkbox"></input></td>
-						<td >1</td>
-						<td >evento1</td>
-						<?php //if ($event->isSubEvent()) : ?>
-							<td align="left"><span class="badge pull-right"><span class="glyphicon glyphicon-link" title="Subevento"></span></span></td>
-						<?php //else : ?>
-							<td align="left">palestra</td>
-						<?php //endif; ?>					
-						<td>
-							
-						</td>					
-					</tr>
-				<?php //endforeach; ?>
-			</table>
-            </div>
-            <div class="caption">
-            </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-          </div>
-       </div>
-    </div>
-</div>
+<script type="text/javascript">
+	page = 1;
+	function loadEvents(){
+		$(".ajax-loader").show();
+		url = "<?=createUriFor('/admin/eventos/lista/selecao/pagina/')?>" + page;	
+		$.ajax({
+			url: url,
+			success: function(data) {
+				$("#event-list-table").children().append( data );
+				//loaded = true;
+				page++;
+				if (/\S/.test(data) == false) {
+					$("#btn-load").hide();
+				}
+				$(".ajax-loader").hide();
+			}
+		});
+	}
+</script>
+

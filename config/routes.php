@@ -92,6 +92,11 @@
     $router->get('/admin/eventos/lista', array('controller' => 'Admin\EventsController', 'action' => '_list'));
     $router->get('/admin/eventos/lista/pagina/:p', array('controller' => 'Admin\EventsController', 'action' => '_list'));
     $router->get('/admin/eventos/lista/id/:id', array('controller' => 'Admin\EventsController', 'action' => '_list'));
+    
+    //rotas para lista de seleção de eventos
+    $router->get('/admin/eventos/lista/selecao', array('controller' => 'Admin\EventsController', 'action' => 'selectionList'));
+    $router->get('/admin/eventos/lista/selecao/pagina/:p', array('controller' => 'Admin\EventsController', 'action' => 'selectionList'));
+
     $router->get('/admin/eventos/novo', array('controller' => 'Admin\EventsController', 'action' => '_new'));
     $router->post('/admin/eventos', array('controller' => 'Admin\EventsController', 'action' => 'create'));    
     $router->get('/admin/eventos/:id/alterar', array('controller' => 'Admin\EventsController', 'action' => 'edit'));
@@ -127,13 +132,21 @@
     $router->get('/admin/inscricoes/:id/pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'payment'));
     $router->get('/admin/inscricoes/:id/cancela-pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment'));    
 
-    //rotas para usuários
+    //rotas para usuários (do painel de administração)
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));
     $router->get('/admin/usuarios/novo', array('controller' => 'Admin\AdministratorController', 'action' => '_new'));
     $router->post('/admin/usuarios/novo', array('controller' => 'Admin\AdministratorController', 'action' => 'save'));
     $router->get('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'edit'));
     $router->post('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'update'));
     $router->get('/admin/usuarios/:id/remover', array('controller' => 'Admin\AdministratorController', 'action' => 'remove'));
+
+    //rotas para participantes
+    $router->get('/admin/participantes/lista', array('controller' => 'Admin\ParticipantController', 'action' => '_list'));
+    $router->get('/admin/participantes/novo', array('controller' => 'Admin\ParticipantController', 'action' => '_new'));
+    $router->post('/admin/participantes/novo', array('controller' => 'Admin\ParticipantController', 'action' => 'save'));
+    $router->get('/admin/participantes/:id/alterar', array('controller' => 'Admin\ParticipantController', 'action' => 'edit'));
+    $router->post('/admin/participantes/:id/alterar', array('controller' => 'Admin\ParticipantController', 'action' => 'update'));
+    $router->get('/admin/participantes/:id/remover', array('controller' => 'Admin\ParticipantController', 'action' => 'remove'));
 
     //rotas para cidades
     $router->get('/admin/cidades/lista', array('controller' => 'Admin\CityController', 'action' => '_list'));

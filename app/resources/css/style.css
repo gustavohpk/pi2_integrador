@@ -28,6 +28,9 @@ a:hover, a:focus { color: #000; }
 .pagination li a:hover{ color: #000; background-color: #AAA; border-color: #AAA;}
 .search-btn-group li { cursor: pointer; }
 
+.ajax-loader{ display: inline-block; width: 16px; height: 16px; background-image: url("../img/ajax-loader.gif"); background-repeat: no-repeat; }
+
+
 
 /* Eventos */
 .event div.thumbnail:hover{ background-color: #CCC; }
@@ -136,6 +139,8 @@ ul.left-menu span{ text-align: left; }
 .nav-pills>li>a { border-radius: 0; margin-left: 5px; border: 1px solid #CCC; background-color: #FFF;}	
 
 .progress-bar { -webkit-transition: width 2.5s ease-in-out; transition: width 2.5s ease-in-out; }
+
+#label-status { font-size: 14px; } 
 
 .config-template input[type="file"]{ margin: 0 auto; }
 .config-template img { width: 64px; height: 64px;}

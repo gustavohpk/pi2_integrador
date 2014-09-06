@@ -1,5 +1,5 @@
 <?php
-ini_set("display_errors", false);
+//ini_set("display_errors", false);
   define('APP_NAME', 'UTFPR Eventos');
   define('SITE_ROOT', '/pi2_integrador');
   define('APP_ROOT_FOLDER', $_SERVER['DOCUMENT_ROOT'] . '/' . SITE_ROOT);

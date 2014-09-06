@@ -1,0 +1,17 @@
+<?php foreach ($this->events as $event) : ?>
+	<tr>
+		<td><input id="option_<?= $event->getIdEvent() ?>" type="radio" name="event[id_parent_event]" value="<?= $event->getIdEvent() ?>"/></td>
+		<td><label for="option_<?= $event->getIdEvent() ?>"><?= $event->getIdEvent() ?></td>
+		<td><label for="option_<?= $event->getIdEvent() ?>"><?= $event->getName() ?></label></td>
+		<?php if ($event->isSubEvent()) : ?>
+			<td ><?= $event->eventType->getEventType() ?><span class="badge pull-right"><span class="glyphicon glyphicon-link" title="Subevento"></span></span></td>
+		<?php else : ?>
+			<td align="left"><label for="option_<?= $event->getIdEvent() ?>"><?= $event->eventType->getEventType()?></label></td>
+		<?php endif; ?>					
+		<td>
+			<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/alterar") ?>" role="button" target="_blank" class='btn btn-default btn-sm' title='Acessar página do evento'>
+				<span class='glyphicon glyphicon-new-window'></span>
+			</a>					
+		</td>					
+	</tr>
+<?php endforeach; ?>

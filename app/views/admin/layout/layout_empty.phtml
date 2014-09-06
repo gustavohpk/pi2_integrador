@@ -4,10 +4,9 @@
   <meta charset="utf-8">
   <title><?= $this->getHeadTitle() ?></title>
    
-  <?php 
+  <?= 
 	  createStylesheetTag(
 	    'css/bootstrap/css/bootstrap.min.css',
-	    'css/jQueryUI/jquery-ui-1.9.2.custom.min.css',
 	    'css/style.css',
 	    'plugins/fancybox/jquery.fancybox.css',
 	    'plugins/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7',
@@ -19,18 +18,23 @@
   ?>
 </head>
 	<body>
-		<div class="container">			
-			<?php 
-				require_once "views/includes/_header.phtml";
-				require_once "views/includes/_main-menu.phtml";
-				require_once "views/admin/includes/_flash.phtml";
-				require_once $this->getViewPath();
-				require_once "views/includes/_footer.phtml";
-			?>
+		<div id="admin" class="container">
+			<div id="header">
+				<h3>Painel do Administrador</h3>
+			</div>
+			<div class="row">
+				<div id="content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<?php
+						require_once "views/admin/includes/_flash.phtml";
+						require_once $this->getViewPath();
+					?>		
+				</div>
+			</div>
+			<div id="footer">
+				<h6>Painel de Administração - Sistema de Eventos UTFPR</h6>
+			</div>	
 		</div>
 
-		<?php require_once "views/includes/_modals.phtml";?>
+		<?php require_once "views/admin/includes/_foot.phtml" ?>
 	</body>
-
-	<?php require_once "views/includes/_foot.phtml";?>
 </html>
