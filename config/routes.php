@@ -140,7 +140,7 @@
     $router->post('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'update'));
     $router->get('/admin/usuarios/:id/remover', array('controller' => 'Admin\AdministratorController', 'action' => 'remove'));
 
-    //rotas para participantes
+    //rotas para participantes (administração)
     $router->get('/admin/participantes/lista', array('controller' => 'Admin\ParticipantController', 'action' => '_list'));
     $router->get('/admin/participantes/novo', array('controller' => 'Admin\ParticipantController', 'action' => '_new'));
     $router->post('/admin/participantes/novo', array('controller' => 'Admin\ParticipantController', 'action' => 'save'));

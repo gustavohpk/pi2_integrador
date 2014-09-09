@@ -216,7 +216,7 @@
 				city ON city.id_city = participant.id_city
 			INNER JOIN
 				state ON state.id_state = city.id_state" . 
-				(!is_null($paramsName) ? " WHERE " . $paramsName : "");
+				($paramsName ? " WHERE " . $paramsName : "");
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($paramsValue);
