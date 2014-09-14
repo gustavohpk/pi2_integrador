@@ -4,7 +4,6 @@
 - Iniciada área de patrocinadores (sponsor)
 
 
-
 ----- Atualização 045 (04/09 - 05/09) -----
 - Adicionada listagem de eventos com Ajax na página de criação/edição de evento
 - Adicionado jQueryUI
@@ -12,16 +11,17 @@
 - Iniciada área de participantes no painel de admin (rotas, controladores)
 - Layout vazio (que exibe apenas o conteúdo, para ser usado em ajax ou iframes) criado
 - Pequenas correções para validar na W3C
-- Tabela de preços de evento iniciada (apenas Atualização)
+- Tabela de preços de evento iniciada (apenas html)
 
 
------ htmlT 044 (30/08 - 31/08) -----
+----- Atualização 044 (30/08 - 31/08) -----
 - Modo manutenção adicionado, na área Configurações Gerais
 - Adicionados via ajax algumas coisas referente à manutenção, mas acho que precisamos aprimorar
 - Dividida lista de links alternativos no footer
 
 - Iniciado relatório de inscrições
 - Iniciado sistema de log, em funcionamento nos Eventos e Notícias no painel de admin
+
 
 ----- Atualização 043 (29/08) -----
 - Adicionado ORDER BY no find de eventos
