@@ -47,7 +47,7 @@
     $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));        
 
     $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
-    $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
+    $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentControposller', 'action' => 'save'));
     $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
 
     //$router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
@@ -174,5 +174,13 @@
     $router->get('/admin/relatorios/inscricoes', array('controller' => 'Admin\ReportsController', 'action' => '_new'));
     $router->post('/admin/relatorios/inscricoes/gerar', array('controller' => 'Admin\ReportsController', 'action' => 'generate'));
 
+ //rotas para tipos de eventos
+    $router->get('/admin/patrocinadores/lista', array('controller' => 'Admin\SponsorsController', 'action' => '_list')); 
+    $router->get('/admin/patrocinadores/lista/pagina/:p', array('controller' => 'Admin\SponsorsController', 'action' => '_list')); 
+    $router->get('/admin/patrocinadores/novo', array('controller' => 'Admin\SponsorsController', 'action' => '_new')); 
+    $router->post('/admin/patrocinadores/novo', array('controller' => 'Admin\SponsorsController', 'action' => 'create')); 
+    $router->get('/admin/patrocinadores/:id/alterar', array('controller' => 'Admin\SponsorsController', 'action' => 'edit')); 
+    $router->post('/admin/patrocinadores/:id/alterar', array('controller' => 'Admin\SponsorsController', 'action' => 'update')); 
+    $router->get('/admin/patrocinadores/:id/remover', array('controller' => 'Admin\SponsorsController', 'action' => 'remove')); 
     $router->load();
 ?>

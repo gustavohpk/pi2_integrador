@@ -1,5 +1,24 @@
 <h2>Galeria de Mídia</h2>
 <div class="row">
+	<div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+		<a class="admin-shortcut-link" href="">
+			<div class="admin-shortcut">
+				<span class="glyphicon glyphicon-camera"></span><br/>
+				<span class="admin-shortcut-title">FOTOS</span class="admin-shortcut-title">
+			</div>
+		</a>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3">
+		<a class="admin-shortcut-link" href="">
+			<div class="admin-shortcut">
+				<span class="glyphicon glyphicon-facetime-video"></span><br/>
+				<span class="admin-shortcut-title">VÍDEOS</span class="admin-shortcut-title">
+			</div>
+		</a>
+	</div>
+</div>
+<br/>
+<div class="row">
 	<?php $i=0;?>
 	<?php foreach($this->media as $mediaItem) : ?>
 		<?php if ($i == 3) : ?>

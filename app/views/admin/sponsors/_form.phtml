@@ -1,0 +1,28 @@
+<form action="<?= $this->actionForm?>" method="post">
+	<div class="row">
+		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+			<h4>ID</h4>
+			<input type="number" class="form-control" name="sponsor[id_sponsor]" value="<?= $this->sponsors->getIdSponsor()?>" disabled/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<h4>Nome</h4>
+			<input type="text" class="form-control" name="sponsor[name]" value="<?= $this->sponsors->getName()?>"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<h4>Endereço Web</h4>
+			<input type="text" class="form-control" name="sponsor[web_address]" value="<?= $this->sponsors->getWebAddress()?>"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<h4>Descrição</h4>
+			<input type="text" class="form-control" name="sponsor[description]" value="<?= $this->sponsors->getDescription()?>"/>
+		</div>
+	</div>
+		<br/>
+	<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
+

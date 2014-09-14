@@ -1,6 +1,8 @@
------ Atualização 046 (08/07) -----
+----- Atualização 046 (08/09 - 09/09) -----
 
 - Área de participantes no painel do admin adicionada (restam ajustes)
+- Iniciada área de patrocinadores (sponsor)
+
 
 
 ----- Atualização 045 (04/09 - 05/09) -----
