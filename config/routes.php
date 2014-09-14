@@ -47,7 +47,7 @@
     $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));        
 
     $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
-    $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentControposller', 'action' => 'save'));
+    $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
     $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
 
     //$router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
