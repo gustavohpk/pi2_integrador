@@ -25,4 +25,8 @@
 		</script>
 	
 	<?php require_once "_form.phtml"; ?>
+	<a href="<?= createUriFor('/admin/eventos/tipos/'.$this->eventsType->getIdEventType().'/remover')?>">
+		<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+	</a>
+</form>
 </div>

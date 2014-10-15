@@ -8,6 +8,9 @@
 
     //rota para raiz
    	$router->get('/', array('controller' => 'HomeController', 'action' => 'index'));
+
+    //validacoes ajax
+    $router->get('/validarcpf/:cpf', array('controller' => 'BaseController', 'action' => 'validateCpf'));
    	
    	//rotas para eventos
    	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
@@ -15,7 +18,6 @@
     $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
     //$router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
     $router->get('/eventos/:id/ver', array('controller' => 'EventsController', 'action' => 'show'));
-
 
    	//rotas para notícias
    	$router->get('/noticias/lista', array('controller' => 'NewsController', 'action' => 'show'));
@@ -25,6 +27,8 @@
     //rotas para mídia
     $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'gallery'));
     $router->get('/midia/galeria/pagina/:p', array('controller' => 'MediaController', 'action' => 'gallery'));
+    $router->get('/midia/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photos'));
+    $router->get('/midia/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videos'));
 
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));

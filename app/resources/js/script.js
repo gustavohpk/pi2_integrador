@@ -46,6 +46,88 @@ $(document).ready(function(){
 	$("input[name='event[start_date_enrollment]']").mask("99/99/9999 99:99");
 	$("input[name='event[end_date_enrollment]']").mask("99/99/9999 99:99");
 	$("input[name='cost[date_max][]']").mask("99/99/9999");
+
+	validName = true;
+	$("input[name='participant[name]']").change(function(){
+		text = $("input[name='participant[name]']").val();
+		re = /^[a-z\s]*$/;
+		if(!re.test(text)){
+			if (validName == true){
+				$("#name-group").append("<span id='name-error' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+				$("#name-group").addClass("has-error");
+				validName = false;
+				$("input[name='participant[name]']").attr("title", "Digite apenas letras e espacos");
+			}
+		}else if(validName == false){
+			validName = true;
+			$("#name-error").remove();
+			$("#name-group").removeClass("has-error");
+			$("input[name='participant[name]']").attr("title", "");
+		}
+	});
+
+	securePW = true;
+	$("input[name='participant[password]']").change(function(){
+		text = $("input[name='participant[password]']").val();
+		if(text.length < 8 && text.length > 0){
+			if (securePW == true){
+				$("#password-group").append("<span id='password-warning' class='glyphicon glyphicon-warning-sign form-control-feedback'></span>");
+				$("#password-group").addClass("has-warning");
+				securePW = false;
+				$("input[name='participant[password]']").attr("title", "Para melhor segurança de sua conta, use uma senha com pelo menos 8 dígitos contendo letras e números.");
+			}
+		}else if(securePW == false){
+			securePW = true;
+			$("#password-warning").remove();
+			$("#password-group").removeClass("has-warning");
+			$("input[name='participant[password]']").attr("title", "");
+		}
+	});
+
+	error = false;
+	success = false;
+	
+	$("input[name='participant[cpf]']").change(function(){
+		cpf = $("input[name='participant[cpf]']").val();
+		cpf = cpf.replace("-", "");
+		cpf = cpf.replace(".","");
+		cpf = cpf.replace(".","");
+		$.ajax({
+			url: validateCpfUrl + cpf,
+			success: function(data) {
+				if(cpf.length > 0){
+					if(data != 1){
+						if(error == false){
+							$("#cpf-success").remove();
+							$("#cpf-group").removeClass("has-success");
+							$("#cpf-group").append("<span id='cpf-error' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+							$("#cpf-group").addClass("has-error");
+							error = true;
+							success = false;
+							$("input[name='participant[cpf]']").attr("title", "O CPF é inválido ou já está cadastrado.");							
+						}
+					}else if (success == false){
+						$("#cpf-error").remove();
+						$("#cpf-group").removeClass("has-error");
+						$("#cpf-group").append("<span id='cpf-success' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+						$("#cpf-group").addClass("has-success");
+						$("input[name='participant[cpf]']").attr("title", "CPF Válido");
+						error = false;
+						success = true;
+					}
+				}else{
+					error = false;
+					success = false;
+					$("#cpf-error").remove();
+					$("#cpf-success").remove();
+					$("#cpf-group").removeClass("has-error");
+					$("#cpf-group").removeClass("has-success");
+					$("input[name='participant[cpf]']").attr("title", "");		
+				}
+			}
+		});
+	});
+
 });
 
 

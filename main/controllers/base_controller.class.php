@@ -145,6 +145,16 @@
 			exit();
 		}
 
+		public function validateCpf(){
+         if (isset($this->params[":cpf"])) {
+            $cpf = $this->params[":cpf"];
+         } else {
+            $cpf = 1;
+         }
+			echo BaseModel::validateCpf($cpf);
+			exit();
+		}
+
 		public function beforeAction(){}
 		public function afterAction(){}
 

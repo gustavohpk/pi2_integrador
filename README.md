@@ -1,3 +1,10 @@
+----- Atualização 047 (01/10 - 14/10) -----
+
+- Documentação iniciada
+- Validações com ajax no formulário de cadastro iniciadas
+- Pequenas correções e modificações
+
+
 ----- Atualização 046 (08/09 - 09/09) -----
 
 - Área de participantes no painel do admin adicionada (restam ajustes)

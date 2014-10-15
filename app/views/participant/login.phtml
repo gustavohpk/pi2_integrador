@@ -14,14 +14,14 @@
 	<div id="account-login" class="row">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-sm-offset-1">
 			<form action="<?= createUriFor('/conta/login')?>" method="POST">
-				<div class="input-group">
-					<span class="input-group-addon glyphicon glyphicon-envelope"></span>
-				  <input type="email" name="participant[email]" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
+				<div class="left-inner-addon-group">
+				    <i class="glyphicon glyphicon-envelope"></i>
+				    <input type="email" name="participant[email]" class="form-control input-glyphicon" placeholder="Endereço de e-mail">
 				</div>
 				<br/>
-				<div class="input-group">
-				  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
-				  <input type="password" name="participant[password]" class="form-control input-glyphicon" placeholder="Senha">
+				<div class="left-inner-addon-group">
+				    <i class="glyphicon glyphicon-asterisk"></i>
+				    <input type="password" name="participant[password]" class="form-control input-glyphicon" placeholder="Senha">
 				</div>
 				<br/>
 				<button type="submit" class="btn btn-default btn-lg">Login</button>
