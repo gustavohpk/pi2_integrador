@@ -1,6 +1,6 @@
 <?php
 /**
-  * Gerenciador de mensagens Flash
+  * Gerenciador de mensagens Flash.
   * @author Gustavo Pchek
   * @author Rodrigo Miss
   */

@@ -1,4 +1,10 @@
-	<?php
+<?php
+/**
+ * Classe de paginação.
+ * @author Rodrigo Miss
+ * @author Gustavo Pchek
+ */
+
 	session_start();
 
 	class BaseController{

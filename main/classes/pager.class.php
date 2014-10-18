@@ -1,9 +1,18 @@
 <?php
+/**
+ * Classe de paginação.
+ * @author Gustavo Pchek
+ */
+
 class Pager
 {
-    private $totalItems;
-    private $limit;
-    private $page;
+
+    /**
+     * @var int $totalItems Total de itens existentes na coleção retornada pelo banco de dados.
+     * @var int $limit Número de itens por página.
+     * @var int $page Número da página atual.
+     */
+    private $totalItems, $limit, $page;
  
     public function __construct($totalItems, $limit, $page)
     {
@@ -11,7 +20,11 @@ class Pager
         $this->itemsPerPage = $limit;
         $this->page = $page;
     }
- 
+
+    /**
+     * @param string $baseUrl URL base para criar os links.
+     * @return string O código HTML da paginação.
+     */
     public function getPageAnchors($baseUrl)
     {
         $html = "";
@@ -40,7 +53,10 @@ class Pager
         }
         return $html;
     }
- 
+
+    /**
+     * @return bool A existência de página anterior.
+     */
     public function hasPrev()
     {
         if ($this->page > 1) {
@@ -49,7 +65,10 @@ class Pager
             return false;
         }
     }
- 
+
+    /**
+     * @return bool A existência de próxima página.
+     */
     public function hasNext()
     {
  
@@ -60,7 +79,10 @@ class Pager
             return false;
         }
     }
- 
+
+    /**
+     * @return bool O número de páginas.
+     */ 
     public function getNumPages()
     {
         $numPages = ceil($this->totalItems/$this->itemsPerPage);

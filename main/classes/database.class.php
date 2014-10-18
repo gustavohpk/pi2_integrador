@@ -1,13 +1,14 @@
 <?php
 /**
- *   @author Rodrigo Miss
+ * Classe para a conexão com o banco de dados.
+ * @author Rodrigo Miss
  */
 
 class Database{	
 
 	/**
 	 * Realiza a conexão com o banco de dados
-	 * @return bool Retorna o resultado da conexão.
+	 * @return bool O resultado da conexão.
 	 */	
 	public static function getConnection(){
 		require "database_config.php";

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Classe roteadora.
+ * @author Rodrigo Miss
+ */
+
 	class Router{
 		private $url;
 		private $postRoutes = array();

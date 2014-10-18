@@ -1,8 +1,8 @@
 <?php
 /**
- *   @author Gustavo Pchek
- *   Gerência de logs do sistema
-*/
+ * Gerência de logs do sistema.
+ * @author Gustavo Pchek
+ */
 class Logger {
 
     /**

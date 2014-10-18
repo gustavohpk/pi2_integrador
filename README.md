@@ -1,12 +1,17 @@
------ Atualização 047 (01/10 - 14/10) -----
+----- Atualização 048 (15/10 - 18/10) -----
 
+- Documentação complementada
+- Criada tabela events_sponsor para relacionar patrocinadores a eventos
+- Pequenas correções e modificações
+
+
+----- Atualização 047 (01/10 - 14/10) -----
 - Documentação iniciada
 - Validações com ajax no formulário de cadastro iniciadas
 - Pequenas correções e modificações
 
 
 ----- Atualização 046 (08/09 - 09/09) -----
-
 - Área de participantes no painel do admin adicionada (restam ajustes)
 - Iniciada área de patrocinadores (sponsor)
 

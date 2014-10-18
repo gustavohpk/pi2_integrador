@@ -200,6 +200,8 @@ $("#cost-add_button").click(function() {
 	$("#cost_event").append($(".first-cost").html());
 });
 
+$("input[name='cost[date_max][]']").datepicker();
+
 $('#searchValue').bind('keypress', function(e)
 {
    if(e.keyCode == 13)

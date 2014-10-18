@@ -50,6 +50,7 @@
          //prepara formulario para inserção de novo evento
 			$this->setHeadTitle("Novo Evento");
          $this->eventsType = \EventsType::all();
+         $this->sponsors = \Sponsors::all();
 			$this->events = new \Events();
          $this->actionForm = $this->getUri("admin/eventos");
          $this->titleBtnSubmit = "Cadastrar";
