@@ -11,6 +11,7 @@
 	    	if ($this->events = Events::findById($this->params[":id"])) {
 	    		$this->events = $this->events[0];
 	    		$this->eventsRelated = $this->events->getEventsRelated();
+	    		$this->sponsors = $this->events->getSponsors();
 	    	}
 	    	else {
 	    		flashMessage::errorMessage("O evento que você está tentando acessar não existe.");

@@ -16,10 +16,12 @@
 		private $startDateEnrollment;
 		private $endDateEnrollment;	
 		public $cost;
+		public $sponsorship;
 
 		public function setIdEvent($idEvent){
 			$this->idEvent = $idEvent;
 			$this->cost = CostEvent::findByIdEvent($idEvent);
+			$this->sponsorship = Sponsorship::findByIdEvent($idEvent);
 		}
 
 		public function getIdEvent(){
@@ -201,6 +203,30 @@
 			return $events;
 		}
 
+		public function getSponsors(){
+			$sql = 
+			"SELECT 
+				*
+			FROM 
+				sponsorship
+			WHERE
+				(id_event = :id_event)";
+			$params = array(
+				":id_event" => $this->getIdEvent()
+			);
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute($params);
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+			$sponsors = array();			
+
+			foreach ($rows as $row) {
+				$sponsors[] = Sponsors::findById($row["id_sponsor"])[0];
+			}
+				
+			return $sponsors;
+		}
+
 		public function getMedia($type = "p") {
 			return Media::findByIdEvent($this->getIdEvent(), $type);
 		}
@@ -277,6 +303,30 @@
 				}
 				else {
 					$cost->save();
+				}
+			}
+		}
+
+		public function setSponsorship($sponsorships) {
+			$sql = "DELETE FROM sponsorship WHERE id_event = :id_event";
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			$params = array(":id_event" => $this->getIdEvent());
+			$statment->execute($params);
+
+			foreach ($sponsorships as $key => $value) {
+				$data = array(
+						"id_sponsorship" => isset($sponsorships["id_sponsorship"][$key]) ? $sponsorships["id_sponsorship"][$key] : null,
+						"id_event" => $this->getIdEvent(),
+						"id_sponsor" => $value
+					);
+				//$sponsorship = &$this->cost[];
+				$sponsorship = new Sponsorship($data);	
+				if ($sponsorship->getIdSponsorship()) {
+					$sponsorship->update($data);
+				}
+				else {
+					$sponsorship->save();
 				}
 			}
 		}

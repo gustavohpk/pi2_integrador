@@ -43,6 +43,19 @@
 		</div>
 	<?php endif ?>
 </div>
+<?php if ($this->sponsors) : ?>
+	<div class="row">
+		<?php if(count($this->sponsors) < 1) : ?>
+			<h4>Patrocinador</h4>
+			<p><a href="<?= $this->sponsors[0]->getWebAddress() ?>"><?= $this->sponsors[0]->getName() ?></a></p>
+		<?php else :?>
+			<h4>Patrocinadores</h4>
+			<?php foreach ($this->sponsors as $key => $sponsor): ?>
+				<p><a href="http://<?= $sponsor->getWebAddress() ?>"><?= $sponsor->getName() ?></a></p>
+			<?php endforeach ?>
+		<?php endif; ?>
+	</div>
+<?php endif; ?>
 <?php if ($this->eventsRelated) : ?>
 	<br/><br/>
 	<div class="row events">

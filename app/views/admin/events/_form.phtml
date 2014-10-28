@@ -171,14 +171,19 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 					<h4>Patrocinadores</h4>
-					<select class="form-control" name="event[id_event_type]" size="5" multiple="multiple" title="Segure a tecla CTRL para selecionar vários patrocinadores" data-toggle="tooltip" data-placement-"right">
-						<?php foreach ($this->sponsors as $sponsor) : ?>
-							<?php if (isset($this->events->sponsor)) : ?>
-								<?php if ($this->events->sponsor->getIdSponsor() == $sponsor->getIdSponsor()) : ?>
-									<option selected value="<?=$sponsor->getIdSponsor()?>"><?=$sponsor->getName()?></option>
-								<?php else :?>
+					<select class="form-control" name="sponsors[]" size="10" multiple="multiple" title="Segure a tecla CTRL para desmarcar ou para selecionar vários patrocinadores" data-toggle="tooltip" data-placement-"right">
+						<?php foreach ($this->sponsors as $key => $sponsor) : ?>
+							<?php if (isset($this->events->sponsorship)) : ?>
+								<?php $found = false ?>
+								<?php foreach ($this->events->sponsorship as $key => $sponsorship): ?>
+									<?php if ($sponsorship->getIdSponsor() == $sponsor->getIdSponsor()) : ?>
+										<?php $found = true ?>
+										<option selected value="<?=$sponsor->getIdSponsor()?>"><?=$sponsor->getName()?></option>
+									<?php endif ?>	
+								<?php endforeach ?>
+								<?php if(!$found) : ?>
 									<option value="<?=$sponsor->getIdSponsor()?>"><?=$sponsor->getName()?></option>
-								<?php endif ?>
+								<?php endif; ?>
 							<?php else : ?>
 								<option value="<?=$sponsor->getIdSponsor()?>"><?=$sponsor->getName()?></option>
 							<?php endif; ?>
