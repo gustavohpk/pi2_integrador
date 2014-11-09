@@ -1,3 +1,8 @@
+----- Atualização 050 (29/10 - 09/11) -----
+
+- Área de certificados iniciada
+
+
 ----- Atualização 049 (27/10 - 28/10) -----
 
 - Relação patrocinador-evento finalizada (porém falta logo de patrocinador)

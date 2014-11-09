@@ -134,7 +134,14 @@
     $router->get('/admin/inscricoes/nova', array('controller' => 'Admin\EnrollmentController', 'action' => '_new'));
     $router->get('/admin/inscricoes/:id/ver', array('controller' => 'Admin\EnrollmentController', 'action' => 'show'));
     $router->get('/admin/inscricoes/:id/pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'payment'));
-    $router->get('/admin/inscricoes/:id/cancela-pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment'));    
+    $router->get('/admin/inscricoes/:id/cancela-pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment'));
+
+    //rotas para certificados
+    $router->get('/admin/certificados', array('controller' => 'Admin\CertificatesController', 'action' => '_list')); 
+    $router->get('/admin/certificados/lista/pagina/:p', array('controller' => 'Admin\CertificatesController', 'action' => '_list'));
+    $router->get('/admin/certificados/:id/remover', array('controller' => 'Admin\CertificatesController', 'action' => 'remove'));
+    $router->get('/admin/certificados/novo', array('controller' => 'Admin\CertificatesController', 'action' => '_new'));
+    $router->get('/admin/certificados/:id/ver', array('controller' => 'Admin\CertificatesController', 'action' => 'show'));    
 
     //rotas para usuários (do painel de administração)
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));
