@@ -5,18 +5,16 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2">
-		<h3>Área do Administrador</h3>
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 				<form method="POST" action="<?= createUriFor('/admin/login')?>">
-					<div class="input-group">
-					  <span class="input-group-addon glyphicon glyphicon-user"></span>
-					  <input type="text" name="admin[email]" class="form-control input-glyphicon" placeholder="Email">
+					<div id="email-group" class="left-inner-addon-group form-group">
+					    <i class="glyphicon glyphicon-envelope"></i>
+					    <input id="email" name="admin[email]" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail" required>
 					</div>
-					<br/>
-					<div class="input-group">
-					  <span class="input-group-addon glyphicon glyphicon-asterisk"></span>
-					  <input type="password" name="admin[password]" class="form-control input-glyphicon" placeholder="Senha">
+					<div id="email-group" class="left-inner-addon-group form-group">
+					    <i class="glyphicon glyphicon-asterisk"></i>
+					    <input type="password" id="password" name="admin[password]" class="form-control input-glyphicon" placeholder="Senha">
 					</div>
 					<br/>
 					<button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-log-in"></span> Login</button>

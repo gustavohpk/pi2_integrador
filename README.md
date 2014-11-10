@@ -1,3 +1,7 @@
+----- Atualização 050 (30/10) -----
+- Correção de alguns ícones de formulários
+- Link "Sobre" adicionado no footer
+
 ----- Atualização 049 (27/10 - 28/10) -----
 
 - Relação patrocinador-evento finalizada (porém falta logo de patrocinador)

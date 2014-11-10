@@ -16,8 +16,10 @@ a:hover, a:focus { color: #000; }
 /* Elementos */
 #header{ background: transparent; }
 #title-banner-img{ width: 100%; margin-top:15px; margin-bottom:15px; }
+.navbar-collapse { overflow: visible !important; }
 #main-menu nav, #account-menu, .media-item .thumbnail{ background: #FFF; border-radius: 0; }
-#login-bar{ background: #FFF; font-size: 0.9em; padding: 5px; }
+.main-menu>li>ul>li>a { padding-top: 5px; padding-bottom: 8px;}
+#login-bar{ background: #FFF; font-size: 0.9em; padding: 8px; }
 #login-bar button{ width: 70px; }
 #news-list .list-group{ text-align: left; }
 #news-list, #news-list a.list-group-item, .event div.thumbnail{ border-radius: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
