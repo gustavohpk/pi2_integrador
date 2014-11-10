@@ -1,4 +1,6 @@
------ Atualização 050 (30/10) -----
+----- Atualização 050 (29/10 - 09/11) -----
+
+- Área de certificados iniciada
 - Correção de alguns ícones de formulários
 - Link "Sobre" adicionado no footer
 

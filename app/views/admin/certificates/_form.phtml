@@ -1,0 +1,16 @@
+<form action="<?= $this->actionForm?>" method="post">
+	<div class="row">
+		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+			<h4>ID</h4>
+			<input type="number" class="form-control" name="certificate[id_certificate]" value="<?= $this->certificates->getIdCertificate()?>" disabled/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<h4>ID Inscrição</h4>
+			<input type="text" class="form-control" name="certificate[id_enrollment]" value="<?= $this->certificates->getIdEnrollment()?>"/>
+		</div>
+	</div>
+		<br/>
+	<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
+
