@@ -13,6 +13,14 @@
 			<?php else : ?>
 				<h3 class="event-date">Data: <?= $this->events->getStartDate("d/m/Y")?> a <?= $this->events->getEndDate("d/m/Y")?></h3>
 			<?php endif ?>
+			<br/>
+			<h4 class="event-enrollment-start-date">Início das inscrições: <?=$this->events->getStartDateEnrollment("d/m/Y")?> às <?= $this->events->getStartDateEnrollment("H:i")?></h4>
+			<h4 class="event-enrollment-start-date">Término das inscrições: <?=$this->events->getEndDateEnrollment("d/m/Y")?> às <?= $this->events->getEndDateEnrollment("H:i")?></h4>
+			<?php if ($this->events->getStartDate("d/m/Y") == date("d/m/Y")) : ?>
+				<span class="label label-danger" style="font-size: 16px">Último dia!</span>
+				<br/>
+			<?php endif; ?>
+			<br/>
 			<h4 class="event-address">Local do evento: <?= $this->events->getLocal()?></h4>
 			<?php if ($this->events->isSubEvent()) : ?>
 				<h5><span class="label label-info">Este evento faz parte do evento: <a class="event-related-link" href="<?= createUriFor("/eventos/{$this->events->parentEvent->getIdEvent()}/ver")?>"><?= $this->events->parentEvent->getName() ?></a></span></h5>
@@ -30,6 +38,7 @@
 	</div>
 </div>
 <div class="row">
+	<br/>
 	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 event-long-description">
 		<?= $this->events->getDetails()?>
 	</div>
@@ -37,7 +46,7 @@
 		<h4><span class="label label-info">Para participar deste evento não é necessário fazer inscrição.</span></h4>
     <?php elseif (!$this->events->eventInitiated() && $this->events->eventType->getEventType() != "sem_inscricao") : ?>
 		<div class="col-xs-12">
-			<span style="display:inline-block" data-toggle="tooltip" data-placement="bottom" <?php echo (!$this->events->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->events->getStartDateEnrollment("d/m/Y"). " às " . $this->events->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
+			<span style="display:inline-block" data-toggle="tooltip" data-placement="top" <?php echo (!$this->events->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->events->getStartDateEnrollment("d/m/Y"). " às " . $this->events->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
 			<a role="button" href="<?= createUriFor("/inscricao/evento/{$this->events->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-lg"  <?php echo (!$this->events->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
 			</span>
 		</div>
@@ -46,10 +55,10 @@
 <?php if ($this->sponsors) : ?>
 	<div class="row">
 		<?php if(count($this->sponsors) < 1) : ?>
-			<h4>Patrocinador</h4>
+			<h3>Patrocinador</h3>
 			<p><a href="<?= $this->sponsors[0]->getWebAddress() ?>"><?= $this->sponsors[0]->getName() ?></a></p>
 		<?php else :?>
-			<h4>Patrocinadores</h4>
+			<h3>Patrocinadores</h3>
 			<?php foreach ($this->sponsors as $key => $sponsor): ?>
 				<p><a href="http://<?= $sponsor->getWebAddress() ?>"><?= $sponsor->getName() ?></a></p>
 			<?php endforeach ?>

@@ -116,7 +116,7 @@
 					<div class="input-group">
 					    <input type="text" class="form-control" name="event[local]" value="<?= $this->events->getLocal()?>" required/>
 					    <div class="input-group-btn">
-					      <button id="address-button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir endereço da UTFPR">UTFPR</button>
+					      <button id="address-button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir endereço da UTFPR Guarapuava">UTFPR GP</button>
 					    </div>
 				    </div>	
 				</div>
@@ -124,6 +124,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 					<h4>Descrição</h4>
+					<h5>Nesta área insira apenas informações adicionais às preenchidas nos outros campos. Informações como local, ministrante, sub-eventos, vagas, patrocinadores, preços, datas e horários já serão exibidas na página do evento.</h5>
 					<textarea id="event-content" name="event[details]"><?= $this->events->getDetails()?></textarea>
 				</div>
 			</div>
@@ -194,60 +195,39 @@
 		</div>
 
 		<div id="section3" class="tab-pane fade">
-			<?php if (!$this->events->getIdEvent() || !$this->events->cost) : ?>
-				<div class="row first-cost">
-					<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-						<h4>Preços</h4>
-						<div class="row">
-							<div class="col-xs-12 col-sm-6">
-								<h5>Preço</h5>
-								<input type="number" min="0" class="form-control" name="cost[cost][]" />
-							</div>
-							<div class="col-xs-12 col-sm-6">
-								<h5>Preço válido até dia</h5>
-								<input type="text" class="form-control" name="cost[date_max][]" />
-							</div>
-						</div>
-					</div>
-				</div>
-			<?php else : ?>
-				<?php foreach ($this->events->cost as $cost) :?>
-					<input type="hidden" name="cost[id_cost_event][]" value="<?=$cost->getIdCostEvent()?>"/>
-					<div class="row first-cost">
-						<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-							<h4>Preços</h4>
-							<div class="row">
-								<div class="col-xs-12 col-sm-6">
-									<h5>Preço</h5>
-									<input type="number" min="0" class="form-control" name="cost[cost][]" value="<?=$cost->getCost()?>"/>
-								</div>
-								<div class="col-xs-12 col-sm-6">
-									<h5>Preço válido até dia</h5>
-									<input type="text" class="form-control" name="cost[date_max][]" value="<?=$cost->getDateMax("d/m/Y")?>" />
-								</div>
-							</div>
-						</div>
-					</div>
-				<?php endforeach?>
-			<?php endif ?>
 			<br/>
-			<button id="cost-add_button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir novo preço">Adicionar Valor</button>
 			<div id="cost_event"></div>
 			<br/>
 			<div class="row">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-					<table class="table" style="background: #FFF">
+					<table id="cost-table" class="table" style="background: #FFF">
 					<tr>
 						<th>Preço</th>
 						<th>Preço válido até dia</th>
-						<th><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Adicionar preço</button></th>
+						<th><button id="cost-add_button" type="button" class="btn btn-success" data-toggle="dropdown" title="Inserir novo preço">Adicionar Preço</button></th>
 					</tr>
 					
-					<tr>
-						<td><input type="text" class="form-control"/></td>
-						<td><input type="text" class="form-control"/></td>
-						<td><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></td>
-					</tr>
+					<?php if(isset($this->events->cost)) : ?>
+						<?php foreach ($this->events->cost as $cost) :?>
+							<tr class="cost-row">
+								<input type="hidden" name="cost[id_cost_event][]" value="<?=$cost->getIdCostEvent()?>"/>
+								<td><input type="number" min="0" class="form-control" name="cost[cost][]" value="<?=$cost->getCost()?>"/></td>
+								<td><input type="text" class="form-control" name="cost[date_max][]" value="<?=$cost->getDateMax("d/m/Y")?>" /></td>
+
+								<td><button type="button" class="btn btn-danger cost-delete-button"><span class="glyphicon glyphicon-trash"></span></button></td>
+							
+							</tr>
+						<?php endforeach ?>
+					<?php else : ?>
+						<tr class="cost-row">
+							<input type="hidden" name="cost[id_cost_event][]" value=""/>
+							<td><input type="number" min="0" class="form-control" name="cost[cost][]" value=""/></td>
+							<td><input type="text" class="form-control" name="cost[date_max][]" value="" /></td>
+
+							<td><button type="button" class="btn btn-danger cost-delete-button"><span class="glyphicon glyphicon-trash"></span></button></td>
+						
+						</tr>
+					<?php endif; ?>
 					
 				</table>
 			</div>

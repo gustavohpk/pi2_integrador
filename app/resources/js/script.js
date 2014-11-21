@@ -50,7 +50,7 @@ $(document).ready(function(){
 	validName = true;
 	$("input[name='participant[name]']").change(function(){
 		text = $("input[name='participant[name]']").val();
-		re = /^[a-z\s]*$/;
+		re = /^[a-zA-Z\s]*$/;
 		if(!re.test(text)){
 			if (validName == true){
 				$("#name-group").append("<span id='name-error' class='glyphicon glyphicon-remove form-control-feedback'></span>");
@@ -171,7 +171,7 @@ $(document).ready(function() {
 });
 
 $("#address-button").click(function(){
-	$("input[name='event[local]']").val("UTFPR - Câmpus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR");
+	$("input[name='event[local]']").val("UTFPR - Campus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR");
 });
 
 //Relatorios
@@ -195,9 +195,17 @@ $("input[name='reports[time_to]']").mask("99:99");
 
 
 
-
 $("#cost-add_button").click(function() {
-	$("#cost_event").append($(".first-cost").html());
+	// $("#cost-table").append("<tr class='cost-row'></tr>");
+	// var htmlString = $(".cost-row");
+	$(".cost-row").last().clone().insertAfter(".cost-row:last");
+	$(".cost-row").last().find(":input[type='hidden']").val("");
+	$(".cost-row").last().find(":input[type='number']").val("");
+	$(".cost-row").last().find(":input[type='text']").val("");
+});
+
+$(".cost-delete-button").click(function() {
+	$(this).closest('tr').remove();
 });
 
 $("input[name='cost[date_max][]']").datepicker();

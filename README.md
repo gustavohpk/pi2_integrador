@@ -1,8 +1,21 @@
+----- Atualização 051 (10/11 - 21/11) -----
+
+- Adicionados registros de participantes para testes
+- Tabela de preços parcialmente corrigida
+- OBS. 1: Não é possível deletar um preço
+- Os patrocinadores não são salvos no cadastro de evento (apenas edição)
+- jQuery UI modificado para ter apenas datepicker
+Bugs Conhecidos : 
+- As mensagens de erro referentes aos preços de evento não são exibidas, mas as validações funcionam
+- O participante é excluído, mas o model ou controller gera um erro. Ao atualizar volta à lista, mas exibe outra mensagem de erro.
+
+
 ----- Atualização 050 (29/10 - 09/11) -----
 
 - Área de certificados iniciada
 - Correção de alguns ícones de formulários
 - Link "Sobre" adicionado no footer
+
 
 ----- Atualização 049 (27/10 - 28/10) -----
 

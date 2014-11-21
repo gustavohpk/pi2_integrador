@@ -38,9 +38,25 @@
 		}
 
 		public function validateData() {
-			if ((intval($this->getIdEvent())) < 1) $this->errors[] = "Não foi informado nenhum evento para o preço cadastrado.";
-			if (is_null($this->getDateMax())) $this->errors[] = "Data Máxima para o preço não foi definida.";
-			if ((floatval($this->getCost())) <= 0) $this->errors[] = "O preço do evento não pode ser 0.";
+			$valid = false;
+			if ((intval($this->getIdEvent())) < 1){
+				$this->errors[] = "Não foi informado nenhum evento para o preço cadastrado.";
+				if($valid == true) $valid = false;
+			}
+			if (is_null($this->getDateMax())){
+				$this->errors[] = "Data Máxima para o preço não foi definida.";
+				if($valid == true) $valid = false;
+			}
+			if ((floatval($this->getCost())) <= 0){
+				$this->errors[] = "O preço do evento não pode ser 0.";
+				if($valid == true) $valid = false;
+			}
+			if(strtotime($this->getDateMax()) > strtotime($this->events = \Events::findById($this->getIdEvent())[0]->getEndDateEnrollment())){
+				$this->errors[] = "A data máxima de um preço não pode ser posterior à data limite de inscrição.";
+				if($valid == true) $valid = false;
+			}
+			
+			return $valid;
 		}
 
  		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){

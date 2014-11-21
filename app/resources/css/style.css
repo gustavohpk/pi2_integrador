@@ -48,6 +48,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 .events{ border-top: 1px solid #BBB; border-bottom: 1px solid #BBB; padding-top: 5px; }
 .event-long-description { text-align: left; }
 .event-long-description img { width: initial; }
+.event-long-description ul { list-style-type: initial; }
 
 
 /* Correacao Glyphicon */

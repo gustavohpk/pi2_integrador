@@ -22,6 +22,19 @@
 				<input type="text" class="form-control" name="reports[time_to]" value="" title=""/>
 			</div>
 		</div>
+		<div class="row">
+			<br/>
+			<div class="col-xs-12">
+				<input type="checkbox" name="reports[confirmed]" title="Inscrições Confirmadas"> Inscrições confirmadas
+				<br/>
+				<input type="checkbox" name="reports[unconfirmed]" title="Inscrições Confirmadas"> Inscrições não-confirmadas
+				<br/>
+				<input type="checkbox" name="reports[present]" title="Inscrições Confirmadas"> Presenças Confirmadas
+				<br/>
+				<input type="checkbox" name="reports[absent]" title="Inscrições Confirmadas"> Ausências
+				<br/>
+			</div>
+		</div>
 		<br/>
 		<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
 		<a href="<?= createUriFor('/admin/noticias/lista')?>">
