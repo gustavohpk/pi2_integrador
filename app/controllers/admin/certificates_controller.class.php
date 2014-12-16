@@ -29,7 +29,8 @@
 		public function _new(){
          	//prepara formulario para inserção
          	$this->certificates = new \Certificates();
-			$this->setHeadTitle("Novo Patrocinador");
+         	$this->events = \Events::find(array("end_date"), array(date("Y-m-d")), "<", "AND", "name", "ASC");
+			$this->setHeadTitle("Novo Certificado");
          	$this->actionForm = $this->getUri("admin/patrocinadores/novo");
          	$this->titleBtnSubmit = "Cadastrar";
 		}
@@ -79,6 +80,16 @@
 			$this->certificates->remove();
 			\FlashMessage::successMessage("Patrocinador removido com sucesso.");
 			$this->redirectTo("admin/patrocinadores/lista");
+		}
+
+		public function enrollments(){
+			$this->enrollments = \Enrollment::findByIdEvent($this->params[":id"]);
+			$enrollments_json = array();
+			foreach ($this->enrollments as $enrollment) {
+				$enrollments_json[] = (array) json_decode(json_encode(new \EnrollmentJson($enrollment), true));
+			}
+			echo json_encode($enrollments_json);
+			exit;
 		}
 	} 
 ?>

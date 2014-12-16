@@ -3,6 +3,8 @@
 	<div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
 		<h2 class="news-title"><?= $news->getTitle()?></h2>
 		Publicado em: <span class="news-date"><?= $news->getCreationDate("d M Y")?></span>
+		<br/>
+		<span class="glyphicon glyphicon-eye-open"></span> <?= $news->getViews() + 1?>
 		<h4 class="news-short-description"><?= $news->getSubtitle()?></h4>
 		<div class="news-content"><?= $news->getContent()?></div>
 	</div>

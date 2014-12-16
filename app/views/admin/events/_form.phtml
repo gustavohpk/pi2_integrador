@@ -13,7 +13,13 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 					<h4>ID</h4>
-					<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getIdEvent()?>" disabled/>
+					<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getIdEvent()?>" title="O ID do evento não pode ser modificado." disabled/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+					<h4>Visualizações</h4>
+					<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getViews()?>" title="O número de visualizações não pode ser modificado." disabled/>
 				</div>
 			</div>
 			<div class="row">

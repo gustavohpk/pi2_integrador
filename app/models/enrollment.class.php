@@ -144,6 +144,10 @@
 			return self::find(array("id_enrollment"), array($id));
 		}
 
+		public static function findByIdEvent($id){
+			return self::find(array("id_event"), array($id));
+		}
+
 		public static function findByIdParticipant($id){
 			return self::find(array("id_participant"), array($id));
 		}
@@ -169,6 +173,9 @@
 			$statment = $pdo->prepare($sql);
 			$statment = $statment->execute($params);
 			$this->setIdEnrollment($pdo->lastInsertId());
+			if($statment){
+				\Events::removeSpaces($this->event->getIdEvent());
+			}
 			return $statment ? $this : false;
 		}
 
@@ -177,7 +184,11 @@
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_enrollment" => $this->getIdEnrollment());
-			return $statment->execute($params);
+			$statment = $statment->execute($params);
+			if($statment){
+				\Events::addSpaces($this->event->getIdEvent());
+			}
+			return $statment;
 		}
 
 		private function modifyUriPayment($uri) {

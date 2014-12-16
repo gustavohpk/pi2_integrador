@@ -6,8 +6,9 @@
    			if (!$this->news = News::findById($this->params[":id"])) {
    				flashMessage::errorMessage("A notícia que você está tentando acessar não existe").
    				$this->redirectTo("noticias/lista");
+   			}else{
+   				News::updateViews($this->params[":id"]);
    			}
-
    			$this->setHeadTitle("Notícia");
    		}
    

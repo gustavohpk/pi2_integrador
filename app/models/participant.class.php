@@ -335,22 +335,19 @@
 		}
 
 		public function login($email, $password){
-			$participant = self::findByEmail($email);
+			$participant = self::find(array("email", "password"), array($email,md5($password)));
 
 			if (count($participant) == 0){
-				$this->errors = array("Email incorreto!");
+				$this->errors = array("Email ou senha incorretos!");
 				return false;
+			}else{
+				$_SESSION["participant"] = $participant[0];
+				return true;
 			}
 			
-			$participant = self::find(array("password"), array(md5($password)));
+			//$participant = self::find(array("password"), array(md5($password)));
 
-			if (count($participant) == 0){
-				$this->errors = array("Senha incorreta!");
-				return false;
-			}			
-
-			$_SESSION["participant"] = $participant[0];
-			return true;			
+			
 		}
 
 		public static function logout(){

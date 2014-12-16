@@ -218,3 +218,18 @@ $('#searchValue').bind('keypress', function(e)
    		return false;
    }
 });
+
+$("body").on("change", "select[name='event']", function(){
+	eventId = $("select[name='event']").val();
+  	$.getJSON( enrollmentsUrl + eventId, function (data) {
+  		if (data.length <= 0){
+  			$("#participant-row").slideUp();
+  		}else{
+	  		$("select[name='participant']").empty();
+	  		$.each(data, function(i, enrollment){
+	  			$("select[name='participant']").append("<option value='" + enrollment.id_participant +"'>" + enrollment.participant_name +"</option>");
+	  		})
+	    	$("#participant-row").slideDown();
+	    }
+    });
+});

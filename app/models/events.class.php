@@ -1,4 +1,10 @@
 <?php
+/**
+ * Classe para gerenciamento de eventos
+ * @author Gustavo Pchek
+ * @author Rodrigo Miss
+ */
+
 	class Events extends BaseModel{
 		private $idEvent;
 		private $idParentEvent;
@@ -15,6 +21,7 @@
 		private $typeEvent;
 		private $startDateEnrollment;
 		private $endDateEnrollment;	
+		private $views;
 		public $cost;
 		public $sponsorship;
 
@@ -81,6 +88,10 @@
 			return $this->local;
 		}
 
+		public function setViews($views){
+			$this->views = $views;
+		}
+
 		public function setStartDate($startDate){			
 			$this->startDate = empty($startDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $startDate)));
 		}
@@ -121,6 +132,13 @@
 			return $this->spaces;
 		}
 
+		public function getViews(){
+			return $this->views;
+		}
+
+		/**
+		 * Realiza a validação dos dados
+		 */	
 		function validateData() {
 			if (strlen(trim($this->getName())) < 3) $this->errors[] = "Título do evento muito curto [min. 3 caracteres].";
 			if ($this->getSpaces() < 1) $this->errors[] = "Informe a quantidade de vagas disponíveis.";
@@ -409,5 +427,37 @@
 			$params = array(":id_event" => $this->getIdEvent());
 			return $statment->execute($params);
 		}
+
+		/**
+		 * Incrementa o número de visualizações
+		 * @param int $id O ID do evento
+		 */	
+		public function updateViews($id){
+			$sql = "UPDATE event SET views = views + 1 WHERE id_event = " . $id;
+
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			
+			$statment->execute();
+		}
+
+		public function addSpaces($id){
+			$sql = "UPDATE event SET spaces = spaces + 1 WHERE id_event = " . $id;
+
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			
+			$statment->execute();
+		}
+
+		public function removeSpaces($id){
+			$sql = "UPDATE event SET spaces = spaces + 1 WHERE id_event = " . $id;
+
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			
+			$statment->execute();
+		}
+
 	}
 ?>

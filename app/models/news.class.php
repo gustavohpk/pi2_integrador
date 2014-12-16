@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * Classe para gerenciamento de notícias
+ * @author Gustavo Pchek
+ * @author Rodrigo Miss
+ */
+
 	class News extends BaseModel{
 		private $idNews;
 		private $idEvent;
@@ -7,6 +14,7 @@
 		private $title;
 		private $subtitle;		
 		private $content;
+		private $views;
 
 		public function setIdNews($idNews){
 			$this->idNews = $idNews;
@@ -36,6 +44,10 @@
 
 		public function setContent($content){
 			$this->content = $content;
+		}
+
+		public function setViews($views){
+			$this->views = $views;
 		}
 
 		public function getIdNews(){
@@ -72,6 +84,10 @@
 
 		public function getMedia($type = "p") {
 			return Media::findByIdEvent($this->getIdEvent(), $type);
+		}
+
+		public function getViews(){
+			return $this->views;
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_news", $direction ="DESC"){
@@ -184,6 +200,19 @@
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_news" => $this->getIdNews());
 			return $statment->execute($params);
+		}
+
+		/**
+		 * Incrementa o número de visualizações
+		 * @param int $id O ID da notícia
+		 */	
+		public function updateViews($id){
+			$sql = "UPDATE news SET views = views + 1 WHERE id_news = " . $id;
+
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			
+			$statment->execute();
 		}
 	}
 ?>

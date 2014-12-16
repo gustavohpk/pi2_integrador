@@ -1,7 +1,13 @@
 <div class="row">
 	<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5">
 		<h4>ID</h4>
-		<input type="number" class="form-control" name="news[id_news]" value="<?= $this->news->getIdNews()?>" disabled/>
+		<input type="number" class="form-control" name="news[id_news]" value="<?= $this->news->getIdNews()?>" title="O ID da notícia não pode ser modificado." disabled/>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5">
+		<h4>Visualizações</h4>
+		<input type="number" class="form-control" name="news[id_news]" value="<?= $this->news->getViews()?>" title="O número de visualizações não pode ser modificado." disabled/>
 	</div>
 </div>
 <div class="row">

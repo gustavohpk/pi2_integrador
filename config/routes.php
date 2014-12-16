@@ -141,7 +141,8 @@
     $router->get('/admin/certificados/lista/pagina/:p', array('controller' => 'Admin\CertificatesController', 'action' => '_list'));
     $router->get('/admin/certificados/:id/remover', array('controller' => 'Admin\CertificatesController', 'action' => 'remove'));
     $router->get('/admin/certificados/novo', array('controller' => 'Admin\CertificatesController', 'action' => '_new'));
-    $router->get('/admin/certificados/:id/ver', array('controller' => 'Admin\CertificatesController', 'action' => 'show'));    
+    $router->get('/admin/certificados/:id/ver', array('controller' => 'Admin\CertificatesController', 'action' => 'show'));
+    $router->get('/admin/certificados/inscricoes/:id', array('controller' => 'Admin\CertificatesController', 'action' => 'enrollments'));
 
     //rotas para usuários (do painel de administração)
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));

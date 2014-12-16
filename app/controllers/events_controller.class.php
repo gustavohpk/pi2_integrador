@@ -12,6 +12,7 @@
 	    		$this->events = $this->events[0];
 	    		$this->eventsRelated = $this->events->getEventsRelated();
 	    		$this->sponsors = $this->events->getSponsors();
+   				Events::updateViews($this->params[":id"]);
 	    	}
 	    	else {
 	    		flashMessage::errorMessage("O evento que você está tentando acessar não existe.");
