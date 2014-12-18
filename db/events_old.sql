@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: events
 -- ------------------------------------------------------
--- Server version	5.5.38-0ubuntu0.14.04.1
+-- Server version	5.5.40-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -43,6 +43,31 @@ LOCK TABLES `administrator` WRITE;
 /*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
 INSERT INTO `administrator` VALUES (3,'Gustavo Pchek','ghpk88@gmail.com','e10adc3949ba59abbe56e057f20f883e',NULL,'08839621954','5555555',NULL);
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `certificate`
+--
+
+DROP TABLE IF EXISTS `certificate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `certificate` (
+  `id_certificate` int(11) NOT NULL,
+  `id_enrollment` int(11) NOT NULL,
+  PRIMARY KEY (`id_certificate`),
+  KEY `fk_certificate_enrollment1` (`id_enrollment`),
+  CONSTRAINT `fk_certificate_enrollment1` FOREIGN KEY (`id_enrollment`) REFERENCES `enrollment` (`id_enrollment`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `certificate`
+--
+
+LOCK TABLES `certificate` WRITE;
+/*!40000 ALTER TABLE `certificate` DISABLE KEYS */;
+/*!40000 ALTER TABLE `certificate` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -87,7 +112,7 @@ CREATE TABLE `cost_event` (
   PRIMARY KEY (`id_cost_event`),
   KEY `fk_cost_event_event` (`id_event`),
   CONSTRAINT `fk_cost_event_event` FOREIGN KEY (`id_event`) REFERENCES `event` (`id_event`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +121,7 @@ CREATE TABLE `cost_event` (
 
 LOCK TABLES `cost_event` WRITE;
 /*!40000 ALTER TABLE `cost_event` DISABLE KEYS */;
-INSERT INTO `cost_event` VALUES (1,11,'2014-08-20',15),(2,11,'2014-09-19',20),(4,13,'2014-09-19',5),(5,14,'2014-09-19',5),(6,18,'2014-09-12',15),(7,18,'2014-09-19',20);
+INSERT INTO `cost_event` VALUES (1,11,'2014-08-20',15),(2,11,'2014-09-19',20),(4,13,'2014-09-19',5),(5,14,'2014-09-19',5),(6,18,'2014-09-12',15),(7,18,'2014-09-13',20),(8,18,'2014-09-15',25),(9,18,'2014-09-19',30);
 /*!40000 ALTER TABLE `cost_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,34 +226,6 @@ CREATE TABLE `event_organizer` (
 LOCK TABLES `event_organizer` WRITE;
 /*!40000 ALTER TABLE `event_organizer` DISABLE KEYS */;
 /*!40000 ALTER TABLE `event_organizer` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `event_sponsor`
---
-
-DROP TABLE IF EXISTS `event_sponsor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `event_sponsor` (
-  `id_event_sponsor` int(11) NOT NULL AUTO_INCREMENT,
-  `id_event` int(11) NOT NULL,
-  `id_sponsor` int(11) NOT NULL,
-  PRIMARY KEY (`id_event_sponsor`),
-  KEY `fk_event_sponsor_event` (`id_event`),
-  KEY `fk_event_sponsor_sponsor` (`id_sponsor`),
-  CONSTRAINT `fk_event_sponsor_event` FOREIGN KEY (`id_event`) REFERENCES `event` (`id_event`),
-  CONSTRAINT `fk_event_sponsor_sponsor` FOREIGN KEY (`id_sponsor`) REFERENCES `sponsor` (`id_sponsor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `event_sponsor`
---
-
-LOCK TABLES `event_sponsor` WRITE;
-/*!40000 ALTER TABLE `event_sponsor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `event_sponsor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -432,6 +429,35 @@ INSERT INTO `sponsor` VALUES (5,'Escola 01','www.escola01.com.br','Descrição d
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sponsorship`
+--
+
+DROP TABLE IF EXISTS `sponsorship`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sponsorship` (
+  `id_sponsorship` int(11) NOT NULL AUTO_INCREMENT,
+  `id_event` int(11) NOT NULL,
+  `id_sponsor` int(11) NOT NULL,
+  PRIMARY KEY (`id_sponsorship`),
+  KEY `fk_event_sponsor_event` (`id_event`),
+  KEY `fk_event_sponsor_sponsor` (`id_sponsor`),
+  CONSTRAINT `fk_event_sponsor_event` FOREIGN KEY (`id_event`) REFERENCES `event` (`id_event`),
+  CONSTRAINT `fk_event_sponsor_sponsor` FOREIGN KEY (`id_sponsor`) REFERENCES `sponsor` (`id_sponsor`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sponsorship`
+--
+
+LOCK TABLES `sponsorship` WRITE;
+/*!40000 ALTER TABLE `sponsorship` DISABLE KEYS */;
+INSERT INTO `sponsorship` VALUES (44,17,11),(45,18,7),(46,18,8),(47,18,11);
+/*!40000 ALTER TABLE `sponsorship` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `state`
 --
 
@@ -464,4 +490,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-10-18 17:03:57
+-- Dump completed on 2014-11-09 21:47:38
