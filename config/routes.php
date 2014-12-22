@@ -54,6 +54,10 @@
     $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
     $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
 
+    //rota para validação de certificados
+    $router->get('/certificados', array('controller' => 'CertificatesController', 'action' => 'index'));
+    $router->post('/certificados/verificar', array('controller' => 'CertificatesController', 'action' => 'verification'));
+
     //$router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
 
 

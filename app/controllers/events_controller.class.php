@@ -4,7 +4,6 @@
 	    protected $eventsRelated;
 	    protected $eventsType;
 	    protected $paymentsType;
-	    protected $actionForm;
 
 	    public function show() {
 	    	$this->setHeadTitle("Ver Evento");

@@ -6,7 +6,7 @@
 		</div>
 		<div class="col-xs-6 col-sm-4 col-sm-offset-0">
 			<h4>Código</h4>
-			<input type="text" class="form-control" name="certificate[id_certificate]" value="<?= $this->certificates->getCode()?>" disabled/>
+			<input type="text" class="form-control" name="certificate[code]" value="<?= $this->certificates->getCode()?>" disabled/>
 		</div>
 	</div>
 	<br/>
@@ -36,16 +36,21 @@
 				</select> 
 		</div>
 	</div>
-	<div class="row" id="certificate-view">
-		<div class="col-xs-12">
-			<?php if($this->certificates->getIdCertificate()) : ?>
-				<?php require_once "_certificate.phtml"; ?>
-			<?php endif; ?>
+
+	<?php if($this->certificates->getIdCertificate()) : ?>
+
+		<br/>
+		<br/>
+		<button type="button" onclick="printDiv('certificate-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+		<div class="row" id="certificate-view">
+			<div class="col-xs-12">
+					<?php require_once "_certificate.phtml"; ?>
+			</div>
 		</div>
-	</div>
+	<?php endif; ?>
 
+ 	<br/>
 
- 		<br/>
 	<button id="create-certificate-btn" class="btn btn-success" type="submit" disabled><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
 
 <script type="text/javascript">

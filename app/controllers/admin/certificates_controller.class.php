@@ -58,10 +58,7 @@
 			$this->certificates = \Certificates::findById($this->params[":id"])[0];
    			$this->setHeadTitle("Visualizar Certificado");
    			$this->events[] = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->getEvent();
-   			//var_dump(get_class_methods(\Enrollment::findById($this->certificates->getIdEnrollment())[0]));
-   			$this->participant = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->participant;
-   			//$this->actionForm = $this->getUri("admin/patrocinadores/{$this->certificates->getIdCertificate()}/alterar");
-   			//$this->titleBtnSubmit = "Salvar";   			
+   			$this->participant = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->participant;  			
 		}
 
 		// public function update(){

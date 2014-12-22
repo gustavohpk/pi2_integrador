@@ -5,7 +5,18 @@
 
 ----------
 
------ Atualização 054 (16/12 - 22/12) -----
+----- Atualização 055 (22/12) -----
+
+- Documentação Atualizada
+- Removidos trechos de código não utilizados
+- Atualização na área de certificados
+- Verificação de autenticidade via código adicionada (login não necessário)
+- Menu do painel de administração fixado no topo e container alterado para fluid
+- Vários formulários alterados, alguns componentes foram alinhados lado a lado
+
+
+
+----- Atualização 054 (16/12 - 21/12) -----
 
 - Geração de certificados iniciada
 - Atualizações na área de relatórios

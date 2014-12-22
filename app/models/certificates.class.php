@@ -80,6 +80,15 @@
 			return count($certificates) > 0 ? $certificates : NULL;
 		}
 
+		public static function findByCode($code){
+			$params = array(
+				"paramsName" => "code = :code", 
+				"paramsValue" => array(":code" => $code)
+			);
+			$certificates = self::find($params);
+			return count($certificates) > 0 ? $certificates : NULL;
+		}
+
 		public function save(){
 			$this->generateCode();
 			$sql = 

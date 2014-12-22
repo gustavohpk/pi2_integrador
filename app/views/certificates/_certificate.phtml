@@ -1,0 +1,28 @@
+
+<div id="show-certificate">
+		
+	<div id="certificate-top" style="margin-left> 10px">
+		<img src="<?= $this->getResource('img/utfpr-logo.gif') ?>">
+		<span>Ministério da Educação</span>
+		<br>
+		<span><b>Universidade Tecnológica Federal do Paraná</b></span>
+		<br>
+		<span>Câmpus Guarapuava</span>
+	</div>
+	<br>
+	<br>
+	<hr style="border: 1px solid black">
+	<hr style="border: 1px solid gold">
+	<br><br><br><br><br><br><br><br><br>
+	<div id="certificate-title">
+		<p>DECLARAÇÃO</p>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br>
+	<div id="certificate-content">
+		<p>Declaramos que <b><?= strtoupper($this->participant->getName()) ?></b> participou do(a) <b>“<i><?= $this->event->getName()?></i>”</b>, ministrado por <?= $this->event->getTeacher()?>, realizado <?= strtotime($this->event->getStartDate("d/m/Y")) != strtotime($this->event->getEndDate("d/m/Y")) ? "entre os dias " . $this->event->getStartDate("d/m/Y") . " e " . $this->event->getEndDate("d/m/Y") : "no dia " . $this->event->getStartDate("d/m/Y") ?>, com carga horária total de <?= ceil((strtotime($this->event->getEndDate("d/m/Y H:s")) - strtotime($this->event->getStartDate("d/m/Y H:s"))) / 3600 )?> horas. </p>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div id="certificate-bottom">
+		<p>Este certificado foi gerado pelo Sistema de Eventos da UTFPR-GP. Seu código de identificação único é<br/><br/><b><?= $this->certificate->getCode() ?></b><br/><br/>e sua autenticidade pode ser confirmada no endereço: <b><i>eventos.gp.utfpr.edu.br</i></b>.</p>
+	</div>
+</div>

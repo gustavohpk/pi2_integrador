@@ -33,7 +33,9 @@ a:hover, a:focus { color: #000; }
 .search-btn-group li { cursor: pointer; }
 .ajax-loader{ display: inline-block; width: 16px; height: 16px; background-image: url("../img/ajax-loader.gif"); background-repeat: no-repeat; }
 
-
+.main-menu-admin{ position: fixed; z-index: 1; margin-right: 0; padding-right: 0; padding-left: 0; right: 0;}
+#admin { margin-top: 65px; }
+#admin h1 { margin-top: 0;}
 
 /* Eventos */
 .event div.thumbnail:hover{ background-color: #CCC; }
@@ -162,7 +164,7 @@ label.disabled { color: darkgray; }
 .admin-shortcut-title { cursor: pointer; text-decoration: none; font-weight: bold;}
 a.admin-shortcut-link { text-decoration: none;}
 .admin-shortcut:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
-.admin-shortcut .glyphicon { font-size: 70px; padding-bottom: 10px;}
+.admin-shortcut .glyphicon { font-size: 70px; padding-bottom: 10px; width: 100%;}
 .admin-shortcut .glyphicon:hover{ font-size: 70px; padding-bottom: 10px;}
 
 .help-button, .help-link { cursor: pointer; }
@@ -192,7 +194,9 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
     background-color: #FAFAFA;
     font: 11pt "Arial";
     width: 21cm;
-    min-height: 29.7cm;
+    min-height: 25cm;
+    /*Altura máxima - um pouco menor que o tamanho da folha A4 para a janela de impressão não exibir uma segunda folha em branco*/
+    max-height: 29.1cm;
     padding: 2cm;
     margin: 1cm auto;
     border: 1px #D3D3D3 solid;
@@ -220,6 +224,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 #certificate-title{
 	font-size: 30px;
 	font-weight: bold;
+	text-align: center;
 }
 
 #certificate-content{
@@ -230,4 +235,5 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 #certificate-bottom{
 	font-size: 13px;
+	text-align: center;
 }

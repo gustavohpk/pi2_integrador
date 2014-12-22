@@ -19,14 +19,13 @@
   ?>
 </head>
 	<body>
+		<?php require_once "views/admin/includes/_main-menu.phtml"; ?>
 		<div id="admin" class="container-fluid">
-			<div id="header">
-				<h1>Painel de Administração</h1>
-			</div>
 			<div class="row">
 				<div id="content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<?php require_once "views/admin/includes/_main-menu.phtml"; ?>
-						
+					
+					<h1>Painel de Administração</h1>	
+
 					<?php require_once "views/admin/includes/_flash.phtml"; ?>
 
 					<?php require_once $this->getViewPath(); ?>					

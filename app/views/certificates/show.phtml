@@ -1,0 +1,27 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 sponsors-new">
+		
+		<h2>Verificar Autenticidade</h2>
+
+		<?php require_once "_form.phtml"; ?>
+
+		<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search"></span> <?= $this->titleBtnSubmit?></button>
+
+		<br/>
+		<br/>
+
+		<?php if($this->certificate->getIdCertificate()) : ?>
+			<button type="button" onclick="printDiv('certificate-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+			<div class="row" id="certificate-view">
+				<div class="col-xs-12">
+					<?php require_once "_certificate.phtml"; ?>
+				</div>
+			</div>
+		<?php endif; ?>
+
+		<br/>
+		<br/>
+
+		</form>
+	</div>
+</div>

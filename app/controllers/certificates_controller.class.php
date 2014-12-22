@@ -1,0 +1,32 @@
+<?php 
+	
+	class CertificatesController extends BaseController{
+		protected $certificates;
+    	protected $actionForm;
+    	protected $titleBtnSubmit;
+
+    	public function index(){
+    		$this->setHeadTitle("Verificar Autenticidade");
+    		$this->certificate = new \Certificates();
+    		$this->actionForm = $this->getUri("certificados/verificar");
+         	$this->titleBtnSubmit = "Procurar";
+    	}
+
+		public function verification(){
+			$this->certificate = Certificates::findByCode($this->params["certificate"]["code"])[0];
+			if($this->certificate){
+				$this->event = \Enrollment::findById($this->certificate->getIdEnrollment())[0]->getEvent();
+   				$this->participant = \Enrollment::findById($this->certificate->getIdEnrollment())[0]->participant;
+   				\FlashMessage::successMessage("Este código é referente a um certificado autêntico.");
+				$this->setHeadTitle("Verificar Autenticidade");
+	         	$this->actionForm = $this->getUri("certificados/verificar");
+	         	$this->titleBtnSubmit = "Procurar";
+	         	$this->render("show");
+			}
+			else {
+				\FlashMessage::warningMessage("Certificado não encontrado.");
+				$this->redirectTo("certificados");
+			}
+		}
+	} 
+?>
