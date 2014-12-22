@@ -25,9 +25,9 @@
   //     }
 
 		public function _new(){
-		$this->setHeadTitle("Relatório de Eventos");
+		$this->setHeadTitle("Relatório de Inscrições");
 		$this->report = new \Reports();
-        $this->actionForm = $this->getUri("admin/relatorios/eventos/gerar");
+        $this->actionForm = $this->getUri("admin/relatorios/inscricoes/gerar");
         $this->titleBtnSubmit = "Gerar";
 		}
 
@@ -38,19 +38,21 @@
         $this->titleBtnSubmit = "Salvar";
 		}
 
-      public function create(){
-         $params = $this->params["news"];
-         $this->news = new \News($params);
-         if ($this->news->save()){
-            \FlashMessage::successMessage("Notícia cadastrada com sucesso.");
-            $this->redirectTo("admin/noticias/lista");
+      public function generate(){
+         $params = $this->params["reports"];
+         $this->report = new \Reports($params);
+         var_dump($this->report); exit;
+         if ($this->report->generate()){
+            //\FlashMessage::successMessage("Relatório gerado com sucesso");
+            //$this->redirectTo("admin/noticias/lista");
+            $this->render("report");
          }
          else{
-            \FlashMessage::errorMessage("Erro ao cadastrar a notícia.");
+            \FlashMessage::errorMessage("Erro ao gerar relatório.");
             $this->setHeadTitle("Cadastro de notícia");           
             $this->actionForm = $this->getUri("admin/noticias");
             $this->titleBtnSubmit = "Cadastrar";
-            $this->render("_new");
+            $this->render("new");
          }
       }
 

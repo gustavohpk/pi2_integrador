@@ -142,7 +142,9 @@
     $router->get('/admin/certificados/:id/remover', array('controller' => 'Admin\CertificatesController', 'action' => 'remove'));
     $router->get('/admin/certificados/novo', array('controller' => 'Admin\CertificatesController', 'action' => '_new'));
     $router->get('/admin/certificados/:id/ver', array('controller' => 'Admin\CertificatesController', 'action' => 'show'));
+    //rota para JSon
     $router->get('/admin/certificados/inscricoes/:id', array('controller' => 'Admin\CertificatesController', 'action' => 'enrollments'));
+    $router->post('/admin/certificados', array('controller' => 'Admin\CertificatesController', 'action' => 'create'));   
 
     //rotas para usuários (do painel de administração)
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));

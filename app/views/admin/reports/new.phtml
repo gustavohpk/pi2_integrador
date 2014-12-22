@@ -1,7 +1,7 @@
 <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 news-edit">
-		<h2>Relatório de Inscrições</h2>
+	<h2>Relatório de Inscrições</h2>
 	
-		<form action="<?= $this->actionForm ?>" method="post">
+	<form action="<?= $this->actionForm ?>" method="post">
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-4 col-md-offset-2 col-lg-2 col-lg-offset-4">
 				<h4>Data inicial:</h4>
@@ -25,19 +25,19 @@
 		<div class="row">
 			<br/>
 			<div class="col-xs-12">
-				<input type="checkbox" name="reports[confirmed]" title="Inscrições Confirmadas"> Inscrições confirmadas
+				<input id="reports[confirmed]" type="checkbox" name="reports[confirmed]" title="Inscrições Confirmadas"> <label for="reports[confirmed]"> Inscrições confirmadas</label>
 				<br/>
-				<input type="checkbox" name="reports[unconfirmed]" title="Inscrições Confirmadas"> Inscrições não-confirmadas
+				<input id="reports[unconfirmed]" type="checkbox" name="reports[unconfirmed]" title="Inscrições Confirmadas"> <label for="reports[unconfirmed]"> Inscrições não-confirmadas</label>
 				<br/>
-				<input type="checkbox" name="reports[present]" title="Inscrições Confirmadas"> Presenças Confirmadas
+				<input id="reports[present]" type="checkbox" name="reports[present]" title="Inscrições Confirmadas" disabled> <label for="reports[present]" class="disabled"> Presenças confirmadas</label>
 				<br/>
-				<input type="checkbox" name="reports[absent]" title="Inscrições Confirmadas"> Ausências
+				<input id="reports[absent]" type="checkbox" name="reports[absent]" title="Inscrições Confirmadas" disabled> <label for="reports[absent]" class="disabled"> Ausências</label>
 				<br/>
 			</div>
 		</div>
 		<br/>
-		<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
-		<a href="<?= createUriFor('/admin/noticias/lista')?>">
+		<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> Gerar</button>
+		<a href="<?= createUriFor('/admin')?>">
 			<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
 		</a>
 	</form>

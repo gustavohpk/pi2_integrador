@@ -5,6 +5,12 @@
 
 ----------
 
+----- Atualização 054 (16/12 - 22/12) -----
+
+- Geração de certificados iniciada
+- Atualizações na área de relatórios
+
+
 
 ----- Atualização 053 (04/12 - 15/12) -----
 

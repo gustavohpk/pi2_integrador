@@ -36,6 +36,10 @@
 			$this->event = $event;
 		}
 
+		public function getEvent(){
+			return $this->event;
+		}
+
 		public function setDateEnrollment($dateEnrollment){
 			$this->dateEnrollment = $dateEnrollment;
 		}

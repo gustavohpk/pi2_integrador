@@ -1,19 +1,77 @@
 <?php
+
+/**
+ * Classe para geração de relatórios.
+ * @author Gustavo Pchek
+ */
+
 	class Reports extends BaseModel{
-		private $dateFrom;
-		private $dateTo;
-		private $event;
+		/**
+	     * @var string $dateTo Data inicial
+	     * @var string $timeTo Hora inicial
+	     * @var string $dateTo Data final
+	     * @var string $timeTo Hora final
+	     * @var bool $confirmed Se o relatório incluirá inscrições confirmadas
+	     * @var bool $unconfirmed Se o relatório incluirá inscrições não confirmadas
+	     * @var bool $present Se o relatório incluirá inscrições com presença confirmada
+	     * @var bool $absent Se o relatório incluirá inscrições com presença não confirmada
+	     * @var int|null $event O evento que as inscrições serão relacionadas, pode ser nulo para ser relatório geral
+	     */
+		private $dateFrom, $timeFrom, $dateTo, $timeTo, $confirmed = false, $unconfirmed = false, $present = false, $absent = false, $event;
 
 		public function setDateFrom($dateFrom){
-			$this->dateFrom = empty($dateFrom) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $dateFrom)));
+			$this->dateFrom = empty($dateFrom) ? null : date("Y-m-d", strtotime(str_replace("/", "-", $dateFrom)));
+		}
+
+		public function setTimeFrom($timeFrom){
+			$this->timeFrom = empty($timeFrom) ? null : date("H:i", strtotime(str_replace("/", "-", $timeFrom)));
 		}
 
 		public function setDateTo($dateTo){
-			$this->dateTo = empty($dateTo) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $dateTo)));
+			$this->dateTo = empty($dateTo) ? null : date("Y-m-d", strtotime(str_replace("/", "-", $dateTo)));
+		}
+
+		public function setTimeTo($timeTo){
+			$this->timeTo = empty($timeTo) ? null : date("H:i", strtotime(str_replace("/", "-", $timeTo)));
 		}
 
 		public function setEvent($event){
-			$this->event = $event;
+			if($event)
+				$this->event = true;
+			else
+				$this->event = false;
+		}
+
+		public function setConfirmed($confirmed){
+			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
+			if($confirmed)
+				$this->confirmed = true;
+			else
+				$this->confirmed = false;
+		}
+
+		public function setUnconfirmed($unconfirmed){
+			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
+			if($unconfirmed)
+				$this->unconfirmed = true;
+			else
+				$this->unconfirmed = false;
+		}
+
+		public function setPresent($present){
+			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
+			if($present)
+				$this->present = true;
+			else
+				$this->present = false;
+		}
+
+		public function setAbsent($absent){
+			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
+			if($absent)
+				$this->absent = true;
+			else
+				$this->absent = false;
 		}
 
 		public function getDateFrom(){
@@ -26,6 +84,22 @@
 
 		public function getEvent(){
 			return $this->event;
+		}
+
+		public function getConfirmed(){
+			return $this->confirmed;
+		}
+
+		public function getUnconfirmed(){
+			return $this->unconfirmed;
+		}
+
+		public function getPresent(){
+			return $this->present;
+		}
+
+		public function getAbsent(){
+			return $this->absent;
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_news", $direction ="DESC"){

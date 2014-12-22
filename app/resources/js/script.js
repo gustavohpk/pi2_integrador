@@ -219,17 +219,37 @@ $('#searchValue').bind('keypress', function(e)
    }
 });
 
-$("body").on("change", "select[name='event']", function(){
-	eventId = $("select[name='event']").val();
+$("body").on("change", "select[name='id_event']", function(){
+	eventId = $("select[name='id_event").val();
   	$.getJSON( enrollmentsUrl + eventId, function (data) {
   		if (data.length <= 0){
   			$("#participant-row").slideUp();
+  			$("#create-certificate-btn").attr("disabled", "disabled");
   		}else{
-	  		$("select[name='participant']").empty();
+  			$("#create-certificate-btn").removeAttr("disabled");
+	  		$("select[name='certificate[id_enrollment]']").empty();
 	  		$.each(data, function(i, enrollment){
-	  			$("select[name='participant']").append("<option value='" + enrollment.id_participant +"'>" + enrollment.participant_name +"</option>");
+	  			$("select[name='certificate[id_enrollment]']").append("<option value='" + enrollment.id_enrollment +"'>" + enrollment.participant_name +"</option>");
 	  		})
 	    	$("#participant-row").slideDown();
 	    }
     });
+});
+
+$("input[name='reports[confirmed]']").click(function() {
+    if($(this).is(':checked')) {
+    	$("input[name='reports[present]']").removeAttr("disabled");
+    	// $("input[name='reports[present]']").attr("checked", true);
+    	$("input[name='reports[absent]']").removeAttr("disabled");
+    	// $("input[name='reports[absent]']").attr("checked", true);
+        $("label[for='reports[present]']").removeClass("disabled");
+        $("label[for='reports[absent]']").removeClass("disabled");
+    } else {
+    	$("input[name='reports[present]']").attr("disabled", "disabled");
+    	$("input[name='reports[absent]']").attr("disabled", "disabled");
+    	// $("input[name='reports[present]']").attr("checked", false);
+    	// $("input[name='reports[absent]']").attr("checked", false);
+        $("label[for='reports[present]']").addClass("disabled");
+        $("label[for='reports[absent]']").addClass("disabled");
+    }
 });

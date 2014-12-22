@@ -6,6 +6,7 @@ ul, ol{ list-style-type: none; }
 img{ width: 100%; }
 h2 { background-color: #FFF; padding: 5px; border: 1px solid #DDD;}
 a { color: #555; }
+label { font-weight: normal; }
 a:hover, a:focus { color: #000; }
 .container-fluid, .container{ text-align: center; }
 .btn:hover, a, .facebook-link, .youtube-link, .utfpr-link, .utfpr-link img, #main-menu li, #account-menu li, span{ webkit-transition: all .3s ease-in-out;	transition: all .3s ease-in-out; }
@@ -148,6 +149,8 @@ ul.left-menu span{ text-align: left; }
 
 #label-status { font-size: 14px; } 
 
+label.disabled { color: darkgray; }
+
 .config-template input[type="file"]{ margin: 0 auto; }
 .config-template img { width: 64px; height: 64px;}
 .config-template select { width: 200px; margin: 0 auto;}
@@ -180,4 +183,51 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 .btn.disabled {
     pointer-events: auto;
+}
+
+
+#show-certificate {
+    margin: 0;
+    padding: 0;
+    background-color: #FAFAFA;
+    font: 11pt "Arial";
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2cm;
+    margin: 1cm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#certificate-top{
+	text-align: left;
+}
+
+#show-certificate hr{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#show-certificate img{
+	width: 25%;
+	vertical-align: top;
+	float: left;
+	margin-right: 15px;
+}
+
+#certificate-title{
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#certificate-content{
+	font-size: 20px;
+	text-align: center;
+	line-height: 150%;
+}
+
+#certificate-bottom{
+	font-size: 13px;
 }

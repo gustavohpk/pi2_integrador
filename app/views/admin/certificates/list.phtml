@@ -37,9 +37,9 @@
 					<td><?= $certificate->getIdCertificate() ?></td>
 					<td><?= $certificate->getIdEnrollment() ?></td>
 					<td>
-						<a href="<?= createUriFor("/admin/certificados/{$certificate->getIdCertificate()}/alterar") ?>">
-							<button class='btn btn-primary btn-sm' title='Editar'>
-								<span class='glyphicon glyphicon-edit'></span>
+						<a href="<?= createUriFor("/admin/certificados/{$certificate->getIdCertificate()}/ver") ?>">
+							<button class='btn btn-primary btn-sm' title='Visualizar'>
+								<span class='glyphicon glyphicon-eye-open'></span>
 							</button>
 						</a>
 						<a href="<?= createUriFor("/admin/certificados/{$certificate->getIdCertificate()}/remover") ?>">
@@ -55,11 +55,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="pagination">
-					  <li class="disabled"><a href="#">&laquo;</a></li>
-					  <li class="active"><a href="#">1 <span class="sr-only">Atual</span></a></li>
-					  <li class=""><a href="#">2</a></li>
-					  <li class=""><a href="#">3</a></li>
-					  <li class=""><a href="#">&raquo;</a></li>
+					  <?php echo $this->pagination->getPageAnchors("{$this->getUri('admin/certificados')}");?>
 					</ul>
 				</div>
 			</div>
