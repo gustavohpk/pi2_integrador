@@ -64,8 +64,9 @@
     }
 
     function getThumbnail($link){
-    	$code = substr($link, (strpos($link, '=')+1), 30);
-    	$thumbnailUrl = 'http://img.youtube.com/vi/' . $code . '/0.jpg';
-    	return $thumbnailUrl;
+    	// $code = substr($link, (strpos($link, '=')+1), 30);
+    	// $thumbnailUrl = 'http://img.youtube.com/vi/' . $code . '/0.jpg';
+    	// return $thumbnailUrl;
+    	return Media::getThumbnail($link);
     }
 ?>

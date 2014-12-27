@@ -15,13 +15,12 @@
           <div class="modal-body">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <?php if ($media = $event->getMedia()) : ?>
-                <?php $media = $media[0] ?>
-                <?php $image = $media->getPath() ?>
-              <?php else : ?>
+            <?php if ($event->getLogo()) : ?>
+                <?php $image = "data:image/jpeg;base64,". base64_encode($event->getLogo()); ?>
+            <?php else : ?>
                 <?php $image = $this->getResource("/img/placeholder-evento.png") ?>
-              <?php endif ?>
-              <img class="event-thumbnail" src="<?=$image?>" alt="<?=($media ? $media->getLabel() : "")?>">
+            <?php endif ?>
+            <img class="event-thumbnail" src="<?=$image ?>" alt="<?= $event->getName() ?>">
             </div>
             <div class="caption">
               <h2><?= $event->getName() ?></h2>

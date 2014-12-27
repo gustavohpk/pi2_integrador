@@ -37,6 +37,8 @@ a:hover, a:focus { color: #000; }
 #admin { margin-top: 65px; }
 #admin h1 { margin-top: 0;}
 
+input[type=file] { display: initial; }
+
 /* Eventos */
 .event div.thumbnail:hover{ background-color: #CCC; }
 .event div.thumbnail img{ border: 1px solid #CCC; }
@@ -52,6 +54,8 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 .event-long-description { text-align: left; }
 .event-long-description img { width: initial; }
 .event-long-description ul { list-style-type: initial; }
+.event-long-description a { color: #333; font-weight: bold;}
+.event-long-description a:hover, a:focus { color: #000; }
 
 
 /* Correacao Glyphicon */

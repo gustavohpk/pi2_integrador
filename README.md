@@ -1,9 +1,26 @@
+----- TO DO -----
+ 
+- Organizar o layout da galeria de mídia, que acaba deixando espaços em branco quando as imagens exibidas na mesma linha tem grande variação de altura
+- Finalizar galeria de mídia por evento
+
+----------
+
 ----- BUGS CONHECIDOS -----
  
 - As mensagens de erro referentes aos preços de evento não são exibidas, mas as validações funcionam
 - O participante é excluído, mas o model ou controller gera um erro. Ao atualizar volta à lista, mas exibe outra mensagem de erro.
 
 ----------
+
+----- Atualização 056 (23/12 - 27/12) -----
+
+- Logo do evento (BLOB) adicionado, e será exibido onde anteriormente era uma mídia
+- Galeria de mídia atualizada, está trazendo as imagens dinamicamente
+- Seção TO DO (fazer) adicionada no topo do README
+- Função getThumbnail adicionada no model Media
+- Criada classe media_json para utilização nas galerias
+
+
 
 ----- Atualização 055 (22/12) -----
 

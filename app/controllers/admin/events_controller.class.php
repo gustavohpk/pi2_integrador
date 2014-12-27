@@ -99,7 +99,8 @@
          //salva edição do evento no db  
          $this->events = \Events::findById($this->params[":id"])[0];
          $cost = $this->params["cost"];
-         $sponsors = $this->params["sponsors"];
+         if(isset($this->params["sponsors"]))
+            $sponsors = $this->params["sponsors"];
          if ($this->events->update($this->params['event'])){
             \Logger::updateLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
             \FlashMessage::successMessage("Evento modificado com sucesso.");

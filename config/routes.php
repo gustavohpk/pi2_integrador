@@ -25,10 +25,22 @@
     $router->get('/noticias/:id/ler', array('controller' => 'NewsController', 'action' => 'item'));
 
     //rotas para mídia
-    $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'gallery'));
-    $router->get('/midia/galeria/pagina/:p', array('controller' => 'MediaController', 'action' => 'gallery'));
+    $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'media'));
+    $router->get('/midia/galeria/pagina/:p', array('controller' => 'MediaController', 'action' => 'media'));
     $router->get('/midia/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photos'));
     $router->get('/midia/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videos'));
+
+    $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'media'));
+    $router->get('/midia/galeria/evento/:id', array('controller' => 'MediaController', 'action' => 'media'));
+
+    $router->get('/midia/galeria/fotos', array('controller' => 'MediaController', 'action' => 'photoGallery'));
+    $router->get('/midia/galeria/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photoGallery'));
+    $router->get('/midia/galeria/fotos/evento/:id/pagina/:p', array('controller' => 'MediaController', 'action' => 'photoGallery'));
+
+
+    $router->get('/midia/galeria/videos', array('controller' => 'MediaController', 'action' => 'videoGallery'));
+    $router->get('/midia/galeria/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videoGallery'));
+    $router->get('/midia/galeria/videos/evento/:id', array('controller' => 'MediaController', 'action' => 'videoGallery'));
 
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));

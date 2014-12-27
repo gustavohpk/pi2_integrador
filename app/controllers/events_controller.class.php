@@ -9,8 +9,10 @@
 	    	$this->setHeadTitle("Ver Evento");
 	    	if ($this->events = Events::findById($this->params[":id"])) {
 	    		$this->events = $this->events[0];
+	    		// print $this->events->getLogo(); exit;
 	    		$this->eventsRelated = $this->events->getEventsRelated();
 	    		$this->sponsors = $this->events->getSponsors();
+	    		$this->hasMedia = Media::hasMedia($this->events->getIdEvent());
    				Events::updateViews($this->params[":id"]);
 	    	}
 	    	else {

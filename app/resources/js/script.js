@@ -264,3 +264,55 @@ function printDiv(div) {
 
      document.body.innerHTML = originalContents;
 }
+
+$("#show-photos").click(function(){
+	if(typeof photosPage == "undefined"){
+		photosPage = 1;
+		loadPhotos();
+	}
+	$("#photos").show();
+	$("#btn-load-photos").show();
+	$("#videos").hide();
+	$("#btn-load-videos").hide();
+});
+
+$("#show-videos").click(function(){
+	if(typeof videosPage == "undefined"){
+		videosPage = 1;
+		loadVideos();
+	}
+	$("#videos").show();
+	$("#btn-load-videos").show();
+	$("#photos").hide();
+	$("#btn-load-photos").hide();
+});
+
+function loadPhotos(){
+	$(".ajax-loader").show();
+	url = photoGalleryUrl + photosPage;
+	$.getJSON( url, function (data) {
+		if (data.length <= 0){
+			$("#btn-load-photos").hide();
+		}else{
+  		$.each(data, function(i, media){
+  			$("#photos").append("<div class='col-xs-12 col-sm-4'><a href='" + media.path + "' class='fancybox' title='" + media.label + "' rel='lightbox'><img class='thumbnail' src='" + media.path + "' alt='" + media.label + "'/><span class='glyphicon glyphicon-camera' title='Foto'></span></div>");
+  		});
+  		photosPage++;
+    }
+    $(".ajax-loader").hide();
+});}
+
+function loadVideos(){
+	$(".ajax-loader").show();
+	url = videoGalleryUrl + videosPage;
+	$.getJSON( url, function (data) {
+		if (data.length <= 0){
+			$("#btn-load-videos").hide();
+		}else{
+  		$.each(data, function(i, media){
+  			$("#videos").append("<div class='col-xs-12 col-sm-4'><a href='" + media.path + "' class='fancybox' title='" + media.label + "' rel='lightbox'><img class='thumbnail' src='" + media.thumbnail + "' alt='" + media.label + "'/><span class='glyphicon glyphicon-video' title='Vídeo'></span></div>");
+  		});
+  		videosPage++;
+    }
+    $(".ajax-loader").hide();
+});}

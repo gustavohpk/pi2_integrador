@@ -12,11 +12,16 @@
          } else {
             $page = 1;
          }
-         $limit = 15;
-         $this->media = \Media::find(null, $limit, $page);
-         $this->count = \Media::count();
-         $this->pagination = new \Pager($this->count, $limit, $page);
- 
+         \Media::setCurrentPage($page);
+
+         if (isset($this->params[":id"])){
+            $this->media = \Media::findById($this->params[":id"]);
+            $this->pagination = new \Pager(count($this->media), \Media::getLimitByPage(), $page);
+         }
+         else{
+            $this->media = \Media::find();
+            $this->pagination = new \Pager(\Media::count(), \Media::getLimitByPage(), $page);
+         }
 		}
 
 		public function _new(){
@@ -80,5 +85,5 @@
          }
          $this->redirectTo("admin/midia/lista");
       }
-	} 
+	}
 ?>

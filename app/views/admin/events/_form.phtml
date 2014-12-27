@@ -1,10 +1,10 @@
-<form action="<?= $this->actionForm?>" method="post">
+<form enctype="multipart/form-data" action="<?= $this->actionForm?>" method="post">
 	<div class="row">
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 			<ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
 			  <li class="active"><a href="#section1" role="tab" data-toggle="pill">Principal</a></li>
 			  <li><a href="#section2" role="tab" data-toggle="pill">Datas, Vagas e Patrocínio</a></li>
-			  <li><a href="#section3" role="tab" data-toggle="pill">Preços</a></li>
+			  <li><a href="#section3" role="tab" data-toggle="pill">Logo e Preços</a></li>
 			</ul>
 		</div>
 	</div>
@@ -200,6 +200,20 @@
 
 		<div id="section3" class="tab-pane fade">
 			<br/>
+			<div class="row">
+
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<h4>Logo do evento</h4>
+					<span class="label label-default">OBS.: Selecione uma imagem no formato JPG, PNG ou GIF</span>
+					<br/><br/>
+					<input type="file" name="logo" accept=".jpg,.png,.gif">
+					<br/><br/>
+					<?php if($this->events->getLogo()) : ?>
+						<img src="data:image/jpeg;base64, <?= base64_encode($this->events->getLogo()) ?>" alt"<?=$this->events->getName() ?>" style="max-width: 300px" />
+					<?php endif; ?>
+				</div>
+
+			</div>
 			<div id="cost_event"></div>
 			<br/>
 			<div class="row">

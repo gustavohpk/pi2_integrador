@@ -22,6 +22,7 @@
 		private $startDateEnrollment;
 		private $endDateEnrollment;	
 		private $views;
+		private $logo;
 		public $cost;
 		public $sponsorship;
 
@@ -92,6 +93,10 @@
 			$this->views = $views;
 		}
 
+		public function setLogo($logo){
+			$this->logo = $logo;
+		}
+
 		public function setStartDate($startDate){			
 			$this->startDate = empty($startDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $startDate)));
 		}
@@ -134,6 +139,10 @@
 
 		public function getViews(){
 			return $this->views;
+		}
+
+		public function getLogo(){
+			return $this->logo;
 		}
 
 		/**
@@ -355,10 +364,10 @@
 			$sql = 
 			"INSERT INTO event
 				(id_event_type, name, details, teacher, local, start_date, end_date, 
-				spaces, start_date_enrollment, end_date_enrollment)
+				spaces, start_date_enrollment, end_date_enrollment, logo)
 			VALUES
 				(:id_event_type, :name, :details, :teacher, :local, :start_date, :end_date,
-				:spaces, :start_date_enrollment, :end_date_enrollment)";
+				:spaces, :start_date_enrollment, :end_date_enrollment, :logo)";
 
 			$params = array(
 					":id_event_type" => $this->eventType->getIdEventType(),
@@ -370,7 +379,8 @@
 					":end_date" => $this->getEndDate(),
 					":spaces" => $this->getSpaces(),
 					":start_date_enrollment" => $this->getStartDateEnrollment(),
-					":end_date_enrollment" => $this->getEndDateEnrollment()
+					":end_date_enrollment" => $this->getEndDateEnrollment(),
+					":logo" => $this->getLogo()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
@@ -382,6 +392,8 @@
 		public function update($data = array()){
 			$this->setData($data);
 			if (!$this->isValidData()) return false;
+
+			$this->setLogo($this->openLogo($_FILES["logo"]));
 
 			$sql = 
 			"UPDATE
@@ -397,7 +409,8 @@
 				end_date = :end_date, 
 				spaces = :spaces,
 				start_date_enrollment = :start_date_enrollment, 
-				end_date_enrollment = :end_date_enrollment
+				end_date_enrollment = :end_date_enrollment,
+				logo = :logo
 			WHERE
 				id_event = :id_event";
 
@@ -413,7 +426,8 @@
 					":spaces" => $this->getSpaces(),
 					":start_date_enrollment" => $this->getStartDateEnrollment(),
 					":end_date_enrollment" => $this->getEndDateEnrollment(),
-					":id_event" => $this->getIdEvent()
+					":id_event" => $this->getIdEvent(),
+					":logo" => $this->getLogo()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
@@ -457,6 +471,12 @@
 			$statment = $pdo->prepare($sql);
 			
 			$statment->execute();
+		}
+
+		private function openLogo($logo){
+			$size = $logo["size"];
+			$img = fread(fopen($logo["tmp_name"], "r"), $size); 
+			return $img;
 		}
 
 	}
