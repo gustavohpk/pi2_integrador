@@ -35,6 +35,7 @@
               <?php else : ?>
                 <h5>Das <?= $event->getStartDate("H:i") ?> às <?= $event->getEndDate("H:i") ?></h4>
               <?php endif; ?>
+              <p>Local: <?= $event->getLocal() ?></p>
               <p>Acesse a página do evento para mais detalhes.</p>
             </div>
             <?php if ($event->eventType->getEventType() == "sem_inscricao") : ?>

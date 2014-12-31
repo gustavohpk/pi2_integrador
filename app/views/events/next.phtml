@@ -2,6 +2,13 @@
 	<h2>Próximos Eventos</h2>
 	<div class="row">
 		<?php $i=0;?>
+		<?php if(!$this->events) : ?>
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Nenhum evento marcado</h3>
+				</div>
+			</div>
+		<?php endif; ?>
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 			<?php require_once "views/includes/_search.phtml" ?>
 		</div>

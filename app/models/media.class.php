@@ -108,7 +108,7 @@
 		}
 
 		public static function findById($id){
-			return self::find(array("id_media"), array($id));
+			return self::find(array("id_media"), array($id))[0];
 		}
 
 		public function findByIdEvent($idEvent, $mediaType = "p") {
@@ -169,7 +169,7 @@
 			return $statment->execute($params);
 		}
 
-		public function imagePath($image, $path){
+		private function imagePath($image, $path){
 			switch ($image["type"]) {
 				case 'image/png': $type = '.png'; break;
 				case 'image/jpeg': case 'image/jpg': $type = '.jpg'; break;
@@ -188,7 +188,7 @@
 			return $relativePath;
 		}
 
-		function getThumbnail($link){
+		public function getThumbnail($link){
         	$code = substr($link, (strpos($link, '=')+1), 30);
          	$thumbnailUrl = 'http://img.youtube.com/vi/' . $code . '/0.jpg';
          	return $thumbnailUrl;

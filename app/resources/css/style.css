@@ -8,10 +8,16 @@ h2 { background-color: #FFF; padding: 5px; border: 1px solid #DDD;}
 a { color: #555; }
 label { font-weight: normal; }
 a:hover, a:focus { color: #000; }
+span.label a { color: #FFF; text-decoration: underline;}
+span.label a:hover { cursor: pointer; }
+
 .container-fluid, .container{ text-align: center; }
 .btn:hover, a, .facebook-link, .youtube-link, .utfpr-link, .utfpr-link img, #main-menu li, #account-menu li, span{ webkit-transition: all .3s ease-in-out;	transition: all .3s ease-in-out; }
 .col-bordered{ border: 1px solid #AAA; }
 .navbar-toggle{ margin-left: 15px; }
+.tooltip{ font-size: 13px; }
+.tooltip-inner { max-width: 300px; }
+.form-control:focus { border-color: #333; box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(150,150,150,.6); webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(150,150,150,.6);}
 
 
 /* Elementos */
@@ -36,6 +42,14 @@ a:hover, a:focus { color: #000; }
 .main-menu-admin{ position: fixed; z-index: 1; margin-right: 0; padding-right: 0; padding-left: 0; right: 0;}
 #admin { margin-top: 65px; }
 #admin h1 { margin-top: 0;}
+
+.google-maps iframe { width: 100% !important; }
+
+/* Label */
+.label-lg { font-size: 16px; }
+.label-md { font-size: 14px; }
+.label-sm { font-size: 12px; }
+.label-xs { font-size: 10px; }
 
 input[type=file] { display: initial; }
 
@@ -144,6 +158,8 @@ a.fancybox:link { text-decoration: none; color: #000; height: 50px;}
 .dropdown:hover .dropdown-menu { display: block; }
 ul.left-menu a{ padding: 5px 5px !important; text-align:left; width: 100%; }
 ul.left-menu span{ text-align: left; }
+
+.well-md { display: inline-block; }
 
 
 /* Tabs área de eventos */

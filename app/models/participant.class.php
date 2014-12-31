@@ -204,9 +204,12 @@
    			if ((int) $this->getIdCity() < 1) $this->errors[] = "O nome da cidade é um campo obrigatório.";   			
    		}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
-			
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_participant", $direction ="DESC"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);	
+			$limit = self::getLimitByPage();
+			$page = self::getCurrentPage();
+			$start = ($page * $limit) - $limit;
+
 			$sql = 
 			"SELECT 
 				participant.*, city.name AS city, city.id_state, state.state as state
@@ -216,7 +219,8 @@
 				city ON city.id_city = participant.id_city
 			INNER JOIN
 				state ON state.id_state = city.id_state" . 
-				($paramsName ? " WHERE " . $paramsName : "");
+				($paramsName ? " WHERE " . $paramsName : "") . " ORDER BY " . $order . " " . $direction;
+			$sql .= " LIMIT $start, $limit";;
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($paramsValue);
@@ -352,6 +356,15 @@
 
 		public static function logout(){
 			unset($_SESSION["participant"]);
+		}
+
+		public static function count(){
+			$sql = "SELECT count(id_news) as count FROM news";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetch();
+			return $rows["count"];
 		}
 	}
 ?>

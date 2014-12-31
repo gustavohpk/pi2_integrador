@@ -12,9 +12,11 @@
 		private $isSubEvent;
 		public $eventType;
 		private $name;
+		private $path;
 		private $details;
 		private $teacher;
 		private $local;
+		private $address;
 		private $startDate;
 		private $endDate;
 		private $spaces;
@@ -23,6 +25,7 @@
 		private $endDateEnrollment;	
 		private $views;
 		private $logo;
+		private $sendParticipantData;
 		public $cost;
 		public $sponsorship;
 
@@ -65,6 +68,15 @@
 			return $this->name;
 		}
 
+		public function setPath($path){
+			$this->path = $path;
+		}
+
+		public function getPath(){
+			return $this->path;
+		}
+
+
 		public function setDetails($details){
 			$this->details = $details;
 		}
@@ -89,12 +101,16 @@
 			return $this->local;
 		}
 
-		public function setViews($views){
-			$this->views = $views;
+		public function setAddress($address){
+			$this->address = $address;
 		}
 
-		public function setLogo($logo){
-			$this->logo = $logo;
+		public function getAddress(){
+			return $this->address;
+		}
+
+		public function setViews($views){
+			$this->views = $views;
 		}
 
 		public function setStartDate($startDate){			
@@ -145,6 +161,18 @@
 			return $this->logo;
 		}
 
+		public function setLogo($logo){
+			$this->logo = $logo;
+		}
+
+		public function getSendParticipantData(){
+			return $this->sendParticipantData;
+		}
+
+		public function setSendParticipantData($sendParticipantData){
+			$this->sendParticipantData = $sendParticipantData;
+		}
+
 		/**
 		 * Realiza a validação dos dados
 		 */	
@@ -157,7 +185,7 @@
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_event", $direction ="DESC"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);	
 			$limit = self::getLimitByPage();
 			$page = self::getCurrentPage();
 			$start = ($page * $limit) - $limit;
@@ -367,20 +395,23 @@
 				spaces, start_date_enrollment, end_date_enrollment, logo)
 			VALUES
 				(:id_event_type, :name, :details, :teacher, :local, :start_date, :end_date,
-				:spaces, :start_date_enrollment, :end_date_enrollment, :logo)";
+				:spaces, :start_date_enrollment, :end_date_enrollment, :logo, :send_participant_data)";
 
 			$params = array(
 					":id_event_type" => $this->eventType->getIdEventType(),
 					":name" => $this->getName(),
+					":path" => $this->getPath(),
 					":details" => $this->getDetails(),
 					":teacher" => $this->getTeacher(),
 					":local" => $this->getLocal(),
+					":address" => $this->getAddress(),
 					":start_date" => $this->getStartDate(), 
 					":end_date" => $this->getEndDate(),
 					":spaces" => $this->getSpaces(),
 					":start_date_enrollment" => $this->getStartDateEnrollment(),
 					":end_date_enrollment" => $this->getEndDateEnrollment(),
-					":logo" => $this->getLogo()
+					":logo" => $this->getLogo(),
+					":send_participant_data" => $this->getSendParticipantData()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
@@ -393,7 +424,11 @@
 			$this->setData($data);
 			if (!$this->isValidData()) return false;
 
-			$this->setLogo($this->openLogo($_FILES["logo"]));
+			if($_FILES["logo"]["size"] > 0){
+				$this->setLogo($this->openLogo($_FILES["logo"]));
+			}
+
+			$this->generatePath($this->getPath());
 
 			$sql = 
 			"UPDATE
@@ -402,15 +437,18 @@
 				id_event_type = :id_event_type,
 				id_parent_event = :id_parent_event,
 				name = :name,
+				path = :path,
 				details = :details,
 				teacher = :teacher, 
 				local = :local,
+				address = :address,
 				start_date = :start_date, 
 				end_date = :end_date, 
 				spaces = :spaces,
 				start_date_enrollment = :start_date_enrollment, 
 				end_date_enrollment = :end_date_enrollment,
-				logo = :logo
+				logo = :logo,
+				send_participant_data = :send_participant_data
 			WHERE
 				id_event = :id_event";
 
@@ -418,16 +456,19 @@
 					":id_event_type" => $this->eventType->getIdEventType(),
 					":id_parent_event" => $this->getIdParentEvent(),
 					":name" => $this->getName(),
+					":path" => $this->getPath(),
 					":details" => $this->getDetails(),
 					":teacher" => $this->getTeacher(),
 					":local" => $this->getLocal(),
+					":address" => $this->getAddress(),
 					":start_date" => $this->getStartDate(), 
 					":end_date" => $this->getEndDate(),
 					":spaces" => $this->getSpaces(),
 					":start_date_enrollment" => $this->getStartDateEnrollment(),
 					":end_date_enrollment" => $this->getEndDateEnrollment(),
 					":id_event" => $this->getIdEvent(),
-					":logo" => $this->getLogo()
+					":logo" => $this->getLogo(),
+					":send_participant_data" => $this->getSendParticipantData()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
@@ -477,6 +518,34 @@
 			$size = $logo["size"];
 			$img = fread(fopen($logo["tmp_name"], "r"), $size); 
 			return $img;
+		}
+
+		private function generatePath($path){
+			if(!$path){
+				$path = str_replace(" ", "-", strtolower($this->getName()));
+			}else{
+				$path = str_replace(" ", "-", strtolower($this->getPath()));
+			}
+			$path = self::removeSpecialCharacters($path);
+
+			$number = 2;
+			$end = "-" . strval($number);
+
+			while ($event = self::find(array("path"), array($path))){
+				if($event[0]->getIdEvent() != $this->getIdEvent()){
+					if($number != 2){
+						$path = substr($path, 0, -2);
+					}
+					$path = substr($path, 0, 48);
+					$path = $path . $end;
+					$number++;
+					$end = "-" . strval($number);
+				}else{
+					break;
+				}
+			}
+
+			$this->setPath($path);
 		}
 
 	}

@@ -8,7 +8,21 @@
 
 		public function _list() {
    		$this->setHeadTitle("Lista de Participantes");
-         $this->participants = \Participant::all();
+         if (isset($this->params[":p"])) {
+            $page = $this->params[":p"];
+         } else {
+            $page = 1;
+         }
+         \Participant::setCurrentPage($page);
+
+         if (isset($this->params[":id"])){
+            $this->participants = \Participant::findById($this->params[":id"]);
+            $this->pagination = new \Pager(count($this->participants), \Participant::getLimitByPage(), $page);
+         }
+         else{
+            $this->participants = \Participant::all();
+            $this->pagination = new \Pager(\Participant::count(), \Participant::getLimitByPage(), $page);
+         }
 		}
 
 		public function _new(){

@@ -16,7 +16,7 @@
    	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
     $router->get('/eventos/proximos/pagina/:p', array('controller' => 'EventsController', 'action' => 'next'));
     $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
-    //$router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
+    $router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
     $router->get('/eventos/:id/ver', array('controller' => 'EventsController', 'action' => 'show'));
 
    	//rotas para notícias
@@ -25,13 +25,12 @@
     $router->get('/noticias/:id/ler', array('controller' => 'NewsController', 'action' => 'item'));
 
     //rotas para mídia
-    $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'media'));
-    $router->get('/midia/galeria/pagina/:p', array('controller' => 'MediaController', 'action' => 'media'));
+    $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'gallery'));
+    $router->get('/midia/galeria/pagina/:p', array('controller' => 'MediaController', 'action' => 'gallery'));
     $router->get('/midia/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photos'));
     $router->get('/midia/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videos'));
 
-    $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'media'));
-    $router->get('/midia/galeria/evento/:id', array('controller' => 'MediaController', 'action' => 'media'));
+    $router->get('/midia/galeria/evento/:id', array('controller' => 'MediaController', 'action' => 'gallery'));
 
     $router->get('/midia/galeria/fotos', array('controller' => 'MediaController', 'action' => 'photoGallery'));
     $router->get('/midia/galeria/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photoGallery'));
@@ -40,7 +39,7 @@
 
     $router->get('/midia/galeria/videos', array('controller' => 'MediaController', 'action' => 'videoGallery'));
     $router->get('/midia/galeria/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videoGallery'));
-    $router->get('/midia/galeria/videos/evento/:id', array('controller' => 'MediaController', 'action' => 'videoGallery'));
+    $router->get('/midia/galeria/videos/evento/:id/pagina/:p', array('controller' => 'MediaController', 'action' => 'videoGallery'));
 
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));

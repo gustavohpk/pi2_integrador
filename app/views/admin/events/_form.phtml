@@ -21,13 +21,21 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+				<div class="col-xs-12 col-sm-2 col-sm-offset-4">
 					<h4>Eventos vinculados</h4>
-					<div class="input-group well well-sm col-xs-12">
+					<div class="input-group well well-md">
 						<span> Vincular evento pai </span><input id="foto" type="radio" name="media[media_type]" value="p" checked><br/>
 						<span> Vincular subeventos </span><input id="video" type="radio" name="media[media_type]" value="v">
 					</div>
+					<br/>
 					<a id="event-access" target="_blank" onclick='javascript:$(".ajax-loader").hide();' class="btn btn-default" data-toggle="modal" data-target="#event-list-modal" ><span class="glyphicon glyphicon-list"></span> Selecione os eventos</a>
+				</div>
+				<div class="col-xs-12 col-sm-2">
+					<h4>Permitir envio de texto pelo participante</h4>
+					<div class="input-group well well-md" title="Caso seja necessário, é possível ativar um campo de texto para ser preenchido durante a inscrição." data-toggle="tooltip" data-placement="bottom">
+						<span> Sim </span><input id="foto" type="radio" name="event[send_participant_data]" value="1" <?= $this->events->getSendParticipantData() ? "checked" : ""  ?>>
+						<span> Não </span><input id="video" type="radio" name="event[send_participant_data]" value="0" <?= $this->events->getSendParticipantData() ? "" : "checked" ?>>
+					</div>
 				</div>
 			</div>
 			<div id="event-list-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -91,7 +99,15 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<h4>Caminho (URL)</h4>
+					<input type="text" class="form-control" name="event[path]" value="<?= $this->events->getPath()?>" title="O URL deve conter apenas letras minúsculas, números e traços (hífens), e deve ser único. Se um URL não for especificado, o sistema irá gerar um automaticamente." data-toggle="tooltip" data-placement="top"/>
+					<span>EX: palestra-sobre-assunto</span>
+					<span>EX2: iv-semana-academica-tsi</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2">
 					<h4>Tipo</h4>
 					<select class="form-control" name="event[id_event_type]">
 						<?php foreach ($this->eventsType as $eventType) : ?>
@@ -107,9 +123,7 @@
 						<?php endforeach ?>
 					</select>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<div class="col-xs-12 col-sm-6 col-md-4">
 					<h4>Ministrante</h4>
 					<input type="text" class="form-control" name="event[teacher]" value="<?= $this->events->getTeacher()?>" required/>
 				</div>
@@ -117,12 +131,13 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<h4>Local</h4>
-					<div class="input-group">
-					    <input type="text" class="form-control" name="event[local]" value="<?= $this->events->getLocal()?>" required/>
-					    <div class="input-group-btn">
-					      <button id="address-button" type="button" class="btn btn-default" data-toggle="dropdown" title="Inserir endereço da UTFPR Guarapuava">UTFPR GP</button>
-					    </div>
-				    </div>	
+					   <input type="text" class="form-control" name="event[local]" value="<?= $this->events->getLocal()?>" required/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<h4>Endereço</h4>
+					<input type="text" class="form-control" name="event[address]" value="<?= $this->events->getAddress()?>" title="Digite o endereço corretamente para que o mapa possa ser exibido corretamente na página do evento. Inclua no endereço pelo menos rua, número, cidade e estado." data-toggle="tooltip" data-placement="bottom"  required/>
 				</div>
 			</div>
 			<div class="row">
@@ -166,11 +181,42 @@
 					</div>
 				</div>
 			</div>
+			<br/>
+			<div class="row">
+				<div class="col-xs-12">
+					<span class="label label-warning label-md">Alguns parâmetros do evento não poderão ser alterados após o a abertura das inscrições. <a data-toggle="modal" data-target="#date-info-modal">Saiba mais</a>.</span>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 					<h4>Vagas</h4>
 					<input type="number" min="1" class="form-control" name="event[spaces]" value="<?= $this->events->getSpaces()?>" required/>
 				</div>
+			</div>
+			<div id="date-info-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+			        <div class="modal-content">
+			          <div class="modal-body">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				            <h2 class="modal-title">Edição de Evento</h2>
+				            <br/>
+				            <p>Após as inscrições serem abertas, os campos <b>Eventos Vinculados</b>, <b>Permitir envio de texto pelo participante</b>, <b>Tipo</b>, <b>Data e horário de <u>início</u> das inscrições</b> e não poderão ser modificados.</p>
+				            <br/>
+				            <p>Quanto aos <b>Métodos de Pagamento</b>, nenhum poderá ser removido. Apenas adicionado.</p>
+				            <br/>
+				            <p>Caso um preço já tenha entrado em vigor, ele não poderá ser modificado.</p>
+				            <br/>
+				            <p>Essas restrições existem para não ocorrerem problemas com as inscrições. Portanto, é essencial configurar todos os dados do evento corretamente antes do início do período de inscrições.</p>
+				            <br/>
+				            <p>Além disso, nenhum evento que possuir inscrições poderá ser excluído.</p>
+			            </div>
+			            <div class="caption">
+			            </div>
+			            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			          </div>
+			       </div>
+			    </div>
 			</div>
 			<br/>
 			<div class="row">

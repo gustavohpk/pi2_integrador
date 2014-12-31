@@ -1,7 +1,10 @@
 <?php 
 	class MediaController extends BaseController{
-		public function media() {
+		public function gallery() {
       		$this->setHeadTitle("Fotos e Vídeos");
+      		if (isset($this->params[":id"])) {
+      			$this->event = Events::findById($this->params[":id"])[0];
+      		}
       		// if (isset($this->params[":p"])) {
 	       //     $page = $this->params[":p"];
 	       //  } else {
