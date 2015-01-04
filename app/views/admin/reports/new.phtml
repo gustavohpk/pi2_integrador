@@ -5,36 +5,49 @@
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-4 col-md-offset-2 col-lg-2 col-lg-offset-4">
 				<h4>Data inicial:</h4>
-				<input type="text" class="form-control" name="reports[date_from]" value="" title=""/>
+				<input type="text" class="form-control" name="reports[date_from]" value="" title="Data inicial" required/>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
 				<h4>Data final:</h4>
-				<input type="text" class="form-control" name="reports[date_to]" value="" title=""/>
+				<input type="text" class="form-control" name="reports[date_to]" value="" title="Data final" required/>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-4 col-md-offset-2 col-lg-2 col-lg-offset-4">
 				<h4>Horário inicial:</h4>
-				<input type="text" class="form-control" name="reports[time_from]" value="" title=""/>
+				<input type="text" class="form-control" name="reports[time_from]" value="" title="Horário inicial" required/>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
 				<h4>Horário final:</h4>
-				<input type="text" class="form-control" name="reports[time_to]" value="" title=""/>
+				<input type="text" class="form-control" name="reports[time_to]" value="" title="Horário final" required/>
 			</div>
 		</div>
 		<div class="row">
 			<br/>
-			<div class="col-xs-12">
-				<input id="reports[confirmed]" type="checkbox" name="reports[confirmed]" title="Inscrições Confirmadas"> <label for="reports[confirmed]"> Inscrições confirmadas</label>
+			<div class="col-xs-12" title="OBS.: Se nenhuma opção for marcada, todas as inscrições dentro do período especificado acima serão exibidas no relatório." data-toggle="tooltip" data-placement="top">
+				<input id="reports[confirmed]" type="checkbox" name="reports[confirmed]" title="Inscrições Confirmadas" checked> <label for="reports[confirmed]"> Inscrições confirmadas</label>
 				<br/>
-				<input id="reports[unconfirmed]" type="checkbox" name="reports[unconfirmed]" title="Inscrições Confirmadas"> <label for="reports[unconfirmed]"> Inscrições não-confirmadas</label>
+				<input id="reports[unconfirmed]" type="checkbox" name="reports[unconfirmed]" title="Inscrições Confirmadas" checked> <label for="reports[unconfirmed]"> Inscrições não-confirmadas</label>
 				<br/>
-				<input id="reports[present]" type="checkbox" name="reports[present]" title="Inscrições Confirmadas" disabled> <label for="reports[present]" class="disabled"> Presenças confirmadas</label>
+				<input id="reports[present]" type="checkbox" name="reports[present]" title="Inscrições Confirmadas" checked> <label for="reports[present]"> Presenças confirmadas</label>
 				<br/>
-				<input id="reports[absent]" type="checkbox" name="reports[absent]" title="Inscrições Confirmadas" disabled> <label for="reports[absent]" class="disabled"> Ausências</label>
+				<input id="reports[absent]" type="checkbox" name="reports[absent]" title="Inscrições Confirmadas" checked> <label for="reports[absent]"> Ausências</label>
 				<br/>
 			</div>
 		</div>
+		<div class="row">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<h4>Eventos</h4>
+					<span class="label label-default label-sm">OBS.: Para fazer um relatório de todos os eventos, deixe todos as opções abaixo desmarcadas. </span>
+					<br/>
+					<br/>
+					<select class="form-control" name="reports[events][]" size="10" multiple="multiple" title="Segure a tecla CTRL para desmarcar ou para selecionar vários eventos. Utilize o teclado para procurar um evento mais rapidamente." data-toggle="tooltip" data-placement-"right">
+						<?php foreach ($this->events as $key => $event) : ?>
+							<option value="<?=$event->getIdEvent()?>"><?=$event->getName()?></option>
+						<?php endforeach ?>
+					</select>
+				</div>
+			</div>
 		<br/>
 		<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> Gerar</button>
 		<a href="<?= createUriFor('/admin')?>">

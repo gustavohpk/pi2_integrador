@@ -40,7 +40,7 @@
 
        	public function logout(){
        		Participant::logout();
-       		$this->redirectTo("conta/login");
+       		$this->redirectTo("");
        	}
 
        	/*

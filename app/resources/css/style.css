@@ -28,7 +28,7 @@ span.label a:hover { cursor: pointer; }
 .main-menu>li>ul>li>a { padding-top: 5px; padding-bottom: 8px;}
 #login-bar{ background: #FFF; font-size: 0.9em; padding: 8px; }
 #login-bar button{ width: 70px; }
-#news-list .list-group{ text-align: left; }
+#news-list .list-group, #certificates-list .list-group{ text-align: left; }
 #news-list, #news-list a.list-group-item, .event div.thumbnail{ border-radius: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
 #news-list img.thumbnail{ max-height: 80px; min-height: 70px;}
 #account-cadastro, #account-login{ text-align: center; }
@@ -60,7 +60,7 @@ img.thumbnail:hover{ background-color: #AAA; border-radius: 5%; }
 /*a.fancybox span { padding: 3px; }
 a.fancybox:hover span{ background-color: #CCC; border-radius: 15%;}*/
 .event-thumbnail{ width: 80%; margin-top: 5px; }
-.modal-body{ text-align: center; }
+.modal-title, .modal-body, .modal-footer { text-align: center; }
 .event-link{ text-decoration: none !important; cursor: pointer; }
 a.event-related-link{ padding: 2px; }
 a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radius: 5px;}
@@ -181,6 +181,7 @@ label.disabled { color: darkgray; }
 .config-banners img{ max-height: 100px; max-width: 100px; }
 
 .admin-shortcut { padding: 10px; cursor: pointer; color:#333;}
+.admin-shortcut label { cursor: pointer; }
 .admin-shortcut-title { cursor: pointer; text-decoration: none; font-weight: bold;}
 a.admin-shortcut-link { text-decoration: none;}
 .admin-shortcut:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
@@ -208,21 +209,30 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 }
 
 
-#show-certificate {
+#show-certificate, #report {
     margin: 0;
     padding: 0;
     background-color: #FAFAFA;
     font: 11pt "Arial";
     width: 21cm;
     min-height: 25cm;
-    /*Altura máxima - um pouco menor que o tamanho da folha A4 para a janela de impressão não exibir uma segunda folha em branco*/
-    max-height: 29.1cm;
     padding: 2cm;
     margin: 1cm auto;
     border: 1px #D3D3D3 solid;
     border-radius: 5px;
     background: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#report table{ font-size: 12px; }
+#report th { font-weight: 600; }
+#report ul { text-align: left; }
+#report-info { text-align: center; }
+
+
+#show-certificate{
+	/*Altura máxima - um pouco menor que o tamanho da folha A4 para a janela de impressão não exibir uma segunda folha em branco*/
+    max-height: 29.1cm;
 }
 
 #certificate-top{
@@ -241,7 +251,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 	margin-right: 15px;
 }
 
-#certificate-title{
+#certificate-title, #report-title{
 	font-size: 30px;
 	font-weight: bold;
 	text-align: center;

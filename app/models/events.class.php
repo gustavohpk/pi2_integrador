@@ -343,6 +343,10 @@
 			return self::find(array("id_event"), array($id));
 		}
 
+		public static function findByPath($path){
+			return self::find(array("path"), array($path));
+		}
+
 		public function setCost($costs) {
 			foreach ($costs["cost"] as $key => $value) {
 				$data = array(
@@ -522,11 +526,10 @@
 
 		private function generatePath($path){
 			if(!$path){
-				$path = str_replace(" ", "-", strtolower($this->getName()));
+				$path = str_replace(" ", "-", strtolower(preg_replace('/[^a-zA-Z0-9\s]/', '', self::removeSpecialCharacters($this->getName()))));
 			}else{
-				$path = str_replace(" ", "-", strtolower($this->getPath()));
+				$path = str_replace(" ", "-", strtolower(preg_replace('/[^a-zA-Z0-9\s]/', '', self::removeSpecialCharacters($this->getPath()))));
 			}
-			$path = self::removeSpecialCharacters($path);
 
 			$number = 2;
 			$end = "-" . strval($number);

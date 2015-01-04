@@ -9,6 +9,9 @@
     //rota para raiz
    	$router->get('/', array('controller' => 'HomeController', 'action' => 'index'));
 
+    //rota para sobre
+    $router->get('/sobre', array('controller' => 'HomeController', 'action' => 'about'));
+
     //validacoes ajax
     $router->get('/validarcpf/:cpf', array('controller' => 'BaseController', 'action' => 'validateCpf'));
    	
@@ -18,6 +21,7 @@
     $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
     $router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
     $router->get('/eventos/:id/ver', array('controller' => 'EventsController', 'action' => 'show'));
+    $router->get('/eventos/:url', array('controller' => 'EventsController', 'action' => 'show'));
 
    	//rotas para notícias
    	$router->get('/noticias/lista', array('controller' => 'NewsController', 'action' => 'show'));
@@ -59,7 +63,9 @@
     $router->get('/conta/painel', array('controller' => 'ParticipantController', 'action' => 'dashboard'));
 
     $router->get('/conta/inscricoes', array('controller' => 'EnrollmentController', 'action' => '_list'));    
-    $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));        
+    $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));  
+
+    $router->get('/conta/certificados', array('controller' => 'CertificatesController', 'action' => '_list'));      
 
     $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
     $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));

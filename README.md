@@ -13,6 +13,8 @@
 - Configurar API Google Maps dinâmica
 - Analisar o uso do campo "desativado/invisível" na tabela de eventos
 - Analisar replicação de dados do usuário para a inscrição
+- Melhorar função de geração/validação de url de evento
+- Consertar a pardonização de nomenclaturas (nomes com "_" na frente, arrumar singular e plural)
 
 ----------
 
@@ -20,8 +22,18 @@
  
 - As mensagens de erro referentes aos preços de evento não são exibidas, mas as validações funcionam
 - O participante é excluído, mas o model ou controller gera um erro. Ao atualizar volta à lista, mas exibe outra mensagem de erro.
+- Lista de certificados no painel do participante iniciada
 
 ----------
+
+----- Atualização 058 (02/01/15 - 03/01/15) -----
+
+- Eventos estão acessíveis através do link customizado
+- Geração de relatórios de inscrições com filtro de período, confirmações, presenças e eventos finalizada
+- Página "Sobre" criada, utilizando o controller da home
+- Login em modal adicionado
+
+
 
 ----- Atualização 057 (28/12/14 - 31/12/14) -----
 

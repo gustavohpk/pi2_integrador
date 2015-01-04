@@ -7,13 +7,17 @@
 
 	    public function show() {
 	    	$this->setHeadTitle("Ver Evento");
-	    	if ($this->events = Events::findById($this->params[":id"])) {
-	    		$this->events = $this->events[0];
-	    		// print $this->events->getLogo(); exit;
+	    	if (isset($this->params[":id"])) {
+	    		$this->events = Events::findById($this->params[":id"])[0];
+	    	}
+	    	else if(isset($this->params[":url"])){
+	    		$this->events = Events::findByPath($this->params[":url"])[0];
+	    	}
+	    	if($this->events){
 	    		$this->eventsRelated = $this->events->getEventsRelated();
 	    		$this->sponsors = $this->events->getSponsors();
 	    		$this->hasMedia = Media::hasMedia($this->events->getIdEvent());
-   				Events::updateViews($this->params[":id"]);
+   				Events::updateViews($this->events->getIdEvent());
 	    	}
 	    	else {
 	    		flashMessage::errorMessage("O evento que você está tentando acessar não existe.");

@@ -1,85 +1,27 @@
 <?php 
-	namespace Admin;
-	
-	class ReportsController extends BaseAdminController{
-      protected $report;
-      protected $actionForm;
+    namespace Admin;
+  
+    class ReportsController extends BaseAdminController{
+        protected $report;
+        protected $actionForm;
 
-		// public function _list() {
-  //        $this->setHeadTitle("Lista de Notícias");
-  //        if (isset($this->params[":p"])) {
-  //           $page = $this->params[":p"];
-  //        } else {
-  //           $page = 1;
-  //        }
-  //        \News::setCurrentPage($page);
+        public function _new(){
+        $this->setHeadTitle("Relatório de Inscrições");
+        $this->report = new \Reports();
+        $this->events = \Events::find(array(), array(), "=", "AND", "name", "ASC");
+            $this->actionForm = $this->getUri("admin/relatorios/inscricoes/gerar");
+            $this->titleBtnSubmit = "Gerar";
+        }
 
-  //        if (isset($this->params[":id"])){
-  //           $this->news = \News::findById($this->params[":id"]);
-  //           $this->pagination = new \Pager(count($this->news), \News::getLimitByPage(), $page);
-  //        }
-  //        else{
-  //           $this->news = \News::find();
-  //           $this->pagination = new \Pager(\News::count(), \News::getLimitByPage(), $page);
-  //        }
-  //     }
-
-		public function _new(){
-		$this->setHeadTitle("Relatório de Inscrições");
-		$this->report = new \Reports();
-        $this->actionForm = $this->getUri("admin/relatorios/inscricoes/gerar");
-        $this->titleBtnSubmit = "Gerar";
-		}
-
-		public function _edit(){
-		$this->setHeadTitle("Modificar notícia");
-      $this->news = \News::findById($this->params[":id"])[0];
-        $this->actionForm = $this->getUri("admin/noticias/{$this->news->getIdNews()}");
-        $this->titleBtnSubmit = "Salvar";
-		}
-
-      public function generate(){
-         $params = $this->params["reports"];
-         $this->report = new \Reports($params);
-         var_dump($this->report); exit;
-         if ($this->report->generate()){
-            //\FlashMessage::successMessage("Relatório gerado com sucesso");
-            //$this->redirectTo("admin/noticias/lista");
-            $this->render("report");
-         }
-         else{
-            \FlashMessage::errorMessage("Erro ao gerar relatório.");
-            $this->setHeadTitle("Cadastro de notícia");           
-            $this->actionForm = $this->getUri("admin/noticias");
-            $this->titleBtnSubmit = "Cadastrar";
-            $this->render("new");
-         }
-      }
-
-      public function update(){  
-         $this->news = \News::findById($this->params[":id"])[0];
-         if ($this->news->update($this->params['news'])){
-            \FlashMessage::successMessage("Notícia alterada com sucesso.");
-            $this->redirectTo("admin/noticias/lista");
-         }
-         else{
-            \FlashMessage::errorMessage("Erro ao alterar a notícia.");
-            $this->setHeadTitle("Editar Notícia");
-            $this->actionForm = $this->getUri("admin/noticias/{$this->news->getIdNews()}");
-            $this->titleBtnSubmit = "Salvar";
-            $this->render("edit");
-         }
-      }
-
-      public function remove(){
-         $this->news = \News::findById($this->params[":id"])[0];
-         if ($this->news->remove()){
-            \FlashMessage::successMessage("Notícia excluída com sucesso.");
-         }
-         else {
-            \FlashMessage::errorMessage("Não foi possível excluír a notícia.");
-         }
-         $this->redirectTo("admin/noticias/lista");
-      }
-	} 
+        public function generate(){
+            $this->report = new \Reports($this->params["reports"]);
+            if ($this->enrollments = $this->report->generate()){
+                $this->render("report");
+            }
+            else{
+                \FlashMessage::errorMessage("Erro ao gerar relatório.");
+                $this->redirectTo("admin/relatorios/inscricoes");
+            }
+        }
+    } 
 ?>

@@ -13,6 +13,11 @@
 	     * @var int $code Código único
 	     */
 		private $idCertificate, $idEnrollment, $code;
+
+		/**
+		 * @var Event $event A inscrição relacionado ao certificado
+		 */
+		public $enrollment;
 		
 		public function setIdCertificate($idCertificate){
 			$this->idCertificate = $idCertificate;
@@ -20,10 +25,16 @@
 
 		public function setIdEnrollment($idEnrollment){
 			$this->idEnrollment = $idEnrollment;
+			$enrollment = Enrollment::findById($idEnrollment);
+			$this->setEnrollment($enrollment[0]);
 		}
 
 		public function setCode($code){
 			$this->code = $code;
+		}
+
+		public function setEnrollment($enrollment){
+			$this->enrollment = $enrollment;
 		}
 
 		public function getIdCertificate(){
@@ -36,6 +47,10 @@
 
 		public function getCode(){
 			return $this->code;
+		}
+
+		public function getEnrollment(){
+			return $this->enrollment;
 		}
 
 		private function generateCode(){
@@ -66,6 +81,15 @@
 			$params = array(
 				"paramsName" => "id_certificate = :id_certificate", 
 				"paramsValue" => array(":id_certificate" => $id)
+			);
+			$certificates = self::find($params);
+			return count($certificates) > 0 ? $certificates : NULL;
+		}
+
+		public static function findByIdParticipant($id){
+			$params = array(
+				"paramsName" => "id_participant = :id_participant", 
+				"paramsValue" => array(":id_participant" => $id)
 			);
 			$certificates = self::find($params);
 			return count($certificates) > 0 ? $certificates : NULL;
