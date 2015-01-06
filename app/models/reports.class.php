@@ -71,20 +71,20 @@
 				$this->absent = false;
 		}
 
-		public function getDateFrom(){
-			return is_null($this->dateFrom) ? null : date("Y-m-d", strtotime($this->dateFrom));
+		public function getDateFrom($format = "Y-m-d"){
+			return is_null($this->dateFrom) ? null : date($format, strtotime($this->dateFrom));
 		}
 
-		public function getDateTo(){
-			return is_null($this->dateTo) ? null : date("Y-m-d", strtotime($this->dateTo));
+		public function getDateTo($format = "Y-m-d"){
+			return is_null($this->dateTo) ? null : date($format, strtotime($this->dateTo));
 		}
 
-		public function getTimeFrom(){
-			return is_null($this->timeFrom) ? null : date("H:i", strtotime($this->timeFrom));
+		public function getTimeFrom($format = "H:i"){
+			return is_null($this->timeFrom) ? null : date($format, strtotime($this->timeFrom));
 		}
 
-		public function getTimeTo(){
-			return is_null($this->timeTo) ? null : date("H:i", strtotime($this->timeTo));
+		public function getTimeTo($format = "H:i"){
+			return is_null($this->timeTo) ? null : date($format, strtotime($this->timeTo));
 		}
 
 		public function getEvents(){
@@ -129,16 +129,12 @@
 				}else if($this->getAbsent()){
 					$sql .= " AND attendance = 0";
 				}
-			}
-
-			
+			}		
 
 			if($this->getEvents())
 				$sql .= " AND id_event IN (" . implode(',', array_map('intval', $this->getEvents())) . ")";
 
 			$sql .= " ORDER BY date_enrollment ASC";
-
-			//var_dump($sql); exit;
 
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);

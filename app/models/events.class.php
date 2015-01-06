@@ -393,12 +393,18 @@
 		public function save(){
 			if (!$this->isValidData()) return false;
 
+			if($_FILES["logo"]["size"] > 0){
+				$this->setLogo($this->openLogo($_FILES["logo"]));
+			}
+
+			$this->generatePath($this->getPath());
+
 			$sql = 
 			"INSERT INTO event
-				(id_event_type, name, details, teacher, local, start_date, end_date, 
-				spaces, start_date_enrollment, end_date_enrollment, logo)
+				(id_event_type, name, path, details, teacher, local, address, start_date, end_date, 
+				spaces, start_date_enrollment, end_date_enrollment, logo, send_participant_data)
 			VALUES
-				(:id_event_type, :name, :details, :teacher, :local, :start_date, :end_date,
+				(:id_event_type, :name, :path, :details, :teacher, :local, :address, :start_date, :end_date,
 				:spaces, :start_date_enrollment, :end_date_enrollment, :logo, :send_participant_data)";
 
 			$params = array(

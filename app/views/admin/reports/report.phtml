@@ -25,30 +25,46 @@
 				</div>
 			</div>
 			<br/>
-			<div class="row">
-				<div id="report-info" class="col-xs-12">
-					<p>Inscrições realizadas entre <u><?= $this->report->getDateFrom() ?> <?= $this->report->getTimeFrom() ?></u> e <u><?= $this->report->getDateTo() ?> <?= $this->report->getTimeTo() ?></u>.</p>
-				</div>
-			</div>
 			<br/>
 			<div class="row">
-				<div class="col-xs-6 col-xs-offset-3">
+				<div class="col-xs-6">
+					<h4>Período</h4>
+					<table class="table">
+						<tr>
+							<th></th>
+							<th>Data</th>
+							<th>Horário</th>
+						</tr>
+						<tr>
+							<td>Início</td>
+							<td><?= $this->report->getDateFrom("d/m/Y") ?></td>
+							<td><?= $this->report->getTimeFrom() ?></td>
+						</tr>
+						<tr>
+							<td>Fim</td>
+							<td><?= $this->report->getDateTo("d/m/Y") ?></td>
+							<td><?= $this->report->getTimeTo() ?></td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-xs-6">
 					<ul class="list-group">
 						<?php if($this->report->getconfirmed()) : ?>
-							<li class="list-group-item"><span class="glyphicon glyphicon-circle-arrow-right"></span> Confirmadas</li>
+							<li class="list-group-item"><span class="glyphicon glyphicon-circle-arrow-right"></span> Inscrições Confirmadas</li>
 							<?= $this->report->getPresent() ? "<li class='list-group-item'><span class='glyphicon glyphicon-circle-arrow-right'></span> Presenças Confirmadas</li>" : "" ?>
 							<?= $this->report->getAbsent() ? "<li class='list-group-item'><span class='glyphicon glyphicon-circle-arrow-right'></span> Faltas</li>" : "" ?>
 						<?php endif; ?>
-						<?= $this->report->getUnconfirmed() ? "<li class='list-group-item'><span class='glyphicon glyphicon-circle-arrow-right'></span> Não Confirmadas</li>" : "" ?>
+						<?= $this->report->getUnconfirmed() ? "<li class='list-group-item'><span class='glyphicon glyphicon-circle-arrow-right'></span> Inscrições Não Confirmadas</li>" : "" ?>
 					</ul>
 				</div>
 			</div>
 
+			<hr/>
 
 			<div class="row">
 
 				<div class="col-xs-12">
-
+					<p>*IC = Inscrição Confirmada. PC = Presença Confirmada</p>
 					<table class="table table-striped">
 						<tr>
 							<th>ID</th>
@@ -56,6 +72,8 @@
 							<th>Evento</th>
 							<th>Data de Inscrição</th>
 							<th>Valor</th>
+							<th>IC*</th>
+							<th>PC*</th>
 						</tr>
 						<?php foreach ($this->enrollments as $enrollment) : ?>
 							<tr>				
@@ -64,6 +82,8 @@
 								<td><?= $enrollment->event->getName() ?></td>
 								<td><?= $enrollment->getDateEnrollment("d/m/Y H:i") ?></td>
 								<td>R$ <?= str_replace('.', ',', money_format('%.2n', $enrollment->getCost())) ?></td>
+								<td><?= $enrollment->getDatePayment() ? "<span class='glyphicon glyphicon-check'></span>" : "<span class='glyphicon glyphicon-unchecked'></span>" ?></td>
+								<td><?= $enrollment->getAttendance() ? "<span class='glyphicon glyphicon-check'></span>" : "<span class='glyphicon glyphicon-unchecked'></span>" ?></td>
 							</tr>
 						<?php endforeach ?>
 					</table>

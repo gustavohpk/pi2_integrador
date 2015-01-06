@@ -58,15 +58,19 @@
 
       public function create(){
          $params = $this->params["event"];
-         $cost = $this->params["cost"];
+         if(isset($this->params["cost"]))
+            $cost = $this->params["cost"];
+
          $this->events = new \Events($params);
          if ($this->events->save()){
             \Logger::creationLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
             \FlashMessage::successMessage("Evento cadastrado com sucesso.");
-            if (!$this->events->setCost($cost)) {
-               $errors = $this->events->cost[0]->getErrors();
-               foreach ($errors as $error) {
-                  \FlashMessage::errorMessage($error);
+            if($cost){
+               if (!$this->events->setCost($cost)) {
+                  $errors = $this->events->cost[0]->getErrors();
+                  foreach ($errors as $error) {
+                     \FlashMessage::errorMessage($error);
+                  }
                }
             }
             $this->redirectTo("admin/eventos/lista");
@@ -146,22 +150,29 @@
 
       public function checkAttendance() {
          $idEvent = $this->params[":id"];
-         //var_dump($idEvent);
-         $this->enrollments = \Enrollment::find(array("id_event"), array($idEvent))[0];
-         //var_dump($this->enrollments);
-         //var_dump(get_class_methods($this->enrollments)); exit;
-         $this->enrollments->checkAttendance($this->params["enrollment"]);
-         \FlashMessage::successMessage("A lista de presença foi atualizada.");
-         $this->redirectTo("admin/eventos/lista");
+         $this->event = \Events::findById($this->params[":id"])[0];
+         if(strtotime($this->event->getStartDate("d-m-Y H:i")) < strtotime(date("d-m-Y H:i")) && $this->event->eventType->getEventType() != "sem_inscricao"){
+            $this->enrollments = \Enrollment::find(array("id_event"), array($idEvent))[0];
+            $this->enrollments->checkAttendance($this->params["enrollment"]);
+            \FlashMessage::successMessage("A lista de presença foi atualizada.");
+            $this->redirectTo("admin/eventos/lista");
+         }else{
+            $this->enrollments = \Enrollment::find(array("id_event"), array($this->params[":id"]));
+            \FlashMessage::warningMessage("Não é possível alterar a lista de presença.");
+            $this->setHeadTitle("Registrar Presença");
+            $this->actionForm = $this->getUri("admin/eventos/{$this->event->getIdEvent()}/presenca");
+            $this->titleBtnSubmit = "Salvar";
+            $this->render("attendance");
+         }
       }
 
       public function attendance() {
          $this->setHeadTitle("Registrar presença");
-         $this->events = \Events::findById($this->params[":id"])[0];
+         $this->event = \Events::findById($this->params[":id"])[0];
          $this->enrollments = \Enrollment::find(array("id_event"), array($this->params[":id"]));
          //$this->attendanceList = \Enrollment::attendanceList($this->params[":id"]);
          //var_dump($this->enrollments); exit;
-         $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}/presenca");
+         $this->actionForm = $this->getUri("admin/eventos/{$this->event->getIdEvent()}/presenca");
          $this->titleBtnSubmit = "Salvar";
       }
 	} 

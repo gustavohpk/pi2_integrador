@@ -28,7 +28,7 @@
 			<br/>
 			<h4 class="event-enrollment-start-date">Início das inscrições: <?=$this->events->getStartDateEnrollment("d/m/Y")?> às <?= $this->events->getStartDateEnrollment("H:i")?></h4>
 			<h4 class="event-enrollment-start-date">Término das inscrições: <?=$this->events->getEndDateEnrollment("d/m/Y")?> às <?= $this->events->getEndDateEnrollment("H:i")?></h4>
-			<?php if ($this->events->getStartDate("d/m/Y") == date("d/m/Y")) : ?>
+			<?php if ($this->events->getEndDateEnrollment("d/m/Y") == date("d/m/Y") && strtotime($this->events->getEndDateEnrollment("H:i")) > strtotime(date("H:i"))) : ?>
 				<span class="label label-danger" style="font-size: 16px">Último dia!</span>
 				<br/>
 			<?php endif; ?>

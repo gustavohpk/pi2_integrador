@@ -22,11 +22,20 @@
  
 - As mensagens de erro referentes aos preços de evento não são exibidas, mas as validações funcionam
 - O participante é excluído, mas o model ou controller gera um erro. Ao atualizar volta à lista, mas exibe outra mensagem de erro.
-- Lista de certificados no painel do participante iniciada
+- Problema na contagem de vagas
 
 ----------
 
------ Atualização 059 (04/01/15 - ) -----
+----- Atualização 060 (06/01/15) -----
+
+- Atualizações na geração de relatórios
+- Validação para impedir registro de presença antes do início do evento adicionada
+- Validação para impedir registro de presença em eventos do tipo sem_inscricao
+- Alterações na página do evento
+
+
+
+----- Atualização 059 (04/01/15) -----
 
 - Adicionado campo "path" na tabela de notícias
 - Adicionado campo "code" na tabela de tipos de evento
@@ -34,6 +43,7 @@
 - Corrigidos vários erros pelo validador da W3c
 - Largura mínima "800px" adicionada no painel do admin (em análise)
 - Iniciado formulário para cadastro de várias mídias
+- Lista de certificados no painel do participante iniciada
 
 
 ----- Atualização 058 (02/01/15 - 03/01/15) -----
