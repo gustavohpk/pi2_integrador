@@ -41,7 +41,7 @@
 					<span class="label label-default label-sm">OBS.: Para fazer um relatório de todos os eventos, deixe todos as opções abaixo desmarcadas. </span>
 					<br/>
 					<br/>
-					<select class="form-control" name="reports[events][]" size="10" multiple="multiple" title="Segure a tecla CTRL para desmarcar ou para selecionar vários eventos. Utilize o teclado para procurar um evento mais rapidamente." data-toggle="tooltip" data-placement-"right">
+					<select class="form-control" name="reports[events][]" size="10" multiple="multiple" title="Segure a tecla CTRL para desmarcar ou para selecionar vários eventos. Utilize o teclado para procurar um evento mais rapidamente." data-toggle="tooltip" data-placement="right">
 						<?php foreach ($this->events as $key => $event) : ?>
 							<option value="<?=$event->getIdEvent()?>"><?=$event->getName()?></option>
 						<?php endforeach ?>

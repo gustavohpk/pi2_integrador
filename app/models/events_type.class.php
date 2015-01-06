@@ -1,8 +1,15 @@
 <?php
+
+	/**
+	 * Classe de gerência de Tipos de Evento
+	 * @author Rodrigo Miss
+	 * @author Gustavo Pchek
+	 */
 	class EventsType extends BaseModel{
 		private $idEventType;
 		private $eventType;
 		private $teacherType;
+		private $code;
 		
 		public function setIdEventType($idEventType){
 			$this->idEventType = $idEventType;
@@ -16,6 +23,10 @@
 			$this->teacherType = $teacherType;
 		}
 
+		public function setCode($code){
+			$this->code = $code;
+		}
+
 		public function getIdEventType(){
 			return $this->idEventType;
 		}
@@ -26,6 +37,10 @@
 
 		public function getTeacherType(){
 			return $this->teacherType;
+		}
+
+		public function getCode(){
+			return $this->code;
 		}
 
 		public static function find($params = null){
@@ -60,13 +75,14 @@
 		public function save(){
 			$sql = 
 			"INSERT INTO event_type
-				(event_type, teacher_type)
+				(event_type, teacher_type, code)
 			VALUES
-				(:event_type, :teacher_type)";
+				(:event_type, :teacher_type, :code)";
 
 			$params = array(
 					":event_type" => $this->getEventType(),
-					":teacher_type" => $this->getTeacherType()
+					":teacher_type" => $this->getTeacherType(),
+					":code" => $this->getCode()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);

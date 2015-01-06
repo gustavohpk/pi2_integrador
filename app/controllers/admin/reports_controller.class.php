@@ -14,6 +14,7 @@
         }
 
         public function generate(){
+            $this->setHeadTitle("Relatório de Inscrições");
             $this->report = new \Reports($this->params["reports"]);
             if ($this->enrollments = $this->report->generate()){
                 $this->render("report");

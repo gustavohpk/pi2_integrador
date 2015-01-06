@@ -17,7 +17,7 @@
 					  	</div>
 					    <h4 class="list-group-item-heading">Evento: <?= $certificate->enrollment->event->getName() ?></h4>
 					    <p class="list-group-item-text">Código: <?= $certificate->getCode() ?></p>
-					    <button class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> Visualizar</button>
+					    <a href="<?= createUriFor("/conta/certificados/{$certificate->getCode()}/ver") ?>" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> Visualizar</a>
 					</div>
 				<?php endforeach; ?>
 			</div>

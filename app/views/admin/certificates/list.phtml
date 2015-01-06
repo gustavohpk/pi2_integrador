@@ -29,13 +29,17 @@
 		<table class="table">
 			<tr>
 				<th>ID</th>
-				<th>ID Inscrição</th>
+				<th>Código</th>
+				<th>Participante</th>
+				<th>Evento</th>
 				<th>Ações</th>
 			</tr>
 			<?php foreach ($this->certificates as $certificate) : ?>
 				<tr>
 					<td><?= $certificate->getIdCertificate() ?></td>
-					<td><?= $certificate->getIdEnrollment() ?></td>
+					<td><?= $certificate->getCode() ?></td>
+					<td><?= $certificate->enrollment->participant->getName() ?></td>
+					<td><?= $certificate->enrollment->event->getName() ?></td>
 					<td>
 						<a href="<?= createUriFor("/admin/certificados/{$certificate->getIdCertificate()}/ver") ?>">
 							<button class='btn btn-primary btn-sm' title='Visualizar'>

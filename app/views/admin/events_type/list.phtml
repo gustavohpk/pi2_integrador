@@ -34,32 +34,27 @@
 		<table class="table">
 			<tr>
 				<th>ID</th>
+				<th>Código</th>
 				<th>Tipo</th>
 				<th>Tipo Ministrante</th>
 				<th>Ações</th>
 			</tr>
-			<?php
-				foreach ($this->eventsType as $eventType){
-					echo
-					"<tr>
-						<td align='right'>{$eventType->getIdEventType()}</td>
-						<td align='left'>{$eventType->getEventType()}</td>
-						<td align='left'>{$eventType->getTeacherType()}</td>						
-						<td align='left'>
-							<a href=\"".createUriFor("/admin/eventos/tipos/{$eventType->getIdEventType()}/alterar")."\">
-								<button class='btn btn-primary btn-sm' title='Editar'>
-									<span class='glyphicon glyphicon-edit'></span>
-								</button>
-							</a>
-							<a href=\"".createUriFor("/admin/eventos/tipos/{$eventType->getIdEventType()}/remover")."\">
-								<button class='btn btn-danger btn-sm' title='Excluir'>
-									<span class='glyphicon glyphicon-trash'></span>
-								</button>
-							</a>
-						</td>					
-					</tr>";
-				}	
-			?>
+			<?php foreach ($this->eventsType as $eventType) : ?>
+				<tr>
+					<td><?= $eventType->getIdEventType() ?></td>
+					<td><?= $eventType->getCode() ?></td>
+					<td><?= $eventType->getEventType() ?></td>
+					<td><?= $eventType->getTeacherType() ?></td>						
+					<td>
+						<a href="<?= createUriFor("/admin/eventos/tipos/{$eventType->getIdEventType()}/alterar") ?>" role="button" class='btn btn-primary btn-sm' title='Editar'>
+							<span class='glyphicon glyphicon-edit'></span>
+						</a>
+						<a href="<?= createUriFor("/admin/eventos/tipos/{$eventType->getIdEventType()}/remover") ?>" role="button" class='btn btn-danger btn-sm' title='Excluir'>
+							<span class='glyphicon glyphicon-trash'></span>
+						</a>	
+					</td>					
+				</tr>
+			<?php endforeach; ?>
 		</table>
 		<div class="panel-footer">
 			<div class="row">

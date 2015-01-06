@@ -47,6 +47,8 @@ $(document).ready(function(){
 	$("input[name='event[end_date_enrollment]']").mask("99/99/9999 99:99");
 	$("input[name='cost[date_max][]']").mask("99/99/9999");
 
+	$("[data-toggle=tooltip]").tooltip();
+
 	validName = true;
 	$("input[name='participant[name]']").change(function(){
 		text = $("input[name='participant[name]']").val();
@@ -165,10 +167,6 @@ $('.btn-danger').click(function() {
     return window.confirm("Você realmente deseja excluir?");
 });
 
-$(document).ready(function() {
-
-    $("[data-toggle=tooltip]").tooltip();
-});
 
 $("#address-button").click(function(){
 	$("input[name='event[local]']").val("UTFPR - Campus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR");
@@ -316,3 +314,45 @@ function loadVideos(){
     }
     $(".ajax-loader").hide();
 });}
+
+
+
+// Upload de imagens
+
+$(document).ready(function() {
+    $( "#photos-form" ).submit(function( e ) {
+    	var data = new FormData(this);
+    	var i = 0;
+	    $.ajax( {
+			url: mediaUploadUrl,
+			type: 'POST',
+			data: data,
+			cache: false,
+        	contentType: false,
+        	processData: false,
+			success: function(data) {
+				alert(data);
+				data = $.parseJSON(data);
+				$.each(data, function(i, photo){
+					alert(photo.name);
+		  			$(".media-row").last().clone().insertAfter(".media-row:last");
+		  			$(".media-row").last().find("img").attr("src", images[i]);
+		  			$(".media-row").last().find(":input[name='media[label][]']").val(photo.name);
+		  			i++;
+		  		})
+			}
+	    } );
+	    e.preventDefault();
+	});
+});
+
+$("input[name='photos[]']").change(function(e) {
+    for (var i = 0; i < $(this).get(0).files.length; ++i) {
+    	console.log(e.target.files[i]);
+    	images.push(URL.createObjectURL(e.target.files[i]));
+    }
+});
+
+$("#media-add_button").click(function() {
+	$(".media-row").last().clone().insertAfter(".media-row:last").find(":input").val("");
+});

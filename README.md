@@ -26,13 +26,22 @@
 
 ----------
 
+----- Atualização 059 (04/01/15 - ) -----
+
+- Adicionado campo "path" na tabela de notícias
+- Adicionado campo "code" na tabela de tipos de evento
+- Adicionado campo "code" na tabela de formas de pagamento
+- Corrigidos vários erros pelo validador da W3c
+- Largura mínima "800px" adicionada no painel do admin (em análise)
+- Iniciado formulário para cadastro de várias mídias
+
+
 ----- Atualização 058 (02/01/15 - 03/01/15) -----
 
 - Eventos estão acessíveis através do link customizado
 - Geração de relatórios de inscrições com filtro de período, confirmações, presenças e eventos finalizada
 - Página "Sobre" criada, utilizando o controller da home
 - Login em modal adicionado
-
 
 
 ----- Atualização 057 (28/12/14 - 31/12/14) -----

@@ -5,8 +5,8 @@
 
 		<br/>
 
-		<a href="<?= createUriFor('/admin/relatorios/inscricoes')?>">
-			<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-folder-open"></span> &nbsp;Novo Relatório</button>
+		<a href="<?= createUriFor('/admin/relatorios/inscricoes')?>" role="button" class="btn btn-default">
+			<span class="glyphicon glyphicon-folder-open"></span> &nbsp;Novo Relatório
 		</a>
 
 		<button type="button" onclick="printDiv('report')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
@@ -15,7 +15,7 @@
 
 			<div class="row">
 				<div class="col-xs-4 col-xs-offset-4 report-img">
-					<img src="<?= $this->getResource('img/title-header.png') ?>"/>
+					<img src="<?= $this->getResource('img/title-header.png') ?>" alt="Logo UTFPR"/>
 				</div>
 			</div>
 			<br/>
@@ -59,11 +59,11 @@
 						</tr>
 						<?php foreach ($this->enrollments as $enrollment) : ?>
 							<tr>				
-								<td align="left"><?= $enrollment->getIdEnrollment() ?></td>
-								<td align="left"><?= $enrollment->participant->getName() ?></td>
-								<td align="left"><?= $enrollment->event->getName() ?></td>
-								<td align="left"><?= $enrollment->getDateEnrollment("d/m/Y H:i") ?></td>
-								<td align="left">R$ <?= str_replace('.', ',', money_format('%.2n', $enrollment->getCost())) ?></td>
+								<td><?= $enrollment->getIdEnrollment() ?></td>
+								<td><?= $enrollment->participant->getName() ?></td>
+								<td><?= $enrollment->event->getName() ?></td>
+								<td><?= $enrollment->getDateEnrollment("d/m/Y H:i") ?></td>
+								<td>R$ <?= str_replace('.', ',', money_format('%.2n', $enrollment->getCost())) ?></td>
 							</tr>
 						<?php endforeach ?>
 					</table>

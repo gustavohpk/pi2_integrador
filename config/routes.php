@@ -65,7 +65,8 @@
     $router->get('/conta/inscricoes', array('controller' => 'EnrollmentController', 'action' => '_list'));    
     $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));  
 
-    $router->get('/conta/certificados', array('controller' => 'CertificatesController', 'action' => '_list'));      
+    $router->get('/conta/certificados', array('controller' => 'CertificatesController', 'action' => '_list'));
+    $router->get('/conta/certificados/:code/ver', array('controller' => 'CertificatesController', 'action' => 'show'));
 
     $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
     $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
@@ -143,8 +144,10 @@
     $router->get('/admin/midia/lista', array('controller' => 'Admin\MediaController', 'action' => '_list'));
     $router->get('/admin/midia/lista/pagina/:p', array('controller' => 'Admin\MediaController', 'action' => '_list'));
     $router->get('/admin/midia/nova', array('controller' => 'Admin\MediaController', 'action' => '_new'));
+    $router->get('/admin/midia/novas', array('controller' => 'Admin\MediaController', 'action' => '_newMultiple'));
     $router->get('/admin/midia/:id/alterar', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
-    $router->post('/admin/midia', array('controller' => 'Admin\MediaController', 'action' => 'create'));    
+    $router->post('/admin/midia', array('controller' => 'Admin\MediaController', 'action' => 'create'));
+    $router->post('/admin/midia/upload', array('controller' => 'Admin\MediaController', 'action' => 'upload'));
     $router->post('/admin/midia/:id', array('controller' => 'Admin\MediaController', 'action' => 'update'));
     $router->get('/admin/midia/:id/remover', array('controller' => 'Admin\MediaController', 'action' => 'remove'));
 

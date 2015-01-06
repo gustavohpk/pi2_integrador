@@ -42,7 +42,7 @@
               <ul class="dropdown-menu">
                 <li><?= createLinkTo('/admin/midia/lista', '<span class="glyphicon glyphicon-list-alt"></span> Listar')?></li>
                 <li><?= createLinkTo('/admin/midia/nova', '<span class="glyphicon glyphicon-plus"></span> Cadastrar')?></li>
-                <li><?= createLinkTo('/admin/midia/novas', '<span class="glyphicon glyphicon-plus"></span> Cadastrar Várias')?></li>
+                <li><?= createLinkTo('/admin/midia/novas', '<span class="glyphicon glyphicon-plus"></span> Cadastrar Várias Fotos')?></li>
               </ul>
             </li>
             <li class="dropdown dropdown-inscriptions">
@@ -68,8 +68,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a class="help-link" data-toggle="modal" data-target="#help-modal">Ajuda</a></li>
-            <span class="navbar-text"><a href="<?= createUriFor('/')?>" target="_blank" class="navbar-link">Acessar site</a></span>
-            <span class="navbar-text">Logado como <a href="<?= createUriFor('/admin')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></span>
+            <p class="navbar-text"><a href="<?= createUriFor('/')?>" target="_blank" class="navbar-link">Acessar site</a></p>
+            <p class="navbar-text">Logado como <a href="<?= createUriFor('/admin')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></p>
             <li><a href="<?= createUriFor('/admin/logout')?>"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
           </ul>
         </div>

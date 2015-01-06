@@ -15,6 +15,7 @@
 		private $subtitle;		
 		private $content;
 		private $views;
+		private $path;
 
 		public function setIdNews($idNews){
 			$this->idNews = $idNews;
@@ -50,6 +51,10 @@
 			$this->views = $views;
 		}
 
+		public function setPath($path){
+			$this->path = $path;
+		}
+
 		public function getIdNews(){
 			return $this->idNews;
 		}
@@ -77,7 +82,6 @@
 			return $this->subtitle;
 		}
 
-
 		public function getContent(){
 			return $this->content;
 		}
@@ -88,6 +92,10 @@
 
 		public function getViews(){
 			return $this->views;
+		}
+
+		public function getPath(){
+			return $this->path;
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_news", $direction ="DESC"){

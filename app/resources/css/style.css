@@ -10,6 +10,7 @@ label { font-weight: normal; }
 a:hover, a:focus { color: #000; }
 span.label a { color: #FFF; text-decoration: underline;}
 span.label a:hover { cursor: pointer; }
+td { text-align: left; }
 
 .container-fluid, .container{ text-align: center; }
 .btn:hover, a, .facebook-link, .youtube-link, .utfpr-link, .utfpr-link img, #main-menu li, #account-menu li, span{ webkit-transition: all .3s ease-in-out;	transition: all .3s ease-in-out; }
@@ -40,7 +41,7 @@ span.label a:hover { cursor: pointer; }
 .ajax-loader{ display: inline-block; width: 16px; height: 16px; background-image: url("../img/ajax-loader.gif"); background-repeat: no-repeat; }
 
 .main-menu-admin{ position: fixed; z-index: 1; margin-right: 0; padding-right: 0; padding-left: 0; right: 0;}
-#admin { margin-top: 65px; }
+#admin { margin-top: 65px; min-width: 800px}
 #admin h1 { margin-top: 0;}
 
 .google-maps iframe { width: 100% !important; }
@@ -189,6 +190,9 @@ a.admin-shortcut-link { text-decoration: none;}
 .admin-shortcut .glyphicon:hover{ font-size: 70px; padding-bottom: 10px;}
 
 .help-button, .help-link { cursor: pointer; }
+
+td.photo { max-width: 200px; }
+td.photo img { margin: 5px; border: 2px solid #CCC }
 
 /* Há um bug no bootstrap quando são colocados glyphicons dentro de input-group-addons */
 /* Algumas correções aqui */

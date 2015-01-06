@@ -7,6 +7,12 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<h4>Código</h4>
+			<input type="text" class="form-control" name="payment_type[code]" value="<?= $this->paymentsType->getCode()?>"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<h4>Nome da Forma de Pagamento</h4>
 			<input type="text" class="form-control" name="payment_type[name]" value="<?= $this->paymentsType->getName()?>"/>
 		</div>
