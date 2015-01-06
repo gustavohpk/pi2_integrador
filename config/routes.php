@@ -9,6 +9,9 @@
     //rota para raiz
    	$router->get('/', array('controller' => 'HomeController', 'action' => 'index'));
 
+    //rota para sobre
+    $router->get('/sobre', array('controller' => 'HomeController', 'action' => 'about'));
+
     //validacoes ajax
     $router->get('/validarcpf/:cpf', array('controller' => 'BaseController', 'action' => 'validateCpf'));
    	
@@ -16,8 +19,9 @@
    	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
     $router->get('/eventos/proximos/pagina/:p', array('controller' => 'EventsController', 'action' => 'next'));
     $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
-    //$router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
+    $router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
     $router->get('/eventos/:id/ver', array('controller' => 'EventsController', 'action' => 'show'));
+    $router->get('/eventos/:url', array('controller' => 'EventsController', 'action' => 'show'));
 
    	//rotas para notícias
    	$router->get('/noticias/lista', array('controller' => 'NewsController', 'action' => 'show'));
@@ -29,6 +33,17 @@
     $router->get('/midia/galeria/pagina/:p', array('controller' => 'MediaController', 'action' => 'gallery'));
     $router->get('/midia/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photos'));
     $router->get('/midia/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videos'));
+
+    $router->get('/midia/galeria/evento/:id', array('controller' => 'MediaController', 'action' => 'gallery'));
+
+    $router->get('/midia/galeria/fotos', array('controller' => 'MediaController', 'action' => 'photoGallery'));
+    $router->get('/midia/galeria/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photoGallery'));
+    $router->get('/midia/galeria/fotos/evento/:id/pagina/:p', array('controller' => 'MediaController', 'action' => 'photoGallery'));
+
+
+    $router->get('/midia/galeria/videos', array('controller' => 'MediaController', 'action' => 'videoGallery'));
+    $router->get('/midia/galeria/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videoGallery'));
+    $router->get('/midia/galeria/videos/evento/:id/pagina/:p', array('controller' => 'MediaController', 'action' => 'videoGallery'));
 
     //rotas para contato
     $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
@@ -48,11 +63,18 @@
     $router->get('/conta/painel', array('controller' => 'ParticipantController', 'action' => 'dashboard'));
 
     $router->get('/conta/inscricoes', array('controller' => 'EnrollmentController', 'action' => '_list'));    
-    $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));        
+    $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));  
+
+    $router->get('/conta/certificados', array('controller' => 'CertificatesController', 'action' => '_list'));
+    $router->get('/conta/certificados/:code/ver', array('controller' => 'CertificatesController', 'action' => 'show'));
 
     $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
     $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
     $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
+
+    //rota para validação de certificados
+    $router->get('/certificados', array('controller' => 'CertificatesController', 'action' => 'index'));
+    $router->post('/certificados/verificar', array('controller' => 'CertificatesController', 'action' => 'verification'));
 
     //$router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
 
@@ -122,8 +144,10 @@
     $router->get('/admin/midia/lista', array('controller' => 'Admin\MediaController', 'action' => '_list'));
     $router->get('/admin/midia/lista/pagina/:p', array('controller' => 'Admin\MediaController', 'action' => '_list'));
     $router->get('/admin/midia/nova', array('controller' => 'Admin\MediaController', 'action' => '_new'));
+    $router->get('/admin/midia/novas', array('controller' => 'Admin\MediaController', 'action' => '_newMultiple'));
     $router->get('/admin/midia/:id/alterar', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
-    $router->post('/admin/midia', array('controller' => 'Admin\MediaController', 'action' => 'create'));    
+    $router->post('/admin/midia', array('controller' => 'Admin\MediaController', 'action' => 'create'));
+    $router->post('/admin/midia/upload', array('controller' => 'Admin\MediaController', 'action' => 'upload'));
     $router->post('/admin/midia/:id', array('controller' => 'Admin\MediaController', 'action' => 'update'));
     $router->get('/admin/midia/:id/remover', array('controller' => 'Admin\MediaController', 'action' => 'remove'));
 
@@ -142,7 +166,9 @@
     $router->get('/admin/certificados/:id/remover', array('controller' => 'Admin\CertificatesController', 'action' => 'remove'));
     $router->get('/admin/certificados/novo', array('controller' => 'Admin\CertificatesController', 'action' => '_new'));
     $router->get('/admin/certificados/:id/ver', array('controller' => 'Admin\CertificatesController', 'action' => 'show'));
+    //rota para JSon
     $router->get('/admin/certificados/inscricoes/:id', array('controller' => 'Admin\CertificatesController', 'action' => 'enrollments'));
+    $router->post('/admin/certificados', array('controller' => 'Admin\CertificatesController', 'action' => 'create'));   
 
     //rotas para usuários (do painel de administração)
     $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));

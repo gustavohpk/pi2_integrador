@@ -2,6 +2,13 @@
 	<h2>Próximos Eventos</h2>
 	<div class="row">
 		<?php $i=0;?>
+		<?php if(!$this->events) : ?>
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Nenhum evento marcado</h3>
+				</div>
+			</div>
+		<?php endif; ?>
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 			<?php require_once "views/includes/_search.phtml" ?>
 		</div>
@@ -13,26 +20,25 @@
 		  <div class="event col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  	<a class="event-link" data-toggle="modal" data-target="#event<?= $event->getIdEvent();?>-modal">
 			    <div class="thumbnail">
-					<?php if ($media = $event->getMedia()) : ?>
-						<?php $media = $media[0] ?>
-						<?php $image = $media->getPath() ?>
+					<?php if ($event->getLogo()) : ?>
+						<?php $image = "data:image/jpeg;base64,". base64_encode($event->getLogo()); ?>
 					<?php else : ?>
 						<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
 					<?php endif ?>
-					<img class="event-thumbnail" src="<?=$image?>" alt="<?=($media ? $media->getLabel() : "")?>">
+					<img class="event-thumbnail" src="<?=$image ?>" alt="<?= $event->getName() ?>">
 					<div class="caption">
-					<h3><?= $event->getName() ?></h3>
-					<?php if ($event->getStartDate("d/m/Y") == date("d/m/Y")) : ?>
-						<?php if (strtotime($event->getStartDate("H:i")) < strtotime(date("H:i")) && strtotime(date("H:i")) < strtotime($event->getEndDate("H:i"))): ?>
-							<span class="label label-default">AGORA</span>
+						<h3><?= $event->getName() ?></h3>
+						<?php if ($event->getStartDate("d/m/Y") == date("d/m/Y")) : ?>
+							<?php if (strtotime($event->getStartDate("H:i")) < strtotime(date("H:i")) && strtotime(date("H:i")) < strtotime($event->getEndDate("H:i"))): ?>
+								<span class="label label-default">AGORA</span>
+							<?php else : ?>
+								<span class="label label-default">HOJE</span>
+							<?php endif; ?>
+						<?php elseif ($event->getStartDate("d/m/Y") == $event->getEndDate("d/m/Y")) : ?>
+							<p> <?= $event->getStartDate("d/m/Y") ?></p>
 						<?php else : ?>
-							<span class="label label-default">HOJE</span>
+							<p>De <?= $event->getStartDate("d/m/Y") ?> a <?= $event->getEndDate("d/m/Y") ?></p>
 						<?php endif; ?>
-					<?php elseif ($event->getStartDate("d/m/Y") == $event->getEndDate("d/m/Y")) : ?>
-						<p> <?= $event->getStartDate("d/m/Y") ?></p>
-					<?php else : ?>
-						<p>De <?= $event->getStartDate("d/m/Y") ?> a <?= $event->getEndDate("d/m/Y") ?></p>
-					<?php endif; ?>
 					</div>
 		    	</div>
 		    </a>

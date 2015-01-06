@@ -1,7 +1,13 @@
 <?php
+	/**
+	 * Classe de gerência de Tipos de Pagamento
+	 * @author Rodrigo Miss
+	 * @author Gustavo Pchek
+	 */
 	class PaymentType extends BaseModel{
 		private $idPaymentType;
 		private $name;
+		private $code;
 		
 		public function setIdPaymentType($idPaymentType){
 			$this->idPaymentType = $idPaymentType;
@@ -11,12 +17,20 @@
 			$this->name = $name;
 		}
 
+		public function setCode($code){
+			$this->code = $code;
+		}
+
 		public function getIdPaymentType(){
 			return $this->idPaymentType;
 		}
 
 		public function getName(){
 			return $this->name;
+		}
+
+		public function getCode(){
+			return $this->code;
 		}
 
 		public static function find($params = null){
@@ -51,10 +65,13 @@
 		public function save(){
 			$sql = 
 			"INSERT INTO payment_type
-				(name)
+				(name, code)
 			VALUES
-				(:name)";
-			$params = array(":name" => $this->getName());
+				(:name, :code)";
+			$params = array(
+					":name" => $this->getName(),
+					":code" => $this->getCode()
+				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			return $statment->execute($params);

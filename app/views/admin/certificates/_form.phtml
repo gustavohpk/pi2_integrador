@@ -1,33 +1,57 @@
 <form action="<?= $this->actionForm?>" method="post">
 	<div class="row">
-		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+		<div class="col-xs-6 col-sm-2 col-sm-offset-3">
 			<h4>ID</h4>
 			<input type="number" class="form-control" name="certificate[id_certificate]" value="<?= $this->certificates->getIdCertificate()?>" disabled/>
 		</div>
+		<div class="col-xs-6 col-sm-4 col-sm-offset-0">
+			<h4>Código</h4>
+			<input type="text" class="form-control" name="certificate[code]" value="<?= $this->certificates->getCode()?>" disabled/>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<p>OBS.: O código é gerado automaticamente após o envio do formulário. Será gerado um código único para cada certificado.</p>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 			<h4>Selecione o evento</h4>
 			<h6>OBS.: São listados apenas eventos que já terminaram.</h6>
-				<select class="form-control" name="event">
+				<select class="form-control" name="id_event" <?php if ($this->certificates->getIdCertificate()) echo "disabled"?>>
 				<?php foreach ($this->events as $event) : ?>
 					<option value="<?= $event->getIdEvent()?>"><?=$event->getName()?></option>
+
 				<?php endforeach ?>
 			</select> 
 		</div>
 	</div>
-	<div class="row" id="participant-row" style="display:none">
+	<div class="row" id="participant-row" <?php if (!$this->certificates->getIdCertificate()) echo "style='display: none'"?>>
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 			<h4>Selecione o participante</h4>
 			<h6>OBS.: São listados apenas os participantes com presença confirmada.</h6>
-				<select class="form-control" name="participant">
-			</select> 
+				<select class="form-control" name="certificate[id_enrollment]" <?= $this->certificates->getIdCertificate() ? "disabled" : "" ?>>
+					<?php if($this->certificates->getIdCertificate()) : ?>
+						<option value="<?= $this->participant->getIdParticipant()?>"><?=$this->participant->getName()?></option>
+					<?php endif; ?>
+				</select> 
 		</div>
 	</div>
 
+	<?php if($this->certificates->getIdCertificate()) : ?>
 
- 		<br/>
-	<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
+		<br/>
+		<br/>
+		<button type="button" onclick="printDiv('certificate-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+		<div class="row" id="certificate-view">
+			<div class="col-xs-12">
+					<?php require_once "_certificate.phtml"; ?>
+			</div>
+		</div>
+	<?php endif; ?>
+
+ 	<br/>
+
+	<button id="create-certificate-btn" class="btn btn-success" type="submit" disabled><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
 
 <script type="text/javascript">
 	enrollmentsUrl = '<?=createUriFor("/admin/certificados/inscricoes/")?>';

@@ -47,6 +47,8 @@ $(document).ready(function(){
 	$("input[name='event[end_date_enrollment]']").mask("99/99/9999 99:99");
 	$("input[name='cost[date_max][]']").mask("99/99/9999");
 
+	$("[data-toggle=tooltip]").tooltip();
+
 	validName = true;
 	$("input[name='participant[name]']").change(function(){
 		text = $("input[name='participant[name]']").val();
@@ -165,10 +167,6 @@ $('.btn-danger').click(function() {
     return window.confirm("Você realmente deseja excluir?");
 });
 
-$(document).ready(function() {
-
-    $("[data-toggle=tooltip]").tooltip();
-});
 
 $("#address-button").click(function(){
 	$("input[name='event[local]']").val("UTFPR - Campus Guarapuava - Avenida Professora Laura Pacheco Bastos, 800 - Bairro Industrial CEP 85053-525 - Guarapuava - PR");
@@ -219,17 +217,142 @@ $('#searchValue').bind('keypress', function(e)
    }
 });
 
-$("body").on("change", "select[name='event']", function(){
-	eventId = $("select[name='event']").val();
+$("body").on("change", "select[name='id_event']", function(){
+	eventId = $("select[name='id_event").val();
   	$.getJSON( enrollmentsUrl + eventId, function (data) {
   		if (data.length <= 0){
   			$("#participant-row").slideUp();
+  			$("#create-certificate-btn").attr("disabled", "disabled");
   		}else{
-	  		$("select[name='participant']").empty();
+  			$("#create-certificate-btn").removeAttr("disabled");
+	  		$("select[name='certificate[id_enrollment]']").empty();
 	  		$.each(data, function(i, enrollment){
-	  			$("select[name='participant']").append("<option value='" + enrollment.id_participant +"'>" + enrollment.participant_name +"</option>");
+	  			$("select[name='certificate[id_enrollment]']").append("<option value='" + enrollment.id_enrollment +"'>" + enrollment.participant_name +"</option>");
 	  		})
 	    	$("#participant-row").slideDown();
 	    }
     });
+});
+
+$("input[name='reports[confirmed]']").click(function() {
+    if($(this).is(':checked')) {
+    	$("input[name='reports[present]']").removeAttr("disabled");
+    	// $("input[name='reports[present]']").attr("checked", true);
+    	$("input[name='reports[absent]']").removeAttr("disabled");
+    	// $("input[name='reports[absent]']").attr("checked", true);
+        $("label[for='reports[present]']").removeClass("disabled");
+        $("label[for='reports[absent]']").removeClass("disabled");
+    } else {
+    	$("input[name='reports[present]']").attr("disabled", "disabled");
+    	$("input[name='reports[absent]']").attr("disabled", "disabled");
+    	// $("input[name='reports[present]']").attr("checked", false);
+    	// $("input[name='reports[absent]']").attr("checked", false);
+        $("label[for='reports[present]']").addClass("disabled");
+        $("label[for='reports[absent]']").addClass("disabled");
+    }
+});
+
+function printDiv(div) {
+     var printContents = document.getElementById(div).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+$("#show-photos").click(function(){
+	if(typeof photosPage == "undefined"){
+		photosPage = 1;
+		loadPhotos();
+	}
+	$("#photos").show();
+	$("#btn-load-photos").show();
+	$("#videos").hide();
+	$("#btn-load-videos").hide();
+});
+
+$("#show-videos").click(function(){
+	if(typeof videosPage == "undefined"){
+		videosPage = 1;
+		loadVideos();
+	}
+	$("#videos").show();
+	$("#btn-load-videos").show();
+	$("#photos").hide();
+	$("#btn-load-photos").hide();
+});
+
+function loadPhotos(){
+	$(".ajax-loader").show();
+	url = photoGalleryUrl + photosPage;
+	$.getJSON( url, function (data) {
+		if (data.length <= 0){
+			$("#btn-load-photos").hide();
+		}else{
+  		$.each(data, function(i, media){
+  			$("#photos").append("<div class='col-xs-12 col-sm-4'><a href='" + media.path + "' class='fancybox' title='" + media.label + "' rel='lightbox'><img class='thumbnail' src='" + media.path + "' alt='" + media.label + "'/><span class='glyphicon glyphicon-camera' title='Foto'></span></div>");
+  		});
+  		photosPage++;
+    }
+    $(".ajax-loader").hide();
+});}
+
+function loadVideos(){
+	$(".ajax-loader").show();
+	url = videoGalleryUrl + videosPage;
+	$.getJSON( url, function (data) {
+		if (data.length <= 0){
+			$("#btn-load-videos").hide();
+		}else{
+  		$.each(data, function(i, media){
+  			$("#videos").append("<div class='col-xs-12 col-sm-4'><a href='" + media.path + "' class='fancybox' title='" + media.label + "' rel='lightbox'><img class='thumbnail' src='" + media.thumbnail + "' alt='" + media.label + "'/><span class='glyphicon glyphicon-video' title='Vídeo'></span></div>");
+  		});
+  		videosPage++;
+    }
+    $(".ajax-loader").hide();
+});}
+
+
+
+// Upload de imagens
+
+$(document).ready(function() {
+    $( "#photos-form" ).submit(function( e ) {
+    	var data = new FormData(this);
+    	var i = 0;
+	    $.ajax( {
+			url: mediaUploadUrl,
+			type: 'POST',
+			data: data,
+			cache: false,
+        	contentType: false,
+        	processData: false,
+			success: function(data) {
+				alert(data);
+				data = $.parseJSON(data);
+				$.each(data, function(i, photo){
+					alert(photo.name);
+		  			$(".media-row").last().clone().insertAfter(".media-row:last");
+		  			$(".media-row").last().find("img").attr("src", images[i]);
+		  			$(".media-row").last().find(":input[name='media[label][]']").val(photo.name);
+		  			i++;
+		  		})
+			}
+	    } );
+	    e.preventDefault();
+	});
+});
+
+$("input[name='photos[]']").change(function(e) {
+    for (var i = 0; i < $(this).get(0).files.length; ++i) {
+    	console.log(e.target.files[i]);
+    	images.push(URL.createObjectURL(e.target.files[i]));
+    }
+});
+
+$("#media-add_button").click(function() {
+	$(".media-row").last().clone().insertAfter(".media-row:last").find(":input").val("");
 });

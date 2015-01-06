@@ -1,10 +1,10 @@
 <div class="row">
-  <div id="main-menu" class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+  <div id="main-menu" class="col-lg-12 col-xs-12 col-sm-12 col-md-12 main-menu-admin">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">Alternar navegação</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -42,6 +42,7 @@
               <ul class="dropdown-menu">
                 <li><?= createLinkTo('/admin/midia/lista', '<span class="glyphicon glyphicon-list-alt"></span> Listar')?></li>
                 <li><?= createLinkTo('/admin/midia/nova', '<span class="glyphicon glyphicon-plus"></span> Cadastrar')?></li>
+                <li><?= createLinkTo('/admin/midia/novas', '<span class="glyphicon glyphicon-plus"></span> Cadastrar Várias Fotos')?></li>
               </ul>
             </li>
             <li class="dropdown dropdown-inscriptions">
@@ -67,8 +68,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a class="help-link" data-toggle="modal" data-target="#help-modal">Ajuda</a></li>
-            <span class="navbar-text"><a href="<?= createUriFor('/')?>" target="_blank" class="navbar-link">Acessar site</a></span>
-            <span class="navbar-text">Logado como <a href="<?= createUriFor('/admin')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></span>
+            <p class="navbar-text"><a href="<?= createUriFor('/')?>" target="_blank" class="navbar-link">Acessar site</a></p>
+            <p class="navbar-text">Logado como <a href="<?= createUriFor('/admin')?>" class="navbar-link"><?= $_SESSION["admin"]->getName()?></a></p>
             <li><a href="<?= createUriFor('/admin/logout')?>"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
           </ul>
         </div>

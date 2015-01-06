@@ -10,6 +10,7 @@
 		private $cost;
 		private $uriPayment;
 		private $attendance;
+		private $participantData;
 
 		public function setIdEnrollment($idEnrollment){
 			$this->idEnrollment = $idEnrollment;
@@ -34,6 +35,10 @@
 
 		public function setEvent($event){
 			$this->event = $event;
+		}
+
+		public function getEvent(){
+			return $this->event;
 		}
 
 		public function setDateEnrollment($dateEnrollment){
@@ -82,6 +87,14 @@
 
 		public function getAttendance() {
 			return $this->attendance;
+		}
+
+		public function setParticipantData($participantData){
+			$this->participantData = $participantData;
+		}
+
+		public function getParticipantData(){
+			return $this->participantData;
 		}
 
 		// mensagens exibidas para confirmação da inscrição do participante

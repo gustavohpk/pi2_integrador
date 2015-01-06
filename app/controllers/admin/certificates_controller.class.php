@@ -7,17 +7,15 @@
     	protected $titleBtnSubmit;
 
 		public function _list(){
-   			$this->setHeadTitle("Lista de Patrocinadores");
+   			$this->setHeadTitle("Lista de Certificados");
 	        if (isset($this->params[":p"])) {
 	           $page = $this->params[":p"];
 	        } else {
 	           $page = 1;
 	        }
-         	\Certificates::setLimitByPage(5);
 	        \Certificates::setCurrentPage($page);
-
 	        if (isset($this->params[":id"])){
-	           $this->certificates = \Certificates::findById($this->params[":id"]);
+            $this->certificates = \Certificates::findById($this->params[":id"]);
 	           $this->pagination = new \Pager(count($this->certificates), \Certificates::getLimitByPage(), $page);
 	        }
 	        else{
@@ -27,59 +25,63 @@
 		}
 
 		public function _new(){
-         	//prepara formulario para inserção
          	$this->certificates = new \Certificates();
          	$this->events = \Events::find(array("end_date"), array(date("Y-m-d")), "<", "AND", "name", "ASC");
 			$this->setHeadTitle("Novo Certificado");
-         	$this->actionForm = $this->getUri("admin/patrocinadores/novo");
+         	$this->actionForm = $this->getUri("admin/certificados");
          	$this->titleBtnSubmit = "Cadastrar";
 		}
 
 		public function create(){
-			//salva inserção no db
 			$this->certificates = new \Certificates($this->params["certificate"]);
-			if ($this->certificates->save()){
-				\FlashMessage::successMessage("Patrocinador cadastro com sucesso.");
-				$this->redirectTo("admin/patrocinadores/lista");
+			if(\Certificates::findByIdEnrollment($this->params["certificate"]["id_enrollment"])){
+				\FlashMessage::errorMessage("Já existe um certificado para esta inscrição.");
+				$this->setHeadTitle("Novo Certificado");
+	         	$this->actionForm = $this->getUri("admin/certificados/novo");
+	         	$this->titleBtnSubmit = "Cadastrar";
+	         	$this->render("_new");
+			}
+			else if ($this->certificates->save()){
+				\FlashMessage::successMessage("Certificado criado com sucesso.");
+				$this->redirectTo("admin/certificados/" . $this->certificates->getIdCertificate() . "/ver");
 			}
 			else{
-				\FlashMessage::errorMessage("Erro ao cadastrar patrocinador.");
-				$this->setHeadTitle("Novo Patrocinador");
-	         	$this->actionForm = $this->getUri("admin/patrocinadores/novo");
+				\FlashMessage::errorMessage("Erro ao criar certificado.");
+				$this->setHeadTitle("Novo Certificado");
+	         	$this->actionForm = $this->getUri("admin/certificados/novo");
 	         	$this->titleBtnSubmit = "Cadastrar";
 	         	$this->render("_new");
 			}
 		}
 
-		public function edit(){
-			//prepara formulario para edicao
+		public function show(){
 			$this->certificates = \Certificates::findById($this->params[":id"])[0];
-   			$this->setHeadTitle("Editar Patrocinador");
-   			$this->actionForm = $this->getUri("admin/patrocinadores/{$this->certificates->getIdSponsor()}/alterar");
-   			$this->titleBtnSubmit = "Salvar";   			
+   			$this->setHeadTitle("Visualizar Certificado");
+   			$this->events[] = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->getEvent();
+   			$this->participant = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->participant;  			
 		}
 
-		public function update(){
-			//salva edição no db  
-			$this->certificates = \Certificates::findById($this->params[":id"])[0];
-			if ($this->certificates->update($this->params['certificate'])){
-				\FlashMessage::successMessage("Patrocinador alterado com sucesso.");
-				$this->redirectTo("admin/patrocinadores/lista");
-			}
-			else{
-				\FlashMessage::errorMessage("Erro ao alterar patrocinador.");
-				$this->setHeadTitle("Editar Patrocinador");
-	         	$this->actionForm = $this->getUri("admin/patrocinadores/{$this->certificates->getIdEventType()}/alterar");
-	         	$this->titleBtnSubmit = "Salvar";
-	         	$this->render("edit");
-			}
-		}
+		// public function update(){
+		// 	//salva edição no db  
+		// 	$this->certificates = \Certificates::findById($this->params[":id"])[0];
+		// 	if ($this->certificates->update($this->params['certificate'])){
+		// 		\FlashMessage::successMessage("Patrocinador alterado com sucesso.");
+		// 		$this->redirectTo("admin/patrocinadores/lista");
+		// 	}
+		// 	else{
+		// 		\FlashMessage::errorMessage("Erro ao alterar patrocinador.");
+		// 		$this->setHeadTitle("Editar Patrocinador");
+	 //         	$this->actionForm = $this->getUri("admin/patrocinadores/{$this->certificates->getIdEventType()}/alterar");
+	 //         	$this->titleBtnSubmit = "Salvar";
+	 //         	$this->render("edit");
+		// 	}
+		// }
 
 		public function remove(){
 			$this->certificates = \Certificates::findById($this->params[":id"])[0];
 			$this->certificates->remove();
-			\FlashMessage::successMessage("Patrocinador removido com sucesso.");
-			$this->redirectTo("admin/patrocinadores/lista");
+			\FlashMessage::successMessage("Certificado removido com sucesso.");
+			$this->redirectTo("admin/certificados");
 		}
 
 		public function enrollments(){

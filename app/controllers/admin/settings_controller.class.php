@@ -20,7 +20,7 @@
 			$this->setHeadTitle("Configurações dos banners");
          $this->bannersNames = \Settings::find(array("description"), array("banner%_name"), "LIKE");
          $this->bannersPaths = \Settings::find(array("description"), array("banner%_path"), "LIKE");
-         //echo "<pre>"; var_dump($this->bannersPaths); exit;
+         // echo "<pre>"; var_dump($this->bannersPaths); exit;
          $this->actionForm = $this->getUri("admin/config");
          $this->titleBtnSubmit = "Alterar";
          $this->configSection = 'site_title';
@@ -40,7 +40,6 @@
 
 
       public function update(){
-         //var_dump($this->params['section']); exit;
          $this->settings = \Settings::findByDescription($this->params['section'])[0];
          //var_dump($this->settings); exit;
          if ($this->settings->update($this->params['setting'])){

@@ -12,11 +12,16 @@
          } else {
             $page = 1;
          }
-         $limit = 15;
-         $this->media = \Media::find(null, $limit, $page);
-         $this->count = \Media::count();
-         $this->pagination = new \Pager($this->count, $limit, $page);
- 
+         \Media::setCurrentPage($page);
+
+         if (isset($this->params[":id"])){
+            $this->media = \Media::findById($this->params[":id"]);
+            $this->pagination = new \Pager(count($this->media), \Media::getLimitByPage(), $page);
+         }
+         else{
+            $this->media = \Media::find();
+            $this->pagination = new \Pager(\Media::count(), \Media::getLimitByPage(), $page);
+         }
 		}
 
 		public function _new(){
@@ -26,12 +31,33 @@
          $this->titleBtnSubmit = "Cadastrar";
 		}
 
+      public function _newMultiple(){
+         $this->setHeadTitle("Upload de mídia");
+         $this->media = new \Media();
+         $this->photosForm = $this->getUri("admin/midia/upload");
+         $this->actionForm = $this->getUri("admin/midia");
+         $this->titleBtnSubmit = "Cadastrar";
+      }
+
 		public function _edit(){
 			$this->setHeadTitle("Modificar mídia");
          $this->media = \Media::findById($this->params[":id"]);
          $this->actionForm = $this->getUri("admin/midia/{$this->media->getIdMedia()}");
          $this->titleBtnSubmit = "Salvar";
 		}
+
+      public function upload(){
+         $photos = array();
+         //$photos = array("name", "type", "tmp_name", "error", "size");
+         for($i = 0; $i < count($_FILES["photos"]["name"]); $i++){
+            $photos[$i]["name"] = $_FILES["photos"]["name"][$i];
+            $photos[$i]["type"] = $_FILES["photos"]["type"][$i];
+            $photos[$i]["tmp_name"] = $_FILES["photos"]["tmp_name"][$i];
+            $photos[$i]["size"] = $_FILES["photos"]["size"][$i];
+            $photos[$i]["error"] = $_FILES["photos"]["name"][$i];
+         }
+         echo stripslashes(json_encode($photos)); exit;
+      }
 
       public function create(){
          $params = $this->params["media"];        
@@ -80,5 +106,5 @@
          }
          $this->redirectTo("admin/midia/lista");
       }
-	} 
+	}
 ?>

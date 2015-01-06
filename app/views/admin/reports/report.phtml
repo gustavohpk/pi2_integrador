@@ -1,0 +1,84 @@
+<div class="row">
+	<div class="col-xs-12">
+
+		<h2>Relatório de Inscrições</h2>
+
+		<br/>
+
+		<a href="<?= createUriFor('/admin/relatorios/inscricoes')?>" role="button" class="btn btn-default">
+			<span class="glyphicon glyphicon-folder-open"></span> &nbsp;Novo Relatório
+		</a>
+
+		<button type="button" onclick="printDiv('report')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+
+		<div id="report">
+
+			<div class="row">
+				<div class="col-xs-4 col-xs-offset-4 report-img">
+					<img src="<?= $this->getResource('img/title-header.png') ?>" alt="Logo UTFPR"/>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div id="report-title" class="col-xs-12">
+					<span>Relatório de Inscrições</span>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div id="report-info" class="col-xs-12">
+					<p>Inscrições realizadas entre <u><?= $this->report->getDateFrom() ?> <?= $this->report->getTimeFrom() ?></u> e <u><?= $this->report->getDateTo() ?> <?= $this->report->getTimeTo() ?></u>.</p>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3">
+					<ul class="list-group">
+						<?php if($this->report->getconfirmed()) : ?>
+							<li class="list-group-item"><span class="glyphicon glyphicon-circle-arrow-right"></span> Confirmadas</li>
+							<?= $this->report->getPresent() ? "<li class='list-group-item'><span class='glyphicon glyphicon-circle-arrow-right'></span> Presenças Confirmadas</li>" : "" ?>
+							<?= $this->report->getAbsent() ? "<li class='list-group-item'><span class='glyphicon glyphicon-circle-arrow-right'></span> Faltas</li>" : "" ?>
+						<?php endif; ?>
+						<?= $this->report->getUnconfirmed() ? "<li class='list-group-item'><span class='glyphicon glyphicon-circle-arrow-right'></span> Não Confirmadas</li>" : "" ?>
+					</ul>
+				</div>
+			</div>
+
+
+			<div class="row">
+
+				<div class="col-xs-12">
+
+					<table class="table table-striped">
+						<tr>
+							<th>ID</th>
+							<th>Nome</th>
+							<th>Evento</th>
+							<th>Data de Inscrição</th>
+							<th>Valor</th>
+						</tr>
+						<?php foreach ($this->enrollments as $enrollment) : ?>
+							<tr>				
+								<td><?= $enrollment->getIdEnrollment() ?></td>
+								<td><?= $enrollment->participant->getName() ?></td>
+								<td><?= $enrollment->event->getName() ?></td>
+								<td><?= $enrollment->getDateEnrollment("d/m/Y H:i") ?></td>
+								<td>R$ <?= str_replace('.', ',', money_format('%.2n', $enrollment->getCost())) ?></td>
+							</tr>
+						<?php endforeach ?>
+					</table>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<p><span class="glyphicon glyphicon-time"></span> Este relatório foi gerado em <?= date("d/m/Y") ?> às <?= date("H:i:s") ?>.</p>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>

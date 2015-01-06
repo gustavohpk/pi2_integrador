@@ -47,8 +47,8 @@
 			return $this->path;
 		}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_media", $direction ="DESC"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);		
 			$limit = self::getLimitByPage();
 			$page = self::getCurrentPage();
 			$start = ($page * $limit) - $limit;
@@ -57,7 +57,7 @@
 			"SELECT 
 				*
 			FROM 
-				media " .($paramsName ? " WHERE $paramsName" : "");
+				media " .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
 			$sql .= " LIMIT $start, $limit";
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
@@ -108,25 +108,11 @@
 		}
 
 		public static function findById($id){
-			$params = array("paramsName" => "id_media = :id_media", "paramsValue" => array(":id_media" => $id));
-			//retorna apenas o primeiro objeto (no caso o unico)
-			$media = self::find($params);
-			return count($media) > 0 ? $media[0] : NULL;
+			return self::find(array("id_media"), array($id))[0];
 		}
 
-		public function findByIdEvent($idEvent, $type = "p") {
-			$sql = "SELECT * FROM media WHERE id_event = :id_event AND media_type = :media_type";
-			$pdo = \Database::getConnection();
-			$rs = $pdo->prepare($sql);
-			$rs->execute(array(":id_event" => $idEvent, "media_type" => $type));
-			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
-			$media = array();			
-
-			foreach ($rows as $row) {
-				$media[] = new Media($row);
-			}
-				
-			return $media;
+		public function findByIdEvent($idEvent, $mediaType = "p") {
+			return self::find(array("id_event", "media_type"), array($idEvent, $mediaType));
 		}
 
 		public function update($data = array()){
@@ -168,7 +154,6 @@
 					":label" => $this->getLabel(),
 					":path" => $this->getPath()
 				);
-			//var_dump($params); exit;
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($params);
@@ -184,7 +169,7 @@
 			return $statment->execute($params);
 		}
 
-		public function imagePath($image, $path){
+		private function imagePath($image, $path){
 			switch ($image["type"]) {
 				case 'image/png': $type = '.png'; break;
 				case 'image/jpeg': case 'image/jpg': $type = '.jpg'; break;
@@ -203,5 +188,22 @@
 			return $relativePath;
 		}
 
+		public function getThumbnail($link){
+        	$code = substr($link, (strpos($link, '=')+1), 30);
+         	$thumbnailUrl = 'http://img.youtube.com/vi/' . $code . '/0.jpg';
+         	return $thumbnailUrl;
+    	}
+
+    	public static function hasMedia($idEvent){
+			$sql = "SELECT count(id_media) as count FROM media WHERE id_event = $idEvent";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetch();
+			if($rows["count"] == 0){
+				return false;
+			}
+			return true;
+		}
 	}
 ?>

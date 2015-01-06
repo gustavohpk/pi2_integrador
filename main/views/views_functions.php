@@ -36,7 +36,7 @@
 
 		foreach ($params as $param) {
 			$path = RESOURCES_FOLDER."/$param";
-			echo "<script src='$path' type='text/javascript' charset='ISO-8859-1'></script>";
+			echo "<script src='$path' type='text/javascript' charset='windows-1252'></script>";
 		}
 	}
 
@@ -64,8 +64,9 @@
     }
 
     function getThumbnail($link){
-    	$code = substr($link, (strpos($link, '=')+1), 30);
-    	$thumbnailUrl = 'http://img.youtube.com/vi/' . $code . '/0.jpg';
-    	return $thumbnailUrl;
+    	// $code = substr($link, (strpos($link, '=')+1), 30);
+    	// $thumbnailUrl = 'http://img.youtube.com/vi/' . $code . '/0.jpg';
+    	// return $thumbnailUrl;
+    	return Media::getThumbnail($link);
     }
 ?>

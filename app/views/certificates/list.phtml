@@ -1,0 +1,27 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 sponsors-new">
+		
+		<h2>Meus Certificados</h2>
+
+		<div id="certificates-list" class="col-xs-12 col-sm-10 col-sm-offset-1">
+			<div class="list-group">
+				<?php foreach ($this->certificates as $key => $certificate) : ?>
+					<div class="list-group-item">
+					  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+							<?php if ($certificate->enrollment->event->getLogo()) : ?>
+								<?php $image = "data:image/jpeg;base64,". base64_encode($certificate->enrollment->event->getLogo()); ?>
+							<?php else : ?>
+								<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
+							<?php endif ?>
+					  		<img class="thumbnail" src="<?=$image?>" alt="<?=($media ? $media->getLabel() : "")?>">
+					  	</div>
+					    <h4 class="list-group-item-heading">Evento: <?= $certificate->enrollment->event->getName() ?></h4>
+					    <p class="list-group-item-text">Código: <?= $certificate->getCode() ?></p>
+					    <a href="<?= createUriFor("/conta/certificados/{$certificate->getCode()}/ver") ?>" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> Visualizar</a>
+					</div>
+				<?php endforeach; ?>
+			</div>
+  		</div>
+		<br/>
+	</div>
+</div>

@@ -4,16 +4,20 @@
 	</div>
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 		<h3>Banners da página principal</h3>
-		<ul class="list-group">
-			<?php foreach ($this->bannersNames as $key => $bannerName) : ?>
-				<?php $path = $this->bannersPaths[$key]->getValue(); ?>
-				<li class="list-group-item">
-					<h4><?= $bannerName->getValue() ?></h4>
-					<input type="file">
-					<br/>
-					<img src='<?= createUriFor("/$path") ?>' alt="<?= $bannerName->getValue() ?>" />
-				</li>
-			<?php endforeach; ?>
-		</ul>
+		<form enctype="multipart/form-data" action="<?= $this->actionForm ?>" method="post">
+			<ul class="list-group">
+				<?php foreach ($this->bannersNames as $key => $bannerName) : ?>
+					<?php $description = $this->bannersPaths[$key]->getDescription(); ?>
+					<?php $path = $this->bannersPaths[$key]->getValue(); ?>
+					<li class="list-group-item">
+						<h4><?= $bannerName->getValue() ?></h4>
+						<input type="file" name="<?= 'banner[' . $description . ']' ?>" accept=".jpg,.png,.gif">
+						<br/>
+						<img src='<?= createUriFor("/$path") ?>' alt="<?= $bannerName->getValue() ?>" />
+					</li>
+				<?php endforeach; ?>
+			</ul>
+			<button type="submit" class="btn btn-default">Alterar</button>
+		</form>
 	</div>
 </div>

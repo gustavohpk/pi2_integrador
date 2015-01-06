@@ -86,7 +86,6 @@
       }
 
 		public function edit(){
-         //prepara formulario para edição do evento
 			$this->setHeadTitle("Editar Evento");
          $this->eventsType = \EventsType::all();
          $this->sponsors = \Sponsors::all();
@@ -95,25 +94,30 @@
          $this->titleBtnSubmit = "Salvar";
 		}
 
-      public function update(){
-         //salva edição do evento no db  
+      public function update(){  
          $this->events = \Events::findById($this->params[":id"])[0];
-         $cost = $this->params["cost"];
-         $sponsors = $this->params["sponsors"];
+         if(isset($this->params["cost"]))
+            $cost = $this->params["cost"];
+         if(isset($this->params["sponsors"]))
+            $sponsors = $this->params["sponsors"];
          if ($this->events->update($this->params['event'])){
             \Logger::updateLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
             \FlashMessage::successMessage("Evento modificado com sucesso.");
-            if (!$this->events->setCost($cost)) {
-               $errors = $this->events->cost[0]->getErrors();
-               foreach ($errors as $error) {
-                  \FlashMessage::errorMessage($error);
+            if(isset($cost)){
+               if (!$this->events->setCost($cost)) {
+                  $errors = $this->events->cost[0]->getErrors();
+                  foreach ($errors as $error) {
+                     \FlashMessage::errorMessage($error);
+                  }
                }
             }
-            if (!$this->events->setSponsorship($sponsors)) {
-               $errors = $this->events->cost[0]->getErrors();
-               foreach ($errors as $error) {
-                  \FlashMessage::errorMessage($error);
-               }
+            if(isset($sponsors)){
+               // if (!$this->events->setSponsorship($sponsors)) {
+               //    $errors = $this->events->sponsors[0]->getErrors();
+               //    foreach ($errors as $error) {
+               //       \FlashMessage::errorMessage($error);
+               //    }
+               // }
             }
             $this->redirectTo("admin/eventos/lista");
          }

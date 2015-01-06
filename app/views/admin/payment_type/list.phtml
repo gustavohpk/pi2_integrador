@@ -6,21 +6,24 @@
 	  <div class="panel-body">
 	  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span>
 			<div class="row">
+				<div class="col-xs-12">
+					<span class="label label-danger label-md"><span class="glyphicon glyphicon-warning-sign"></span> Cuidado! Alterações nesta área podem comprometer o funcionamento do sistema. <a data-toggle="modal" data-target="#system-danger-modal">Saiba mais</a>.</span>
+				</div>
 				<div class="col-xs-12 general-actions">
-					<a href="<?= createUriFor('/admin/config/pagamento/nova')?>">
-						<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					<a role="button" class="btn btn-success btn-sm" href="<?= createUriFor('/admin/config/pagamento/nova')?>" title="Cadastrar">
+						<span class="glyphicon glyphicon-plus-sign"></span>
 					</a>
 					<div class="col-lg-4">
-					  <div class="input-group">
-					    <input type="text" class="form-control">
-					    <div class="input-group-btn">
-					      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Procurar"><span class="glyphicon glyphicon-search"></span> <span class="caret"></span></button>
-					      <ul class="dropdown-menu pull-right">
-				          <li><a href="#">ID</a></li>
-				          <li><a href="#">Nome</a></li>				          
-				        </ul>
-					    </div>
-					  </div>
+					 	<div class="input-group">
+						    <input type="text" class="form-control">
+						    <div class="input-group-btn">
+						    	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Procurar"><span class="glyphicon glyphicon-search"></span> <span class="caret"></span></button>
+						    	<ul class="dropdown-menu pull-right">
+						        	<li><a href="#">ID</a></li>
+						        	<li><a href="#">Nome</a></li>				          
+					        	</ul>
+						    </div>
+					 	</div>
 					</div>
 				</div>
 			</div>
@@ -28,14 +31,16 @@
 		<table class="table">
 			<tr>
 				<th>ID</th>
+				<th>Código</th>
 				<th>Nome</th>
-				<th width="20%">Ações</th>
+				<th>Ações</th>
 			</tr>
 			<?php foreach ($this->paymentsType as $paymentType) :?>						
 				<tr>
-					<td align='right'><?= $paymentType->getIdPaymentType() ?></td>
-					<td align='left'><?= $paymentType->getName() ?></td>
-					<td align='left'>
+					<td><?= $paymentType->getIdPaymentType() ?></td>
+					<td><?= $paymentType->getCode() ?></td>
+					<td><?= $paymentType->getName() ?></td>
+					<td>
 						<a href="<?= createUriFor("/admin/config/pagamento/{$paymentType->getIdPaymentType()}/alterar")?>"
 							<button class='btn btn-primary btn-sm' title='Editar'>
 								<span class='glyphicon glyphicon-edit'></span>

@@ -1,89 +1,162 @@
 <?php
+
+/**
+ * Classe para geração de relatórios.
+ * @author Gustavo Pchek
+ */
+
 	class Reports extends BaseModel{
-		private $dateFrom;
-		private $dateTo;
-		private $event;
+		/**
+	     * @var string $dateTo Data inicial
+	     * @var string $timeTo Hora inicial
+	     * @var string $dateTo Data final
+	     * @var string $timeTo Hora final
+	     * @var bool $confirmed Se o relatório incluirá inscrições confirmadas
+	     * @var bool $unconfirmed Se o relatório incluirá inscrições não confirmadas
+	     * @var bool $present Se o relatório incluirá inscrições com presença confirmada
+	     * @var bool $absent Se o relatório incluirá inscrições com presença não confirmada
+	     * @var int[] $events Os eventos que as inscrições serão relacionadas, pode ser vazio para relatório geral
+	     */
+		private $dateFrom, $timeFrom, $dateTo, $timeTo, $confirmed = false, $unconfirmed = false, $present = false, $absent = false, $events = array();
 
 		public function setDateFrom($dateFrom){
-			$this->dateFrom = empty($dateFrom) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $dateFrom)));
+			$this->dateFrom = empty($dateFrom) ? null : date("Y-m-d", strtotime(str_replace("/", "-", $dateFrom)));
+		}
+
+		public function setTimeFrom($timeFrom){
+			$this->timeFrom = empty($timeFrom) ? null : date("H:i", strtotime(str_replace("/", "-", $timeFrom)));
 		}
 
 		public function setDateTo($dateTo){
-			$this->dateTo = empty($dateTo) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $dateTo)));
+			$this->dateTo = empty($dateTo) ? null : date("Y-m-d", strtotime(str_replace("/", "-", $dateTo)));
 		}
 
-		public function setEvent($event){
-			$this->event = $event;
+		public function setTimeTo($timeTo){
+			$this->timeTo = empty($timeTo) ? null : date("H:i", strtotime(str_replace("/", "-", $timeTo)));
+		}
+
+		public function setEvents($events){
+			$this->events = $events;
+		}
+
+		public function setConfirmed($confirmed){
+			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
+			if($confirmed)
+				$this->confirmed = true;
+			else
+				$this->confirmed = false;
+		}
+
+		public function setUnconfirmed($unconfirmed){
+			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
+			if($unconfirmed)
+				$this->unconfirmed = true;
+			else
+				$this->unconfirmed = false;
+		}
+
+		public function setPresent($present){
+			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
+			if($present)
+				$this->present = true;
+			else
+				$this->present = false;
+		}
+
+		public function setAbsent($absent){
+			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
+			if($absent)
+				$this->absent = true;
+			else
+				$this->absent = false;
 		}
 
 		public function getDateFrom(){
-			return is_null($this->dateFrom) ? null : date($format, strtotime($this->dateFrom));
+			return is_null($this->dateFrom) ? null : date("Y-m-d", strtotime($this->dateFrom));
 		}
 
 		public function getDateTo(){
-			return is_null($this->dateTo) ? null : date($format, strtotime($this->dateTo));
+			return is_null($this->dateTo) ? null : date("Y-m-d", strtotime($this->dateTo));
 		}
 
-		public function getEvent(){
-			return $this->event;
+		public function getTimeFrom(){
+			return is_null($this->timeFrom) ? null : date("H:i", strtotime($this->timeFrom));
 		}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_news", $direction ="DESC"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
-			$limit = self::getLimitByPage();
-			$page = self::getCurrentPage();
-			$start = ($page * $limit) - $limit;
+		public function getTimeTo(){
+			return is_null($this->timeTo) ? null : date("H:i", strtotime($this->timeTo));
+		}
 
-			$sql = 
-			"SELECT * FROM news" .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
+		public function getEvents(){
+			return $this->events;
+		}
 
-			$sql .= " LIMIT $start, $limit";
+		public function getConfirmed(){
+			return $this->confirmed;
+		}
 
-			$pdo = \Database::getConnection();
-			$rs = $pdo->prepare($sql);
-			$rs->execute($paramsValue);
-			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
-			$news = array();			
+		public function getUnconfirmed(){
+			return $this->unconfirmed;
+		}
 
-			foreach ($rows as $row) {
-				$news[] = new News($row);
+		public function getPresent(){
+			return $this->present;
+		}
+
+		public function getAbsent(){
+			return $this->absent;
+		}
+
+		public function generate(){
+
+			$sql = "SELECT * FROM enrollment WHERE";
+
+			if($this->getConfirmed() && $this->getUnconfirmed()){
+				// não faz nada
+			}else if($this->getConfirmed()){
+				$sql .= " date_payment IS NOT NULL AND";
+			}else if($this->getUnconfirmed()){
+				$sql .= " date_payment IS NULL AND";
 			}
-				
-			return $news;
-		}
 
-		public static function customerSearch($searchValue){
+			$sql .= " date_enrollment BETWEEN '" . $this->getDateFrom() . " " . $this->getTimeFrom() . "' AND '" . $this->getDateTo() . " " . $this->getTimeTo() . "'";
 
-			$serachValue = preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $searchValue ) );
-			$serachValue = utf8_encode($searchValue);
-			$searchValue = str_replace('%20', ' ', $searchValue);
-			$searchValue = '%' . $searchValue . '%';
-			$news = self::find(array("title"), array($searchValue), "LIKE");
-			return $news;
-		}
+			if($this->getConfirmed()){
+				if($this->getPresent() && $this->getAbsent()){
+				// não faz nada
+				}else if($this->getPresent()){
+					$sql .= " AND attendance = 1";
+				}else if($this->getAbsent()){
+					$sql .= " AND attendance = 0";
+				}
+			}
 
-		public static function findLast($date){
-			$news = self::find(array("modification_date"), array($date), ">=");
-			return $news;
-		}
+			
 
-		public static function all(){
-			return self::find();
-		}
+			if($this->getEvents())
+				$sql .= " AND id_event IN (" . implode(',', array_map('intval', $this->getEvents())) . ")";
 
-		public static function count(){
-			$sql = "SELECT count(id_news) as count FROM news";
+			$sql .= " ORDER BY date_enrollment ASC";
+
+			//var_dump($sql); exit;
+
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
 			$rs->execute();
-			$rows = $rs->fetch();
-			return $rows["count"];
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+			$enrollments = array();			
+
+			foreach ($rows as $row) {
+				$enrollments[] = new Enrollment($row);
+			}
+				
+			return $enrollments;
 		}
 
-		public static function findById($id){
-			$news = self::find(array("id_news"), array($id));
-			return count($news) > 0 ? $news : NULL;
-		}
+
+
+
+
 
 		public function update($data = array()){
 
