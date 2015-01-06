@@ -11,7 +11,6 @@
 - Atualizações anteriores à 30 guardadas no arquivo readme_old.txt
 - BUGS CONHECIDOS agora fica no topo do readme
 - Atualizações na área de certificados
-- 
 
 
 
