@@ -30,25 +30,37 @@ class Pager
         $html = "";
         if ($this->hasPrev()) {
             $html .= '<li>';
-            $html .= '<a href="'.$baseUrl.'/pagina/'.($this->page-1).'">';
+            $html .= '<a href="'.$baseUrl.'/pagina/1" title="Primeira Página">';
             $html .= '&laquo;';
+            $html .= '</a></li>';
+
+            $html .= '<li>';
+            $html .= '<a href="'.$baseUrl.'/pagina/'.($this->page-1).'" title="Página Anterior">';
+            $html .= '&lsaquo;';
             $html .= '</a></li>';
         } else {
             $html .= '<li class="disabled"><a href="#">&laquo;</a></li>';
+            $html .= '<li class="disabled"><a href="#">&lsaquo;</a></li>';
         }
         for($i=1; $i<=$this->getNumPages(); $i++) {
             if ($i != $this->page) {
-                $html .= '<li><a href="'.$baseUrl.'/pagina/'.$i.'">'.$i.'</a></li>';
+                $html .= '<li><a href="'.$baseUrl.'/pagina/'.$i.'" title="Página '.$i.'">'.$i.'</a></li>';
             } else {
-                $html .= '<li class="active"><a href="#">'.$i.'</a></li>';
+                $html .= '<li class="active"><a href="#" title="Página '.$i.' (atual)">'.$i.'</a></li>';
             }
         }
         if ($this->hasNext()) {
             $html .= '<li>';
-            $html .= '<a href="'.$baseUrl.'/pagina/'.($this->page+1).'">';
+            $html .= '<a href="'.$baseUrl.'/pagina/'.($this->page+1).'" title="Próxima Página">';
+            $html .= '&rsaquo;';
+            $html .= '</a></li>';
+
+            $html .= '<li>';
+            $html .= '<a href="'.$baseUrl.'/pagina/'.($this->getNumPages()).'" title="Última Página">';
             $html .= '&raquo;';
             $html .= '</a></li>';
         } else {
+            $html .= '<li class="disabled"><a href="#">&rsaquo;</a></li>';
             $html .= '<li class="disabled"><a href="#">&raquo;</a></li>';
         }
         return $html;

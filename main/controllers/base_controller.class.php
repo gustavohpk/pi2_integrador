@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de paginação.
+ * Controlador base
  * @author Rodrigo Miss
  * @author Gustavo Pchek
  */
@@ -15,6 +15,7 @@
 		protected $controllerName;
 		protected $headTitle; //tag <title></title>
 		protected $data = array(); //dados/variáveis que serão exportados para as views
+		protected $continueUrl;
 
 		public function __construct(){
 			if(Settings::checkMaintenance() == '1'){
@@ -63,6 +64,29 @@
 			if (isset($_SERVER['HTTP_REFERER'])) {
 				return $_SERVER['HTTP_REFERER']; 
 			}
+		}
+
+		/**
+		 * Salva um URL que pode ser recuperado posteriormente. Útil para redirecionar após login.
+	     * @param string $url O URL
+	     */
+		public function saveUrl($url){
+			$_SESSION["continueUrl"] = str_replace(SITE_ROOT . "/", "", $url);
+		}
+
+		/**
+		 * Recupera o URL salvo pela função saveUrl
+	     * @return string O URL
+	     */
+		public function retrieveUrl() {
+			return $_SESSION["continueUrl"];
+		}
+
+		/**
+		 * Destrói o URL salvo.
+	     */
+		public function unsetUrl(){
+			unset($_SESSION["continueUrl"]);
 		}
 
 		//Retorna constantes

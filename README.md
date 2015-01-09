@@ -15,6 +15,9 @@
 - Analisar replicação de dados do usuário para a inscrição
 - Melhorar função de geração/validação de url de evento
 - Consertar a pardonização de nomenclaturas (nomes com "_" na frente, arrumar singular e plural)
+- Geração de miniaturas ao cadastrar imagem
+- Analisar o uso do campo "status" na inscrição
+- A paginação está infinita. Limitar em 8 ou 10
 
 ----------
 
@@ -23,8 +26,21 @@
 - As mensagens de erro referentes aos preços de evento não são exibidas, mas as validações funcionam
 - O participante é excluído, mas o model ou controller gera um erro. Ao atualizar volta à lista, mas exibe outra mensagem de erro.
 - Problema na contagem de vagas
+- Mensagens de confirmação ou erro de inscrição não estão funcionando corretamente
 
 ----------
+
+----- Atualização 061 (08/01/15) -----
+
+- Área de mídia atualizada, upload de várias fotos finalizado (restando apenas a listagem de eventos por json)
+- Miniatura de imagens/vídeos na listagem do admin
+- Na home, caso não existam 4 próximos eventos, o espaço será preenchido por eventos anteriores.
+- Criadas funções saveUrl, retrieveUrl e unsetUrl no controlador base, para guardar uma url que pode ser recuperada posteriormente. Utilizada no login quando o usuário deslogado entra numa página que requer login.
+- Adicionada validação que impede duas inscrições do mesmo usuário no mesmo evento.
+- Verificação de tipo de pagamento alterada para comparar o código e não mais o nome do tipo de pagamento
+- Paginação corrigida na listagem de tipos de evento
+- Pequenas correções
+
 
 ----- Atualização 060 (06/01/15) -----
 

@@ -119,5 +119,14 @@
 			$params = array(":id_event_type" => $this->getIdEventType());
 			return $statment->execute($params);
 		}
+
+		public static function count(){
+			$sql = "SELECT count(id_event_type) as count FROM event_type";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetch();
+			return $rows["count"];
+		}
 	}
 ?>

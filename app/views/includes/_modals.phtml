@@ -38,11 +38,11 @@
               <p>Local: <?= $event->getLocal() ?></p>
               <p>Acesse a página do evento para mais detalhes.</p>
             </div>
-            <?php if ($event->eventType->getEventType() == "sem_inscricao") : ?>
+            <?php if ($event->eventType->getCode() == "sem_inscricao") : ?>
               <h4><span class="label label-info">Para participar deste evento não é necessário fazer inscrição.</span></h4>
             <?php endif ?>
             <a href="<?= createUriFor("/eventos/{$event->getPath()}")?>" class="btn btn-default" role="button">Ir para a página do evento</a>
-            <?php if (!$event->eventInitiated() && $event->eventType->getEventType() != "sem_inscricao") : ?>
+            <?php if (!$event->eventInitiated() && $event->eventType->getCode() != "sem_inscricao") : ?>
               <span style="display:inline-block" data-toggle="tooltip" data-placement="top" <?php echo (!$event->canEnrollment()?"disabled title='As inscrições abrem dia " . $event->getStartDateEnrollment("d/m/Y"). " às " . $event->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
                 <a role="button" href="<?= createUriFor("/inscricao/evento/{$event->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-md" <?php echo (!$event->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
               </span>

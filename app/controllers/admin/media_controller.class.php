@@ -2,109 +2,128 @@
 	namespace Admin;
 	
 	class MediaController extends BaseAdminController{
-      protected $media;
-      protected $actionForm;
+    protected $media;
+    protected $actionForm;
 
-		public function _list() {
-   		$this->setHeadTitle("Lista de Mídia");
-         if (isset($this->params[":p"])) {
-            $page = $this->params[":p"];
-         } else {
-            $page = 1;
-         }
-         \Media::setCurrentPage($page);
+    public function _list() {
+        $this->setHeadTitle("Lista de Mídia");
+        if (isset($this->params[":p"])) {
+        $page = $this->params[":p"];
+        } else {
+        $page = 1;
+        }
+        \Media::setCurrentPage($page);
 
-         if (isset($this->params[":id"])){
-            $this->media = \Media::findById($this->params[":id"]);
-            $this->pagination = new \Pager(count($this->media), \Media::getLimitByPage(), $page);
-         }
-         else{
-            $this->media = \Media::find();
-            $this->pagination = new \Pager(\Media::count(), \Media::getLimitByPage(), $page);
-         }
-		}
+        if (isset($this->params[":id"])){
+        $this->media = \Media::findById($this->params[":id"]);
+        $this->pagination = new \Pager(count($this->media), \Media::getLimitByPage(), $page);
+        }
+        else{
+        $this->media = \Media::find();
+        $this->pagination = new \Pager(\Media::count(), \Media::getLimitByPage(), $page);
+        }
+    }
 
-		public function _new(){
-			$this->setHeadTitle("Upload de mídia");
-         $this->media = new \Media();
-         $this->actionForm = $this->getUri("admin/midia");
-         $this->titleBtnSubmit = "Cadastrar";
-		}
+    public function _new(){
+        $this->setHeadTitle("Cadastrar Vídeo");
+        $this->media = new \Media();
+        $this->actionForm = $this->getUri("admin/midia/video");
+        $this->titleBtnSubmit = "Cadastrar";
+        }
 
-      public function _newMultiple(){
-         $this->setHeadTitle("Upload de mídia");
-         $this->media = new \Media();
-         $this->photosForm = $this->getUri("admin/midia/upload");
-         $this->actionForm = $this->getUri("admin/midia");
-         $this->titleBtnSubmit = "Cadastrar";
-      }
+        public function _newMultiple(){
+        $this->setHeadTitle("Upload de mídia");
+        $this->media = new \Media();
+        $this->actionForm = $this->getUri("admin/midia/fotos");
+        $this->titleBtnSubmit = "Cadastrar";
+    }
 
-		public function _edit(){
-			$this->setHeadTitle("Modificar mídia");
-         $this->media = \Media::findById($this->params[":id"]);
-         $this->actionForm = $this->getUri("admin/midia/{$this->media->getIdMedia()}");
-         $this->titleBtnSubmit = "Salvar";
-		}
+    public function _edit(){
+        $this->setHeadTitle("Modificar mídia");
+        $this->media = \Media::findById($this->params[":id"]);
+        $this->actionForm = $this->getUri("admin/midia/{$this->media->getIdMedia()}");
+        $this->titleBtnSubmit = "Salvar";
+    }
 
-      public function upload(){
-         $photos = array();
-         //$photos = array("name", "type", "tmp_name", "error", "size");
-         for($i = 0; $i < count($_FILES["photos"]["name"]); $i++){
-            $photos[$i]["name"] = $_FILES["photos"]["name"][$i];
-            $photos[$i]["type"] = $_FILES["photos"]["type"][$i];
-            $photos[$i]["tmp_name"] = $_FILES["photos"]["tmp_name"][$i];
-            $photos[$i]["size"] = $_FILES["photos"]["size"][$i];
-            $photos[$i]["error"] = $_FILES["photos"]["name"][$i];
-         }
-         echo stripslashes(json_encode($photos)); exit;
-      }
+    public function createVideo(){
+        $params = $this->params["media"];
 
-      public function create(){
-         $params = $this->params["media"];        
+        $this->media = new \Media($params);
+        $this->media->setMediaType("v");
 
-         $this->media = new \Media($params);
-         $uri = $this->getUri("media/image/event/");
-         if ($this->media->save($uri)){
-            \FlashMessage::successMessage("Mídia cadastrada com sucesso.");
-            if ($this->media->getMediaType() == "p") {
-               move_uploaded_file($_FILES["media"]["tmp_name"], "/var/www/" . $this->media->getPath());
-            }
+        $uri = $this->getUri("media/image/event/");
+
+        if ($this->media->save($uri, 0)){
+            \FlashMessage::successMessage("Vídeo cadastrado com sucesso.");
             $this->redirectTo("admin/midia/lista");
-         }
-         else{
-            \FlashMessage::errorMessage("Erro ao cadastrar a mídia.");
-            $this->setHeadTitle("Upload de Mídia");           
-            $this->actionForm = $this->getUri("admin/midia");
+        }
+        else{
+            \FlashMessage::errorMessage("Erro ao cadastrar vídeo.");
+            $this->setHeadTitle("Cadastrar Vídeo");
+            $this->actionForm = $this->getUri("admin/midia/video");
             $this->titleBtnSubmit = "Cadastrar";
             $this->render("_new");
-         }
-      }
+        }
+    }
 
-      public function update(){ 
-         $this->media = \Media::findById($this->params[":id"]);
-         if ($this->media->update($this->params['media'])){
-            \FlashMessage::successMessage("Mídia alterada com sucesso.");
-            $this->redirectTo("admin/midia/lista");
-         }
-         else{
-            \FlashMessage::errorMessage("Erro ao alterar a mídia.");
-            $this->setHeadTitle("Editar Mídia");
-            $this->actionForm = $this->getUri("admin/midia/{$this->media->getIdMedia()}");
-            $this->titleBtnSubmit = "Salvar";
-            $this->render("edit");
-         }
-      }
+    public function createPhotos(){
+        $params = $this->params["media"];
+        $successes = array();
+        $errors = array();
 
-      public function remove(){
-         $this->media = \Media::findById($this->params[":id"]);
-         if ($this->media->remove()){
+        for($i = 0; $i < count($this->params["media"]["label"]); $i++)
+        {
+            $data = array(
+                        "id_media" => null,
+                        "label" => $this->params["media"]["label"][$i],
+                        "id_event" => $this->params["media"]["id_event"][$i], 
+                        "media_type" => "p",
+                        "path" => ""
+            );
+            $this->media = new \Media($data);
+            $this->media->setMediaType("p");
+
+            $uri = $this->getUri("media/image/event/");
+
+            if ($this->media->save($uri, $i)){
+                $successes[] = $_FILES["photos"]["name"][$i];
+                move_uploaded_file($_FILES["photos"]["tmp_name"][$i], "/var/www/" . $this->media->getPath());
+            }
+            else{
+                $errors[] = $_FILES["photos"]["name"][$i];;
+            }
+        }
+
+        $successMsg = "Fotos cadastradas com sucesso: ";
+        foreach ($successes as $name) {
+            $successMsg .= $name . ", ";
+        }
+        if($successes)
+            \FlashMessage::successMessage(substr($successMsg, 0, -2));
+
+        $errorMsg = "Erro ao cadastrar fotos: ";
+        foreach ($errors as $name) {
+            $errorMsg .= $name . ", ";
+        }
+
+        if($errors)
+            \FlashMessage::errorMessage(substr($errorMsg, 0, -2));
+
+
+        $this->redirectTo("admin/midia/lista");
+
+    }
+
+    public function remove(){
+            $this->media = \Media::findById($this->params[":id"]);
+            if ($this->media->remove()){
             \FlashMessage::successMessage("Mídia removida com sucesso.");
             unlink("/var/www/" . $this->media->getPath());
-         }
-         else {
+        }
+        else {
             \FlashMessage::errorMessage("Não foi possível excluír a mídia.");
-         }
-         $this->redirectTo("admin/midia/lista");
-      }
-	}
+        }
+            $this->redirectTo("admin/midia/lista");
+        }
+    }
 ?>

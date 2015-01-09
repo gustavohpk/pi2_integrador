@@ -13,7 +13,15 @@
 	        Media::setCurrentPage($page);
 	        $this->media = Media::all();
 	        Events::setLimitByPage(4);
-	        $this->events = Events::findNext(date("Y-m-d"));
+	        $this->nextEvents = Events::findNext(date("Y-m-d"));
+	        $this->countNext = count($this->nextEvents);
+	        if($this->countNext < 4){
+	        	Events::setLimitByPage(4 - $this->countNext);
+	        	$this->prevEvents = Events::findPrev(date("Y-m-d"));
+	        	$this->countPrev = count($this->prevEvents);
+	        }
+	        $this->events = array_merge($this->nextEvents, $this->prevEvents);
+	        //var_dump($this->events); exit;
 	        $this->bannersNames = Settings::find(array("description"), array("banner%_name"), "LIKE");
          	$this->bannersPaths = Settings::find(array("description"), array("banner%_path"), "LIKE");
    		}

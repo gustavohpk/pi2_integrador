@@ -143,11 +143,11 @@
     //rotas para mídia
     $router->get('/admin/midia/lista', array('controller' => 'Admin\MediaController', 'action' => '_list'));
     $router->get('/admin/midia/lista/pagina/:p', array('controller' => 'Admin\MediaController', 'action' => '_list'));
-    $router->get('/admin/midia/nova', array('controller' => 'Admin\MediaController', 'action' => '_new'));
-    $router->get('/admin/midia/novas', array('controller' => 'Admin\MediaController', 'action' => '_newMultiple'));
+    $router->get('/admin/midia/novo/video', array('controller' => 'Admin\MediaController', 'action' => '_new'));
+    $router->get('/admin/midia/novas/fotos', array('controller' => 'Admin\MediaController', 'action' => '_newMultiple'));
     $router->get('/admin/midia/:id/alterar', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
-    $router->post('/admin/midia', array('controller' => 'Admin\MediaController', 'action' => 'create'));
-    $router->post('/admin/midia/upload', array('controller' => 'Admin\MediaController', 'action' => 'upload'));
+    $router->post('/admin/midia/fotos', array('controller' => 'Admin\MediaController', 'action' => 'createPhotos'));
+    $router->post('/admin/midia/video', array('controller' => 'Admin\MediaController', 'action' => 'createVideo'));
     $router->post('/admin/midia/:id', array('controller' => 'Admin\MediaController', 'action' => 'update'));
     $router->get('/admin/midia/:id/remover', array('controller' => 'Admin\MediaController', 'action' => 'remove'));
 

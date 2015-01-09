@@ -151,7 +151,7 @@
       public function checkAttendance() {
          $idEvent = $this->params[":id"];
          $this->event = \Events::findById($this->params[":id"])[0];
-         if(strtotime($this->event->getStartDate("d-m-Y H:i")) < strtotime(date("d-m-Y H:i")) && $this->event->eventType->getEventType() != "sem_inscricao"){
+         if(strtotime($this->event->getStartDate("d-m-Y H:i")) < strtotime(date("d-m-Y H:i")) && $this->event->eventType->getCode() != "sem_inscricao"){
             $this->enrollments = \Enrollment::find(array("id_event"), array($idEvent))[0];
             $this->enrollments->checkAttendance($this->params["enrollment"]);
             \FlashMessage::successMessage("A lista de presença foi atualizada.");

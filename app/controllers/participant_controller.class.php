@@ -17,13 +17,19 @@
 			}
        	}
 
-       	public function executeLogin(){			
+       	public function executeLogin(){	
 			$this->participant = new Participant();
 			$email = $this->params["participant"]["email"];
 			$password = $this->params["participant"]["password"];
 
 			if ($this->participant->login($email, $password)){
-				$this->redirectTo("conta/painel");
+				if($this->retrieveUrl()){
+					$url = $this->retrieveUrl();
+					$this->unsetUrl();
+					$this->redirectTo($url);
+				}
+				else
+					$this->redirectTo("conta/painel");
 			}
 			else{
 				FlashMessage::errorMessage("Os seguintes ocorreram ao tentar acessar sua conta:");

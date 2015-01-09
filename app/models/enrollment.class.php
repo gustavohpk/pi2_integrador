@@ -122,8 +122,8 @@
 		public function validateData(){
 			if ($this->participant->getIdParticipant() < 1) $this->errors[] = "Nome do participante não informado.";
 			if ($this->event->getIdEvent() < 1) $this->errors[] = "Evento não informado.";
-			if ($this->event->eventType->getEventType() != "sem_pagamento" && $this->getIdPaymentType() < 1) $this->errors[] = "Forma de pagamento não localizada.";
-			if ($this->event->eventType->getEventType() != "sem_pagamento" && $this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
+			if ($this->event->eventType->getCode() != "sem_pagamento" && $this->getIdPaymentType() < 1) $this->errors[] = "Forma de pagamento não localizada.";
+			if ($this->event->eventType->getCode() != "sem_pagamento" && $this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
 		}
 
  		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
@@ -167,6 +167,11 @@
 
 		public function save(){
 			if (!$this->isValidData()) return false;
+
+			if(self::findByIdParticipant($this->participant->getIdParticipant())){
+				$this->setMessageError("Você já se inscreveu neste evento.");
+				return false;
+			}
 
 			$sql = 
 			"INSERT INTO enrollment

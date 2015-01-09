@@ -7,11 +7,11 @@
 	  	<span class="glyphicon glyphicon-question-sign" style="float:right;" title="Aqui é possível gerenciar as fotos e vídeos do sistema. É possível fazer upload de fotos, porém quanto aos vídeos são aceitos apenas links do Youtube e na listagem aparecerá a miniatura do vídeo." data-toggle="tooltip" data-placement="left"></span>
 			<div class="row">
 				<div class="col-xs-12 general-actions">
-					<a href="<?= createUriFor('/admin/midia/nova')?>">
-						<button class="btn btn-success btn-sm" title="Cadastrar Mídia" style="float: left; margin-right: 10px"><span class="glyphicon glyphicon-plus-sign"></span> Cadastrar</button>
+					<a href="<?= createUriFor('/admin/midia/novas/fotos')?>">
+						<button class="btn btn-success btn-sm" title="Cadastrar Fotos" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span> Cadastrar Fotos</button>
 					</a>
-					<a href="<?= createUriFor('/admin/midia/novas')?>">
-						<button class="btn btn-success btn-sm" title="Cadastrar Várias" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span> Cadastrar Várias</button>
+					<a href="<?= createUriFor('/admin/midia/novo/video')?>">
+						<button class="btn btn-success btn-sm" title="Cadastrar Vídeo" style="float: left; margin-right: 10px"><span class="glyphicon glyphicon-plus-sign"></span> Cadastrar Vídeo</button>
 					</a>
 					<div class="col-lg-4">
 					  <div class="input-group">
@@ -29,11 +29,12 @@
 				</div>
 			</div>
 		</div>
-		<table class="table">
+		<table class="table media-list">
 			<tr>
 				<td>ID</td>
 				<th>Nome</th>
 				<th>Tipo</th>
+				<th>Miniatura</th>
 				<th>Ações</th>
 			</tr>
 			<?php foreach ($this->media as $media) : ?>
@@ -45,6 +46,13 @@
 					<?php else : ?>
 						<td><span class="glyphicon glyphicon-facetime-video" title="Vídeo"></span></td>
 					<?php endif; ?>
+					<td>
+						<?php if ($media->getMediaType() == 'p') : ?>
+		  					<a href="<?=$media->getPath()?>" class="fancybox" title="<?= $media->getLabel() ?>" rel="lightbox"><img src="<?=$media->getPath()?>" alt="<?= $media->getLabel() ?>"/>
+						<?php else : ?>
+		  					<a href="<?= $media->getPath() ?>" class="fancybox" title="<?= $media->getLabel() ?>" rel="lightbox"><img src="<?= getThumbnail($media->getPath()) ?>" alt="<?= $media->getLabel() ?>"/>
+						<?php endif; ?>
+					</td>
 					<td>
 						<a href="<?= createUriFor("/admin/midia/{$media->getIdMedia()}/alterar") ?>">
 							<button class='btn btn-primary btn-sm' title='Editar'>

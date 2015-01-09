@@ -34,7 +34,10 @@
 	        $this->enrollments = Enrollment::findByIdParticipant($_SESSION["participant"]->getIdParticipant());
 	        $this->certificates = array();
 	        foreach ($this->enrollments as $key => $enrollment) {
-	        	$this->certificates[] = Certificates::findByIdEnrollment($enrollment->getIdEnrollment())[0];
+	        	$certificate = Certificates::findByIdEnrollment($enrollment->getIdEnrollment())[0];
+	        	if($certificate)
+	        		$this->certificates[] = Certificates::findByIdEnrollment($enrollment->getIdEnrollment())[0];
+
 	        }
       	}
 

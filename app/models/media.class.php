@@ -138,10 +138,13 @@
 			return $statment->execute($param);
 		}
 
-		public function save($path){
+		public function save($path, $index){
 			if ($this->getMediaType() == "p") {
-	            $this->setPath($this->imagePath($_FILES["media"], $path));
-	        }       
+	            $this->setPath($this->imagePath($path, $index));
+	        }else{
+	        	if(!$this->validateYoutubeLink($this->getPath()))
+	        		return false;
+	        }
 			$sql = 
 			"INSERT INTO media
 				(media_type, id_event, label, path)
@@ -169,8 +172,8 @@
 			return $statment->execute($params);
 		}
 
-		private function imagePath($image, $path){
-			switch ($image["type"]) {
+		private function imagePath($path, $index){
+			switch ($_FILES["photos"]["type"][$index]) {
 				case 'image/png': $type = '.png'; break;
 				case 'image/jpeg': case 'image/jpg': $type = '.jpg'; break;
 				case 'image/gif': $type = '.gif'; break;

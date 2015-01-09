@@ -7,8 +7,9 @@
 			$this->loginRequired = $loginRequired;
 		}
 
-		public function beforeAction(){		
+		public function beforeAction(){
 			if (!isset($_SESSION["participant"]) && $this->loginRequired) {
+				$this->saveUrl($_SERVER['REQUEST_URI']);
 				$this->redirectTo("conta/login");
 			}
 			else {

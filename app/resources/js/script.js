@@ -347,12 +347,8 @@ $(document).ready(function() {
 });
 
 $("input[name='photos[]']").change(function(e) {
+	$("#media-table").find("tr.media-row").remove();
     for (var i = 0; i < $(this).get(0).files.length; ++i) {
-    	console.log(e.target.files[i]);
-    	images.push(URL.createObjectURL(e.target.files[i]));
+    	$("#media-table").append("<tr class='media-row'><td class='photo'><img src='" + URL.createObjectURL(e.target.files[i]) + "' alt=''/></td><td><p>Legenda</p><input type='text' class='form-control' name='media[label][]' value='" + e.target.files[i].name.substr(0, e.target.files[i].name.length - 4) + "'/><br/><p>Evento</p><input id='event-id' type='number' class='form-control' name='media[id_event][]'' value='' required><br/></td></tr>");
     }
-});
-
-$("#media-add_button").click(function() {
-	$(".media-row").last().clone().insertAfter(".media-row:last").find(":input").val("");
 });

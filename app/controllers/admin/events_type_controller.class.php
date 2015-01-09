@@ -8,7 +8,15 @@
 
 		public function _list(){
    			$this->setHeadTitle("Listando Tipos de Eventos");
+   			if (isset($this->params[":p"])) {
+	           $page = $this->params[":p"];
+	        } else {
+	           $page = 1;
+	        }
+	        \EventsType::setCurrentPage($page);
    			$this->eventsType = \EventsType::all();
+   			$this->pagination = new \Pager(\EventsType::count(), \EventsType::getLimitByPage(), $page);
+   		
 		}
 
 		public function _new(){

@@ -15,7 +15,7 @@
 	        }
 	        \Certificates::setCurrentPage($page);
 	        if (isset($this->params[":id"])){
-            $this->certificates = \Certificates::findById($this->params[":id"]);
+            	$this->certificates = \Certificates::findById($this->params[":id"]);
 	           $this->pagination = new \Pager(count($this->certificates), \Certificates::getLimitByPage(), $page);
 	        }
 	        else{
