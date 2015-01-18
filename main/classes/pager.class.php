@@ -22,6 +22,7 @@ class Pager
     }
 
     /**
+     * Retorna o html com a paginação
      * @param string $baseUrl URL base para criar os links.
      * @return string O código HTML da paginação.
      */
@@ -83,8 +84,6 @@ class Pager
      */
     public function hasNext()
     {
- 
- 
         if ($this->page < $this->getNumPages()) {
             return true;
         } else {

@@ -26,6 +26,8 @@
 		private $views;
 		private $logo;
 		private $sendParticipantData;
+		private $rating;
+		private $evaluations;
 		public $cost;
 		public $sponsorship;
 
@@ -171,6 +173,22 @@
 
 		public function setSendParticipantData($sendParticipantData){
 			$this->sendParticipantData = $sendParticipantData;
+		}
+
+		public function getRating(){
+			return $this->rating;
+		}
+
+		public function setRating($rating){
+			$this->rating = $rating;
+		}
+
+		public function getEvaluations(){
+			return $this->evaluations;
+		}
+
+		public function setEvaluations($evaluations){
+			$this->evaluations = $evaluations;
 		}
 
 		/**

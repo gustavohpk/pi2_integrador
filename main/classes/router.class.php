@@ -5,9 +5,13 @@
  */
 
 	class Router{
-		private $url;
-		private $postRoutes = array();
-		private $getRoutes = array();
+
+    /**
+     * @var string $url O URL solicitado
+     * @var array $postRoutes Rotas POST
+     * @var array $getRoutes Rotas GET
+     */
+		private $url, $postRoutes = array(), $getRoutes = array();
 
 		public function __construct($url){
       $this->url = str_replace(SITE_ROOT, '', $url);
@@ -28,6 +32,10 @@
 					$this->find($this->getRoutes);
 		}
 
+    /**
+     * Procura a rota solicitada dentro da lista de rotas
+     * @param array $routes As rotas
+     */
   	private function find($routes) {
       foreach($routes as $route => $options){
         $params = array();
@@ -58,10 +66,12 @@
        $controller->afterAction();
        $controller->render();
        return;
-
-      //echo "Página não encontrada"; //melhorar isso depois
 	}
 
+  /**
+   * Verifica se a rota está correta
+   * @param String $route A rota
+   */
   private function isRightRoute($route, &$params) {
     $route = explode('/', $route);
     $url = explode('/', $this->url);
@@ -81,6 +91,9 @@
     return true;
   }
 
+  /**
+   * @return array Os parâmetros
+   */
   private function params() {
      if ($_SERVER['REQUEST_METHOD'] === 'POST')
        return $_POST;

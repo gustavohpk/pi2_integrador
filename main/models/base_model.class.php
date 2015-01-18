@@ -1,15 +1,32 @@
 <?php
-	class BaseModel{		
+
+/**
+ * Modelo base.
+ * @author Rodrigo Miss
+ */
+
+	class BaseModel{
+
+		/** @var string[] $errors Lista de erros  */
 		protected $errors = array();
-		private static $limitByPage = 15;
-		private static $currentPage = 1;
+
+		/**
+		 * @var int $limitByPage Limite de itens por página
+		 * @var int $currentPage Página atual
+		 */
+		private static $limitByPage = 15, $currentPage = 1;
 
 		public function validateData(){}
+
 
 		public function __construct($data = array()){
 			$this->setData($data);
 		}
 
+		/**
+		 * Define os dados a serem utilizados pelos controladores e visões
+		 * @param string[] $data Array de dados
+		 */
 		public function setData($data){
 			foreach ($data as $key => $value) {
 				$method = $this->snakToCamelCase("set_$key");
@@ -23,30 +40,54 @@
 	    	return empty($this->errors);
 	    }
 
+	    /**
+	     * Retorna os erros salvos na variável
+	     * return string[] Os erros
+	     */
 	    public function getErrors(){
 	    	return $this->errors;
 	    }
 
+	    /**
+	     * Define o limite de itens por página
+	     * @param int $limitByPage Limite
+	     */
 	    public static function setLimitByPage($limitByPage){
 	    	self::$limitByPage = $limitByPage;
 	    }
 
+	    /**
+	     * Define a página atual
+	     * @param int $currentPage Página atual
+	     */
 	    public static function setCurrentPage($currentPage){
 	    	self::$currentPage = $currentPage;
 	    }
 
+	    /**
+	     * Retorna o limite de itens por página
+	     * @return int Limite
+	     */
 	    public static function getLimitByPage(){
 	    	return self::$limitByPage;
 	    }
 
+	    /**
+	     * Retorna a página atual
+	     * @return int Página atual
+	     */
 	    public static function getCurrentPage(){
 	    	return self::$currentPage;
 	    }
 
-	    /*
-	    * Funções auxiliares para os models
-	    */
-	    //retorna parametros para funcao find()
+	    /**
+	     * Retorna os parâmetros para serem utilizados nos PDOs das funções de busca dos modelos
+	     * @param string[] $params Os parâmetros (campos no banco)
+	     * @param string[] $values Os valores
+	     * @param string $operator O operador
+	     * @param string $compare O comparador
+	     * @return array Uma array com os parâmetros e seus respectivos valores
+	     */
 		protected function getParamsSQL($params, $values, $operator, $compare){
 			$paramsValue = array();
 			$i = 0;
@@ -64,28 +105,52 @@
 			return array($paramsName, $paramsValue);
 		}
 
-		//função para conveter campos do DB do formato snak_case para formato camelCase utilizado nas classes
+		/**
+		 * Converte o valor no formato "snake case" para o formato "camel case"
+		 * @param string $value O valor em snake case
+		 * @return string O valor em camel case
+		 */
 	    public function snakToCamelCase($value){
 			$value = str_replace("_", " ", $value);
 			$value = lcfirst(str_replace(" ", "", ucwords($value)));
 			return $value;
 	    }
 
+	    /**
+	     * Valida um endereço de e-mail
+	     * @param string $email Endereço de e-mail
+	     * @return bool Retorna se é válido
+	     */
 	    public function validateEmail($email){
 			return (eregi("^[a-z0-9_\.\-]+@[a-z0-9_\.\-]*[a-z0-9_\-]+\.[a-z]{2,4}$", $email));
 		}
 
+		/**
+		 * Valida um link de vídeo do Youtube
+		 * @param string $link Link do vídeo
+		 * @return bool Retorna se é válido
+		 */
 		public function validateYoutubeLink($link){
 			if (strpos($link, 'youtube.com/watch?v=') != false){
 				return true;
 			}
 		}
 
+		/**
+		 * Verifica se a data é válida
+		 * @param string $date A data
+		 * @return boolean Retorna se é válida
+		 */
 		public function is_date($date) {
 			$date = explode("/", $date);
 			return checkdate($date[1], $date[0], $date[2]);
 		}
 
+		/**
+		 * Valida um número de CPF
+		 * @param string $cpf O número de CPF
+		 * @return boolean Retorna se é válido
+		 */
 		public function validateCpf($cpf){ 
 			$cpf = preg_replace("/[^0-9]/", "", $cpf);
 			$digitoUm = 0;
@@ -113,6 +178,12 @@
 				return true;
 			}
 		}
+
+		/**
+		 * Remove caracteres especiais, incluindo acentos e cedilha
+		 * @param string $string A string a ser limpada
+		 * @return string A string com os caracteres especiais substituídos
+		 */
 		public function removeSpecialCharacters($string){
 	    	$cleanedString = strtr($string,
 	    	array (

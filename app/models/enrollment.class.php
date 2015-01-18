@@ -11,6 +11,7 @@
 		private $uriPayment;
 		private $attendance;
 		private $participantData;
+		private $rating;
 
 		public function setIdEnrollment($idEnrollment){
 			$this->idEnrollment = $idEnrollment;
@@ -95,6 +96,14 @@
 
 		public function getParticipantData(){
 			return $this->participantData;
+		}
+
+		public function setRating($rating){
+			$this->rating = $rating;
+		}
+
+		public function getRating(){
+			return $this->rating;
 		}
 
 		// mensagens exibidas para confirmação da inscrição do participante
@@ -269,6 +278,18 @@
 				$pdo = \Database::getConnection();
 				$statment = $pdo->prepare($sql);
 				$statment->execute(array(":attendance"=>$status, ":id_enrollment"=>$key));
+			}
+		}
+
+		public function updateRating($rating){
+			//Validação - A nota tem que estar entre 1 e 5 e só é possível avaliar se a presença for confirmada
+			if($rating < 1 || $rating > 5 || $this->getAttendance() == 0){
+				return 0;
+			} else {
+				$sql = "UPDATE enrollment SET rating = :rating WHERE id_enrollment = :id_enrollment";
+				$pdo = \Database::getConnection();
+				$statment = $pdo->prepare($sql);
+				return $statment->execute(array(":rating"=> $rating, ":id_enrollment"=> $this->getIdEnrollment()));
 			}
 		}
 

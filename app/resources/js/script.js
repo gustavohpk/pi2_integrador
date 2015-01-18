@@ -352,3 +352,144 @@ $("input[name='photos[]']").change(function(e) {
     	$("#media-table").append("<tr class='media-row'><td class='photo'><img src='" + URL.createObjectURL(e.target.files[i]) + "' alt=''/></td><td><p>Legenda</p><input type='text' class='form-control' name='media[label][]' value='" + e.target.files[i].name.substr(0, e.target.files[i].name.length - 4) + "'/><br/><p>Evento</p><input id='event-id' type='number' class='form-control' name='media[id_event][]'' value='' required><br/></td></tr>");
     }
 });
+
+$(document).ready(function() {
+	$('input.check').on('change', function () {
+	  alert('Rating: ' + $(this).val());
+	});
+	$('.rating-tooltip').rating({
+	  extendSymbol: function (rate) {
+	  	switch(rate) {
+		    case 1:
+		        title = "Ruim"; break;
+		    case 2:
+		        title = "Regular"; break;
+		    case 3:
+		    	title = "Bom"; break;
+		    case 4:
+		    	title = "Otimo"; break;
+		    case 5:
+		    	title = "Excelente"; break;
+		    default:
+		        title = "Nao Avaliado";
+		  }
+	    $(this).tooltip({
+	      container: 'body',
+	      placement: 'bottom',
+	      title: title
+	    });
+	  }
+	});
+
+	$('.rating').each(function () {
+    var rating = parseFloat($(this).val());
+    var title;
+    switch(true) {
+        case ((rating >= 1) && (rating < 1.5)):
+            title = "Ruim";
+            break;
+        case ((rating >= 1.5) && (rating < 2.5)):
+            title = "Regular";
+            break;
+        case ((rating >= 2.5) && (rating < 3.5)):
+          title = "Bom";
+          break;
+        case ((rating >= 3.5) && (rating < 4.5)):
+          title = "Otimo";
+          break;
+        case (rating >= 4.5):
+          title = "Excelente";
+          break;
+        default:
+            title = "Nao avaliado";
+      }
+    $('<br/><span class="label label-default label-sm"></span>')
+    .text("Avaliacao Media: " + title + ' (' + rating + ')' || ' ')
+    .insertAfter(this);
+  });
+
+
+	$('.rating-tooltip').each(function () {
+    var rating = parseFloat($(this).val());
+    var label;
+    var title;
+    var color;
+    switch(true) {
+    	case (rating < 1):
+            label = "label-default";
+            title = "Nao avaliado";
+            color = "#CCC";
+            break;
+        case ((rating >= 1) && (rating < 1.5)):
+            label = "label-danger";
+            title = "Ruim";
+            color = "#d9534f";
+            break;
+        case ((rating >= 1.5) && (rating < 2.5)):
+            label = "label-warning";
+            title = "Regular";
+            color = "#f0ad4e";
+            break;
+        case ((rating >= 2.5) && (rating < 3.5)):
+          label = "label-info";
+          title = "Bom";
+          color = "#5bc0de";
+          break;
+        case ((rating >= 3.5) && (rating < 4.5)):
+          label = "label-primary";
+          title = "Otimo";
+          color = "#428bca";
+          break;
+        case (rating >= 4.5):
+          label = "label-success";
+          title = "Excelente";
+          color = "#5cb85c";
+          break;
+        default:
+            label = "label-default";
+            title = "Nao avaliado";
+      }
+    $('<br/><span class="label ' + label + ' label-sm"></span>')
+    .text("Sua avaliacao: " + title || ' ')
+    .insertAfter(this);
+    $( "#participant-rating .rating-symbol" ).children(".rating-symbol-foreground").css("color", color);
+  });
+
+
+	$( "#participant-rating .rating-symbol:nth-child(1)" ).mouseover(function(){
+		$("#participant-rating .rating-symbol").children(".rating-symbol-foreground").css("color", "#d9534f");
+	});
+
+	$( "#participant-rating .rating-symbol:nth-child(2)" ).mouseover(function(){
+		$( "#participant-rating .rating-symbol" ).children(".rating-symbol-foreground").css("color", "#f0ad4e");
+	});
+
+	$( "#participant-rating .rating-symbol:nth-child(3)" ).mouseover(function(){
+		$( "#participant-rating .rating-symbol" ).children(".rating-symbol-foreground").css("color", "#5bc0de");
+	});
+
+	$( "#participant-rating .rating-symbol:nth-child(4)" ).mouseover(function(){
+		$( "#participant-rating .rating-symbol" ).children(".rating-symbol-foreground").css("color", "#428bca");
+	});
+
+	$( "#participant-rating .rating-symbol:nth-child(5)" ).mouseover(function(){
+		$( "#participant-rating .rating-symbol" ).children(".rating-symbol-foreground").css("color", "#5cb85c");
+	});
+
+
+	$(".rating-tooltip").change(function(){
+		rating = $(".rating-tooltip").val();
+		$.ajax({
+			url: ratingUrl + rating,
+			success: function(data) {
+				if(data == 1){
+					void(0);
+				} else if(data == 0){
+					alert("Erro ao alterar avaliação.");		
+				}
+			}
+		});
+	});
+
+});
+

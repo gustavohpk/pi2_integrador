@@ -94,5 +94,15 @@
          $this->setHeadTitle("Confirmação");
          $this->enrollment = new Enrollment();
       }
+
+      public function updateRating(){
+         if(isset($_SESSION["participant"])){
+            $this->enrollment = Enrollment::find(array("id_participant", "id_event"), array($_SESSION["participant"]->getIdParticipant(), $this->params[":id"]))[0];
+            echo $this->enrollment->updateRating($this->params[":r"]);
+         }else{
+            echo 0;
+         }
+         exit;
+      }
 	} 
 ?>

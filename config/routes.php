@@ -23,6 +23,9 @@
     $router->get('/eventos/:id/ver', array('controller' => 'EventsController', 'action' => 'show'));
     $router->get('/eventos/:url', array('controller' => 'EventsController', 'action' => 'show'));
 
+    //rota para setar nota do evento pelo participante
+    $router->get('/eventos/:id/avaliacao/:r', array('controller' => 'EnrollmentController', 'action' => 'updateRating'));
+
    	//rotas para notícias
    	$router->get('/noticias/lista', array('controller' => 'NewsController', 'action' => 'show'));
     $router->get('/noticias/lista/pagina/:p', array('controller' => 'NewsController', 'action' => 'show'));

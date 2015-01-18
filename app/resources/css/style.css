@@ -273,3 +273,37 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 	font-size: 13px;
 	text-align: center;
 }
+
+.symbol {
+  display: inline-block;
+  border-radius: 50%;
+  border: 5px double white;
+  width: 30px;
+  height: 30px;
+}
+
+.symbol-empty {
+  background-color: #ccc;
+}
+
+.symbol-filled {
+  background-color: black;
+}
+
+#average .rating-symbol{
+	color: gold;
+	text-shadow: -1px 0 #333, 0 1px #333, 1px 0 #333, 0 -1px #333;
+	letter-spacing: 4px;
+}
+
+.rating-symbol{
+	font-size: 32px !important;
+	text-shadow: -1px 0 #333, 0 1px #333, 1px 0 #333, 0 -1px #333;
+	letter-spacing: 4px;
+	color: #CCC;
+	webkit-transition: all .1s ease-in-out;	transition: all .1s ease-in-out;
+}
+
+#participant-rating .rating-symbol{
+	cursor: pointer;
+}

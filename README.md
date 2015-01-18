@@ -30,6 +30,16 @@
 
 ----------
 
+----- Atualização 062 (12/01/15 - 16/01/15) -----
+
+- Adicionado campo "rating" na tabela "enrollment"
+- Adicionado campo "rating" na tabela "event"
+- Adicionado campo "evaluations" na tabela "event"
+- Avaliação de eventos finalizada
+- Criada trigger para atualizar média das avaliações
+- Lista de inscrições do participante alterada, agora uma <ul> é utilizada
+
+
 ----- Atualização 061 (08/01/15) -----
 
 - Área de mídia atualizada, upload de várias fotos finalizado (restando apenas a listagem de eventos por json)

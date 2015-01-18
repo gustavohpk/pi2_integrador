@@ -14,7 +14,6 @@
 			</div>
 		<?php endif; ?>
 		<div class="col-xs-12">
-			<span class="glyphicon glyphicon-eye-open"></span> <?= $this->events->getViews() + 1?>
 			<?php if ($this->events->getStartDate("d/m/Y") == $this->events->getEndDate("d/m/Y")) : ?>
 				<h3 class="event-date">Data: <?= $this->events->getStartDate("d/m/Y")?></h3>
 				<?php if ($this->events->getStartDate("H:i") == $this->events->getEndDate("H:i")) : ?>
@@ -26,6 +25,20 @@
 				<h3 class="event-date">Data: <?= $this->events->getStartDate("d/m/Y")?> a <?= $this->events->getEndDate("d/m/Y")?></h3>
 			<?php endif ?>
 			<br/>
+			<span class="glyphicon glyphicon-eye-open"></span> <?= $this->events->getViews() + 1?>
+			<br>
+			<div id="average">
+				<input type="hidden" class="rating" readonly value="<?= $this->realRating ?>" data-start="0" data-stop="5" data-fractions="10"/>
+			</div>
+			<br/>
+			<?php if($this->attendance) : ?>
+				<div id="participant-rating">
+					<input type="hidden" class="rating-tooltip" data-start="0" data-stop="5" value="<?= $this->participantRating ?>"/>
+				</div>
+			<?php elseif (strtotime($this->events->getEndDate("Y-m-d")) < strtotime(date("Y-m-d"))) : ?>
+				<a data-toggle="modal" data-target="#login-modal">Participou deste evento? Faça login para avaliá-lo.</a>
+			<?php endif; ?>
+			<br/><br/>
 			<h4 class="event-enrollment-start-date">Início das inscrições: <?=$this->events->getStartDateEnrollment("d/m/Y")?> às <?= $this->events->getStartDateEnrollment("H:i")?></h4>
 			<h4 class="event-enrollment-start-date">Término das inscrições: <?=$this->events->getEndDateEnrollment("d/m/Y")?> às <?= $this->events->getEndDateEnrollment("H:i")?></h4>
 			<?php if ($this->events->getEndDateEnrollment("d/m/Y") == date("d/m/Y") && strtotime($this->events->getEndDateEnrollment("H:i")) > strtotime(date("H:i"))) : ?>
@@ -114,3 +127,7 @@
 	</div>
 <?php endif ?>
 <div class="fb-comments" data-href="http://<?=$_SERVER['HTTP_HOST'] ?><?= createUriFor("/eventos/{$this->events->getIdEvent()}/ver")?>" data-numposts="5" data-colorscheme="light"></div>
+
+<script type="text/javascript">
+	ratingUrl = '<?= createUriFor("/eventos/{$this->events->getIdEvent()}/avaliacao/") ?>';
+</script>

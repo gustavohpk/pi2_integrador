@@ -8,13 +8,24 @@
 	session_start();
 
 	class BaseController{
+
+		/**
+	     * @var string[] $params Os parâmetros
+	     * @var string $layout O tipo do layout
+	     * @var string $view O nome da visão
+	     * @var string $viewPath O caminho da visão
+	     * @var string $controllerName O nome do controlador
+	     * @var string $headTitle O título da página
+	     * @var string[] $data Os dados a serem exportados para as visões
+	     * @var string $continueUrl O URL a ser salvo (quando necessário)
+	     */
 		protected $params;
 		protected $layout;
 		protected $view;
 		protected $viewPath; 
 		protected $controllerName;
-		protected $headTitle; //tag <title></title>
-		protected $data = array(); //dados/variáveis que serão exportados para as views
+		protected $headTitle;
+		protected $data = array();
 		protected $continueUrl;
 
 		public function __construct(){
@@ -25,15 +36,26 @@
 			}
 		}
 
+		/**
+		 * Define os parâmetros
+		 * @param $params array Os parâmetros
+		 */
 		public function setParams($params){
 			$this->params = $params;
 		}
 
+		/**
+		 * Define a visão
+		 * @param $view String A visão
+		 */
 		public function setView($view){
 			$this->view = $view;
 		}
 
-		//Título para tag title da tag head
+		/**
+		 * Define o título da página, para ser utilizado na tag <head>
+		 * @param String $pageTitle O título de página
+		 */
 		public function setHeadTitle($pageTitle = null){
 			$siteTitle = Settings::getSiteTitle()->getValue();
 			if ($pageTitle){
@@ -45,21 +67,34 @@
 			return $this->headTitle;
 		}
 
+		/**
+		 * Retorna o título da página
+		 * @return String O título da página
+		 */
 		public function getHeadTitle(){
 			return $this->headTitle;
 		}
 
-		//funcões auxiliares
+		/**
+		 * Redireciona para outra página
+		 * @param String $uri O uri da página.
+		 */
 		public function redirectTo($uri){
 			header("Location: " . $this->getUri($uri));
 			exit();
 		}
 
+		/**
+		 * Retorna para a última página acessada
+		 */
 		public function returnToLastPage(){
 			header("Location: " . $this->back());
 			exit(); 
 		}
 
+		/**
+		 * Retorna para o endereço salvo no referer
+		 */
 		public function back() {
 			if (isset($_SERVER['HTTP_REFERER'])) {
 				return $_SERVER['HTTP_REFERER']; 
@@ -89,11 +124,19 @@
 			unset($_SESSION["continueUrl"]);
 		}
 
-		//Retorna constantes
+		/**
+		 * Retorna o nome da aplicação salvo no arquivo de configuração.
+		 * @return string O nome da aplicação
+		 */
 		public function getApplicationName(){
 			return APP_NAME;
 		}
 
+		/**
+		 * Obtém o URI absoluto a partir do URI relativo
+		 * @param string $uri O URI relativo
+		 * @return string O URI absoluto
+		 */
 		public function getUri($uri = null){
 			if (!$uri){
 				return SITE_ROOT;
@@ -103,6 +146,11 @@
 			}
 		}
 
+		/**
+		 * Retorna o caminho de uma mídia
+		 * @param string $media O URI relativo da mídia
+		 * @return string O caminho da mídia
+		 */
 		public function getMedia($media = null){
 			if ($media){
 				return MEDIA_FOLDER . "/" . $media;
@@ -112,6 +160,11 @@
 			}
 		}
 
+		/**
+		 * Retorna o caminho de um recurso (asset)
+		 * @param string $resource O URI relativo
+		 * @return string O caminho do recurso
+		 */
 		public function getResource($resource = null){
 			if ($resource){
 				return RESOURCES_FOLDER . "/" . $resource;
@@ -128,7 +181,9 @@
 			return UPLOAD_FOLDER . "$resource/";
 		}
 
-		//Caminho da visão
+		/**
+		 * Define o caminho da visão a partir do nome da função dentro do controlador
+		 */
 		private function setViewPath(){
 			$controller = lcfirst(str_replace('Controller', '', $this->controllerName)); //não considera a string Controller no nome do arquivo
 			$controller = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $controller)); //camel to snak
@@ -153,15 +208,26 @@
 		    $this->viewPath = 'views/' . $controller . '/' . $view . '.phtml';
 		}
 
+		/**
+		 * Retorna o caminho da visão
+		 * @return string O caminho da visão
+		 */
 		public function getViewPath(){
 			return $this->viewPath;
 		}
 
-		//Seta o controllador
+		/**
+		 * Define o nome do controlador
+		 * @param string $controllerName O nome do controlador
+		 */
 		public function setControllerName($controllerName){
 			$this->controllerName = $controllerName;
 		}
 
+		/**
+		 * Renderiza a visão
+		 * @param string $view O nome da visão
+		 */
 		public function render($view = null){
 			require_once "main/views/views_functions.php";
 

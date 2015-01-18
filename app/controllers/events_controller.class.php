@@ -17,7 +17,19 @@
 	    		$this->eventsRelated = $this->events->getEventsRelated();
 	    		$this->sponsors = $this->events->getSponsors();
 	    		$this->hasMedia = Media::hasMedia($this->events->getIdEvent());
+	    		if($this->events->getRating() > 0)
+	    			$this->realRating = $this->events->getRating() / $this->events->getEvaluations();
    				Events::updateViews($this->events->getIdEvent());
+   				if(isset($_SESSION["participant"])){
+	   				if($this->enrollment = Enrollment::find(array("id_participant", "id_event"), array($_SESSION["participant"]->getIdParticipant(), $this->events->getIdEvent()))){
+	   					$this->attendance = $this->enrollment[0]->getAttendance();
+	   					$this->participantRating = $this->enrollment[0]->getRating();
+	   				}
+	   				else
+	   					$this->attendance = false;
+	   			}
+   				else
+   					$this->attendance = false;
 	    	}
 	    	else {
 	    		flashMessage::errorMessage("O evento que você está tentando acessar não existe.");
