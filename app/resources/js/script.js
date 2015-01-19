@@ -1,5 +1,12 @@
-//PÁGINA MEDIA
 
+//Dropdowns
+$('.navbar .dropdown').hover(function() {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+}, function() {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+});
+
+//Página de Mídia
 $(".btn-media-photos").click(function(){
 	$("#media-main").hide();
 	$("#media-videos").hide();

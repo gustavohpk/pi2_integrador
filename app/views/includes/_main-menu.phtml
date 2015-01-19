@@ -18,8 +18,20 @@
             <li class="dropdown dropdown-events">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">EVENTOS</a>
               <ul class="dropdown-menu">
-                <li><?= createLinkTo('/eventos/proximos', 'PRÓXIMOS EVENTOS')?></li>
-                <li><?= createLinkTo('/eventos/anteriores', 'EVENTOS ANTERIORES')?></li>
+                  <li class="menu-option">
+                    <span class="glyphicon glyphicon-forward"></span>
+                    <div>
+                      <?= createLinkTo('/eventos/proximos', 'PRÓXIMOS EVENTOS')?>
+                      <span>Veja a lista dos eventos que ainda irão ocorrer</span>
+                    </div>
+                  </li>
+                  <li class="menu-option">
+                    <span class="glyphicon glyphicon-backward" style="padding-left: 4px; padding-right: 6px"></span>
+                    <div>
+                      <?= createLinkTo('/eventos/anteriores', 'EVENTOS ANTERIORES')?>
+                      <span>Veja os eventos que já ocorreram e avalie-os</span>
+                    </div>
+                  </li>
               </ul>
             </li>
             <li><?= createLinkTo('/noticias/lista', 'NOTÍCIAS')?></li>
@@ -27,8 +39,20 @@
             <li class="dropdown dropdown-events">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">CERTIFICADOS</a>
               <ul class="dropdown-menu">
-                <li><?= createLinkTo('/certificados', 'VALIDAR CERTIFICADOS')?></li>
-                <li><?= createLinkTo('/conta/certificados', 'OBTER CERTIFICADOS')?></li>
+                <li class="menu-option">
+                  <span class="glyphicon glyphicon-check"></span>
+                  <div>
+                    <?= createLinkTo('/certificados', 'VALIDAR CERTIFICADOS')?>
+                    <span>Verifique a autenticidade de um certificado</span>
+                  </div>
+                </li>
+                <li class="menu-option">
+                  <span class="glyphicon glyphicon-asterisk"></span>
+                  <div>
+                    <?= createLinkTo('/conta/certificados', 'OBTER CERTIFICADOS')?>
+                    <span>Participou de um evento? Obtenha seu certificado</span>
+                  </div>
+                </li>
               </ul>
             </li>
             <li><?= createLinkTo('/contato', 'CONTATO')?></li>

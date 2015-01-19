@@ -27,6 +27,13 @@ td { text-align: left; }
 .navbar-collapse { overflow: visible !important; }
 #main-menu nav, #account-menu, .media-item .thumbnail{ background: #FFF; border-radius: 0; }
 .main-menu>li>ul>li>a { padding-top: 5px; padding-bottom: 8px;}
+
+.menu-option { height: 50px; width: 300px; text-align: left;}
+.menu-option a { padding: 5px 0 0 10px !important; }
+.menu-option span { font-size: 10px; padding-left: 10px; display: inline-block; }
+.menu-option span.glyphicon { font-size: 34px; float: left; padding-top: 2px;}
+
+
 #login-bar{ background: #FFF; font-size: 0.9em; padding: 8px; }
 #login-bar button{ width: 70px; }
 #news-list .list-group, #certificates-list .list-group{ text-align: left; }
@@ -88,7 +95,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 /* Menu */
 #main-menu li, #account-menu li { font-size: 1.1em; }
 #main-menu li, #account-menu a { font-size: 1.1em; }
-#main-menu li:hover, #account-menu li:hover{ background: #CCC; }
+#main-menu li:hover, #account-menu li:hover{ background: #DDD; }
 #main-menu a:hover, #account-menu a:hover{ color: #000; }
 .navbar-text{ font-style: italic; font-weight: bold;}
 .main-menu, .main-menu > li, .account-menu, .account-menu > li { float:none; display:inline-block; vertical-align: top; }
@@ -156,7 +163,7 @@ a.fancybox:link { text-decoration: none; color: #000; height: 50px;}
 
 
 /* PAINEL DO ADMIN */
-.dropdown:hover .dropdown-menu { display: block; }
+/*.dropdown:hover .dropdown-menu { display: block; }*/
 ul.left-menu a{ padding: 5px 5px !important; text-align:left; width: 100%; }
 ul.left-menu span{ text-align: left; }
 

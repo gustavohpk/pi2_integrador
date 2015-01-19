@@ -30,6 +30,17 @@
 
 ----------
 
+----- Atualização 064 (19/01/15) -----
+
+- Atualizações no Layout
+- Modificações no menu principal
+
+
+----- Atualização 063 (18/01/15) -----
+
+- Refinamento da documentação
+
+
 ----- Atualização 062 (12/01/15 - 16/01/15) -----
 
 - Adicionado campo "rating" na tabela "enrollment"
