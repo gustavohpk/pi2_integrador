@@ -18,6 +18,7 @@
 	     * @var string $headTitle O título da página
 	     * @var string[] $data Os dados a serem exportados para as visões
 	     * @var string $continueUrl O URL a ser salvo (quando necessário)
+	     * @var string $currentTheme O tema atual
 	     */
 		protected $params;
 		protected $layout;
@@ -27,6 +28,7 @@
 		protected $headTitle;
 		protected $data = array();
 		protected $continueUrl;
+		protected $currentTheme = "utfpr";
 
 		public function __construct(){
 			if(Settings::checkMaintenance() == '1'){
@@ -73,6 +75,22 @@
 		 */
 		public function getHeadTitle(){
 			return $this->headTitle;
+		}
+
+		/**
+		 * Define tema atual da p[agina]
+		 * @param String $currentTheme O tema atual
+		 */
+		public function setCurrentTheme($currentTheme = "utfpr"){
+			$this->currentTheme = $currentTheme;
+		}
+
+		/**
+		 * Retorna o tema atual
+		 * @return String O tema atual
+		 */
+		public function getCurrentTheme(){
+			return $this->currentTheme;
 		}
 
 		/**
@@ -204,8 +222,14 @@
 		    	$this->viewPath = 'views/' . $controller . '/' . $view . '.phtml';
 		    }
 		    */
-		    
-		    $this->viewPath = 'views/' . $controller . '/' . $view . '.phtml';
+
+		    //var_dump('views/default/' . $controller . '/' . $view . '.phtml'); exit;
+		    if(stream_resolve_include_path('views/'. $this->getCurrentTheme() . '/' . $controller . '/' . $view . '.phtml')){
+		    	$this->viewPath = 'views/'. $this->getCurrentTheme() . '/' . $controller . '/' . $view . '.phtml';
+			} else {
+				$this->viewPath = 'views/default/' . $controller . '/' . $view . '.phtml';
+			}
+
 		}
 
 		/**
@@ -237,7 +261,14 @@
 
 			$this->setViewPath();
 			extract($this->data);
-			require 'views/'.$this->layout;
+
+
+			//Se o arquivo de layout não existe no tema atual, busca o default
+			if(stream_resolve_include_path('views/' . $this->getCurrentTheme() . '/'.$this->layout)){
+				require 'views/' . $this->getCurrentTheme() . '/'.$this->layout;
+			} else {
+				require 'views/default/'.$this->layout;
+			}
 			exit();
 		}
 

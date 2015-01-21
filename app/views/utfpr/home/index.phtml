@@ -1,0 +1,106 @@
+<div class="row">
+	<div id="content" class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+	  	<div class="container">
+	  		<div class="row">
+		  		<div id="col-right" class="col-lg-3 col-lg-push-9 col-md-3 col-md-push-9 col-sm-6 col-sm-push-6 col-xs-12">
+		  			<div class="row">
+		  				<div class="col-xs-12">
+		  					<?php require_once "views/default/includes/_search.phtml" ?>
+		  				</div>
+		  			</div>
+		  			<div class="row">
+		  				<div id="banner-slider" class="slider-wrapper theme-default col-xs-12">
+		  					<div id="slider" class="nivoSlider">
+		  					<?php foreach ($this->bannersNames as $key => $bannerName) : ?>
+								<?php $path = $this->bannersPaths[$key]->getValue(); ?>
+								<img src="<?= $path ?>" alt="<?= $bannerName->getValue() ?>"/>
+							<?php endforeach; ?>
+							</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		<div id="news-list" class="col-lg-9 col-lg-pull-3 col-md-9 col-md-pull-3 col-sm-6 col-sm-pull-6 col-xs-12">
+					<div class="list-group">
+					<?php foreach($this->news as $newsItem) : ?>
+					  <a href="<?= createUriFor("/noticias/{$newsItem->getIdNews()}/ler")?>" class="list-group-item">
+					  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+							<?php if ($media = $newsItem->getMedia()) : ?>
+								<?php $media = $media[0] ?>
+								<?php $image = $media->getPath()?>
+							<?php else : ?>
+								<?php $image = $this->getResource("/img/utfpr/placeholder-evento.png") ?>
+							<?php endif ?>
+					  		<img class="thumbnail" src="<?=$image?>" alt="<?=($media ? $media->getLabel() : "")?>">
+					  	</div>
+					  	<div class="col-xs-7 col-sm-7 col-md-8 col-lg-8">
+					    	<h4 class="list-group-item-heading"><?= $newsItem->getTitle()?></h4>
+					    	<p class="list-group-item-text"><?= $newsItem->getSubtitle()?></p>
+					    	<h6><?= $newsItem->getModificationDate("d/m/Y H:i")?></h6>
+					    </div>
+					  </a>
+					<?php endforeach; ?>
+					<a href="<?= $this->getUri('noticias/lista') ?>" class="older-news">Ver Notícias Anteriores</a>
+					</div>
+		  		</div>
+		  	</div>
+		</div>
+		<?php if($this->countNext > 0 || $this->countPrev > 0) : ?>
+		<div class="row-events">
+			<div class="container">
+				<div class="row">
+					<?php foreach ($this->events as $event) : ?>
+						<?php if ($event->getLogo()) : ?>
+							<?php $image = "data:image/jpeg;base64,". base64_encode($event->getLogo()); ?>
+						<?php else : ?>
+							<?php $image = $this->getResource("/img/utfpr/placeholder-evento.png") ?>
+						<?php endif ?>
+						<div class="event col-lg-3 col-md-3 col-sm-3 col-xs-12">
+							<a class="event-link" data-toggle="modal" data-target="#event<?=$event->getIdEvent()?>-modal">
+						    <div class="thumbnail">
+						      <img class="event-thumbnail" src="<?=$image?>" alt="<?= $event->getName() ?>">
+						      <div class="caption">
+						        <h4><?= $event->getName()?></h4>
+						        <?php if ($event->getStartDate("d/m/Y") == date("d/m/Y")) : ?>
+									<?php if (strtotime($event->getStartDate("H:i")) < strtotime(date("H:i")) && strtotime(date("H:i")) < strtotime($event->getEndDate("H:i"))): ?>
+										<span class="label label-default">AGORA</span>
+									<?php else : ?>
+										<span class="label label-default">HOJE</span>
+									<?php endif; ?>
+								<?php elseif ($event->getStartDate("d/m/Y") == $event->getEndDate("d/m/Y")) : ?>
+									<p> <?= $event->getStartDate("d/m/Y") ?></p>
+								<?php else : ?>
+									<p>De <?= $event->getStartDate("d/m/Y") ?> a <?= $event->getEndDate("d/m/Y") ?></p>
+								<?php endif; ?>
+						      </div>
+							</div>
+						</a>
+						</div>
+					<?php endforeach ?>
+				</div>
+			</div>
+		</div>
+		<?php endif; ?>
+		<div class="container">
+			<div class="row">
+		  		<div id="media-thumbnail" class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"><h5>FOTOS E VÍDEOS DOS ÚLTIMOS EVENTOS</h5>
+					<div class="row">
+					<?php foreach($this->media as $mediaItem) : ?>
+						<div class="media-item col-xs-4 col-sm-4 col-md-2 col-lg-2">
+							<?php if ($mediaItem->getMediaType() == 'p') : ?>
+			  					<a href="<?=$mediaItem->getPath()?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?=$mediaItem->getPath()?>" alt="<?= $mediaItem->getLabel() ?>"/>
+								<td><span class="glyphicon glyphicon-camera" title="Foto"></span></td>
+							<?php else : ?>
+			  					<a href="<?= $mediaItem->getPath() ?>" class="fancybox" title="<?= $mediaItem->getLabel() ?>" rel="lightbox"><img class="thumbnail" src="<?= getThumbnail($mediaItem->getPath()) ?>" alt="<?= $mediaItem->getLabel() ?>"/>
+								<td><span class="glyphicon glyphicon-facetime-video" title="Vídeo"></span></td>
+							<?php endif; ?>
+							<br/>
+							<?= $mediaItem->getLabel() ?>
+						  	</a>
+						</div>
+					<?php endforeach; ?>
+					</div>
+		  		</div>
+	  		</div>
+		</div>
+	</div>
+</div>

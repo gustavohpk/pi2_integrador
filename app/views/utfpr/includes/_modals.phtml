@@ -1,0 +1,87 @@
+<?php
+  if (isset($this->eventsRelated)) {
+    $events = $this->eventsRelated;
+  }
+  elseif (isset($this->events)) {
+    $events = $this->events;
+  }
+?>
+
+<?php if (isset($events)) : ?>
+  <?php foreach ($events as $event) : ?>
+    <div id="event<?=$event->getIdEvent()?>-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <?php if ($event->getLogo()) : ?>
+                <?php $image = "data:image/jpeg;base64,". base64_encode($event->getLogo()); ?>
+            <?php else : ?>
+                <?php $image = $this->getResource("/img/utfpr/placeholder-evento.png") ?>
+            <?php endif ?>
+            <img class="event-thumbnail" src="<?=$image ?>" alt="<?= $event->getName() ?>">
+            </div>
+            <div class="caption">
+              <h2><?= $event->getName() ?></h2>
+               <?php if ($event->getStartDate("d/m/Y") == $event->getEndDate("d/m/Y")) : ?>
+                <h4> <?= $event->getStartDate("d/m/Y") ?></h4>
+              <?php else : ?>
+                <h4>De <?= $event->getStartDate("d/m/Y") ?> a <?= $event->getEndDate("d/m/Y") ?></h4>
+              <?php endif; ?>
+
+              <?php if ($event->getStartDate("H:i") == $event->getEndDate("H:i")) : ?>
+                <h5> <?= $event->getStartDate("H:i") ?></h4>
+              <?php else : ?>
+                <h5>Das <?= $event->getStartDate("H:i") ?> às <?= $event->getEndDate("H:i") ?></h4>
+              <?php endif; ?>
+              <p>Local: <?= $event->getLocal() ?></p>
+              <p>Acesse a página do evento para mais detalhes.</p>
+            </div>
+            <?php if ($event->eventType->getCode() == "sem_inscricao") : ?>
+              <h4><span class="label label-info">Para participar deste evento não é necessário fazer inscrição.</span></h4>
+            <?php endif ?>
+            <a href="<?= createUriFor("/eventos/{$event->getPath()}")?>" class="btn btn-default" role="button">Ir para a página do evento</a>
+            <?php if (!$event->eventInitiated() && $event->eventType->getCode() != "sem_inscricao") : ?>
+              <span style="display:inline-block" data-toggle="tooltip" data-placement="top" <?php echo (!$event->canEnrollment()?"disabled title='As inscrições abrem dia " . $event->getStartDateEnrollment("d/m/Y"). " às " . $event->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
+                <a role="button" href="<?= createUriFor("/inscricao/evento/{$event->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-md" <?php echo (!$event->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
+              </span>
+            <?php endif; ?>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if (!isset($_SESSION["participant"])) : ?>
+    <div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title">Login - UTFPR Eventos</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="<?= createUriFor('/conta/login')?>" method="POST">
+                        <div class="left-inner-addon-group">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            <input type="email" name="participant[email]" class="form-control input-glyphicon" placeholder="Endereço de e-mail" required>
+                        </div>
+                        <br/>
+                        <div class="left-inner-addon-group">
+                            <i class="glyphicon glyphicon-asterisk"></i>
+                            <input type="password" name="participant[password]" class="form-control input-glyphicon" placeholder="Senha" required>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default btn-lg">Login</button>
+                    </form>
+                    <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php endif; ?>

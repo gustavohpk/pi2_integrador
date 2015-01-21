@@ -8,6 +8,8 @@
   define('MEDIA_FOLDER', SITE_ROOT.'/media');
   define('UPLOAD_FOLDER', APP_ROOT_FOLDER . '/media');
 
+  define('CURRENT_THEME', 'default');
+
 	/* Adicionar pastas defaults para inclução de arquivos com as funções require e include */
   set_include_path(get_include_path() . PATH_SEPARATOR . APP_ROOT_FOLDER );
   set_include_path(get_include_path() . PATH_SEPARATOR . APP_ROOT_FOLDER . '/main');

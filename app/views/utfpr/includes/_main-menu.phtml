@@ -1,0 +1,66 @@
+<div class="row" style="background-color: #26292E">
+  <div id="main-menu" class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu-contents">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="main-menu-contents">
+          <ul class="nav navbar-nav main-menu">
+          	<li><?= createLinkTo('/', 'HOME')?></li>
+            <li class="dropdown dropdown-events">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">EVENTOS</a>
+              <ul class="dropdown-menu">
+                  <li class="menu-option">
+                    <span class="glyphicon glyphicon-forward"></span>
+                    <div>
+                      <?= createLinkTo('/eventos/proximos', 'PRÓXIMOS EVENTOS')?>
+                      <span>Veja a lista dos eventos que ainda irão ocorrer</span>
+                    </div>
+                  </li>
+                  <li class="menu-option">
+                    <span class="glyphicon glyphicon-backward" style="padding-left: 4px; padding-right: 6px"></span>
+                    <div>
+                      <?= createLinkTo('/eventos/anteriores', 'EVENTOS ANTERIORES')?>
+                      <span>Veja os eventos que já ocorreram e avalie-os</span>
+                    </div>
+                  </li>
+              </ul>
+            </li>
+            <li><?= createLinkTo('/noticias/lista', 'NOTÍCIAS')?></li>
+            <li><?= createLinkTo('/midia/galeria', 'FOTOS E VÍDEOS')?></li>
+            <li class="dropdown dropdown-events">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">CERTIFICADOS</a>
+              <ul class="dropdown-menu">
+                <li class="menu-option">
+                  <span class="glyphicon glyphicon-check"></span>
+                  <div>
+                    <?= createLinkTo('/certificados', 'VALIDAR CERTIFICADOS')?>
+                    <span>Verifique a autenticidade de um certificado</span>
+                  </div>
+                </li>
+                <li class="menu-option">
+                  <span class="glyphicon glyphicon-asterisk"></span>
+                  <div>
+                    <?= createLinkTo('/conta/certificados', 'OBTER CERTIFICADOS')?>
+                    <span>Participou de um evento? Obtenha seu certificado</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li><?= createLinkTo('/contato', 'CONTATO')?></li>
+            <li><?= createLinkTo('/conta/painel', 'PAINEL')?></li>
+            <li><?= createLinkTo('/sobre', 'SOBRE')?></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

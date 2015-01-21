@@ -30,10 +30,12 @@
 
 ----------
 
------ Atualização 064 (19/01/15) -----
+----- Atualização 064 (19/01/15 - 20/01/15) -----
 
 - Atualizações no Layout
 - Modificações no menu principal
+- Iniciado suporte a múltiplos temas (templates)
+- Iniciado tema "UTFPR"
 
 
 ----- Atualização 063 (18/01/15) -----
