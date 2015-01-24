@@ -18,6 +18,8 @@
 - Geração de miniaturas ao cadastrar imagem
 - Analisar o uso do campo "status" na inscrição
 - A paginação está infinita. Limitar em 8 ou 10
+- Mudar links estáticos para dinâmicos, editando pelo painel
+- Desvincular "Settings" do "Main"
 
 ----------
 
@@ -27,8 +29,15 @@
 - O participante é excluído, mas o model ou controller gera um erro. Ao atualizar volta à lista, mas exibe outra mensagem de erro.
 - Problema na contagem de vagas
 - Mensagens de confirmação ou erro de inscrição não estão funcionando corretamente
+- Pequeno no javascript da avaliação de eventos
 
 ----------
+
+----- Atualização 065 (22/01/15 - 23/01/15) -----
+
+- Atualizações no tema "UTFPR"
+- Modificações na página "Sobre"
+
 
 ----- Atualização 064 (19/01/15 - 20/01/15) -----
 

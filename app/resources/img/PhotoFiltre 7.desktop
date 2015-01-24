@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=PhotoFiltre 7
+Exec=env WINEPREFIX="/home/gustavo/.wine" wine C:\\\\Program\\ Files\\ \\(x86\\)\\\\PhotoFiltre\\ 7\\\\PhotoFiltre7.exe 
+Type=Application
+StartupNotify=true
+Path=/home/gustavo/.wine/dosdevices/c:/Program Files (x86)/PhotoFiltre 7
+Icon=E996_PhotoFiltre7.0

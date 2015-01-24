@@ -198,7 +198,7 @@ a.admin-shortcut-link { text-decoration: none;}
 
 .help-button, .help-link { cursor: pointer; }
 
-td.photo { max-width: 200px; }
+td.photo { max-width: 100px; }
 td.photo img { margin: 5px; border: 2px solid #CCC }
 
 table.media-list img { max-width: 40px; max-height: 40px;}

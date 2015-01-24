@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="container">
+			<h2>Notícias</h2>
+			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<?php require_once "views/default/includes/_search.phtml" ?>
+			</div>
+			<div id="news-list" class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+				<div class="list-group">
+					<?php foreach($this->news as $newsItem) : ?>
+					  <a href="<?= createUriFor("/noticias/{$newsItem->getIdNews()}/ler")?>" class="list-group-item">
+					  	<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+							<?php if ($media = $newsItem->getMedia()) : ?>
+								<?php $media = $media[0] ?>
+								<?php $image = $media->getPath() ?>
+							<?php else : ?>
+								<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
+							<?php endif ?>
+					  		<img class="thumbnail" src="<?=$image?>" alt="<?=($media ? $media->getLabel() : "")?>">
+					  	</div>
+					    <h4 class="list-group-item-heading"><?= $newsItem->getTitle()?></h4>
+					    <p class="list-group-item-text"><?= $newsItem->getSubtitle()?></p>
+					    <h6><?= $newsItem->getModificationDate("d/m/Y H:i")?></h6>
+					  </a>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<ul class="pagination">
+				  <?php echo $this->pagination->getPageAnchors("{$this->getUri('noticias/lista')}");?>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

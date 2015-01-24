@@ -1,0 +1,20 @@
+<?php $news = $this->news[0] ?>
+<div class="row news-item">
+	<div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+		<h2 class="news-title"><?= $news->getTitle()?></h2>
+		Publicado em: <span class="news-date"><?= $news->getCreationDate("d M Y")?></span>
+		<br/>
+		<span class="glyphicon glyphicon-eye-open"></span> <?= $news->getViews() + 1?>
+		<h4 class="news-short-description"><?= $news->getSubtitle()?></h4>
+		<div class="news-content"><?= $news->getContent()?></div>
+	</div>
+	<div class="col-bordered col-lg-4 col-md-4 col-sm-5 col-xs-12">
+		<?php if ($media = $news->getMedia()) : ?>
+			<?php $media = $media[0] ?>
+			<?php $image = $media->getPath() ?>
+		<?php else : ?>
+			<?php $image = $this->getResource("/img/placeholder-evento.png") ?>
+		<?php endif ?>
+		<img class="news-thumbnail" src="<?=$image?>" alt="<?=($media ? $media->getLabel() : "")?>">
+	</div>
+</div>

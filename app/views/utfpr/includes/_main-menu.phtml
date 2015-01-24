@@ -1,66 +1,125 @@
 <div class="row" style="background-color: #26292E">
-  <div id="main-menu" class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
+    <div id="main-menu" class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
 
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu-contents">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu-contents">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                </div>
 
-        <div class="collapse navbar-collapse" id="main-menu-contents">
-          <ul class="nav navbar-nav main-menu">
-          	<li><?= createLinkTo('/', 'HOME')?></li>
-            <li class="dropdown dropdown-events">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">EVENTOS</a>
-              <ul class="dropdown-menu">
-                  <li class="menu-option">
-                    <span class="glyphicon glyphicon-forward"></span>
-                    <div>
-                      <?= createLinkTo('/eventos/proximos', 'PRÓXIMOS EVENTOS')?>
-                      <span>Veja a lista dos eventos que ainda irão ocorrer</span>
-                    </div>
-                  </li>
-                  <li class="menu-option">
-                    <span class="glyphicon glyphicon-backward" style="padding-left: 4px; padding-right: 6px"></span>
-                    <div>
-                      <?= createLinkTo('/eventos/anteriores', 'EVENTOS ANTERIORES')?>
-                      <span>Veja os eventos que já ocorreram e avalie-os</span>
-                    </div>
-                  </li>
-              </ul>
-            </li>
-            <li><?= createLinkTo('/noticias/lista', 'NOTÍCIAS')?></li>
-            <li><?= createLinkTo('/midia/galeria', 'FOTOS E VÍDEOS')?></li>
-            <li class="dropdown dropdown-events">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">CERTIFICADOS</a>
-              <ul class="dropdown-menu">
-                <li class="menu-option">
-                  <span class="glyphicon glyphicon-check"></span>
-                  <div>
-                    <?= createLinkTo('/certificados', 'VALIDAR CERTIFICADOS')?>
-                    <span>Verifique a autenticidade de um certificado</span>
-                  </div>
-                </li>
-                <li class="menu-option">
-                  <span class="glyphicon glyphicon-asterisk"></span>
-                  <div>
-                    <?= createLinkTo('/conta/certificados', 'OBTER CERTIFICADOS')?>
-                    <span>Participou de um evento? Obtenha seu certificado</span>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <li><?= createLinkTo('/contato', 'CONTATO')?></li>
-            <li><?= createLinkTo('/conta/painel', 'PAINEL')?></li>
-            <li><?= createLinkTo('/sobre', 'SOBRE')?></li>
-          </ul>
+                <div class="collapse navbar-collapse" id="main-menu-contents">
+                    <ul class="nav navbar-nav main-menu">
+                	    <li><?= createLinkTo('/', 'HOME')?></li>
+                        <li><a href="#">EVENTOS</a></li>
+                        <li><?= createLinkTo('/noticias/lista', 'NOTÍCIAS')?></li>
+                        <li><?= createLinkTo('/midia/galeria', 'GALERIA')?></li>
+                        <li><a href="#">CERTIFICADOS</a></li>
+                <li><?= createLinkTo('/contato', 'CONTATO')?></li>
+                <li><?= createLinkTo('/conta/painel', 'PAINEL')?></li>
+                <li><?= createLinkTo('/sobre', 'SOBRE')?></li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div id="menu-item1-description" class="row" style="width: ">
+    <div class="menu-option">
+        <span class="glyphicon glyphicon-home"></span>
+        <div>
+            <a href="#">PÁGINA PRINCIPAL</a>
+            <br>
+            <span class="description">Acesse a página principal</span>
         </div>
-      </div>
-    </nav>
-  </div>
+    </div>
+</div>
+<div id="menu-item2-description" class="row">
+        <a href="<?= $this->getUri('eventos/anteriores') ?>">
+            <div class="menu-option">
+                <span class="glyphicon glyphicon-backward hvr-skew-backward" style="padding-left: 4px; padding-right: 6px"></span>
+                <div>
+                    <span class="title">EVENTOS ANTERIORES</span><br>
+                    <span class="description">Veja os eventos que já ocorreram e avalie-os</span>
+                </div>
+            </div>
+        </a>
+        <a href="<?= $this->getUri('eventos/proximos') ?>">
+            <div class="menu-option">
+                <span class="glyphicon glyphicon-forward hvr-skew-forward"></span>
+                <div>
+                    <span class="title">PRÓXIMOS EVENTOS</span><br>
+                    <span class="description">Veja a lista dos eventos que ainda irão ocorrer</span>
+                </div>
+            </div>
+        </a>
+</div>
+<div id="menu-item3-description" class="row">
+    <div class="menu-option">
+        <i class="fa fa-newspaper-o fa-3x"></i>
+        <div>
+            <a href="#">NOTÍCIAS</a><br>
+            <span class="description">Veja a lista de notícias</span>
+        </div>
+    </div>
+</div>
+<div id="menu-item4-description" class="row">
+    <div class="menu-option">
+        <span class="glyphicon glyphicon-picture"></span>
+        <div>
+            <a href="#">GALERIA</a><br>
+            <span class="description">Visualize a galeria de fotos e vídeos</span>
+        </div>
+    </div>
+</div>
+<div id="menu-item5-description" class="row">
+        <a href="<?= $this->getUri('certificados') ?>">
+            <div class="menu-option">
+                <span class="glyphicon glyphicon-check hvr-shrink" style="margin-top: 3px"></span>
+                <div>
+                    <span class="title">VALIDAR CERTIFICADOS</span><br>
+                    <span class="description">Verifique a autenticidade de um certificado</span>
+                </div>
+            </div>
+        </a>
+        <a href="<?= $this->getUri('conta/certificados') ?>">
+            <div class="menu-option">
+                <i class="fa fa-certificate fa-3x" style="margin-top: 3px"></i>
+                <div>
+                    <span class="title">OBTER CERTIFICADOS</span><br>
+                    <span class="description">Participou de algum evento? Obtenha seu certificado</span>
+                </div>
+            </div>
+        </a>
+</div>
+<div id="menu-item6-description" class="row">
+    <div class="menu-option">
+        <i class="fa fa-envelope-o fa-3x" style="margin-top: -3px"></i>
+        <div>
+            <a href="#">CONTATO</a><br>
+            <span class="description">Entre em contato</span>
+        </div>
+    </div>
+</div>
+<div id="menu-item7-description" class="row">
+    <div class="menu-option">
+        <i class="fa fa-dashboard fa-3x" style="margin-top: -3px"></i>
+        <div>
+            <a href="#">PAINEL</a><br>
+            <span class="description">Acesse o painel da sua conta</span>
+        </div>
+    </div>
+</div>
+<div id="menu-item8-description" class="row">
+    <div class="menu-option">
+        <i class="fa fa-info-circle fa-3x" style="margin-top: -3px"></i>
+        <div>
+            <a href="#">SOBRE</a><br>
+            <span class="description">Sobre o UTFPR Eventos</span>
+        </div>
+    </div>
 </div>
