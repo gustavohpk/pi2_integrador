@@ -314,3 +314,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 #participant-rating .rating-symbol{
 	cursor: pointer;
 }
+
+@media (max-width: 992px){
+	#news-list .list-group-item-text { text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+}

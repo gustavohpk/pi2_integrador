@@ -28,8 +28,10 @@
 					$this->unsetUrl();
 					$this->redirectTo($url);
 				}
-				else
+				else{
+					FlashMessage::infoMessage("Login efetuado.");
 					$this->redirectTo("conta/painel");
+				}
 			}
 			else{
 				FlashMessage::errorMessage("Os seguintes ocorreram ao tentar acessar sua conta:");
@@ -46,6 +48,7 @@
 
        	public function logout(){
        		Participant::logout();
+       		FlashMessage::infoMessage("Logout efetuado.");
        		$this->redirectTo("");
        	}
 

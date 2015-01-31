@@ -6,8 +6,7 @@
 	<div class="row">
 		<form action="<?= $this->actionForm ?>" method="post">
 			<div class="col-xs-6 col-xs-offset-3">
-				<input type="hidden" name="section" value="<?= $this->configSection ?>"/>
-				<input type="email" class="form-control" name="setting[value]" value="<?= $this->settings->getValue() ?>">
+				<input type="email" class="form-control" name="contact_mail" value="<?= $this->settings->getValue() ?>">
 				<br/>
 				<button type="submit" class="btn btn-default">Alterar</button>
 			</div>

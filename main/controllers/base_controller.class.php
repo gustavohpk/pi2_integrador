@@ -59,14 +59,14 @@
 		 * @param String $pageTitle O título de página
 		 */
 		public function setHeadTitle($pageTitle = null){
-			$siteTitle = Settings::getSiteTitle()->getValue();
-			if ($pageTitle){
-				$this->headTitle = $pageTitle . " - " . $siteTitle;
-			}
-			else{
-				$this->headTitle = $siteTitle;
-			}
-			return $this->headTitle;
+			// $siteTitle = Settings::getSiteTitle()->getValue();
+			// if ($pageTitle){
+			// 	$this->headTitle = $pageTitle . " - " . $siteTitle;
+			// }
+			// else{
+			// 	$this->headTitle = $siteTitle;
+			// }
+			return "teste";
 		}
 
 		/**

@@ -2,6 +2,7 @@
 
 /* CSS Principal */
 
+html { min-width: 400px; }
 body{ background-image: none;  background-color: #2F3238; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; }
 ul, ol{ list-style-type: none; }
 img{ width: 100%; }
@@ -16,6 +17,7 @@ a:hover, a:focus, a:active { color: #E6E6E6; }
 span.label a { color: #FFF; text-decoration: underline;}
 span.label a:hover { cursor: pointer; }
 td { text-align: left; }
+textarea { border-radius: 0 !important; border: 1px solid #3C3F45 !important;}
 
 input:-webkit-autofill {
   -webkit-text-fill-color: white;
@@ -35,6 +37,10 @@ input:-khtml-autofill {
 }
 
 #main .row, #news-list, #col-right { background-color: #2F3238; }
+
+#main { min-height: 400px; }
+
+.btn { border-radius: 0; }
 
 
 .container-fluid, .container{ text-align: center; }
@@ -148,9 +154,9 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 .event-long-description a:hover, a:focus { color: #000; }
 
 
-.row-events .event:nth-child(1) { border-right: 1px solid #2F3238; }
+/*.row-events .event:nth-child(1) { border-right: 1px solid #2F3238; }*/
 .row-events .event:nth-child(2) { border-left: 1px solid #2F3238; border-right: 1px solid #2F3238; }
-.row-events .event:nth-child(3) { border-left: 1px solid #2F3238; border-right: 1px solid #2F3238; }
+/*.row-events .event:nth-child(3) { border-left: 1px solid #2F3238; border-right: 1px solid #2F3238; }*/
 .row-events .event:nth-child(4)  { border-left: 1px solid #2F3238; }
 
 
@@ -196,6 +202,10 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 .youtube-link:hover{ color: #CB0A05; background-color: white; background-image: none;}
 #footer-links{ border-right: 1px solid #3C3F45; }
 
+/* (correção página de manutenção) */
+#maintenance i { font-size: 3.45em; }
+#maintenance .utfpr-link { margin-top: 3px; }
+#maintenance a { display: inline-block; }
 
 /* Modais */
 .modal-content { background-color: #26292E; }
@@ -233,8 +243,10 @@ img.thumbnail:hover{ border-color: #7F8289; }
 
  /* Login Bar */
 #login-bar a{ display: none; }
-#login-bar{ border: 1px solid #3C3F45; border-top: 0; right: 0; position: fixed; z-index: 7; background-color: #26292E; margin-right: 20px; color: #CCC; opacity: 0.8;}  
+#login-bar{ border: 1px solid #3C3F45; border-top: 0; right: 0; position: fixed; z-index: 7; background-color: #26292E; margin-right: 20px; color: #CCC; opacity: 0.8; padding-bottom: 0;}  
+#login-bar:hover { padding-bottom: 10px; }
 #login-bar:hover a{ display: inline; }
+#login-bar:hover #menu-arrow-down { display: none; }
 .logged-in { background-color: #2F3238;}
 
 /* ACCOUNT */
@@ -278,66 +290,6 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
     pointer-events: auto;
 }
 
-
-#show-certificate, #report {
-    margin: 0;
-    padding: 0;
-    background-color: #FAFAFA;
-    font: 11pt "Arial";
-    width: 21cm;
-    min-height: 25cm;
-    padding: 2cm;
-    margin: 1cm auto;
-    border: 1px #D3D3D3 solid;
-    border-radius: 5px;
-    background: white;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-#report table{ font-size: 12px; }
-#report th { font-weight: 600; }
-#report ul { text-align: left; }
-#report-info { text-align: center; }
-
-
-#show-certificate{
-	/*Altura máxima - um pouco menor que o tamanho da folha A4 para a janela de impressão não exibir uma segunda folha em branco*/
-    max-height: 29.1cm;
-}
-
-#certificate-top{
-	text-align: left;
-}
-
-#show-certificate hr{
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-#show-certificate img{
-	width: 25%;
-	vertical-align: top;
-	float: left;
-	margin-right: 15px;
-}
-
-#certificate-title, #report-title{
-	font-size: 30px;
-	font-weight: bold;
-	text-align: center;
-}
-
-#certificate-content{
-	font-size: 20px;
-	text-align: center;
-	line-height: 150%;
-}
-
-#certificate-bottom{
-	font-size: 13px;
-	text-align: center;
-}
-
 .symbol {
   display: inline-block;
   border-radius: 50%;
@@ -370,4 +322,75 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 #participant-rating .rating-symbol{
 	cursor: pointer;
+}
+
+/* Mensagens Flash */
+
+.alert-success { color: #5cb85c; background-color: rgba(60, 118, 61, 0.2); border-radius: 0; border-color: #4cae4c;}
+
+.alert-warning { color: #f0ad4e; background-color: rgba(138, 109, 59, 0.2); border-radius: 0; border-color: #eea236;}
+
+.alert-danger { color: #d9534f; background-color: rgba(169, 68, 66, 0.125); border-radius: 0; border-color: #d43f3a;}
+
+.alert-info { color: #3276b1; background-color: rgba(49, 112, 143, 0.125); border-radius: 0; border-color: #285e8e;}
+
+#show-certificate, #report {
+    margin: 0;
+    padding: 0;
+    background-color: #FAFAFA;
+    font: 11pt "Arial";
+    width: 21cm;
+    min-height: 25cm;
+    padding: 2cm;
+    margin: 1cm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#report table{ font-size: 12px; }
+#report th { font-weight: 600; }
+#report ul { text-align: left; }
+#report-info { text-align: center; }
+
+
+#show-certificate{
+  /*Altura máxima - um pouco menor que o tamanho da folha A4 para a janela de impressão não exibir uma segunda folha em branco*/
+    max-height: 29.1cm;
+}
+
+#show-certificate p {  color: #000;}
+
+#certificate-top{
+  text-align: left;
+}
+
+#show-certificate hr{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#show-certificate img{
+  width: 25%;
+  vertical-align: top;
+  float: left;
+  margin-right: 15px;
+}
+
+#certificate-title, #report-title{
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#certificate-content{
+  font-size: 20px;
+  text-align: center;
+  line-height: 150%;
+}
+
+#certificate-bottom{
+  font-size: 13px;
+  text-align: center;
 }

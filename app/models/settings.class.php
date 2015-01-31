@@ -76,6 +76,8 @@
 
 			$this->setData($data);
 
+			$params = "";
+
 			$keys = array_keys($data);
 			foreach ($keys as $key) {
 				$params .= "$key = :$key, ";

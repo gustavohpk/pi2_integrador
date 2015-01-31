@@ -6,9 +6,9 @@
       protected $actionForm;
 		public function general() {
    		$this->setHeadTitle("Configurações Gerais");
-         $this->settings = \Settings::find(array("description"), array("site_title"))[0];
+         $this->settings[] = \Settings::find(array("description"), array("site_title"))[0];
+         $this->settings[] = \Settings::find(array("description"), array("google_maps_api"))[0];
          $this->actionForm = $this->getUri("admin/config");
-         $this->configSection = 'site_title';
          $this->maintenance = \Settings::checkMaintenance();
 		}
 
@@ -30,7 +30,7 @@
 			$this->setHeadTitle("Configurações de Pagamento");
 		}
 
-      public function contacts(){
+      public function email(){
          $this->settings = \Settings::find(array("description"), array("contact_mail"))[0];
          $this->actionForm = $this->getUri("admin/config");
          $this->titleBtnSubmit = "Alterar";
@@ -40,17 +40,34 @@
 
 
       public function update(){
-         $this->settings = \Settings::findByDescription($this->params['section'])[0];
-         //var_dump($this->settings); exit;
-         if ($this->settings->update($this->params['setting'])){
-            \FlashMessage::successMessage("Configuração alterada com sucesso.");
+         $error = false;
+         foreach ($this->params as $key => $param) {;
+            $this->settings = \Settings::findByDescription($key)[0];
+            if($this->settings->update(array("value" => $param))){
+               \FlashMessage::successMessage("Configuração alterada com sucesso.");    
+            }else{
+               \FlashMessage::errorMessage("Erro ao alterar a configuração.");
+               $error = true;
+            }
+         }
+         if($error)
+               $this->redirectTo("admin/config/geral");
+         else
             $this->returnToLastPage();
-         }
-         else{
-            \FlashMessage::errorMessage("Erro ao alterar a configuração.");
-            $this->redirectTo("admin/config/geral");
-         }
       }
+
+      // public function updateOld(){
+      //    $this->settings = \Settings::findByDescription($this->params['section'])[0];
+      //    //var_dump($this->settings); exit;
+      //    if ($this->settings->update($this->params['setting'])){
+      //       \FlashMessage::successMessage("Configuração alterada com sucesso.");
+      //       $this->returnToLastPage();
+      //    }
+      //    else{
+      //       \FlashMessage::errorMessage("Erro ao alterar a configuração.");
+      //       $this->redirectTo("admin/config/geral");
+      //    }
+      // }
 
       public function developer(){
          $this->setHeadTitle("Programador");

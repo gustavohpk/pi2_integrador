@@ -207,9 +207,10 @@
     $router->get('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\PaymentTypeController', 'action' => 'edit'));
     $router->post('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\PaymentTypeController', 'action' => 'update'));
     $router->get('/admin/config/pagamento/:id/remover', array('controller' => 'Admin\PaymentTypeController', 'action' => 'remove'));
-    $router->get('/admin/config/contato', array('controller' => 'Admin\SettingsController', 'action' => 'contacts'));
-    $router->post('/admin/config', array('controller' => 'Admin\SettingsController', 'action' => 'update'));
+    $router->get('/admin/config/email', array('controller' => 'Admin\SettingsController', 'action' => 'email'));
     $router->get('/admin/config/programador', array('controller' => 'Admin\SettingsController', 'action' => 'developer'));
+
+    $router->post('/admin/config', array('controller' => 'Admin\SettingsController', 'action' => 'update'));
 
     //rotas para relatorios
     $router->get('/admin/relatorios/inscricoes', array('controller' => 'Admin\ReportsController', 'action' => '_new'));

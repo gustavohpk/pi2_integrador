@@ -55,7 +55,7 @@
          }
       }
 
-      public function update(){  
+      public function update(){ 
          $this->news = \News::findById($this->params[":id"])[0];
          if ($this->news->update($this->params['news'])){
             \Logger::updateLog($_SESSION["admin"]->getName(), "Notícias", $this->news->getIdNews());

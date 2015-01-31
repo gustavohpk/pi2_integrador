@@ -29,9 +29,15 @@
 - O participante é excluído, mas o model ou controller gera um erro. Ao atualizar volta à lista, mas exibe outra mensagem de erro.
 - Problema na contagem de vagas
 - Mensagens de confirmação ou erro de inscrição não estão funcionando corretamente
-- Pequeno no javascript da avaliação de eventos
+- Pequeno bug no javascript da avaliação de eventos
 
 ----------
+
+----- Atualização 066 (27/01/15 - 29/01/15) -----
+
+- Pequenas alterações de layout
+- Correções na área de Settings
+
 
 ----- Atualização 065 (22/01/15 - 23/01/15) -----
 
