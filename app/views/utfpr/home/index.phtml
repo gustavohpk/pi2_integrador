@@ -2,24 +2,46 @@
 	<div id="content" class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
 	  	<div class="container">
 	  		<div class="row">
-		  		<div id="col-right" class="col-lg-3 col-lg-push-9 col-md-3 col-md-push-9 col-sm-6 col-sm-push-6 col-xs-12">
+		  		<div id="col-right" class="col-lg-4 col-lg-push-8 col-md-4 col-md-push-8 col-sm-6 col-sm-push-6 col-xs-12">
 		  			<div class="row">
 		  				<div class="col-xs-12">
 		  					<?php require_once "views/default/includes/_search.phtml" ?>
 		  				</div>
 		  			</div>
-		  			<div class="row">
+<!--  		  			<div class="row">
 		  				<div id="banner-slider" class="slider-wrapper theme-default col-xs-12">
 		  					<div id="slider" class="nivoSlider">
-		  					<?php foreach ($this->bannersNames as $key => $bannerName) : ?>
-								<?php $path = $this->bannersPaths[$key]->getValue(); ?>
-								<img src="<?= $path ?>" alt="<?= $bannerName->getValue() ?>"/>
-							<?php endforeach; ?>
+		  					<?php //foreach ($this->bannersNames as $key => $bannerName) : ?>
+								<?php //$path = $this->bannersPaths[$key]->getValue(); ?>
+								<img src="<?//= $path ?>" alt="<?//= $bannerName->getValue() ?>"/>
+							<?php //endforeach; ?>
+							</div>
+		  				</div>
+		  			</div> -->
+		  			<div class="row">
+		  				<div class="col-xs-12">
+		  					<div class="loading-yellow">
+		  						<img src="<?= $this->getResource("/img/icon_loading_yellow.gif") ?>" alt="Carregando">
+		  						<br>
+		  						<span>Carregando calendário...</span>
+		  					</div>
+		  					<div class="custom-calendar-wrap" style="display: none">
+								<div id="custom-inner" class="custom-inner">
+									<div class="custom-header clearfix">
+										 <nav>
+											<span id="custom-prev" class="custom-prev glyphicon glyphicon-menu-left"></span>
+											<span id="custom-next" class="custom-next"></span>
+										 </nav>
+										 <h2 id="custom-month" class="custom-month"></h2>
+										 <h3 id="custom-year" class="custom-year"></h3>
+									</div>
+									<div id="calendar" class="fc-calendar-container"></div>
+								</div>
 							</div>
 		  				</div>
 		  			</div>
 		  		</div>
-		  		<div id="news-list" class="col-lg-9 col-lg-pull-3 col-md-9 col-md-pull-3 col-sm-6 col-sm-pull-6 col-xs-12">
+		  		<div id="news-list" class="col-lg-8 col-lg-pull-4 col-md-8 col-md-pull-4 col-sm-6 col-sm-pull-6 col-xs-12">
 					<div class="list-group">
 					<?php foreach($this->news as $newsItem) : ?>
 					  <a href="<?= createUriFor("/noticias/{$newsItem->getIdNews()}/ler")?>" class="list-group-item">
@@ -104,3 +126,7 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	calendarUrl = '<?=createUriFor("/eventos/calendario")?>';
+</script>

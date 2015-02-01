@@ -136,5 +136,3 @@ $( "#main-menu ul li:nth-child(7)" ).hover(function(){
 $( "#main-menu ul li:nth-child(8)" ).hover(function(){
 	toggleMenuDescription($("#menu-item8-description"));
 });
-
-

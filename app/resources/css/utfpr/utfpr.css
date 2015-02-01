@@ -1,5 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed);
 
+
+/* CSS para animação */
+
+/*body#site header, body#site #main-menu, body#site #main, body#site footer { display: none;}*/
+
 /* CSS Principal */
 
 html { min-width: 400px; }
@@ -66,6 +71,8 @@ input:-khtml-autofill {
 #main .dropdown-menu a:hover { color: #E6E6E6; background-color: #3C3F45;}
 
 #main .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus { color: #E6E6E6; }
+
+#col-right .row:nth-child(1) .col-xs-12 { height: 60px; }
 
 
 /* Elementos */
@@ -393,4 +400,35 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 #certificate-bottom{
   font-size: 13px;
   text-align: center;
+}
+
+
+
+
+/* Calendario */
+
+
+.custom-header h2 { background-color: #26292E; color: #E6E6E6; font-size: 18px; margin-top: 10px;}
+/*.custom-header nav span.custom-prev:before, .custom-header nav span.custom-prev:after { content: none; };*/
+
+.fc-calendar .fc-body { border: none; border-top: 1px solid #3C3F45; border-bottom: 1px solid #3C3F45;}
+.fc-calendar .fc-row { border: none; height: 42px;}
+.fc-calendar .fc-row > div { border: 1px solid #3C3F45; }
+
+.fc-calendar .fc-body { height: auto; /* height: calc(100% - 127px); */ }
+
+.fc-calendar .fc-row > div > span.fc-date { font-size: 16px;}
+
+#calendar { border: 1px solid #3C3F45; border-top: 0; }
+
+.fc-calendar .fc-row > div:last-child  { border: 1px solid #3C3F45; }
+
+.loading-yellow {  }
+.loading-yellow img { width: 30px; opacity: 0.9; }
+.loading-yellow span { font-size: 10px; color: #E7E7E7;}
+
+
+@media (max-width: 768px){
+  .fc-calendar .fc-row > div > span.fc-date { font-size: 14px; font-weight: normal;}
+
 }

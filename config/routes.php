@@ -15,6 +15,8 @@
     //validacoes ajax
     $router->get('/validarcpf/:cpf', array('controller' => 'BaseController', 'action' => 'validateCpf'));
    	
+    $router->get('/eventos/calendario', array('controller' => 'EventsController', 'action' => 'calendar'));
+
    	//rotas para eventos
    	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
     $router->get('/eventos/proximos/pagina/:p', array('controller' => 'EventsController', 'action' => 'next'));

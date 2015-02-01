@@ -62,5 +62,23 @@
 	        $this->events = Events::findPrev(date("Y-m-d"));
 	        $this->pagination = new Pager(Events::countPrev(), Events::getLimitByPage(), $page);
    		}
+
+   		public function calendar(){
+   			sleep(1);
+   			$this->layout = "admin/layout/layout_empty.phtml";
+   			$this->events = Events::all();
+   			$calendar = array();
+   			foreach ($this->events as $key => $event) {
+   				if(array_key_exists($event->getStartDate("m-d-Y"), $calendar)){
+					$calendar[$event->getStartDate("m-d-Y")] .= "<span>" . $event->getName() . "</span><br>";
+   				}else{
+   					$calendar[$event->getStartDate("m-d-Y")] = "<span>" . $event->getName() . "</span><br>";
+   				}
+   			}
+   			$json_calendar = json_encode($calendar);
+   			// $json_calendar = substr_replace($json_calendar, ",", -1, 0);
+   			echo $json_calendar;
+   			exit;
+   		}
 	} 
 ?>

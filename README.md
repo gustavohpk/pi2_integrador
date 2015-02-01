@@ -33,6 +33,11 @@
 
 ----------
 
+----- Atualização 067 (31/01/15 - )
+
+- Iniciado calendário de eventos
+
+
 ----- Atualização 066 (27/01/15 - 29/01/15) -----
 
 - Pequenas alterações de layout

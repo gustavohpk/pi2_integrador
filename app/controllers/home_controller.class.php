@@ -5,7 +5,7 @@
    		public function index() {
       		$this->setHeadTitle();
 	        $page = 1;
-	        News::setLimitByPage(3);
+	        News::setLimitByPage(4);
 	        News::setCurrentPage($page);
 	        $date = date("d-m-Y");
 	        $this->news = News::find(array(), array(), "=", "AND", "modification_date");

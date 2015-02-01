@@ -11,39 +11,137 @@
 			"plugins/mask/jquery.maskedinput.js",
 			"js/script.js",
 			"js/utfpr/utfpr.js",
-			"plugins/bootstrap-rating-master/bootstrap-rating.js"
+			"plugins/bootstrap-rating-master/bootstrap-rating.js",
+			"plugins/calendario/js/jquery.calendario.js",
+			"plugins/calendario/js/modernizr.custom.63321.js"
 		);
 ?>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.fancybox').fancybox({
-        	arrows : false,
-        	nextClick : true,
-			helpers : {
-				media : {},
-				thumbs : {
-					width  : 50,
-					height : 50
-				}
-			}
-		});
-    });
 
-	$(window).load(function() {
-		$('#slider').nivoSlider({
-		    effect: 'fade',               // Specify sets like: 'fold,fade,sliceDown'
-		    animSpeed: 500,                 // Slide transition speed
-		    pauseTime: 5000,                // How long each slide will show
-		    startSlide: 0,                  // Set starting Slide (0 index)
-		    directionNav: true,             // Next & Prev navigation
-		    controlNav: false,               // 1,2,3... navigation
-		    pauseOnHover: true,             // Stop animation while hovering
-		    prevText: 'Anterior',               // Prev directionNav text
-		    nextText: 'Próximo',               // Next directionNav text
-		    randomStart: false,             // Start on a random slide
-		});
+
+<script type="text/javascript">
+
+var calendarData = $.ajax({
+	url: calendarUrl,
+	success: function(data) {
+
+	}
+});
+
+
+
+
+
+$(document).ready(function() {
+	// $("#calendar").calendario();
+    $('.fancybox').fancybox({
+    	arrows : false,
+    	nextClick : true,
+		helpers : {
+			media : {},
+			thumbs : {
+				width  : 50,
+				height : 50
+			}
+		}
 	});
+
+
+	// calendarData = {'01-15-2015': "<span>New Year's day</span>"};
+	$.getJSON( calendarUrl, function (data) {
+		$(".loading-yellow").slideUp("fast");
+		$(".custom-calendar-wrap").slideDown("slow");
+		calendarData = data;
+		// calendarData = {"02-01-2015" : "<span>Teste</span>", "02-02-2015" : "<span>Teste</span>", "02-03-2015" : "<span>Teste</span>", "02-04-2015" : "<span>Teste</span>", "02-05-2015" : "<span>Teste</span>", "02-06-2015" : "<span>Teste</span>", "02-07-2015" : "<span>Teste</span>", "02-08-2015" : "<span>Teste</span>", "02-09-2015" : "<span>Teste</span>", "02-10-2015" : "<span>Teste</span>"};
+		$(function() {
+
+		var transEndEventNames = {
+			 'WebkitTransition' : 'webkitTransitionend',
+			 'MozTransition' : 'transitionend',
+			 'OTransition' : 'oTransitionend',
+			 'msTransition' : 'MSTransitionend',
+			 'transition' : 'transitionend'
+			 },
+			 transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+			 $wrapper = $( '#custom-inner' ),
+			 $calendar = $( '#calendar' ),
+			 cal = $calendar.calendario( {
+			 onDayClick : function( $el, $contentEl, dateProperties ) {
+				 if( $contentEl.length > 0 ) {
+				 showEvents( $contentEl, dateProperties );
+				 }
+			},
+			 caldata : calendarData,
+			 weeks : [ 'Domingo', 'Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado' ],
+			 weekabbrs : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab' ],
+			 months : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
+			 monthabbrs : [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+			 displayWeekAbbr : true,
+			 startIn : 0
+			 } ),
+			 $month = $( '#custom-month' ).html( cal.getMonthName() ),
+			 $year = $( '#custom-year' ).html( cal.getYear() );
+		$( '#custom-next' ).on( 'click', function() {
+			 cal.gotoNextMonth( updateMonthYear );
+		} );
+		$( '#custom-today' ).on( 'click', function() {
+			 cal.gotoNow( updateMonthYear );
+		} );
+		$( '#custom-prev' ).on( 'click', function() {
+			 cal.gotoPreviousMonth( updateMonthYear );
+		} );
+		function updateMonthYear() {
+			 $month.html( cal.getMonthName() );
+			 $year.html( cal.getYear() );
+		}
+		// just an example..
+		function showEvents( $contentEl, dateProperties ) {
+			 hideEvents();
+			
+			 var $events = $( '<div id="custom-content-reveal" class="custom-content-reveal"><h4>Eventos em ' + dateProperties.day + ' de ' + dateProperties.monthname + ' de ' + dateProperties.year + '</h4></div>' ),
+			 $close = $( '<span class="custom-content-close"></span>' ).on( 'click', hideEvents );
+			 $events.append( $contentEl.html() , $close ).insertAfter( $wrapper );
+			
+			 setTimeout( function() {
+			 $events.css( 'top', '0%' );
+			 }, 25 );
+		}
+		function hideEvents() {
+			 var $events = $( '#custom-content-reveal' );
+			 if( $events.length > 0 ) {
+			
+			 $events.css( 'top', '100%' );
+			 Modernizr.csstransitions ? $events.on( transEndEventName, function() { $( this ).remove(); } ) : $events.remove();
+			 }
+		}
+	});
+
+	});
+
+
+	
+
+
+
+
+
+
+});
+
+$(window).load(function() {
+	$('#slider').nivoSlider({
+	    effect: 'fade',               // Specify sets like: 'fold,fade,sliceDown'
+	    animSpeed: 500,                 // Slide transition speed
+	    pauseTime: 5000,                // How long each slide will show
+	    startSlide: 0,                  // Set starting Slide (0 index)
+	    directionNav: true,             // Next & Prev navigation
+	    controlNav: false,               // 1,2,3... navigation
+	    pauseOnHover: true,             // Stop animation while hovering
+	    prevText: 'Anterior',               // Prev directionNav text
+	    nextText: 'Próximo',               // Next directionNav text
+	    randomStart: false,             // Start on a random slide
+	});
+});
 </script>
 
 <div id="fb-root"></div>
