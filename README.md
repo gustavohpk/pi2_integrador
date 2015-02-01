@@ -33,9 +33,10 @@
 
 ----------
 
------ Atualização 067 (31/01/15 - )
+----- Atualização 067 (31/01/15 - 01/02/15)
 
 - Iniciado calendário de eventos
+- Iniciados botões para mudar o zoom
 
 
 ----- Atualização 066 (27/01/15 - 29/01/15) -----

@@ -49,8 +49,10 @@
         // once bottom of div is scrolled past
         if($('body').scrollTop() >= 200 ) {
             $("#login-bar").fadeOut();
+            $(".zoom-change").fadeOut();
         }else{
         	$("#login-bar").fadeIn();
+        	$(".zoom-change").fadeIn();
         }
     });
 </script>
