@@ -28,98 +28,100 @@
         </nav>
     </div>
 </div>
-<div id="menu-item1-description" class="row" style="width: ">
-    <div class="menu-option">
-        <span class="glyphicon glyphicon-home"></span>
-        <div>
-            <a href="#">PÁGINA PRINCIPAL</a>
-            <br>
-            <span class="description">Acesse a página principal</span>
-        </div>
-    </div>
-</div>
-<div id="menu-item2-description" class="row">
-        <a href="<?= $this->getUri('eventos/anteriores') ?>">
-            <div class="menu-option">
-                <span class="glyphicon glyphicon-backward hvr-skew-backward" style="padding-left: 4px; padding-right: 6px"></span>
-                <div>
-                    <span class="title">EVENTOS ANTERIORES</span><br>
-                    <span class="description">Veja os eventos que já ocorreram e avalie-os</span>
-                </div>
+<div class="menu-description-container">
+    <div id="menu-item1-description" class="row" style="width: ">
+        <div class="menu-option">
+            <span class="glyphicon glyphicon-home"></span>
+            <div>
+                <a href="#">PÁGINA PRINCIPAL</a>
+                <br>
+                <span class="description">Acesse a página principal</span>
             </div>
-        </a>
-        <a href="<?= $this->getUri('eventos/proximos') ?>">
-            <div class="menu-option">
-                <span class="glyphicon glyphicon-forward hvr-skew-forward"></span>
-                <div>
-                    <span class="title">PRÓXIMOS EVENTOS</span><br>
-                    <span class="description">Veja a lista dos eventos que ainda irão ocorrer</span>
+        </div>
+    </div>
+    <div id="menu-item2-description" class="row">
+            <a href="<?= $this->getUri('eventos/anteriores') ?>">
+                <div class="menu-option">
+                    <span class="glyphicon glyphicon-backward hvr-skew-backward" style="padding-left: 4px; padding-right: 6px"></span>
+                    <div>
+                        <span class="title">EVENTOS ANTERIORES</span><br>
+                        <span class="description">Veja os eventos que já ocorreram e avalie-os</span>
+                    </div>
                 </div>
-            </div>
-        </a>
-</div>
-<div id="menu-item3-description" class="row">
-    <div class="menu-option">
-        <i class="fa fa-newspaper-o fa-3x"></i>
-        <div>
-            <a href="#">NOTÍCIAS</a><br>
-            <span class="description">Veja a lista de notícias</span>
-        </div>
-    </div>
-</div>
-<div id="menu-item4-description" class="row">
-    <div class="menu-option">
-        <span class="glyphicon glyphicon-picture"></span>
-        <div>
-            <a href="#">GALERIA</a><br>
-            <span class="description">Visualize a galeria de fotos e vídeos</span>
-        </div>
-    </div>
-</div>
-<div id="menu-item5-description" class="row">
-        <a href="<?= $this->getUri('certificados') ?>">
-            <div class="menu-option">
-                <span class="glyphicon glyphicon-check hvr-shrink" style="margin-top: 3px"></span>
-                <div>
-                    <span class="title">VALIDAR CERTIFICADOS</span><br>
-                    <span class="description">Verifique a autenticidade de um certificado</span>
+            </a>
+            <a href="<?= $this->getUri('eventos/proximos') ?>">
+                <div class="menu-option">
+                    <span class="glyphicon glyphicon-forward hvr-skew-forward"></span>
+                    <div>
+                        <span class="title">PRÓXIMOS EVENTOS</span><br>
+                        <span class="description">Veja a lista dos eventos que ainda irão ocorrer</span>
+                    </div>
                 </div>
+            </a>
+    </div>
+    <div id="menu-item3-description" class="row">
+        <div class="menu-option">
+            <i class="fa fa-newspaper-o fa-3x"></i>
+            <div>
+                <a href="#">NOTÍCIAS</a><br>
+                <span class="description">Veja a lista de notícias</span>
             </div>
-        </a>
-        <a href="<?= $this->getUri('conta/certificados') ?>">
-            <div class="menu-option">
-                <i class="fa fa-certificate fa-3x" style="margin-top: 3px"></i>
-                <div>
-                    <span class="title">OBTER CERTIFICADOS</span><br>
-                    <span class="description">Participou de algum evento? Obtenha seu certificado</span>
+        </div>
+    </div>
+    <div id="menu-item4-description" class="row">
+        <div class="menu-option">
+            <span class="glyphicon glyphicon-picture"></span>
+            <div>
+                <a href="#">GALERIA</a><br>
+                <span class="description">Visualize a galeria de fotos e vídeos</span>
+            </div>
+        </div>
+    </div>
+    <div id="menu-item5-description" class="row">
+            <a href="<?= $this->getUri('certificados') ?>">
+                <div class="menu-option">
+                    <span class="glyphicon glyphicon-check hvr-shrink" style="margin-top: 3px"></span>
+                    <div>
+                        <span class="title">VALIDAR CERTIFICADOS</span><br>
+                        <span class="description">Verifique a autenticidade de um certificado</span>
+                    </div>
                 </div>
+            </a>
+            <a href="<?= $this->getUri('conta/certificados') ?>">
+                <div class="menu-option">
+                    <i class="fa fa-certificate fa-3x" style="margin-top: 3px"></i>
+                    <div>
+                        <span class="title">OBTER CERTIFICADOS</span><br>
+                        <span class="description">Participou de algum evento? Obtenha seu certificado</span>
+                    </div>
+                </div>
+            </a>
+    </div>
+    <div id="menu-item6-description" class="row">
+        <div class="menu-option">
+            <i class="fa fa-envelope-o fa-3x" style="margin-top: -3px"></i>
+            <div>
+                <a href="#">CONTATO</a><br>
+                <span class="description">Entre em contato</span>
             </div>
-        </a>
-</div>
-<div id="menu-item6-description" class="row">
-    <div class="menu-option">
-        <i class="fa fa-envelope-o fa-3x" style="margin-top: -3px"></i>
-        <div>
-            <a href="#">CONTATO</a><br>
-            <span class="description">Entre em contato</span>
         </div>
     </div>
-</div>
-<div id="menu-item7-description" class="row">
-    <div class="menu-option">
-        <i class="fa fa-dashboard fa-3x" style="margin-top: -3px"></i>
-        <div>
-            <a href="#">PAINEL</a><br>
-            <span class="description">Acesse o painel da sua conta</span>
+    <div id="menu-item7-description" class="row">
+        <div class="menu-option">
+            <i class="fa fa-dashboard fa-3x" style="margin-top: -3px"></i>
+            <div>
+                <a href="#">PAINEL</a><br>
+                <span class="description">Acesse o painel da sua conta</span>
+            </div>
         </div>
     </div>
-</div>
-<div id="menu-item8-description" class="row">
-    <div class="menu-option">
-        <i class="fa fa-info-circle fa-3x" style="margin-top: -3px"></i>
-        <div>
-            <a href="#">SOBRE</a><br>
-            <span class="description">Sobre o UTFPR Eventos</span>
+    <div id="menu-item8-description" class="row">
+        <div class="menu-option">
+            <i class="fa fa-info-circle fa-3x" style="margin-top: -3px"></i>
+            <div>
+                <a href="#">SOBRE</a><br>
+                <span class="description">Sobre o UTFPR Eventos</span>
+            </div>
         </div>
     </div>
 </div>

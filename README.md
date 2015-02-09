@@ -2,8 +2,7 @@
  
 - Organizar o layout da galeria de mídia, que acaba deixando espaços em branco quando as imagens exibidas na mesma linha tem grande variação de altura
 - Corrigir tabela de preços de evento
-- Alterar o campo (e o model) "local" dos eventos para "place"
-- Criar página para upload de várias mídias simultaneamente
+- Alterar o campo (e o model) "local" dos eventos para "place" ou "location"
 - Trocar a checagem de eventos do tipo sem inscrição de nome para id
 - Editar a classe das flash messages para suportar links, ícones e opção de "fechar" a mensagem
 - Requisitar Google Maps Embed API da faculdade
@@ -32,6 +31,15 @@
 - Pequeno bug no javascript da avaliação de eventos
 
 ----------
+
+----- Atualização 068 (03/02/15 - 09/02/15) -----
+
+- Várias correções de layout do tema "utfpr"
+- Classe "Events" alterada para "Event"
+- Classe "EventsType" alterada para "EventType"
+- Classe "Certificates" alterada para "Certificate"
+- Modificações na página de cadastro/edição de evento no painel do admin
+
 
 ----- Atualização 067 (31/01/15 - 01/02/15)
 

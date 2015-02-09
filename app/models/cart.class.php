@@ -16,7 +16,7 @@
 		}
 
 		public function add($idEvent) {
-			if (!$event = Events::findById($idEvent)) {
+			if (!$event = Event::findById($idEvent)) {
 				$this->errors[] = "Evento não localizado.";
 				return false;
 			}

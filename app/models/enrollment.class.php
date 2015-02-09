@@ -30,7 +30,7 @@
 		}
 
 		protected function setIdEvent($idEvent){
-			$event = Events::findById($idEvent);
+			$event = Event::findById($idEvent);
 			$this->setEvent($event[0]);
 		}
 
@@ -201,7 +201,7 @@
 			$statment = $statment->execute($params);
 			$this->setIdEnrollment($pdo->lastInsertId());
 			if($statment){
-				\Events::removeSpaces($this->event->getIdEvent());
+				\Event::removeSpaces($this->event->getIdEvent());
 			}
 			return $statment ? $this : false;
 		}
@@ -213,7 +213,7 @@
 			$params = array(":id_enrollment" => $this->getIdEnrollment());
 			$statment = $statment->execute($params);
 			if($statment){
-				\Events::addSpaces($this->event->getIdEvent());
+				\Event::addSpaces($this->event->getIdEvent());
 			}
 			return $statment;
 		}
@@ -234,7 +234,7 @@
 			require_once APP_ROOT_FOLDER . '/main/classes/pagseguro/PagSeguroLibrary/PagSeguroLibrary.php';
          	$pagseguro = new PagSeguroPaymentRequest();       
          	
-     		if ($event = Events::findById($item["id_event"])) {
+     		if ($event = Event::findById($item["id_event"])) {
      			$event = $event[0];
    				$pagseguro->addItem(
 				        $event->getIdEvent(),

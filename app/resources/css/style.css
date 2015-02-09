@@ -196,6 +196,9 @@ a.admin-shortcut-link { text-decoration: none;}
 .admin-shortcut .glyphicon { font-size: 70px; padding-bottom: 10px; width: 100%;}
 .admin-shortcut .glyphicon:hover{ font-size: 70px; padding-bottom: 10px;}
 
+.admin-help-list{ text-align: left; list-style-type: disc;}
+
+
 .help-button, .help-link { cursor: pointer; }
 
 td.photo { max-width: 100px; }

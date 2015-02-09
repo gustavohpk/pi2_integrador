@@ -51,7 +51,7 @@
 				$this->errors[] = "O preço do evento não pode ser 0.";
 				if($valid == true) $valid = false;
 			}
-			if(strtotime($this->getDateMax()) > strtotime($this->events = \Events::findById($this->getIdEvent())[0]->getEndDateEnrollment())){
+			if(strtotime($this->getDateMax()) > strtotime($this->events = \Event::findById($this->getIdEvent())[0]->getEndDateEnrollment())){
 				$this->errors[] = "A data máxima de um preço não pode ser posterior à data limite de inscrição.";
 				if($valid == true) $valid = false;
 			}

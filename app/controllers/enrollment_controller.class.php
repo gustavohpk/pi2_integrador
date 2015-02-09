@@ -29,7 +29,7 @@
             flashMessage::errorMessage("Nenhuma forma de pagamento foi localizada.");
             $this->redirectTo("eventos/proximos");            
          }
-         elseif (!$this->events = Events::findById($this->params[":id"])) {
+         elseif (!$this->events = Event::findById($this->params[":id"])) {
             flashMessage::errorMessage("Evento não encontrado.");
             $this->redirectTo("eventos/proximos");
          }
@@ -58,7 +58,7 @@
          $participant = $this->currentParticipant;
          $params = $this->params["enrollment"];
          foreach ($params["id_event"] as $id_event) {
-            $this->events = Events::findById($id_event)[0]; 
+            $this->events = Event::findById($id_event)[0]; 
             $cost = ($this->events->cost ? $this->events->cost[0]->getCostOfDay() : 0);            
             $data = array(
                   "id_participant" => $participant->getIdParticipant(),

@@ -5,7 +5,7 @@
  * @author Gustavo Pchek
  */
 
-	class Certificates extends BaseModel{
+	class Certificate extends BaseModel{
 
 		/**
 	     * @var int $idCertificate ID do certificado
@@ -67,7 +67,7 @@
 			$certificates = array();			
 
 			foreach ($rows as $row) {
-				$certificates[] = new Certificates($row);
+				$certificates[] = new Certificate($row);
 			}
 				
 			return $certificates;

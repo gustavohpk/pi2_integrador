@@ -7,13 +7,13 @@
 
     	public function index(){
     		$this->setHeadTitle("Verificar Autenticidade");
-    		$this->certificate = new \Certificates();
+    		$this->certificate = new \Certificate();
     		$this->actionForm = $this->getUri("certificados/verificar");
          	$this->titleBtnSubmit = "Procurar";
     	}
 
 		public function verification(){
-			$this->certificate = Certificates::findByCode($this->params["certificate"]["code"])[0];
+			$this->certificate = Certificate::findByCode($this->params["certificate"]["code"])[0];
 			if($this->certificate){
 				$this->event = \Enrollment::findById($this->certificate->getIdEnrollment())[0]->getEvent();
    				$this->participant = \Enrollment::findById($this->certificate->getIdEnrollment())[0]->participant;
@@ -30,19 +30,22 @@
 		}
 
 		public function _list() {
+			if (!isset($_SESSION["participant"])){
+       			$this->redirectTo("conta/login");
+       		}
 	        $this->setHeadTitle("Meus Certificados");
 	        $this->enrollments = Enrollment::findByIdParticipant($_SESSION["participant"]->getIdParticipant());
 	        $this->certificates = array();
 	        foreach ($this->enrollments as $key => $enrollment) {
-	        	$certificate = Certificates::findByIdEnrollment($enrollment->getIdEnrollment())[0];
+	        	$certificate = Certificate::findByIdEnrollment($enrollment->getIdEnrollment())[0];
 	        	if($certificate)
-	        		$this->certificates[] = Certificates::findByIdEnrollment($enrollment->getIdEnrollment())[0];
+	        		$this->certificates[] = Certificate::findByIdEnrollment($enrollment->getIdEnrollment())[0];
 
 	        }
       	}
 
       	public function show(){
-			$this->certificate = Certificates::findByCode($this->params[":code"])[0];
+			$this->certificate = Certificate::findByCode($this->params[":code"])[0];
 			if($this->certificate){
 				$this->event = \Enrollment::findById($this->certificate->getIdEnrollment())[0]->getEvent();
    				$this->participant = \Enrollment::findById($this->certificate->getIdEnrollment())[0]->participant;

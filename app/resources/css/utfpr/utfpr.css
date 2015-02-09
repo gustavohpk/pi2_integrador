@@ -7,7 +7,7 @@
 
 /* CSS Principal */
 
-html { min-width: 400px; }
+html { /*min-width: 400px;*/ }
 body{ background-image: none;  background-color: #2F3238; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; }
 ul, ol{ list-style-type: none; }
 img{ width: 100%; }
@@ -64,8 +64,10 @@ input:-khtml-autofill {
 #main .form-control, .modal-content .form-control { color: #E6E6E6; background-color: #26292E;}
 #main .form-group i, .modal-content i { color: #7F8289; }
 #main input, .modal-content input, #main select { border: 1px solid #3C3F45 !important; border-radius: 0;}
-#main .left-inner-addon-group i, .modal-content .left-inner-addon-group i{ border-right: 1px solid #3C3F45;}
+#main .left-inner-addon-group i, .modal-content .left-inner-addon-group i{ border-right: 1px solid #3C3F45; color: #AAA;}
 #main .well { border: 0; }
+
+
 
 #main .btn-default, header .btn-default, .modal-content .btn-default { color: #AAA; background-color: #26292E; border-color: #3C3F45; border-radius: 0;}
 #main .btn-default:hover, header .btn-default:hover, .modal-content .btn-default:hover { background-color: #2F3238; color: #CCC; border-color: #3C3F45; }
@@ -77,6 +79,26 @@ input:-khtml-autofill {
 
 #col-right .row:nth-child(1) .col-xs-12 { height: 60px; }
 
+/* Botões */
+
+#main .btn-success, #main .btn-warning, #main .btn-danger, #main .btn-primary { background: #26292E; }
+
+#main .btn-success { color: #5cb85c; }
+#main .btn-success:hover { background-color: rgba(60, 118, 61, 0.2); }
+
+/* Fim Botões */
+
+
+
+/* Paginação */
+
+#main .pagination>li>a, .pagination>li>span { color: #AAA; background-color: #26292E; border-color: #3C3F45;}
+#main .pagination>li:not(.active):not(.disabled)>a:hover { background-color: #3C3F45; color: #E6E6E6; /*border: 1px solid #AAA;*/ /*z-index: 999;*/}
+#main .pagination li.active a, .pagination li.active a:hover { background-color: #2F3238; }
+
+/* Fim Paginação */
+
+/* Fim correção #main */
 
 /* Elementos */
 #header{ background: transparent; }
@@ -96,6 +118,8 @@ input:-khtml-autofill {
 .menu-option i { float: left; }
 .menu-option div { float: left; webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out;}
 .menu-option a:hover { text-decoration: none; text-decoration: none;}
+
+.menu-description-container { max-height: 65px; }
 
 .flash-background { background-color: #3C3F45; }
 
@@ -161,7 +185,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 .event-long-description img { width: initial; }
 .event-long-description ul { list-style-type: initial; }
 .event-long-description a { color: #333; font-weight: bold;}
-.event-long-description a:hover, a:focus { color: #000; }
+.event-long-description a:hover, .event-long-description a:focus { color: #000; }
 
 
 /*.row-events .event:nth-child(1) { border-right: 1px solid #2F3238; }*/
@@ -218,9 +242,11 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 #maintenance a { display: inline-block; }
 
 /* Modais */
+.modal-header { border: 0; }
 .modal-content { background-color: #26292E; }
 .modal-body h2 { border: 0; }
 .modal-content { box-shadow: 0 5px 15px rgba(150, 150, 150, 0.20); border-radius: 0;}
+.modal-footer { border: 0; }
 .close { color: #E6E6E6; }
 .close:hover { opacity: .5; color: #E6E6E6;}
 
@@ -240,15 +266,16 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 
 
 /* Fotos e vídeos */
-a.fancybox:link { text-decoration: none; color: #000; height: 50px;}
+a.fancybox:link { text-decoration: none; color: #E6E6E6; height: 50px;}
 #media-thumbnail img{ margin-bottom: 0; }
-#media-thumbnail a{ text-decoration: none; color: #CCC; font-size: 0.8em; font-weight: 100; text-transform: uppercase;}
+#media-thumbnail a{ text-decoration: none; color: #AAA; font-size: 0.8em; font-weight: 100;}]
 .media-item{ margin-bottom: 5px; }
-.media-largeicons { cursor: pointer; color:#333; }
-.media-largeicons:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
-.media-largeicons .glyphicon { font-size: 100px; padding-bottom: 10px;}
-.media-largeicons .glyphicon:hover{ font-size: 100px; padding-bottom: 10px;}
-img.thumbnail:hover{ border-color: #7F8289; }
+.media-largeicons { cursor: pointer; color:#333; color: #AAA; webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out;}
+.media-largeicons:hover{ background-color: #26292E; border-radius: 5%; color: #E6E6E6;}
+.media-largeicons .glyphicon { font-size: 100px; padding-bottom: 10px; color: #AAA;}
+.media-largeicons:hover .glyphicon{ font-size: 100px; padding-bottom: 10px; color: #E6E6E6;}
+.media-largeicons-title { cursor: pointer; text-decoration: none; font-weight: bold; color: #AAA;}
+.media-largeicons:hover .media-largeicons-title { color: #E7E7E7; }
 
 
  /* Login Bar */
@@ -263,6 +290,13 @@ img.thumbnail:hover{ border-color: #7F8289; }
 #account-register .col-xs-3, #account-register .col-xs-4, #account-register .col-xs-5, #account-register .col-xs-6, #account-register .col-xs-7, #account-register .col-xs-9, #account-register .col-xs-10, #account-register .col-xs-12{ padding-bottom: 10px; }
 #account-register span{ margin-bottom: 1px; }
 .general-actions { margin-top: 10px; }
+
+.account-icons { margin-top: 15px; margin-bottom: 15px; cursor: pointer; color:#333; color: #AAA; webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out;}
+.account-icons:hover{ background-color: #26292E; border-radius: 5%; color: #E6E6E6; }
+.account-icons .glyphicon { font-size: 70px; padding-bottom: 10px; color: #AAA;}
+.account-icons:hover .glyphicon{ font-size: 70px; padding-bottom: 10px; color: #E6E6E6;}
+.account-icons-title { cursor: pointer; text-decoration: none; font-weight: bold; color: #AAA;}
+.account-icons:hover .account-icons-title { color: #E6E6E6; }
 
 
 
@@ -294,7 +328,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 #account-register span.glyphicon-road {  padding-top: 11px; padding-bottom: 9px; top:0;}
 
 /* Ícones de ajuda */
-#help-cpf { float: right; top: -22px; left: -7px; }
+#help-cpf { float: right; top: -22px; left: -7px; color: #AAA;}
 
 .btn.disabled {
     pointer-events: auto;
@@ -340,7 +374,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 .alert-warning { color: #f0ad4e; background-color: rgba(138, 109, 59, 0.2); border-radius: 0; border-color: #eea236;}
 
-.alert-danger { color: #d9534f; background-color: rgba(169, 68, 66, 0.125); border-radius: 0; border-color: #d43f3a;}
+.alert-danger { color: #d9534f; background-color: rgba(169, 68, 66, 0.05); border-radius: 0; border-color: #d43f3a;}
 
 .alert-info { color: #3276b1; background-color: rgba(49, 112, 143, 0.125); border-radius: 0; border-color: #285e8e;}
 
@@ -432,6 +466,8 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 
 @media (max-width: 768px){
+  h4 { font-size: 14px; }
+  .fc-calendar .fc-row { height: 32px; }
   .fc-calendar .fc-row > div > span.fc-date { font-size: 14px; font-weight: normal;}
 
 }

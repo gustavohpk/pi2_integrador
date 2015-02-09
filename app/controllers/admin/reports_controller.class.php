@@ -8,7 +8,7 @@
         public function _new(){
         $this->setHeadTitle("Relatório de Inscrições");
         $this->report = new \Reports();
-        $this->events = \Events::find(array(), array(), "=", "AND", "name", "ASC");
+        $this->events = \Event::find(array(), array(), "=", "AND", "name", "ASC");
             $this->actionForm = $this->getUri("admin/relatorios/inscricoes/gerar");
             $this->titleBtnSubmit = "Gerar";
         }

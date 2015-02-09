@@ -5,7 +5,7 @@
 	 * @author Rodrigo Miss
 	 * @author Gustavo Pchek
 	 */
-	class EventsType extends BaseModel{
+	class EventType extends BaseModel{
 		private $idEventType;
 		private $eventType;
 		private $teacherType;
@@ -52,7 +52,7 @@
 			$eventsType = array();			
 
 			foreach ($rows as $row) {
-				$eventsType[] = new EventsType($row);
+				$eventsType[] = new EventType($row);
 			}
 				
 			return $eventsType;

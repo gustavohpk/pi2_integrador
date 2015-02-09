@@ -13,15 +13,15 @@
          } else {
             $page = 1;
          }
-         \Events::setCurrentPage($page);
+         \Event::setCurrentPage($page);
 
          if (isset($this->params[":id"])){
-            $this->events = \Events::findById($this->params[":id"]);
-            $this->pagination = new \Pager(count($this->events), \Events::getLimitByPage(), $page);
+            $this->events = \Event::findById($this->params[":id"]);
+            $this->pagination = new \Pager(count($this->events), \Event::getLimitByPage(), $page);
          }
          else{
-            $this->events = \Events::find();
-            $this->pagination = new \Pager(\Events::count(), \Events::getLimitByPage(), $page);
+            $this->events = \Event::find();
+            $this->pagination = new \Pager(\Event::count(), \Event::getLimitByPage(), $page);
          }
 		}
 
@@ -33,25 +33,25 @@
          } else {
             $page = 1;
          }
-         \Events::setLimitByPage(5);
-         \Events::setCurrentPage($page);
+         \Event::setLimitByPage(5);
+         \Event::setCurrentPage($page);
 
          if (isset($this->params[":id"])){
-            $this->events = \Events::findById($this->params[":id"]);
-            $this->pagination = new \Pager(count($this->events), \Events::getLimitByPage(), $page);
+            $this->events = \Event::findById($this->params[":id"]);
+            $this->pagination = new \Pager(count($this->events), \Event::getLimitByPage(), $page);
          }
          else{
-            $this->events = \Events::find();
-            $this->pagination = new \Pager(\Events::count(), \Events::getLimitByPage(), $page);
+            $this->events = \Event::find();
+            $this->pagination = new \Pager(\Event::count(), \Event::getLimitByPage(), $page);
          }
       }
 
 		public function _new(){
          //prepara formulario para inserção de novo evento
 			$this->setHeadTitle("Novo Evento");
-         $this->eventsType = \EventsType::all();
+         $this->eventsType = \EventType::all();
          $this->sponsors = \Sponsors::all();
-			$this->events = new \Events();
+			$this->events = new \Event();
          $this->actionForm = $this->getUri("admin/eventos");
          $this->titleBtnSubmit = "Cadastrar";
 		}
@@ -61,7 +61,7 @@
          if(isset($this->params["cost"]))
             $cost = $this->params["cost"];
 
-         $this->events = new \Events($params);
+         $this->events = new \Event($params);
          if ($this->events->save()){
             \Logger::creationLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
             \FlashMessage::successMessage("Evento cadastrado com sucesso.");
@@ -82,7 +82,7 @@
             }
             
             $this->setHeadTitle("Novo Evento");
-            $this->eventsType = \EventsType::all();
+            $this->eventsType = \EventType::all();
             $this->actionForm = $this->getUri("admin/eventos");
             $this->titleBtnSubmit = "Cadastrar";
             $this->render("_new");
@@ -91,15 +91,15 @@
 
 		public function edit(){
 			$this->setHeadTitle("Editar Evento");
-         $this->eventsType = \EventsType::all();
+         $this->eventsType = \EventType::all();
          $this->sponsors = \Sponsors::all();
-			$this->events = \Events::findById($this->params[":id"])[0];
+			$this->events = \Event::findById($this->params[":id"])[0];
          $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
          $this->titleBtnSubmit = "Salvar";
 		}
 
       public function update(){  
-         $this->events = \Events::findById($this->params[":id"])[0];
+         $this->events = \Event::findById($this->params[":id"])[0];
          if(isset($this->params["cost"]))
             $cost = $this->params["cost"];
          if(isset($this->params["sponsors"]))
@@ -132,7 +132,7 @@
             }
 
             $this->setHeadTitle("Editar Evento");
-            $this->eventsType = \EventsType::all();
+            $this->eventsType = \EventType::all();
             $this->paymentsType = \PaymentType::all();
             $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
             $this->titleBtnSubmit = "Salvar";
@@ -141,7 +141,7 @@
       }
 
 		public function remove(){
-         $this->events = \Events::findById($this->params[":id"])[0];
+         $this->events = \Event::findById($this->params[":id"])[0];
          $this->events->remove();
          \Logger::deletionLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
          \FlashMessage::successMessage("Evento removido com sucesso.");
@@ -150,7 +150,7 @@
 
       public function checkAttendance() {
          $idEvent = $this->params[":id"];
-         $this->event = \Events::findById($this->params[":id"])[0];
+         $this->event = \Event::findById($this->params[":id"])[0];
          if(strtotime($this->event->getStartDate("d-m-Y H:i")) < strtotime(date("d-m-Y H:i")) && $this->event->eventType->getCode() != "sem_inscricao"){
             $this->enrollments = \Enrollment::find(array("id_event"), array($idEvent))[0];
             $this->enrollments->checkAttendance($this->params["enrollment"]);
@@ -168,7 +168,7 @@
 
       public function attendance() {
          $this->setHeadTitle("Registrar presença");
-         $this->event = \Events::findById($this->params[":id"])[0];
+         $this->event = \Event::findById($this->params[":id"])[0];
          $this->enrollments = \Enrollment::find(array("id_event"), array($this->params[":id"]));
          //$this->attendanceList = \Enrollment::attendanceList($this->params[":id"]);
          //var_dump($this->enrollments); exit;

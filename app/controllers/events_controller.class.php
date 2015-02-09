@@ -8,10 +8,10 @@
 	    public function show() {
 	    	$this->setHeadTitle("Ver Evento");
 	    	if (isset($this->params[":id"])) {
-	    		$this->events = Events::findById($this->params[":id"])[0];
+	    		$this->events = Event::findById($this->params[":id"])[0];
 	    	}
 	    	else if(isset($this->params[":url"])){
-	    		$this->events = Events::findByPath($this->params[":url"])[0];
+	    		$this->events = Event::findByPath($this->params[":url"])[0];
 	    	}
 	    	if($this->events){
 	    		$this->eventsRelated = $this->events->getEventsRelated();
@@ -19,7 +19,7 @@
 	    		$this->hasMedia = Media::hasMedia($this->events->getIdEvent());
 	    		if($this->events->getRating() > 0)
 	    			$this->realRating = $this->events->getRating() / $this->events->getEvaluations();
-   				Events::updateViews($this->events->getIdEvent());
+   				Event::updateViews($this->events->getIdEvent());
    				if(isset($_SESSION["participant"])){
 	   				if($this->enrollment = Enrollment::find(array("id_participant", "id_event"), array($_SESSION["participant"]->getIdParticipant(), $this->events->getIdEvent()))){
 	   					$this->attendance = $this->enrollment[0]->getAttendance();
@@ -44,10 +44,10 @@
 	        } else {
 	           $page = 1;
 	        }
-	        Events::setLimitByPage(4);
-	        Events::setCurrentPage($page);
-	        $this->events = Events::findNext(date("Y-m-d"));
-	        $this->pagination = new Pager(Events::countNext(), Events::getlimitByPage(), $page);
+	        Event::setLimitByPage(4);
+	        Event::setCurrentPage($page);
+	        $this->events = Event::findNext(date("Y-m-d"));
+	        $this->pagination = new Pager(Event::countNext(), Event::getlimitByPage(), $page);
    		}
 
    		public function previous(){
@@ -57,16 +57,16 @@
 	        } else {
 	           $page = 1;
 	        }
-	        Events::setLimitByPage(6);
-	        Events::setCurrentPage($page);
-	        $this->events = Events::findPrev(date("Y-m-d"));
-	        $this->pagination = new Pager(Events::countPrev(), Events::getLimitByPage(), $page);
+	        Event::setLimitByPage(6);
+	        Event::setCurrentPage($page);
+	        $this->events = Event::findPrev(date("Y-m-d"));
+	        $this->pagination = new Pager(Event::countPrev(), Event::getLimitByPage(), $page);
    		}
 
    		public function calendar(){
    			sleep(1);
    			$this->layout = "admin/layout/layout_empty.phtml";
-   			$this->events = Events::all();
+   			$this->events = Event::all();
    			$calendar = array();
    			foreach ($this->events as $key => $event) {
    				if(array_key_exists($event->getStartDate("m-d-Y"), $calendar)){

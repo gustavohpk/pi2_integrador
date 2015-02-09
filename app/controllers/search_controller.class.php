@@ -8,18 +8,18 @@
 	         } else {
 	             $page = 1;
 	         }
-	         Events::setLimitByPage(8);
-	         Events::setCurrentPage($page);
+	         Event::setLimitByPage(8);
+	         Event::setCurrentPage($page);
 	         if (isset($this->params[":s"])){
 	         	if ($this->params[":s"] != ""){
-	            	$this->events = Events::customerSearch($this->params[":s"]);
-	            	$this->pagination = new Pager(Events::count(), Events::getLimitByPage(), $page);
+	            	$this->events = Event::customerSearch($this->params[":s"]);
+	            	$this->pagination = new Pager(Event::count(), Event::getLimitByPage(), $page);
 	         	} else{
 					FlashMessage::warningMessage("Digite algo para pesquisar.");
 	         	}
 	         }
 	         else{			
-	            $this->pagination = new Pager(Events::count(), Events::getLimitByPage(), $page);
+	            $this->pagination = new Pager(Event::count(), Event::getLimitByPage(), $page);
 			}
    		}
 

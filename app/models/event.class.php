@@ -5,7 +5,7 @@
  * @author Rodrigo Miss
  */
 
-	class Events extends BaseModel{
+	class Event extends BaseModel{
 		private $idEvent;
 		private $idParentEvent;
 		public $parentEvent;
@@ -45,7 +45,7 @@
 			$this->idParentEvent = ($idParentEvent > 0 ? $idParentEvent : null);
 			$this->isSubEvent = $idParentEvent > 0;
 
-			if ($this->idParentEvent && $parentEvent = Events::findById($this->idParentEvent)) {
+			if ($this->idParentEvent && $parentEvent = Event::findById($this->idParentEvent)) {
 				$this->parentEvent = $parentEvent[0];
 			}
 		}
@@ -59,7 +59,7 @@
 		}
 
 		public function setIdEventType($idEventType){
-			$this->eventType = EventsType::findById($idEventType)[0];
+			$this->eventType = EventType::findById($idEventType)[0];
 		}
 
 		public function setName($name){
@@ -220,7 +220,7 @@
 			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
 			$events = array();		
 			foreach ($rows as $row) {
-				$events[] = new Events($row);
+				$events[] = new Event($row);
 			}
 				
 			return $events;
@@ -270,7 +270,7 @@
 			$events = array();			
 
 			foreach ($rows as $row) {
-				$events[] = new Events($row);
+				$events[] = new Event($row);
 			}
 				
 			return $events;

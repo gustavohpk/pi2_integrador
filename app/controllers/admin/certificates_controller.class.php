@@ -13,28 +13,28 @@
 	        } else {
 	           $page = 1;
 	        }
-	        \Certificates::setCurrentPage($page);
+	        \Certificate::setCurrentPage($page);
 	        if (isset($this->params[":id"])){
-            	$this->certificates = \Certificates::findById($this->params[":id"]);
-	           $this->pagination = new \Pager(count($this->certificates), \Certificates::getLimitByPage(), $page);
+            	$this->certificates = \Certificate::findById($this->params[":id"]);
+	           $this->pagination = new \Pager(count($this->certificates), \Certificate::getLimitByPage(), $page);
 	        }
 	        else{
-	           $this->certificates = \Certificates::find();
-	           $this->pagination = new \Pager(\Certificates::count(), \Certificates::getLimitByPage(), $page);
+	           $this->certificates = \Certificate::find();
+	           $this->pagination = new \Pager(\Certificate::count(), \Certificate::getLimitByPage(), $page);
 	        }
 		}
 
 		public function _new(){
-         	$this->certificates = new \Certificates();
-         	$this->events = \Events::find(array("end_date"), array(date("Y-m-d")), "<", "AND", "name", "ASC");
+         	$this->certificates = new \Certificate();
+         	$this->events = \Event::find(array("end_date"), array(date("Y-m-d")), "<", "AND", "name", "ASC");
 			$this->setHeadTitle("Novo Certificado");
          	$this->actionForm = $this->getUri("admin/certificados");
          	$this->titleBtnSubmit = "Cadastrar";
 		}
 
 		public function create(){
-			$this->certificates = new \Certificates($this->params["certificate"]);
-			if(\Certificates::findByIdEnrollment($this->params["certificate"]["id_enrollment"])){
+			$this->certificates = new \Certificate($this->params["certificate"]);
+			if(\Certificate::findByIdEnrollment($this->params["certificate"]["id_enrollment"])){
 				\FlashMessage::errorMessage("Já existe um certificado para esta inscrição.");
 				$this->setHeadTitle("Novo Certificado");
 	         	$this->actionForm = $this->getUri("admin/certificados/novo");
@@ -55,7 +55,7 @@
 		}
 
 		public function show(){
-			$this->certificates = \Certificates::findById($this->params[":id"])[0];
+			$this->certificates = \Certificate::findById($this->params[":id"])[0];
    			$this->setHeadTitle("Visualizar Certificado");
    			$this->events[] = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->getEvent();
    			$this->participant = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->participant;  			
@@ -63,7 +63,7 @@
 
 		// public function update(){
 		// 	//salva edição no db  
-		// 	$this->certificates = \Certificates::findById($this->params[":id"])[0];
+		// 	$this->certificates = \Certificate::findById($this->params[":id"])[0];
 		// 	if ($this->certificates->update($this->params['certificate'])){
 		// 		\FlashMessage::successMessage("Patrocinador alterado com sucesso.");
 		// 		$this->redirectTo("admin/patrocinadores/lista");
@@ -78,7 +78,7 @@
 		// }
 
 		public function remove(){
-			$this->certificates = \Certificates::findById($this->params[":id"])[0];
+			$this->certificates = \Certificate::findById($this->params[":id"])[0];
 			$this->certificates->remove();
 			\FlashMessage::successMessage("Certificado removido com sucesso.");
 			$this->redirectTo("admin/certificados");

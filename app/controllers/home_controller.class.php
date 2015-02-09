@@ -12,12 +12,12 @@
 	        Media::setLimitByPage(6);
 	        Media::setCurrentPage($page);
 	        $this->media = Media::all();
-	        Events::setLimitByPage(4);
-	        $this->nextEvents = Events::findNext(date("Y-m-d"));
+	        Event::setLimitByPage(4);
+	        $this->nextEvents = Event::findNext(date("Y-m-d"));
 	        $this->countNext = count($this->nextEvents);
 	        if($this->countNext < 4){
-	        	Events::setLimitByPage(4 - $this->countNext);
-	        	$this->prevEvents = Events::findPrev(date("Y-m-d"));
+	        	Event::setLimitByPage(4 - $this->countNext);
+	        	$this->prevEvents = Event::findPrev(date("Y-m-d"));
 	        	$this->countPrev = count($this->prevEvents);
 	        }
 	        $this->events = array_merge($this->nextEvents, $this->prevEvents);
