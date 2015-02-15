@@ -30,11 +30,13 @@
 		private $evaluations;
 		public $cost;
 		public $sponsorship;
+		public $eventBonus;
 
 		public function setIdEvent($idEvent){
 			$this->idEvent = $idEvent;
 			$this->cost = CostEvent::findByIdEvent($idEvent);
 			$this->sponsorship = Sponsorship::findByIdEvent($idEvent);
+			$this->eventBonus = EventBonus::findByIdEvent($idEvent);
 		}
 
 		public function getIdEvent(){
@@ -404,6 +406,31 @@
 				}
 				else {
 					$sponsorship->save();
+				}
+			}
+		}
+
+		/**
+		 * Função que define os bônus de evento
+		 * @param $eventBonus array Os dados dos bônus
+		 */
+		public function setEventBonus($bonusData) {
+			// echo "<pre>";
+			// var_dump($bonusData); exit;
+			foreach ($bonusData["id_event_type"] as $key => $value) {
+				$data = array(
+						"id_event_bonus" => $bonusData["id_event_bonus"] > 0 ? $bonusData["id_event_bonus"][$key] : null,
+						"id_event_type" => $value,
+						"id_event" => $this->getIdEvent(),
+						"quantity" => $bonusData["quantity"][$key]
+					);
+				$eventBonus = new EventBonus($data);
+				if ($eventBonus->getIdEventBonus()) {
+					$eventBonus->update($data);
+				}
+				// Caso não exista um registro na tabela de bônus, cria apenas se o valor for maior que 0, pois caso contrário, não há a necessidade
+				elseif ($data["quantity"] > 0) {
+					$eventBonus->save();
 				}
 			}
 		}

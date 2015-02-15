@@ -166,6 +166,7 @@ a.fancybox:link { text-decoration: none; color: #000; height: 50px;}
 /*.dropdown:hover .dropdown-menu { display: block; }*/
 ul.left-menu a{ padding: 5px 5px !important; text-align:left; width: 100%; }
 ul.left-menu span{ text-align: left; }
+.dropdown a { text-align: center; }
 
 .well-md { display: inline-block; }
 

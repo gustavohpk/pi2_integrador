@@ -4,6 +4,7 @@
 	class EventsController extends BaseAdminController{
 		protected $events;
       protected $eventsType;
+      protected $eventBonus;
       protected $actionForm;
 
 		public function _list() {
@@ -52,6 +53,7 @@
          $this->eventsType = \EventType::all();
          $this->sponsors = \Sponsors::all();
 			$this->events = new \Event();
+         $this->eventBonus = \EventBonus::findByIdEvent($this->events->getIdEvent());
          $this->actionForm = $this->getUri("admin/eventos");
          $this->titleBtnSubmit = "Cadastrar";
 		}
@@ -60,6 +62,8 @@
          $params = $this->params["event"];
          if(isset($this->params["cost"]))
             $cost = $this->params["cost"];
+         if(isset($this->params["event_bonus"]))
+            $eventBonus = $this->params["event_bonus"];
 
          $this->events = new \Event($params);
          if ($this->events->save()){
@@ -68,6 +72,14 @@
             if($cost){
                if (!$this->events->setCost($cost)) {
                   $errors = $this->events->cost[0]->getErrors();
+                  foreach ($errors as $error) {
+                     \FlashMessage::errorMessage($error);
+                  }
+               }
+            }
+            if($eventBonus){
+               if (!$this->events->setEventBonus($eventBonus)) {
+                  $errors = $this->events->eventBonus[0]->getErrors();
                   foreach ($errors as $error) {
                      \FlashMessage::errorMessage($error);
                   }
@@ -94,16 +106,19 @@
          $this->eventsType = \EventType::all();
          $this->sponsors = \Sponsors::all();
 			$this->events = \Event::findById($this->params[":id"])[0];
+         $this->eventBonus = \EventBonus::findByIdEvent($this->events->getIdEvent());
          $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
          $this->titleBtnSubmit = "Salvar";
 		}
 
-      public function update(){  
+      public function update(){
          $this->events = \Event::findById($this->params[":id"])[0];
          if(isset($this->params["cost"]))
             $cost = $this->params["cost"];
          if(isset($this->params["sponsors"]))
             $sponsors = $this->params["sponsors"];
+         if(isset($this->params["event_bonus"]))
+            $eventBonus = $this->params["event_bonus"];
          if ($this->events->update($this->params['event'])){
             \Logger::updateLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
             \FlashMessage::successMessage("Evento modificado com sucesso.");
@@ -122,6 +137,14 @@
                //       \FlashMessage::errorMessage($error);
                //    }
                // }
+            }
+            if($eventBonus){
+               if (!$this->events->setEventBonus($eventBonus)) {
+                  // $errors = $this->events->eventBonus[0]->getErrors();
+                  // foreach ($errors as $error) {
+                  //    \FlashMessage::errorMessage($error);
+                  // }
+               }
             }
             $this->redirectTo("admin/eventos/lista");
          }

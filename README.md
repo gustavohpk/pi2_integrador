@@ -19,6 +19,7 @@
 - A paginação está infinita. Limitar em 8 ou 10
 - Mudar links estáticos para dinâmicos, editando pelo painel
 - Desvincular "Settings" do "Main"
+- Adicionar mensagens flash no template de manutenção
 
 ----------
 
@@ -29,8 +30,18 @@
 - Problema na contagem de vagas
 - Mensagens de confirmação ou erro de inscrição não estão funcionando corretamente
 - Pequeno bug no javascript da avaliação de eventos
+- Mensagens flash do admin/settings sendo exibidas várias vezes
 
 ----------
+
+----- Atualização 069 (10/02/15 - 14/02/15) -----
+
+- Iniciado sistema bônus de evento
+- Tabela event_bonus criada
+- Restrição adicionada na tabela event_bonus : Apenas uma combinação entre os campos (id_event, id_event_type)
+- Classe event_bonus criada
+- Adição de bônus de evento adicionada, porém a falta a verificação no ato da inscrição
+
 
 ----- Atualização 068 (03/02/15 - 09/02/15) -----
 

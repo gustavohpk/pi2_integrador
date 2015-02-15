@@ -272,37 +272,94 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 					<table id="cost-table" class="table" style="background: #FFF">
-					<tr>
-						<th>Preço</th>
-						<th>Preço válido até dia</th>
-						<th><button id="cost-add_button" type="button" class="btn btn-success" data-toggle="dropdown" title="Inserir novo preço">Adicionar Preço</button></th>
-					</tr>
-					
-					<?php if(isset($this->events->cost)) : ?>
-						<?php foreach ($this->events->cost as $cost) :?>
+						<tr>
+							<th>Preço</th>
+							<th>Preço válido até dia</th>
+							<th><button id="cost-add_button" type="button" class="btn btn-success" data-toggle="dropdown" title="Inserir novo preço">Adicionar Preço</button></th>
+						</tr>
+						
+						<?php if(isset($this->events->cost)) : ?>
+							<?php foreach ($this->events->cost as $cost) :?>
+								<tr class="cost-row">
+									<input type="hidden" name="cost[id_cost_event][]" value="<?=$cost->getIdCostEvent()?>"/>
+									<td><input type="number" min="0" class="form-control" name="cost[cost][]" value="<?=$cost->getCost()?>"/></td>
+									<td><input type="text" class="form-control" name="cost[date_max][]" value="<?=$cost->getDateMax("d/m/Y")?>" /></td>
+
+									<td><button type="button" class="btn btn-danger cost-delete-button"><span class="glyphicon glyphicon-trash"></span></button></td>
+								
+								</tr>
+							<?php endforeach ?>
+						<?php else : ?>
 							<tr class="cost-row">
-								<input type="hidden" name="cost[id_cost_event][]" value="<?=$cost->getIdCostEvent()?>"/>
-								<td><input type="number" min="0" class="form-control" name="cost[cost][]" value="<?=$cost->getCost()?>"/></td>
-								<td><input type="text" class="form-control" name="cost[date_max][]" value="<?=$cost->getDateMax("d/m/Y")?>" /></td>
+								<input type="hidden" name="cost[id_cost_event][]" value=""/>
+								<td><input type="number" min="0" class="form-control" name="cost[cost][]" value=""/></td>
+								<td><input type="text" class="form-control" name="cost[date_max][]" value="" /></td>
 
 								<td><button type="button" class="btn btn-danger cost-delete-button"><span class="glyphicon glyphicon-trash"></span></button></td>
 							
 							</tr>
-						<?php endforeach ?>
-					<?php else : ?>
-						<tr class="cost-row">
-							<input type="hidden" name="cost[id_cost_event][]" value=""/>
-							<td><input type="number" min="0" class="form-control" name="cost[cost][]" value=""/></td>
-							<td><input type="text" class="form-control" name="cost[date_max][]" value="" /></td>
-
-							<td><button type="button" class="btn btn-danger cost-delete-button"><span class="glyphicon glyphicon-trash"></span></button></td>
+						<?php endif; ?>
 						
-						</tr>
-					<?php endif; ?>
-					
-				</table>
+					</table>
+				</div>
 			</div>
-		</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+					<h4>Tabela de Bônus</h4>
+					<span class="label label-info label-md"><a data-toggle="modal" data-target="#bonus-info-modal">Saiba mais</a></span>
+					<br/><br/>
+				</div>
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<table id="cost-table" class="table" style="background: #FFF">
+						<tr>
+							<th>Tipo de Evento</th>
+							<th>Quantidade</th>
+						</tr>
+						<?php foreach ($this->eventsType as $key => $eventType) : ?>
+							<tr>
+								<td><?= $eventType->getEventType() ?></td>
+								<input type="hidden" name="event_bonus[id_event_type][]" value="<?= $eventType->getIdEventType() ?>">
+								<?php if(!empty($this->events->eventBonus)) : ?>
+									<?php $foundBonus = false ?>
+									<?php foreach ($this->events->eventBonus as $key => $eventBonus): ?>
+										<?php if ($eventBonus->getIdEventType() == $eventType->getIdEventType()) : ?>
+											<?php $foundBonus = true ?>
+											<input type="hidden" name="event_bonus[id_event_bonus][]" value="<?=$eventBonus->getIdEventBonus()?>"/>
+											<td><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="<?= $eventBonus->getQuantity() ?>"></td>
+										<?php endif; ?>	
+									<?php endforeach ?>
+									<?php if(!$foundBonus) : ?>
+										<input type="hidden" name="event_bonus[id_event_bonus][]" value="0"/>
+										<td><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="0"></td>
+									<?php endif; ?>
+								<?php else : ?>
+									<input type="hidden" name="event_bonus[id_event_bonus][]" value="0"/>
+									<td><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="0"></td>
+								<?php endif; ?>
+							</tr>
+						<?php endforeach; ?>
+					</table>
+				</div>
+			</div>
+			<div id="bonus-info-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+			        <div class="modal-content">
+			          <div class="modal-body">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				            <h2 class="modal-title">Tabela de Bônus</h2>
+				            <br/>
+				            <p>Nesta tabela é possível incluir eventos bônus. Funciona da seguinte maneira: Suponhamos que você selecione, na tabela o tipo de evento "Minicurso" e o número "2". Desta forma, quando alguém se inscreve neste evento terá direito a se inscrever em 2 minicursos gratuitamente <u>que sejam eventos filhos do atual</u>.</p>
+				            <p>Este recurso foi desenvolvido pensando na sua utilização em eventos como semanas acadêmicas, onde um inscrito tem direito gratuitamente a, por exemplo, 1 palestra e 1 minicurso, e caso queira participar de outros, paga os valores correspondentes.</p>
+			            </div>
+			            <div class="caption">
+			            </div>
+			            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			          </div>
+			       </div>
+			    </div>
+			</div>
+			<br/>
 		</div>
 	</div>
 	<br>
