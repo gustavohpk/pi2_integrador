@@ -51,6 +51,7 @@
   
 
          $this->eventsRelated = $this->events->getEventsRelated();
+         $this->eventTypes = $this->events->getEventTypes();
          $this->paymentsType = PaymentType::all();
       }
 

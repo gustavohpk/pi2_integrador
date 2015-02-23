@@ -1,0 +1,141 @@
+<?php createJavascriptTag("js/cidades-estados-v0.2.js") ?>
+<script type="text/javascript">
+    window.onload = function() {
+        new dgCidadesEstados(
+            document.getElementById('estado'),
+            document.getElementById('cidade'),
+            true
+        );
+
+        <?php $state = $this->participant->getState() ?>
+        <?php $city = $this->participant->getCity() ?>
+		$("#estado option[value='<?=$state?>']").attr("selected", true);
+		$("#estado").change();
+		$("#cidade option[value='<?=$city?>']").attr("selected", true);       
+    }
+</script>
+
+<form name="participant" method="POST" action="<?= $this->actionForm ?>">
+	<div class="row">
+		<div class="col-xs-12">
+			<div id="name-group" class="left-inner-addon-group form-group has-feedback">
+			    <i class="glyphicon glyphicon-user"></i>
+			    <input id="name" name="participant[name]" value="<?= $this->participant->getName()?>" type="text" class="form-control input-glyphicon" placeholder="Nome" required autofocus data-toggle="tooltip" data-placement="bottom" title=""/>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+			<div id="birthday-group" class="left-inner-addon-group form-group has-feedback">
+			    <i class="glyphicon glyphicon-calendar"></i>
+			    <input id="birthday" name="participant[birthday]" value="<?= $this->participant->getBirthday("d/m/Y")?>" type="text" class="form-control input-glyphicon" placeholder="Data de Nascimento" required pattern="[0-3][0-9]\/[0-1][0-9]\/[0-9]{4}$">
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="input-group well well-sm form-control">
+				<span class="label label-default">Sexo</span>
+				<span> &nbsp;&nbsp;&nbsp;Masculino </span><input id="masc" type="radio" name="participant[gender]" value="M" <?php if (strtoupper($this->participant->getGender()) != "F")echo "checked"?>>
+				<span> &nbsp;&nbsp;&nbsp;Feminino </span><input id="fem" type="radio" name="participant[gender]" value="F" <?php if (strtoupper($this->participant->getGender()) == "F") echo "checked"?>>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+			<div id="email-group" class="left-inner-addon-group form-group">
+			    <i class="glyphicon glyphicon-envelope"></i>
+			    <input id="email" name="participant[email]" value="<?= $this->participant->getEmail()?>" type="text" class="form-control input-glyphicon" placeholder="Endereço de e-mail" required>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div id="password-group" class="left-inner-addon-group form-group has-feedback">
+				<i class="glyphicon glyphicon-asterisk"></i>
+				<input id="password" name="participant[password]" type="password" class="form-control input-glyphicon" placeholder="Senha" required data-toggle="tooltip" data-placement="bottom" title="">
+			</div>
+		</div>
+	</div>
+
+
+
+	
+	<div class="row">
+		<div class="col-xs-6">
+			<div id="rg-group" class="left-inner-addon-group form-group">
+				<i class="glyphicon" style="font-size: 12px; color: gray"><b>RG</b></i>
+				<input id="rg" name="participant[rg]" value="<?= $this->participant->getRg()?>" type="text" class="form-control" required>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div id="cpf-group" class="left-inner-addon-group form-group has-feedback">
+				<i class="glyphicon" style="font-size: 12px; color: gray"><b>CPF</b></i>
+				<input id="cpf" name="participant[cpf]" value="<?= $this->participant->getCpf()?>" type="text" class="form-control" data-toggle="tooltip" data-placement="bottom" required>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+			<div id="phone1-group" class="left-inner-addon-group form-group has-feedback">
+			    <i class="glyphicon glyphicon-phone-alt"></i>
+			    <input id="phone1" name="participant[phone]" value="<?= $this->participant->getPhone()?>" type="text" class="form-control input-glyphicon" placeholder="Telefone" required>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+
+			<div id="phone2-group" class="left-inner-addon-group form-group has-feedback">
+			    <i class="glyphicon glyphicon-earphone"></i>
+			    <input id="phone2" name="participant[phone2]" value="<?= $this->participant->getPhone2()?>" type="text" class="form-control input-glyphicon" placeholder="Telefone 2" required>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="row">
+		<div class="col-xs-8 col-sm-9">
+			<div id="address-group" class="left-inner-addon-group form-group has-feedback">
+			    <i class="glyphicon glyphicon-road"></i>
+			    <input id="street" name="participant[address]" value="<?= $this->participant->getAddress()?>" type="text" class="form-control input-glyphicon" placeholder="Endereço" required>
+			</div>
+		</div>
+		<div class="col-xs-4 col-sm-3">
+			<input id="number" name="participant[number]" value="<?= $this->participant->getNumber()?>" type="text" class="form-control" placeholder="Número" required>
+		</div>
+	</div>
+	
+
+	<div class="row">
+		<div class="col-xs-5">
+			<input id="cep" name="participant[zipcode]" value="<?= $this->participant->getZipcode()?>" type="text" class="form-control" placeholder="CEP" required>
+			<a href="http://www.buscacep.correios.com.br" target="_blank"><span id="help-cpf" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Caso você não saiba seu CEP, é possível fazer uma busca a partir do endereço em www.buscacep.correios.com.br"></span></a>
+		</div>
+		<div class="col-xs-7">
+			<input id="district" name="participant[district]" value="<?= $this->participant->getDistrict()?>" type="text" class="form-control" placeholder="Bairro" required>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<input id="complement" name="participant[complement]" value="<?= $this->participant->getComplement()?>" type="text" class="form-control" placeholder="Complemento">
+		</div>
+	</div>
+	
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-5">
+			<select id="estado" name="state[state]" class="form-control"></select>
+		</div>
+		<div class="col-xs-12 col-sm-7">
+			<select id="cidade" name="city[name]" class="form-control"></select>
+		</div>
+	</div>
+	
+	<button type="submit" class="btn btn-default btn-lg"><?= $this->titleBtnSubmit ?></button>
+</form>
+
+<script type="text/javascript">
+	validateCpfUrl = '<?=createUriFor("/validarcpf/")?>';
+</script>
+	
+

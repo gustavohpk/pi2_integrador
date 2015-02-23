@@ -10,16 +10,22 @@
 - Alterar a classe dos certificados, adicionando os objetos Evento e Participante como atributo público
 - Adicionar a listagem de eventos (via json) nas diversas áreas do painel
 - Configurar API Google Maps dinâmica
-- Analisar o uso do campo "desativado/invisível" na tabela de eventos
-- Analisar replicação de dados do usuário para a inscrição
 - Melhorar função de geração/validação de url de evento
 - Consertar a pardonização de nomenclaturas (nomes com "_" na frente, arrumar singular e plural)
 - Geração de miniaturas ao cadastrar imagem
-- Analisar o uso do campo "status" na inscrição
 - A paginação está infinita. Limitar em 8 ou 10
 - Mudar links estáticos para dinâmicos, editando pelo painel
 - Desvincular "Settings" do "Main"
 - Adicionar mensagens flash no template de manutenção
+- Adicionar validações de data de abertura e término de inscrição (para inscrições feitas pelo site, não pelo painel)
+- Herdar patrocinadores do evento pai
+- Finalizar o javascript da página de inscrição
+- Adicionar validação de conflito de horário
+
+- Analisar o uso do campo "desativado/invisível" na tabela de eventos
+- Analisar replicação de dados do usuário para a inscrição
+- Analisar o uso do campo "status" na inscrição
+- Analisar o uso de descrição customizada no certificado
 
 ----------
 
@@ -31,8 +37,18 @@
 - Mensagens de confirmação ou erro de inscrição não estão funcionando corretamente
 - Pequeno bug no javascript da avaliação de eventos
 - Mensagens flash do admin/settings sendo exibidas várias vezes
+- Layout da galeria: as imagens estão quebrando a linha em algumas situações
+- O menu principal se sobrepõe ao conteúdo em algumas situações
+- Problema nas mensagens flash dos bônus de evento
 
 ----------
+
+
+----- Atualização 070 (18/02/15 - 23/02/15) -----
+
+- Correções do tema "utfpr" - painel do usuário
+- Atualizações no sistema de créditos/bônus
+
 
 ----- Atualização 069 (10/02/15 - 14/02/15) -----
 

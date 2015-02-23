@@ -302,6 +302,30 @@
 			return $sponsors;
 		}
 
+		public function getEventTypes(){
+			$sql = 
+			"SELECT 
+				*
+			FROM 
+				event_bonus
+			WHERE
+				(id_event = :id_event)";
+			$params = array(
+				":id_event" => $this->getIdEvent()
+			);
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute($params);
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+			$sponsors = array();			
+
+			foreach ($rows as $row) {
+				$sponsors[] = EventType::findById($row["id_event_type"])[0];
+			}
+				
+			return $sponsors;
+		}
+
 		public function getMedia($type = "p") {
 			return Media::findByIdEvent($this->getIdEvent(), $type);
 		}
@@ -446,15 +470,16 @@
 
 			$sql = 
 			"INSERT INTO event
-				(id_event_type, name, path, details, teacher, local, address, start_date, end_date, 
+				(id_event_type, id_parent_event, name, path, details, teacher, local, address, start_date, end_date, 
 				spaces, start_date_enrollment, end_date_enrollment, logo, send_participant_data)
 			VALUES
-				(:id_event_type, :name, :path, :details, :teacher, :local, :address, :start_date, :end_date,
+				(:id_event_type, :id_parent_event, :name, :path, :details, :teacher, :local, :address, :start_date, :end_date,
 				:spaces, :start_date_enrollment, :end_date_enrollment, :logo, :send_participant_data)";
 
 			$params = array(
 					":id_event_type" => $this->eventType->getIdEventType(),
 					":name" => $this->getName(),
+					":id_parent_event" => $this->getIdParentEvent(),
 					":path" => $this->getPath(),
 					":details" => $this->getDetails(),
 					":teacher" => $this->getTeacher(),
@@ -531,6 +556,13 @@
 		}
 
 		public function remove(){
+			//Remove os bônus
+			$sql = "DELETE FROM event_bonus WHERE id_event = :id_event";
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			$params = array(":id_event" => $this->getIdEvent());
+			$statment->execute($params);
+
 			$sql = "DELETE FROM event WHERE id_event = :id_event";
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);

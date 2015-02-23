@@ -27,9 +27,11 @@
 			<br/>
 			<span class="glyphicon glyphicon-eye-open"></span> <?= $this->events->getViews() + 1?>
 			<br>
-			<div id="average">
-				<input type="hidden" class="rating" readonly value="<?= $this->realRating ?>" data-start="0" data-stop="5" data-fractions="10"/>
-			</div>
+			<?php if($this->events->eventInitiated()) : ?>
+				<div id="average">
+					<input type="hidden" class="rating" readonly value="<?= $this->realRating ?>" data-start="0" data-stop="5" data-fractions="10"/>
+				</div>
+			<?php endif; ?>
 			<br/>
 			<?php if($this->attendance) : ?>
 				<div id="participant-rating">

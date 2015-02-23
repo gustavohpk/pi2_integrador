@@ -6,7 +6,7 @@
 	}
 </script>
 
-<div class="row">
+<div class="row enrollment">
 	<form method="POST" action="<?= createUriFor('/inscricao/finalizar') ?>">
 	<div class="col-xs-12">
 		<h2>Inscrição</h2>
@@ -15,43 +15,76 @@
 		<?php $enablePayment = $event->eventType->getCode() != "sem_pagamento" ?>
 
 		<input type="hidden" name="enrollment[id_event][]" value="<?= $event->getIdEvent()?>">
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<h4><?= $event->getName() ?></h4>
-			<h4>Valor: R$ <?= number_format($costEvent, 2) ?></h4>
-			<ul class="list-group" style="text-align: left">
-				<?php $subEvents = $this->eventsRelated; ?>
-				<?php foreach ($subEvents as $subEvent) :?>
-					<?php if ($subEvent->canEnrollment()) : ?>
-						<?php $enablePayment = ($enablePayment ? true : $event->eventType->getCode() != "sem_pagamento"); ?>
-						<?php $costSubEvent = ($subEvent->cost ? $subEvent->cost[0]->getCostOfDay() : 0) ?>
-						<li class="list-group-item">
-							<span class="badge">
-								R$ <span id="costSubEvent<?=$subEvent->getIdEvent()?>">
-									<?= number_format($costSubEvent, 2) ?>
-								</span>
-							</span>
-							<input type="checkbox" name="enrollment[id_event][]" value="<?= $subEvent->getIdEvent()?>" onClick="selectSubEvent(<?=$subEvent->getIdEvent()?>, this.checked)">
-							<?=$subEvent->getName() ?>
-						</li>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</ul>
-			<h4>Total: R$ <span id="sum"><?= number_format($costEvent, 2) ?></span></h4>
-		</div>		
 
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<?php if ($enablePayment) : ?>
-				<h4>Método de Pagamento</h4>
-				<h5>Selecione um dos métodos de pagamento a seguir</h5>
-				<ul class="list-group" style="text-align: left">
-					<li class="list-group-item">
-						<input type="radio" name="enrollment[id_payment_type]" value="<?=$this->paymentsType[0]->getIdPaymentType()?>">
-						<img class="" src="<?=$this->getResource('img/pagseguro-logo.png')?>" style="width: 20%" alt="<?=$this->paymentsType[0]->getName() ?>">
-					</li>
+			<h4>Evento: <?= $event->getName() ?></h4>
+			<h4>Valor da inscrição: R$ <?= number_format($costEvent, 2) ?></h4>
+			<?php if(isset($this->eventsRelated)) : ?>
+				<!-- <span class="left-title">Sub-eventos</span> -->
+				<br>
+				<h4>Sub-eventos <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Este evento possui sub-eventos. Sub-evento é um evento que faz parte de outro. Por exemplo, uma palestra pode ser um sub-evento de uma Semana Acadêmica."></span></h4>
+				<ul class="list-group subevent-list" style="text-align: left">
+					<?php foreach ($this->eventsRelated as $subEvent) :?>
+						<?php if ($subEvent->canEnrollment()) : ?>
+							<?php $enablePayment = ($enablePayment ? true : $event->eventType->getCode() != "sem_pagamento"); ?>
+							<?php $costSubEvent = ($subEvent->cost ? $subEvent->cost[0]->getCostOfDay() : 0) ?>
+							<li class="list-group-item">
+								<span class="badge">
+									R$ <span id="costSubEvent<?=$subEvent->getIdEvent()?>">
+										<?= number_format($costSubEvent, 2) ?>
+									</span>
+								</span>
+								<input type="checkbox" name="enrollment[id_event][]" value="<?= $subEvent->getIdEvent()?>" onClick="selectSubEvent(<?=$subEvent->getIdEvent()?>, this.checked)">
+								<?=$subEvent->getName() ?>
+							</li>
+						<?php endif; ?>
+					<?php endforeach; ?>
 				</ul>
-			<?php else : ?>
-				<h4>Evento gratuíto</h4>
-			<?php endif ?>
+				<span class="info">OBS.: Você pode se inscrever agora nos sub-eventos e gerar apenas uma GRU.</span>
+			<?php endif; ?>
+			<h4>Total: R$ <span id="sum"><?= number_format($costEvent, 2) ?></span></h4>
+		</div>		
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="row">
+				<div class="col-xs-12">
+					<?php if(isset($this->events->eventBonus)) : ?>
+						<h4>Bônus (créditos)</h4>
+						<p>Realizando a inscrição neste evento, você poderá se inscrever gratuitamente em:</p>
+
+						<ul class="list-group subevent-list" style="text-align: left">
+							<?php foreach ($this->events->eventBonus as $bonus) :?>
+								<?php foreach($this->eventTypes as $type) : ?>
+									<?php if($bonus->getIdEventType() == $type->getIdEventType()) : ?>
+										<li class="list-group-item">
+											<?= $bonus->getQuantity() ?> sub-evento(s) do tipo <?= $type->getEventType() ?>
+										</li>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							<?php endforeach; ?>
+						</ul>
+
+						<span class="info">OBS.: O bônus se aplica tanto aos eventos selecionados ao lado quanto a inscrições separadas, desde que sejam sub-eventos deste evento. O valor será descontado após a finalização da inscrição. O valor dos eventos restantes (que excedam os créditos) será cobrado normalmente.</span>
+
+					<?php endif; ?>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-12">
+					<?php if ($enablePayment) : ?>
+						<h4>Método de Pagamento</h4>
+						<h5>Selecione um dos métodos de pagamento a seguir</h5>
+						<ul class="list-group" style="text-align: left">
+							<li class="list-group-item">
+								<input type="radio" name="enrollment[id_payment_type]" value="<?=$this->paymentsType[0]->getIdPaymentType()?>">
+								<img class="" src="<?=$this->getResource('img/pagseguro-logo.png')?>" style="width: 20%" alt="<?=$this->paymentsType[0]->getName() ?>">
+							</li>
+						</ul>
+					<?php else : ?>
+						<h4>Evento gratuíto</h4>
+					<?php endif ?>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">

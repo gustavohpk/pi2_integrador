@@ -77,9 +77,17 @@
                   }
                }
             }
+            if(isset($sponsors)){
+               if (!$this->events->setSponsorship($sponsors)) {
+                  // $errors = $this->events->sponsors[0]->getErrors();
+                  // foreach ($errors as $error) {
+                  //    \FlashMessage::errorMessage($error);
+                  // }
+               }
+            }
             if($eventBonus){
                if (!$this->events->setEventBonus($eventBonus)) {
-                  $errors = $this->events->eventBonus[0]->getErrors();
+                  // $errors = $this->events->eventBonus[0]->getErrors();
                   foreach ($errors as $error) {
                      \FlashMessage::errorMessage($error);
                   }
@@ -131,12 +139,12 @@
                }
             }
             if(isset($sponsors)){
-               // if (!$this->events->setSponsorship($sponsors)) {
-               //    $errors = $this->events->sponsors[0]->getErrors();
-               //    foreach ($errors as $error) {
-               //       \FlashMessage::errorMessage($error);
-               //    }
-               // }
+               if (!$this->events->setSponsorship($sponsors)) {
+                  // $errors = $this->events->sponsors[0]->getErrors();
+                  // foreach ($errors as $error) {
+                  //    \FlashMessage::errorMessage($error);
+                  // }
+               }
             }
             if($eventBonus){
                if (!$this->events->setEventBonus($eventBonus)) {
