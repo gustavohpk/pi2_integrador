@@ -26,6 +26,7 @@
 - Analisar replicação de dados do usuário para a inscrição
 - Analisar o uso do campo "status" na inscrição
 - Analisar o uso de descrição customizada no certificado
+- Analisar o uso do campo "usou bônus" na tabela de inscrição
 
 ----------
 
@@ -42,6 +43,10 @@
 - Problema nas mensagens flash dos bônus de evento
 
 ----------
+
+----- Atualização 071 (24/02/15 - 25/02/15) -----
+
+- Atualizações no sistema de créditos/bônus
 
 
 ----- Atualização 070 (18/02/15 - 23/02/15) -----

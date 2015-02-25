@@ -174,13 +174,16 @@
 			return self::find(array("id_participant"), array($id));
 		}
 
-		public function save(){
+		public function save($useBonus){
 			if (!$this->isValidData()) return false;
 
-			if(self::findByIdParticipant($this->participant->getIdParticipant())){
+			if(self::find(array("id_event", "id_participant"), array($this->event->getIdEvent(), $this->participant->getIdParticipant()))){
 				$this->setMessageError("Você já se inscreveu neste evento.");
 				return false;
 			}
+
+			if($useBonus)
+				$this->setCost(0);
 
 			$sql = 
 			"INSERT INTO enrollment

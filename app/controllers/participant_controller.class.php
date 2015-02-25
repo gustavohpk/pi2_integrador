@@ -23,13 +23,13 @@
 			$password = $this->params["participant"]["password"];
 
 			if ($this->participant->login($email, $password)){
+				FlashMessage::infoMessage("Login efetuado.");
 				if($this->retrieveUrl()){
 					$url = $this->retrieveUrl();
 					$this->unsetUrl();
 					$this->redirectTo($url);
 				}
 				else{
-					FlashMessage::infoMessage("Login efetuado.");
 					$this->redirectTo("conta/painel");
 				}
 			}

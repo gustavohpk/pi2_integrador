@@ -259,8 +259,8 @@
 			FROM 
 				event
 			WHERE
-				(id_event = :id_parent_event) 
-				OR (id_parent_event = :id_event AND id_event <> :id_event)";
+				(id_event = :id_parent_event) AND id_event <> :id_event)";
+				// OR (id_parent_event = :id_event
 			$params = array(
 				":id_parent_event" => $this->getIdParentEvent(),
 				":id_event" => $this->getIdEvent()

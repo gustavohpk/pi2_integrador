@@ -48,8 +48,10 @@
                $this->redirectTo("eventos/proximos");
             }
          }
-  
 
+         if($this->events->getIdParentEvent())
+            $this->parentEvent = Event::findById($this->events->getIdParentEvent())[0];
+         
          $this->eventsRelated = $this->events->getEventsRelated();
          $this->eventTypes = $this->events->getEventTypes();
          $this->paymentsType = PaymentType::all();
@@ -60,7 +62,35 @@
          $params = $this->params["enrollment"];
          foreach ($params["id_event"] as $id_event) {
             $this->events = Event::findById($id_event)[0]; 
-            $cost = ($this->events->cost ? $this->events->cost[0]->getCostOfDay() : 0);            
+            echo "<pre>";
+            //Procura inscrições com o mesmo evento pai
+            if($this->events->getIdParentEvent()){
+               $bonus = EventBonus::findByIdEvent($this->events->getIdParentEvent());
+               $siblingEvents = Event::find(array("id_parent_event"), array($this->events->getIdParentEvent()));
+
+               $siblingEventsEnrollments = array();
+               foreach ($siblingEvents as $siblingEvent) {
+                  if(!empty($siblingEventEnrollment = Enrollment::findByIdEvent($siblingEvent->getIdEvent()))){
+                     $siblingEventsEnrollments[$siblingEvent->eventType->getIdEventType()] = $siblingEventEnrollment;
+                  }
+               }
+               foreach ($bonus as $bonusItem) {
+                  if($bonusItem->getIdEventType() == $this->events->eventType->getIdEventType()){
+                     $qty = $bonusItem->getQuantity();
+                     if(!empty($siblingEventsEnrollments)){
+                        foreach ($siblingEventsEnrollments[$this->events->eventType->getIdEventType()] as $enrollment) {
+                           $qty--;
+                        }
+                     }
+                     if($qty > 0){
+                        $useBonus = true;
+                     }
+                  }
+               }
+            }
+
+            $cost = ($this->events->cost ? $this->events->cost[0]->getCostOfDay() : 0);
+
             $data = array(
                   "id_participant" => $participant->getIdParticipant(),
                   "id_event" => $this->events->getIdEvent(),
@@ -68,16 +98,18 @@
                   "cost" => $cost
                );
             $this->enrollment = new Enrollment($data);
-            if ($this->enrollment->save()) {
+            if ($this->enrollment->save($useBonus)) {
                if ($this->events->eventType->getCode() == "sem_pagamento") {
                   $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - Gratuíto");
                }
-               else {
+               else if($useBonus) {
+                  $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - Inscrição Realizada - Bônus utilizado (inscrição gratuita)");
+               }else{
                   $url = $this->enrollment->executePayment($data);
                   $this->enrollment->setMessageSuccess("
-                        #{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - 
-                        <a href='{$url}' target='_blank'>Clique aqui</a> para fazer o pagamento"
-                     );
+                     #{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - 
+                     <a href='{$url}' target='_blank'>Clique aqui</a> para fazer o pagamento"
+                  );
                }
             }
             else {

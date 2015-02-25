@@ -16,10 +16,16 @@
 
 		<input type="hidden" name="enrollment[id_event][]" value="<?= $event->getIdEvent()?>">
 
+		<?php if(isset($this->parentEvent)) : ?>
+	
+			<div class="well well-md">Este evento faz parte do evento <?= $this->parentEvent->getName() ?>. Caso ainda não esteja inscrito neste evento, realize sua inscrição.</div>
+
+		<?php endif; ?>
+
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<h4>Evento: <?= $event->getName() ?></h4>
 			<h4>Valor da inscrição: R$ <?= number_format($costEvent, 2) ?></h4>
-			<?php if(isset($this->eventsRelated)) : ?>
+			<?php if(!empty($this->eventsRelated)) : ?>
 				<!-- <span class="left-title">Sub-eventos</span> -->
 				<br>
 				<h4>Sub-eventos <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Este evento possui sub-eventos. Sub-evento é um evento que faz parte de outro. Por exemplo, uma palestra pode ser um sub-evento de uma Semana Acadêmica."></span></h4>
