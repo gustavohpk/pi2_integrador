@@ -43,11 +43,50 @@ class Pager
             $html .= '<li class="disabled"><a href="#">&laquo;</a></li>';
             $html .= '<li class="disabled"><a href="#">&lsaquo;</a></li>';
         }
-        for($i=1; $i<=$this->getNumPages(); $i++) {
-            if ($i != $this->page) {
-                $html .= '<li><a href="'.$baseUrl.'/pagina/'.$i.'" title="Página '.$i.'">'.$i.'</a></li>';
-            } else {
-                $html .= '<li class="active"><a href="#" title="Página '.$i.' (atual)">'.$i.'</a></li>';
+        if($this->getNumPages() < 6){
+            for($i=1; $i<=$this->getNumPages(); $i++) {
+                if ($i != $this->page) {
+                    $html .= '<li><a href="'.$baseUrl.'/pagina/'.$i.'" title="Página '.$i.'">'.$i.'</a></li>';
+                } else {
+                    $html .= '<li class="active"><a href="#" title="Página '.$i.' (atual)">'.$i.'</a></li>';
+                }
+            }
+        }else{
+            for ($i = 1; $i <= 2; $i++) { 
+                if ($i != $this->page) {
+                    $html .= '<li><a href="'.$baseUrl.'/pagina/'.$i.'" title="Página '.$i.'">'.$i.'</a></li>';
+                } else {
+                    $html .= '<li class="active"><a href="#" title="Página '.$i.' (atual)">'.$i.'</a></li>';
+                }
+            }
+            if($this->page > 2 && $this->page < $this->getNumPages() - 2){
+                if($this->page-2 > 2){
+                    $html .= '<li class="disabled"><a href="#" title="...">...</a></li>';
+                }
+
+                if($this->page -1 > 2){
+                    $html .= '<li><a href="'.$baseUrl.'/pagina/'.($this->page -1).'" title="Página '.($this->page -1).'">'.($this->page -1).'</a></li>';
+                }
+
+                $html .= '<li class="active"><a href="#" title="Página '.$this->page.' (atual)">'.$this->page.'</a></li>';
+
+                if($this->page + 1 < $this->getNumPages() - 2){
+                    $html .= '<li><a href="'.$baseUrl.'/pagina/'.($this->page + 1).'" title="Página '.($this->page + 1).'">'.($this->page + 1).'</a></li>';
+                }
+
+                if($this->page < $this->getNumPages() -2){
+                    $html .= '<li class="disabled"><a href="#" title="...">...</a></li>';
+                }
+                
+            }else{
+                $html .= '<li><a href="#" title="...">...</a></li>';
+            }
+            for ($i = $this->getNumPages() - 2; $i < $this->getNumPages(); $i++) {
+                if ($i != $this->page) {
+                    $html .= '<li><a href="'.$baseUrl.'/pagina/'.$i.'" title="Página '.$i.'">'.$i.'</a></li>';
+                } else {
+                    $html .= '<li class="active"><a href="#" title="Página '.$i.' (atual)">'.$i.'</a></li>';
+                }
             }
         }
         if ($this->hasNext()) {

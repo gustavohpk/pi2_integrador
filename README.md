@@ -44,6 +44,11 @@
 
 ----------
 
+----- Atualização 072 (26/02/15) -----
+
+- Paginação corrigida
+
+
 ----- Atualização 071 (24/02/15 - 25/02/15) -----
 
 - Atualizações no sistema de créditos/bônus
