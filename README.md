@@ -44,6 +44,11 @@
 
 ----------
 
+----- Atualização 073 (27/02/15 - )
+
+- Iniciada classe administrator_level
+
+
 ----- Atualização 072 (26/02/15) -----
 
 - Paginação corrigida
