@@ -1,7 +1,7 @@
 <?php
 	namespace Admin;
 
-	class AdministratorLevel extends \BaseModel{
+	class AdministratorLevel {
 		private $idAdministratorLevel;
 		private $title;
 		private $level;

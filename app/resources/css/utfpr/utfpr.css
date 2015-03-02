@@ -161,6 +161,8 @@ input:-khtml-autofill {
 .label-sm { font-size: 12px; }
 .label-xs { font-size: 10px; }
 
+.label-info { background-color: rgba(91, 192, 222, 0.7); }
+
 input[type=file] { display: initial; }
 
 /* Eventos */
@@ -202,12 +204,10 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 .row-events .event:nth-child(4)  { border-left: 1px solid #2F3238; }
 
 
-/* Correacao Glyphicon */
-#account-register input.input-glyphicon, #account-login input.input-glyphicon, #contact-form input.input-glyphicon{ margin-top: 1px !important; margin-bottom: -1px !important; }
-.left-inner-addon-group { position: relative; }
-.left-inner-addon-group input { padding-left: 42px;}
-.left-inner-addon-group i { position: absolute; padding: 9px 12px; pointer-events: none; display: block; padding-right: 10px; border-right: 1px solid #DDD;}
-.has-feedback .form-control-feedback{ top: 0; }
+/* Correacao Formulário de cadastro */
+.left-inner-addon-group input#cpf { padding-left: 50px;}
+#main #complement, #cidade { margin-bottom: 15px; }
+
 
 /* Contato */
 #contact-form button{ margin-top: 15px; }
@@ -266,6 +266,7 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 #news-list .list-group-item{ color: #7F8289; min-height: 105px; webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out; }
 #news-list .list-group-item:hover{ background-color: #3C3F45; color: #E6E6E6;}
 #news-list .list-group-item:hover h4 { color: #E6E6E6; }
+#news-list .list-group-item:hover h6 { color: #AAA; }
 #news-list .list-group-item h4 { color: #DDD; text-transform: uppercase;}
 #news-list .list-group-item{ min-height: 140px; background-color: #26292E; border: 0; }
 .news-item .news-content {text-align: justify;}
@@ -394,67 +395,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 .list-group-item-warning:hover { background-color: rgba(138, 109, 59, 0.4); }
 
 
-#show-certificate, #report {
-    margin: 0;
-    padding: 0;
-    background-color: #FAFAFA;
-    font: 11pt "Arial";
-    width: 21cm;
-    min-height: 25cm;
-    padding: 2cm;
-    margin: 1cm auto;
-    border: 1px #D3D3D3 solid;
-    border-radius: 5px;
-    background: white;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-#report table{ font-size: 12px; }
-#report th { font-weight: 600; }
-#report ul { text-align: left; }
-#report-info { text-align: center; }
-
-
-#show-certificate{
-  /*Altura máxima - um pouco menor que o tamanho da folha A4 para a janela de impressão não exibir uma segunda folha em branco*/
-    max-height: 29.1cm;
-}
-
-#show-certificate p {  color: #000;}
-
-#certificate-top{
-  text-align: left;
-}
-
-#show-certificate hr{
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-#show-certificate img{
-  width: 25%;
-  vertical-align: top;
-  float: left;
-  margin-right: 15px;
-}
-
-#certificate-title, #report-title{
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-}
-
-#certificate-content{
-  font-size: 20px;
-  text-align: center;
-  line-height: 150%;
-}
-
-#certificate-bottom{
-  font-size: 13px;
-  text-align: center;
-}
-
+#show-certificate p, #show-certificate span{ color: #000; }
 
 
 

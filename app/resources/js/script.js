@@ -299,9 +299,11 @@ function loadPhotos(){
 		if (data.length <= 0){
 			$("#btn-load-photos").hide();
 		}else{
+		$("#photos").append("<div class='row'>");
   		$.each(data, function(i, media){
   			$("#photos").append("<div class='col-xs-12 col-sm-4'><a href='" + media.path + "' class='fancybox' title='" + media.label + "' rel='lightbox'><img class='thumbnail' src='" + media.path + "' alt='" + media.label + "'/><span class='glyphicon glyphicon-camera' title='Foto'></span></div>");
   		});
+  		$("#photos").append("</div>");
   		photosPage++;
     }
     $(".ajax-loader").hide();
@@ -314,9 +316,11 @@ function loadVideos(){
 		if (data.length <= 0){
 			$("#btn-load-videos").hide();
 		}else{
+		$("#videos").append("<div class='row'>");
   		$.each(data, function(i, media){
   			$("#videos").append("<div class='col-xs-12 col-sm-4'><a href='" + media.path + "' class='fancybox' title='" + media.label + "' rel='lightbox'><img class='thumbnail' src='" + media.thumbnail + "' alt='" + media.label + "'/><span class='glyphicon glyphicon-video' title='Vídeo'></span></div>");
   		});
+  		$("#videos").append("</div>");
   		videosPage++;
     }
     $(".ajax-loader").hide();

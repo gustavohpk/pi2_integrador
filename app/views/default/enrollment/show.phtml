@@ -9,7 +9,7 @@
 			<?php if ($this->enrollment->getDatePayment()) : ?>	
 				<h4><span class="label label-info">Evento pago em: <?=$this->enrollment->getDatePayment("d/m/Y")?></span></h4>
 			<?php elseif ($this->enrollment->getCost() == 0) : ?>	
-				<h4><span class="label label-info">Evento Gratuíto</span></h4>
+				<h4><span class="label label-info">Evento Gratuito</span></h4>
 			<?php else : ?>
 				<h4><span class="label label-danger">Este evento ainda não foi pago! <a class="event-related-link" href="<?=$this->enrollment->getUriPayment()?>" target="_blank">Clique aqui</a> para pagar agora!</span></h4>
 			<?php endif ?>

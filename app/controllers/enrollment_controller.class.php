@@ -95,12 +95,13 @@
                   "id_participant" => $participant->getIdParticipant(),
                   "id_event" => $this->events->getIdEvent(),
                   "id_payment_type" => $params["id_payment_type"],
-                  "cost" => $cost
+                  "cost" => $cost,
+                  "bonus" => $useBonus ? $useBonus : false
                );
             $this->enrollment = new Enrollment($data);
-            if ($this->enrollment->save($useBonus)) {
+            if ($this->enrollment->save()) {
                if ($this->events->eventType->getCode() == "sem_pagamento") {
-                  $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - Gratuíto");
+                  $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - Gratuito");
                }
                else if($useBonus) {
                   $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - Inscrição Realizada - Bônus utilizado (inscrição gratuita)");

@@ -11,6 +11,13 @@
 							<?= $enrollment->event->getName() ?> - <b>Pagamento Confirmado</b>
 						</li>
 					</a>
+				<?php elseif ($enrollment->getBonus()) : ?>
+					<a href="<?=$this->getUri("conta/inscricoes/{$enrollment->getIdEnrollment()}")?>">
+						<li class="list-group-item list-group-item-success">
+							<span class="glyphicon glyphicon-ok-sign"></span>
+							<?= $enrollment->event->getName() ?> - <b>Inscrição Gratuita (bônus utilizado)</b>
+						</li>
+					</a>
 				<?php elseif ($enrollment->getCost() == 0) : ?>
 					<a href="<?=$this->getUri("conta/inscricoes/{$enrollment->getIdEnrollment()}")?>">
 						<li class="list-group-item list-group-item-success">

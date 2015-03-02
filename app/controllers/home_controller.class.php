@@ -20,7 +20,10 @@
 	        	$this->prevEvents = Event::findPrev(date("Y-m-d"));
 	        	$this->countPrev = count($this->prevEvents);
 	        }
-	        $this->events = array_merge($this->nextEvents, $this->prevEvents);
+	        if(isset($this->prevEvents))
+	        	$this->events = array_merge($this->nextEvents, $this->prevEvents);
+	        else
+	        	$this->events = $this->nextEvents;
 	        //var_dump($this->events); exit;
 	        $this->bannersNames = Settings::find(array("description"), array("banner%_name"), "LIKE");
          	$this->bannersPaths = Settings::find(array("description"), array("banner%_path"), "LIKE");

@@ -12,6 +12,7 @@
 		private $attendance;
 		private $participantData;
 		private $rating;
+		private $bonus;
 
 		public function setIdEnrollment($idEnrollment){
 			$this->idEnrollment = $idEnrollment;
@@ -102,8 +103,16 @@
 			$this->rating = $rating;
 		}
 
+		public function setBonus($bonus){
+			$this->bonus = $bonus;
+		}
+
 		public function getRating(){
 			return $this->rating;
+		}
+
+		public function getBonus(){
+			return $this->bonus;
 		}
 
 		// mensagens exibidas para confirmação da inscrição do participante
@@ -174,7 +183,7 @@
 			return self::find(array("id_participant"), array($id));
 		}
 
-		public function save($useBonus){
+		public function save(){
 			if (!$this->isValidData()) return false;
 
 			if(self::find(array("id_event", "id_participant"), array($this->event->getIdEvent(), $this->participant->getIdParticipant()))){
@@ -182,14 +191,14 @@
 				return false;
 			}
 
-			if($useBonus)
+			if($this->getBonus())
 				$this->setCost(0);
 
 			$sql = 
 			"INSERT INTO enrollment
-				(id_participant, id_event, date_enrollment, date_payment, id_payment_type, cost)
+				(id_participant, id_event, date_enrollment, date_payment, id_payment_type, cost, bonus)
 			VALUES
-				(:id_participant, :id_event, :date_enrollment, :date_payment, :id_payment_type, :cost)";
+				(:id_participant, :id_event, :date_enrollment, :date_payment, :id_payment_type, :cost, :bonus)";
 
 			$params = array(
 					":id_participant" => $this->participant->getIdParticipant(),
@@ -197,7 +206,8 @@
 					":date_enrollment" => date("Y-m-d H:i:s"),
 					":date_payment" => null,
 					":id_payment_type" => $this->getIdPaymentType(),
-					":cost" => $this->getCost()
+					":cost" => $this->getCost(),
+					":bonus" => $this->getBonus()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);

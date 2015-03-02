@@ -21,12 +21,14 @@
 - Herdar patrocinadores do evento pai
 - Finalizar o javascript da página de inscrição
 - Adicionar validação de conflito de horário
+- Adicionar menu do painel de usuário em todas as páginas do painel
+- Adicionar informação "Todas as fotos / Todos os vídeos foram carregados"
+- Mover classe "Reports" para o namespace "Admin"
 
 - Analisar o uso do campo "desativado/invisível" na tabela de eventos
 - Analisar replicação de dados do usuário para a inscrição
 - Analisar o uso do campo "status" na inscrição
 - Analisar o uso de descrição customizada no certificado
-- Analisar o uso do campo "usou bônus" na tabela de inscrição
 
 ----------
 
@@ -44,9 +46,12 @@
 
 ----------
 
------ Atualização 073 (27/02/15 - )
+----- Atualização 073 (27/02/15 - 02/03/15) -----
 
+- Campo "bonus" adicionado à inscrição, para indicar quando o bônus foi utilizado
 - Iniciada classe administrator_level
+- Atualizações na área de nível de administrador
+- Pequenas correções de CSS
 
 
 ----- Atualização 072 (26/02/15) -----

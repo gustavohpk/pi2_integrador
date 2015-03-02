@@ -183,6 +183,14 @@
     $router->post('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'update'));
     $router->get('/admin/usuarios/:id/remover', array('controller' => 'Admin\AdministratorController', 'action' => 'remove'));
 
+    //rotas para níveis de administrador
+    $router->get('/admin/niveis/lista', array('controller' => 'Admin\AdministratorLevelController', 'action' => '_list'));
+    $router->get('/admin/niveis/novo', array('controller' => 'Admin\AdministratorLevelController', 'action' => '_new'));
+    $router->post('/admin/niveis/novo', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'save'));
+    $router->get('/admin/niveis/:id/alterar', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'edit'));
+    $router->post('/admin/niveis/:id/alterar', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'update'));
+    $router->get('/admin/niveis/:id/remover', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'remove'));
+
     //rotas para participantes (administração)
     $router->get('/admin/participantes/lista', array('controller' => 'Admin\ParticipantController', 'action' => '_list'));
     $router->get('/admin/participantes/novo', array('controller' => 'Admin\ParticipantController', 'action' => '_new'));
