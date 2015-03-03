@@ -1,7 +1,7 @@
 <?php
 	namespace Admin;
 
-	class AdministratorLevel {
+	class AdministratorLevel extends \BaseModel{
 		private $idAdministratorLevel;
 		private $title;
 		private $level;
@@ -64,16 +64,15 @@
 		}
 
 		public function save(){
-			if (!$this->isValidData()) return false;
 
 			$sql = 
 			"INSERT INTO administrator_level
-				(name, level)
+				(title, level)
 			VALUES
-				(:name, :level)";
+				(:title, :level)";
 
 			$params = array(
-					":name" => $this->getName(),
+					":title" => $this->getTitle(),
 					":level" => $this->getLevel()
 				);
 
@@ -107,7 +106,7 @@
 		}
 
 		public function remove(){
-			$sql = "DELETE FROM administrator WHERE id_administrator_level = :id_administrator_level";
+			$sql = "DELETE FROM administrator_level WHERE id_administrator_level = :id_administrator_level";
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_administrator_level" => $this->getIdAdministratorLevel());

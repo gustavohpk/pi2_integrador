@@ -186,7 +186,7 @@
     //rotas para níveis de administrador
     $router->get('/admin/niveis/lista', array('controller' => 'Admin\AdministratorLevelController', 'action' => '_list'));
     $router->get('/admin/niveis/novo', array('controller' => 'Admin\AdministratorLevelController', 'action' => '_new'));
-    $router->post('/admin/niveis/novo', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'save'));
+    $router->post('/admin/niveis/novo', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'create'));
     $router->get('/admin/niveis/:id/alterar', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'edit'));
     $router->post('/admin/niveis/:id/alterar', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'update'));
     $router->get('/admin/niveis/:id/remover', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'remove'));
