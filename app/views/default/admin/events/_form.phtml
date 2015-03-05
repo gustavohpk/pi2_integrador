@@ -33,8 +33,8 @@
 				<div class="col-xs-12 col-sm-2">
 					<h4>Permitir envio de texto pelo participante</h4>
 					<div class="input-group well well-md" title="Caso seja necessário, é possível ativar um campo de texto para ser preenchido durante a inscrição." data-toggle="tooltip" data-placement="bottom">
-						<span> Sim </span><input id="foto" type="radio" name="event[send_participant_data]" value="1" <?= $this->events->getSendParticipantData() ? "checked" : ""  ?>>
-						<span> Não </span><input id="video" type="radio" name="event[send_participant_data]" value="0" <?= $this->events->getSendParticipantData() ? "" : "checked" ?>>
+						<span> Sim </span><input id="send_data" type="radio" name="event[send_participant_data]" value="1" <?= $this->events->getSendParticipantData() ? "checked" : ""  ?>>
+						<span> Não </span><input id="not_send_data" type="radio" name="event[send_participant_data]" value="0" <?= $this->events->getSendParticipantData() ? "" : "checked" ?>>
 					</div>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 								<?php endif; ?>
 							</table>
 							<div class="ajax-loader"></div>
-							</br>
+							<br>
 							<span class="info" style="height:15px; width: 25px; border: 1px solid gray; display: inline-block; background: #d9edf7"></span>
 							<span style="font-size: 12px; margin-bottom: 3px">Anteriormente selecionado</span>
 							<br/><br/>
@@ -229,7 +229,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 					<h4>Patrocinadores</h4>
-					<select class="form-control" name="sponsors[]" size="10" multiple="multiple" title="Segure a tecla CTRL para desmarcar ou para selecionar vários patrocinadores" data-toggle="tooltip" data-placement-"right">
+					<select class="form-control" name="sponsors[]" size="10" multiple="multiple" title="Segure a tecla CTRL para desmarcar ou para selecionar vários patrocinadores" data-toggle="tooltip" data-placement="right">
 						<?php foreach ($this->sponsors as $key => $sponsor) : ?>
 							<?php if (isset($this->events->sponsorship)) : ?>
 								<?php $found = false ?>
@@ -259,7 +259,7 @@
 					<h4>Logo do evento</h4>
 					<span class="label label-default">OBS.: Selecione uma imagem no formato JPG, PNG ou GIF</span>
 					<br/><br/>
-					<input type="file" name="logo" accept=".jpg,.png,.gif">
+					<input type="file" name="logo" accept="image/jpg, image/jpeg, image/x-png, image/gif">
 					<br/><br/>
 					<?php if($this->events->getLogo()) : ?>
 						<img src="data:image/jpeg;base64, <?= base64_encode($this->events->getLogo()) ?>" alt"<?=$this->events->getName() ?>" style="max-width: 300px" />
@@ -291,8 +291,7 @@
 							<?php endforeach ?>
 						<?php else : ?>
 							<tr class="cost-row">
-								<input type="hidden" name="cost[id_cost_event][]" value=""/>
-								<td><input type="number" min="0" class="form-control" name="cost[cost][]" value=""/></td>
+								<td><input type="hidden" name="cost[id_cost_event][]" value=""/><input type="number" min="0" class="form-control" name="cost[cost][]" value=""/></td>
 								<td><input type="text" class="form-control" name="cost[date_max][]" value="" /></td>
 
 								<td><button type="button" class="btn btn-danger cost-delete-button"><span class="glyphicon glyphicon-trash"></span></button></td>
@@ -310,15 +309,14 @@
 					<br/><br/>
 				</div>
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-					<table id="cost-table" class="table" style="background: #FFF">
+					<table id="bonus-table" class="table" style="background: #FFF">
 						<tr>
 							<th>Tipo de Evento</th>
 							<th>Quantidade</th>
 						</tr>
 						<?php foreach ($this->eventsType as $key => $eventType) : ?>
 							<tr>
-								<td><?= $eventType->getEventType() ?></td>
-								<input type="hidden" name="event_bonus[id_event_type][]" value="<?= $eventType->getIdEventType() ?>">
+								<td><?= $eventType->getEventType() ?><input type="hidden" name="event_bonus[id_event_type][]" value="<?= $eventType->getIdEventType() ?>"></td>
 								<?php if(!empty($this->events->eventBonus)) : ?>
 									<?php $foundBonus = false ?>
 									<?php foreach ($this->events->eventBonus as $key => $eventBonus): ?>
@@ -329,12 +327,10 @@
 										<?php endif; ?>	
 									<?php endforeach ?>
 									<?php if(!$foundBonus) : ?>
-										<input type="hidden" name="event_bonus[id_event_bonus][]" value="0"/>
-										<td><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="0"></td>
+										<td><input type="hidden" name="event_bonus[id_event_bonus][]" value="0"/><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="0"></td>
 									<?php endif; ?>
 								<?php else : ?>
-									<input type="hidden" name="event_bonus[id_event_bonus][]" value="0"/>
-									<td><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="0"></td>
+									<td><input type="hidden" name="event_bonus[id_event_bonus][]" value="0"/><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="0"></td>
 								<?php endif; ?>
 							</tr>
 						<?php endforeach; ?>
@@ -367,11 +363,11 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
-			<a href="<?= createUriFor('/admin/eventos/lista')?>">
-				<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+			<a href="<?= createUriFor('/admin/eventos/lista')?>" class="btn btn-warning" role="button">
+				<span class="glyphicon glyphicon-remove-circle"></span> Cancelar
 			</a>
-			<a href="<?= createUriFor('/admin/eventos/'.$this->events->getIdEvent().'/remover')?>">
-				<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+			<a href="<?= createUriFor('/admin/eventos/'.$this->events->getIdEvent().'/remover')?>" class="btn btn-danger" role="button">
+				<span class="glyphicon glyphicon-trash"></span> Excluir
 			</a>
 		</div>
 	</div>

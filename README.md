@@ -43,8 +43,15 @@
 - Layout da galeria: as imagens estão quebrando a linha em algumas situações
 - O menu principal se sobrepõe ao conteúdo em algumas situações
 - Problema nas mensagens flash dos bônus de evento
+- Problema de redirecionamentos no painel do admin (provavelmente logado)
 
 ----------
+
+----- Atualização 074 (04/03/15 - ) -----
+
+- Correções para validar no W3C
+
+
 
 ----- Atualização 073 (27/02/15 - 02/03/15) -----
 
