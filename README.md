@@ -25,6 +25,8 @@
 - Adicionar informação "Todas as fotos / Todos os vídeos foram carregados"
 - Mover classe "Reports" para o namespace "Admin"
 
+- Analisar existência de bug: Após acessar uma url passando post, se editamos a url para outra, mesmo que exista como get, indica página não encontrada
+
 - Analisar o uso do campo "desativado/invisível" na tabela de eventos
 - Analisar replicação de dados do usuário para a inscrição
 - Analisar o uso do campo "status" na inscrição
@@ -47,10 +49,11 @@
 
 ----------
 
------ Atualização 074 (04/03/15 - ) -----
+----- Atualização 074 (04/03/15 - 13/03/15) -----
 
 - Correções para validar no W3C
-
+- Campo "details" da tabela "event" alterado para "MEDIUMTEXT"
+- Avanços no controle de permissões do painel do administrador
 
 
 ----- Atualização 073 (27/02/15 - 02/03/15) -----

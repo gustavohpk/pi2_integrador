@@ -1,238 +1,239 @@
 <?php
-    require 'main.php';
-    $router = new Router($_SERVER['REQUEST_URI']);
-
     /*
     * rotas para acesso geral
     */ 
 
+    $routes = array();
+
     //rota para raiz
-   	$router->get('/', array('controller' => 'HomeController', 'action' => 'index'));
+    $routes['GET'][] = array('route' => '/', 'controller' => 'HomeController', 'action' => 'index');
 
     //rota para sobre
-    $router->get('/sobre', array('controller' => 'HomeController', 'action' => 'about'));
+    $routes['GET'][] = array('route' => '/sobre', 'controller' => 'HomeController', 'action' => 'about');
 
     //validacoes ajax
-    $router->get('/validarcpf/:cpf', array('controller' => 'BaseController', 'action' => 'validateCpf'));
-   	
-    $router->get('/eventos/calendario', array('controller' => 'EventsController', 'action' => 'calendar'));
+    $routes['GET'][] = array('route' => '/validarcpf/:cpf', 'controller' => 'BaseController', 'action' => 'validateCpf');
+    
+    $routes['GET'][] = array('route' => '/eventos/calendario', 'controller' => 'EventsController', 'action' => 'calendar');
 
-   	//rotas para eventos
-   	$router->get('/eventos/proximos', array('controller' => 'EventsController', 'action' => 'next'));
-    $router->get('/eventos/proximos/pagina/:p', array('controller' => 'EventsController', 'action' => 'next'));
-    $router->get('/eventos/anteriores', array('controller' => 'EventsController', 'action' => 'previous'));
-    $router->get('/eventos/anteriores/pagina/:p', array('controller' => 'EventsController', 'action' => 'previous'));
-    $router->get('/eventos/:id/ver', array('controller' => 'EventsController', 'action' => 'show'));
-    $router->get('/eventos/:url', array('controller' => 'EventsController', 'action' => 'show'));
+    //rotas para eventos
+    $routes['GET'][] = array('route' => '/eventos/proximos', 'controller' => 'EventsController', 'action' => 'next');
+    $routes['GET'][] = array('route' => '/eventos/proximos/pagina/:p', 'controller' => 'EventsController', 'action' => 'next');
+    $routes['GET'][] = array('route' => '/eventos/anteriores', 'controller' => 'EventsController', 'action' => 'previous');
+    $routes['GET'][] = array('route' => '/eventos/anteriores/pagina/:p', 'controller' => 'EventsController', 'action' => 'previous');
+    $routes['GET'][] = array('route' => '/eventos/:id/ver', 'controller' => 'EventsController', 'action' => 'show');
+    $routes['GET'][] = array('route' => '/eventos/:url', 'controller' => 'EventsController', 'action' => 'show');
 
     //rota para setar nota do evento pelo participante
-    $router->get('/eventos/:id/avaliacao/:r', array('controller' => 'EnrollmentController', 'action' => 'updateRating'));
+    $routes['GET'][] = array('route' => '/eventos/:id/avaliacao/:r', 'controller' => 'EnrollmentController', 'action' => 'updateRating');
 
-   	//rotas para notícias
-   	$router->get('/noticias/lista', array('controller' => 'NewsController', 'action' => 'show'));
-    $router->get('/noticias/lista/pagina/:p', array('controller' => 'NewsController', 'action' => 'show'));
-    $router->get('/noticias/:id/ler', array('controller' => 'NewsController', 'action' => 'item'));
+    //rotas para notícias
+    $routes['GET'][] = array('route' => '/noticias/lista', 'controller' => 'NewsController', 'action' => 'show');
+    $routes['GET'][] = array('route' => '/noticias/lista/pagina/:p', 'controller' => 'NewsController', 'action' => 'show');
+    $routes['GET'][] = array('route' => '/noticias/:id/ler', 'controller' => 'NewsController', 'action' => 'item');
 
     //rotas para mídia
-    $router->get('/midia/galeria', array('controller' => 'MediaController', 'action' => 'gallery'));
-    $router->get('/midia/galeria/pagina/:p', array('controller' => 'MediaController', 'action' => 'gallery'));
-    $router->get('/midia/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photos'));
-    $router->get('/midia/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videos'));
+    $routes['GET'][] = array('route' => '/midia/galeria', 'controller' => 'MediaController', 'action' => 'gallery');
+    $routes['GET'][] = array('route' => '/midia/galeria/pagina/:p', 'controller' => 'MediaController', 'action' => 'gallery');
+    $routes['GET'][] = array('route' => '/midia/fotos/pagina/:p', 'controller' => 'MediaController', 'action' => 'photos');
+    $routes['GET'][] = array('route' => '/midia/videos/pagina/:p', 'controller' => 'MediaController', 'action' => 'videos');
 
-    $router->get('/midia/galeria/evento/:id', array('controller' => 'MediaController', 'action' => 'gallery'));
+    $routes['GET'][] = array('route' => '/midia/galeria/evento/:id', 'controller' => 'MediaController', 'action' => 'gallery');
 
-    $router->get('/midia/galeria/fotos', array('controller' => 'MediaController', 'action' => 'photoGallery'));
-    $router->get('/midia/galeria/fotos/pagina/:p', array('controller' => 'MediaController', 'action' => 'photoGallery'));
-    $router->get('/midia/galeria/fotos/evento/:id/pagina/:p', array('controller' => 'MediaController', 'action' => 'photoGallery'));
+    $routes['GET'][] = array('route' => '/midia/galeria/fotos', 'controller' => 'MediaController', 'action' => 'photoGallery');
+    $routes['GET'][] = array('route' => '/midia/galeria/fotos/pagina/:p', 'controller' => 'MediaController', 'action' => 'photoGallery');
+    $routes['GET'][] = array('route' => '/midia/galeria/fotos/evento/:id/pagina/:p', 'controller' => 'MediaController', 'action' => 'photoGallery');
 
 
-    $router->get('/midia/galeria/videos', array('controller' => 'MediaController', 'action' => 'videoGallery'));
-    $router->get('/midia/galeria/videos/pagina/:p', array('controller' => 'MediaController', 'action' => 'videoGallery'));
-    $router->get('/midia/galeria/videos/evento/:id/pagina/:p', array('controller' => 'MediaController', 'action' => 'videoGallery'));
+    $routes['GET'][] = array('route' => '/midia/galeria/videos', 'controller' => 'MediaController', 'action' => 'videoGallery');
+    $routes['GET'][] = array('route' => '/midia/galeria/videos/pagina/:p', 'controller' => 'MediaController', 'action' => 'videoGallery');
+    $routes['GET'][] = array('route' => '/midia/galeria/videos/evento/:id/pagina/:p', 'controller' => 'MediaController', 'action' => 'videoGallery');
 
     //rotas para contato
-    $router->get('/contato', array('controller' => 'ContactsController', 'action' => 'index'));
-    $router->post('/contato', array('controller' => 'ContactsController', 'action' => 'sendMessage'));
+    $routes['GET'][] = array('route' => '/contato', 'controller' => 'ContactsController', 'action' => 'index');
+    $routes['POST'][] = array('route' => '/contato', 'controller' => 'ContactsController', 'action' => 'sendMessage');
 
     /*
-    * rotas para area do participant
+    * rotas para area do participante
     */
-   	//rota para login/cadastro - usuários
-    $router->get('/conta/login', array('controller' => 'ParticipantController', 'action' => 'login'));
-    $router->post('/conta/login', array('controller' => 'ParticipantController', 'action' => 'executeLogin'));
-    $router->get('/conta/alterar', array('controller' => 'ParticipantController', 'action' => 'edit')); 
-    $router->post('/conta/:id/alterar', array('controller' => 'ParticipantController', 'action' => 'update')); 
-    $router->get('/conta/sair', array('controller' => 'ParticipantController', 'action' => 'logout'));
-    $router->get('/conta/nova', array('controller' => 'ParticipantController', 'action' => '_new'));
-    $router->post('/conta/nova', array('controller' => 'ParticipantController', 'action' => 'create'));
-    $router->get('/conta/painel', array('controller' => 'ParticipantController', 'action' => 'dashboard'));
+    //rota para login/cadastro - usuários
+    $routes['GET'][] = array('route' => '/conta/login', 'controller' => 'ParticipantController', 'action' => 'login');
+    $routes['POST'][] = array('route' => '/conta/login', 'controller' => 'ParticipantController', 'action' => 'executeLogin');
+    $routes['GET'][] = array('route' => '/conta/alterar', 'controller' => 'ParticipantController', 'action' => 'edit'); 
+    $routes['POST'][] = array('route' => '/conta/:id/alterar', 'controller' => 'ParticipantController', 'action' => 'update'); 
+    $routes['GET'][] = array('route' => '/conta/sair', 'controller' => 'ParticipantController', 'action' => 'logout');
+    $routes['GET'][] = array('route' => '/conta/nova', 'controller' => 'ParticipantController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/conta/nova', 'controller' => 'ParticipantController', 'action' => 'create');
+    $routes['GET'][] = array('route' => '/conta/painel', 'controller' => 'ParticipantController', 'action' => 'dashboard');
 
-    $router->get('/conta/inscricoes', array('controller' => 'EnrollmentController', 'action' => '_list'));    
-    $router->get('/conta/inscricoes/:id', array('controller' => 'EnrollmentController', 'action' => 'show'));  
+    $routes['GET'][] = array('route' => '/conta/inscricoes', 'controller' => 'EnrollmentController', 'action' => '_list');    
+    $routes['GET'][] = array('route' => '/conta/inscricoes/:id', 'controller' => 'EnrollmentController', 'action' => 'show');  
 
-    $router->get('/conta/certificados', array('controller' => 'CertificatesController', 'action' => '_list'));
-    $router->get('/conta/certificados/:code/ver', array('controller' => 'CertificatesController', 'action' => 'show'));
+    $routes['GET'][] = array('route' => '/conta/certificados', 'controller' => 'CertificatesController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/conta/certificados/:code/ver', 'controller' => 'CertificatesController', 'action' => 'show');
 
-    $router->get('/inscricao/evento/:id', array('controller' => 'EnrollmentController', 'action' => '_new'));
-    $router->post('/inscricao/finalizar', array('controller' => 'EnrollmentController', 'action' => 'save'));
-    $router->get('/inscricao/confirmacao', array('controller' => 'EnrollmentController', 'action' => 'confirmation'));
+    $routes['GET'][] = array('route' => '/inscricao/evento/:id', 'controller' => 'EnrollmentController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/inscricao/finalizar', 'controller' => 'EnrollmentController', 'action' => 'save');
+    $routes['GET'][] = array('route' => '/inscricao/confirmacao', 'controller' => 'EnrollmentController', 'action' => 'confirmation');
 
     //rota para validação de certificados
-    $router->get('/certificados', array('controller' => 'CertificatesController', 'action' => 'index'));
-    $router->post('/certificados/verificar', array('controller' => 'CertificatesController', 'action' => 'verification'));
+    $routes['GET'][] = array('route' => '/certificados', 'controller' => 'CertificatesController', 'action' => 'index');
+    $routes['POST'][] = array('route' => '/certificados/verificar', 'controller' => 'CertificatesController', 'action' => 'verification');
 
-    //$router->get('/conta/inscricoes', array('controller' => 'ParticipantController', 'action' => 'enrollments'));
+    //$routes['GET'][] = array('route' => '/conta/inscricoes', 'controller' => 'ParticipantController', 'action' => 'enrollments');
 
 
     //rotas para pesquisa
-    $router->get('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'events'));
-    $router->get('/pesquisa/eventos/:s', array('controller' => 'SearchController', 'action' => 'events'));
-    $router->get('/pesquisa/eventos/:s/pagina/:p', array('controller' => 'SearchController', 'action' => 'events'));
-    $router->post('/pesquisa/eventos', array('controller' => 'SearchController', 'action' => 'findEvents'));
+    $routes['GET'][] = array('route' => '/pesquisa/eventos', 'controller' => 'SearchController', 'action' => 'events');
+    $routes['GET'][] = array('route' => '/pesquisa/eventos/:s', 'controller' => 'SearchController', 'action' => 'events');
+    $routes['GET'][] = array('route' => '/pesquisa/eventos/:s/pagina/:p', 'controller' => 'SearchController', 'action' => 'events');
+    $routes['POST'][] = array('route' => '/pesquisa/eventos', 'controller' => 'SearchController', 'action' => 'findEvents');
 
-    $router->get('/pesquisa/noticias', array('controller' => 'SearchController', 'action' => 'news'));
-    $router->get('/pesquisa/noticias/:s', array('controller' => 'SearchController', 'action' => 'news'));
-    $router->get('/pesquisa/noticias/:s/pagina/:p', array('controller' => 'SearchController', 'action' => 'news'));
-    $router->post('/pesquisa/noticias', array('controller' => 'SearchController', 'action' => 'findNews'));
+    $routes['GET'][] = array('route' => '/pesquisa/noticias', 'controller' => 'SearchController', 'action' => 'news');
+    $routes['GET'][] = array('route' => '/pesquisa/noticias/:s', 'controller' => 'SearchController', 'action' => 'news');
+    $routes['GET'][] = array('route' => '/pesquisa/noticias/:s/pagina/:p', 'controller' => 'SearchController', 'action' => 'news');
+    $routes['POST'][] = array('route' => '/pesquisa/noticias', 'controller' => 'SearchController', 'action' => 'findNews');
 
 
-    $router->get('/pesquisa/midia', array('controller' => 'SearchController', 'action' => 'media'));
-    $router->get('/pesquisa/midia/pagina/:p', array('controller' => 'SearchController', 'action' => 'media'));
+    $routes['GET'][] = array('route' => '/pesquisa/midia', 'controller' => 'SearchController', 'action' => 'media');
+    $routes['GET'][] = array('route' => '/pesquisa/midia/pagina/:p', 'controller' => 'SearchController', 'action' => 'media');
 
     /*
     * rotas para area do admin
     */ 
 
     //root do admin
-    $router->get('/admin', array('controller' => 'Admin\HomeController', 'action' => 'index'));
+    $routes['GET'][] = array('route' => '/admin', 'controller' => 'Admin\HomeController', 'action' => 'index');
 
     //rotas para login
-    $router->get('/admin/login', array('controller' => 'Admin\LoginController', 'action' => 'index'));
-    $router->post('/admin/login', array('controller' => 'Admin\LoginController', 'action' => 'login'));
-    $router->get('/admin/logout', array('controller' => 'Admin\LoginController', 'action' => 'logout'));
+    $routes['GET'][] = array('route' => '/admin/login', 'controller' => 'Admin\LoginController', 'action' => 'index');
+    $routes['POST'][] = array('route' => '/admin/login', 'controller' => 'Admin\LoginController', 'action' => 'login');
+    $routes['GET'][] = array('route' => '/admin/logout', 'controller' => 'Admin\LoginController', 'action' => 'logout');
 
     //rotas para tipos de eventos
-    $router->get('/admin/eventos/tipos', array('controller' => 'Admin\EventsTypeController', 'action' => '_list')); 
-    $router->get('/admin/eventos/tipos/novo', array('controller' => 'Admin\EventsTypeController', 'action' => '_new')); 
-    $router->post('/admin/eventos/tipos/novo', array('controller' => 'Admin\EventsTypeController', 'action' => 'create')); 
-    $router->get('/admin/eventos/tipos/:id/alterar', array('controller' => 'Admin\EventsTypeController', 'action' => 'edit')); 
-    $router->post('/admin/eventos/tipos/:id/alterar', array('controller' => 'Admin\EventsTypeController', 'action' => 'update')); 
-    $router->get('/admin/eventos/tipos/:id/remover', array('controller' => 'Admin\EventsTypeController', 'action' => 'remove')); 
+    $routes['GET'][] = array('route' => '/admin/eventos/tipos', 'controller' => 'Admin\EventsTypeController', 'action' => '_list'); 
+    $routes['GET'][] = array('route' => '/admin/eventos/tipos/novo', 'controller' => 'Admin\EventsTypeController', 'action' => '_new'); 
+    $routes['POST'][] = array('route' => '/admin/eventos/tipos/novo', 'controller' => 'Admin\EventsTypeController', 'action' => 'create'); 
+    $routes['GET'][] = array('route' => '/admin/eventos/tipos/:id/alterar', 'controller' => 'Admin\EventsTypeController', 'action' => '_edit'); 
+    $routes['POST'][] = array('route' => '/admin/eventos/tipos/:id/alterar', 'controller' => 'Admin\EventsTypeController', 'action' => 'update'); 
+    $routes['GET'][] = array('route' => '/admin/eventos/tipos/:id/remover', 'controller' => 'Admin\EventsTypeController', 'action' => 'remove'); 
 
     //rotas para eventos
-    $router->get('/admin/eventos/lista', array('controller' => 'Admin\EventsController', 'action' => '_list'));
-    $router->get('/admin/eventos/lista/pagina/:p', array('controller' => 'Admin\EventsController', 'action' => '_list'));
-    $router->get('/admin/eventos/lista/id/:id', array('controller' => 'Admin\EventsController', 'action' => '_list'));
+    $routes['GET'][] = array('route' => '/admin/eventos/lista', 'controller' => 'Admin\EventsController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/eventos/lista/pagina/:p', 'controller' => 'Admin\EventsController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/eventos/lista/id/:id', 'controller' => 'Admin\EventsController', 'action' => '_list');
     
     //rotas para lista de seleção de eventos
-    $router->get('/admin/eventos/lista/selecao', array('controller' => 'Admin\EventsController', 'action' => 'selectionList'));
-    $router->get('/admin/eventos/lista/selecao/pagina/:p', array('controller' => 'Admin\EventsController', 'action' => 'selectionList'));
+    $routes['GET'][] = array('route' => '/admin/eventos/lista/selecao', 'controller' => 'Admin\EventsController', 'action' => 'selectionList');
+    $routes['GET'][] = array('route' => '/admin/eventos/lista/selecao/pagina/:p', 'controller' => 'Admin\EventsController', 'action' => 'selectionList');
 
-    $router->get('/admin/eventos/novo', array('controller' => 'Admin\EventsController', 'action' => '_new'));
-    $router->post('/admin/eventos', array('controller' => 'Admin\EventsController', 'action' => 'create'));    
-    $router->get('/admin/eventos/:id/alterar', array('controller' => 'Admin\EventsController', 'action' => 'edit'));
-    $router->post('/admin/eventos/:id', array('controller' => 'Admin\EventsController', 'action' => 'update'));
-    $router->get('/admin/eventos/:id/remover', array('controller' => 'Admin\EventsController', 'action' => 'remove'));
-    $router->get('/admin/eventos/:id/presenca', array('controller' => 'Admin\EventsController', 'action' => 'attendance'));
-    $router->post('/admin/eventos/:id/presenca', array('controller' => 'Admin\EventsController', 'action' => 'checkAttendance'));
+    $routes['GET'][] = array('route' => '/admin/eventos/novo', 'controller' => 'Admin\EventsController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/admin/eventos', 'controller' => 'Admin\EventsController', 'action' => 'create');    
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/alterar', 'controller' => 'Admin\EventsController', 'action' => 'edit');
+    $routes['POST'][] = array('route' => '/admin/eventos/:id', 'controller' => 'Admin\EventsController', 'action' => 'update');
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/remover', 'controller' => 'Admin\EventsController', 'action' => 'remove');
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'attendance');
+    $routes['POST'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'checkAttendance');
 
     //rotas para notícias
-    $router->get('/admin/noticias/lista', array('controller' => 'Admin\NewsController', 'action' => '_list'));
-    $router->get('/admin/noticias/lista/pagina/:p', array('controller' => 'Admin\NewsController', 'action' => '_list'));
-    $router->get('/admin/noticias/nova', array('controller' => 'Admin\NewsController', 'action' => '_new'));
-    $router->post('/admin/noticias', array('controller' => 'Admin\NewsController', 'action' => 'create'));    
-    $router->get('/admin/noticias/:id/alterar', array('controller' => 'Admin\NewsController', 'action' => '_edit'));
-    $router->post('/admin/noticias/:id', array('controller' => 'Admin\NewsController', 'action' => 'update'));
-    $router->get('/admin/noticias/:id/remover', array('controller' => 'Admin\NewsController', 'action' => 'remove'));    
+    $routes['GET'][] = array('route' => '/admin/noticias/lista', 'controller' => 'Admin\NewsController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/noticias/lista/pagina/:p', 'controller' => 'Admin\NewsController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/noticias/nova', 'controller' => 'Admin\NewsController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/admin/noticias', 'controller' => 'Admin\NewsController', 'action' => 'create');    
+    $routes['GET'][] = array('route' => '/admin/noticias/:id/alterar', 'controller' => 'Admin\NewsController', 'action' => '_edit');
+    $routes['POST'][] = array('route' => '/admin/noticias/:id', 'controller' => 'Admin\NewsController', 'action' => 'update');
+    $routes['GET'][] = array('route' => '/admin/noticias/:id/remover', 'controller' => 'Admin\NewsController', 'action' => 'remove');    
 
     //rotas para mídia
-    $router->get('/admin/midia/lista', array('controller' => 'Admin\MediaController', 'action' => '_list'));
-    $router->get('/admin/midia/lista/pagina/:p', array('controller' => 'Admin\MediaController', 'action' => '_list'));
-    $router->get('/admin/midia/novo/video', array('controller' => 'Admin\MediaController', 'action' => '_new'));
-    $router->get('/admin/midia/novas/fotos', array('controller' => 'Admin\MediaController', 'action' => '_newMultiple'));
-    $router->get('/admin/midia/:id/alterar', array('controller' => 'Admin\MediaController', 'action' => '_edit'));
-    $router->post('/admin/midia/fotos', array('controller' => 'Admin\MediaController', 'action' => 'createPhotos'));
-    $router->post('/admin/midia/video', array('controller' => 'Admin\MediaController', 'action' => 'createVideo'));
-    $router->post('/admin/midia/:id', array('controller' => 'Admin\MediaController', 'action' => 'update'));
-    $router->get('/admin/midia/:id/remover', array('controller' => 'Admin\MediaController', 'action' => 'remove'));
+    $routes['GET'][] = array('route' => '/admin/midia/lista', 'controller' => 'Admin\MediaController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/midia/lista/pagina/:p', 'controller' => 'Admin\MediaController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/midia/novo/video', 'controller' => 'Admin\MediaController', 'action' => '_new');
+    $routes['GET'][] = array('route' => '/admin/midia/novas/fotos', 'controller' => 'Admin\MediaController', 'action' => '_newMultiple');
+    $routes['GET'][] = array('route' => '/admin/midia/:id/alterar', 'controller' => 'Admin\MediaController', 'action' => '_edit');
+    $routes['POST'][] = array('route' => '/admin/midia/fotos', 'controller' => 'Admin\MediaController', 'action' => 'createPhotos');
+    $routes['POST'][] = array('route' => '/admin/midia/video', 'controller' => 'Admin\MediaController', 'action' => 'createVideo');
+    $routes['POST'][] = array('route' => '/admin/midia/:id', 'controller' => 'Admin\MediaController', 'action' => 'update');
+    $routes['GET'][] = array('route' => '/admin/midia/:id/remover', 'controller' => 'Admin\MediaController', 'action' => 'remove');
 
     //rotas para inscrições
-    $router->get('/admin/inscricoes/lista', array('controller' => 'Admin\EnrollmentController', 'action' => '_list'));
-    $router->get('/admin/inscricoes/lista/pagina/:p', array('controller' => 'Admin\EnrollmentController', 'action' => '_list'));
-    $router->get('/admin/inscricoes/:id/remover', array('controller' => 'Admin\EnrollmentController', 'action' => 'remove'));
-    $router->get('/admin/inscricoes/nova', array('controller' => 'Admin\EnrollmentController', 'action' => '_new'));
-    $router->get('/admin/inscricoes/:id/ver', array('controller' => 'Admin\EnrollmentController', 'action' => 'show'));
-    $router->get('/admin/inscricoes/:id/pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'payment'));
-    $router->get('/admin/inscricoes/:id/cancela-pagamento', array('controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment'));
+    $routes['GET'][] = array('route' => '/admin/inscricoes/lista', 'controller' => 'Admin\EnrollmentController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/inscricoes/lista/pagina/:p', 'controller' => 'Admin\EnrollmentController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/inscricoes/:id/remover', 'controller' => 'Admin\EnrollmentController', 'action' => 'remove');
+    $routes['GET'][] = array('route' => '/admin/inscricoes/nova', 'controller' => 'Admin\EnrollmentController', 'action' => '_new');
+    $routes['GET'][] = array('route' => '/admin/inscricoes/:id/ver', 'controller' => 'Admin\EnrollmentController', 'action' => 'show');
+    $routes['GET'][] = array('route' => '/admin/inscricoes/:id/pagamento', 'controller' => 'Admin\EnrollmentController', 'action' => 'payment');
+    $routes['GET'][] = array('route' => '/admin/inscricoes/:id/cancela-pagamento', 'controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment');
 
     //rotas para certificados
-    $router->get('/admin/certificados', array('controller' => 'Admin\CertificatesController', 'action' => '_list')); 
-    $router->get('/admin/certificados/lista/pagina/:p', array('controller' => 'Admin\CertificatesController', 'action' => '_list'));
-    $router->get('/admin/certificados/:id/remover', array('controller' => 'Admin\CertificatesController', 'action' => 'remove'));
-    $router->get('/admin/certificados/novo', array('controller' => 'Admin\CertificatesController', 'action' => '_new'));
-    $router->get('/admin/certificados/:id/ver', array('controller' => 'Admin\CertificatesController', 'action' => 'show'));
+    $routes['GET'][] = array('route' => '/admin/certificados', 'controller' => 'Admin\CertificatesController', 'action' => '_list'); 
+    $routes['GET'][] = array('route' => '/admin/certificados/lista/pagina/:p', 'controller' => 'Admin\CertificatesController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/certificados/:id/remover', 'controller' => 'Admin\CertificatesController', 'action' => 'remove');
+    $routes['GET'][] = array('route' => '/admin/certificados/novo', 'controller' => 'Admin\CertificatesController', 'action' => '_new');
+    $routes['GET'][] = array('route' => '/admin/certificados/:id/ver', 'controller' => 'Admin\CertificatesController', 'action' => 'show');
     //rota para JSon
-    $router->get('/admin/certificados/inscricoes/:id', array('controller' => 'Admin\CertificatesController', 'action' => 'enrollments'));
-    $router->post('/admin/certificados', array('controller' => 'Admin\CertificatesController', 'action' => 'create'));   
+    $routes['GET'][] = array('route' => '/admin/certificados/inscricoes/:id', 'controller' => 'Admin\CertificatesController', 'action' => 'enrollments');
+    $routes['POST'][] = array('route' => '/admin/certificados', 'controller' => 'Admin\CertificatesController', 'action' => 'create');   
 
     //rotas para usuários (do painel de administração)
-    $router->get('/admin/usuarios/lista', array('controller' => 'Admin\AdministratorController', 'action' => '_list'));
-    $router->get('/admin/usuarios/novo', array('controller' => 'Admin\AdministratorController', 'action' => '_new'));
-    $router->post('/admin/usuarios/novo', array('controller' => 'Admin\AdministratorController', 'action' => 'save'));
-    $router->get('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'edit'));
-    $router->post('/admin/usuarios/:id/alterar', array('controller' => 'Admin\AdministratorController', 'action' => 'update'));
-    $router->get('/admin/usuarios/:id/remover', array('controller' => 'Admin\AdministratorController', 'action' => 'remove'));
+    $routes['GET'][] = array('route' => '/admin/usuarios/lista', 'controller' => 'Admin\AdministratorController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/usuarios/novo', 'controller' => 'Admin\AdministratorController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/admin/usuarios/novo', 'controller' => 'Admin\AdministratorController', 'action' => 'save');
+    $routes['GET'][] = array('route' => '/admin/usuarios/:id/alterar', 'controller' => 'Admin\AdministratorController', 'action' => 'edit');
+    $routes['POST'][] = array('route' => '/admin/usuarios/:id/alterar', 'controller' => 'Admin\AdministratorController', 'action' => 'update');
+    $routes['GET'][] = array('route' => '/admin/usuarios/:id/remover', 'controller' => 'Admin\AdministratorController', 'action' => 'remove');
 
     //rotas para níveis de administrador
-    $router->get('/admin/niveis/lista', array('controller' => 'Admin\AdministratorLevelController', 'action' => '_list'));
-    $router->get('/admin/niveis/novo', array('controller' => 'Admin\AdministratorLevelController', 'action' => '_new'));
-    $router->post('/admin/niveis/novo', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'create'));
-    $router->get('/admin/niveis/:id/alterar', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'edit'));
-    $router->post('/admin/niveis/:id/alterar', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'update'));
-    $router->get('/admin/niveis/:id/remover', array('controller' => 'Admin\AdministratorLevelController', 'action' => 'remove'));
+    $routes['GET'][] = array('route' => '/admin/niveis/lista', 'controller' => 'Admin\AdministratorLevelController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/niveis/novo', 'controller' => 'Admin\AdministratorLevelController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/admin/niveis/novo', 'controller' => 'Admin\AdministratorLevelController', 'action' => 'create');
+    $routes['GET'][] = array('route' => '/admin/niveis/:id/alterar', 'controller' => 'Admin\AdministratorLevelController', 'action' => 'edit');
+    $routes['POST'][] = array('route' => '/admin/niveis/:id/alterar', 'controller' => 'Admin\AdministratorLevelController', 'action' => 'update');
+    $routes['GET'][] = array('route' => '/admin/niveis/:id/remover', 'controller' => 'Admin\AdministratorLevelController', 'action' => 'remove');
 
     //rotas para participantes (administração)
-    $router->get('/admin/participantes/lista', array('controller' => 'Admin\ParticipantController', 'action' => '_list'));
-    $router->get('/admin/participantes/novo', array('controller' => 'Admin\ParticipantController', 'action' => '_new'));
-    $router->post('/admin/participantes/novo', array('controller' => 'Admin\ParticipantController', 'action' => 'save'));
-    $router->get('/admin/participantes/:id/alterar', array('controller' => 'Admin\ParticipantController', 'action' => 'edit'));
-    $router->post('/admin/participantes/:id/alterar', array('controller' => 'Admin\ParticipantController', 'action' => 'update'));
-    $router->get('/admin/participantes/:id/remover', array('controller' => 'Admin\ParticipantController', 'action' => 'remove'));
+    $routes['GET'][] = array('route' => '/admin/participantes/lista', 'controller' => 'Admin\ParticipantController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/participantes/novo', 'controller' => 'Admin\ParticipantController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/admin/participantes/novo', 'controller' => 'Admin\ParticipantController', 'action' => 'save');
+    $routes['GET'][] = array('route' => '/admin/participantes/:id/alterar', 'controller' => 'Admin\ParticipantController', 'action' => 'edit');
+    $routes['POST'][] = array('route' => '/admin/participantes/:id/alterar', 'controller' => 'Admin\ParticipantController', 'action' => 'update');
+    $routes['GET'][] = array('route' => '/admin/participantes/:id/remover', 'controller' => 'Admin\ParticipantController', 'action' => 'remove');
 
     //rotas para cidades
-    $router->get('/admin/cidades/lista', array('controller' => 'Admin\CityController', 'action' => '_list'));
-    $router->get('/admin/cidades/nova', array('controller' => 'Admin\CityController', 'action' => '_new'));
-    $router->get('/admin/cidades/:id/alterar', array('controller' => 'Admin\CityController', 'action' => 'edit'));
+    $routes['GET'][] = array('route' => '/admin/cidades/lista', 'controller' => 'Admin\CityController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/cidades/nova', 'controller' => 'Admin\CityController', 'action' => '_new');
+    $routes['GET'][] = array('route' => '/admin/cidades/:id/alterar', 'controller' => 'Admin\CityController', 'action' => 'edit');
 
     //rotas para configuracoes
-    $router->get('/admin/config/geral', array('controller' => 'Admin\SettingsController', 'action' => 'general'));
-    $router->get('/admin/config/geral/manutencao', array('controller' => 'Admin\SettingsController', 'action' => 'maintenance'));
-    $router->get('/admin/config/tema', array('controller' => 'Admin\SettingsController', 'action' => 'theme'));
-    $router->get('/admin/config/banners', array('controller' => 'Admin\SettingsController', 'action' => 'banners'));
+    $routes['GET'][] = array('route' => '/admin/config/geral', 'controller' => 'Admin\SettingsController', 'action' => 'general');
+    $routes['GET'][] = array('route' => '/admin/config/geral/manutencao', 'controller' => 'Admin\SettingsController', 'action' => 'maintenance');
+    $routes['GET'][] = array('route' => '/admin/config/tema', 'controller' => 'Admin\SettingsController', 'action' => 'theme');
+    $routes['GET'][] = array('route' => '/admin/config/banners', 'controller' => 'Admin\SettingsController', 'action' => 'banners');
     //forma de pgto
-    $router->get('/admin/config/pagamento', array('controller' => 'Admin\PaymentTypeController', 'action' => '_list'));
-    $router->get('/admin/config/pagamento/nova', array('controller' => 'Admin\PaymentTypeController', 'action' => '_new'));
-    $router->post('/admin/config/pagamento/nova', array('controller' => 'Admin\PaymentTypeController', 'action' => 'create'));
+    $routes['GET'][] = array('route' => '/admin/config/pagamento', 'controller' => 'Admin\PaymentTypeController', 'action' => '_list');
+    $routes['GET'][] = array('route' => '/admin/config/pagamento/nova', 'controller' => 'Admin\PaymentTypeController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/admin/config/pagamento/nova', 'controller' => 'Admin\PaymentTypeController', 'action' => 'create');
     
-    $router->get('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\PaymentTypeController', 'action' => 'edit'));
-    $router->post('/admin/config/pagamento/:id/alterar', array('controller' => 'Admin\PaymentTypeController', 'action' => 'update'));
-    $router->get('/admin/config/pagamento/:id/remover', array('controller' => 'Admin\PaymentTypeController', 'action' => 'remove'));
-    $router->get('/admin/config/email', array('controller' => 'Admin\SettingsController', 'action' => 'email'));
-    $router->get('/admin/config/programador', array('controller' => 'Admin\SettingsController', 'action' => 'developer'));
+    $routes['GET'][] = array('route' => '/admin/config/pagamento/:id/alterar', 'controller' => 'Admin\PaymentTypeController', 'action' => 'edit');
+    $routes['POST'][] = array('route' => '/admin/config/pagamento/:id/alterar', 'controller' => 'Admin\PaymentTypeController', 'action' => 'update');
+    $routes['GET'][] = array('route' => '/admin/config/pagamento/:id/remover', 'controller' => 'Admin\PaymentTypeController', 'action' => 'remove');
+    $routes['GET'][] = array('route' => '/admin/config/email', 'controller' => 'Admin\SettingsController', 'action' => 'email');
+    $routes['GET'][] = array('route' => '/admin/config/programador', 'controller' => 'Admin\SettingsController', 'action' => 'developer');
 
-    $router->post('/admin/config', array('controller' => 'Admin\SettingsController', 'action' => 'update'));
+    $routes['POST'][] = array('route' => '/admin/config', 'controller' => 'Admin\SettingsController', 'action' => 'update');
 
     //rotas para relatorios
-    $router->get('/admin/relatorios/inscricoes', array('controller' => 'Admin\ReportsController', 'action' => '_new'));
-    $router->post('/admin/relatorios/inscricoes/gerar', array('controller' => 'Admin\ReportsController', 'action' => 'generate'));
+    $routes['GET'][] = array('route' => '/admin/relatorios/inscricoes', 'controller' => 'Admin\ReportsController', 'action' => '_new');
+    $routes['POST'][] = array('route' => '/admin/relatorios/inscricoes/gerar', 'controller' => 'Admin\ReportsController', 'action' => 'generate');
 
  //rotas para tipos de eventos
-    $router->get('/admin/patrocinadores/lista', array('controller' => 'Admin\SponsorsController', 'action' => '_list')); 
-    $router->get('/admin/patrocinadores/lista/pagina/:p', array('controller' => 'Admin\SponsorsController', 'action' => '_list')); 
-    $router->get('/admin/patrocinadores/novo', array('controller' => 'Admin\SponsorsController', 'action' => '_new')); 
-    $router->post('/admin/patrocinadores/novo', array('controller' => 'Admin\SponsorsController', 'action' => 'create')); 
-    $router->get('/admin/patrocinadores/:id/alterar', array('controller' => 'Admin\SponsorsController', 'action' => 'edit')); 
-    $router->post('/admin/patrocinadores/:id/alterar', array('controller' => 'Admin\SponsorsController', 'action' => 'update')); 
-    $router->get('/admin/patrocinadores/:id/remover', array('controller' => 'Admin\SponsorsController', 'action' => 'remove')); 
-    $router->load();
+    $routes['GET'][] = array('route' => '/admin/patrocinadores/lista', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
+    $routes['GET'][] = array('route' => '/admin/patrocinadores/lista/pagina/:p', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
+    $routes['GET'][] = array('route' => '/admin/patrocinadores/novo', 'controller' => 'Admin\SponsorsController', 'action' => '_new'); 
+    $routes['POST'][] = array('route' => '/admin/patrocinadores/novo', 'controller' => 'Admin\SponsorsController', 'action' => 'create'); 
+    $routes['GET'][] = array('route' => '/admin/patrocinadores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'edit'); 
+    $routes['POST'][] = array('route' => '/admin/patrocinadores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'update'); 
+    $routes['GET'][] = array('route' => '/admin/patrocinadores/:id/remover', 'controller' => 'Admin\SponsorsController', 'action' => 'remove'); 
+
+    return $routes;
+
 ?>

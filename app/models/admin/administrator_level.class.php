@@ -4,7 +4,7 @@
 	class AdministratorLevel extends \BaseModel{
 		private $idAdministratorLevel;
 		private $title;
-		private $level;
+		private $permissions;
 
 		public function setIdAdministratorLevel($idAdministratorLevel){
 			$this->idAdministratorLevel = $idAdministratorLevel;
@@ -22,12 +22,12 @@
 			return $this->title;
 		}
 
-		public function setLevel($level){
-			$this->level = $level;
+		public function setPermissions($permissions){
+			$this->permissions = $permissions;
 		}
 
-		public function getLevel(){
-			return $this->level;
+		public function getPermissions(){
+			return json_decode($this->permissions, true);
 		}
 
 		public static function all(){
@@ -67,13 +67,13 @@
 
 			$sql = 
 			"INSERT INTO administrator_level
-				(title, level)
+				(title, permissions)
 			VALUES
-				(:title, :level)";
+				(:title, :permissions)";
 
 			$params = array(
 					":title" => $this->getTitle(),
-					":level" => $this->getLevel()
+					":permissions" => json_encode($this->getPermissions())
 				);
 
 			$pdo = \Database::getConnection();
@@ -85,6 +85,7 @@
 			$this->setData($data);
 			if (!$this->isValidData()) return false;
 
+			$params = "";
 			$keys = array_keys($data);
 			foreach ($keys as $key) {
 				$params .= "$key = :$key, ";
@@ -96,20 +97,20 @@
 			$sql = sprintf($sql, $params);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);			
-			$param = array();
-			foreach ($keys as $key){
-				$method = $this->snakToCamelCase("get_$key");
-				$param[":$key"] = $this->$method();
-			}
+			
+			$params = array(
+					":title" => $this->getTitle(),
+					":permissions" => json_encode($this->getPermissions())
+				);
 
-			return $statment->execute($param);
+			return $statment->execute($params);
 		}
 
 		public function remove(){
-			$sql = "DELETE FROM administrator_level WHERE id_administrator_level = :id_administrator_level";
+			$sql = "DELETE FROM administrator_permissions WHERE id_administrator_permissions = :id_administrator_permissions";
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
-			$params = array(":id_administrator_level" => $this->getIdAdministratorLevel());
+			$params = array(":id_administrator_permissions" => $this->getIdAdministratorLevel());
 			return $statment->execute($params);
 		}
 	}

@@ -43,7 +43,7 @@
 			}
 		}
 
-		public function edit(){
+		public function _edit(){
 			//prepara formulario para edicao
 			$this->eventsType = \EventType::findById($this->params[":id"])[0];
    			$this->setHeadTitle("Editar Tipo de Evento");

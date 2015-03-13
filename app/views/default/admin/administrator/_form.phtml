@@ -58,6 +58,19 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	
+	<div class="row">
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+			<h4>Nível de Administrador</h4>
+			<select name="admin[id_administrator_level]" id="id_administrator_level" class="form-control">
+				<?php foreach ($this->administratorLevels as $administratorLevel): ?>
+					<option value="<?= $administratorLevel->getIdAdministratorLevel() ?>"><?= $administratorLevel->getTitle() ?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+	</div>
+
 	<br/>
 
 	<br/>

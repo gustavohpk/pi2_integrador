@@ -32,14 +32,12 @@
 			<tr>
 				<th>ID</th>
 				<th>Título</th>
-				<th>Nível</th>
 				<th>Ações</th>
 			</tr>
 			<?php foreach ($this->administratorLevels as $administratorLevel) : ?>
 				<tr>
 					<td><?=$administratorLevel->getIdAdministratorLevel()?></td>
 					<td align="left"><?=$administratorLevel->getTitle()?></td>
-					<td align="left"><?=$administratorLevel->getLevel()?></td>
 					<td>
 						<a href="<?=$this->getUri("admin/niveis/{$administratorLevel->getIdAdministratorLevel()}/alterar")?>" role="button" class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
 						<a href="<?=$this->getUri("admin/niveis/{$administratorLevel->getIdAdministratorLevel()}/remover")?>" role="button" class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></a>

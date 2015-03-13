@@ -11,7 +11,7 @@ class Database{
 	 * @return bool O resultado da conexão.
 	 */	
 	public static function getConnection(){
-		require "database_config.php";
+		require "config/database_config.php";
 
 		$datasource = sprintf(
 			"mysql:host=%s;port=%s;dbname=%s", 

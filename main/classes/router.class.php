@@ -2,6 +2,7 @@
 /**
  * Classe roteadora.
  * @author Rodrigo Miss
+ * @author Gustavo Pchek
  */
 
 	class Router{
@@ -32,6 +33,11 @@
 					$this->find($this->getRoutes);
 		}
 
+    public static function allRoutes(){
+      $routes = include 'config/routes.php';
+      return $routes;
+    }
+
     /**
      * Procura a rota solicitada dentro da lista de rotas
      * @param array $routes As rotas
@@ -47,7 +53,7 @@
            $merged_params = array_merge($this->params(), $params);
            $controller = new $controller_name();
            $controller->setParams($merged_params);
-           $controller->setView($action_name);
+           $controller->setAction($action_name);
            $controller->setControllerName($controller_name);
 
            $controller->beforeAction();

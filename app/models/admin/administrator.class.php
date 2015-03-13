@@ -10,6 +10,7 @@
 		private $cpf;
 		private $phone;
 		private $phone2;
+		public $administratorLevel; 
 
 		public function setIdAdministrator($id_administrator){
 			$this->id_administrator = $id_administrator;
@@ -83,6 +84,10 @@
 			return $this->phone2;
 		}
 
+		public function setIdAdministratorLevel($idAdministratorLevel){
+			$this->administratorLevel = AdministratorLevel::findById($idAdministratorLevel)[0];
+		}
+
 		public static function all(){
 			return self::find();
 		}	
@@ -147,9 +152,9 @@
 
 			$sql = 
 			"INSERT INTO administrator
-				(name, email, password, rg, cpf, phone, phone2)
+				(name, email, password, rg, cpf, phone, phone2, id_administrator_level)
 			VALUES
-				(:name, :email, :password, :rg, :cpf, :phone, :phone2)";
+				(:name, :email, :password, :rg, :cpf, :phone, :phone2, :id_administrator_level)";
 
 			$params = array(
 					":name" => $this->getName(),
@@ -158,7 +163,8 @@
 					":rg" => $this->getRg(),
 					":cpf" => $this->getCpf(),
 					":phone" => $this->getPhone(),
-					":phone2" => $this->getPhone2()
+					":phone2" => $this->getPhone2(),
+					":id_administrator_level" => $this->administratorLevel->getIdAdministratorLevel()
 				);
 
 			$pdo = \Database::getConnection();
@@ -179,15 +185,21 @@
 
 			$sql = "UPDATE administrator SET %s WHERE id_administrator = " . $this->getIdAdministrator();
 			$sql = sprintf($sql, $params);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);			
-			$param = array();
-			foreach ($keys as $key){
-				$method = $this->snakToCamelCase("get_$key");
-				$param[":$key"] = $this->$method();
-			}
+			$params = array(
+				":name" => $this->getName(),
+				":email" => $this->getEmail(),
+				":password" => $this->getPassword(),
+				":rg" => $this->getRg(),
+				":cpf" => $this->getCpf(),
+				":phone" => $this->getPhone(),
+				":phone2" => $this->getPhone2(),
+ 				":id_administrator_level" => $this->administratorLevel->getIdAdministratorLevel()
+				);
 
-			return $statment->execute($param);
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+
+			return $statment->execute($params);
 		}
 
 		public function remove(){

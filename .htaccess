@@ -18,4 +18,4 @@ RewriteRule ^$ config/routes.php [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 
 # Arquivo para onde deve ser direcionado as requisições.
-RewriteRule .(/)?$ config/routes.php
+RewriteRule .(/)?$ index.php

@@ -12,7 +12,7 @@
 		/**
 	     * @var string[] $params Os parâmetros
 	     * @var string $layout O tipo do layout
-	     * @var string $view O nome da visão
+	     * @var string $action O nome da ação
 	     * @var string $viewPath O caminho da visão
 	     * @var string $controllerName O nome do controlador
 	     * @var string $headTitle O título da página
@@ -22,7 +22,7 @@
 	     */
 		protected $params;
 		protected $layout;
-		protected $view;
+		protected $action;
 		protected $viewPath; 
 		protected $controllerName;
 		protected $headTitle;
@@ -50,8 +50,8 @@
 		 * Define a visão
 		 * @param $view String A visão
 		 */
-		public function setView($view){
-			$this->view = $view;
+		public function setAction($action){
+			$this->action = $action;
 		}
 
 		/**
@@ -207,10 +207,10 @@
 			$controller = str_replace('\\', '/', $controller); # for namespace
 			  
 		  	//em alguns métodos tais como _list e _new, remove-se o _ na busca pelo arquivo
-		    if (substr($this->view, 0, 1) == '_'){
-		      $view = substr($this->view, 1, strlen($this->view));
+		    if (substr($this->getAction(), 0, 1) == '_'){
+		      $view = substr($this->getAction(), 1, strlen($this->getAction()));
 		    } else {
-		      $view = $this->view;
+		      $view = $this->getAction();
 		    }
 
 		    /*
@@ -229,6 +229,14 @@
 				$this->viewPath = 'views/default/' . $controller . '/' . $view . '.phtml';
 			}
 
+		}
+
+		/**
+		 * Retorna a ação
+		 * @return string A ação
+		 */
+		public function getAction(){
+			return $this->action;
 		}
 
 		/**
@@ -251,11 +259,11 @@
 		 * Renderiza a visão
 		 * @param string $view O nome da visão
 		 */
-		public function render($view = null){
+		public function render($action = null){
 			require_once "main/views/views_functions.php";
 
-			if ($view !== null){
-				$this->view = $view;
+			if ($action !== null){
+				$this->setAction($action);
 			}
 
 			$this->setViewPath();

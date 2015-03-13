@@ -14,6 +14,7 @@
 			$this->setHeadTitle("Criar usuário");
          $this->actionForm = $this->getUri("admin/usuarios/novo");
          $this->administrators = new Administrator();
+         $this->administratorLevels = \AdministratorLevel::find();
 		}
 
       public function save() {
@@ -37,6 +38,7 @@
          $this->actionForm = $this->getUri("admin/usuarios/{$this->params[":id"]}/alterar");
          if ($this->administrators = Administrator::findById($this->params[":id"])) {
             $this->administrators = $this->administrators[0];
+            $this->administratorLevels = AdministratorLevel::find();
          }
 		}
 

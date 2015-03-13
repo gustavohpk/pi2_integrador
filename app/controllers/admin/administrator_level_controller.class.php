@@ -14,10 +14,34 @@
 			$this->setHeadTitle("Novo nível de administrador");
          $this->actionForm = $this->getUri("admin/niveis/novo");
          $this->administratorLevel = new AdministratorLevel();
+         $this->routes = array();
+         $routes = \Router::allRoutes();
+         foreach ($routes["GET"] as $key => $route) {
+            if(substr($route["route"], 0, 6) != "/admin"){
+               unset($routes["GET"][$key]);
+            }else{
+               $this->routes[$route["controller"]][] = array("method" => "GET", "route" => $route["route"], "action" => $route["action"]);
+            }
+         }
+         foreach ($routes["POST"] as $key => $route) {
+
+            if(substr($route["route"], 0, 6) != "/admin"){
+               unset($routes["POST"][$key]);
+            }else{
+               $this->routes[$route["controller"]][] = array("method" => "POST", "route" => $route["route"], "action" => $route["action"]);
+            }
+         }
 		}
 
       public function create() {
-         $this->administratorLevel = new AdministratorLevel($this->params["admin_level"]);
+         $params = $this->params;
+         foreach ($params as $key => $value) {
+            if($key != "admin_level")
+               $areas[$key] = array_keys($value);
+         }
+         $params["admin_level"]["permissions"] = json_encode($areas);
+         
+         $this->administratorLevel = new AdministratorLevel($params["admin_level"]);
          if ($this->administratorLevel->save()) {
             \FlashMessage::successMessage("Cadastro de nível de administrador realizado com sucesso.");
             $this->redirectTo("admin/niveis/lista");
@@ -37,11 +61,37 @@
          if ($this->administratorLevel = AdministratorLevel::findById($this->params[":id"])) {
             $this->administratorLevel = $this->administratorLevel[0];
          }
+         $this->routes = array();
+         $routes = \Router::allRoutes();
+         foreach ($routes["GET"] as $key => $route) {
+            if(substr($route["route"], 0, 6) != "/admin"){
+               unset($routes["GET"][$key]);
+            }else{
+               $this->routes[$route["controller"]][] = array("method" => "GET", "route" => $route["route"], "action" => $route["action"]);
+            }
+         }
+         foreach ($routes["POST"] as $key => $route) {
+
+            if(substr($route["route"], 0, 6) != "/admin"){
+               unset($routes["POST"][$key]);
+            }else{
+               $this->routes[$route["controller"]][] = array("method" => "POST", "route" => $route["route"], "action" => $route["action"]);
+            }
+         }
 		}
 
       public function update() {
          $this->administratorLevel = AdministratorLevel::findById($this->params[":id"])[0];
-         if ($this->administratorLevel->update($this->params["admin_level"])) {
+
+         $params = $this->params;
+         foreach ($params as $key => $value) {
+            if($key != "admin_level" && $key != ":id"){
+               $areas[$key] = array_keys($value);
+            }
+         }
+         $params["admin_level"]["permissions"] = json_encode($areas);
+
+         if ($this->administratorLevel->update($params["admin_level"])) {
             \flashMessage::successMessage("Nível de administrador alterado com sucesso.");
             $this->redirectTo("admin/niveis/lista");
          }
@@ -49,6 +99,24 @@
             $errors = $this->administratorLevel->getErrors();
             foreach ($errors as $error) {
                \flashMessage::errorMessage($error);
+            }
+            
+            $this->routes = array();
+            $routes = \Router::allRoutes();
+            foreach ($routes["GET"] as $key => $route) {
+               if(substr($route["route"], 0, 6) != "/admin"){
+                  unset($routes["GET"][$key]);
+               }else{
+                  $this->routes[$route["controller"]][] = array("method" => "GET", "route" => $route["route"], "action" => $route["action"]);
+               }
+            }
+            foreach ($routes["POST"] as $key => $route) {
+
+               if(substr($route["route"], 0, 6) != "/admin"){
+                  unset($routes["POST"][$key]);
+               }else{
+                  $this->routes[$route["controller"]][] = array("method" => "POST", "route" => $route["route"], "action" => $route["action"]);
+               }
             }
             $this->setHeadTitle("Modificar nível de administrador");
             $this->actionForm = $this->getUri("admin/niveis/{$this->params[":id"]}/alterar");
