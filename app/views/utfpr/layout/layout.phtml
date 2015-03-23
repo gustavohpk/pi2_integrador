@@ -46,14 +46,16 @@
 	<?php require_once "views/utfpr/includes/_foot.phtml";?>
 	<script type="text/javascript">
 	$(window).scroll(function() {
-        // once bottom of div is scrolled past
-        if($('body').scrollTop() >= 200 ) {
-            $("#login-bar").fadeOut();
-            $(".zoom-change").fadeOut();
-        }else{
-        	$("#login-bar").fadeIn();
-        	$(".zoom-change").fadeIn();
-        }
+		if($(window).width() > 768){
+			if($(window).scrollTop() >= 200 ) {
+            	$("#login-bar").fadeOut();
+           		$(".zoom-change").fadeOut();
+	        }else{
+	        	$("#login-bar").fadeIn();
+	        	$(".zoom-change").fadeIn();
+	        }
+		}
+        
     });
 </script>
 </html>

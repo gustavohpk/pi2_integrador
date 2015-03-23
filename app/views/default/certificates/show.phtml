@@ -11,12 +11,15 @@
 		<br/>
 
 		<?php if($this->certificate->getIdCertificate()) : ?>
-			<button type="button" onclick="printDiv('certificate-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
-			<div class="row" id="certificate-view">
-				<div class="col-xs-12">
-					<?php require_once "_certificate.phtml"; ?>
+			<div id="print-certificate">
+				<button type="button" onclick="printDiv('certificate-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+				<div class="row" id="certificate-view">
+					<div class="col-xs-12">
+						<?php require_once "_certificate.phtml"; ?>
+					</div>
 				</div>
 			</div>
+			<span id="print-info" style="display: none">Devido a limitações de resolução, certificados só podem ser visualizados e impressos através de um computador ou tablet.</span>
 		<?php endif; ?>
 
 		<br/>

@@ -24,8 +24,16 @@ span.label a:hover { cursor: pointer; }
 td { text-align: left; }
 textarea { border-radius: 0 !important; border: 1px solid #3C3F45 !important;}
 
+/* Acessibilidade */
+
 .zoom-change { color: #AAA; font-size: 10px; border: 1px solid #3C3F45; width: 150px; padding: 3px; background-color: #2F3238; position: fixed; top: 0; margin-left: 30px; z-index: 999;}
-.zoom-change span { font-size: 30px; }
+.zoom-change span { font-size: 30px;}
+.zoom-change div { border: 1px solid transparent;  webkit-transition: all .3s ease-in-out;  transition: all .3s ease-in-out; }
+.zoom-change div:hover { color: #E6E6E6; cursor: pointer; border-color: #777;}
+
+/* Fim acessibilidade */
+
+/* Cores auto-completar */
 
 input:-webkit-autofill {
   -webkit-text-fill-color: white;
@@ -44,13 +52,19 @@ input:-khtml-autofill {
   -khtml-box-shadow: 0 0 0px 1000px #3C3F45 inset !important;
 }
 
+/* Fim cores auto-completar */
+
 #main .row, #news-list, #col-right { background-color: #2F3238; }
 
 #main { min-height: 400px; }
 
 .btn { border-radius: 0; }
 
+/* Mensagens flash */
+
 #flash-messages { margin-top: 15px; }
+
+/* Fim mensagens flash */
 
 .enrollment .left-title { color: #E6E6E6; font-size: 16px; text-align: left; display: block; margin-left: 5px;}
 .subevent-list { margin-bottom: 5px; }
@@ -61,6 +75,7 @@ input:-khtml-autofill {
 .btn:hover, a, .facebook-link, .youtube-link, .utfpr-link, .utfpr-link img, #main-menu li, #account-menu li, span{ webkit-transition: all .3s ease-in-out;	transition: all .3s ease-in-out; }
 .col-bordered{ border: 1px solid #AAA; }
 .navbar-toggle{ margin-left: 15px; }
+.navbar-default .navbar-toggle { border-color: #777; }
 .tooltip{ font-size: 13px; }
 .tooltip-inner { max-width: 300px; }
 .form-control:focus { border-color: #333; box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(150,150,150,.6); webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(150,150,150,.6);}
@@ -134,9 +149,15 @@ input:-khtml-autofill {
 
 #login-bar{ background: #FFF; font-size: 0.9em; padding: 8px; border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
 #login-bar button{ width: 70px; }
+
+
+
 #news-list .list-group, #certificates-list .list-group{ text-align: left; }
 #news-list, #news-list a.list-group-item, .event div.thumbnail{ border-radius: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
 #news-list img.thumbnail{ max-height: 80px; min-height: 70px;}
+#news-list a.list-group-item div { padding-left: 3px; padding-right: 3px;}
+
+
 #account-cadastro, #account-login{ text-align: center; }
 .nivo-directionNav a{ top: 80% !important; }
 
@@ -313,15 +334,6 @@ a.fancybox:link { text-decoration: none; color: #E6E6E6; height: 50px;}
 .fb-comments{ margin-top: 25px; }
 
 
-/* Breadcrumbs */
-.breadcrumb{ display:inline-block; }
-
-
-/* PAINEL DO ADMIN */
-
-.well-md { display: inline-block; }
-
-
 /* Tabs área de eventos */
 
 
@@ -339,43 +351,23 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 /* Ícones de ajuda */
 #help-cpf { float: right; top: -22px; left: -7px; color: #AAA;}
 
-.btn.disabled {
-    pointer-events: auto;
-}
+/* Votação/rating */
 
-.symbol {
-  display: inline-block;
-  border-radius: 50%;
-  border: 5px double white;
-  width: 30px;
-  height: 30px;
-}
+.btn.disabled { pointer-events: auto; }
 
-.symbol-empty {
-  background-color: #ccc;
-}
+.symbol { display: inline-block; border-radius: 50%; border: 5px double white; width: 30px; height: 30px; }
 
-.symbol-filled {
-  background-color: black;
-}
+.symbol-empty { background-color: #ccc; }
 
-#average .rating-symbol{
-	color: gold;
-	text-shadow: -1px 0 #333, 0 1px #333, 1px 0 #333, 0 -1px #333;
-	letter-spacing: 4px;
-}
+.symbol-filled { background-color: black; }
 
-.rating-symbol{
-	font-size: 32px !important;
-	text-shadow: -1px 0 #333, 0 1px #333, 1px 0 #333, 0 -1px #333;
-	letter-spacing: 4px;
-	color: #CCC;
-	webkit-transition: all .1s ease-in-out;	transition: all .1s ease-in-out;
-}
+#average .rating-symbol{ color: gold; text-shadow: -1px 0 #333, 0 1px #333, 1px 0 #333, 0 -1px #333; letter-spacing: 4px; }
 
-#participant-rating .rating-symbol{
-	cursor: pointer;
-}
+.rating-symbol{ font-size: 32px !important; text-shadow: -1px 0 #333, 0 1px #333, 1px 0 #333, 0 -1px #333; letter-spacing: 4px; color: #CCC; webkit-transition: all .1s ease-in-out;	transition: all .1s ease-in-out; }
+
+#participant-rating .rating-symbol{ cursor: pointer; }
+
+/* Fim votação/rating */
 
 /* Success, warning, Danger e Info*/
 
@@ -383,6 +375,10 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 .alert-warning { color: #f0ad4e; background-color: rgba(138, 109, 59, 0.2); border-radius: 0; border-color: #eea236;}
 .alert-danger { color: #d9534f; background-color: rgba(169, 68, 66, 0.05); border-radius: 0; border-color: #d43f3a;}
 .alert-info { /*color: #3276b1;*/ color: #4f91c6; background-color: rgba(49, 112, 143, 0.125); border-radius: 0; border-color: #285e8e;}
+
+/* Fim success, warning, danger e info */
+
+/* Listas */
 
 .list-group a { text-decoration: none; }
 
@@ -394,10 +390,14 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 .list-group-item-warning { color: #f0ad4e; background-color: rgba(138, 109, 59, 0.2); border-radius: 0 !important;/* border-color: #eea236;*/ margin-top: 1px; margin-bottom: 1px;border: 0;}
 .list-group-item-warning:hover { background-color: rgba(138, 109, 59, 0.4); }
 
+/* Fim listas */
+
+
+/* Certificados */
 
 #show-certificate p, #show-certificate span{ color: #000; }
 
-
+/* Fim certificados */
 
 /* Calendario */
 
@@ -421,10 +421,39 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 .loading-yellow img { width: 30px; opacity: 0.9; }
 .loading-yellow span { font-size: 10px; color: #E7E7E7;}
 
+/* Correções de responsividade */
 
 @media (max-width: 768px){
   h4 { font-size: 14px; }
+
+  /* Calendário */
   .fc-calendar .fc-row { height: 32px; }
   .fc-calendar .fc-row > div > span.fc-date { font-size: 14px; font-weight: normal;}
+  /* Fim calendário */
+
+  /* Acessibilidade */ 
+  .zoom-change { display: none; }
+  /* Fim acessibilidade */
+
+  /* Barra de login */
+  #login-bar { display: none; }
+  /* Fim barra de login*/
+
+  /* Menu principal */
+  .navbar-default .navbar-nav>li>a { padding-top: 3px; padding-bottom: 3px; min-height: 20px;}
+  /* Fim menu principal */
+
+  /* Certificados */
+  #print-certificate { display: none; }
+  #print-info { display: inline-block !important; }
+  /* Fim certificados */
+
+  /* Footer */
+  #footer-links { border-right: none; }
+  /* Fim footer */
+
+  /* Eventos */
+  .event { margin-bottom: 15px; }
+  /* Fim eventos */
 
 }
