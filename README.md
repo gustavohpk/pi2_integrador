@@ -49,6 +49,12 @@
 
 ----------
 
+----- Atualização 075 (16/03/15 - 23/03/15) -----
+
+- Correções de layout
+- Correções de css
+- Correções de javascript
+
 ----- Atualização 074 (04/03/15 - 13/03/15) -----
 
 - Correções para validar no W3C
