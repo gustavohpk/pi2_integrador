@@ -1,0 +1,36 @@
+<h2>Galeria de Mídia<?= isset($this->event) ? " - " . $this->event->getName() : "" ?></h2>
+<div class="row">
+	<div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+		<div id="show-photos" class="admin-shortcut">
+			<span class="glyphicon glyphicon-camera"></span><br/>
+			<span class="admin-shortcut-title">FOTOS</span class="admin-shortcut-title">
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3">
+		<div id="show-videos" class="admin-shortcut">
+			<span class="glyphicon glyphicon-facetime-video"></span><br/>
+			<span class="admin-shortcut-title">VÍDEOS</span class="admin-shortcut-title">
+		</div>
+	</div>
+</div>
+<br/>
+<div class="row">
+	<div id="photos" class="col-xs-12" style="display: none">
+		<br/>
+	</div>
+	<div id="videos" class="col-xs-12" style="display: none">
+		<br/>
+	</div>
+	<div class="ajax-loader" style="display: none"></div>
+	<button id="btn-load-photos" type="button" class="btn btn-default btn-xs" onclick="loadPhotos();" style="display: none">Carregar mais</button>
+	<button id="btn-load-videos" type="button" class="btn btn-default btn-xs" onclick="loadVideos();" style="display: none">Carregar mais</button>
+</div>
+<script type="text/javascript">
+<?php if(isset($this->event)) : ?>
+	photoGalleryUrl = '<?=createUriFor("/midia/galeria/fotos/evento/" . $this->event->getIdEvent() . "/pagina/")?>';
+	videoGalleryUrl = '<?=createUriFor("/midia/galeria/videos/evento/" . $this->event->getIdEvent() . "/pagina/")?>';
+<?php else : ?>
+	photoGalleryUrl = '<?=createUriFor("/midia/galeria/fotos/pagina/")?>';
+	videoGalleryUrl = '<?=createUriFor("/midia/galeria/videos/pagina/")?>';
+<?php endif; ?>
+</script>
