@@ -98,6 +98,7 @@
     $routes['GET'][] = array('route' => '/pesquisa/midia', 'controller' => 'SearchController', 'action' => 'media');
     $routes['GET'][] = array('route' => '/pesquisa/midia/pagina/:p', 'controller' => 'SearchController', 'action' => 'media');
 
+
     /*
     * rotas para area do admin
     */ 
@@ -225,7 +226,7 @@
     $routes['GET'][] = array('route' => '/admin/relatorios/inscricoes', 'controller' => 'Admin\ReportsController', 'action' => '_new');
     $routes['POST'][] = array('route' => '/admin/relatorios/inscricoes/gerar', 'controller' => 'Admin\ReportsController', 'action' => 'generate');
 
- //rotas para tipos de eventos
+    //rotas para tipos de eventos
     $routes['GET'][] = array('route' => '/admin/patrocinadores/lista', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
     $routes['GET'][] = array('route' => '/admin/patrocinadores/lista/pagina/:p', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
     $routes['GET'][] = array('route' => '/admin/patrocinadores/novo', 'controller' => 'Admin\SponsorsController', 'action' => '_new'); 
@@ -233,6 +234,9 @@
     $routes['GET'][] = array('route' => '/admin/patrocinadores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'edit'); 
     $routes['POST'][] = array('route' => '/admin/patrocinadores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'update'); 
     $routes['GET'][] = array('route' => '/admin/patrocinadores/:id/remover', 'controller' => 'Admin\SponsorsController', 'action' => 'remove'); 
+
+    //rotas para mensagens
+    $routes['GET'][] = array('route' => '/admin/mensagem/nova', 'controller' => 'Admin\MessageController', 'action' => '_new');
 
     return $routes;
 

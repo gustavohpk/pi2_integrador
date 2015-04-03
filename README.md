@@ -1,38 +1,3 @@
------ TO DO -----
- 
-- Organizar o layout da galeria de mídia, que acaba deixando espaços em branco quando as imagens exibidas na mesma linha tem grande variação de altura
-- Corrigir tabela de preços de evento
-- Alterar o campo (e o model) "local" dos eventos para "place" ou "location"
-- Trocar a checagem de eventos do tipo sem inscrição de nome para id
-- Editar a classe das flash messages para suportar links, ícones e opção de "fechar" a mensagem
-- Requisitar Google Maps Embed API da faculdade
-- Alterar funções "find" e "getParamsSQL" para suportar múltiplos comparadores e múltiplos operadores conjuntivos
-- Alterar a classe dos certificados, adicionando os objetos Evento e Participante como atributo público
-- Adicionar a listagem de eventos (via json) nas diversas áreas do painel
-- Configurar API Google Maps dinâmica
-- Melhorar função de geração/validação de url de evento
-- Consertar a pardonização de nomenclaturas (nomes com "_" na frente, arrumar singular e plural)
-- Geração de miniaturas ao cadastrar imagem
-- A paginação está infinita. Limitar em 8 ou 10
-- Mudar links estáticos para dinâmicos, editando pelo painel
-- Desvincular "Settings" do "Main"
-- Adicionar mensagens flash no template de manutenção
-- Adicionar validações de data de abertura e término de inscrição (para inscrições feitas pelo site, não pelo painel)
-- Herdar patrocinadores do evento pai
-- Finalizar o javascript da página de inscrição
-- Adicionar validação de conflito de horário
-- Adicionar menu do painel de usuário em todas as páginas do painel
-- Adicionar informação "Todas as fotos / Todos os vídeos foram carregados"
-- Mover classe "Reports" para o namespace "Admin"
-
-- Analisar existência de bug: Após acessar uma url passando post, se editamos a url para outra, mesmo que exista como get, indica página não encontrada
-
-- Analisar o uso do campo "desativado/invisível" na tabela de eventos
-- Analisar replicação de dados do usuário para a inscrição
-- Analisar o uso do campo "status" na inscrição
-- Analisar o uso de descrição customizada no certificado
-
-----------
 
 ----- BUGS CONHECIDOS -----
  
@@ -48,6 +13,13 @@
 - Problema de redirecionamentos no painel do admin (provavelmente logado)
 
 ----------
+
+----- Atualização 076 (24/03/15 - 02/04/15) -----
+
+- Remoção dos campos rg, cpf, phone1 e phone2 da tabela de administradores
+- Criada a área "Mensagem" (para mensagens e envio de e-mails)
+
+
 
 ----- Atualização 075 (16/03/15 - 23/03/15) -----
 

@@ -319,6 +319,37 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 	cursor: pointer;
 }
 
+
+/* E-mails */
+
+#mail { margin: 0;padding: 0;color: #E6E6E6; font-family: 'Roboto Condensed'; background-color: #2F3238;}
+		#mail button { display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px; }
+
+		#mail #mail-header { background-color: #26292E; padding: 10px; text-align: center }
+		#mail #mail-content { text-align: center; }
+		#mail #mail-footer { background-color: #26292E; padding-top: 1px; padding-bottom: 1px; text-align: center }
+
+		#mail ul { list-style-type: none; -webkit-padding-start: 0;}
+
+		#mail h2 { background-color: #2F3238; border-color: #2F3238;}
+
+
+
+
+
+
 @media (max-width: 992px){
 	#news-list .list-group-item-text { text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
 }

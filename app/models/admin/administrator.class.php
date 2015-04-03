@@ -6,10 +6,6 @@
 		private $name;
 		private $email;
 		private $password;
-		private $rg;
-		private $cpf;
-		private $phone;
-		private $phone2;
 		public $administratorLevel; 
 
 		public function setIdAdministrator($id_administrator){
@@ -42,46 +38,6 @@
 
 		public function getPassword(){
 			return $this->password;
-		}
-
-		public function setRg($rg){
-			$this->rg = $rg;
-		}
-
-		public function getRg(){
-			return $this->rg;
-		}
-
-		public function setCpf($cpf){
-			$cpf = str_replace(".", "", $cpf);
-			$cpf = str_replace("-", "", $cpf);
-			$this->cpf = $cpf;
-		}
-
-		public function getCpf(){
-			return $this->cpf;
-		}
-
-		public function setPhone($phone){
-			$phone = str_replace(" ", "", $phone);
-			$phone = str_replace("(", "", $phone);
-			$phone = str_replace(")", "", $phone);
-			$this->phone = $phone;
-		}
-
-		public function getPhone(){
-			return $this->phone;
-		}
-
-		public function setPhone2($phone2){
-			$phone2 = str_replace(" ", "", $phone2);
-			$phone2 = str_replace("(", "", $phone2);
-			$phone2 = str_replace(")", "", $phone2);
-			$this->phone2 = $phone2;
-		}
-
-		public function getPhone2(){
-			return $this->phone2;
 		}
 
 		public function setIdAdministratorLevel($idAdministratorLevel){

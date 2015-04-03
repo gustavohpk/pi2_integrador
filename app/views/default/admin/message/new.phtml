@@ -1,0 +1,65 @@
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 news-edit">
+	<?php createJavascriptTag('plugins/tinymce/tinymce.min.js')?>
+	<script>
+		// tinymce.init({
+		//     selector: "textarea#mail-content, textarea#event-content",
+		//     theme: "modern",
+		//     language: "pt_BR",
+		//     height: 300,
+		//     plugins: [
+		//          "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+		//          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+		//          "save table contextmenu directionality emoticons template paste textcolor"
+		//    ],
+		//    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons", 
+		//    style_formats: [
+		//         {title: 'Bold text', inline: 'b'},
+		//         {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+		//         {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+		//         {title: 'Example 1', inline: 'span', classes: 'example1'},
+		//         {title: 'Example 2', inline: 'span', classes: 'example2'},
+		//         {title: 'Table styles'},
+		//         {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+		//     ]
+		//  }); 
+		</script>
+
+		<h2>Enviar Mensagem</h2>
+	
+		<form action="<?= $this->actionForm ?>" method="post">
+		<?php require_once "_form.phtml"; ?>
+		<br/>
+		<div class="row">
+			<h4>Previsão</h4>
+			<div class="col-xs-6 col-xs-offset-3">
+				<?php require_once "_message_email.html"; ?>
+			</div>
+		</div>
+		<br>
+		<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> </button>
+		<a href="">
+			<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+		</a>
+
+	</form>
+</div>
+
+<script>
+	logo = "<a href='<?= $this->getUri()?>'><img id='title-banner-img' src=' <?= $this->getResource('img/utfpr/title-header.png')?>' alt='UTFPR Eventos' style='max-width: 200px'/></a>";
+
+	$("input[name='message[title]']").keyup(function(){
+		mailPreview();
+	});
+
+	$("textarea[name='message[content]']").keyup(function(){
+		mailPreview();
+	});
+
+	function mailPreview(){
+		$("#mail #mail-header").html(logo);
+		$("#mail #mail-content h2").html($("input[name='message[title]']").val());
+		$("#mail #mail-content p").html($("textarea[name='message[content]']").val());
+	}
+		
+
+</script>
