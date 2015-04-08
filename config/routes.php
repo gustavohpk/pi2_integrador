@@ -236,8 +236,8 @@
     $routes['GET'][] = array('route' => '/admin/patrocinadores/:id/remover', 'controller' => 'Admin\SponsorsController', 'action' => 'remove'); 
 
     //rotas para mensagens
-    $routes['GET'][] = array('route' => '/admin/mensagem/nova', 'controller' => 'Admin\MessageController', 'action' => '_new');
-
+    $routes['GET'][] = array('route' => '/admin/mensagens/nova', 'controller' => 'Admin\MessageController', 'action' => '_new');
+    $routes['GET'][] = array('route' => '/admin/mensagens/lista', 'controller' => 'Admin\MessageController', 'action' => '_list');
     return $routes;
 
 ?>
