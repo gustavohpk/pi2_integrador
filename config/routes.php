@@ -130,7 +130,7 @@
 
     $routes['GET'][] = array('route' => '/admin/eventos/novo', 'controller' => 'Admin\EventsController', 'action' => '_new');
     $routes['POST'][] = array('route' => '/admin/eventos', 'controller' => 'Admin\EventsController', 'action' => 'create');    
-    $routes['GET'][] = array('route' => '/admin/eventos/:id/alterar', 'controller' => 'Admin\EventsController', 'action' => 'edit');
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/alterar', 'controller' => 'Admin\EventsController', 'action' => '_edit');
     $routes['POST'][] = array('route' => '/admin/eventos/:id', 'controller' => 'Admin\EventsController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/eventos/:id/remover', 'controller' => 'Admin\EventsController', 'action' => 'remove');
     $routes['GET'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'attendance');

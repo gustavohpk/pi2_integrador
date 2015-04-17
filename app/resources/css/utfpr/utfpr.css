@@ -140,7 +140,7 @@ input:-khtml-autofill {
 .menu-option div { float: left; webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out;}
 .menu-option a:hover { text-decoration: none; text-decoration: none;}
 
-.menu-description-container { max-height: 65px; }
+.menu-description-container { max-height: 65px; overflow: hidden; }
 
 .flash-background { background-color: #3C3F45; }
 
@@ -423,37 +423,41 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 /* Correções de responsividade */
 
+
+/* Layout mobile */
 @media (max-width: 768px){
-  h4 { font-size: 14px; }
+	h4 { font-size: 14px; }
 
-  /* Calendário */
-  .fc-calendar .fc-row { height: 32px; }
-  .fc-calendar .fc-row > div > span.fc-date { font-size: 14px; font-weight: normal;}
-  /* Fim calendário */
+	/* Calendário */
+	.fc-calendar .fc-row { height: 32px; }
+	.fc-calendar .fc-row > div > span.fc-date { font-size: 14px; font-weight: normal;}
+	/* Fim calendário */
 
-  /* Acessibilidade */ 
-  .zoom-change { display: none; }
-  /* Fim acessibilidade */
+	/* Acessibilidade */ 
+	.zoom-change { display: none; }
+	/* Fim acessibilidade */
 
-  /* Barra de login */
-  #login-bar { display: none; }
-  /* Fim barra de login*/
+	/* Barra de login */
+	#login-bar { display: none; }
+	/* Fim barra de login*/
 
-  /* Menu principal */
-  .navbar-default .navbar-nav>li>a { padding-top: 3px; padding-bottom: 3px; min-height: 20px;}
-  /* Fim menu principal */
+	/* Menu principal */
+	.navbar-default .navbar-nav>li>a { padding-top: 3px; padding-bottom: 3px; min-height: 20px;}
+	/* Fim menu principal */
 
-  /* Certificados */
-  #print-certificate { display: none; }
-  #print-info { display: inline-block !important; }
-  /* Fim certificados */
+	/* Certificados */
+	#print-certificate { display: none; }
+	#print-info { display: inline-block !important; }
+	/* Fim certificados */
 
-  /* Footer */
-  #footer-links { border-right: none; }
-  /* Fim footer */
+	/* Footer */
+	#footer-links { border-right: none; }
+	/* Fim footer */
 
-  /* Eventos */
-  .event { margin-bottom: 15px; }
-  /* Fim eventos */
+	/* Eventos */
+	.event { margin-bottom: 15px; }
+	/* Fim eventos */
 
+	/* Cadastro */
+	.account-icons .glyphicon { font-size: 40px; padding-bottom: 0;}
 }

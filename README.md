@@ -14,10 +14,21 @@
 
 ----------
 
------ Atualização 076 (24/03/15 - 02/04/15) -----
+
+----- Atualização 077 (12/04/15 - 17/04/15) -----
+
+- Corrigido layout da galeria de imagens e também das imagens da home
+- Atualização da área de ajuda do painel de admin
+- Correções de responsividade
+- Padronização de actions dos controllers (parcial)
+
+
+----- Atualização 076 (24/03/15 - 08/04/15) -----
 
 - Remoção dos campos rg, cpf, phone1 e phone2 da tabela de administradores
 - Criada a área "Mensagem" (para mensagens e envio de e-mails)
+- Criado template de e-mail para mensagem comum e confirmação de inscrição
+- Iniciada funcionalidade de "previsão de e-mail"
 
 
 

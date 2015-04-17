@@ -109,7 +109,7 @@
          }
       }
 
-		public function edit(){
+		public function _edit(){
 			$this->setHeadTitle("Editar Evento");
          $this->eventsType = \EventType::all();
          $this->sponsors = \Sponsors::all();
