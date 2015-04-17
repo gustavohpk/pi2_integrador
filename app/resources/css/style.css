@@ -347,9 +347,17 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 
 
+/* Correções de responsividade */
 
 
-
+/* Layout Celular e Tablet */
 @media (max-width: 992px){
 	#news-list .list-group-item-text { text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+}
+
+/* Layout tablet */
+@media (min-width: 769px) and (max-width: 992px){
+
+  .media-item{ height: 250px;}
+
 }

@@ -299,11 +299,10 @@ function loadPhotos(){
 		if (data.length <= 0){
 			$("#btn-load-photos").hide();
 		}else{
-		$("#photos").append("<div class='row'>");
+		$("#photos").append("<div class='row'></div>");
   		$.each(data, function(i, media){
-  			$("#photos").append("<div class='col-xs-12 col-sm-4'><a href='" + media.path + "' class='fancybox' title='" + media.label + "' rel='lightbox'><img class='thumbnail' src='" + media.path + "' alt='" + media.label + "'/><span class='glyphicon glyphicon-camera' title='Foto'></span></div>");
+  			$("#photos .row").last().append("<div class='col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0'><a href='" + media.path + "' class='fancybox' title='" + media.label + "' rel='lightbox'><img class='thumbnail' src='" + media.path + "' alt='" + media.label + "'/><span class='glyphicon glyphicon-camera' title='Foto'></span></div>");
   		});
-  		$("#photos").append("</div>");
   		photosPage++;
     }
     $(".ajax-loader").hide();
