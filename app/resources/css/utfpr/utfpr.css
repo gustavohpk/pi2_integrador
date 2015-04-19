@@ -54,11 +54,6 @@ input:-khtml-autofill {
 
 /* Fim cores auto-completar */
 
-#main .row, #news-list, #col-right { background-color: #2F3238; }
-
-#main { min-height: 400px; }
-
-.btn { border-radius: 0; }
 
 /* Mensagens flash */
 
@@ -82,13 +77,14 @@ input:-khtml-autofill {
 
 /* Usando #main para nao afetar o painel do admin */
 
+#main .row, #news-list, #col-right { background-color: #2F3238; }
+#main { min-height: 400px; }
+
 #main .form-control, .modal-content .form-control { color: #E6E6E6; background-color: #26292E;}
 #main .form-group i, .modal-content i { color: #7F8289; }
 #main input, .modal-content input, #main select { border: 1px solid #3C3F45 !important; border-radius: 0;}
 #main .left-inner-addon-group i, .modal-content .left-inner-addon-group i{ border-right: 1px solid #3C3F45; color: #AAA;}
 #main .well { border: 0; }
-
-
 
 #main .btn-default, header .btn-default, .modal-content .btn-default { color: #AAA; background-color: #26292E; border-color: #3C3F45; border-radius: 0;}
 #main .btn-default:hover, header .btn-default:hover, .modal-content .btn-default:hover { background-color: #2F3238; color: #CCC; border-color: #3C3F45; }
@@ -103,13 +99,12 @@ input:-khtml-autofill {
 /* Botões */
 
 #main .btn-success, #main .btn-warning, #main .btn-danger, #main .btn-primary { background: #26292E; }
-
 #main .btn-success { color: #5cb85c; }
 #main .btn-success:hover { background-color: rgba(60, 118, 61, 0.2); }
 
+.btn { border-radius: 0; }
+
 /* Fim Botões */
-
-
 
 /* Paginação */
 
@@ -146,19 +141,19 @@ input:-khtml-autofill {
 
 [id^=menu-item] { /*background-color: #26292E;*/ background-color: transparent; color: #E6E6E6; display: none; left: 50%; padding-top: 10px;}
 
+input[type=file] { display: initial; }
 
 #login-bar{ background: #FFF; font-size: 0.9em; padding: 8px; border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
 #login-bar button{ width: 70px; }
-
-
 
 #news-list .list-group, #certificates-list .list-group{ text-align: left; }
 #news-list, #news-list a.list-group-item, .event div.thumbnail{ border-radius: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
 #news-list img.thumbnail{ max-height: 80px; min-height: 70px;}
 #news-list a.list-group-item div { padding-left: 3px; padding-right: 3px;}
 
-
 #account-cadastro, #account-login{ text-align: center; }
+
+
 .nivo-directionNav a{ top: 80% !important; }
 
 /* Paginação */
@@ -166,6 +161,7 @@ input:-khtml-autofill {
 .pagination li a { color: #777; }
 .pagination li a:hover{ color: #000; background-color: #AAA; border-color: #AAA;}
 
+/* Fim Paginação */
 
 .search-btn-group li { cursor: pointer; }
 .ajax-loader{ display: inline-block; width: 16px; height: 16px; background-image: url("../img/ajax-loader.gif"); background-repeat: no-repeat; }
@@ -174,7 +170,11 @@ input:-khtml-autofill {
 #admin { margin-top: 65px; min-width: 800px}
 #admin h1 { margin-top: 0;}
 
+/* iframe do Google Maps */
+
 .google-maps iframe { width: 100% !important; }
+
+/* Fim iframe do Google Maps */
 
 /* Label */
 .label-lg { font-size: 16px; }
@@ -184,7 +184,9 @@ input:-khtml-autofill {
 
 .label-info { background-color: rgba(91, 192, 222, 0.7); }
 
-input[type=file] { display: initial; }
+/* Fim Label */
+
+
 
 /* Eventos */
 
@@ -223,6 +225,8 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 .row-events .event:nth-child(2) { border-left: 1px solid #2F3238; border-right: 1px solid #2F3238; }
 /*.row-events .event:nth-child(3) { border-left: 1px solid #2F3238; border-right: 1px solid #2F3238; }*/
 .row-events .event:nth-child(4)  { border-left: 1px solid #2F3238; }
+
+/* Fim eventos */
 
 
 /* Correacao Formulário de cadastro */

@@ -21,6 +21,7 @@
 - Atualização da área de ajuda do painel de admin
 - Correções de responsividade
 - Padronização de actions dos controllers (parcial)
+- Corrigido javascript do calendário de eventos
 
 
 ----- Atualização 076 (24/03/15 - 08/04/15) -----
