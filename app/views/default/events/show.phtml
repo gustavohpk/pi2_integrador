@@ -73,7 +73,7 @@
 		<h4><span class="label label-info">Para participar deste evento não é necessário fazer inscrição.</span></h4>
     <?php elseif (!$this->events->eventInitiated() && $this->events->eventType->getCode() != "sem_inscricao") : ?>
 		<div class="col-xs-12">
-			<span style="display:inline-block" data-toggle="tooltip" data-placement="top" <?php echo (!$this->events->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->events->getStartDateEnrollment("d/m/Y"). " às " . $this->events->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
+			<span style="display:inline-block; margin-bottom: 20px" data-toggle="tooltip" data-placement="top" <?php echo (!$this->events->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->events->getStartDateEnrollment("d/m/Y"). " às " . $this->events->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
 			<a role="button" href="<?= createUriFor("/inscricao/evento/{$this->events->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-lg"  <?php echo (!$this->events->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
 			</span>
 		</div>

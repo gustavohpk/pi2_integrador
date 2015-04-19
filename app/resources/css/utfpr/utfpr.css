@@ -298,7 +298,9 @@ a.event-related-link:hover{ text-decoration: none; background: #FFF; border-radi
 /* Fotos e vídeos */
 a.fancybox:link { text-decoration: none; color: #E6E6E6; height: 50px;}
 #media-thumbnail img{ margin-bottom: 0; }
-#media-thumbnail a{ text-decoration: none; color: #AAA; font-size: 0.8em; font-weight: 100;}]
+#media-thumbnail a{ text-decoration: none; color: #AAA; font-size: 0.8em; font-weight: 100;}
+.thumbnail { background-color: #333; border-color: #777;}
+img.thumbnail:hover { border-radius: 2px; background-color: #777;}
 .media-item{ margin-bottom: 5px; }
 .media-largeicons { cursor: pointer; color:#333; color: #AAA; webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out;}
 .media-largeicons:hover{ background-color: #26292E; border-radius: 5%; color: #E6E6E6;}
