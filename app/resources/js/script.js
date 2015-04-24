@@ -367,29 +367,31 @@ $(document).ready(function() {
 	$('input.check').on('change', function () {
 	  alert('Rating: ' + $(this).val());
 	});
-	$('.rating-tooltip').rating({
-	  extendSymbol: function (rate) {
-	  	switch(rate) {
-		    case 1:
-		        title = "Ruim"; break;
-		    case 2:
-		        title = "Regular"; break;
-		    case 3:
-		    	title = "Bom"; break;
-		    case 4:
-		    	title = "Otimo"; break;
-		    case 5:
-		    	title = "Excelente"; break;
-		    default:
-		        title = "Nao Avaliado";
+	if($('.rating-tooltip').length > 0){
+		$('.rating-tooltip').rating({
+		  extendSymbol: function (rate) {
+		  	switch(rate) {
+			    case 1:
+			        title = "Ruim"; break;
+			    case 2:
+			        title = "Regular"; break;
+			    case 3:
+			    	title = "Bom"; break;
+			    case 4:
+			    	title = "Otimo"; break;
+			    case 5:
+			    	title = "Excelente"; break;
+			    default:
+			        title = "Nao Avaliado";
+			  }
+		    $(this).tooltip({
+		      container: 'body',
+		      placement: 'bottom',
+		      title: title
+		    });
 		  }
-	    $(this).tooltip({
-	      container: 'body',
-	      placement: 'bottom',
-	      title: title
-	    });
-	  }
-	});
+		});
+	}
 
 	$('.rating').each(function () {
     var rating = parseFloat($(this).val());
