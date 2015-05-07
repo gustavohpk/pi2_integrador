@@ -15,6 +15,15 @@
 ----------
 
 
+----- Atualização 078 (25/04/15 - 07/05/15) -----
+
+- Adicionada biblioteca para geração de QRCode
+- Iniciada área de Status da Inscrição
+- Criada tabela "enrollment_status"
+- Criado campo "id_enrollment_status" na tabela "enrollment"
+- Criado campo "enabled" na tabela "event"
+
+
 ----- Atualização 077 (12/04/15 - 17/04/15) -----
 
 - Corrigido layout da galeria de imagens e também das imagens da home

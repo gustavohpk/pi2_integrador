@@ -165,6 +165,15 @@
     $routes['GET'][] = array('route' => '/admin/inscricoes/:id/pagamento', 'controller' => 'Admin\EnrollmentController', 'action' => 'payment');
     $routes['GET'][] = array('route' => '/admin/inscricoes/:id/cancela-pagamento', 'controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment');
 
+    //rotas para status de inscricao
+    $routes['GET'][] = array('route' => '/admin/inscricoes/estados', 'controller' => 'Admin\EnrollmentStatusController', 'action' => '_list'); 
+    $routes['GET'][] = array('route' => '/admin/inscricoes/estados/novo', 'controller' => 'Admin\EnrollmentStatusController', 'action' => '_new'); 
+    $routes['POST'][] = array('route' => '/admin/inscricoes/estados/novo', 'controller' => 'Admin\EnrollmentStatusController', 'action' => 'create'); 
+    $routes['GET'][] = array('route' => '/admin/inscricoes/estados/:id/alterar', 'controller' => 'Admin\EnrollmentStatusController', 'action' => '_edit'); 
+    $routes['POST'][] = array('route' => '/admin/inscricoes/estados/:id/alterar', 'controller' => 'Admin\EnrollmentStatusController', 'action' => 'update'); 
+    $routes['GET'][] = array('route' => '/admin/inscricoes/estados/:id/remover', 'controller' => 'Admin\EnrollmentStatusController', 'action' => 'remove'); 
+
+
     //rotas para certificados
     $routes['GET'][] = array('route' => '/admin/certificados', 'controller' => 'Admin\CertificatesController', 'action' => '_list'); 
     $routes['GET'][] = array('route' => '/admin/certificados/lista/pagina/:p', 'controller' => 'Admin\CertificatesController', 'action' => '_list');
