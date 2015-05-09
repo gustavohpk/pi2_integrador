@@ -1,6 +1,8 @@
 <?php 
 	class Enrollment extends BaseModel{
 		private $idEnrollment;
+		private $idEnrollmentStatus;
+		public $enrollmentStatus;
 		private $idParticipant;
 		public $participant;
 		public $event;
@@ -20,6 +22,15 @@
 
 		public function getIdEnrollment(){
 			return $this->idEnrollment;
+		}
+
+
+		public function setIdEnrollmentStatus($idEnrollmentStatus){
+			$this->idEnrollmentStatus = $idEnrollmentStatus;
+		}
+
+		public function getIdEnrollmentStatus(){
+			return $this->idEnrollmentStatus;
 		}
 
 		public function setIdParticipant($idParticipant){

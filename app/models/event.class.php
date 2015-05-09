@@ -9,6 +9,7 @@
 		private $idEvent;
 		private $idParentEvent;
 		public $parentEvent;
+		private $enabled;
 		private $isSubEvent;
 		public $eventType;
 		private $name;
@@ -62,6 +63,14 @@
 
 		public function setIdEventType($idEventType){
 			$this->eventType = EventType::findById($idEventType)[0];
+		}
+
+		public function getEnabled(){
+			return $this->enabled;
+		}
+
+		public function setEnabled($enabled){
+			$this->enabled = $enabled;
 		}
 
 		public function setName($name){
