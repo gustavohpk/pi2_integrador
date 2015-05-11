@@ -14,6 +14,11 @@
 
 ----------
 
+----- Atualização 079 (11/05/15 - ) -----
+
+- Correções de HTML5 e CSS
+- Alteração no Footer do painel de admin
+
 
 ----- Atualização 078 (25/04/15 - 07/05/15) -----
 

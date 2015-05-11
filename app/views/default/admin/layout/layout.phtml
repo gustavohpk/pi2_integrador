@@ -36,25 +36,23 @@
 ?>
 </head>
 	<body>
-		<?php 
-
-require_once "views/default/admin/includes/_main-menu.phtml"; ?>
+		<header>
+			<?php require_once "views/default/admin/includes/_main-menu.phtml"; ?>
+		</header>
 		<div id="admin" class="container-fluid">
 			<div class="row">
 				<div id="content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					
 					<h1>Painel de Administração</h1>	
 
-					<?php 
-
-require_once "views/default/admin/includes/_flash.phtml"; ?>
+					<?php require_once "views/default/admin/includes/_flash.phtml"; ?>
 
 					<?php require_once $this->getViewPath(); ?>					
 				</div>
 			</div>
-			<div id="footer">
-				<h6>Painel de Administração - Sistema de Eventos UTFPR</h6>
-			</div>	
+			<footer id="footer">
+				<?php require_once "views/default/admin/includes/_footer.phtml"; ?>
+			</footer>	
 		</div>
 
 		<?php 
