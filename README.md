@@ -18,6 +18,7 @@
 
 - Correções de HTML5 e CSS
 - Alteração no Footer do painel de admin
+- Corrigindo problema da exibição incorreta quando a página não existe
 
 
 ----- Atualização 078 (25/04/15 - 07/05/15) -----

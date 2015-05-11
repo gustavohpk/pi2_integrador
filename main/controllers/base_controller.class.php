@@ -228,7 +228,6 @@
 			} else {
 				$this->viewPath = 'views/default/' . $controller . '/' . $view . '.phtml';
 			}
-
 		}
 
 		/**
@@ -293,7 +292,7 @@
 		public function afterAction(){}
 
 		public function notFound(){
-			
+
 		}
 	}
 ?>
