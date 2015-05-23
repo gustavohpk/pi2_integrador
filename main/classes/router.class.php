@@ -64,14 +64,15 @@
         }
       }
 
-      $controller = new BaseController;
-      $controller->setView('not_found');
+      $controller = new BaseController();
+      $controller->setAction("not_found");
       $controller->setControllerName('BaseController');
-       $controller->beforeAction();
-       $controller->notFound();
-       $controller->afterAction();
-       $controller->render();
-       return;
+
+      $controller->beforeAction();
+      $controller->notFound();
+      $controller->afterAction();
+      $controller->render();
+      return;
 	}
 
   /**
