@@ -14,6 +14,18 @@
 
 ----------
 
+----- Atualização 080 (16/05/15 - 23/05/15) -----
+
+- Implementado funcionalidades para gerar crachás para participantes
+
+----- Atualização 079 (11/05/15 - 12/05/15) -----
+
+- Correções de HTML5 e CSS
+- Alteração no Footer do painel de admin
+- Corrigindo problema da exibição incorreta quando a página não existe
+- Corrigindo layout do modal (lightbox)
+- Correções de layout mobile
+
 
 ----- Atualização 079 (11/05/15 - 23/05/15) -----
 

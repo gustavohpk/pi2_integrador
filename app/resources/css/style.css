@@ -47,9 +47,7 @@ td { text-align: left; }
 .search-btn-group li { cursor: pointer; }
 .ajax-loader{ display: inline-block; width: 16px; height: 16px; background-image: url("../img/ajax-loader.gif"); background-repeat: no-repeat; }
 
-.main-menu-admin{ position: fixed; z-index: 1; margin-right: 0; padding-right: 0; padding-left: 0; right: 0;}
-#admin { margin-top: 65px; min-width: 800px}
-#admin h1 { margin-top: 0;}
+
 
 .google-maps iframe { width: 100% !important; }
 
@@ -163,6 +161,16 @@ a.fancybox:link { text-decoration: none; color: #000; height: 50px;}
 
 
 /* PAINEL DO ADMIN */
+
+.main-menu-admin{ position: fixed; z-index: 1; margin-right: 0; padding-right: 0; padding-left: 0; right: 0;}
+#admin { margin-top: 65px; min-width: 800px;}
+#admin #content { min-height: 600px; }
+#admin h1 { margin-top: 0;}
+
+#admin footer a { color: #000; margin-top: 20px;}
+
+
+
 /*.dropdown:hover .dropdown-menu { display: block; }*/
 ul.left-menu a{ padding: 5px 5px !important; text-align:left; width: 100%; }
 ul.left-menu span{ text-align: left; }
@@ -226,7 +234,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 }
 
 
-#show-certificate, #report {
+#show-certificate, #show-badge, #report {
     margin: 0;
     padding: 0;
     background-color: #FAFAFA;
@@ -284,6 +292,44 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 	font-size: 13px;
 	text-align: center;
 }
+
+/*inicio emissao crachás*/
+#show-badge #badge-content .badgeItem{
+  width: 8cm;
+  height: 10cm;
+  border: 1px solid #000;
+  margin-right: 0.4cm;
+  margin-bottom: 1cm;
+  float:left;
+}
+#show-badge #badge-content .badgeItem .badge-logo-utfpr img{
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 75%;
+}
+#show-badge #badge-content .badgeItem img.qrcode{
+  width: 114px;
+  margin: 20px 2.4cm;
+}
+#show-badge #badge-content .badgeItem .badgeItemEvent{
+  text-align: center;
+  clear:both;
+}
+#show-badge #badge-content .badgeItem .badgeItemFooter{
+  height: 1.5cm;
+  background-color: #E6E6E6;
+  bottom: -1.48cm;
+  position: relative;
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+}
+#show-badge #badge-content .badgeItem .badgeItemFooter >div{
+  width: 8cm;
+  padding-top: 0.5cm;
+  text-align: center;
+}
+/*fim emissao crachá*/
 
 .symbol {
   display: inline-block;

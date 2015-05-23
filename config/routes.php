@@ -136,6 +136,11 @@
     $routes['GET'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'attendance');
     $routes['POST'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'checkAttendance');
 
+    //rotas para crachas
+    $routes['GET'][] = array('route' => '/admin/eventos/cracha', 'controller' => 'Admin\BadgeController', 'action' => 'index');
+        $routes['POST'][] = array('route' => '/admin/eventos/cracha/gerar', 'controller' => 'Admin\BadgeController', 'action' => 'generate');
+
+
     //rotas para notícias
     $routes['GET'][] = array('route' => '/admin/noticias/lista', 'controller' => 'Admin\NewsController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/noticias/lista/pagina/:p', 'controller' => 'Admin\NewsController', 'action' => '_list');
@@ -172,7 +177,6 @@
     $routes['GET'][] = array('route' => '/admin/inscricoes/estados/:id/alterar', 'controller' => 'Admin\EnrollmentStatusController', 'action' => '_edit'); 
     $routes['POST'][] = array('route' => '/admin/inscricoes/estados/:id/alterar', 'controller' => 'Admin\EnrollmentStatusController', 'action' => 'update'); 
     $routes['GET'][] = array('route' => '/admin/inscricoes/estados/:id/remover', 'controller' => 'Admin\EnrollmentStatusController', 'action' => 'remove'); 
-
 
     //rotas para certificados
     $routes['GET'][] = array('route' => '/admin/certificados', 'controller' => 'Admin\CertificatesController', 'action' => '_list'); 
