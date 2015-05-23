@@ -21,6 +21,15 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5">
+					<h4>Status</h4>
+					<select name="event[enabled]" class="form-control">
+						<option value="1">Ativado</option>
+						<option value="0" <?= $this->events->getEnabled() ? '' : 'selected' ?>>Desativado</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
 				<div class="col-xs-12 col-sm-2 col-sm-offset-4">
 					<h4>Eventos vinculados</h4>
 					<div class="input-group well well-md">

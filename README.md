@@ -15,6 +15,13 @@
 ----------
 
 
+----- Atualização 079 (11/05/15 - 23/05/15) -----
+
+- Campo 'enabled' adicionado na criação e edição de evento
+
+
+
+
 ----- Atualização 078 (25/04/15 - 07/05/15) -----
 
 - Adicionada biblioteca para geração de QRCode

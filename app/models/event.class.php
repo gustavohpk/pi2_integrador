@@ -12,6 +12,7 @@
 		private $enabled;
 		private $isSubEvent;
 		public $eventType;
+		private $status;
 		private $name;
 		private $path;
 		private $details;
@@ -246,11 +247,20 @@
 			return $events;
 		}
 
+
+		/**
+	     * Retorna os próximos eventos
+	     * @return Event[] Eventos
+	     */
 		public static function findNext($date){
 			$events = self::find(array("end_date"), array($date), ">=", "AND" ,"start_date", "ASC");
 			return $events;
 		}
 
+		/**
+	     * Retorna os eventos anteriores
+	     * @return Event[] Eventos
+	     */
 		public static function findPrev($date){
 			$events = self::find(array("end_date"), array($date), "<", "AND", "end_date", "DESC");
 			return $events;			
@@ -479,13 +489,14 @@
 
 			$sql = 
 			"INSERT INTO event
-				(id_event_type, id_parent_event, name, path, details, teacher, local, address, start_date, end_date, 
+				(enabled, id_event_type, id_parent_event, name, path, details, teacher, local, address, start_date, end_date, 
 				spaces, start_date_enrollment, end_date_enrollment, logo, send_participant_data)
 			VALUES
-				(:id_event_type, :id_parent_event, :name, :path, :details, :teacher, :local, :address, :start_date, :end_date,
+				(:enabled, :id_event_type, :id_parent_event, :name, :path, :details, :teacher, :local, :address, :start_date, :end_date,
 				:spaces, :start_date_enrollment, :end_date_enrollment, :logo, :send_participant_data)";
 
 			$params = array(
+					":enabled" => $this->getEnabled(),
 					":id_event_type" => $this->eventType->getIdEventType(),
 					":name" => $this->getName(),
 					":id_parent_event" => $this->getIdParentEvent(),
@@ -523,6 +534,7 @@
 			"UPDATE
 				event
 			SET
+				enabled = :enabled,
 				id_event_type = :id_event_type,
 				id_parent_event = :id_parent_event,
 				name = :name,
@@ -542,6 +554,7 @@
 				id_event = :id_event";
 
 			$params = array(
+					":enabled" => $this->getEnabled(),
 					":id_event_type" => $this->eventType->getIdEventType(),
 					":id_parent_event" => $this->getIdParentEvent(),
 					":name" => $this->getName(),

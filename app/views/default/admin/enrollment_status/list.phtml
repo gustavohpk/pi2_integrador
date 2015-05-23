@@ -1,0 +1,56 @@
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 events-list">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+	    <h3 class="panel-title">Lista de estados de inscrição cadastrados</h3>
+	  </div>
+	  <div class="panel-body">
+	  	<span class="glyphicon glyphicon-question-sign" style="float:right;" title="Cada inscrição precisa ter um estado para indicar se ela está pendente, se já foi confirmada, se foi cancelada ou se foi suspensa." data-toggle="tooltip" data-placement="left"></span>
+			<div class="row">
+				<div class="col-xs-12">
+					<span class="label label-danger label-md"><span class="glyphicon glyphicon-warning-sign"></span> Cuidado! Alterações nesta área podem comprometer o funcionamento do sistema. <a data-toggle="modal" data-target="#system-danger-modal">Saiba mais</a>.</span>
+				</div>
+				<div class="col-xs-12 general-actions">
+					<a href="<?= createUriFor('/admin/inscricoes/estados/novo')?>">
+						<button class="btn btn-success btn-sm" title="Cadastrar" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					</a>
+					<div class="col-lg-4">
+					  
+					</div>
+				</div>
+			</div>
+		</div>
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<th>Código</th>
+				<th>Nome</th>
+				<th>Descrição</th>
+			</tr>
+			<?php foreach ($this->enrollmentStatus as $enrollmentStatusItem) : ?>
+				<tr>
+					<td><?= $enrollmentStatusItem->getIdEnrollmentStatus() ?></td>
+					<td><?= $enrollmentStatusItem->getCode() ?></td>
+					<td><?= $enrollmentStatusItem->getName() ?></td>
+					<td><?= $enrollmentStatusItem->getDescription() ?></td>						
+					<td>
+						<a href="<?= createUriFor("/admin/inscricoes/estados/{$enrollmentStatusItem->getIdEnrollmentStatus()}/alterar") ?>" role="button" class='btn btn-primary btn-sm' title='Editar'>
+							<span class='glyphicon glyphicon-edit'></span>
+						</a>
+						<a href="<?= createUriFor("/admin/inscricoes/estados/{$enrollmentStatusItem->getIdEnrollmentStatus()}/remover") ?>" role="button" class='btn btn-danger btn-sm' title='Excluir'>
+							<span class='glyphicon glyphicon-trash'></span>
+						</a>	
+					</td>					
+				</tr>
+			<?php endforeach; ?>
+		</table>
+		<div class="panel-footer">
+			<div class="row">
+				<div class="col-xs-12">
+					<ul class="pagination">
+					  <?= $this->pagination->getPageAnchors("{$this->getUri('admin/inscricoes/tipos')}");?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
