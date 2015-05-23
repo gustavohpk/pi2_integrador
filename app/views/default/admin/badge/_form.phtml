@@ -1,0 +1,41 @@
+<form action="<?= $this->actionForm?>" method="post">
+	<div class="row">
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+			<h4>Selecione o evento</h4>
+			<h6>OBS.: São listados apenas eventos que não iniciaram.</h6>
+				<select class="form-control" name="id_event">
+				<?php foreach ($this->events as $event) : ?>
+					<option value="<?= $event->getIdEvent()?>"><?=$event->getName()?></option>
+
+				<?php endforeach ?>
+			</select> 
+		</div>
+	</div>
+
+	<br />
+	
+	<button class="btn btn-success" type="submit" <?php if (!$this->events) echo "disabled"?>><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
+	
+	<?php if ($this->events) :?>
+		<a role="button" href="<?= createUriFor('/admin/eventos/cracha')?>">
+			<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+		</a>
+	<?php else :?>
+		<a role="button" href="<?= createUriFor('/admin')?>">
+			<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+		</a>
+	<?php endif?>
+
+	<?php if($this->id_event) : ?>
+		<br/>
+		<br/>
+		<button type="button" onclick="printDiv('badge-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+		<div class="row" id="badge-view">
+			<div class="col-xs-12">
+					<?php require_once "_badge.phtml"; ?>
+			</div>
+		</div>
+	<?php endif; ?>
+ 	<br/>
+
+
