@@ -37,7 +37,8 @@
 		public function show(){
 			$this->setHeadTitle("Visualizar Inscrição");
          if ($this->enrollments = \Enrollment::findById($this->params[":id"])) {
-            $this->enrollments = $this->enrollments[0];
+            $this->enrollment = $this->enrollments[0];
+            $this->enrollmentStatus = \EnrollmentStatus::all();
          }
          else {
             \FlashMessage::errorMessage("A inscrição que você está tentando visualizar não foi localizada.");

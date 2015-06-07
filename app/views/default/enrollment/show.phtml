@@ -6,13 +6,24 @@
 				Valor: R$ <?=number_format($this->enrollment->getCost(), 2)?>
 			</h4>
 
-			<?php if ($this->enrollment->getDatePayment()) : ?>	
-				<h4><span class="label label-info">Evento pago em: <?=$this->enrollment->getDatePayment("d/m/Y")?></span></h4>
-			<?php elseif ($this->enrollment->getCost() == 0) : ?>	
-				<h4><span class="label label-info">Evento Gratuito</span></h4>
-			<?php else : ?>
-				<h4><span class="label label-danger">Este evento ainda não foi pago! <a class="event-related-link" href="<?=$this->enrollment->getUriPayment()?>" target="_blank">Clique aqui</a> para pagar agora!</span></h4>
-			<?php endif ?>
+			<?php if ($this->enrollment->getEnrollmentStatus()->getCode() == "confirmed") : ?>
+				<?php if ($this->enrollment->getDatePayment()) : ?>	
+					<h4><span class="label label-success"><?= $this->enrollment->getEnrollmentStatus()->getDescription() ?> Evento pago em: <?=$this->enrollment->getDatePayment("d/m/Y")?></span></h4>
+				<?php elseif ($this->enrollment->getCost() == 0) : ?>	
+					<h4><span class="label label-success"><?= $this->enrollment->getEnrollmentStatus()->getDescription() ?> Evento Gratuito</span></h4>
+				<?php endif; ?>
+			<?php elseif ($this->enrollment->getEnrollmentStatus()->getCode() == "pending") : ?>
+				<?php if ($this->enrollment->getCost() == 0) : ?>
+					<h4><span class="label label-info">Aguardando confirmação</span></h4>
+				<?php else : ?>
+					<h4><span class="label label-info">Aguardando pagamento e confirmação. <a class="event-related-link" href="<?=$this->enrollment->getUriPayment()?>" target="_blank">Clique aqui</a> para realizar o pagamento.</span></h4>
+				<?php endif; ?>
+			<?php elseif ($this->enrollment->getEnrollmentStatus()->getCode() == "cancelled") : ?>
+				<h4><span class="label label-danger"><?= $this->enrollment->getEnrollmentStatus()->getDescription() ?></span></h4>
+			<?php elseif ($this->enrollment->getEnrollmentStatus()->getCode() == "suspended") : ?>
+				<h4><span class="label label-warning"><?= $this->enrollment->getEnrollmentStatus()->getDescription() ?></span></h4>
+			<?php endif; ?>
+
 			<?php if ($this->enrollment->event->getStartDate("d/m/Y") == $this->enrollment->event->getEndDate("d/m/Y")) : ?>
 				<h3 class="event-date">Data: <?= $this->enrollment->event->getStartDate("d/m/Y")?></h3>
 				<?php if ($this->enrollment->event->getStartDate("H:i") == $this->enrollment->event->getEndDate("H:i")) : ?>

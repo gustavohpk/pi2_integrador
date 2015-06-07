@@ -14,23 +14,31 @@
 
 ----------
 
------ Atualização 080 (16/05/15 - 23/05/15) -----
+
+----- Atualização 081 (31/05/15 - 07/05/15) -----
+
+- Página de visualização de inscrição alterada para suportar estados de inscrição
+- Alteração no código para adequar aos padrões de plural e singular
+- Novas inscrições sempre iniciarão com o status "Pendente"
+- Alteração na página do evento para exibir vagas totais e restantes
+
+
+----- Atualização 080 (25/05/15 - 30/05/15) -----
+
+- Alterada listagem de eventos anteriores e próximos para exibir apenas habilitados
+- Página "Minhas Inscrições" alterada para suportar estados de inscrição
+
+
+
+----- Atualização 079 (16/05/15 - 23/05/15) -----
 
 - Implementado funcionalidades para gerar crachás para participantes
-
------ Atualização 079 (11/05/15 - 12/05/15) -----
-
 - Correções de HTML5 e CSS
 - Alteração no Footer do painel de admin
 - Corrigindo problema da exibição incorreta quando a página não existe
 - Corrigindo layout do modal (lightbox)
 - Correções de layout mobile
-
-
------ Atualização 079 (11/05/15 - 23/05/15) -----
-
 - Campo 'enabled' adicionado na criação e edição de evento
-
 
 
 

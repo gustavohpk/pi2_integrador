@@ -8,28 +8,32 @@
 	    public function show() {
 	    	$this->setHeadTitle("Ver Evento");
 	    	if (isset($this->params[":id"])) {
-	    		$this->events = Event::findById($this->params[":id"])[0];
+	    		$this->event = Event::findById($this->params[":id"])[0];
 	    	}
 	    	else if(isset($this->params[":url"])){
-	    		$this->events = Event::findByPath($this->params[":url"])[0];
+	    		$this->event = Event::findByPath($this->params[":url"])[0];
 	    	}
-	    	if($this->events){
-	    		$this->eventsRelated = $this->events->getEventsRelated();
-	    		$this->sponsors = $this->events->getSponsors();
-	    		$this->hasMedia = Media::hasMedia($this->events->getIdEvent());
-	    		if($this->events->getRating() > 0)
-	    			$this->realRating = $this->events->getRating() / $this->events->getEvaluations();
-   				Event::updateViews($this->events->getIdEvent());
+	    	if($this->event){
+	    		$this->eventRelated = $this->event->getEventsRelated();
+	    		$this->sponsors = $this->event->getSponsors();
+	    		$this->hasMedia = Media::hasMedia($this->event->getIdEvent());
+	    		$this->remainingSpaces = $this->event->getSpaces() - count(Enrollment::find(array("id_event"), array($this->event->getIdEvent())));
+	    		if($this->event->getRating() > 0)
+	    			$this->realRating = $this->event->getRating() / $this->event->getEvaluations();
+   				Event::updateViews($this->event->getIdEvent());
    				if(isset($_SESSION["participant"])){
-	   				if($this->enrollment = Enrollment::find(array("id_participant", "id_event"), array($_SESSION["participant"]->getIdParticipant(), $this->events->getIdEvent()))){
+	   				if($this->enrollment = Enrollment::find(array("id_participant", "id_event"), array($_SESSION["participant"]->getIdParticipant(), $this->event->getIdEvent()))){
 	   					$this->attendance = $this->enrollment[0]->getAttendance();
 	   					$this->participantRating = $this->enrollment[0]->getRating();
+	   					$this->isEnrolled = true;
 	   				}
 	   				else
 	   					$this->attendance = false;
 	   			}
-   				else
+   				else{
    					$this->attendance = false;
+   					$this->isEnrolled = false;
+   				}
 	    	}
 	    	else {
 	    		flashMessage::errorMessage("O evento que você está tentando acessar não existe.");

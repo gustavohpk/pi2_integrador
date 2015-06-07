@@ -1,57 +1,85 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 		<h4>ID</h4>
-		<input type="number" class="form-control" value="<?=$this->enrollments->getIdEnrollment()?>" disabled/>
+		<input type="number" class="form-control" value="<?=$this->enrollment->getIdEnrollment()?>" disabled/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 		<h4>Participante</h4>
-		<input type="text" class="form-control" value="<?=$this->enrollments->participant->getIdParticipant() . " - " . $this->enrollments->participant->getName()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->participant->getIdParticipant() . " - " . $this->enrollment->participant->getName()?>" disabled/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 		<h4>Evento</h4>
-		<input type="text" class="form-control" value="<?=$this->enrollments->event->getIdEvent() . " - " . $this->enrollments->event->getName()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->event->getIdEvent() . " - " . $this->enrollment->event->getName()?>" disabled/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 		<h4>Tipo do Evento</h4>
-		<input type="text" class="form-control" value="<?=$this->enrollments->event->eventType->getEventType()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->event->eventType->getEventType()?>" disabled/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
-		<h4><?=$this->enrollments->event->eventType->getTeacherType()?></h4>
-		<input type="text" class="form-control" value="<?=$this->enrollments->event->getTeacher()?>" disabled/>
+		<h4><?=$this->enrollment->event->eventType->getTeacherType()?></h4>
+		<input type="text" class="form-control" value="<?=$this->enrollment->event->getTeacher()?>" disabled/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 		<h4>Local</h4>
-		<input type="text" class="form-control" value="<?=$this->enrollments->event->getLocal()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->event->getLocal()?>" disabled/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-6 col-sm-6 col-md-4 col-md-offset-2">
 		<h4>Data de inscrição</h4>
-		<input type="date" class="form-control" value="<?=$this->enrollments->getDateEnrollment("d/m/Y H:i:s")?>" disabled/>
+		<input type="date" class="form-control" value="<?=$this->enrollment->getDateEnrollment("d/m/Y H:i:s")?>" disabled/>
 	</div>
 	<div class="col-xs-6 col-sm-6 col-md-4">
 		<h4>Data de pagamento</h4>
-		<input type="date" class="form-control" value="<?=($this->enrollments->getCost() > 0 ?  $this->enrollments->getDatePayment("d/m/Y H:i:s") : "Gratuito")?>" disabled/>
+		<input type="date" class="form-control" value="<?=($this->enrollment->getCost() > 0 ?  $this->enrollment->getDatePayment("d/m/Y H:i:s") : "Gratuito")?>" disabled/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 		<h4>Valor</h4>
-		<input type="number" class="form-control" value="<?=$this->enrollments->getCost()?>" disabled/>
+		<input type="number" class="form-control" value="<?=$this->enrollment->getCost()?>" disabled/>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+		<h4>Status</h4>
+
+		<?php if($this->enrollment->enrollmentStatus->getCode() == "pending") : ?>
+			<p>Esta inscrição está pendente (aguardando pagamento e/ou confirmação). A vaga no evento está reservada até que o prazo para confirmação expire ou que a confirmação seja realizada.</p>
+		<?php elseif($this->enrollment->enrollmentStatus->getCode() == "confirmed") : ?>
+			<p>Esta inscrição está confirmada. A vaga no evento está garantida.</p>
+		<?php elseif($this->enrollment->enrollmentStatus->getCode() == "cancelled") : ?>
+			<p>Esta inscrição foi cancelada. Não é possível realizar nenhuma alteração.</p>
+		<?php elseif($this->enrollment->enrollmentStatus->getCode() == "suspended") : ?>
+			<p>Esta inscrição está suspensa. A vaga no evento está reservada.</p>
+		<?php endif;?>
+	</div>
+	<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+
+		<select name="enrollment[id_enrollment_status]" id="" class="form-control">
+			<?php foreach ($this->enrollmentStatus as $enrollmentStatusItem): ?>
+				<?php if ($this->enrollment->enrollmentStatus->getIdEnrollmentStatus() == $enrollmentStatusItem->getIdEnrollmentStatus()): ?>
+					<option value="<?= $enrollmentStatusItem->getIdEnrollmentStatus() ?>" selected><?= $enrollmentStatusItem->getName() ?></option>
+				<?php else : ?>
+					<option value="<?= $enrollmentStatusItem->getIdEnrollmentStatus() ?>"><?= $enrollmentStatusItem->getName() ?></option>
+				<?php endif ?>
+			<?php endforeach ?>
+		</select>
 	</div>
 </div>
 
 <br/>
-<a href="<?=createUriFor("/admin/inscricoes/{$this->enrollments->getIdEnrollment()}/pagamento")?>" role="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Definir como Pago</a>
+<a href="<?=createUriFor("/admin/inscricoes/{$this->enrollment->getIdEnrollment()}/pagamento")?>" role="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Definir como Pago</a>
 <a href="<?=createUriFor("/admin/inscricoes/lista")?>" role="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-<a href="<?=createUriFor("/admin/inscricoes/{$this->enrollments->getIdEnrollment()}/remover")?>" role="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+<a href="<?=createUriFor("/admin/inscricoes/{$this->enrollment->getIdEnrollment()}/remover")?>" role="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</a>

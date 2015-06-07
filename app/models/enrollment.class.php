@@ -1,20 +1,46 @@
 <?php 
+
+/**
+ * Classe de inscrição
+ * @author Gustavo Pchek
+ * @author Rodrigo Miss
+ */
+
 	class Enrollment extends BaseModel{
+
+		/**
+		 * @var int $idEnrollment Id da inscrição
+		 * @var int $idEnrollmentStatus Id do estado da inscrição
+		 * @var int $idParticipant Id do participante
+		 * @var int $idPaymentTime Id do tipo de pagamento
+		 * @var datetime $dateEnrollment Data e hora da realização da inscrição
+		 * @var datetime $datePayment Data e hora em que foi realizado o pagamento
+		 * @var float $cost Valor da inscrição
+		 * @var boolean $attendance Verificador de presença/ausência
+		 * @var int Nota/avaliação do evento
+		 * @var boolean Indica se usou ou não bônus
+		 */
 		private $idEnrollment;
 		private $idEnrollmentStatus;
-		public $enrollmentStatus;
 		private $idParticipant;
-		public $participant;
-		public $event;
+		private $idPaymentType;
 		private $dateEnrollment;
 		private $datePayment;
-		private $idPaymentType;
 		private $cost;
 		private $uriPayment;
 		private $attendance;
 		private $participantData;
 		private $rating;
 		private $bonus;
+
+		/**
+		 * @var EnrollmentStatus $enrollmentStatus Estado da inscrição
+		 * @var Participant $participant Participante
+		 * @var Event $event Evento
+		 */
+		public $enrollmentStatus;
+		public $participant;
+		public $event;
 
 		public function setIdEnrollment($idEnrollment){
 			$this->idEnrollment = $idEnrollment;
@@ -24,13 +50,22 @@
 			return $this->idEnrollment;
 		}
 
-
 		public function setIdEnrollmentStatus($idEnrollmentStatus){
-			$this->idEnrollmentStatus = $idEnrollmentStatus;
+			// $this->idEnrollmentStatus = $idEnrollmentStatus;
+			$status = EnrollmentStatus::findById($idEnrollmentStatus);
+			$this->setEnrollmentStatus($status[0]);
 		}
 
 		public function getIdEnrollmentStatus(){
 			return $this->idEnrollmentStatus;
+		}
+
+		public function setEnrollmentStatus($enrollmentStatus){
+			$this->enrollmentStatus = $enrollmentStatus;
+		}
+
+		public function getEnrollmentStatus(){
+			return $this->enrollmentStatus;
 		}
 
 		public function setIdParticipant($idParticipant){
@@ -207,12 +242,13 @@
 
 			$sql = 
 			"INSERT INTO enrollment
-				(id_participant, id_event, date_enrollment, date_payment, id_payment_type, cost, bonus)
+				(id_participant, id_enrollment_status, id_event, date_enrollment, date_payment, id_payment_type, cost, bonus)
 			VALUES
-				(:id_participant, :id_event, :date_enrollment, :date_payment, :id_payment_type, :cost, :bonus)";
+				(:id_participant, :id_enrollment_status, :id_event, :date_enrollment, :date_payment, :id_payment_type, :cost, :bonus)";
 
 			$params = array(
 					":id_participant" => $this->participant->getIdParticipant(),
+					":id_enrollment_status" => EnrollmentStatus::find(array("paramsName" => "code = :code", "paramsValue" => array(":code" => "pending")))[0]->getIdEnrollmentStatus(),
 					":id_event" => $this->event->getIdEvent(),
 					":date_enrollment" => date("Y-m-d H:i:s"),
 					":date_payment" => null,
@@ -236,9 +272,9 @@
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_enrollment" => $this->getIdEnrollment());
 			$statment = $statment->execute($params);
-			if($statment){
-				\Event::addSpaces($this->event->getIdEvent());
-			}
+			// if($statment){
+			// 	\Event::addSpaces($this->event->getIdEvent());
+			// }
 			return $statment;
 		}
 

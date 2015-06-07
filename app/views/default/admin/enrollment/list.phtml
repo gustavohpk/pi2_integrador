@@ -29,6 +29,7 @@
 				<th>ID</th>
 				<th>Nome</th>
 				<th>Evento</th>
+				<th>Status</th>
 				<th>Ações</th>
 			</tr>
 			<?php foreach ($this->enrollments as $enrollment) : ?>
@@ -36,6 +37,7 @@
 					<td align="left"><?= $enrollment->getIdEnrollment() ?></td>
 					<td align="left"><?= $enrollment->participant->getName() ?></td>
 					<td align="left"><?= $enrollment->event->getName() ?></td>
+					<td align="left"><?= $enrollment->enrollmentStatus->getName() ?></td>
 					<td>
 						<a href="<?=createUriFor("/admin/inscricoes/{$enrollment->getIdEnrollment()}/ver")?>" role="button" class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
 						<a href="<?= createUriFor("/admin/inscricoes/{$enrollment->getIdEnrollment()}/remover") ?>" role="button" class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span>

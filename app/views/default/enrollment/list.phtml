@@ -4,32 +4,40 @@
 		<ul class="list-group" style="text-align: left">
 			<?php foreach ($this->enrollment as $enrollment) : ?>
 				
-				<?php if ($enrollment->getDatePayment()) : ?>
+				<?php if ($enrollment->getEnrollmentStatus()->getCode() == "confirmed") : ?>
 					<a href="<?=$this->getUri("conta/inscricoes/{$enrollment->getIdEnrollment()}")?>">
 						<li class="list-group-item list-group-item-success">
 							<span class="glyphicon glyphicon-ok-sign"></span>
-							<?= $enrollment->event->getName() ?> - <b>Pagamento Confirmado</b>
+							<?= $enrollment->event->getName() ?> - 
+							<?php if($enrollment->getBonus()) : ?>
+								<b>Inscrição Confirmada (bônus utilizado)</b>
+							<?php elseif($enrollment->getCost() == 0) : ?>
+								<b>Inscrição Confirmada (inscrição gratuita)</b>
+							<?php else : ?>
+								<b>Inscrição Confirmada (pagamento confirmado)</b>
+							<?php endif; ?>
+
 						</li>
 					</a>
-				<?php elseif ($enrollment->getBonus()) : ?>
+				<?php elseif ($enrollment->getEnrollmentStatus()->getCode() == "pending") : ?>
 					<a href="<?=$this->getUri("conta/inscricoes/{$enrollment->getIdEnrollment()}")?>">
-						<li class="list-group-item list-group-item-success">
-							<span class="glyphicon glyphicon-ok-sign"></span>
-							<?= $enrollment->event->getName() ?> - <b>Inscrição Gratuita (bônus utilizado)</b>
+						<li class="list-group-item list-group-item-info">
+							<span class="glyphicon glyphicon-time"></span>
+							<?= $enrollment->event->getName() ?> - <b>Pendente</b>
 						</li>
 					</a>
-				<?php elseif ($enrollment->getCost() == 0) : ?>
+				<?php elseif ($enrollment->getEnrollmentStatus()->getCode() == "cancelled") : ?>
 					<a href="<?=$this->getUri("conta/inscricoes/{$enrollment->getIdEnrollment()}")?>">
-						<li class="list-group-item list-group-item-success">
-							<span class="glyphicon glyphicon-ok-sign"></span>
-							<?= $enrollment->event->getName() ?> - <b>Inscrição Gratuita</b>
+						<li class="list-group-item list-group-item-danger">
+							<span class="glyphicon glyphicon-remove-sign"></span>
+							<?= $enrollment->event->getName() ?> - <b>Inscrição Cancelada</b>
 						</li>
 					</a>
-				<?php else : ?>
+				<?php elseif ($enrollment->getEnrollmentStatus()->getCode() == "suspended") : ?>
 					<a href="<?=$this->getUri("conta/inscricoes/{$enrollment->getIdEnrollment()}")?>">
 						<li class="list-group-item list-group-item-warning">
 							<span class="glyphicon glyphicon-exclamation-sign"></span>
-							<?= $enrollment->event->getName() ?> - <b>Pendente</b>
+							<?= $enrollment->event->getName() ?> - <b>Inscrição suspensa temporariamente (entre em contato com o organizador)</b>
 						</li>
 					</a>
 				<?php endif ?>

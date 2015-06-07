@@ -391,10 +391,16 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 .list-group-item { color: #E6E6E6; background-color: #2F3238; border-color: #3C3F45;}
 
 .list-group-item-success { color: #5cb85c; background-color: rgba(60, 118, 61, 0.2); border-radius: 0 !important; /*border-color: #4cae4c;*/ margin-top: 1px; margin-bottom: 1px;border: 0;}
-.list-group-item-success:hover { background-color: rgba(60, 118, 61, 0.4); }
+.list-group-item-success:hover { background-color: rgba(125, 125, 125, 0.4); }
 
 .list-group-item-warning { color: #f0ad4e; background-color: rgba(138, 109, 59, 0.2); border-radius: 0 !important;/* border-color: #eea236;*/ margin-top: 1px; margin-bottom: 1px;border: 0;}
-.list-group-item-warning:hover { background-color: rgba(138, 109, 59, 0.4); }
+.list-group-item-warning:hover { background-color: rgba(125, 125, 125, 0.4); }
+
+.list-group-item-danger { color: #d9534f; background-color: rgba(169, 68, 66, 0.15); border-radius: 0 !important; /*border-color: #4cae4c;*/ margin-top: 1px; margin-bottom: 1px;border: 0;}
+.list-group-item-danger:hover { background-color: rgba(125, 125, 125, 0.4); }
+
+.list-group-item-info { color: #4f91c6; background-color: rgba(49, 112, 143, 0.125); border-radius: 0 !important;/* border-color: #eea236;*/ margin-top: 1px; margin-bottom: 1px;border: 0;}
+.list-group-item-info:hover { background-color: rgba(125, 125, 125, 0.4); }
 
 /* Fim listas */
 

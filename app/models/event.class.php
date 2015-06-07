@@ -249,20 +249,32 @@
 
 
 		/**
-	     * Retorna os próximos eventos
+	     * Retorna os próximos eventos habilitados (visíveis)
 	     * @return Event[] Eventos
 	     */
 		public static function findNext($date){
+			// Necessária otimização
 			$events = self::find(array("end_date"), array($date), ">=", "AND" ,"start_date", "ASC");
+			foreach ($events as $key => $event) {
+				if(!$event->getEnabled()){
+					unset($events[$key]);
+				}
+			}
 			return $events;
 		}
 
 		/**
-	     * Retorna os eventos anteriores
+	     * Retorna os eventos anteriores habilitados (visíveis)
 	     * @return Event[] Eventos
 	     */
 		public static function findPrev($date){
+			// Necessária otimização
 			$events = self::find(array("end_date"), array($date), "<", "AND", "end_date", "DESC");
+			foreach ($events as $key => $event) {
+				if(!$event->getEnabled()){
+					unset($events[$key]);
+				}
+			}
 			return $events;			
 		}
 

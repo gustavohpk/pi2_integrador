@@ -1,33 +1,33 @@
 <div class="row">
 	<div class="col-xs-12">
-		<h2 class="event-title"><?= $this->events->getName() ?></h2>
+		<h2 class="event-title"><?= $this->event->getName() ?></h2>
 	</div>
 </div>
 
 <div class="row">
-	<div class='col-xs-12 <?= $this->events->getAddress() ? "col-sm-6" : "col-sm-10 col-sm-offset-1" ?>'>
-		<?php if ($this->events->getLogo()) : ?>
-			<div class="col-xs-10 col-xs-offset-1 <?= $this->events->getAddress() ? "col-sm-8 col-sm-offset-2" : "col-sm-4 col-sm-offset-4" ?>">
-				<?php $image = "data:image/jpeg;base64,". base64_encode($this->events->getLogo()); ?>
+	<div class='col-xs-12 <?= $this->event->getAddress() ? "col-sm-6" : "col-sm-10 col-sm-offset-1" ?>'>
+		<?php if ($this->event->getLogo()) : ?>
+			<div class="col-xs-10 col-xs-offset-1 <?= $this->event->getAddress() ? "col-sm-8 col-sm-offset-2" : "col-sm-4 col-sm-offset-4" ?>">
+				<?php $image = "data:image/jpeg;base64,". base64_encode($this->event->getLogo()); ?>
 				<img class="event-thumbnail" src="<?=$image ?>" alt="">
 				<br/><br/>
 			</div>
 		<?php endif; ?>
 		<div class="col-xs-12">
-			<?php if ($this->events->getStartDate("d/m/Y") == $this->events->getEndDate("d/m/Y")) : ?>
-				<h3 class="event-date">Data: <?= $this->events->getStartDate("d/m/Y")?></h3>
-				<?php if ($this->events->getStartDate("H:i") == $this->events->getEndDate("H:i")) : ?>
-					<h3 class="event-date">Horário: <?= $this->events->getStartDate("H:i")?></h3>
+			<?php if ($this->event->getStartDate("d/m/Y") == $this->event->getEndDate("d/m/Y")) : ?>
+				<h3 class="event-date">Data: <?= $this->event->getStartDate("d/m/Y")?></h3>
+				<?php if ($this->event->getStartDate("H:i") == $this->event->getEndDate("H:i")) : ?>
+					<h3 class="event-date">Horário: <?= $this->event->getStartDate("H:i")?></h3>
 				<?php else : ?>
-					<h3 class="event-date">Das <?= $this->events->getStartDate("H:i")?> às <?= $this->events->getEndDate("H:i")?></h3>
+					<h3 class="event-date">Das <?= $this->event->getStartDate("H:i")?> às <?= $this->event->getEndDate("H:i")?></h3>
 				<?php endif ?>
 			<?php else : ?>
-				<h3 class="event-date">Data: <?= $this->events->getStartDate("d/m/Y")?> a <?= $this->events->getEndDate("d/m/Y")?></h3>
+				<h3 class="event-date">Data: <?= $this->event->getStartDate("d/m/Y")?> a <?= $this->event->getEndDate("d/m/Y")?></h3>
 			<?php endif ?>
 			<br/>
-			<span class="glyphicon glyphicon-eye-open"></span> <?= $this->events->getViews() + 1?>
+			<span class="glyphicon glyphicon-eye-open"></span> <?= $this->event->getViews() + 1?>
 			<br>
-			<?php if($this->events->eventInitiated()) : ?>
+			<?php if($this->event->eventInitiated()) : ?>
 				<div id="average">
 					<input type="hidden" class="rating" readonly value="<?= $this->realRating ?>" data-start="0" data-stop="5" data-fractions="10"/>
 				</div>
@@ -37,29 +37,29 @@
 				<div id="participant-rating">
 					<input type="hidden" class="rating-tooltip" data-start="0" data-stop="5" value="<?= $this->participantRating ?>"/>
 				</div>
-			<?php elseif (strtotime($this->events->getEndDate("Y-m-d")) < strtotime(date("Y-m-d"))) : ?>
+			<?php elseif (strtotime($this->event->getEndDate("Y-m-d")) < strtotime(date("Y-m-d"))) : ?>
 				<a data-toggle="modal" data-target="#login-modal">Participou deste evento? Faça login para avaliá-lo.</a>
 			<?php endif; ?>
 			<br/><br/>
-			<h4 class="event-enrollment-start-date">Início das inscrições: <?=$this->events->getStartDateEnrollment("d/m/Y")?> às <?= $this->events->getStartDateEnrollment("H:i")?></h4>
-			<h4 class="event-enrollment-start-date">Término das inscrições: <?=$this->events->getEndDateEnrollment("d/m/Y")?> às <?= $this->events->getEndDateEnrollment("H:i")?></h4>
-			<?php if ($this->events->getEndDateEnrollment("d/m/Y") == date("d/m/Y") && strtotime($this->events->getEndDateEnrollment("H:i")) > strtotime(date("H:i"))) : ?>
+			<h4 class="event-enrollment-start-date">Início das inscrições: <?=$this->event->getStartDateEnrollment("d/m/Y")?> às <?= $this->event->getStartDateEnrollment("H:i")?></h4>
+			<h4 class="event-enrollment-start-date">Término das inscrições: <?=$this->event->getEndDateEnrollment("d/m/Y")?> às <?= $this->event->getEndDateEnrollment("H:i")?></h4>
+			<?php if ($this->event->getEndDateEnrollment("d/m/Y") == date("d/m/Y") && strtotime($this->event->getEndDateEnrollment("H:i")) > strtotime(date("H:i"))) : ?>
 				<span class="label label-danger" style="font-size: 16px">Último dia!</span>
 				<br/>
 			<?php endif; ?>
 			<br/>
-			<h4 class="event-address">Local do evento: <?= $this->events->getLocal()?></h4>
-			<h4 class="event-address">Endereço: <?= $this->events->getAddress()?></h4>
-			<?php if ($this->events->isSubEvent()) : ?>
-				<h5><span class="label label-info label-sm">Este evento faz parte do evento: <a class="event-related-link" href="<?= createUriFor("/eventos/{$this->events->parentEvent->getIdEvent()}/ver")?>"><?= $this->events->parentEvent->getName() ?></a></span></h5>
+			<h4 class="event-address">Local do evento: <?= $this->event->getLocal()?></h4>
+			<h4 class="event-address">Endereço: <?= $this->event->getAddress()?></h4>
+			<?php if ($this->event->isSubEvent()) : ?>
+				<h5><span class="label label-info label-sm">Este evento faz parte do evento: <a class="event-related-link" href="<?= createUriFor("/eventos/{$this->event->parentEvent->getIdEvent()}/ver")?>"><?= $this->event->parentEvent->getName() ?></a></span></h5>
 			<?php endif ?>
 		</div>
 	</div>
 	<div class="col-sm-6 col-xs-12">
 		<div class="col-xs-12 google-maps">
 			<br/>
-			<?php if($this->events->getAddress()) : ?>
-				<iframe width="400" height="400" frameborder="0" style="border:0" src='https://www.google.com/maps/embed/v1/place?key=AIzaSyAvEa-GZOf1PMuUH4wDTg353GY5b_UIVXw&q=<?= str_replace(" ", "+", $this->events->getAddress()) ?>'></iframe>
+			<?php if($this->event->getAddress()) : ?>
+				<iframe width="400" height="400" frameborder="0" style="border:0" src='https://www.google.com/maps/embed/v1/place?key=AIzaSyAvEa-GZOf1PMuUH4wDTg353GY5b_UIVXw&q=<?= str_replace(" ", "+", $this->event->getAddress()) ?>'></iframe>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -67,22 +67,32 @@
 <div class="row">
 	<br/>
 	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 event-long-description">
-		<?= $this->events->getDetails()?>
+		<?= $this->event->getDetails()?>
 	</div>
-    <?php if ($this->events->eventType->getCode() == "sem_inscricao") : ?>
+    <?php if ($this->event->eventType->getCode() == "sem_inscricao") : ?>
 		<h4><span class="label label-info">Para participar deste evento não é necessário fazer inscrição.</span></h4>
-    <?php elseif (!$this->events->eventInitiated() && $this->events->eventType->getCode() != "sem_inscricao") : ?>
+    <?php elseif (!$this->event->eventInitiated() && $this->event->eventType->getCode() != "sem_inscricao") : ?>
 		<div class="col-xs-12">
-			<span style="display:inline-block; margin-bottom: 20px" data-toggle="tooltip" data-placement="top" <?php echo (!$this->events->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->events->getStartDateEnrollment("d/m/Y"). " às " . $this->events->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
-			<a role="button" href="<?= createUriFor("/inscricao/evento/{$this->events->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-lg"  <?php echo (!$this->events->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
-			</span>
+			<p>Vagas totais: <?= $this->event->getSpaces() ?></p>
+			<p>Vagas restantes: <?= $this->remainingSpaces ?></p>
 		</div>
+		<?php if($this->isEnrolled) : ?>
+			<div class="col-xs-12">
+				<p>Você já se inscreveu neste evento. <a href="<?= createUriFor('/conta/inscricoes')?>">Verifique o status da inscrição</a>.</p>
+			</div>
+		<?php else: ?>
+			<div class="col-xs-12">
+				<span style="display:inline-block; margin-bottom: 20px" data-toggle="tooltip" data-placement="top" <?php echo (!$this->event->canEnrollment()?"disabled title='As inscrições abrem dia " . $this->event->getStartDateEnrollment("d/m/Y"). " às " . $this->event->getStartDateEnrollment("H:i") . ".'" : 'Inscrever-se') ?>>
+				<a role="button" href="<?= createUriFor("/inscricao/evento/{$this->event->getIdEvent()}")?>" type="button" id="enroll-button" class="btn btn-default btn-lg"  <?php echo (!$this->event->canEnrollment()?"disabled" : 'Inscreva-se') ?> >Inscrever-se</a>
+				</span>
+			</div>
+		<?php endif; ?>
 	<?php endif ?>
 </div>
 <?php if($this->hasMedia) : ?>
 	<div class="row">
 		<div class="col-xs-12">
-			<a role="button" href="<?= createUriFor("/midia/galeria/evento/{$this->events->getIdEvent()}")?>" type="button" id="gallery-button" class="btn btn-default btn-md"><span class="glyphicon glyphicon-picture"></span> Ver galeria</a>
+			<a role="button" href="<?= createUriFor("/midia/galeria/evento/{$this->event->getIdEvent()}")?>" type="button" id="gallery-button" class="btn btn-default btn-md"><span class="glyphicon glyphicon-picture"></span> Ver galeria</a>
 		</div>
 	</div>
 <?php endif; ?>
@@ -99,11 +109,11 @@
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
-<?php if ($this->eventsRelated) : ?>
+<?php if ($this->eventRelated) : ?>
 	<br/><br/>
 	<div class="row events">
 		<h4>Eventos relacionados</h4>
-		<?php foreach ($this->eventsRelated as $event) : ?>
+		<?php foreach ($this->eventRelated as $event) : ?>
 			<div class="event col-lg-2 col-md-2 col-sm-4 col-xs-6">
 				<a class="event-link" data-toggle="modal" data-target="#event<?=$event->getIdEvent()?>-modal">
 				    <div class="thumbnail">
@@ -128,8 +138,8 @@
 		<?php endforeach ?>
 	</div>
 <?php endif ?>
-<div class="fb-comments" data-href="http://<?=$_SERVER['HTTP_HOST'] ?><?= createUriFor("/eventos/{$this->events->getIdEvent()}/ver")?>" data-numposts="5" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://<?=$_SERVER['HTTP_HOST'] ?><?= createUriFor("/eventos/{$this->event->getIdEvent()}/ver")?>" data-numposts="5" data-colorscheme="light"></div>
 
 <script type="text/javascript">
-	ratingUrl = '<?= createUriFor("/eventos/{$this->events->getIdEvent()}/avaliacao/") ?>';
+	ratingUrl = '<?= createUriFor("/eventos/{$this->event->getIdEvent()}/avaliacao/") ?>';
 </script>
