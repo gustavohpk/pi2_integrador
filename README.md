@@ -14,6 +14,15 @@
 
 ----------
 
+----- Atualização 082 (08/05/15 - 10/05/15) -----
+
+- Adicionada validação para impedir visualização de evento desativado
+- Pequenas correções no código
+- Adicionada exibição dos patrocinadores do evento pai na página do evento filho
+- Função do framework "getParamsSQL" alterada para permitir array de operadores relacionais
+OBS.: Temporariamente está aceitando tanto string como array de strings.
+- Número de vagas do evento corrigido
+
 
 ----- Atualização 081 (31/05/15 - 07/05/15) -----
 

@@ -15,7 +15,7 @@
 		private $idCertificate, $idEnrollment, $code;
 
 		/**
-		 * @var Event $event A inscrição relacionado ao certificado
+		 * @var Enrollment $enrollment A inscrição relacionado ao certificado
 		 */
 		public $enrollment;
 		

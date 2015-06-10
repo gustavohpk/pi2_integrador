@@ -248,7 +248,7 @@
 
 			$params = array(
 					":id_participant" => $this->participant->getIdParticipant(),
-					":id_enrollment_status" => EnrollmentStatus::find(array("paramsName" => "code = :code", "paramsValue" => array(":code" => "pending")))[0]->getIdEnrollmentStatus(),
+					":id_enrollment_status" => EnrollmentStatus::find(array("code"), array("pending"))[0]->getIdEnrollmentStatus(),
 					":id_event" => $this->event->getIdEvent(),
 					":date_enrollment" => date("Y-m-d H:i:s"),
 					":date_payment" => null,

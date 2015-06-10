@@ -3,6 +3,7 @@
 /**
  * Modelo base.
  * @author Rodrigo Miss
+ * @author Gustavo Pchek
  */
 
 	class BaseModel{
@@ -88,14 +89,18 @@
 	     * @param string $compare O comparador
 	     * @return array Uma array com os parâmetros e seus respectivos valores
 	     */
-		protected function getParamsSQL($params, $values, $operator, $compare){
+		protected function getParamsSQL($params, $values, $operators, $compare){
 			$paramsValue = array();
 			$i = 0;
 			$paramsName = "";
 
-			foreach ($params as $param){
+			foreach ($params as $key => $param){
 				$aux = str_replace(".", "", $param);
-				$paramsName .= "$param $operator :$aux $compare ";
+				if(is_array($operators)){
+					$paramsName .= "$param " . $operators[$key] . " :$aux $compare ";
+				}else{
+					$paramsName .= "$param $operators :$aux $compare ";
+				}
 				$paramsValue[":$aux"] = $values[$i]; 
 				$i++;
 			}

@@ -44,12 +44,21 @@
 
 
 
-		public static function find($params = null){
-			$sql = "SELECT * FROM enrollment_status " . (!is_null($params) ? " WHERE " . $params['paramsName'] : "");
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_enrollment_status", $direction ="DESC"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
+			$limit = self::getLimitByPage();
+			$page = self::getCurrentPage();
+			$start = ($page * $limit) - $limit;
+
+			$sql = 
+			"SELECT * FROM enrollment_status" .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
+
+			$sql .= " LIMIT $start, $limit";
+
 			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment->execute($params["paramsValue"]);
-			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
+			$rs = $pdo->prepare($sql);
+			$rs->execute($paramsValue);
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
 			$enrollmentStatus = array();			
 
 			foreach ($rows as $row) {
@@ -64,12 +73,7 @@
 		}
 
 		public static function findById($id){
-			$params = array(
-				"paramsName" => "id_enrollment_status = :id_enrollment_status", 
-				"paramsValue" => array(":id_enrollment_status" => $id)
-			);
-			//retorna apenas o primeiro objeto (no caso o unico)
-			$enrollmentStatus = self::find($params);
+			$enrollmentStatus = self::find("id_enrollment_status", $id);
 			return count($enrollmentStatus) > 0 ? $enrollmentStatus : NULL;
 		}
 

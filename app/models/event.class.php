@@ -8,10 +8,8 @@
 	class Event extends BaseModel{
 		private $idEvent;
 		private $idParentEvent;
-		public $parentEvent;
 		private $enabled;
 		private $isSubEvent;
-		public $eventType;
 		private $status;
 		private $name;
 		private $path;
@@ -30,6 +28,9 @@
 		private $sendParticipantData;
 		private $rating;
 		private $evaluations;
+
+		public $eventType;
+		public $parentEvent;
 		public $cost;
 		public $sponsorship;
 		public $eventBonus;
@@ -60,6 +61,10 @@
 
 		public function getIdParentEvent(){
 			return $this->idParentEvent;
+		}
+
+		public function getParentEvent(){
+			return $this->parentEvent;
 		}
 
 		public function setIdEventType($idEventType){
@@ -254,12 +259,7 @@
 	     */
 		public static function findNext($date){
 			// Necessária otimização
-			$events = self::find(array("end_date"), array($date), ">=", "AND" ,"start_date", "ASC");
-			foreach ($events as $key => $event) {
-				if(!$event->getEnabled()){
-					unset($events[$key]);
-				}
-			}
+			$events = self::find(array("end_date", "enabled"), array($date, true), array(">=", "="), "AND" ,"start_date", "ASC");
 			return $events;
 		}
 

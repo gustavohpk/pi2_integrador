@@ -13,11 +13,21 @@
 	    	else if(isset($this->params[":url"])){
 	    		$this->event = Event::findByPath($this->params[":url"])[0];
 	    	}
-	    	if($this->event){
+	    	if($this->event && $this->event->getEnabled() == true){
 	    		$this->eventRelated = $this->event->getEventsRelated();
 	    		$this->sponsors = $this->event->getSponsors();
+	    		// Une os patrocinadores do evento pai
+	    		if($this->event->getIdParentEvent()){
+	    			$parentEventSponsors = $this->event->getParentEvent()->getSponsors();
+	    			foreach ($parentEventSponsors as $key => $parentEventSponsor) {
+	    				if(!in_array($parentEventSponsor, $this->sponsors)){
+	    					$this->sponsors[] = $parentEventSponsor;
+	    				}
+	    			}
+	    		}
 	    		$this->hasMedia = Media::hasMedia($this->event->getIdEvent());
-	    		$this->remainingSpaces = $this->event->getSpaces() - count(Enrollment::find(array("id_event"), array($this->event->getIdEvent())));
+	    		// Subtrai o nº de vagas inicial pelo nº de inscrições não canceladas
+	    		$this->remainingSpaces = $this->event->getSpaces() - count(Enrollment::find(array("id_event", "id_enrollment_status"), array($this->event->getIdEvent(), EnrollmentStatus::find(array("code"), array("cancelled"))[0]->getIdEnrollmentStatus()), array("=", "!=")));
 	    		if($this->event->getRating() > 0)
 	    			$this->realRating = $this->event->getRating() / $this->event->getEvaluations();
    				Event::updateViews($this->event->getIdEvent());
