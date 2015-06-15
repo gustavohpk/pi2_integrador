@@ -67,7 +67,7 @@
             if(substr($route["route"], 0, 6) != "/admin"){
                unset($routes["GET"][$key]);
             }else{
-               $this->routes[$route["controller"]][] = array("method" => "GET", "route" => $route["route"], "action" => $route["action"]);
+               $this->routes[$route["controller"]][] = array("method" => "GET", "route" => $route["route"], "action" => $route["action"], "name" => AdministratorLevel::translate($route["action"], "pt_BR"));
             }
          }
          foreach ($routes["POST"] as $key => $route) {
@@ -75,7 +75,7 @@
             if(substr($route["route"], 0, 6) != "/admin"){
                unset($routes["POST"][$key]);
             }else{
-               $this->routes[$route["controller"]][] = array("method" => "POST", "route" => $route["route"], "action" => $route["action"]);
+               $this->routes[$route["controller"]][] = array("method" => "POST", "route" => $route["route"], "action" => $route["action"], "name" => AdministratorLevel::translate($route["action"], "pt_BR"));
             }
          }
 		}

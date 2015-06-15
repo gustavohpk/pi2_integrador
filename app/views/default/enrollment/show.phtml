@@ -34,7 +34,7 @@
 			<?php else : ?>
 				<h3 class="event-date">Data: <?= $this->enrollment->event->getStartDate("d/m/Y")?> a <?= $this->enrollment->event->getEndDate("d/m/Y")?></h3>
 			<?php endif ?>
-			<h4 class="event-address">Local do evento: <?= $this->enrollment->event->getLocal()?></h4>
+			<h4 class="event-address">Local do evento: <?= $this->enrollment->event->getLocation()?></h4>
 			<h4 class="event-address"><?=$this->enrollment->event->eventType->getTeacherType() . ": " . $this->enrollment->event->getTeacher()?></h4>
 			<?php if ($this->enrollment->event->isSubEvent()) : ?>
 				<h5><span class="label label-info">Este evento faz parte do evento: <a class="event-related-link" href="<?= createUriFor("/eventos/{$this->enrollment->event->parentEvent->getIdEvent()}/ver")?>"><?= $this->enrollment->event->parentEvent->getName() ?></a></span></h5>

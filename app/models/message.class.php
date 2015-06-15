@@ -7,14 +7,11 @@
 
 	class Message extends BaseModel{
 		private $idMessage;
-		private $idEvent;
-		private $creationDate;
-		private $modificationDate;
+		private $recipient;
+		private $subject;
 		private $title;
-		private $subtitle;		
 		private $content;
-		private $views;
-		private $path;
+		private $status;
 
 		public function confirmedEnrollment(){
 			$mail = file_get_contents("app/views/default/message/_message_email.html");
@@ -42,87 +39,7 @@
 			$mail = str_replace("{{DATE}}", $date, $mail);
 			$mail = str_replace("{{CONFIRMDATE}}", $confirmDate, $mail);
 		}
-
-		public function setIdMessage($idMessage){
-			$this->idMessage = $idMessage;
-		}
-
-		public function setIdEvent($idEvent){
-			$this->idEvent = $idEvent;
-		}
-
-		public function setCreationDate($creationDate){
-			//$this->creationDate = $creationDate;
-			$this->creationDate = empty($creationDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $creationDate)));
-		}
-
-		public function setModificationDate($modificationDate){
-			//$this->modificationDate = $modificationDate;
-			$this->modificationDate = empty($modificationDate) ? null : date("Y-m-d H:i:s", strtotime(str_replace("/", "-", $modificationDate)));
-		}
-
-		public function setTitle($title){
-			$this->title = $title;
-		}
-
-		public function setSubtitle($subtitle){
-			$this->subtitle = $subtitle;
-		}
-
-		public function setContent($content){
-			$this->content = $content;
-		}
-
-		public function setViews($views){
-			$this->views = $views;
-		}
-
-		public function setPath($path){
-			$this->path = $path;
-		}
-
-		public function getIdMessage(){
-			return $this->idMessage;
-		}
-
-		public function getIdEvent(){
-			return $this->idEvent;
-		}
-
-		public function getCreationDate($format = "Y-m-d H:i:s"){
-			//return date("d/m/Y H:i", $this->creationDate);
-			if (empty($this->idMessage)) $this->creationDate = date("Y-m-d H:i:s");
-			return is_null($this->creationDate) ? null : date($format, strtotime($this->creationDate));
-		}
-
-		public function getModificationDate($format = "Y-m-d H:i:s"){
-			//return date("d/m/Y H:i", $this->modificationDate);
-			return is_null($this->modificationDate) ? null : date($format, strtotime($this->modificationDate));
-		}
-
-		public function getTitle(){
-			return $this->title;
-		}
-
-		public function getSubtitle(){
-			return $this->subtitle;
-		}
-
-		public function getContent(){
-			return $this->content;
-		}
-
-		public function getMedia($type = "p") {
-			return Media::findByIdEvent($this->getIdEvent(), $type);
-		}
-
-		public function getViews(){
-			return $this->views;
-		}
-
-		public function getPath(){
-			return $this->path;
-		}
+	
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_message", $direction ="DESC"){
 			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
@@ -228,6 +145,45 @@
 			return $statment ? $this : false;
 		}
 
+		function sendMail($nameAddress = "Gustavo"){
+			$html = file_get_contents("app/views/default/admin/message/_message_email.html");
+			// $mail = str_replace('{{LOGO}}', "<a href='#'><img id='title-banner-img' src='" . $this->getResource('img/utfpr/title-header.png'). "' alt='UTFPR Eventos' style='max-width: 200px'/></a>", $mail);
+
+			$confirmDate = "18/09/2015 - 09:05";
+
+			$html = str_replace('{{TEXT}}', $this->getContent(), $html);
+			$html = str_replace('{{TITLE}}', $this->getTitle(), $html);
+
+
+			require_once APP_ROOT_FOLDER . '/app/resources/php/PHPMailer-master/PHPMailerAutoload.php';
+			$mail = new PHPMailer;
+			$mail->charSet = "UTF-8";
+			$mail->isSMTP(true);
+			$mail->isHTML(true);
+			$mail->CharSet = 'UTF-8';
+			$mail->Debugoutput = 'html';
+			$mail->Host = 'smtp.gmail.com';
+			$mail->Port = 587;
+			$mail->SMTPAuth = true;
+			$mail->Username = "";
+			$mail->Password = "";
+			$mail->setFrom('', 'UTFPR Eventos teste');
+			// $mail->addReplyTo('ghpk88@gmail.com', 'UTFPR Eventos teste');
+			$mail->addAddress($this->getRecipient(), $nameAddress);
+			$mail->Subject = $this->getSubject();
+			$mail->msgHTML($html);
+			$mail->AltBody = 'E-mail teste';
+
+			// COLOCAR ISTO NUM LOG
+			if (!$mail->send()) {
+				var_dump($mail->ErrorInfo);
+			    return false;
+			} else {
+			    return true;
+			}
+		}
+
+
 		public function remove(){
 			$sql = "DELETE FROM message WHERE id_message = :id_message";
 			$pdo = \Database::getConnection();
@@ -248,5 +204,149 @@
 			
 			$statment->execute();
 		}
-	}
+	
+    /**
+     * Gets the value of idMessage.
+     *
+     * @return mixed
+     */
+    public function getIdMessage()
+    {
+        return $this->idMessage;
+    }
+
+    /**
+     * Sets the value of idMessage.
+     *
+     * @param mixed $idMessage the id message
+     *
+     * @return self
+     */
+    public function setIdMessage($idMessage)
+    {
+        $this->idMessage = $idMessage;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of recipient.
+     *
+     * @return mixed
+     */
+    public function getRecipient()
+    {
+        return $this->recipient;
+    }
+
+    /**
+     * Sets the value of recipient.
+     *
+     * @param mixed $recipient the recipient
+     *
+     * @return self
+     */
+    public function setRecipient($recipient)
+    {
+        $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of subject.
+     *
+     * @return mixed
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * Sets the value of subject.
+     *
+     * @param mixed $subject the subject
+     *
+     * @return self
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of title.
+     *
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Sets the value of title.
+     *
+     * @param mixed $title the title
+     *
+     * @return self
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of content.
+     *
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Sets the value of content.
+     *
+     * @param mixed $content the content
+     *
+     * @return self
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of status.
+     *
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Sets the value of status.
+     *
+     * @param mixed $status the status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+}
 ?>

@@ -48,7 +48,7 @@
 				<br/>
 			<?php endif; ?>
 			<br/>
-			<h4 class="event-address">Local do evento: <?= $this->event->getLocal()?></h4>
+			<h4 class="event-address">Local do evento: <?= $this->event->getLocation()?></h4>
 			<h4 class="event-address">Endereço: <?= $this->event->getAddress()?></h4>
 			<?php if ($this->event->isSubEvent()) : ?>
 				<h5><span class="label label-info label-sm">Este evento faz parte do evento: <a class="event-related-link" href="<?= createUriFor("/eventos/{$this->event->parentEvent->getIdEvent()}/ver")?>"><?= $this->event->parentEvent->getName() ?></a></span></h5>

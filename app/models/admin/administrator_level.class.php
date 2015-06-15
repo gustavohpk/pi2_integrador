@@ -113,5 +113,28 @@
 			$params = array(":id_administrator_permissions" => $this->getIdAdministratorLevel());
 			return $statment->execute($params);
 		}
+
+		public static function translate($action, $lang){
+			if($lang == "pt_BR"){
+				$name = strtr($action,
+		    	array (
+		 			'index' => 'Principal',
+		 			'login' => 'Login',
+		 			'logout' => 'Logout',
+		 			'_list' => 'Visualizar listagem',
+		 			'_new' => 'Formulário de criação',
+		 			'create' => 'Criar novo',
+		 			'_edit' => 'Formulário de edição',
+		 			'update' => 'Salvar edição',
+		 			'remove' => 'Excluir',
+		 			'show' => 'Visualizar'
+			      
+			    ));
+					
+			}else{
+				$name = $action;
+			}
+			return $name;
+		}
 	}
 ?>

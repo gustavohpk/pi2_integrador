@@ -14,7 +14,15 @@
 
 ----------
 
------ Atualização 082 (08/05/15 - 10/05/15) -----
+----- Atualização 083 (11/06/15 - 15/06/15) -----
+
+- Padronização de código
+- Tradução dos Níveis de Administrador iniciada
+- Adicionada biblioteca para envio de e-mails
+- Iniciado envio de e-mails
+
+
+----- Atualização 082 (08/06/15 - 10/06/15) -----
 
 - Adicionada validação para impedir visualização de evento desativado
 - Pequenas correções no código

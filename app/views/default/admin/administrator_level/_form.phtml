@@ -27,10 +27,10 @@
 								<li class="list-group-item">
 									<?php if($this->administratorLevel->getPermissions()) : ?>
 										<input type="checkbox" name="<?= $controller ?>[<?= $route["action"] ?>]" <?= array_key_exists($controller, $this->administratorLevel->getPermissions()) && in_array($route["action"], $this->administratorLevel->getPermissions()[$controller]) ? "checked" : "" ?>>
-										<?= $route["action"] ?>
+											<?= $route["name"] ?>
 									<?php else : ?>
 										<input type="checkbox" name="<?= $controller ?>[<?= $route["action"] ?>]">
-										<?= $route["action"] ?>
+										<?= $route["name"] ?>
 									<?php endif; ?>
 								</li>
 							<?php endforeach; ?>

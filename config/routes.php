@@ -251,6 +251,9 @@
     //rotas para mensagens
     $routes['GET'][] = array('route' => '/admin/mensagens/nova', 'controller' => 'Admin\MessageController', 'action' => '_new');
     $routes['GET'][] = array('route' => '/admin/mensagens/lista', 'controller' => 'Admin\MessageController', 'action' => '_list');
+    $routes['POST'][] = array('route' => '/admin/mensagens/nova', 'controller' => 'Admin\MessageController', 'action' => 'create');
+
+
     return $routes;
 
 ?>

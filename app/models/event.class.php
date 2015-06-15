@@ -15,7 +15,7 @@
 		private $path;
 		private $details;
 		private $teacher;
-		private $local;
+		private $location;
 		private $address;
 		private $startDate;
 		private $endDate;
@@ -112,12 +112,12 @@
 			return $this->teacher;
 		}
 
-		public function setLocal($local){
-			$this->local = $local;
+		public function setLocation($location){
+			$this->location = $location;
 		}
 
-		public function getLocal(){
-			return $this->local;
+		public function getLocation(){
+			return $this->location;
 		}
 
 		public function setAddress($address){
@@ -216,7 +216,7 @@
 			if ($this->getSpaces() < 1) $this->errors[] = "Informe a quantidade de vagas disponíveis.";
 			if ($this->getStartDate() > $this->getEndDate()) $this->errors[] = "A data e hora de início do evento deve ser menor que a data de término";
 			if ($this->getStartDateEnrollment() > $this->getEndDateEnrollment()) $this->errors[] = "A data e hora de início das inscrições deve ser menor que a data de término";
-			if ($this->getIdParentEvent() && !$this->findById($this->getIdParentEvent())) $this->errors[] = "Evento à ser vinculado não foi localizado.";
+			if ($this->getIdParentEvent() && !$this->findById($this->getIdParentEvent())) $this->errors[] = "Evento à ser vinculado não foi locationizado.";
 		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_event", $direction ="DESC"){
@@ -501,10 +501,10 @@
 
 			$sql = 
 			"INSERT INTO event
-				(enabled, id_event_type, id_parent_event, name, path, details, teacher, local, address, start_date, end_date, 
+				(enabled, id_event_type, id_parent_event, name, path, details, teacher, location, address, start_date, end_date, 
 				spaces, start_date_enrollment, end_date_enrollment, logo, send_participant_data)
 			VALUES
-				(:enabled, :id_event_type, :id_parent_event, :name, :path, :details, :teacher, :local, :address, :start_date, :end_date,
+				(:enabled, :id_event_type, :id_parent_event, :name, :path, :details, :teacher, :location, :address, :start_date, :end_date,
 				:spaces, :start_date_enrollment, :end_date_enrollment, :logo, :send_participant_data)";
 
 			$params = array(
@@ -515,7 +515,7 @@
 					":path" => $this->getPath(),
 					":details" => $this->getDetails(),
 					":teacher" => $this->getTeacher(),
-					":local" => $this->getLocal(),
+					":location" => $this->getLocation(),
 					":address" => $this->getAddress(),
 					":start_date" => $this->getStartDate(), 
 					":end_date" => $this->getEndDate(),
@@ -553,7 +553,7 @@
 				path = :path,
 				details = :details,
 				teacher = :teacher, 
-				local = :local,
+				location = :location,
 				address = :address,
 				start_date = :start_date, 
 				end_date = :end_date, 
@@ -573,7 +573,7 @@
 					":path" => $this->getPath(),
 					":details" => $this->getDetails(),
 					":teacher" => $this->getTeacher(),
-					":local" => $this->getLocal(),
+					":location" => $this->getLocation(),
 					":address" => $this->getAddress(),
 					":start_date" => $this->getStartDate(), 
 					":end_date" => $this->getEndDate(),

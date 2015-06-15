@@ -26,6 +26,7 @@
 
 		public function _new(){
    		$this->setHeadTitle("Enviar mensagem");
+         $this->actionForm = $this->getUri("admin/mensagens/nova");
 		}
 
 		public function _edit(){
@@ -38,19 +39,24 @@
       public function create(){
          $params = $this->params["message"];
          $this->message = new \Message($params);
-         if ($this->message->save()){
-            \Logger::creationLog($_SESSION["admin"]->getName(), "Notícias", $this->message->getIdMessage());
-            \FlashMessage::successMessage("Notícia cadastrada com sucesso.");
-            $this->redirectTo("admin/noticias/lista");
-         }
-         else{
-            \FlashMessage::errorMessage("Erro ao cadastrar a notícia.");
-            $this->setHeadTitle("Cadastro de notícia");           
-            $this->actionForm = $this->getUri("admin/noticias");
-            $this->titleBtnSubmit = "Cadastrar";
-            $this->render("_new");
-         }
-      }
+         
+         var_dump($this->message->sendMail());
+         exit;
+
+      //    $this->message = new \Message($params);
+      //    if ($this->message->save()){
+      //       \Logger::creationLog($_SESSION["admin"]->getName(), "Notícias", $this->message->getIdMessage());
+      //       \FlashMessage::successMessage("Notícia cadastrada com sucesso.");
+      //       $this->redirectTo("admin/noticias/lista");
+      //    }
+      //    else{
+      //       \FlashMessage::errorMessage("Erro ao cadastrar a notícia.");
+      //       $this->setHeadTitle("Cadastro de notícia");           
+      //       $this->actionForm = $this->getUri("admin/noticias");
+      //       $this->titleBtnSubmit = "Cadastrar";
+      //       $this->render("_new");
+      //    }
+       }
 
       public function update(){ 
          $this->message = \Message::findById($this->params[":id"])[0];
