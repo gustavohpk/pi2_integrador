@@ -470,11 +470,6 @@ li.mobile-only { display: none; }
 	.navbar-default .navbar-nav>li>a { padding-top: 3px; padding-bottom: 3px; min-height: 20px;}
 	/* Fim menu principal */
 
-	/* Certificados */
-	#print-certificate { display: none; }
-	#print-info { display: inline-block !important; }
-	/* Fim certificados */
-
 	/* Footer */
 	#footer-links { border-right: none; }
 	/* Fim footer */

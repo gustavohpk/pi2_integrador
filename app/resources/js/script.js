@@ -207,6 +207,7 @@ $("#cost-add_button").click(function() {
 	$(".cost-row").last().find(":input[type='hidden']").val("");
 	$(".cost-row").last().find(":input[type='number']").val("");
 	$(".cost-row").last().find(":input[type='text']").val("");
+	$(".cost-row").last().find(":input[type='text']").removeAttr("id");
 });
 
 $(".cost-delete-button").click(function() {

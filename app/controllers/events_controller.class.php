@@ -16,7 +16,7 @@
 	    	if($this->event && $this->event->getEnabled() == true){
 	    		$this->eventRelated = $this->event->getEventsRelated();
 	    		$this->sponsors = $this->event->getSponsors();
-	    		// Une os patrocinadores do evento pai
+	    		// Une os colaboradores do evento pai
 	    		if($this->event->getIdParentEvent()){
 	    			$parentEventSponsors = $this->event->getParentEvent()->getSponsors();
 	    			foreach ($parentEventSponsors as $key => $parentEventSponsor) {

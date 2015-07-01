@@ -1,6 +1,6 @@
 <?php
 /**
-* Classe de relacionamento entre patrocinadores e eventos
+* Classe de relacionamento entre colaboradores e eventos
 * @author Gustavo Pchek
 */
 
@@ -9,7 +9,7 @@ class Sponsorship extends BaseModel {
 	private $idEventSponsor;
 	/** @var int Id do evento */
 	private $idEvent;
-	/** @var int Id do patrocinador */
+	/** @var int Id do colaborador */
 	private $idSponsor;
 
 	public function setIdSponsorship($idSponsorship) {

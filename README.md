@@ -14,6 +14,14 @@
 
 ----------
 
+----- Atualização 084 (22/06/15 - 01/07/15) -----
+
+- O termo "Patrocinador" foi alterado para "Colaborador"
+- Visualização e impressão de certificados no site removida (apenas admin poderá imprimir)
+- Iniciada área de estatísticas de evento
+- Corrigido o problema da exclusão de preços de evento
+
+
 ----- Atualização 083 (11/06/15 - 15/06/15) -----
 
 - Padronização de código
@@ -26,7 +34,7 @@
 
 - Adicionada validação para impedir visualização de evento desativado
 - Pequenas correções no código
-- Adicionada exibição dos patrocinadores do evento pai na página do evento filho
+- Adicionada exibição dos colaboradores do evento pai na página do evento filho
 - Função do framework "getParamsSQL" alterada para permitir array de operadores relacionais
 OBS.: Temporariamente está aceitando tanto string como array de strings.
 - Número de vagas do evento corrigido
@@ -288,7 +296,7 @@ Bugs Conhecidos :
 - Adicionados registros de participantes para testes
 - Tabela de preços parcialmente corrigida
 - OBS. 1: Não é possível deletar um preço
-- Os patrocinadores não são salvos no cadastro de evento (apenas edição)
+- Os colaboradores não são salvos no cadastro de evento (apenas edição)
 - jQuery UI modificado para ter apenas datepicker
 Bugs Conhecidos : 
 - As mensagens de erro referentes aos preços de evento não são exibidas, mas as validações funcionam
@@ -304,13 +312,13 @@ Bugs Conhecidos :
 
 ----- Atualização 049 (27/10/14 - 28/10/14) -----
 
-- Relação patrocinador-evento finalizada (porém falta logo de patrocinador)
+- Relação colaborador-evento finalizada (porém falta logo de colaborador)
 
 
 ----- Atualização 048 (15/10/14 - 18/10/14) -----
 
 - Documentação complementada
-- Criada tabela events_sponsor para relacionar patrocinadores a eventos
+- Criada tabela events_sponsor para relacionar colaboradores a eventos
 - Pequenas correções e modificações
 
 
@@ -322,7 +330,7 @@ Bugs Conhecidos :
 
 ----- Atualização 046 (08/09/14 - 09/09/14) -----
 - Área de participantes no painel do admin adicionada (restam ajustes)
-- Iniciada área de patrocinadores (sponsor)
+- Iniciada área de colaboradores (sponsor)
 
 
 ----- Atualização 045 (04/09/14 - 05/09/14) -----

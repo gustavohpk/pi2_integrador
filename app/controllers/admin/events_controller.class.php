@@ -207,5 +207,10 @@
          $this->actionForm = $this->getUri("admin/eventos/{$this->event->getIdEvent()}/presenca");
          $this->titleBtnSubmit = "Salvar";
       }
+
+      public function stats(){
+         $this->setHeadTitle("Estatísticas do evento");
+         $this->event = \Event::findById($this->params[":id"])[0];
+      }
 	} 
 ?>

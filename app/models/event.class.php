@@ -423,6 +423,19 @@
 		}
 
 		public function setCost($costs) {
+			// Exclui os preços que foram removidos
+			$ids = array();
+			foreach ($costs["id_cost_event"] as $id) {
+				$ids[] = $id;
+			}
+			$ids = implode(",", $ids);
+
+			$sql = "DELETE FROM cost_event WHERE id_event = :id_event AND id_cost_event NOT IN ($ids)";
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			$params = array(":id_event" => $this->getIdEvent());
+			$result = $statment->execute($params);			
+
 			foreach ($costs["cost"] as $key => $value) {
 				$data = array(
 						"id_cost_event" => isset($costs["id_cost_event"][$key]) ? $costs["id_cost_event"][$key] : null,

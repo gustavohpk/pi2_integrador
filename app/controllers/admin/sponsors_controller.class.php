@@ -7,7 +7,7 @@
     	protected $titleBtnSubmit;
 
 		public function _list(){
-   			$this->setHeadTitle("Lista de Patrocinadores");
+   			$this->setHeadTitle("Lista de Colaboradores");
 	        if (isset($this->params[":p"])) {
 	           $page = $this->params[":p"];
 	        } else {
@@ -29,8 +29,8 @@
 		public function _new(){
          	//prepara formulario para inserção
          	$this->sponsors = new \Sponsors();
-			$this->setHeadTitle("Novo Patrocinador");
-         	$this->actionForm = $this->getUri("admin/patrocinadores/novo");
+			$this->setHeadTitle("Novo Colaborador");
+         	$this->actionForm = $this->getUri("admin/colaboradores/novo");
          	$this->titleBtnSubmit = "Cadastrar";
 		}
 
@@ -38,13 +38,13 @@
 			//salva inserção no db
 			$this->sponsors = new \Sponsors($this->params["sponsor"]);
 			if ($this->sponsors->save()){
-				\FlashMessage::successMessage("Patrocinador cadastro com sucesso.");
-				$this->redirectTo("admin/patrocinadores/lista");
+				\FlashMessage::successMessage("Colaborador cadastro com sucesso.");
+				$this->redirectTo("admin/colaboradores/lista");
 			}
 			else{
-				\FlashMessage::errorMessage("Erro ao cadastrar patrocinador.");
-				$this->setHeadTitle("Novo Patrocinador");
-	         	$this->actionForm = $this->getUri("admin/patrocinadores/novo");
+				\FlashMessage::errorMessage("Erro ao cadastrar colaborador.");
+				$this->setHeadTitle("Novo Colaborador");
+	         	$this->actionForm = $this->getUri("admin/colaboradores/novo");
 	         	$this->titleBtnSubmit = "Cadastrar";
 	         	$this->render("_new");
 			}
@@ -53,8 +53,8 @@
 		public function edit(){
 			//prepara formulario para edicao
 			$this->sponsors = \Sponsors::findById($this->params[":id"])[0];
-   			$this->setHeadTitle("Editar Patrocinador");
-   			$this->actionForm = $this->getUri("admin/patrocinadores/{$this->sponsors->getIdSponsor()}/alterar");
+   			$this->setHeadTitle("Editar Colaborador");
+   			$this->actionForm = $this->getUri("admin/colaboradores/{$this->sponsors->getIdSponsor()}/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
 		}
 
@@ -62,13 +62,13 @@
 			//salva edição no db  
 			$this->sponsors = \Sponsors::findById($this->params[":id"])[0];
 			if ($this->sponsors->update($this->params['sponsor'])){
-				\FlashMessage::successMessage("Patrocinador alterado com sucesso.");
-				$this->redirectTo("admin/patrocinadores/lista");
+				\FlashMessage::successMessage("Colaborador alterado com sucesso.");
+				$this->redirectTo("admin/colaboradores/lista");
 			}
 			else{
-				\FlashMessage::errorMessage("Erro ao alterar patrocinador.");
-				$this->setHeadTitle("Editar Patrocinador");
-	         	$this->actionForm = $this->getUri("admin/patrocinadores/{$this->sponsors->getIdEventType()}/alterar");
+				\FlashMessage::errorMessage("Erro ao alterar colaborador.");
+				$this->setHeadTitle("Editar Colaborador");
+	         	$this->actionForm = $this->getUri("admin/colaboradores/{$this->sponsors->getIdEventType()}/alterar");
 	         	$this->titleBtnSubmit = "Salvar";
 	         	$this->render("edit");
 			}
@@ -77,8 +77,8 @@
 		public function remove(){
 			$this->sponsors = \Sponsors::findById($this->params[":id"])[0];
 			$this->sponsors->remove();
-			\FlashMessage::successMessage("Patrocinador removido com sucesso.");
-			$this->redirectTo("admin/patrocinadores/lista");
+			\FlashMessage::successMessage("Colaborador removido com sucesso.");
+			$this->redirectTo("admin/colaboradores/lista");
 		}
 	} 
 ?>

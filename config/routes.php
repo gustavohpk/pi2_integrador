@@ -135,6 +135,7 @@
     $routes['GET'][] = array('route' => '/admin/eventos/:id/remover', 'controller' => 'Admin\EventsController', 'action' => 'remove');
     $routes['GET'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'attendance');
     $routes['POST'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'checkAttendance');
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/estatisticas', 'controller' => 'Admin\EventsController', 'action' => 'stats');
 
     //rotas para crachas
     $routes['GET'][] = array('route' => '/admin/eventos/cracha', 'controller' => 'Admin\BadgeController', 'action' => 'index');
@@ -240,13 +241,13 @@
     $routes['POST'][] = array('route' => '/admin/relatorios/inscricoes/gerar', 'controller' => 'Admin\ReportsController', 'action' => 'generate');
 
     //rotas para tipos de eventos
-    $routes['GET'][] = array('route' => '/admin/patrocinadores/lista', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
-    $routes['GET'][] = array('route' => '/admin/patrocinadores/lista/pagina/:p', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
-    $routes['GET'][] = array('route' => '/admin/patrocinadores/novo', 'controller' => 'Admin\SponsorsController', 'action' => '_new'); 
-    $routes['POST'][] = array('route' => '/admin/patrocinadores/novo', 'controller' => 'Admin\SponsorsController', 'action' => 'create'); 
-    $routes['GET'][] = array('route' => '/admin/patrocinadores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'edit'); 
-    $routes['POST'][] = array('route' => '/admin/patrocinadores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'update'); 
-    $routes['GET'][] = array('route' => '/admin/patrocinadores/:id/remover', 'controller' => 'Admin\SponsorsController', 'action' => 'remove'); 
+    $routes['GET'][] = array('route' => '/admin/colaboradores/lista', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
+    $routes['GET'][] = array('route' => '/admin/colaboradores/lista/pagina/:p', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
+    $routes['GET'][] = array('route' => '/admin/colaboradores/novo', 'controller' => 'Admin\SponsorsController', 'action' => '_new'); 
+    $routes['POST'][] = array('route' => '/admin/colaboradores/novo', 'controller' => 'Admin\SponsorsController', 'action' => 'create'); 
+    $routes['GET'][] = array('route' => '/admin/colaboradores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'edit'); 
+    $routes['POST'][] = array('route' => '/admin/colaboradores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'update'); 
+    $routes['GET'][] = array('route' => '/admin/colaboradores/:id/remover', 'controller' => 'Admin\SponsorsController', 'action' => 'remove'); 
 
     //rotas para mensagens
     $routes['GET'][] = array('route' => '/admin/mensagens/nova', 'controller' => 'Admin\MessageController', 'action' => '_new');

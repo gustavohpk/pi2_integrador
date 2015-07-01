@@ -57,6 +57,9 @@
 						<td align="left"><?= $event->eventType->getEventType()?></td>
 					<?php endif; ?>					
 					<td>
+							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/estatisticas")?>" role="button" class='btn btn-default btn-sm' title='Acompanhar Estatísticas'>
+								<span class='glyphicon glyphicon-stats'></span>
+							</a>
 						<?php if($event->eventType->getCode() != 'sem_inscricao') : ?>							
 							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/presenca")?>" role="button" class='btn btn-warning btn-sm' title='Lista de Presença'>
 								<span class='glyphicon glyphicon-check'></span>

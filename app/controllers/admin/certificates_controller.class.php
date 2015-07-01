@@ -65,13 +65,13 @@
 		// 	//salva edição no db  
 		// 	$this->certificates = \Certificate::findById($this->params[":id"])[0];
 		// 	if ($this->certificates->update($this->params['certificate'])){
-		// 		\FlashMessage::successMessage("Patrocinador alterado com sucesso.");
-		// 		$this->redirectTo("admin/patrocinadores/lista");
+		// 		\FlashMessage::successMessage("Colaborador alterado com sucesso.");
+		// 		$this->redirectTo("admin/colaboradores/lista");
 		// 	}
 		// 	else{
-		// 		\FlashMessage::errorMessage("Erro ao alterar patrocinador.");
-		// 		$this->setHeadTitle("Editar Patrocinador");
-	 //         	$this->actionForm = $this->getUri("admin/patrocinadores/{$this->certificates->getIdEventType()}/alterar");
+		// 		\FlashMessage::errorMessage("Erro ao alterar colaborador.");
+		// 		$this->setHeadTitle("Editar Colaborador");
+	 //         	$this->actionForm = $this->getUri("admin/colaboradores/{$this->certificates->getIdEventType()}/alterar");
 	 //         	$this->titleBtnSubmit = "Salvar";
 	 //         	$this->render("edit");
 		// 	}

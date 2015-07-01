@@ -11,15 +11,17 @@
 		<br/>
 
 		<?php if($this->certificate->getIdCertificate()) : ?>
-			<div id="print-certificate">
-				<button type="button" onclick="printDiv('certificate-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
-				<div class="row" id="certificate-view">
-					<div class="col-xs-12">
-						<?php require_once "_certificate.phtml"; ?>
-					</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+					<ul class="list-group">
+						<li class="list-group-item">Código do certificado: <b><?= $this->certificate->getCode() ?></b></li>
+						<li class="list-group-item">Participante: <b><?= strtoupper($this->participant->getName()) ?></b></li>
+						<li class="list-group-item">Evento: <b><?= $this->event->getName()?></b></li>
+						<li class="list-group-item">Data: <?= strtotime($this->event->getStartDate("d/m/Y")) != strtotime($this->event->getEndDate("d/m/Y")) ? "Entre " . $this->event->getStartDate("d/m/Y") . " e " . $this->event->getEndDate("d/m/Y") : "" . $this->event->getStartDate("d/m/Y") ?></li>
+						<li class="list-group-item">Carga horária total: <b><?= ceil((strtotime($this->event->getEndDate("d/m/Y H:s")) - strtotime($this->event->getStartDate("d/m/Y H:s"))) / 3600 )?> horas</b></li>
+					</ul>
 				</div>
 			</div>
-			<span id="print-info" style="display: none">Devido a limitações de resolução, certificados só podem ser visualizados e impressos através de um computador ou tablet.</span>
 		<?php endif; ?>
 
 		<br/>
