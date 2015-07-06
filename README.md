@@ -14,6 +14,11 @@
 
 ----------
 
+----- Atualização 085 (06/07/15) -----
+
+- Atualizações na área de mensagens
+
+
 ----- Atualização 084 (22/06/15 - 01/07/15) -----
 
 - O termo "Patrocinador" foi alterado para "Colaborador"

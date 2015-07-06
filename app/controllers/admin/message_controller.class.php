@@ -27,6 +27,8 @@
 		public function _new(){
    		$this->setHeadTitle("Enviar mensagem");
          $this->actionForm = $this->getUri("admin/mensagens/nova");
+         $this->preview = file_get_contents("app/views/default/admin/message/templates/base.html");
+         $this->preview = str_replace('{{TEMPLATE}}', file_get_contents("app/views/default/admin/message/templates/_message_email.html"), $this->preview);
 		}
 
 		public function _edit(){
@@ -40,7 +42,7 @@
          $params = $this->params["message"];
          $this->message = new \Message($params);
          
-         var_dump($this->message->sendMail());
+         var_dump($this->message->messageMail());
          exit;
 
       //    $this->message = new \Message($params);

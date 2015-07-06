@@ -145,16 +145,23 @@
 			return $statment ? $this : false;
 		}
 
-		function sendMail($nameAddress = "Gustavo"){
-			$html = file_get_contents("app/views/default/admin/message/_message_email.html");
-			// $mail = str_replace('{{LOGO}}', "<a href='#'><img id='title-banner-img' src='" . $this->getResource('img/utfpr/title-header.png'). "' alt='UTFPR Eventos' style='max-width: 200px'/></a>", $mail);
+		function messageMail($nameAddress = "Gustavo"){
+			$html = file_get_contents("app/views/default/admin/message/templates/base.html");
 
-			$confirmDate = "18/09/2015 - 09:05";
+			$logo = Basecontroller::getResource('img/utfpr/title-header.png');
 
+			$html = str_replace('{{TEMPLATE}}', file_get_contents("app/views/default/admin/message/templates/_message_email.html"), $html);
+			$html = str_replace('{{LOGO}}', "<img id='title-banner-img' src='$logo' alt='UTFPR Eventos' style='max-width: 200px'/>", $html);
 			$html = str_replace('{{TEXT}}', $this->getContent(), $html);
 			$html = str_replace('{{TITLE}}', $this->getTitle(), $html);
 
 
+			$recipients = str_replace(" ", "", explode(",", $this->getRecipient()));
+
+			self::sendMail($html, $recipients);
+		}
+
+		function sendMail($html, $recipients, $nameAddress = ""){
 			require_once APP_ROOT_FOLDER . '/app/resources/php/PHPMailer-master/PHPMailerAutoload.php';
 			$mail = new PHPMailer;
 			$mail->charSet = "UTF-8";
@@ -169,7 +176,9 @@
 			$mail->Password = "";
 			$mail->setFrom('', 'UTFPR Eventos teste');
 			// $mail->addReplyTo('ghpk88@gmail.com', 'UTFPR Eventos teste');
-			$mail->addAddress($this->getRecipient(), $nameAddress);
+			foreach ($recipients as $key => $recipient) {
+				$mail->addAddress($recipient, $nameAddress);
+			}
 			$mail->Subject = $this->getSubject();
 			$mail->msgHTML($html);
 			$mail->AltBody = 'E-mail teste';
