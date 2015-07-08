@@ -28,6 +28,9 @@
 		private $sendParticipantData;
 		private $rating;
 		private $evaluations;
+		private $free;
+		private $noEnrollment;
+		private $autoConfirmEnrollment;
 
 		public $eventType;
 		public $parentEvent;
@@ -206,6 +209,30 @@
 
 		public function setEvaluations($evaluations){
 			$this->evaluations = $evaluations;
+		}
+
+		public function getFree(){
+			return $this->free;
+		}
+
+		public function setFree($free){
+			$this->free = $free;
+		}
+
+		public function getNoEnrollment(){
+			return $this->noEnrollment;
+		}
+
+		public function setNoEnrollment($noEnrollment){
+			$this->noEnrollment = $noEnrollment;
+		}
+
+		public function getAutoConfirmEnrollment(){
+			return $this->autoConfirmEnrollment;
+		}
+
+		public function setAutoConfirmEnrollment($autoConfirmEnrollment){
+			$this->autoConfirmEnrollment = $autoConfirmEnrollment;
 		}
 
 		/**

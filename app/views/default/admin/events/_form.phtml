@@ -102,6 +102,29 @@
 			    </div>
 			</div>
 			<div class="row">
+				<div class="col-xs-12 col-sm-offset-3 col-sm-2">
+					<h4>Evento Sem Inscrição?</h4>
+					<div class="input-group well well-md" title="Não será necessário se inscrever para participar. Esta opção pode ser utilizada para eventos abertos." data-toggle="tooltip" data-placement="bottom">
+						<span> Sim </span><input id="no_enrollment" type="radio" name="event[no_enrollment]" value="1" <?= $this->events->getNoEnrollment() ? "checked" : ""  ?>>
+						<span> Não </span><input id="yes_enrollment" type="radio" name="event[no_enrollment]" value="0" <?= $this->events->getNoEnrollment() ? "" : "checked" ?>>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-2">
+					<h4>Evento Gratuito?</h4>
+					<div class="input-group well well-md" title="Nenhum pagamento será necessário para participar." data-toggle="tooltip" data-placement="bottom">
+						<span> Sim </span><input id="free" type="radio" name="event[free]" value="1" <?= $this->events->getFree() ? "checked" : ""  ?>>
+						<span> Não </span><input id="not_free" type="radio" name="event[free]" value="0" <?= $this->events->getFree() ? "" : "checked" ?>>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-2">
+					<h4>Confirmar Automaticamente? (Apenas para eventos gratuitos)</h4>
+					<div class="input-group well well-md" title="Novas inscrições serão confirmadas automaticamente assim que forem realizadas." data-toggle="tooltip" data-placement="bottom">
+						<span> Sim </span><input id="not_auto_confirm_enrollment" type="radio" name="event[auto_confirm_enrollment]" value="1" <?= $this->events->getAutoConfirmEnrollment() ? "checked" : ""  ?>>
+						<span> Não </span><input id="yes_auto_confirm_enrollment" type="radio" name="event[auto_confirm_enrollment]" value="0" <?= $this->events->getAutoConfirmEnrollment() ? "" : "checked" ?>>
+					</div>
+				</div>
+			</div>
+			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<h4>Título do Evento</h4>
 					<input type="text" class="form-control" name="event[name]" value="<?= $this->events->getName()?>" required/>

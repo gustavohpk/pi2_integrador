@@ -14,6 +14,11 @@
 
 ----------
 
+----- Atualização 086 (08/07/15 - ) -----
+
+- Adicionados campos booleanos "free", "no_enrollment" e "auto_confirm_enrollment"
+
+
 ----- Atualização 085 (06/07/15 - 07/07/15) -----
 
 - Atualizações na área de mensagens
