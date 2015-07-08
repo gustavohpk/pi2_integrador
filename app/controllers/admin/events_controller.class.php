@@ -211,6 +211,14 @@
       public function stats(){
          $this->setHeadTitle("Estatísticas do evento");
          $this->event = \Event::findById($this->params[":id"])[0];
+         $this->enrollmentsCount = count(\Enrollment::find(array("id_event"), array($this->event->getIdEvent())));
+         $this->confirmedEnrollmentsCount = count(\Enrollment::find(array("id_event", "id_enrollment_status"), array($this->event->getIdEvent(), \EnrollmentStatus::find(array("code"), array("confirmed"))[0]->getIdEnrollmentStatus()), "="));
+         $this->pendingEnrollmentsCount = count(\Enrollment::find(array("id_event", "id_enrollment_status"), array($this->event->getIdEvent(), \EnrollmentStatus::find(array("code"), array("pending"))[0]->getIdEnrollmentStatus()), "="));
+         $this->cancelledEnrollmentsCount = count(\Enrollment::find(array("id_event", "id_enrollment_status"), array($this->event->getIdEvent(), \EnrollmentStatus::find(array("code"), array("cancelled"))[0]->getIdEnrollmentStatus()), "="));
+         $this->suspendedEnrollmentsCount = count(\Enrollment::find(array("id_event", "id_enrollment_status"), array($this->event->getIdEvent(), \EnrollmentStatus::find(array("code"), array("suspended"))[0]->getIdEnrollmentStatus()), "="));
+
+
+         $this->validEnrollmentsCount = $this->enrollmentsCount - $this->cancelledEnrollmentsCount;
       }
 	} 
 ?>

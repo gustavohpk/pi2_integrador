@@ -17,6 +17,7 @@
 ----- Atualização 086 (08/07/15 - ) -----
 
 - Adicionados campos booleanos "free", "no_enrollment" e "auto_confirm_enrollment"
+- Atualizada área de estatísticas do evento no admin
 
 
 ----- Atualização 085 (06/07/15 - 07/07/15) -----

@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+		<h2>Estatísticas do Evento</h2>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<h3><?= $this->event->getName() ?></h3>
+				<p>Tipo: <?= $this->event->eventType->getEventType() ?></p>
+				<?= $this->event->getNoEnrollment() ? "<p>Evento Sem Inscrições</p>" : "" ?>
+				<?= $this->event->getFree() ? "<p>Evento Gratuito</p>" : "" ?>
+				<?= $this->event->getAutoConfirmEnrollment() ? "<p>Inscrições confirmadas automaticamente</p>" : "" ?>
+				<p>Total de vagas: <?= $this->event->getSpaces() ?></p>
+				<p>Vagas restantes: <?= $this->event->getSpaces() - $this->validEnrollmentsCount ?></p>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<ul class="list-group">
+					<li class="list-group-item">Abertura das inscrições: <?= $this->event->getStartDateEnrollment("d/m/Y H:i") ?></li>
+					<li class="list-group-item">Fechamento das inscrições: <?= $this->event->getEndDateEnrollment("d/m/Y H:i") ?></li>
+					<li class="list-group-item">Início do evento: <?= $this->event->getStartDate("d/m/Y H:i") ?></li>
+					<li class="list-group-item">Fim do evento: <?= $this->event->getEndDate("d/m/Y H:i") ?></li>
+					<li class="list-group-item"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<ul class="list-group">
+					<li class="list-group-item">Inscrições pendentes: <?= $this->pendingEnrollmentsCount ?></li>
+					<li class="list-group-item">Inscrições confirmadas: <?= $this->confirmedEnrollmentsCount ?></li>
+					<li class="list-group-item">Inscrições canceladas: <?= $this->cancelledEnrollmentsCount ?></li>
+					<li class="list-group-item">Inscrições suspensas: <?= $this->suspendedEnrollmentsCount ?></li>
+					<li class="list-group-item">Total de inscrições: <?= $this->enrollmentsCount ?></li>
+					<li class="list-group-item">Total de inscrições válidas (excluindo canceladas): <?= $this->validEnrollmentsCount ?></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
