@@ -42,22 +42,8 @@
          $params = $this->params["message"];
          $this->message = new \Message($params);
          
-         var_dump($this->message->messageMail());
+         var_dump($this->message->registrationMail());
          exit;
-
-      //    $this->message = new \Message($params);
-      //    if ($this->message->save()){
-      //       \Logger::creationLog($_SESSION["admin"]->getName(), "Notícias", $this->message->getIdMessage());
-      //       \FlashMessage::successMessage("Notícia cadastrada com sucesso.");
-      //       $this->redirectTo("admin/noticias/lista");
-      //    }
-      //    else{
-      //       \FlashMessage::errorMessage("Erro ao cadastrar a notícia.");
-      //       $this->setHeadTitle("Cadastro de notícia");           
-      //       $this->actionForm = $this->getUri("admin/noticias");
-      //       $this->titleBtnSubmit = "Cadastrar";
-      //       $this->render("_new");
-      //    }
        }
 
       public function update(){ 

@@ -79,6 +79,7 @@
 			
 			if ($this->participant->save()){
 				FlashMessage::successMessage("Cadastro realizado com sucesso.");
+				Message::registrationMail($this->participant);
 				$this->redirectTo("conta/login");
 			}
 			else{

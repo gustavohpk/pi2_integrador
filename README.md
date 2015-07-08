@@ -14,9 +14,10 @@
 
 ----------
 
------ Atualização 085 (06/07/15) -----
+----- Atualização 085 (06/07/15 - 07/07/15) -----
 
 - Atualizações na área de mensagens
+- Adicionado envio de e-mail ao realizar cadastro
 
 
 ----- Atualização 084 (22/06/15 - 01/07/15) -----

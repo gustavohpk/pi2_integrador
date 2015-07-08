@@ -145,7 +145,7 @@
 			return $statment ? $this : false;
 		}
 
-		function messageMail($nameAddress = "Gustavo"){
+		public function messageMail($nameAddress = "Gustavo"){
 			$html = file_get_contents("app/views/default/admin/message/templates/base.html");
 
 			$logo = Basecontroller::getResource('img/utfpr/title-header.png');
@@ -158,10 +158,25 @@
 
 			$recipients = str_replace(" ", "", explode(",", $this->getRecipient()));
 
-			self::sendMail($html, $recipients);
+			self::sendMail($html, $recipients, "", $this->getSubject());
 		}
 
-		function sendMail($html, $recipients, $nameAddress = ""){
+		public static function registrationMail($participant){
+
+			$html = file_get_contents("app/views/default/admin/message/templates/base.html");
+
+			$logo = Basecontroller::getResource('img/utfpr/title-header.png');
+
+			$html = str_replace('{{TEMPLATE}}', file_get_contents("app/views/default/admin/message/templates/_registration_email.html"), $html);
+			$html = str_replace('{{LOGO}}', "<img id='title-banner-img' src='$logo' alt='UTFPR Eventos' style='max-width: 200px'/>", $html);
+			$html = str_replace('{{USERNAME}}', $participant->getName(), $html);
+
+			$recipients = str_replace(" ", "", explode(",", $participant->getEmail()));
+
+			self::sendMail($html, $recipients, $participant->getName(), "Cadastro realizado");	
+		}
+
+		private function sendMail($html, $recipients, $nameAddress = "", $subject = "UTFPR Eventos"){
 			require_once APP_ROOT_FOLDER . '/app/resources/php/PHPMailer-master/PHPMailerAutoload.php';
 			$mail = new PHPMailer;
 			$mail->charSet = "UTF-8";
@@ -172,14 +187,14 @@
 			$mail->Host = 'smtp.gmail.com';
 			$mail->Port = 587;
 			$mail->SMTPAuth = true;
-			$mail->Username = "";
-			$mail->Password = "";
+			$mail->Username = "ghpk88@gmail.com";
+			$mail->Password = "wsk9732fn88";
 			$mail->setFrom('', 'UTFPR Eventos teste');
 			// $mail->addReplyTo('ghpk88@gmail.com', 'UTFPR Eventos teste');
 			foreach ($recipients as $key => $recipient) {
 				$mail->addAddress($recipient, $nameAddress);
 			}
-			$mail->Subject = $this->getSubject();
+			$mail->Subject = $subject;
 			$mail->msgHTML($html);
 			$mail->AltBody = 'E-mail teste';
 
