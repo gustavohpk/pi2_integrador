@@ -60,7 +60,7 @@
 							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/estatisticas")?>" role="button" class='btn btn-default btn-sm' title='Acompanhar Estatísticas'>
 								<span class='glyphicon glyphicon-stats'></span>
 							</a>
-						<?php if($event->eventType->getCode() != 'sem_inscricao') : ?>							
+						<?php if(!$event->getNoEnrollment()) : ?>							
 							<a href="<?= createUriFor("/admin/eventos/{$event->getIdEvent()}/presenca")?>" role="button" class='btn btn-warning btn-sm' title='Lista de Presença'>
 								<span class='glyphicon glyphicon-check'></span>
 							</a>

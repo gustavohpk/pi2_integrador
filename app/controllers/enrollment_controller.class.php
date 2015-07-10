@@ -33,7 +33,7 @@
             flashMessage::errorMessage("Evento não encontrado.");
             $this->redirectTo("eventos/proximos");
          }
-         elseif ($this->events[0]->eventType->getCode() == "sem_inscricao") {
+         elseif ($this->events[0]->getNoEnrollment()) {
             flashMessage::warningMessage("Para participar deste evento não precisa se increver.");
             $this->redirectTo("eventos/proximos");
          }
@@ -100,7 +100,7 @@
                );
             $this->enrollment = new Enrollment($data);
             if ($this->enrollment->save()) {
-               if ($this->events->eventType->getCode() == "sem_pagamento") {
+               if ($this->events->getFree()) {
                   $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - Gratuito");
                }
                else if($useBonus) {

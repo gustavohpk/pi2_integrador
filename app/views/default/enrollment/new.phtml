@@ -12,7 +12,7 @@
 		<h2>Inscrição</h2>
 		<?php $event = $this->events ?>
 		<?php $costEvent = ($event->cost ? $event->cost[0]->getCostOfDay() : 0) ?>
-		<?php $enablePayment = $event->eventType->getCode() != "sem_pagamento" ?>
+		<?php $enablePayment = !$event->getFree() ?>
 
 		<input type="hidden" name="enrollment[id_event][]" value="<?= $event->getIdEvent()?>">
 
@@ -32,7 +32,7 @@
 				<ul class="list-group subevent-list" style="text-align: left">
 					<?php foreach ($this->eventsRelated as $subEvent) :?>
 						<?php if ($subEvent->canEnrollment()) : ?>
-							<?php $enablePayment = ($enablePayment ? true : $event->eventType->getCode() != "sem_pagamento"); ?>
+							<?php $enablePayment = ($enablePayment ? true : !$event->getFree()); ?>
 							<?php $costSubEvent = ($subEvent->cost ? $subEvent->cost[0]->getCostOfDay() : 0) ?>
 							<li class="list-group-item">
 								<span class="badge">
