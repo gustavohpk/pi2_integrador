@@ -19,6 +19,7 @@
 		 * @var boolean $attendance Verificador de presença/ausência
 		 * @var int Nota/avaliação do evento
 		 * @var boolean Indica se usou ou não bônus
+		 * @var string Dados adicionais enviados pelo participante
 		 */
 		private $idEnrollment;
 		private $idEnrollmentStatus;
@@ -32,6 +33,7 @@
 		private $participantData;
 		private $rating;
 		private $bonus;
+		private $additionalInfo;
 
 		/**
 		 * @var EnrollmentStatus $enrollmentStatus Estado da inscrição
@@ -161,6 +163,14 @@
 			return $this->bonus;
 		}
 
+		public function getAdditionalInfo(){
+			return $this->getAdditionalInfo();
+		}
+
+		public function setAdditionalInfo($additionalInfo){
+			$this->additionalInfo = $additionalInfo;
+		}
+
 		// mensagens exibidas para confirmação da inscrição do participante
 		private function setMessage($message, $type) {
 			if (!isset($_SESSION["msg_enrollment"])) {
@@ -184,10 +194,11 @@
 		}
 
 		public function validateData(){
-			if ($this->participant->getIdParticipant() < 1) $this->errors[] = "Nome do participante não informado.";
-			if ($this->event->getIdEvent() < 1) $this->errors[] = "Evento não informado.";
-			if (!$this->event->getFree() && $this->getIdPaymentType() < 1) $this->errors[] = "Forma de pagamento não localizada.";
-			if (!$this->event->getFree() && $this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
+			if($this->participant->getIdParticipant() < 1) $this->errors[] = "Nome do participante não informado.";
+			if($this->event->getIdEvent() < 1) $this->errors[] = "Evento não informado.";
+			if(!$this->event->getEnabled() || $this->event->getNoEnrollment()) $this->errors[] = "Não é possível se inscrever neste evento.";
+			if(!$this->event->getFree() && $this->getIdPaymentType() < 1) $this->errors[] = "Forma de pagamento não localizada.";
+			if(!$this->event->getFree() && $this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
 		}
 
  		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){

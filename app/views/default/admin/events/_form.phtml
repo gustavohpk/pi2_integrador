@@ -13,11 +13,11 @@
 			<div class="row">
 				<div class="col-xs-6 col-sm-2 col-sm-offset-4">
 					<h4>ID</h4>
-					<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getIdEvent()?>" title="O ID do evento não pode ser modificado." disabled/>
+					<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getIdEvent()?>" title="O ID do evento não pode ser modificado." readonly/>
 				</div>
 				<div class="col-xs-6 col-sm-2">
 					<h4>Visualizações</h4>
-					<input type="number" class="form-control" name="event[id_event]" value="<?= $this->events->getViews()?>" title="O número de visualizações não pode ser modificado." disabled/>
+					<input type="number" class="form-control" name="event[views]" value="<?= $this->events->getViews()?>" title="O número de visualizações não pode ser modificado." readonly/>
 				</div>
 			</div>
 			<div class="row">
@@ -163,8 +163,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 					<h4>Local</h4>
-					   <input type="text" class="form-control" name="event[location
-					   ]" value="<?= $this->events->getLocation()?>" required/>
+					   <input type="text" class="form-control" name="event[location]" value="<?= $this->events->getLocation()?>" required/>
 				</div>
 			</div>
 			<div class="row">

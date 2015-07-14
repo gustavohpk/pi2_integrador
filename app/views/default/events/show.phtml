@@ -71,7 +71,7 @@
 	</div>
     <?php if ($this->event->getNoEnrollment()) : ?>
 		<h4><span class="label label-info">Para participar deste evento não é necessário fazer inscrição.</span></h4>
-    <?php elseif (!$this->event->eventInitiated() && $this->event->getNoEnrollment()) : ?>
+    <?php elseif (!$this->event->eventInitiated() && !$this->event->getNoEnrollment()) : ?>
 		<div class="col-xs-12">
 			<p>Vagas totais: <?= $this->event->getSpaces() ?></p>
 			<p>Vagas restantes: <?= $this->remainingSpaces ?></p>

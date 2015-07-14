@@ -14,6 +14,14 @@
 
 ----------
 
+----- Atualização 087 (11/07/15 - 13/07/15) -----
+
+- Atualizações na página da inscrição
+- Adicionado campo para envio de texto na página da inscrição
+- Corrigido erro na edição do evento
+- Adicionado campo texto 250 "informações adicionais" na inscrição
+
+
 ----- Atualização 086 (08/07/15 - 10/07/15) -----
 
 - Adicionados campos booleanos "free", "no_enrollment" e "auto_confirm_enrollment"

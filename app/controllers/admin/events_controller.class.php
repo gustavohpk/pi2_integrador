@@ -60,7 +60,6 @@
 
       public function create(){
          $params = $this->params["event"];
-         var_dump($params);
          if(isset($this->params["cost"]))
             $cost = $this->params["cost"];
          if(isset($this->params["event_bonus"]))

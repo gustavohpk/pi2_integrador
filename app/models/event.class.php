@@ -542,10 +542,10 @@
 			$sql = 
 			"INSERT INTO event
 				(enabled, id_event_type, id_parent_event, name, path, details, teacher, location, address, start_date, end_date, 
-				spaces, start_date_enrollment, end_date_enrollment, logo, send_participant_data)
+				spaces, start_date_enrollment, end_date_enrollment, logo, send_participant_data, free, no_enrollment, auto_confirm_enrollment)
 			VALUES
 				(:enabled, :id_event_type, :id_parent_event, :name, :path, :details, :teacher, :location, :address, :start_date, :end_date,
-				:spaces, :start_date_enrollment, :end_date_enrollment, :logo, :send_participant_data)";
+				:spaces, :start_date_enrollment, :end_date_enrollment, :logo, :send_participant_data, :free, :no_enrollment, :auto_confirm_enrollment)";
 
 			$params = array(
 					":enabled" => $this->getEnabled(),
@@ -563,7 +563,10 @@
 					":start_date_enrollment" => $this->getStartDateEnrollment(),
 					":end_date_enrollment" => $this->getEndDateEnrollment(),
 					":logo" => $this->getLogo(),
-					":send_participant_data" => $this->getSendParticipantData()
+					":send_participant_data" => $this->getSendParticipantData(),
+					":free" => $this->getFree(),
+					":no_enrollment" => $this->getNoEnrollment(),
+					":auto_confirm_enrollment" => $this->getAutoConfirmEnrollment()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
@@ -601,7 +604,10 @@
 				start_date_enrollment = :start_date_enrollment, 
 				end_date_enrollment = :end_date_enrollment,
 				logo = :logo,
-				send_participant_data = :send_participant_data
+				send_participant_data = :send_participant_data,
+				free = :free,
+				no_enrollment = :no_enrollment,
+				auto_confirm_enrollment = :auto_confirm_enrollment
 			WHERE
 				id_event = :id_event";
 
@@ -620,9 +626,12 @@
 					":spaces" => $this->getSpaces(),
 					":start_date_enrollment" => $this->getStartDateEnrollment(),
 					":end_date_enrollment" => $this->getEndDateEnrollment(),
-					":id_event" => $this->getIdEvent(),
 					":logo" => $this->getLogo(),
-					":send_participant_data" => $this->getSendParticipantData()
+					":send_participant_data" => $this->getSendParticipantData(),
+					":free" => $this->getFree(),
+					":no_enrollment" => $this->getNoEnrollment(),
+					":auto_confirm_enrollment" => $this->getAutoConfirmEnrollment(),
+					":id_event" => $this->getIdEvent()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
