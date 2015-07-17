@@ -14,6 +14,14 @@
 
 ----------
 
+----- Atualização 088 (14/07/15 - 17/07/15) -----
+
+- Atualizações no envio de informações pelo participante
+- Adicionada confirmação automática de inscrição (quando assim for configurado)
+- Adicionado menu do usuário em todas as páginas
+- Edição de senha separada da edição dos dados
+
+
 ----- Atualização 087 (11/07/15 - 13/07/15) -----
 
 - Atualizações na página da inscrição

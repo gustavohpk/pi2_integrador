@@ -73,7 +73,7 @@
 		}
 
 		public static function findById($id){
-			$enrollmentStatus = self::find("id_enrollment_status", $id);
+			$enrollmentStatus = self::find(array("id_enrollment_status"), array($id));
 			return count($enrollmentStatus) > 0 ? $enrollmentStatus : NULL;
 		}
 

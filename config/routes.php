@@ -60,7 +60,10 @@
     $routes['GET'][] = array('route' => '/conta/login', 'controller' => 'ParticipantController', 'action' => 'login');
     $routes['POST'][] = array('route' => '/conta/login', 'controller' => 'ParticipantController', 'action' => 'executeLogin');
     $routes['GET'][] = array('route' => '/conta/alterar', 'controller' => 'ParticipantController', 'action' => 'edit'); 
-    $routes['POST'][] = array('route' => '/conta/:id/alterar', 'controller' => 'ParticipantController', 'action' => 'update'); 
+    $routes['POST'][] = array('route' => '/conta/:id/alterar', 'controller' => 'ParticipantController', 'action' => 'update');
+    $routes['GET'][] = array('route' => '/conta/senha', 'controller' => 'ParticipantController', 'action' => 'editpassword'); 
+    $routes['POST'][] = array('route' => '/conta/:id/senha', 'controller' => 'ParticipantController', 'action' => 'updatePassword'); 
+
     $routes['GET'][] = array('route' => '/conta/sair', 'controller' => 'ParticipantController', 'action' => 'logout');
     $routes['GET'][] = array('route' => '/conta/nova', 'controller' => 'ParticipantController', 'action' => '_new');
     $routes['POST'][] = array('route' => '/conta/nova', 'controller' => 'ParticipantController', 'action' => 'create');
@@ -73,7 +76,7 @@
     $routes['GET'][] = array('route' => '/conta/certificados/:code/ver', 'controller' => 'CertificatesController', 'action' => 'show');
 
     $routes['GET'][] = array('route' => '/inscricao/evento/:id', 'controller' => 'EnrollmentController', 'action' => '_new');
-    $routes['POST'][] = array('route' => '/inscricao/finalizar', 'controller' => 'EnrollmentController', 'action' => 'save');
+    $routes['POST'][] = array('route' => '/inscricao/finalizar', 'controller' => 'EnrollmentController', 'action' => 'create');
     $routes['GET'][] = array('route' => '/inscricao/confirmacao', 'controller' => 'EnrollmentController', 'action' => 'confirmation');
 
     //rota para validação de certificados

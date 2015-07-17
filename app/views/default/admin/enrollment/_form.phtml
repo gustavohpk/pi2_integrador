@@ -1,53 +1,62 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 		<h4>ID</h4>
-		<input type="number" class="form-control" value="<?=$this->enrollment->getIdEnrollment()?>" disabled/>
+		<input type="number" class="form-control" value="<?=$this->enrollment->getIdEnrollment()?>" readonly/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 		<h4>Participante</h4>
-		<input type="text" class="form-control" value="<?=$this->enrollment->participant->getIdParticipant() . " - " . $this->enrollment->participant->getName()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->participant->getIdParticipant() . " - " . $this->enrollment->participant->getName()?>" readonly/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 		<h4>Evento</h4>
-		<input type="text" class="form-control" value="<?=$this->enrollment->event->getIdEvent() . " - " . $this->enrollment->event->getName()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->event->getIdEvent() . " - " . $this->enrollment->event->getName()?>" readonly/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 		<h4>Tipo do Evento</h4>
-		<input type="text" class="form-control" value="<?=$this->enrollment->event->eventType->getEventType()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->event->eventType->getEventType()?>" readonly/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 		<h4><?=$this->enrollment->event->eventType->getTeacherType()?></h4>
-		<input type="text" class="form-control" value="<?=$this->enrollment->event->getTeacher()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->event->getTeacher()?>" readonly/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 		<h4>Local</h4>
-		<input type="text" class="form-control" value="<?=$this->enrollment->event->getLocation()?>" disabled/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->event->getLocation()?>" readonly/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-6 col-sm-6 col-md-4 col-md-offset-2">
 		<h4>Data de inscrição</h4>
-		<input type="date" class="form-control" value="<?=$this->enrollment->getDateEnrollment("d/m/Y H:i:s")?>" disabled/>
+		<input type="date" class="form-control" value="<?=$this->enrollment->getDateEnrollment("d/m/Y H:i:s")?>" readonly/>
 	</div>
 	<div class="col-xs-6 col-sm-6 col-md-4">
 		<h4>Data de pagamento</h4>
-		<input type="date" class="form-control" value="<?=($this->enrollment->getCost() > 0 ?  $this->enrollment->getDatePayment("d/m/Y H:i:s") : "Gratuito")?>" disabled/>
+		<input type="date" class="form-control" value="<?=($this->enrollment->getCost() > 0 ?  $this->enrollment->getDatePayment("d/m/Y H:i:s") : "Gratuito")?>" readonly/>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 		<h4>Valor</h4>
-		<input type="number" class="form-control" value="<?=$this->enrollment->getCost()?>" disabled/>
+		<input type="number" class="form-control" value="<?=$this->enrollment->getCost()?>" readonly/>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+		<h4>Informação Adicional (enviada pelo participante)</h4>
+		<textarea name="additional_info" id="additional_info" cols="30" rows="5" class="form-control" readonly>
+			<?= $this->enrollment->getAdditionalInfo() ?>
+		</textarea>
 	</div>
 </div>
 

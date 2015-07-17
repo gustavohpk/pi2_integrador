@@ -71,7 +71,7 @@
 		}
 
 		public function setIdParticipant($idParticipant){
-			$this->participant = Participant::findById($idParticipant)[0];
+			$this->participant = Participant::findById($idParticipant);
 		}
 
 		public function getIdParticipant(){
@@ -164,7 +164,7 @@
 		}
 
 		public function getAdditionalInfo(){
-			return $this->getAdditionalInfo();
+			return $this->additionalInfo;
 		}
 
 		public function setAdditionalInfo($additionalInfo){
@@ -201,16 +201,17 @@
 			if(!$this->event->getFree() && $this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
 		}
 
- 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
+		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_enrollment", $direction ="DESC"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
+			$limit = self::getLimitByPage();
+			$page = self::getCurrentPage();
+			$start = ($page * $limit) - $limit;
 
 			$sql = 
-			"SELECT 
-				enrollment.*
-			FROM
-				enrollment" . ($paramsName ? " WHERE " . $paramsName : "") . 
-			" ORDER BY 
-				id_enrollment DESC";
+			"SELECT * FROM enrollment" .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
+
+			$sql .= " LIMIT $start, $limit";
+
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment->execute($paramsValue);
@@ -251,21 +252,24 @@
 			if($this->getBonus())
 				$this->setCost(0);
 
+			$statusCode = $this->event->getFree() && $this->event->getAutoConfirmEnrollment() ? "confirmed" : "pending";
+
 			$sql = 
 			"INSERT INTO enrollment
-				(id_participant, id_enrollment_status, id_event, date_enrollment, date_payment, id_payment_type, cost, bonus)
+				(id_participant, id_enrollment_status, id_event, date_enrollment, date_payment, id_payment_type, cost, bonus, additional_info)
 			VALUES
-				(:id_participant, :id_enrollment_status, :id_event, :date_enrollment, :date_payment, :id_payment_type, :cost, :bonus)";
+				(:id_participant, :id_enrollment_status, :id_event, :date_enrollment, :date_payment, :id_payment_type, :cost, :bonus, :additional_info)";
 
 			$params = array(
 					":id_participant" => $this->participant->getIdParticipant(),
-					":id_enrollment_status" => EnrollmentStatus::find(array("code"), array("pending"))[0]->getIdEnrollmentStatus(),
+					":id_enrollment_status" => EnrollmentStatus::find(array("code"), array($statusCode))[0]->getIdEnrollmentStatus(),
 					":id_event" => $this->event->getIdEvent(),
 					":date_enrollment" => date("Y-m-d H:i:s"),
 					":date_payment" => null,
 					":id_payment_type" => $this->getIdPaymentType(),
 					":cost" => $this->getCost(),
-					":bonus" => $this->getBonus()
+					":bonus" => $this->getBonus(),
+					":additional_info" => $this->getAdditionalInfo()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);

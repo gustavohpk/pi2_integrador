@@ -106,7 +106,7 @@
 
    		public function setPassword($password){
    			$password = trim($password);
-   			$this->password = (empty($password) ? NULL : md5($password));
+   			$this->password = $password;
    		}
 
    		public function getIdParticipant(){
@@ -194,7 +194,6 @@
 				if ($email->getIdParticipant() != $this->getIdParticipant())
 					$this->errors[] = "O email informado já está sendo usado por outro participante";	
 			} 
-   			if (is_null($this->getPassword())) $this->errors[] = "Nenhuma senha foi informado.";
    			if (!$this->validateCpf($this->getCpf())) $this->errors[] = "CPF inválido";   			
    			if ($cpf = self::findByCpf($this->getCpf())) {
    				$cpf = $cpf[0];
@@ -202,6 +201,10 @@
    					$this->errors[] = "O CPF informado já esta sendo usado por outro participante.";	
    			} 
    			if ((int) $this->getIdCity() < 1) $this->errors[] = "O nome da cidade é um campo obrigatório.";   			
+   		}
+
+   		public function validatePassword(){
+   			if (is_null($this->getPassword())) $this->errors[] = "Nenhuma senha foi informada.";
    		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_participant", $direction ="DESC"){
@@ -237,7 +240,7 @@
 		}
 
 		public static function findById($id){
-			return self::find(array("id_participant"), array($id));
+			return self::find(array("id_participant"), array($id))[0];
 		}
 
 		public static function findByCpf($cpf){
@@ -250,6 +253,7 @@
 
 		public function save(){
 			if (!$this->isValidData()) return false;
+			if (!$this->validatePassword()) return false;
 
 			$sql = 
 			"INSERT INTO participant
@@ -273,7 +277,7 @@
 					":phone" => $this->getPhone(),
 					":phone2" => $this->getPhone2(),
 					":email" => $this->getEmail(),
-					":password" => $this->getPassword()
+					":password" => md5($this->getPassword())
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
@@ -301,8 +305,7 @@
 				complement = :complement, 
 				phone = :phone, 
 				phone2 = :phone2, 
-				email = :email, 
-				password = :password
+				email = :email
 			WHERE
 				id_participant = :id_participant";
 			$params = array(
@@ -320,13 +323,38 @@
 					":phone" => $this->getPhone(),
 					":phone2" => $this->getPhone2(),
 					":email" => $this->getEmail(),
-					":password" => $this->getPassword(),
 					":id_participant" => $this->getIdParticipant()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
 			$statment = $statment->execute($params);	
-			//echo "<pre>"; var_dump($this); exit;
+			return $statment ? $this : false;
+		}
+
+		public function updatePassword($data = array()){
+
+			$participant = self::findById($data[":id"]);
+
+			if (!$participant) return false;
+
+			if (md5($data["old-password"]) != $participant->getPassword()) return false;
+
+			if($data["new-password"] != $data["new-password-repeat"]) return false;
+
+			$sql = 
+			"UPDATE
+				participant
+			SET
+				password = :password
+			WHERE
+				id_participant = :id_participant";
+			$params = array(
+					":password" => md5($data["new-password"]),
+					":id_participant" => $participant->getIdParticipant()
+				);
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			$statment = $statment->execute($params);	
 			return $statment ? $this : false;
 		}
 

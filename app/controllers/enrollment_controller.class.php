@@ -57,12 +57,11 @@
          $this->paymentsType = PaymentType::all();
       }
 
-      public function save() {
+      public function create() {
          $participant = $this->currentParticipant;
          $params = $this->params["enrollment"];
          foreach ($params["id_event"] as $id_event) {
             $this->events = Event::findById($id_event)[0]; 
-            echo "<pre>";
             //Procura inscrições com o mesmo evento pai
             if($this->events->getIdParentEvent()){
                $bonus = EventBonus::findByIdEvent($this->events->getIdParentEvent());
@@ -96,7 +95,8 @@
                   "id_event" => $this->events->getIdEvent(),
                   "id_payment_type" => $params["id_payment_type"],
                   "cost" => $cost,
-                  "bonus" => $useBonus ? $useBonus : false
+                  "bonus" => $useBonus ? $useBonus : false,
+                  "additional_info" => $params["additional_info"]
                );
             $this->enrollment = new Enrollment($data);
             if ($this->enrollment->save()) {

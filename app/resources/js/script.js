@@ -54,6 +54,12 @@ $(document).ready(function(){
 	$("input[name='event[end_date_enrollment]']").mask("99/99/9999 99:99");
 	$("input[name='cost[date_max][]']").mask("99/99/9999");
 
+	if(participantEditPage){
+		$("input#password").removeAttr("required");
+		$("input#password").attr("disabled", "disabled");
+		$("#password-group").attr("title", "Para alterar sua senha, acesse a página de alteração de senha através do menu do participante.");
+	}
+
 	$("[data-toggle=tooltip]").tooltip();
 
 	validName = true;

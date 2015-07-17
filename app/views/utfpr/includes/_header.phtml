@@ -4,11 +4,33 @@
 			<?php $participant = isset($_SESSION["participant"]) ? $_SESSION["participant"] : false; ?>
 				
 			<?php if ($participant) : ?>
-				<?= "Bem vindo, {$participant->getName()} <br />"; ?>
+				<?= "Bem vindo(a), {$participant->getName()} <br />"; ?>
 				<a href="<?= createUriFor('/conta/painel')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-user"></span> Minha Conta</a>
 				<a href="<?= createUriFor('/conta/sair')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
+				<ul id="user-menu">
+					<li>
+						<a href="<?= createUriFor('/conta/alterar')?>">
+							<span class="glyphicon glyphicon-edit"></span> Alterar Dados
+						</a>
+					</li>
+						<li>
+				    	<a href="<?= createUriFor('/conta/senha')?>">
+				    		<span class="glyphicon glyphicon-cog"></span> Alterar Senha
+				    	</a>
+				    </li>
+				    <li>
+				    	<a href="<?= createUriFor('/conta/inscricoes')?>">
+				    		<span class="glyphicon glyphicon-list-alt"></span> Minhas Inscrições
+				    	</a>
+				    </li>
+				   	<li>
+				    	<a href="<?= createUriFor('/conta/certificados')?>">
+				    		<span class="glyphicon glyphicon-certificate"></span> Certificados
+				    	</a>
+				    </li>
+				</ul>
 			<?php else : ?>		
-				Bem vindo, visitante<br />
+				Bem vindo(a), visitante<br />
 				<a class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a>
 				<a href="<?= createUriFor('/conta/nova')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Cadastro</a>
 			<?php endif ?>

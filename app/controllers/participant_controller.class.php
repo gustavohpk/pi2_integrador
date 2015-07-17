@@ -94,16 +94,24 @@
 		}
 
 		public function edit(){
-			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant())[0];
+			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant());
    			$this->setHeadTitle("Alterar Dados");
    			$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
 		}
 
+		public function editpassword(){
+			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant());
+   			$this->setHeadTitle("Alterar Senha");
+   			$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/senha");
+   			$this->titleBtnSubmit = "Alterar";
+		}
+
 		public function update(){
 			$this->checkCity();
-			if ($this->participant = Participant::findById($this->params[":id"])) {
-				$this->participant = $this->participant[0];	
+
+			// Verifica se a ID enviada pelo formulário é a mesma ID do participante logado
+			if ($this->params[":id"] == $_SESSION["participant"]->getIdParticipant() && $this->participant = Participant::findById($this->params[":id"])) {
 				if ($this->participant->update($this->params["participant"])) {
 					FlashMessage::successMessage("Dados alterados com sucesso.");
 					$this->redirectTo("conta/painel");
@@ -113,11 +121,38 @@
 					foreach ($errors as $error){
 						FlashMessage::errorMessage($error);
 					}
-					$this->setHeadTitle("Editar Tipo de Evento");
+					$this->setHeadTitle("Alterar Dados");
 		         	$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
 		         	$this->titleBtnSubmit = "Salvar";
 		         	$this->render("edit");
 				}
+			}else{
+				FlashMessage::errorMessage("Não foi possível alterar os dados.");
+				$this->redirectTo("conta/painel");
+			}
+		}
+
+		public function updatePassword(){
+
+			// Verifica se a ID enviada pelo formulário é a mesma ID do participante logado
+			if ($this->params[":id"] == $_SESSION["participant"]->getIdParticipant() && $this->participant = Participant::findById($this->params[":id"])) {
+				if ($this->participant->updatePassword($this->params)) {
+					FlashMessage::successMessage("Senha Alterada com sucesso.");
+					$this->redirectTo("conta/painel");
+				}
+				else{
+					$errors = $this->participant->getErrors();
+					foreach ($errors as $error){
+						FlashMessage::errorMessage($error);
+					}
+					$this->setHeadTitle("Alterar Senha");
+		         	$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/senha");
+		         	$this->titleBtnSubmit = "Salvar";
+		         	$this->render("editpassword");
+				}
+			}else{
+				FlashMessage::errorMessage("Não foi possível alterar a senha.");
+				$this->redirectTo("conta/painel");
 			}
 		}
 
