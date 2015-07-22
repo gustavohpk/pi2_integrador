@@ -8,10 +8,20 @@
 			<a href="<?= createUriFor('/conta/certificados')?>">
 				<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-arrow-left"></span> &nbsp;Retornar</button>
 			</a>
-			<button type="button" onclick="printDiv('certificate-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+			<br><br>
 			<div class="row" id="certificate-view">
 				<div class="col-xs-12">
-					<?php require_once "_certificate.phtml"; ?>
+					<div class="row">
+						<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+							<ul class="list-group">
+								<li class="list-group-item">Código do certificado: <b><?= $this->certificate->getCode() ?></b></li>
+								<li class="list-group-item">Participante: <b><?= strtoupper($this->participant->getName()) ?></b></li>
+								<li class="list-group-item">Evento: <b><?= $this->event->getName()?></b></li>
+								<li class="list-group-item">Data: <?= strtotime($this->event->getStartDate("d/m/Y")) != strtotime($this->event->getEndDate("d/m/Y")) ? "Entre " . $this->event->getStartDate("d/m/Y") . " e " . $this->event->getEndDate("d/m/Y") : "" . $this->event->getStartDate("d/m/Y") ?></li>
+								<li class="list-group-item">Carga horária total: <b><?= ceil((strtotime($this->event->getEndDate("Y-m-d H:s")) - strtotime($this->event->getStartDate("Y-m-d H:s"))) / 3600 )?> horas</b></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		<?php endif; ?>

@@ -18,7 +18,7 @@
 						<li class="list-group-item">Participante: <b><?= strtoupper($this->participant->getName()) ?></b></li>
 						<li class="list-group-item">Evento: <b><?= $this->event->getName()?></b></li>
 						<li class="list-group-item">Data: <?= strtotime($this->event->getStartDate("d/m/Y")) != strtotime($this->event->getEndDate("d/m/Y")) ? "Entre " . $this->event->getStartDate("d/m/Y") . " e " . $this->event->getEndDate("d/m/Y") : "" . $this->event->getStartDate("d/m/Y") ?></li>
-						<li class="list-group-item">Carga horária total: <b><?= ceil((strtotime($this->event->getEndDate("d/m/Y H:s")) - strtotime($this->event->getStartDate("d/m/Y H:s"))) / 3600 )?> horas</b></li>
+						<li class="list-group-item">Carga horária total: <b><?= ceil((strtotime($this->event->getEndDate("Y-m-d H:s")) - strtotime($this->event->getStartDate("Y-m-d H:s"))) / 3600 )?> horas</b></li>
 					</ul>
 				</div>
 			</div>

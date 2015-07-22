@@ -42,6 +42,9 @@
 		<br/>
 		<br/>
 		<button type="button" onclick="printDiv('certificate-view')" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+		<button type="button" class="btn btn-default" onclick="toggleTemplate()">Esconder / Exibir template</button>
+		<button type="button" class="btn btn-default" onclick="toggleHeader()">Esconder / Exibir cabeçalho</button>
+		<button type="button" class="btn btn-default" onclick="toggleFooter()">Esconder / Exibir rodapé</button>
 		<div class="row" id="certificate-view">
 			<div class="col-xs-12">
 					<?php require_once "_certificate.phtml"; ?>
@@ -55,5 +58,27 @@
 
 <script type="text/javascript">
 	enrollmentsUrl = '<?=createUriFor("/admin/certificados/inscricoes/")?>';
+	function toggleTemplate(){
+		if ($("#show-certificate .visual").css("visibility") == "visible"){
+			$("#show-certificate .visual").css("visibility", "hidden");
+		}else{
+			$("#show-certificate .visual").css("visibility", "visible");
+		}
+	}
+	function toggleHeader(){
+		if ($("#show-certificate #certificate-top span").css("visibility") == "visible"){
+			$("#show-certificate #certificate-top span").css("visibility", "hidden");
+		}else{
+			$("#show-certificate #certificate-top span").css("visibility", "visible");
+		}
+	}
+	function toggleFooter(){
+		if ($("#show-certificate #certificate-bottom").css("visibility") == "visible"){
+			$("#show-certificate #certificate-bottom").css("visibility", "hidden");
+		}else{
+			$("#show-certificate #certificate-bottom").css("visibility", "visible");
+		}
+	}
+
 </script>
 

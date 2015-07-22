@@ -141,10 +141,7 @@
 					$this->redirectTo("conta/painel");
 				}
 				else{
-					$errors = $this->participant->getErrors();
-					foreach ($errors as $error){
-						FlashMessage::errorMessage($error);
-					}
+					FlashMessage::errorMessage("Não foi possível alterar a senha.");
 					$this->setHeadTitle("Alterar Senha");
 		         	$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/senha");
 		         	$this->titleBtnSubmit = "Salvar";

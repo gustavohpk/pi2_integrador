@@ -85,13 +85,19 @@
 
             $uri = $this->getUri("media/image/event/");
 
-            if ($this->media->save($uri, $i)){
-                $successes[] = $_FILES["photos"]["name"][$i];
-                move_uploaded_file($_FILES["photos"]["tmp_name"][$i], "/var/www/" . $this->media->getPath());
+            if($_FILES["photos"]["size"][$i] == 0){
+                $errors[] = $_FILES["photos"]["name"][$i] . " - o tamanho do arquivo não pode ser superior a " . (int)(ini_get('upload_max_filesize')) . " mb.";
+            }else{
+                if ($this->media->save($uri, $i)){
+                    $successes[] = $_FILES["photos"]["name"][$i];
+                    move_uploaded_file($_FILES["photos"]["tmp_name"][$i], "/var/www/" . $this->media->getPath());
+                }
+                else{
+                    $errors[] = $_FILES["photos"]["name"][$i];
+                }
             }
-            else{
-                $errors[] = $_FILES["photos"]["name"][$i];;
-            }
+
+            
         }
 
         $successMsg = "Fotos cadastradas com sucesso: ";

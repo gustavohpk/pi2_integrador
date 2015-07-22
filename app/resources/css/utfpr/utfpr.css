@@ -408,6 +408,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 /* Certificados */
 
 #show-certificate p, #show-certificate span{ color: #000; }
+#certificates-list img { max-width: 100px; float: left; margin-right: 5px;}
 
 /* Fim certificados */
 
