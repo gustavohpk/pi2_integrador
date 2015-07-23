@@ -285,7 +285,6 @@
 	     * @return Event[] Eventos
 	     */
 		public static function findNext($date){
-			// Necessária otimização
 			$events = self::find(array("end_date", "enabled"), array($date, true), array(">=", "="), "AND" ,"start_date", "ASC");
 			return $events;
 		}
@@ -295,8 +294,7 @@
 	     * @return Event[] Eventos
 	     */
 		public static function findPrev($date){
-			// Necessária otimização
-			$events = self::find(array("end_date"), array($date), "<", "AND", "end_date", "DESC");
+			$events = self::find(array("end_date", "enabled"), array($date, true), array("<", "="), "AND", "end_date", "DESC");
 			foreach ($events as $key => $event) {
 				if(!$event->getEnabled()){
 					unset($events[$key]);

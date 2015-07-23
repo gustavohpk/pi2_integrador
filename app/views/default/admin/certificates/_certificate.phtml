@@ -19,10 +19,10 @@
 	</div>
 	<br><br><br><br><br><br><br><br><br><br>
 	<div id="certificate-content">
-		<p>Declaramos que <b><?= strtoupper($this->participant->getName()) ?></b> participou do(a) <b>“<i><?= $this->events[0]->getName()?></i>”</b>, ministrado por <?= $this->events[0]->getTeacher()?>, realizado <?= strtotime($this->events[0]->getStartDate("d/m/Y")) != strtotime($this->events[0]->getEndDate("d/m/Y")) ? "entre os dias " . $this->events[0]->getStartDate("d/m/Y") . " e " . $this->events[0]->getEndDate("d/m/Y") : "no dia " . $this->events[0]->getStartDate("d/m/Y") ?>, com carga horária total de <?= ceil((strtotime($this->events[0]->getEndDate("d/m/Y H:s")) - strtotime($this->events[0]->getStartDate("d/m/Y H:s"))) / 3600 )?> horas. </p>
+		<p>Declaramos que <b><?= strtoupper($this->certificate->enrollment->participant->getName()) ?></b> participou do(a) <b>“<i><?= $this->certificate->enrollment->event->getName()?></i>”</b>, ministrado por <?= $this->certificate->enrollment->event->getTeacher()?>, realizado <?= strtotime($this->certificate->enrollment->event->getStartDate("d/m/Y")) != strtotime($this->certificate->enrollment->event->getEndDate("d/m/Y")) ? "entre os dias " . $this->certificate->enrollment->event->getStartDate("d/m/Y") . " e " . $this->certificate->enrollment->event->getEndDate("d/m/Y") : "no dia " . $this->certificate->enrollment->event->getStartDate("d/m/Y") ?>, com carga horária total de <?= ceil((strtotime($this->certificate->enrollment->event->getEndDate("d/m/Y H:s")) - strtotime($this->certificate->enrollment->event->getStartDate("d/m/Y H:s"))) / 3600 )?> horas. </p>
 	</div>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<div id="certificate-bottom">
-		<p>Este certificado foi gerado pelo Sistema de Eventos da UTFPR-GP. Seu código de identificação único é<br/><br/><b><?= $this->certificates->getCode() ?></b><br/><br/>e sua autenticidade pode ser confirmada no endereço: <b><i>eventos.gp.utfpr.edu.br</i></b>.</p>
+		<p>Este certificado foi gerado pelo Sistema de Eventos da UTFPR-GP. Seu código de identificação único é<br/><br/><b><?= $this->certificate->getCode() ?></b><br/><br/>e sua autenticidade pode ser confirmada no endereço: <b><i>eventos.gp.utfpr.edu.br</i></b>.</p>
 	</div>
 </div>

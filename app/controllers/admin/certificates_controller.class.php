@@ -55,10 +55,10 @@
 		}
 
 		public function show(){
-			$this->certificates = \Certificate::findById($this->params[":id"])[0];
+			$this->certificate = \Certificate::findById($this->params[":id"])[0];
    			$this->setHeadTitle("Visualizar Certificado");
-   			$this->events[] = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->getEvent();
-   			$this->participant = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->participant;  			
+   			// $this->events[] = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->getEvent();
+   			// $this->participant = \Enrollment::findById($this->certificates->getIdEnrollment())[0]->participant;  			
 		}
 
 		// public function update(){

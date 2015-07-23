@@ -14,13 +14,14 @@
 
 ----------
 
------ Atualização 089 (21/07/15 - ) -----
+----- Atualização 089 (21/07/15 - 23/07/15) -----
 
 - Linha de eventos alterada na home
 - Correção de layout na lista de certificados do site
 - Alterando visualização de certificado no painel do usuário
 - Adicionadas opções para esconder template, cabeçalho e rodapé ao imprimir um certificado
 - Adicionada validação para tamanho da imagem
+- Otimizada a exibição e impressão do certificado na área do admin
 
 ----- Atualização 088 (14/07/15 - 17/07/15) -----
 
