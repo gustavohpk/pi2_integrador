@@ -420,7 +420,7 @@
 
 		public static function countNext(){
 			$date = date("Y-m-d");
-			$sql = "SELECT count(id_event) as count FROM event WHERE end_date > CURDATE()";
+			$sql = "SELECT count(id_event) as count FROM event WHERE enabled = true AND end_date >= CURDATE()";
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
 			$rs->execute();
@@ -431,7 +431,7 @@
 
 		public static function countPrev(){
 			$date = date("Y-m-d");
-			$sql = "SELECT count(id_event) as count FROM event WHERE end_date < CURDATE()";
+			$sql = "SELECT count(id_event) as count FROM event WHERE enabled = true AND end_date < CURDATE()";
 			$pdo = \Database::getConnection();
 			$rs = $pdo->prepare($sql);
 			$rs->execute();

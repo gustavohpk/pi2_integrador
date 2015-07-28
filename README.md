@@ -14,6 +14,15 @@
 
 ----------
 
+----- Atualização 090 (27/07/15) -----
+
+- Paginação corrigida
+- Contagem de eventos na listagem do site corrigida
+- Página "Sobre" atualizada
+- Link "Painel" do menu principal alterado para "Minha Conta"
+- Meta Tags adicionadas
+- Removido busca de título do site na classe Settings a partir da classe base
+
 ----- Atualização 089 (21/07/15 - 23/07/15) -----
 
 - Linha de eventos alterada na home

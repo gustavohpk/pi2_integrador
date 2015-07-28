@@ -59,7 +59,7 @@
 		 * @param String $pageTitle O título de página
 		 */
 		public function setHeadTitle($pageTitle = null){
-			$siteTitle = Settings::getSiteTitle()->getValue();
+			$siteTitle = APP_NAME;
 			if ($pageTitle){
 				$this->headTitle = $pageTitle . " - " . $siteTitle;
 			}
