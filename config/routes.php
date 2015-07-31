@@ -171,8 +171,9 @@
     $routes['GET'][] = array('route' => '/admin/inscricoes/:id/remover', 'controller' => 'Admin\EnrollmentController', 'action' => 'remove');
     $routes['GET'][] = array('route' => '/admin/inscricoes/nova', 'controller' => 'Admin\EnrollmentController', 'action' => '_new');
     $routes['GET'][] = array('route' => '/admin/inscricoes/:id/ver', 'controller' => 'Admin\EnrollmentController', 'action' => 'show');
-    $routes['GET'][] = array('route' => '/admin/inscricoes/:id/pagamento', 'controller' => 'Admin\EnrollmentController', 'action' => 'payment');
-    $routes['GET'][] = array('route' => '/admin/inscricoes/:id/cancela-pagamento', 'controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment');
+    $routes['POST'][] = array('route' => '/admin/inscricoes/:id/status', 'controller' => 'Admin\EnrollmentController', 'action' => 'updateStatus');
+    // $routes['GET'][] = array('route' => '/admin/inscricoes/:id/pagamento', 'controller' => 'Admin\EnrollmentController', 'action' => 'payment');
+    // $routes['GET'][] = array('route' => '/admin/inscricoes/:id/cancela-pagamento', 'controller' => 'Admin\EnrollmentController', 'action' => 'cancelPayment');
 
     //rotas para status de inscricao
     $routes['GET'][] = array('route' => '/admin/inscricoes/estados', 'controller' => 'Admin\EnrollmentStatusController', 'action' => '_list'); 
@@ -225,7 +226,6 @@
     $routes['GET'][] = array('route' => '/admin/config/geral', 'controller' => 'Admin\SettingsController', 'action' => 'general');
     $routes['GET'][] = array('route' => '/admin/config/geral/manutencao', 'controller' => 'Admin\SettingsController', 'action' => 'maintenance');
     $routes['GET'][] = array('route' => '/admin/config/tema', 'controller' => 'Admin\SettingsController', 'action' => 'theme');
-    $routes['GET'][] = array('route' => '/admin/config/banners', 'controller' => 'Admin\SettingsController', 'action' => 'banners');
     //forma de pgto
     $routes['GET'][] = array('route' => '/admin/config/pagamento', 'controller' => 'Admin\PaymentTypeController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/config/pagamento/nova', 'controller' => 'Admin\PaymentTypeController', 'action' => '_new');
@@ -234,7 +234,6 @@
     $routes['GET'][] = array('route' => '/admin/config/pagamento/:id/alterar', 'controller' => 'Admin\PaymentTypeController', 'action' => 'edit');
     $routes['POST'][] = array('route' => '/admin/config/pagamento/:id/alterar', 'controller' => 'Admin\PaymentTypeController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/config/pagamento/:id/remover', 'controller' => 'Admin\PaymentTypeController', 'action' => 'remove');
-    $routes['GET'][] = array('route' => '/admin/config/email', 'controller' => 'Admin\SettingsController', 'action' => 'email');
     $routes['GET'][] = array('route' => '/admin/config/programador', 'controller' => 'Admin\SettingsController', 'action' => 'developer');
 
     $routes['POST'][] = array('route' => '/admin/config', 'controller' => 'Admin\SettingsController', 'action' => 'update');

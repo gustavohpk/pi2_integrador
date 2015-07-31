@@ -664,23 +664,23 @@
 			$statment->execute();
 		}
 
-		public function addSpaces($id){
-			$sql = "UPDATE event SET spaces = spaces + 1 WHERE id_event = " . $id;
+		// public function addSpaces($id){
+		// 	$sql = "UPDATE event SET spaces = spaces + 1 WHERE id_event = " . $id;
 
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
+		// 	$pdo = \Database::getConnection();
+		// 	$statment = $pdo->prepare($sql);
 			
-			$statment->execute();
-		}
+		// 	$statment->execute();
+		// }
 
-		public function removeSpaces($id){
-			$sql = "UPDATE event SET spaces = spaces + 1 WHERE id_event = " . $id;
+		// public function removeSpaces($id){
+		// 	$sql = "UPDATE event SET spaces = spaces + 1 WHERE id_event = " . $id;
 
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
+		// 	$pdo = \Database::getConnection();
+		// 	$statment = $pdo->prepare($sql);
 			
-			$statment->execute();
-		}
+		// 	$statment->execute();
+		// }
 
 		private function openLogo($logo){
 			$size = $logo["size"];
@@ -690,9 +690,9 @@
 
 		private function generatePath($path){
 			if(!$path){
-				$path = str_replace(" ", "-", strtolower(preg_replace('/[^a-zA-Z0-9\s]/', '', self::removeSpecialCharacters($this->getName()))));
+				$path = str_replace(" ", "-", strtolower(preg_replace('/[^a-zA-Z0-9\s]/', '-', self::removeSpecialCharacters($this->getName()))));
 			}else{
-				$path = str_replace(" ", "-", strtolower(preg_replace('/[^a-zA-Z0-9\s]/', '', self::removeSpecialCharacters($this->getPath()))));
+				$path = str_replace(" ", "-", strtolower(preg_replace('/[^a-zA-Z0-9\s]/', '-', self::removeSpecialCharacters($this->getPath()))));
 			}
 
 			$number = 2;

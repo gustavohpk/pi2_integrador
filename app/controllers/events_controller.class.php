@@ -31,6 +31,7 @@
 	    		if($this->event->getRating() > 0)
 	    			$this->realRating = $this->event->getRating() / $this->event->getEvaluations();
    				Event::updateViews($this->event->getIdEvent());
+   				$this->isEnrolled = false;
    				if(isset($_SESSION["participant"])){
 	   				if($this->enrollment = Enrollment::find(array("id_participant", "id_event"), array($_SESSION["participant"]->getIdParticipant(), $this->event->getIdEvent()))){
 	   					$this->attendance = $this->enrollment[0]->getAttendance();

@@ -145,6 +145,10 @@
 			return $statment ? $this : false;
 		}
 
+		/**
+		 * Envia um e-mail com uma mensagem
+		 * 
+		 */
 		public function messageMail($nameAddress = "Gustavo"){
 			$html = file_get_contents("app/views/default/admin/message/templates/base.html");
 
@@ -161,6 +165,10 @@
 			self::sendMail($html, $recipients, "", $this->getSubject());
 		}
 
+		/**
+		 * Envia um e-mail informando que o cadastro foi realizado
+		 * @param Participant $participant O participante que efetuou o cadastro
+		 */
 		public static function registrationMail($participant){
 
 			$html = file_get_contents("app/views/default/admin/message/templates/base.html");
@@ -173,7 +181,29 @@
 
 			$recipients = str_replace(" ", "", explode(",", $participant->getEmail()));
 
-			self::sendMail($html, $recipients, $participant->getName(), "Cadastro realizado");	
+			self::sendMail($html, $recipients, $participant->getName(), "Cadastro realizado");
+		}
+
+		/**
+		 * Envia um e-mail sobre uma inscrição realizada
+		 * @param Enrollment A inscrição
+		 */
+		public static function newEnrollmentMail($enrollment){
+			$html = file_get_contents("app/views/default/admin/message/templates/base.html");
+
+			$logo = Basecontroller::getResource('img/utfpr/title-header.png');
+
+			$html = str_replace('{{TEMPLATE}}', file_get_contents("app/views/default/admin/message/templates/_new_enrollment_email.html"), $html);
+			$html = str_replace('{{LOGO}}', "<img id='title-banner-img' src='$logo' alt='UTFPR Eventos' style='max-width: 200px'/>", $html);
+			$html = str_replace('{{USERNAME}}', $enrollment->participant->getName(), $html);
+			$html = str_replace('{{EVENT}}', $enrollment->event->getName(), $html);
+			$html = str_replace('{{DATE}}', $enrollment->getDateEnrollment("d/m/Y h:m"), $html);
+			$html = str_replace('{{COST}}', $enrollment->getCost(), $html);
+			$html = str_replace('{{STATUS}}', $enrollment->enrollmentStatus->getName(), $html);
+
+			$recipients = str_replace(" ", "", explode(",", $enrollment->participant->getEmail()));
+
+			self::sendMail($html, $recipients, $enrollment->participant->getName(), "Inscrição Realizada");
 		}
 
 		private function sendMail($html, $recipients, $nameAddress = "", $subject = "UTFPR Eventos"){

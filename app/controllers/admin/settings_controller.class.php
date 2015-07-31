@@ -6,24 +6,17 @@
       protected $actionForm;
 		public function general() {
    		$this->setHeadTitle("Configurações Gerais");
-         $this->settings[] = \Settings::find(array("description"), array("site_title"))[0];
-         $this->settings[] = \Settings::find(array("description"), array("google_maps_api"))[0];
+         $settings = \Settings::all();
+         $this->settings = array();
+         foreach ($settings as $key => $setting) {
+            $this->settings[$setting->getDescription()] = $setting->getValue(); 
+         }
          $this->actionForm = $this->getUri("admin/config");
          $this->maintenance = \Settings::checkMaintenance();
 		}
 
 		public function theme(){
 			$this->setHeadTitle("Configurações de Tema");
-		}
-
-		public function banners(){
-			$this->setHeadTitle("Configurações dos banners");
-         $this->bannersNames = \Settings::find(array("description"), array("banner%_name"), "LIKE");
-         $this->bannersPaths = \Settings::find(array("description"), array("banner%_path"), "LIKE");
-         // echo "<pre>"; var_dump($this->bannersPaths); exit;
-         $this->actionForm = $this->getUri("admin/config");
-         $this->titleBtnSubmit = "Alterar";
-         $this->configSection = 'site_title';
 		}
 
 		public function payment(){
@@ -40,20 +33,13 @@
 
 
       public function update(){
-         $error = false;
-         foreach ($this->params as $key => $param) {;
-            $this->settings = \Settings::findByDescription($key)[0];
-            if($this->settings->update(array("value" => $param))){
-               \FlashMessage::successMessage("Configuração alterada com sucesso.");    
-            }else{
-               \FlashMessage::errorMessage("Erro ao alterar a configuração.");
-               $error = true;
-            }
-         }
-         if($error)
-               $this->redirectTo("admin/config/geral");
-         else
+         if(\Settings::update($this->params)){
+            \FlashMessage::successMessage("Configurações alterada com sucesso.");  
             $this->returnToLastPage();
+         }else{
+            \FlashMessage::errorMessage("Não foi possível alterar as configurações.");
+            $this->redirectTo("admin/config/geral");
+         }
       }
 
       // public function updateOld(){

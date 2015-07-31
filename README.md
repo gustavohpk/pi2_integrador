@@ -14,6 +14,12 @@
 
 ----------
 
+----- Atualização 091 (28/07/15 - 30/07/15) -----
+
+- Iniciado e-mail ao realizar inscrição
+- Removida área de configuração de banners
+- Otimizada e corrigida área de configurações
+
 ----- Atualização 090 (27/07/15) -----
 
 - Paginação corrigida

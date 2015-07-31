@@ -37,11 +37,11 @@
 <div class="row">
 	<div class="col-xs-6 col-sm-6 col-md-4 col-md-offset-2">
 		<h4>Data de inscrição</h4>
-		<input type="date" class="form-control" value="<?=$this->enrollment->getDateEnrollment("d/m/Y H:i:s")?>" readonly/>
+		<input type="text" class="form-control" value="<?=$this->enrollment->getDateEnrollment("d/m/Y H:i:s")?>" readonly/>
 	</div>
 	<div class="col-xs-6 col-sm-6 col-md-4">
 		<h4>Data de pagamento</h4>
-		<input type="date" class="form-control" value="<?=($this->enrollment->getCost() > 0 ?  $this->enrollment->getDatePayment("d/m/Y H:i:s") : "Gratuito")?>" readonly/>
+		<input type="text" class="form-control" value="<?=($this->enrollment->getCost() > 0 ?  $this->enrollment->getDatePayment("d/m/Y H:i:s") : "Gratuito")?>" readonly/>
 	</div>
 </div>
 <div class="row">
@@ -89,6 +89,5 @@
 </div>
 
 <br/>
-<a href="<?=createUriFor("/admin/inscricoes/{$this->enrollment->getIdEnrollment()}/pagamento")?>" role="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Definir como Pago</a>
 <a href="<?=createUriFor("/admin/inscricoes/lista")?>" role="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-<a href="<?=createUriFor("/admin/inscricoes/{$this->enrollment->getIdEnrollment()}/remover")?>" role="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+<button type="submit" class="btn btn-success" onclick="return confirm('Atualizar status? Um e-mail será enviado ao participante informando a sobre atualização.');"><?= $this->titleBtnSubmit ?></button>

@@ -72,47 +72,46 @@
 			return count($contactEmail) > 0 ? $contactEmail : NULL;
 		}
 
-		public function update($data = array()){
+		public static function update($settings){
 
-			$this->setData($data);
+            $pdo = \Database::getConnection();
 
-			$params = "";
+            $result = true;
 
-			$keys = array_keys($data);
-			foreach ($keys as $key) {
-				$params .= "$key = :$key, ";
-			}
+            try {
+            	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            	$pdo->beginTransaction();
+            	foreach ($settings as $key => $value) {
+            		$sql = "UPDATE setting SET value = :$key WHERE description = '$key'";
+            		$statment = $pdo->prepare($sql);
+            		$statment->execute(array(":$key" => $value));
+            	}
+            	$pdo->commit();
+            	
+            } catch (Exception $e) {
+            	$pdo->rollBack();
+            	$result = false;
+            }
 
-			//remove a ultima (",") virgula
-			$params = substr($params, 0, -2);
-			$sql = "UPDATE setting SET %s WHERE id_setting = ".$this->getIdSetting();
-			$sql = sprintf($sql, $params);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
+            return $result;
 			
-			$param = array();
-			foreach ($keys as $key){
-				$param[":$key"] = $data[$key];
-			}
-	
-			return $statment->execute($param);
 		}
 
-		public function save(){
-			$sql = 
-			"INSERT INTO setting
-				(id_setting, description, value)
-			VALUES
-				(:id_setting, :description, :value, :title)";
-			$params = array(
-					":id_setting" => $this->getIdSetting(),
-					":description" => $this->getDescription(),
-					":value" => $this->getValue()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			return $statment->execute($params);
-		}
+		// public function save(){
+		// 	$sql = 
+		// 	"INSERT INTO setting
+		// 		(id_setting, description, value)
+		// 	VALUES
+		// 		(:id_setting, :description, :value, :title)";
+		// 	$params = array(
+		// 			":id_setting" => $this->getIdSetting(),
+		// 			":description" => $this->getDescription(),
+		// 			":value" => $this->getValue()
+		// 		);
+		// 	$pdo = \Database::getConnection();
+		// 	$statment = $pdo->prepare($sql);
+		// 	return $statment->execute($params);
+		// }
 
 		public function remove(){
 			$sql = "DELETE FROM setting WHERE id_setting = :id_setting";

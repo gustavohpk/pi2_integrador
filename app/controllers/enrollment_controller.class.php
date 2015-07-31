@@ -100,6 +100,8 @@
                );
             $this->enrollment = new Enrollment($data);
             if ($this->enrollment->save()) {
+               Message::newEnrollmentMail($this->enrollment);
+
                if ($this->events->getFree()) {
                   $this->enrollment->setMessageSuccess("#{$this->enrollment->getIdEnrollment()} - {$this->enrollment->event->getName()} - Gratuito");
                }

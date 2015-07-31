@@ -27,17 +27,57 @@
 		<div class="row">
 			<h4>Título do site</h4>
 			<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
-				<input type="text" class="form-control" name="site_title" value="<?= $this->settings[0]->getValue() ?>">
+				<input type="text" class="form-control" name="site_title" value="<?= $this->settings['site_title'] ?>">
 			</div>
 		</div>
 		<div class="row">
 			<h4>API do Google Maps</h4>
 			<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
-				<input type="text" class="form-control" name="google_maps_api" value="<?= $this->settings[1]->getValue() ?>">
+				<input type="text" class="form-control" name="google_maps_api" value="<?= $this->settings['google_maps_api'] ?>">
 				<br/>
-				<button type="submit" class="btn btn-default">Alterar</button>
 			</div>
 		</div>
+		<div class="row">
+			<h4>E-mail de contato</h4>
+			<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+				<input type="email" class="form-control" name="contact_mail" value="<?= $this->settings['contact_mail'] ?>">
+				<br/>
+				
+			</div>
+		</div>
+		<div class="row">
+			<h4>Host de e-mail</h4>
+			<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+				<input type="text" class="form-control" name="mail_host" value="<?= $this->settings['mail_host'] ?>">
+				<br/>
+				
+			</div>
+		</div>
+		<div class="row">
+			<h4>Porta do host de e-mail</h4>
+			<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+				<input type="text" class="form-control" name="mail_port" value="<?= $this->settings['mail_port'] ?>">
+				<br/>
+				
+			</div>
+		</div>
+		<div class="row">
+			<h4>Usuário do host de e-mail</h4>
+			<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+				<input type="text" class="form-control" name="mail_username" value="<?= $this->settings['mail_username'] ?>">
+				<br/>
+				
+			</div>
+		</div>
+		<div class="row">
+			<h4>Senha do host de e-mail</h4>
+			<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+				<input type="text" class="form-control" name="mail_password" value="<?= $this->settings['mail_password'] ?>">
+				<br/>
+				
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success">Salvar alterações</button>
 	</form>
 	<hr/>
 </div>

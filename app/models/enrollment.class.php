@@ -254,6 +254,9 @@
 
 			$statusCode = $this->event->getFree() && $this->event->getAutoConfirmEnrollment() ? "confirmed" : "pending";
 
+			$this->setIdEnrollmentStatus(EnrollmentStatus::find(array("code"), array($statusCode))[0]->getIdEnrollmentStatus());
+			$this->setDateEnrollment(date("Y-m-d H:i:s"));
+
 			$sql = 
 			"INSERT INTO enrollment
 				(id_participant, id_enrollment_status, id_event, date_enrollment, date_payment, id_payment_type, cost, bonus, additional_info)
@@ -262,9 +265,9 @@
 
 			$params = array(
 					":id_participant" => $this->participant->getIdParticipant(),
-					":id_enrollment_status" => EnrollmentStatus::find(array("code"), array($statusCode))[0]->getIdEnrollmentStatus(),
+					":id_enrollment_status" => $this->enrollmentStatus->getIdEnrollmentStatus(),
 					":id_event" => $this->event->getIdEvent(),
-					":date_enrollment" => date("Y-m-d H:i:s"),
+					":date_enrollment" => $this->getDateEnrollment(),
 					":date_payment" => null,
 					":id_payment_type" => $this->getIdPaymentType(),
 					":cost" => $this->getCost(),
@@ -275,9 +278,6 @@
 			$statment = $pdo->prepare($sql);
 			$statment = $statment->execute($params);
 			$this->setIdEnrollment($pdo->lastInsertId());
-			if($statment){
-				\Event::removeSpaces($this->event->getIdEvent());
-			}
 			return $statment ? $this : false;
 		}
 
@@ -287,9 +287,6 @@
 			$statment = $pdo->prepare($sql);
 			$params = array(":id_enrollment" => $this->getIdEnrollment());
 			$statment = $statment->execute($params);
-			// if($statment){
-			// 	\Event::addSpaces($this->event->getIdEvent());
-			// }
 			return $statment;
 		}
 
@@ -366,6 +363,25 @@
 				$statment = $pdo->prepare($sql);
 				return $statment->execute(array(":rating"=> $rating, ":id_enrollment"=> $this->getIdEnrollment()));
 			}
+		}
+
+		public function updateStatus($data = array()){
+			$this->setData($data);
+
+			$sql = 
+			"UPDATE
+				enrollment
+			SET 
+				id_enrollment_status = :id_enrollment_status
+			WHERE
+				id_enrollment = :id_enrollment";
+			$params = array(				
+					":id_enrollment_status" => $this->enrollmentStatus->getIdEnrollmentStatus(),
+					":id_enrollment" => $this->getIdEnrollment()
+				);
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			return $statment->execute($params);
 		}
 
 		public function setPayment($date = null){
