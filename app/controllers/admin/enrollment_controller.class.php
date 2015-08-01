@@ -49,8 +49,9 @@
 		}
 
       public function updateStatus(){
-         if ($this->enrollments = \Enrollment::findById($this->params[":id"])) {
-            if ($this->enrollments[0]->updateStatus($this->params["enrollment"])) {
+         if ($this->enrollment = \Enrollment::findById($this->params[":id"])) {
+            if ($this->enrollment[0]->updateStatus($this->params["enrollment"])) {
+               \Message::updateEnrollmentMail($this->enrollment[0]);
                \FlashMessage::successMessage("Status da inscrição atualizado.");
             }
             else {

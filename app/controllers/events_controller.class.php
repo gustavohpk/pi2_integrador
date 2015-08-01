@@ -48,7 +48,8 @@
 	    	}
 	    	else {
 	    		flashMessage::errorMessage("O evento que você está tentando acessar não existe.");
-	    		$this->redirectTo($this->back());
+	    		// $this->redirectTo($this->back());
+	    		$this->redirectTo("");
 	    	}
 	    }
 

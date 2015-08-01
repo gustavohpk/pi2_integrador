@@ -17,6 +17,7 @@
 
 		public function setIdEvent($idEvent){
 			$this->idEvent = $idEvent;
+			$this->event = Event::findById($idEvent)[0];
 		}
 
 		public function setLabel($label){
@@ -108,7 +109,7 @@
 		}
 
 		public static function findById($id){
-			return self::find(array("id_media"), array($id))[0];
+			return self::find(array("id_media"), array($id));
 		}
 
 		public function findByIdEvent($idEvent, $mediaType = "p") {

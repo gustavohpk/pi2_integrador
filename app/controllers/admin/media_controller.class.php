@@ -15,7 +15,7 @@
         \Media::setCurrentPage($page);
 
         if (isset($this->params[":id"])){
-        $this->media = \Media::findById($this->params[":id"]);
+         $this->media = \Media::findById($this->params[":id"])[0];
         $this->pagination = new \Pager(count($this->media), \Media::getLimitByPage(), $page);
         }
         else{
@@ -40,7 +40,7 @@
 
     public function _edit(){
         $this->setHeadTitle("Modificar mídia");
-        $this->media = \Media::findById($this->params[":id"]);
+         $this->media = \Media::findById($this->params[":id"])[0];
         $this->actionForm = $this->getUri("admin/midia/{$this->media->getIdMedia()}");
         $this->titleBtnSubmit = "Salvar";
     }
@@ -76,7 +76,7 @@
             $data = array(
                         "id_media" => null,
                         "label" => $this->params["media"]["label"][$i],
-                        "id_event" => $this->params["media"]["id_event"][$i], 
+                        "id_event" => $this->params["id_event"], 
                         "media_type" => "p",
                         "path" => ""
             );
@@ -120,8 +120,24 @@
 
     }
 
+    public function update(){ 
+        $this->media = \Media::findById($this->params[":id"])[0];
+        if ($this->media->update($this->params['media'])){
+            \Logger::updateLog($_SESSION["admin"]->getName(), "Mídia", $this->media->getidMedia());
+            \FlashMessage::successMessage("Mídia alterada com sucesso.");
+            $this->redirectTo("admin/midia/lista");
+        }
+        else{
+            \FlashMessage::errorMessage("Erro ao alterar a mídia.");
+            $this->setHeadTitle("Editar Mídia");
+            $this->actionForm = $this->getUri("admin/midia/{$this->media->getidMedia()}");
+            $this->titleBtnSubmit = "Salvar";
+            $this->render("edit");
+        }
+    }
+
     public function remove(){
-            $this->media = \Media::findById($this->params[":id"]);
+             $this->media = \Media::findById($this->params[":id"])[0];
             if ($this->media->remove()){
             \FlashMessage::successMessage("Mídia removida com sucesso.");
             unlink("/var/www/" . $this->media->getPath());

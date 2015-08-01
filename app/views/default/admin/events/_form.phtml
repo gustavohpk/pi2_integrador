@@ -64,7 +64,7 @@
 									<th></th>
 								</tr>
 								<tr>
-									<td><input id="option_0" checked type="radio" name="event[id_parent_event]" value="0"/></td>
+									<td><input id="option_0" <?= $this->events->isSubEvent() ? "" : "checked"?> type="radio" name="event[id_parent_event]" value="0"/></td>
 									<td><label for="option_0">0</label></td>
 									<td><label for="option_0">Nenhum</label></td>
 									<td><label for="option_0"></label></td>				

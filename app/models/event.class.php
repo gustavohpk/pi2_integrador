@@ -439,13 +439,50 @@
 			return $rows["count"];
 		}
 
-		public static function findById($id){
-			return self::find(array("id_event"), array($id));
-		}
+		/**
+		 * Procura um evento a partir do ID
+		 * @param int $idEvent O id do evento
+		 */
+		public static function findById($idEvent){
+	        $sql = "SELECT * FROM event WHERE id_event = :id_event";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_event" => $idEvent);
+	        $statment->execute($params);
 
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $events = array();
+
+	        if($result){
+	            $events[] = new Event($result[0]);
+	        }
+
+	        return $events;
+	    }
+
+		/**
+		 * Procura um evento a partir do caminho
+		 * @param string $path O caminho do evento
+		 */
 		public static function findByPath($path){
-			return self::find(array("path"), array($path));
-		}
+	        $sql = "SELECT * FROM event WHERE path = :path";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":path" => $path);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+	        $cities = array();
+
+	        $events = array();
+
+	        if($result){
+	            $events[] = new Event($result[0]);
+	        }
+
+	        return $events;
+	    }
 
 		public function setCost($costs) {
 			// Exclui os preços que foram removidos

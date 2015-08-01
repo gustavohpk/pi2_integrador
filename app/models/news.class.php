@@ -23,6 +23,7 @@
 
 		public function setIdEvent($idEvent){
 			$this->idEvent = $idEvent;
+			$this->event = Event::findById($idEvent)[0];
 		}
 
 		public function setCreationDate($creationDate){

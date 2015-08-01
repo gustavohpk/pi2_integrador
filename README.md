@@ -14,6 +14,15 @@
 
 ----------
 
+----- Atualização 092 (31/07/15) -----
+
+- Melhorando lista de seleção de evento no admin
+- Envio de e-mail ao atualizar status da inscrição
+- Modo manutenção removido temporariamente
+- Atualizações nas listagens de evento do admin
+- Classes Media e News atualizadas pra suportarem as novas listagens
+
+
 ----- Atualização 091 (28/07/15 - 30/07/15) -----
 
 - Iniciado e-mail ao realizar inscrição

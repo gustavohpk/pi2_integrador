@@ -11,43 +11,109 @@
 	</div>
 </div>
 <div class="row">
-		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
-			<h4>ID evento</h4>
-
-			<div class="input-group">
-		    <input id="event-id" type="number" class="form-control" name="media[id_event]" value="<?= $this->media->getIdEvent()?>" required>
-		    <input id="event-link" type="hidden" value="<?= createUriFor('/admin/eventos/idevento/alterar')?>"></input>
+	<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+		<h4>Evento</h4>
+		<a id="event-access" target="_blank" onclick='javascript:$(".ajax-loader").hide();' class="btn btn-default" data-toggle="modal" data-target="#event-list-modal" ><span class="glyphicon glyphicon-list"></span> Selecione o evento</a>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+		<h4>Tipo</h4>
+		<div class="input-group well well-md media-type-define" <?= $this->media->getIdMedia() ? "title='Não é possível modificar o tipo da mídia.' data-toggle='tooltip' data-placement='bottom'" : "" ?>>
+				<span> Foto </span><input id="foto" type="radio" name="media[media_type]" value="p" <?= $this->media->getMediaType() == 'p' ? "checked" : ""  ?> disabled>
+				<span> Vídeo </span><input id="video" type="radio" name="media[media_type]" value="v" <?= $this->media->getMediaType() == 'v' || empty($this->media->getMediaType()) ? "checked" : ""  ?> disabled>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div id="photo-source" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" <?= $this->media->getMediaType() == 'v' ? "style='display: none'" : ""  ?> <?= $this->media->getMediaType() == 'v' || empty($this->media->getMediaType()) ? "style='display: none'" : ""  ?>>
+		<h4>Selecione a imagem</h4>
+		<span class="label label-default label-sm">OBS.: Selecione uma imagem no formato JPG, PNG ou GIF</span>
+		<br/><br/>
+		<input type="file" name="media" accept=".jpg,.png,.gif" <?= $this->media->getIdMedia() ? " disabled" : "" ?>>
+	</div>
+	<div id="video-source" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" <?= $this->media->getMediaType() == 'p' ? "style='display: none'" : ""  ?>>
+		<h4>Link</h4>
+		<span class="label label-default label-sm">OBS.: No momento, o sistema só suporta vídeos do Youtube</span>
+		<br/><br/>
+		<div class="input-group" <?= $this->media->getIdMedia() ? "title='Não é possível modificar o URL do vídeo.' data-toggle='tooltip' data-placement='bottom'" : "" ?>>
+		    <input type="text" class="form-control" name="media[path]" value="<?= $this->media->getPath()?>" <?= $this->media->getIdMedia() ? "disabled" : "" ?>>
 		    <div class="input-group-btn">
-		      <a id="event-access" href="<?= createUriFor('/admin/eventos/lista') ?>" target="_blank" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Lista de eventos" ><span class="glyphicon glyphicon-list"></span></a>
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Acessar link"><span class="glyphicon glyphicon-new-window"></span></button>
 		    </div>
 		  </div>
-		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-			<h4>Tipo</h4>
-			<div class="input-group well well-md media-type-define" <?= $this->media->getIdMedia() ? "title='Não é possível modificar o tipo da mídia.' data-toggle='tooltip' data-placement='bottom'" : "" ?>>
-					<span> Foto </span><input id="foto" type="radio" name="media[media_type]" value="p" <?= $this->media->getMediaType() == 'p' ? "checked" : ""  ?> disabled>
-					<span> Vídeo </span><input id="video" type="radio" name="media[media_type]" value="v" <?= $this->media->getMediaType() == 'v' || empty($this->media->getMediaType()) ? "checked" : ""  ?> disabled>
-			</div>
-		</div>
+</div>
+<div id="event-list-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	            <h2 class="modal-title">Lista de eventos</h2>
+	            <table class="table table-hover" id="event-list-table">
+					<tr>
+						<th></th>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>Tipo</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td><input id="option_0" <?= $this->media->getIdEvent() ? "" : "checked"?> type="radio" name="media[id_event]" value="0"/></td>
+						<td><label for="option_0">0</label></td>
+						<td><label for="option_0">Nenhum</label></td>
+						<td><label for="option_0"></label></td>				
+						<td>					
+						</td>					
+					</tr>
+					<?php if($this->media->getIdEvent()) : ?>
+						<tr class="info">
+							<td><input id="option_<?= $this->media->event->getIdEvent() ?>" checked type="radio" name="event[id_parent_event]" value="<?= $this->media->event->getIdEvent() ?>"/></td>
+							<td><label for="option_<?= $this->media->event->getIdEvent() ?>"><?= $this->media->event->getIdEvent() ?></label></td>
+							<td><label for="option_<?= $this->media->event->getIdEvent() ?>"><?= $this->media->event->getName() ?></label></td>
+							<td><label for="option_<?= $this->media->event->getIdEvent() ?>"><?= $this->media->event->eventType->getEventType()?></label></td>				
+							<td>
+								<a href="<?= createUriFor("/admin/eventos/{$this->media->event->getIdEvent()}/alterar") ?>" role="button" target="_blank" class='btn btn-default btn-sm' title='Acessar página do evento'>
+									<span class='glyphicon glyphicon-new-window'></span>
+								</a>					
+							</td>					
+						</tr>
+					<?php endif; ?>
+				</table>
+				<div class="ajax-loader"></div>
+				<br>
+				<span class="info" style="height:15px; width: 25px; border: 1px solid gray; display: inline-block; background: #d9edf7"></span>
+				<span style="font-size: 12px; margin-bottom: 3px">Anteriormente selecionado</span>
+				<br/><br/>
+				<button id="btn-load" type="button" class="btn btn-default btn-xs" onclick="loadEvents();">Carregar mais</button>
+				<br/>
+				<br/>
+	        </div>
+	        <div class="caption">
+	        </div>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	      </div>
+	   </div>
 	</div>
-	<div class="row">
-		<div id="photo-source" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" <?= $this->media->getMediaType() == 'v' ? "style='display: none'" : ""  ?> <?= $this->media->getMediaType() == 'v' || empty($this->media->getMediaType()) ? "style='display: none'" : ""  ?>>
-			<h4>Selecione a imagem</h4>
-			<span class="label label-default label-sm">OBS.: Selecione uma imagem no formato JPG, PNG ou GIF</span>
-			<br/><br/>
-			<input type="file" name="media" accept=".jpg,.png,.gif" <?= $this->media->getIdMedia() ? " disabled" : "" ?>>
-		</div>
-		<div id="video-source" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" <?= $this->media->getMediaType() == 'p' ? "style='display: none'" : ""  ?>>
-			<h4>Link</h4>
-			<span class="label label-default label-sm">OBS.: No momento, o sistema só suporta vídeos do Youtube</span>
-			<br/><br/>
-			<div class="input-group" <?= $this->media->getIdMedia() ? "title='Não é possível modificar o URL do vídeo.' data-toggle='tooltip' data-placement='bottom'" : "" ?>>
-			    <input type="text" class="form-control" name="media[path]" value="<?= $this->media->getPath()?>" <?= $this->media->getIdMedia() ? "disabled" : "" ?>>
-			    <div class="input-group-btn">
-			      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Acessar link"><span class="glyphicon glyphicon-new-window"></span></button>
-			    </div>
-			  </div>
-		</div>
-	</div>
+</div>
+<script type="text/javascript">
+	page = 1;
+	function loadEvents(){
+		$(".ajax-loader").show();
+		url = "<?=createUriFor('/admin/eventos/lista/selecao/pagina/')?>" + page;	
+		$.ajax({
+			url: url,
+			success: function(data) {
+				$("#event-list-table").children().append( data );
+				//loaded = true;
+				page++;
+				if (/\S/.test(data) == false) {
+					$("#btn-load").hide();
+				}
+				$(".ajax-loader").hide();
+				$("#event-list-modal input[type='radio']").attr("name", "media[id_event]");
+			}
+		});
+	}
+</script>

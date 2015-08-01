@@ -29,6 +29,7 @@
       public function selectionList() {
          $this->layout = "admin/layout/layout_empty.phtml";
          $this->setHeadTitle("Seleção de Eventos");
+         $this->inputName = "event[id_parent_event]";
          if (isset($this->params[":p"])) {
             $page = $this->params[":p"];
          } else {

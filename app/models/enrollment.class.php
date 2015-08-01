@@ -229,9 +229,27 @@
 			return self::find();
 		}
 
-		public static function findById($id){
-			return self::find(array("id_enrollment"), array($id));
-		}
+		/**
+		 * Procura uma inscrição a partir do ID
+		 * @param int $idEnrollment O id da inscrição
+		 */
+		public static function findById($idEnrollment){
+	        $sql = "SELECT * FROM enrollment WHERE id_enrollment = :id_enrollment";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_enrollment" => $idEnrollment);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $enrollments = array();
+
+	        if($result){
+	            $enrollments[] = new Enrollment($result[0]);
+	        }
+
+	        return $enrollments;
+	    }
 
 		public static function findByIdEvent($id){
 			return self::find(array("id_event"), array($id));

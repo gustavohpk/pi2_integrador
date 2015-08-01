@@ -7,16 +7,10 @@
 		<h4>Visualizações</h4>
 		<input type="number" class="form-control" name="news[id_news]" value="<?= $this->news->getViews()?>" title="O número de visualizações não pode ser modificado." disabled/>
 	</div>
-	<div class="col-xs-4 col-sm-2">
-		<h4>ID evento</h4>
 
-		<div class="input-group">
-	    <input id="event-id" type="number" class="form-control" name="news[id_event]" value="<?= $this->news->getIdEvent()?>" required>
-	    <input id="event-link" type="hidden" value="<?= createUriFor('/admin/eventos/idevento/alterar')?>"></input>
-	    <div class="input-group-btn">
-	      <a id="event-access" href="<?= createUriFor('/admin/eventos/lista') ?>" target="_blank" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Lista de eventos" ><span class="glyphicon glyphicon-list"></span></a>
-	    </div>
-	  </div>
+	<div class="col-xs-4 col-sm-2">
+		<h4>Evento</h4>
+		<a id="event-access" target="_blank" onclick='javascript:$(".ajax-loader").hide();' class="btn btn-default" data-toggle="modal" data-target="#event-list-modal" ><span class="glyphicon glyphicon-list"></span> Selecione o evento</a>
 	</div>
 </div>
 <div class="row">
@@ -47,3 +41,76 @@
 		<textarea id="news-content" name="news[content]"><?= $this->news->getContent()?></textarea>
 	</div>
 </div>
+<div id="event-list-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	            <h2 class="modal-title">Lista de eventos</h2>
+	            <table class="table table-hover" id="event-list-table">
+					<tr>
+						<th></th>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>Tipo</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td><input id="option_0" <?= $this->news->getIdEvent() ? "" : "checked"?> type="radio" name="media[id_event]" value="0"/></td>
+						<td><label for="option_0">0</label></td>
+						<td><label for="option_0">Nenhum</label></td>
+						<td><label for="option_0"></label></td>				
+						<td>					
+						</td>					
+					</tr>
+					<?php if($this->news->getIdEvent()) : ?>
+						<tr class="info">
+							<td><input id="option_<?= $this->news->event->getIdEvent() ?>" checked type="radio" name="event[id_parent_event]" value="<?= $this->news->event->getIdEvent() ?>"/></td>
+							<td><label for="option_<?= $this->news->event->getIdEvent() ?>"><?= $this->news->event->getIdEvent() ?></label></td>
+							<td><label for="option_<?= $this->news->event->getIdEvent() ?>"><?= $this->news->event->getName() ?></label></td>
+							<td><label for="option_<?= $this->news->event->getIdEvent() ?>"><?= $this->news->event->eventType->getEventType()?></label></td>				
+							<td>
+								<a href="<?= createUriFor("/admin/eventos/{$this->news->event->getIdEvent()}/alterar") ?>" role="button" target="_blank" class='btn btn-default btn-sm' title='Acessar página do evento'>
+									<span class='glyphicon glyphicon-new-window'></span>
+								</a>					
+							</td>					
+						</tr>
+					<?php endif; ?>
+				</table>
+				<div class="ajax-loader"></div>
+				<br>
+				<span class="info" style="height:15px; width: 25px; border: 1px solid gray; display: inline-block; background: #d9edf7"></span>
+				<span style="font-size: 12px; margin-bottom: 3px">Anteriormente selecionado</span>
+				<br/><br/>
+				<button id="btn-load" type="button" class="btn btn-default btn-xs" onclick="loadEvents();">Carregar mais</button>
+				<br/>
+				<br/>
+	        </div>
+	        <div class="caption">
+	        </div>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	      </div>
+	   </div>
+	</div>
+</div>
+<script type="text/javascript">
+	page = 1;
+	function loadEvents(){
+		$(".ajax-loader").show();
+		url = "<?=createUriFor('/admin/eventos/lista/selecao/pagina/')?>" + page;	
+		$.ajax({
+			url: url,
+			success: function(data) {
+				$("#event-list-table").children().append( data );
+				//loaded = true;
+				page++;
+				if (/\S/.test(data) == false) {
+					$("#btn-load").hide();
+				}
+				$(".ajax-loader").hide();
+				$("#event-list-modal input[type='radio']").attr("name", "news[id_event]");
+			}
+		});
+	}
+</script>

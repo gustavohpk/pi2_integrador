@@ -31,11 +31,7 @@
 		protected $currentTheme = "utfpr";
 
 		public function __construct(){
-			if(Settings::checkMaintenance() == '1'){
-				$this->layout = "layout/layout_maintenance.phtml";
-			}else{
-				$this->layout = "layout/layout.phtml";
-			}
+			$this->layout = "layout/layout.phtml";
 		}
 
 		/**

@@ -1,6 +1,6 @@
 <?php foreach ($this->events as $event) : ?>
 	<tr>
-		<td><input id="option_<?= $event->getIdEvent() ?>" type="radio" name="event[id_parent_event]" value="<?= $event->getIdEvent() ?>"/></td>
+		<td><input id="option_<?= $event->getIdEvent() ?>" type="radio" name="<?= $this->inputName ?>" value="<?= $event->getIdEvent() ?>"/></td>
 		<td><label for="option_<?= $event->getIdEvent() ?>"><?= $event->getIdEvent() ?></td>
 		<td><label for="option_<?= $event->getIdEvent() ?>"><?= $event->getName() ?></label></td>
 		<?php if ($event->isSubEvent()) : ?>

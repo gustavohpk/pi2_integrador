@@ -200,10 +200,37 @@
 			$html = str_replace('{{DATE}}', $enrollment->getDateEnrollment("d/m/Y h:m"), $html);
 			$html = str_replace('{{COST}}', $enrollment->getCost(), $html);
 			$html = str_replace('{{STATUS}}', $enrollment->enrollmentStatus->getName(), $html);
+			$html = str_replace('{{DESCRIPTION}}', $enrollment->enrollmentStatus->getDescription(), $html);
 
 			$recipients = str_replace(" ", "", explode(",", $enrollment->participant->getEmail()));
 
 			self::sendMail($html, $recipients, $enrollment->participant->getName(), "Inscrição Realizada");
+		}
+
+		public static function updateEnrollmentMail($enrollment){
+			$html = file_get_contents("app/views/default/admin/message/templates/base.html");
+
+			$logo = Basecontroller::getResource('img/utfpr/title-header.png');
+
+			$html = str_replace('{{TEMPLATE}}', file_get_contents("app/views/default/admin/message/templates/_update_enrollment_email.html"), $html);
+			$html = str_replace('{{LOGO}}', "<img id='title-banner-img' src='$logo' alt='UTFPR Eventos' style='max-width: 200px'/>", $html);
+			$html = str_replace('{{USERNAME}}', $enrollment->participant->getName(), $html);
+			$html = str_replace('{{EVENT}}', $enrollment->event->getName(), $html);
+			$html = str_replace('{{DATE}}', $enrollment->getDateEnrollment("d/m/Y h:m"), $html);
+			$html = str_replace('{{COST}}', $enrollment->getCost(), $html);
+			$html = str_replace('{{STATUS}}', $enrollment->enrollmentStatus->getName(), $html);
+			$html = str_replace('{{DESCRIPTION}}', $enrollment->enrollmentStatus->getDescription(), $html);
+			
+			$title = "Inscrição Atualizada";
+			if($enrollment->enrollmentStatus->getCode() == "confirmed"){
+				$title = "Inscrição Confirmada";
+			}elseif($enrollment->enrollmentStatus->getCode() == "cancelled"){
+				$title = "Inscrição Cancelada";
+			}
+
+			$recipients = str_replace(" ", "", explode(",", $enrollment->participant->getEmail()));
+
+			self::sendMail($html, $recipients, $enrollment->participant->getName(), $title);
 		}
 
 		private function sendMail($html, $recipients, $nameAddress = "", $subject = "UTFPR Eventos"){
