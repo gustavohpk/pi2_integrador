@@ -10,7 +10,7 @@
 		/**
 	     * @var int $idCertificate ID do certificado
 	     * @var int $idEnrollment ID da inscrição
-	     * @var int $code Código único
+	     * @var string $code Código único
 	     */
 		private $idCertificate, $idEnrollment, $code;
 

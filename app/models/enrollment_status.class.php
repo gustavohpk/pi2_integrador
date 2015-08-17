@@ -5,6 +5,13 @@
 	 * @author Gustavo Pchek
 	 */
 	class EnrollmentStatus extends BaseModel{
+
+		/**
+	     * @var int $idEnrollmentStatus ID do status de evento
+	     * @var string $code Código do status
+	     * @var string $name Nome do status
+	     * @var string $description Descrição do status
+	     */
 		private $idEnrollmentStatus;
 		private $code;
 		private $name;

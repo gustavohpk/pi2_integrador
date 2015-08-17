@@ -34,7 +34,7 @@
 				}
 			}
 			else{
-				FlashMessage::errorMessage("Os seguintes ocorreram ao tentar acessar sua conta:");
+				FlashMessage::errorMessage("Não foi possível realizar o cadastro:");
 				$errors = $this->participant->getErrors();
 				foreach ($errors as $error){
 					FlashMessage::errorMessage($error);

@@ -220,5 +220,99 @@
 
          $this->validEnrollmentsCount = $this->enrollmentsCount - $this->cancelledEnrollmentsCount;
       }
+
+        public function sponsorship() {
+            $this->event = \Event::findById($this->params[":id"])[0];
+            if($this->event){
+                $this->setHeadTitle("Organizar Colaboradores");
+                $this->titleBtnSubmit = "Salvar";
+                $this->actionForm = $this->getUri("admin/eventos/{$this->event->getIdEvent()}/colaboracao");
+                $this->sponsors = \Sponsors::all();
+                // var_dump($this->event->sponsorship[0]->getIdEvent()); exit;
+            }else{
+                \FlashMessage::errorMessage("O evento não foi encontrado.");
+                $this->redirectTo("admin/eventos/lista");
+            }
+        }
+
+         public function prices() {
+            $this->event = \Event::findById($this->params[":id"])[0];
+            if($this->event){
+                if($this->event->getFree()){
+                    \FlashMessage::warningMessage("Este é um evento gratuito, portanto não é necessário definir preços.");
+                    $this->redirectTo("admin/eventos/lista");
+                }
+                $this->setHeadTitle("Preços Personalizados");
+                $this->titleBtnSubmit = "Salvar";
+                $this->actionForm = $this->getUri("admin/eventos/{$this->event->getIdEvent()}/precos");
+            }else{
+                \FlashMessage::errorMessage("O evento não foi encontrado.");
+                $this->redirectTo("admin/eventos/lista");
+            }
+        }
+
+        public function bonus() {
+          $this->event = \Event::findById($this->params[":id"])[0];
+          if($this->event){
+              $this->setHeadTitle("Bônus de Evento");
+              $this->titleBtnSubmit = "Salvar";
+              $this->actionForm = $this->getUri("admin/eventos/{$this->event->getIdEvent()}/bonus");
+              $this->eventTypes = \EventType::all();
+          }else{
+              \FlashMessage::errorMessage("O evento não foi encontrado.");
+              $this->redirectTo("admin/eventos/lista");
+          }
+        }
+
+        public function updateBonus() {
+            $this->event = \Event::findById($this->params[":id"])[0];
+            if($this->event){
+                $this->event->setBonus($this->params["event_bonus"]);
+                if(\EventBonus::saveMultiple($this->event->eventBonus, $this->event->getIdEvent())){
+                    \FlashMessage::successMessage("Preços alterados com sucesso.");
+                    $this->redirectTo("admin/eventos/lista");
+                }else{
+                    \FlashMessage::errorMessage("Não foi possível atualizar os preços.");
+                    $this->redirectTo("admin/eventos/{$this->params[':id']}/precos");
+                }
+            }else{
+                \FlashMessage::errorMessage("O evento não foi encontrado.");
+                $this->redirectTo("admin/eventos/lista");
+            }
+        }
+
+        public function updateSponsorship() {
+            $this->event = \Event::findById($this->params[":id"])[0];
+            if($this->event){
+                $this->event->setSponsorship($this->params["sponsorship"]);
+                if(\Sponsorship::saveMultiple($this->event->sponsorship, $this->event->getIdEvent())){
+                    \FlashMessage::successMessage("Colaboradores alterados com sucesso.");
+                    $this->redirectTo("admin/eventos/lista");
+                }else{
+                    \FlashMessage::errorMessage("Não foi possível atualizar os colaboradores.");
+                    $this->redirectTo("admin/eventos/{$this->params[':id']}/colaboracao");
+                }
+            }else{
+                \FlashMessage::errorMessage("O evento não foi encontrado.");
+                $this->redirectTo("admin/eventos/lista");
+            }
+        }
+
+        public function updatePrices() {
+            $this->event = \Event::findById($this->params[":id"])[0];
+            if($this->event){
+                $this->event->setCost($this->params["cost"]);
+                if(\CostEvent::saveMultiple($this->event->cost, $this->event->getIdEvent())){
+                    \FlashMessage::successMessage("Preços alterados com sucesso.");
+                    $this->redirectTo("admin/eventos/lista");
+                }else{
+                    \FlashMessage::errorMessage("Não foi possível atualizar os preços.");
+                    $this->redirectTo("admin/eventos/{$this->params[':id']}/precos");
+                }
+            }else{
+                \FlashMessage::errorMessage("O evento não foi encontrado.");
+                $this->redirectTo("admin/eventos/lista");
+            }
+        }
 	} 
 ?>

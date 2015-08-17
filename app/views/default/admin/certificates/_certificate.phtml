@@ -26,3 +26,34 @@
 		<p>Este certificado foi gerado pelo Sistema de Eventos da UTFPR-GP. Seu código de identificação único é<br/><br/><b><?= $this->certificate->getCode() ?></b><br/><br/>e sua autenticidade pode ser confirmada no endereço: <b><i>eventos.gp.utfpr.edu.br</i></b>.</p>
 	</div>
 </div>
+
+
+<div id="show-certificate-2">
+		
+	<div class="certificate-left">
+		<img class="visual" src="<?= $this->getResource('img/utfpr-logo.gif') ?>" alt="Logo UTFPR">
+	</div>
+
+	<div class="certificate-right">
+		<div class="certificate-top" style="margin-left> 10px">
+			<span>República Federativa do Brasil</span>
+			<br>
+			<span>Ministério da Educação</span>
+			<br>
+			<span><b>Universidade Tecnológica Federal do Paraná</b></span>
+		</div>
+		<br>
+		<br><br><br><br><br><br><br><br><br>
+		<div class="certificate-title">
+			<p>CERTIFICADO</p>
+		</div>
+		<br><br><br><br><br><br><br><br><br><br>
+		<div class="certificate-content">
+			<p>Declaramos que <b><?= strtoupper($this->certificate->enrollment->participant->getName()) ?></b> participou do(a) <b>“<i><?= $this->certificate->enrollment->event->getName()?></i>”</b>, ministrado por <?= $this->certificate->enrollment->event->getTeacher()?>, realizado <?= strtotime($this->certificate->enrollment->event->getStartDate("d/m/Y")) != strtotime($this->certificate->enrollment->event->getEndDate("d/m/Y")) ? "entre os dias " . $this->certificate->enrollment->event->getStartDate("d/m/Y") . " e " . $this->certificate->enrollment->event->getEndDate("d/m/Y") : "no dia " . $this->certificate->enrollment->event->getStartDate("d/m/Y") ?>, com carga horária total de <?= ceil((strtotime($this->certificate->enrollment->event->getEndDate("d/m/Y H:s")) - strtotime($this->certificate->enrollment->event->getStartDate("d/m/Y H:s"))) / 3600 )?> horas. </p>
+		</div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<div class="certificate-bottom">
+			<p>Este certificado foi gerado pelo Sistema de Eventos da UTFPR-GP. Seu código de identificação único é<br/><br/><b><?= $this->certificate->getCode() ?></b><br/><br/>e sua autenticidade pode ser confirmada no endereço: <b><i>eventos.gp.utfpr.edu.br</i></b>.</p>
+		</div>
+	</div>
+</div>

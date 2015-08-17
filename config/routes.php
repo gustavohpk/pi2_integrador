@@ -122,7 +122,7 @@
     $routes['POST'][] = array('route' => '/admin/eventos/tipos/:id/alterar', 'controller' => 'Admin\EventsTypeController', 'action' => 'update'); 
     $routes['GET'][] = array('route' => '/admin/eventos/tipos/:id/remover', 'controller' => 'Admin\EventsTypeController', 'action' => 'remove'); 
 
-    //rotas para eventos
+    //rotas para lista de seleção eventos
     $routes['GET'][] = array('route' => '/admin/eventos/lista', 'controller' => 'Admin\EventsController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/eventos/lista/pagina/:p', 'controller' => 'Admin\EventsController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/eventos/lista/id/:id', 'controller' => 'Admin\EventsController', 'action' => '_list');
@@ -131,14 +131,27 @@
     $routes['GET'][] = array('route' => '/admin/eventos/lista/selecao', 'controller' => 'Admin\EventsController', 'action' => 'selectionList');
     $routes['GET'][] = array('route' => '/admin/eventos/lista/selecao/pagina/:p', 'controller' => 'Admin\EventsController', 'action' => 'selectionList');
 
+    //rotas para eventos
     $routes['GET'][] = array('route' => '/admin/eventos/novo', 'controller' => 'Admin\EventsController', 'action' => '_new');
     $routes['POST'][] = array('route' => '/admin/eventos', 'controller' => 'Admin\EventsController', 'action' => 'create');    
     $routes['GET'][] = array('route' => '/admin/eventos/:id/alterar', 'controller' => 'Admin\EventsController', 'action' => '_edit');
     $routes['POST'][] = array('route' => '/admin/eventos/:id', 'controller' => 'Admin\EventsController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/eventos/:id/remover', 'controller' => 'Admin\EventsController', 'action' => 'remove');
+    
     $routes['GET'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'attendance');
     $routes['POST'][] = array('route' => '/admin/eventos/:id/presenca', 'controller' => 'Admin\EventsController', 'action' => 'checkAttendance');
+    
     $routes['GET'][] = array('route' => '/admin/eventos/:id/estatisticas', 'controller' => 'Admin\EventsController', 'action' => 'stats');
+
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/precos', 'controller' => 'Admin\EventsController', 'action' => 'prices');
+    $routes['POST'][] = array('route' => '/admin/eventos/:id/precos', 'controller' => 'Admin\EventsController', 'action' => 'updatePrices');
+
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/bonus', 'controller' => 'Admin\EventsController', 'action' => 'bonus');
+    $routes['POST'][] = array('route' => '/admin/eventos/:id/bonus', 'controller' => 'Admin\EventsController', 'action' => 'updateBonus');
+
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/colaboracao', 'controller' => 'Admin\EventsController', 'action' => 'sponsorship');
+    $routes['POST'][] = array('route' => '/admin/eventos/:id/colaboracao', 'controller' => 'Admin\EventsController', 'action' => 'updateSponsorship');
+
 
     //rotas para crachas
     $routes['GET'][] = array('route' => '/admin/eventos/cracha', 'controller' => 'Admin\BadgeController', 'action' => 'index');
@@ -242,7 +255,7 @@
     $routes['GET'][] = array('route' => '/admin/relatorios/inscricoes', 'controller' => 'Admin\ReportsController', 'action' => '_new');
     $routes['POST'][] = array('route' => '/admin/relatorios/inscricoes/gerar', 'controller' => 'Admin\ReportsController', 'action' => 'generate');
 
-    //rotas para tipos de eventos
+    //rotas para patrocinadores
     $routes['GET'][] = array('route' => '/admin/colaboradores/lista', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
     $routes['GET'][] = array('route' => '/admin/colaboradores/lista/pagina/:p', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
     $routes['GET'][] = array('route' => '/admin/colaboradores/novo', 'controller' => 'Admin\SponsorsController', 'action' => '_new'); 

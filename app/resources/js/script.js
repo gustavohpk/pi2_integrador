@@ -177,7 +177,7 @@ $("input[name='media[media_type]']").change(function() {
 });
 
 $('.btn-danger').click(function() {
-    return window.confirm("Você realmente deseja excluir?");
+    return confirm("Você realmente deseja excluir?");
 });
 
 
@@ -209,15 +209,17 @@ $("input[name='reports[time_to]']").mask("99:99");
 $("#cost-add_button").click(function() {
 	// $("#cost-table").append("<tr class='cost-row'></tr>");
 	// var htmlString = $(".cost-row");
-	$(".cost-row").last().clone().insertAfter(".cost-row:last");
-	$(".cost-row").last().find(":input[type='hidden']").val("");
-	$(".cost-row").last().find(":input[type='number']").val("");
-	$(".cost-row").last().find(":input[type='text']").val("");
-	$(".cost-row").last().find(":input[type='text']").removeAttr("id");
+	// $(".cost-row").last().clone().insertAfter(".cost-row:last");
+	// $(".cost-row").last().find(":input[type='hidden']").val("");
+	// $(".cost-row").last().find(":input[type='number']").val("");
+	// $(".cost-row").last().find(":input[type='text']").val("");
+	// $(".cost-row").last().find(":input[type='text']").removeAttr("id");
+	$("#cost-table").append("<tr class='cost-row'><input type='hidden' name='cost[id_cost_event][]' value=''/><td><input type='number' min='0' class='form-control' name='cost[cost][]' value=''/></td><td><input type='text' class='form-control' name='cost[date_max][]' value='' /></td><td><button type='button' class='btn btn-danger cost-delete-button' onclick='$(this).parent().parent().remove();'><span class='glyphicon glyphicon-trash'></span></button></td></tr>");
+	
 });
 
 $(".cost-delete-button").click(function() {
-	$(this).closest('tr').remove();
+	$(this).parent().parent().remove();
 });
 
 $("input[name='cost[date_max][]']").datepicker();

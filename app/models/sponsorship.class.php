@@ -32,11 +32,11 @@ class Sponsorship extends BaseModel {
 		$this->idSponsor = $idSponsor;
 	}
 
-	public function getIdSponsor($format = "Y-m-d H:i:s") {
+	public function getIdSponsor() {
 		return $this->idSponsor;
 	}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
+	public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
 		list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
 
 		$sql = 
@@ -89,7 +89,49 @@ class Sponsorship extends BaseModel {
 		$statment = $statment->execute($params);
 		$this->setIdSponsorship($pdo->lastInsertId());
 		return $statment ? $this : false;
+	}
 
+	/**
+     * Atualiza a lista de colaboradores de um evento
+     * @param Sponsorship[] $sponsorships As colaborações (relação entre colaborador e evento)
+     * @param int idEvent ID do Evento
+     * @return boolean Resultado
+     */
+	public function saveMultiple($sponsorships, $idEvent) {
+
+        $pdo = \Database::getConnection();
+
+        $result = true;
+
+        try {
+
+        	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        	$pdo->beginTransaction();
+
+        	$sql = "DELETE FROM sponsorship WHERE id_event = :id_event";
+			$statment = $pdo->prepare($sql);
+			$params = array(":id_event" => $idEvent);
+			$statment->execute($params);
+
+        	foreach ($sponsorships as $key => $sponsorship) {
+        		$sql = "INSERT INTO sponsorship (id_event, id_sponsor) VALUES (:id_event, :id_sponsor)";
+        		$params = array(
+					":id_event" => $sponsorship->getIdEvent(),
+					":id_sponsor" => $sponsorship->getIdSponsor(),
+				);
+        		$statment = $pdo->prepare($sql);
+        		$statment->execute($params);
+        	}
+
+        	$pdo->commit();
+        	
+        } catch (Exception $e) {
+        	$pdo->rollBack();
+        	$result = false;
+        	
+        }
+
+        return $result;
 	}
 
 }

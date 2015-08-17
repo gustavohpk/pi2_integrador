@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * Classe Inscrição Json
+ * @author Gustavo Pchek
+ */
+
 class EnrollmentJson implements JsonSerializable{
 
+	/**
+     * @var int $idEnrollment ID da inscricao
+     * @var int $idEvent ID do evento
+     * @var int $idParticipant ID do participante
+     * @var string $participantName Nome do participante
+     */
 	private $idEnrollment;
 	private $idEvent;
 	private $idParticipant;

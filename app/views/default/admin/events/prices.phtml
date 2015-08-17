@@ -1,0 +1,53 @@
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 enrollment-list" style="">
+	<h2>Preços Personalizados</h2>
+	<h3><?= $this->event->getName() ?></h3>
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+		    <h3 class="panel-title">Lista de Preços</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<p>Você pode definir diferentes preços para o evento e definir datas limite para cada um.</p>
+		  	<p>O preço base deste evento é <b>R$ <?= str_replace('.', ',', money_format('%.2n', $this->event->getBasePrice())) ?></b>. Este será o preço vigente caso nenhum outro tenha sido definido ou caso os outros já tenham suas datas limite expiradas.</p>
+		  	<p>A data limite de um preço não pode ser posterior à data de término das inscrições deste evento (<b><?= $this->event->getEndDateEnrollment("d/m/Y") ?></b>).</p>
+<!-- 		  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span> -->
+			</div>
+			<form action="<?= $this->actionForm ?>" method="post">
+				<table id="cost-table" class="table" style="background: #FFF">
+					<tr>
+						<th>Preço</th>
+						<th>Preço válido até dia</th>
+						<th><button id="cost-add_button" type="button" class="btn btn-success" data-toggle="dropdown" title="Inserir novo preço">Adicionar Preço</button></th>
+					</tr>
+					
+					<?php if(!empty($this->event->cost)) : ?>
+						<?php foreach ($this->event->cost as $cost) :?>
+							<tr class="cost-row">
+								<input type="hidden" name="cost[id_cost_event][]" value="<?=$cost->getIdCostEvent()?>"/>
+								<td><input type="number" min="0" class="form-control" name="cost[cost][]" value="<?=$cost->getCost()?>"/></td>
+								<td><input type="text" class="form-control" name="cost[date_max][]" value="<?=$cost->getDateMax("d/m/Y")?>" /></td>
+
+								<td><button type="button" class="btn btn-danger cost-delete-button"><span class="glyphicon glyphicon-trash"></span></button></td>
+							
+							</tr>
+						<?php endforeach ?>
+					<?php else : ?>
+						<tr class="cost-row">
+							<td><input type="hidden" name="cost[id_cost_event][]" value=""/><input type="number" min="0" class="form-control" name="cost[cost][]" value=""/></td>
+							<td><input type="text" class="form-control" name="cost[date_max][]" value="" /></td>
+
+							<td><button type="button" class="btn btn-danger cost-delete-button"><span class="glyphicon glyphicon-trash"></span></button></td>
+						
+						</tr>
+					<?php endif; ?>
+					
+				</table>
+				
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Salvar</button>
+					<a role="button" href="<?= createUriFor("/admin/eventos/lista") ?>" class="btn btn-warning"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

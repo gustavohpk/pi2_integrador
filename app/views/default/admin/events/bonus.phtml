@@ -1,0 +1,68 @@
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 enrollment-list" style="">
+	<h2>Bônus de Evento</h2>
+	<h3><?= $this->event->getName() ?></h3>
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+		    <h3 class="panel-title">Lista de Bônus</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<p>Indique quantos eventos de cada tipo serão dados como bônus (gratuitos).</p>
+		  	<p>Os bônus valem para eventos que são <u>subeventos</u> do evento atual.</p>
+		  	<p>O evento atual é do tipo <b><?= $this->event->eventType->getEventType() ?></b>.</p>
+		  	<span class="label label-info label-md"><a data-toggle="modal" data-target="#bonus-info-modal">Saiba mais</a></span>
+			</div>
+			<form action="<?= $this->actionForm ?>" method="post">
+				<table id="bonus-table" class="table" style="background: #FFF">
+					<tr>
+						<th>Tipo de Evento</th>
+						<th>Quantidade</th>
+					</tr>
+					<?php foreach ($this->eventTypes as $key => $eventType) : ?>
+						<tr>
+							<td><?= $eventType->getEventType() ?><input type="hidden" name="event_bonus[id_event_type][]" value="<?= $eventType->getIdEventType() ?>"></td>
+							<?php if(!empty($this->event->eventBonus)) : ?>
+								<?php $foundBonus = false ?>
+								<?php foreach ($this->event->eventBonus as $key => $eventBonus): ?>
+									<?php if ($eventBonus->getIdEventType() == $eventType->getIdEventType()) : ?>
+										<?php $foundBonus = true ?>
+										<input type="hidden" name="event_bonus[id_event_bonus][]" value="<?=$eventBonus->getIdEventBonus()?>"/>
+										<td><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="<?= $eventBonus->getQuantity() ?>"></td>
+									<?php endif; ?>	
+								<?php endforeach ?>
+								<?php if(!$foundBonus) : ?>
+									<td><input type="hidden" name="event_bonus[id_event_bonus][]" value="0"/><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="0"></td>
+								<?php endif; ?>
+							<?php else : ?>
+								<td><input type="hidden" name="event_bonus[id_event_bonus][]" value="0"/><input type="number" min="0" class="form-control" name="event_bonus[quantity][]" value="0"></td>
+							<?php endif; ?>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+				
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Salvar</button>
+					<a role="button" href="<?= createUriFor("/admin/eventos/lista") ?>" class="btn btn-warning"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+				</div>
+			</form>
+			<div id="bonus-info-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+			        <div class="modal-content">
+			          <div class="modal-body">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            <div class="event col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				            <h2 class="modal-title">Tabela de Bônus</h2>
+				            <br/>
+				            <p>Nesta tabela é possível incluir eventos bônus. Funciona da seguinte maneira: Suponhamos que você selecione, na tabela o tipo de evento "Minicurso" e o número "2". Desta forma, quando alguém se inscreve neste evento terá direito a se inscrever em 2 minicursos gratuitamente <u>que sejam eventos filhos (subeventos) do atual</u>.</p>
+				            <p>Este recurso foi desenvolvido pensando na sua utilização em eventos como semanas acadêmicas, onde um inscrito tem direito gratuitamente a, por exemplo, 1 palestra e 1 minicurso, e caso queira participar de outros, paga os valores correspondentes.</p>
+			            </div>
+			            <div class="caption">
+			            </div>
+			            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			          </div>
+			       </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>

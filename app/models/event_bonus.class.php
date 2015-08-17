@@ -99,6 +99,50 @@ class EventBonus extends BaseModel {
 		return $statment ? $this : false;
 	}
 
+	/**
+     * Atualiza a lista de bônus de um evento
+     * @param EventBonus[] $bonus Os bônus
+     * @param int idEvent ID do Evento
+     * @return boolean Resultado
+     */
+	public function saveMultiple($bonus, $idEvent) {
+
+        $pdo = \Database::getConnection();
+
+        $result = true;
+
+        try {
+
+        	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        	$pdo->beginTransaction();
+
+        	$sql = "DELETE FROM event_bonus WHERE id_event = :id_event";
+			$statment = $pdo->prepare($sql);
+			$params = array(":id_event" => $idEvent);
+			$statment->execute($params);
+
+        	foreach ($bonus as $key => $bonusItem) {
+        		$sql = "INSERT INTO event_bonus (id_event, id_event_type, quantity) VALUES (:id_event, :id_event_type, :quantity)";
+        		$params = array(
+					":id_event" => $bonusItem->getIdEvent(),
+					":id_event_type" => $bonusItem->getIdEventType(),
+					":quantity" => $bonusItem->getQuantity()
+				);
+        		$statment = $pdo->prepare($sql);
+        		$statment->execute($params);
+        	}
+
+        	$pdo->commit();
+        	
+        } catch (Exception $e) {
+        	$pdo->rollBack();
+        	$result = false;
+        	
+        }
+
+        return $result;
+	}
+
 	public function update($data = array()){
 		$this->setData($data);
 

@@ -14,6 +14,27 @@
 
 ----------
 
+----- Atualização 094 (07/08/15 - 17/08/15) -----
+
+- Atualizando documentação
+- Removida classe Cart
+- Removidos atributos "status" e "typeEvent" da classe Evento
+- Campo "preço base" adicionado no evento
+- Patrocínio/Colaboração separada da edição do evento
+- Preços separados da edição do evento
+- Bônus separados da edição do evento
+- Iniciado suporte a múltiplos templates de certificados
+
+
+----- Atualização 093 (02/08/15 - 06/08/15) -----
+
+- Correções no formulário de cadastro de evento
+- Corrigido formulário de cadastro de participante que obrigava a preencher o segundo telefone
+- Corrigido problema que impedia cadastro
+- Corrigida mensagem de exclusão de participante no painel do admin
+- Adicionado um limite de 80 eventos no calendário
+- Alterada codificação das tags Javascript
+
 ----- Atualização 092 (31/07/15) -----
 
 - Melhorando lista de seleção de evento no admin

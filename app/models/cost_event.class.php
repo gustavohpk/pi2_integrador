@@ -1,5 +1,17 @@
 <?php
-	class CostEvent extends BaseModel {	
+
+	/**
+	 * Classe custo de evento.
+	 * @author Gustavo Pchek
+	 */
+	class CostEvent extends BaseModel {
+
+		/**
+	     * @var int $idCostEvent ID do custo de evento
+	     * @var int $idEvent ID do evento
+	     * @var date $dateMax Data limite
+	     * @var float $cost
+	     */
 		private $idCostEvent;
 		private $idEvent;
 		private $dateMax;
@@ -127,6 +139,49 @@
 			$this->setIdCostEvent($pdo->lastInsertId());
 			return $statment ? $this : false;
 		}
+
+	/**
+     * Atualiza a lista de preços de um evento
+     * @param CostEvent[] $costs Os preços
+     * @param int idEvent ID do Evento
+     * @return boolean Resultado
+     */
+	public function saveMultiple($costs, $idEvent) {
+        $pdo = \Database::getConnection();
+
+        $result = true;
+
+        try {
+
+        	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        	$pdo->beginTransaction();
+
+        	$sql = "DELETE FROM cost_event WHERE id_event = :id_event";
+			$statment = $pdo->prepare($sql);
+			$params = array(":id_event" => $idEvent);
+			$statment->execute($params);
+
+        	foreach ($costs as $key => $cost) {
+        		$sql = "INSERT INTO cost_event (id_event, cost, date_max) VALUES (:id_event, :cost, :date_max)";
+        		$params = array(
+					":id_event" => $cost->getIdEvent(),
+					":cost" => $cost->getCost(),
+					":date_max" => $cost->getDateMax()
+				);
+        		$statment = $pdo->prepare($sql);
+        		$statment->execute($params);
+        	}
+
+        	$pdo->commit();
+        	
+        } catch (Exception $e) {
+        	$pdo->rollBack();
+        	$result = false;
+        	
+        }
+
+        return $result;
+	}
 
 		public function update($data){
 			$this->setData($data);

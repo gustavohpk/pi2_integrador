@@ -6,11 +6,37 @@
  */
 
 	class Event extends BaseModel{
+
+		/**
+		 * @var int $idEvent ID do evento
+		 * @var int $idParentEvent ID do evento pai
+		 * @var boolean $enabled Verifica se evento está ativado
+		 * @var boolean $isSubEvent Verifica se é um subevento
+		 * @var string $name Nome do evento
+		 * @var string $path URL única
+		 * @var string $details HTML com os detalhes do evento
+		 * @var string $teacher Ministrante do evento
+		 * @var string $location Local do evento
+		 * @var string $address Endereço do evento
+		 * @var datetime $startDate Data e hora de início do evento
+		 * @var datetime $endDate Data e hora de fim do evento
+		 * @var int $spaces Número de vagas
+		 * @var datetime $startDateEnrollment Data e hora de início das inscrições
+		 * @var datetime $endDateEnrollment Data e hora de término das inscrições
+		 * @var int $views Contador de visualizações da página do evento
+		 * @var mixed $logo Logotipo em formato BLOB
+		 * @var boolean $sendParticipantData Indica se está habilitado o envio de texto pelo participante
+		 * @var int $rating Avaliação total do evento
+		 * @var int $evaluations Número de avaliações realizadas
+		 * @var boolean $free Indica se o evento é gratuito
+		 * @var boolean $noEnrollment Indica se o evento não permite inscrição
+		 * @var boolean $autoConfirmEnrollment Indica se as inscrições deste evento serão confirmadas automaticamente
+		 * @var float $basePrice Preço base do evento
+		 */
 		private $idEvent;
 		private $idParentEvent;
 		private $enabled;
 		private $isSubEvent;
-		private $status;
 		private $name;
 		private $path;
 		private $details;
@@ -20,7 +46,6 @@
 		private $startDate;
 		private $endDate;
 		private $spaces;
-		private $typeEvent;
 		private $startDateEnrollment;
 		private $endDateEnrollment;	
 		private $views;
@@ -31,7 +56,15 @@
 		private $free;
 		private $noEnrollment;
 		private $autoConfirmEnrollment;
+		private $basePrice;
 
+		/**
+	     * @var EventType $eventType Tipo do evento
+	     * @var Event $parentEvent Evento pai
+	     * @var Cost[] $cost Lista de custos de evento
+	     * @var Sponsor[] $sponsorship Lista de patrocinadores
+	     * @var EventBonus[] $eventbonus Lista de bônus de evento
+	     */
 		public $eventType;
 		public $parentEvent;
 		public $cost;
@@ -233,6 +266,14 @@
 
 		public function setAutoConfirmEnrollment($autoConfirmEnrollment){
 			$this->autoConfirmEnrollment = $autoConfirmEnrollment;
+		}
+
+		public function getBasePrice(){
+			return $this->basePrice;
+		}
+
+		public function setBasePrice($basePrice){
+			$this->basePrice = $basePrice;
 		}
 
 		/**
@@ -484,7 +525,20 @@
 	        return $events;
 	    }
 
-		public function setCost($costs) {
+	    public function setCost($costs) {
+			unset($this->cost);
+			foreach ($costs["cost"] as $key => $value) {
+				$data = array(
+					"id_cost_event" => isset($costs["id_cost_event"][$key]) ? $costs["id_cost_event"][$key] : null,
+					"id_event" => $this->getIdEvent(),
+					"cost" => $value, 
+					"date_max" => $costs["date_max"][$key]
+				);
+				$this->cost[] = new CostEvent($data);
+			}
+		}
+
+		public function setCostOld($costs) {
 			// Exclui os preços que foram removidos
 			$ids = array();
 			foreach ($costs["id_cost_event"] as $id) {
@@ -517,25 +571,15 @@
 		}
 
 		public function setSponsorship($sponsorships) {
-			$sql = "DELETE FROM sponsorship WHERE id_event = :id_event";
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$params = array(":id_event" => $this->getIdEvent());
-			$statment->execute($params);
-
+			unset($this->sponsorship);
 			foreach ($sponsorships as $key => $value) {
-				$data = array(
+				if($value == "on"){
+					$data = array(
 						"id_sponsorship" => isset($sponsorships["id_sponsorship"][$key]) ? $sponsorships["id_sponsorship"][$key] : null,
 						"id_event" => $this->getIdEvent(),
-						"id_sponsor" => $value
+						"id_sponsor" => $key
 					);
-				//$sponsorship = &$this->cost[];
-				$sponsorship = new Sponsorship($data);	
-				if ($sponsorship->getIdSponsorship()) {
-					$sponsorship->update($data);
-				}
-				else {
-					$sponsorship->save();
+					$this->sponsorship[] = new Sponsorship($data);
 				}
 			}
 		}
@@ -544,7 +588,24 @@
 		 * Função que define os bônus de evento
 		 * @param $eventBonus array Os dados dos bônus
 		 */
-		public function setEventBonus($bonusData) {
+		public function setBonus($eventBonus) {
+			unset($this->eventBonus);
+			foreach ($eventBonus["id_event_type"] as $key => $value) {
+				$data = array(
+					"id_event_bonus" => isset($eventBonus["id_event_bonus"][$key]) ? $eventBonus["id_event_bonus"][$key] : null,
+					"id_event" => $this->getIdEvent(),
+					"id_event_type" => $eventBonus["id_event_type"][$key],
+					"quantity" => $eventBonus["quantity"][$key]
+				);
+				$this->eventBonus[] = new EventBonus($data);
+			}
+		}
+
+		/**
+		 * Função que define os bônus de evento
+		 * @param $eventBonus array Os dados dos bônus
+		 */
+		public function setEventBonusOld($bonusData) {
 			// echo "<pre>";
 			// var_dump($bonusData); exit;
 			foreach ($bonusData["id_event_type"] as $key => $value) {

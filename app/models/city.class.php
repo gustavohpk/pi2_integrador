@@ -1,5 +1,18 @@
-<?php 
+<?php
+
+	/**
+	 * Classe cidade.
+	 * @author Rodrigo Miss
+	 */
+
 	class City extends BaseModel{
+
+		/**
+	     * @var int $idCity ID da cidade
+	     * @var string $name Nome da cidade
+	     * @var int $idState ID do estado
+	     * @var State Estado
+	     */
 		private $idCity;
 		private $name;
 		private $idState;

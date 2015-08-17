@@ -73,8 +73,8 @@
       }
 
       public function remove() {
-         if ($this->participants = \Participant::findById($this->params[":id"])) {
-            if ($this->participants->remove()) {
+         if ($this->participant = \Participant::findById($this->params[":id"])) {
+            if ($this->participant->remove()) {
                \Logger::deletionLog($_SESSION["admin"]->getName(), "Participantes", $this->participant->getIdParticipant());
                \flashMessage::successMessage("Participante removido com sucesso.");
                $this->redirectTo("admin/participantes/lista");

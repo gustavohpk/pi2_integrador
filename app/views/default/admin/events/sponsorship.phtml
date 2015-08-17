@@ -1,0 +1,59 @@
+<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 enrollment-list" style="">
+	<h2>Organizar Colaboradores</h2>
+	<h3><?= $this->event->getName() ?></h3>
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+		    <h3 class="panel-title">Lista de Colaboradores</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<p>Marque as empresas que são colaboradoras deste evento.</p>
+		  	<p>Os colaboradores serão exibidos na página do evento e também poderão ser exibidos nos certificados.</p>
+<!-- 		  	<span class="glyphicon glyphicon-question-sign" style="float:right;"></span> -->
+			</div>
+			<form action="<?= $this->actionForm ?>" method="post">
+				<table class="table">
+					<tr>
+						<th></th>
+						<th>Código</th>
+						<th>Colaborador</th>
+						<th>Site</th>
+					</tr>
+					<?php foreach($this->sponsors as $sponsor) : ?>
+						
+						<input type="hidden" name="sponsorship[<?= $sponsor->getIdSponsor() ?>]"/>
+						<tr>
+							<td>
+								<div class="checkbox">
+                                    <label>
+                                    	<?php if (isset($this->event->sponsorship)) : ?>
+                                    		<?php $found = false ?>
+                                    		<?php foreach ($this->event->sponsorship as $sponsorshipItem): ?>
+                                    			<?php if($sponsorshipItem->getIdSponsor() == $sponsor->getIdSponsor()) : ?>
+                                    				<?php $found = true ?>
+                                    				<input type="checkbox" name="sponsorship[<?= $sponsor->getIdSponsor() ?>]" checked><span class="checkbox-material"><span class="check"></span></span>
+												<?php endif ?>
+                                    		<?php endforeach ?>
+                                    		<?php if(!$found) : ?>
+												<input type="checkbox" name="sponsorship[<?= $sponsor->getIdSponsor() ?>]"><span class="checkbox-material"><span class="check"></span></span>
+											<?php endif; ?>
+                                    	<?php else : ?>
+                                        	<input type="checkbox" name="sponsorship[<?= $sponsor->getIdSponsor() ?>]"><span class="checkbox-material"><span class="check"></span></span>
+                                        <?php endif; ?>
+                                    </label>
+                            	</div>
+                        	</td>
+							<td><?= $sponsor->getIdSponsor() ?></td>
+							<td><?= $sponsor->getName() ?></td>
+							<td><?= $sponsor->getWebAddress() ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle"></span> Salvar</button>
+					<a role="button" href="<?= createUriFor("/admin/eventos/lista") ?>" class="btn btn-warning"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

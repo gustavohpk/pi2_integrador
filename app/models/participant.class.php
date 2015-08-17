@@ -204,7 +204,11 @@
    		}
 
    		public function validatePassword(){
-   			if (is_null($this->getPassword())) $this->errors[] = "Nenhuma senha foi informada.";
+   			if (is_null($this->getPassword())){
+   				$this->errors[] = "Nenhuma senha foi informada.";
+   			}else{
+   				return true;
+   			}
    		}
 
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_participant", $direction ="DESC"){
