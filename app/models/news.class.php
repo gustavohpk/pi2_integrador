@@ -99,8 +99,18 @@
 			return $this->path;
 		}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_news", $direction ="DESC"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
+		/**
+	     * Busca por notícias
+	     * @param mixed[] $params Os parâmetros (atributos / colunas)
+	     * @param mixed[] $values valores
+	     * @param string $comparsion O operador de comparação
+	     * @param string $conjunctive O operador de conjunção
+	     * @param string $order Ordernar resultados por este campo
+	     * @param string $direction Ordem ascendente ou descendente dos resultados
+	     * @return News[] Resultado da busca
+	     */
+		public static function find($params = array(), $values = array(), $comparsion = "=", $conjunctive = "AND", $order = "id_news", $direction ="DESC"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $comparsion, $conjunctive);			
 			$limit = self::getLimitByPage();
 			$page = self::getCurrentPage();
 			$start = ($page * $limit) - $limit;
@@ -123,6 +133,11 @@
 			return $news;
 		}
 
+		/**
+	     * Busca por notícias a partir do título
+	     * @param string $searchValue Texto a ser procurado
+	     * @return News[] Resultado da busca
+	     */
 		public static function customerSearch($searchValue){
 
 			$serachValue = preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $searchValue ) );
@@ -133,15 +148,18 @@
 			return $news;
 		}
 
-		public static function findLast($date){
-			$news = self::find(array("modification_date"), array($date), ">=");
-			return $news;
-		}
-
+		/**
+	     * Busca todas as notícias
+	     * @return News[] Resultado da busca
+	     */
 		public static function all(){
 			return self::find();
 		}
 
+		/**
+	     * Conta quantas notícias existem
+	     * @return int Resultado da contagem
+	     */
 		public static function count(){
 			$sql = "SELECT count(id_news) as count FROM news";
 			$pdo = \Database::getConnection();
@@ -151,11 +169,21 @@
 			return $rows["count"];
 		}
 
+		/**
+	     * Busca por notícias a partir do id
+	     * @param id $id Id da notícia
+	     * @return News[] Resultado da busca
+	     */
 		public static function findById($id){
 			$news = self::find(array("id_news"), array($id));
 			return count($news) > 0 ? $news : NULL;
 		}
 
+		/**
+	     * Atualiza a notícia
+	     * @param mixed[] $data Dados da notícia
+	     * @return boolean Resultado da atualização
+	     */
 		public function update($data = array()){
 
 			$data["modification_date"] = date('Y-m-d H:i');
@@ -182,6 +210,10 @@
 			return $statment->execute($param);
 		}
 
+		/**
+	     * Cria uma notícia
+	     * @return boolean Resultado da criação
+	     */
 		public function save(){
 			$sql = 
 			"INSERT INTO news
@@ -203,6 +235,10 @@
 			return $statment ? $this : false;
 		}
 
+		/**
+	     * Exclui a notícia
+	     * @return boolean Resultado da exclusão
+	     */
 		public function remove(){
 			$sql = "DELETE FROM news WHERE id_news = :id_news";
 			$pdo = \Database::getConnection();

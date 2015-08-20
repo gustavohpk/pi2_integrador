@@ -32,10 +32,17 @@
 		}
 
 		public function _edit(){
-		$this->setHeadTitle("Modificar notícia");
-      $this->news = \News::findById($this->params[":id"])[0];
-        $this->actionForm = $this->getUri("admin/noticias/{$this->news->getIdNews()}");
-        $this->titleBtnSubmit = "Salvar";
+            $this->setHeadTitle("Modificar notícia");
+            $this->news = \News::findById($this->params[":id"])[0];
+            if($this->news){
+                $this->setHeadTitle("Atualizar Notícia");
+                $this->actionForm = $this->getUri("admin/noticias/{$this->news->getIdNews()}");
+                $this->titleBtnSubmit = "Salvar";
+            }else{
+                 \FlashMessage::errorMessage("A notícia não foi encontrada.");
+                 $this->redirectTo("admin/noticias/lista");
+            }
+            
 		}
 
       public function create(){
@@ -55,32 +62,43 @@
          }
       }
 
-      public function update(){ 
-         $this->news = \News::findById($this->params[":id"])[0];
-         if ($this->news->update($this->params['news'])){
-            \Logger::updateLog($_SESSION["admin"]->getName(), "Notícias", $this->news->getIdNews());
-            \FlashMessage::successMessage("Notícia alterada com sucesso.");
-            $this->redirectTo("admin/noticias/lista");
-         }
-         else{
-            \FlashMessage::errorMessage("Erro ao alterar a notícia.");
-            $this->setHeadTitle("Editar Notícia");
-            $this->actionForm = $this->getUri("admin/noticias/{$this->news->getIdNews()}");
-            $this->titleBtnSubmit = "Salvar";
-            $this->render("edit");
-         }
-      }
+        public function update(){ 
+            $this->news = \News::findById($this->params[":id"])[0];
+            if($this->news){
+                if ($this->news->update($this->params['news'])){
+                    \Logger::updateLog($_SESSION["admin"]->getName(), "Notícias", $this->news->getIdNews());
+                    \FlashMessage::successMessage("Notícia alterada com sucesso.");
+                    $this->redirectTo("admin/noticias/lista");
+                }
+                else{
+                    \FlashMessage::errorMessage("Erro ao alterar a notícia.");
+                    $this->setHeadTitle("Editar Notícia");
+                    $this->actionForm = $this->getUri("admin/noticias/{$this->news->getIdNews()}");
+                    $this->titleBtnSubmit = "Salvar";
+                    $this->render("edit");
+                }
+            }else{
+                \FlashMessage::errorMessage("A notícia não foi encontrada.");
+                 $this->redirectTo("admin/noticias/lista");
+            }
+         
+        }
 
-      public function remove(){
-         $this->news = \News::findById($this->params[":id"])[0];
-         if ($this->news->remove()){
-            \Logger::deletionLog($_SESSION["admin"]->getName(), "Notícias", $this->news->getIdNews());
-            \FlashMessage::successMessage("Notícia excluída com sucesso.");
-         }
-         else {
-            \FlashMessage::errorMessage("Não foi possível excluír a notícia.");
-         }
-         $this->redirectTo("admin/noticias/lista");
-      }
-	} 
+        public function remove(){
+            $this->news = \News::findById($this->params[":id"])[0];
+            if($this->news){
+                if ($this->news->remove()){
+                    \Logger::deletionLog($_SESSION["admin"]->getName(), "Notícias", $this->news->getIdNews());
+                    \FlashMessage::successMessage("Notícia excluída com sucesso.");
+                }
+                else {
+                    \FlashMessage::errorMessage("Não foi possível excluír a notícia.");
+                }
+            }else{
+                \FlashMessage::errorMessage("A notícia não foi encontrada.");
+            }
+                 
+            $this->redirectTo("admin/noticias/lista");
+	    } 
+    }
 ?>

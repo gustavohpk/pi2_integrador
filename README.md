@@ -14,6 +14,12 @@
 
 ----------
 
+----- Atualização 095 (18/08/15 - 19/08/15) -----
+
+- Atualização na área de certificados
+- Atualização na documentação e nomenclaturas
+
+
 ----- Atualização 094 (07/08/15 - 17/08/15) -----
 
 - Atualizando documentação

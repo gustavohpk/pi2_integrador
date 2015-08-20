@@ -15,10 +15,10 @@
 		</div>
 
 		<div class="btn-group" data-toggle="buttons">
-			<label class="btn btn-material-grey active">
+			<label class="btn btn-material-grey active" onclick="$('#show-certificate').fadeIn(); $('#show-certificate-2').fadeOut();">
 				<input type="radio" name="options" id="option1" autocomplete="off" checked> Template 1
 			</label>
-			<label class="btn btn-material-grey">
+			<label class="btn btn-material-grey" onclick="$('#show-certificate-2').fadeIn(); $('#show-certificate').fadeOut();">
 				<input type="radio" name="options" id="option2" autocomplete="off"> Template 2
 			</label>
 		</div>
@@ -54,24 +54,26 @@
 <script type="text/javascript">
 	enrollmentsUrl = '<?=createUriFor("/admin/certificados/inscricoes/")?>';
 	function toggleTemplate(){
-		if ($("#show-certificate .visual").css("visibility") == "visible"){
-			$("#show-certificate .visual").css("visibility", "hidden");
+		if ($("#certificates .visual").css("visibility") == "visible"){
+			$("#certificates .visual").css("visibility", "hidden");
+			$("#certificates .certificate-left").css("visibility", "hidden");
 		}else{
-			$("#show-certificate .visual").css("visibility", "visible");
+			$("#certificates .visual").css("visibility", "visible");
+			$("#certificates .certificate-left").css("visibility", "visible");
 		}
 	}
 	function toggleHeader(){
-		if ($("#show-certificate #certificate-top span").css("visibility") == "visible"){
-			$("#show-certificate #certificate-top span").css("visibility", "hidden");
+		if ($("#certificates .certificate-top span").css("visibility") == "visible"){
+			$("#certificates .certificate-top span").css("visibility", "hidden");
 		}else{
-			$("#show-certificate #certificate-top span").css("visibility", "visible");
+			$("#certificates .certificate-top span").css("visibility", "visible");
 		}
 	}
 	function toggleFooter(){
-		if ($("#show-certificate #certificate-bottom").css("visibility") == "visible"){
-			$("#show-certificate #certificate-bottom").css("visibility", "hidden");
+		if ($("#certificates .certificate-bottom").css("visibility") == "visible"){
+			$("#certificates .certificate-bottom").css("visibility", "hidden");
 		}else{
-			$("#show-certificate #certificate-bottom").css("visibility", "visible");
+			$("#certificates .certificate-bottom").css("visibility", "visible");
 		}
 	}
 

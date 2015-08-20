@@ -112,49 +112,17 @@
 
 		public function _edit(){
 			$this->setHeadTitle("Editar Evento");
-         $this->eventsType = \EventType::all();
-         $this->sponsors = \Sponsors::all();
-			$this->events = \Event::findById($this->params[":id"])[0];
-         $this->eventBonus = \EventBonus::findByIdEvent($this->events->getIdEvent());
-         $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
-         $this->titleBtnSubmit = "Salvar";
+      $this->eventsType = \EventType::all();
+      $this->events = \Event::findById($this->params[":id"])[0];
+      $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
+      $this->titleBtnSubmit = "Salvar";
 		}
 
       public function update(){
          $this->events = \Event::findById($this->params[":id"])[0];
-         if(isset($this->params["cost"]))
-            $cost = $this->params["cost"];
-         if(isset($this->params["sponsors"]))
-            $sponsors = $this->params["sponsors"];
-         if(isset($this->params["event_bonus"]))
-            $eventBonus = $this->params["event_bonus"];
          if ($this->events->update($this->params['event'])){
             \Logger::updateLog($_SESSION["admin"]->getName(), "Eventos", $this->events->getIdEvent());
             \FlashMessage::successMessage("Evento modificado com sucesso.");
-            if(isset($cost)){
-               if (!$this->events->setCost($cost)) {
-                  $errors = $this->events->cost[0]->getErrors();
-                  foreach ($errors as $error) {
-                     \FlashMessage::errorMessage($error);
-                  }
-               }
-            }
-            if(isset($sponsors)){
-               if (!$this->events->setSponsorship($sponsors)) {
-                  // $errors = $this->events->sponsors[0]->getErrors();
-                  // foreach ($errors as $error) {
-                  //    \FlashMessage::errorMessage($error);
-                  // }
-               }
-            }
-            if($eventBonus){
-               if (!$this->events->setEventBonus($eventBonus)) {
-                  // $errors = $this->events->eventBonus[0]->getErrors();
-                  // foreach ($errors as $error) {
-                  //    \FlashMessage::errorMessage($error);
-                  // }
-               }
-            }
             $this->redirectTo("admin/eventos/lista");
          }
          else{
@@ -162,10 +130,7 @@
             foreach ($errors as $error) {
                \FlashMessage::errorMessage($error);
             }
-
             $this->setHeadTitle("Editar Evento");
-            $this->eventsType = \EventType::all();
-            $this->paymentsType = \PaymentType::all();
             $this->actionForm = $this->getUri("admin/eventos/{$this->events->getIdEvent()}");
             $this->titleBtnSubmit = "Salvar";
             $this->render("edit");

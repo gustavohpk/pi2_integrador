@@ -281,7 +281,7 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 }
 
-#show-certificate-2 .certificate-left { width: 4cm; height: 23cm; float:left; 
+#show-certificate-2 .certificate-left { width: 3.7cm; height: 23cm; float:left; 
 
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2e4b5+-1,f4c20e+0,f2b900+0,f4c20e+42,efe9d5+100 */
 background: rgb(242,228,181); /* Old browsers */
@@ -297,7 +297,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2e4b5', end
 
 #show-certificate-2 .certificate-left img { margin-top: 21.5cm; width: 100%; }
 
-#show-certificate-2 .certificate-right { padding-left: 15px; float: left; width: 14cm; }
+#show-certificate-2 .certificate-right { padding-left: 15px; float: left; width: 14cm; },
+#show-certificate-2 .certificate-right .certificate-top img { width: 40px !important; }
+
+#show-certificate-2 .certificate-title{
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#show-certificate-2 .certificate-content { line-height: 200%; font-size: 16px; }
 
 #show-certificate .certificate-top{
 	text-align: left;

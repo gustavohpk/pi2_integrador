@@ -3,7 +3,7 @@
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 			<ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
 			  <li class="active"><a href="#section1" role="tab" data-toggle="pill">Principal</a></li>
-			  <li><a href="#section2" role="tab" data-toggle="pill">Datas e Vagas</a></li>
+			  <li><a href="#section2" role="tab" data-toggle="pill">Datas, Vagas e Preço</a></li>
 			  <li><a href="#section3" role="tab" data-toggle="pill">Logo e Descrição</a></li>
 			</ul>
 		</div>
@@ -212,6 +212,12 @@
 				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
 					<h4>Vagas</h4>
 					<input type="number" min="1" class="form-control" name="event[spaces]" value="<?= $this->events->getSpaces()?>" required/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+					<h4>Preço Base</h4>
+					<input type="text" min="1" class="form-control" name="event[base_price]" value="<?= str_replace('.', ',', money_format('%.2n', $this->events->getBasePrice())) ?>" title="Este será o preço vigente caso nenhum preço personalizado esteja definido ou caso as datas dos preços personalizados tenham expirado." data-toggle="tooltip" data-placement="bottom" required/>
 				</div>
 			</div>
 			<div id="date-info-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

@@ -54,6 +54,12 @@ $(document).ready(function(){
 	$("input[name='event[end_date_enrollment]']").mask("99/99/9999 99:99");
 	$("input[name='cost[date_max][]']").mask("99/99/9999");
 
+	$("input[name='event[base_price]']").priceFormat({
+		prefix: '',
+		centsSeparator: ',',
+		thousandsSeparator: '.'
+	});
+
 	if(typeof participantEditPage !== 'undefined'){
 		$("input#password").removeAttr("required");
 		$("input#password").attr("disabled", "disabled");
@@ -202,8 +208,6 @@ $("input[name='reports[date_from]']").datepicker();
 $("input[name='reports[date_to]']").datepicker();
 $("input[name='reports[time_from]']").mask("99:99");
 $("input[name='reports[time_to]']").mask("99:99");
-
-
 
 
 $("#cost-add_button").click(function() {
