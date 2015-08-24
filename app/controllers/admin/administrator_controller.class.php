@@ -17,7 +17,7 @@
          $this->administratorLevels = \AdministratorLevel::find();
 		}
 
-      public function save() {
+      public function create() {
          $this->administrators = new Administrator($this->params["admin"]);
          if ($this->administrators->save()) {
             \flashMessage::successMessage("Cadastro de usuário realizado com sucesso.");
@@ -33,7 +33,7 @@
          }
       }
 
-		public function edit(){
+		public function _edit(){
 			$this->setHeadTitle("Modificar usuário");
          $this->actionForm = $this->getUri("admin/usuarios/{$this->params[":id"]}/alterar");
          if ($this->administrators = Administrator::findById($this->params[":id"])) {

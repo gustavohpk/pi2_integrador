@@ -59,7 +59,7 @@
     //rota para login/cadastro - usuários
     $routes['GET'][] = array('route' => '/conta/login', 'controller' => 'ParticipantController', 'action' => 'login');
     $routes['POST'][] = array('route' => '/conta/login', 'controller' => 'ParticipantController', 'action' => 'executeLogin');
-    $routes['GET'][] = array('route' => '/conta/alterar', 'controller' => 'ParticipantController', 'action' => 'edit'); 
+    $routes['GET'][] = array('route' => '/conta/alterar', 'controller' => 'ParticipantController', 'action' => '_edit'); 
     $routes['POST'][] = array('route' => '/conta/:id/alterar', 'controller' => 'ParticipantController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/conta/senha', 'controller' => 'ParticipantController', 'action' => 'editpassword'); 
     $routes['POST'][] = array('route' => '/conta/:id/senha', 'controller' => 'ParticipantController', 'action' => 'updatePassword'); 
@@ -209,8 +209,8 @@
     //rotas para usuários (do painel de administração)
     $routes['GET'][] = array('route' => '/admin/usuarios/lista', 'controller' => 'Admin\AdministratorController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/usuarios/novo', 'controller' => 'Admin\AdministratorController', 'action' => '_new');
-    $routes['POST'][] = array('route' => '/admin/usuarios/novo', 'controller' => 'Admin\AdministratorController', 'action' => 'save');
-    $routes['GET'][] = array('route' => '/admin/usuarios/:id/alterar', 'controller' => 'Admin\AdministratorController', 'action' => 'edit');
+    $routes['POST'][] = array('route' => '/admin/usuarios/novo', 'controller' => 'Admin\AdministratorController', 'action' => 'create');
+    $routes['GET'][] = array('route' => '/admin/usuarios/:id/alterar', 'controller' => 'Admin\AdministratorController', 'action' => '_edit');
     $routes['POST'][] = array('route' => '/admin/usuarios/:id/alterar', 'controller' => 'Admin\AdministratorController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/usuarios/:id/remover', 'controller' => 'Admin\AdministratorController', 'action' => 'remove');
 
@@ -218,22 +218,22 @@
     $routes['GET'][] = array('route' => '/admin/niveis/lista', 'controller' => 'Admin\AdministratorLevelController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/niveis/novo', 'controller' => 'Admin\AdministratorLevelController', 'action' => '_new');
     $routes['POST'][] = array('route' => '/admin/niveis/novo', 'controller' => 'Admin\AdministratorLevelController', 'action' => 'create');
-    $routes['GET'][] = array('route' => '/admin/niveis/:id/alterar', 'controller' => 'Admin\AdministratorLevelController', 'action' => 'edit');
+    $routes['GET'][] = array('route' => '/admin/niveis/:id/alterar', 'controller' => 'Admin\AdministratorLevelController', 'action' => '_edit');
     $routes['POST'][] = array('route' => '/admin/niveis/:id/alterar', 'controller' => 'Admin\AdministratorLevelController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/niveis/:id/remover', 'controller' => 'Admin\AdministratorLevelController', 'action' => 'remove');
 
     //rotas para participantes (administração)
     $routes['GET'][] = array('route' => '/admin/participantes/lista', 'controller' => 'Admin\ParticipantController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/participantes/novo', 'controller' => 'Admin\ParticipantController', 'action' => '_new');
-    $routes['POST'][] = array('route' => '/admin/participantes/novo', 'controller' => 'Admin\ParticipantController', 'action' => 'save');
-    $routes['GET'][] = array('route' => '/admin/participantes/:id/alterar', 'controller' => 'Admin\ParticipantController', 'action' => 'edit');
+    $routes['POST'][] = array('route' => '/admin/participantes/novo', 'controller' => 'Admin\ParticipantController', 'action' => 'create');
+    $routes['GET'][] = array('route' => '/admin/participantes/:id/alterar', 'controller' => 'Admin\ParticipantController', 'action' => '_edit');
     $routes['POST'][] = array('route' => '/admin/participantes/:id/alterar', 'controller' => 'Admin\ParticipantController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/participantes/:id/remover', 'controller' => 'Admin\ParticipantController', 'action' => 'remove');
 
     //rotas para cidades
     $routes['GET'][] = array('route' => '/admin/cidades/lista', 'controller' => 'Admin\CityController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/cidades/nova', 'controller' => 'Admin\CityController', 'action' => '_new');
-    $routes['GET'][] = array('route' => '/admin/cidades/:id/alterar', 'controller' => 'Admin\CityController', 'action' => 'edit');
+    $routes['GET'][] = array('route' => '/admin/cidades/:id/alterar', 'controller' => 'Admin\CityController', 'action' => '_edit');
 
     //rotas para configuracoes
     $routes['GET'][] = array('route' => '/admin/config/geral', 'controller' => 'Admin\SettingsController', 'action' => 'general');
@@ -244,7 +244,7 @@
     $routes['GET'][] = array('route' => '/admin/config/pagamento/nova', 'controller' => 'Admin\PaymentTypeController', 'action' => '_new');
     $routes['POST'][] = array('route' => '/admin/config/pagamento/nova', 'controller' => 'Admin\PaymentTypeController', 'action' => 'create');
     
-    $routes['GET'][] = array('route' => '/admin/config/pagamento/:id/alterar', 'controller' => 'Admin\PaymentTypeController', 'action' => 'edit');
+    $routes['GET'][] = array('route' => '/admin/config/pagamento/:id/alterar', 'controller' => 'Admin\PaymentTypeController', 'action' => '_edit');
     $routes['POST'][] = array('route' => '/admin/config/pagamento/:id/alterar', 'controller' => 'Admin\PaymentTypeController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/config/pagamento/:id/remover', 'controller' => 'Admin\PaymentTypeController', 'action' => 'remove');
     $routes['GET'][] = array('route' => '/admin/config/programador', 'controller' => 'Admin\SettingsController', 'action' => 'developer');
@@ -260,7 +260,7 @@
     $routes['GET'][] = array('route' => '/admin/colaboradores/lista/pagina/:p', 'controller' => 'Admin\SponsorsController', 'action' => '_list'); 
     $routes['GET'][] = array('route' => '/admin/colaboradores/novo', 'controller' => 'Admin\SponsorsController', 'action' => '_new'); 
     $routes['POST'][] = array('route' => '/admin/colaboradores/novo', 'controller' => 'Admin\SponsorsController', 'action' => 'create'); 
-    $routes['GET'][] = array('route' => '/admin/colaboradores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'edit'); 
+    $routes['GET'][] = array('route' => '/admin/colaboradores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => '_edit'); 
     $routes['POST'][] = array('route' => '/admin/colaboradores/:id/alterar', 'controller' => 'Admin\SponsorsController', 'action' => 'update'); 
     $routes['GET'][] = array('route' => '/admin/colaboradores/:id/remover', 'controller' => 'Admin\SponsorsController', 'action' => 'remove'); 
 

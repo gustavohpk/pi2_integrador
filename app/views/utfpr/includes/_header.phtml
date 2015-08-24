@@ -2,9 +2,10 @@
 	<div class="row logged-in">
 		<div id="login-bar" class="col-borded col-lg-2 col-lg-offset-10 col-md-3 col-md-offset-3 col-sm-4 col-sm-offset-4 col-xs-6">
 			<?php $participant = isset($_SESSION["participant"]) ? $_SESSION["participant"] : false; ?>
-				
+			
 			<?php if ($participant) : ?>
 				<?= "Bem vindo(a), {$participant->getName()} <br />"; ?>
+				<span id="menu-arrow-down" class="help-button glyphicon glyphicon-chevron-down"></span><br/>
 				<a href="<?= createUriFor('/conta/painel')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-user"></span> Minha Conta</a>
 				<a href="<?= createUriFor('/conta/sair')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
 				<ul id="user-menu">
@@ -34,7 +35,6 @@
 				<a class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a>
 				<a href="<?= createUriFor('/conta/nova')?>" class="btn btn-default btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Cadastro</a>
 			<?php endif ?>
-			<span id="menu-arrow-down" class="help-button glyphicon glyphicon-chevron-down"></span>
 		</div>
 	</div>
 	<div class="row" style="background-color: #2F3238">

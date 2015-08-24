@@ -123,11 +123,29 @@
 		 			'logout' => 'Logout',
 		 			'_list' => 'Visualizar listagem',
 		 			'_new' => 'Formulário de criação',
-		 			'create' => 'Criar novo',
-		 			'_edit' => 'Formulário de edição',
+		 			'create' => 'Criar',
+		 			'_edit' => 'Visualizar / Acessar formulário de edição',
 		 			'update' => 'Salvar edição',
 		 			'remove' => 'Excluir',
-		 			'show' => 'Visualizar'
+		 			'show' => 'Visualizar',
+		 			'stats' => 'Estatísticas',
+		 			'updateStatus' => 'Atualizar status',
+		 			'bonus' => 'Bônus',
+		 			'updateBonus' => 'Salvar edição de bônus',
+		 			'prices' => 'Preços',
+		 			'updatePrices' => 'Salvar edição de preços',
+		 			'attendance' => 'Lista de Presença',
+		 			'checkAttendance' => 'Salvar lista de presença',
+		 			'sponsorship' => 'Colaboração',
+		 			'updateSponsorship' => 'Salvar edição de colaboradores',
+		 			'general' => 'Geral',
+		 			'maintenance' => 'Manutenção',
+		 			'theme' => 'Tema',
+		 			'developer' => 'Desenvolvedor',
+		 			'generate' => 'Gerar',
+		 			'createPhoto' => 'Adicionar foto',
+		 			'createVideo' => 'Adicionar vídeo'
+
 			      
 			    ));
 					

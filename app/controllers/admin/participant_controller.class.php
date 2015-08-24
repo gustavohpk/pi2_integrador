@@ -31,7 +31,7 @@
          $this->participants = new \Participant();
 		}
 
-      public function save() {
+      public function create() {
          $this->participants = new \Participant($this->params["participant"]);
          if ($this->participants->save()) {
             \Logger::creationLog($_SESSION["admin"]->getName(), "Participantes", $this->participant->getIdParticipant());
@@ -48,7 +48,7 @@
          }
       }
 
-		public function edit(){
+		public function _edit(){
 			$this->setHeadTitle("Modificar participante");
          $this->actionForm = $this->getUri("admin/participantes/{$this->params[":id"]}/alterar");
          $this->participants = \Participant::findById($this->params[":id"]);

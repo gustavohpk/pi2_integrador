@@ -83,6 +83,7 @@
    			sleep(1);
    			$this->layout = "admin/layout/layout_empty.phtml";
    			Event::setLimitByPage(80);
+   			Event::setCurrentPage(1);
    			$this->events = Event::all();
    			$calendar = array();
    			foreach ($this->events as $key => $event) {

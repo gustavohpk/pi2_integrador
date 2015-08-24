@@ -1,11 +1,25 @@
 <?php
 
 	class Media extends BaseModel{
+
+
+		/**
+		 * @var int $idMedia ID da mídia
+		 * @var char $mediaType Tipo da mídia (p - photo / v - video)
+		 * @var int $idEvent ID do evento relacionado
+		 * @var string $label Etiqueta / título da mídia
+		 * @var string $path Caminho da mídia (aplicável para mediaType photo)
+		 */
 		private $idMedia;
 		private $mediaType;
 		private $idEvent;
 		private $label;
 		private $path;
+
+		/**
+	     * @var Event $event Evento relacionado
+	     */
+		public $event;
 
 		public function setIdMedia($idMedia){
 			$this->idMedia = $idMedia;
@@ -48,8 +62,18 @@
 			return $this->path;
 		}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_media", $direction ="DESC"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);		
+		/**
+	     * Busca por mídias
+	     * @param mixed[] $params Os parâmetros (atributos / colunas)
+	     * @param mixed[] $values valores
+	     * @param string $comparsion O operador de comparação
+	     * @param string $conjunctive O operador de conjunção
+	     * @param string $order Ordernar resultados por este campo
+	     * @param string $direction Ordem ascendente ou descendente dos resultados
+	     * @return Media[] Resultado da busca
+	     */
+		public static function find($params = array(), $values = array(), $comparsion = "=", $conjunctive = "AND", $order = "id_media", $direction ="DESC"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $comparsion, $conjunctive);		
 			$limit = self::getLimitByPage();
 			$page = self::getCurrentPage();
 			$start = ($page * $limit) - $limit;
@@ -72,29 +96,10 @@
 			return $media;
 		}
 
-		// public static function find($params = null, $limit = 6, $page = 1){
-		// 	$start = ($page * $limit) - $limit;
-		// 	$sql = "SELECT * FROM media";
-
-		// 	if (!is_null($params)){
-		// 		$sql .= " WHERE " . $params['paramsName'];
-		// 	}
-
-		// 	$sql .= " LIMIT $start, $limit";
-
-		// 	$pdo = \Database::getConnection();
-		// 	$rs = $pdo->prepare($sql);
-		// 	$rs->execute($params["paramsValue"]);
-		// 	$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
-		// 	$media = array();			
-
-		// 	foreach ($rows as $row) {
-		// 		$media[] = new Media($row);
-		// 	}
-				
-		// 	return $media;
-		// }
-
+		/**
+	     * Conta quantas mídias existem
+	     * @return int Resultado da contagem
+	     */
 		public static function count(){
 			$sql = "SELECT id_media FROM media";
 			$pdo = \Database::getConnection();
@@ -104,18 +109,65 @@
 			return count($rows);
 		}
 
+		/**
+	     * Busca todas as mídias
+	     * @return Media[] Resultado da busca
+	     */
 		public static function all(){
 			return self::find();
 		}
 
+		/**
+	     * Busca por mídia a partir do id
+	     * @param id $id Id da mídia
+	     * @return Media[] Resultado da busca
+	     */
 		public static function findById($id){
-			return self::find(array("id_media"), array($id));
+			$sql = "SELECT * FROM media WHERE id_media = :id_media";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_media" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $media = array();
+
+	        if($result){
+	            $media[] = new Media($result[0]);
+	        }
+
+	        return count($media) > 0 ? $media : NULL;
 		}
 
-		public function findByIdEvent($idEvent, $mediaType = "p") {
-			return self::find(array("id_event", "media_type"), array($idEvent, $mediaType));
+		/**
+	     * Busca por mídia a partir do id do evento relacionado
+	     * @param id $id Id do evento
+	     * @return Media[] Resultado da busca
+	     */
+		public static function findByIdEvent($id){
+			$sql = "SELECT * FROM media WHERE id_event = :id_event";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_event" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $media = array();
+	        
+	        if($result){
+	            $media[] = new Media($result[0]);
+	        }
+
+	        return count($media) > 0 ? $media : NULL;
 		}
 
+		/**
+	     * Atualiza a mídia
+	     * @param mixed[] $data Dados da mídia
+	     * @return boolean Resultado da atualização
+	     */
 		public function update($data = array()){
 			$this->setData($data);
 
@@ -139,6 +191,12 @@
 			return $statment->execute($param);
 		}
 
+		/**
+	     * Cria uma mídia
+	     * @param string $path Caminho da mídia (apenas para mediaType photo)
+	     * @param int $index Índice da imagem no diretório temporário de upload
+	     * @return boolean Resultado da criação
+	     */
 		public function save($path, $index){
 			if ($this->getMediaType() == "p") {
 	            $this->setPath($this->imagePath($path, $index));
@@ -165,6 +223,10 @@
 			return $statment ? $this : false;
 		}
 
+		/**
+	     * Exclui a notícia
+	     * @return boolean Resultado da exclusão
+	     */
 		public function remove(){
 			$sql = "DELETE FROM media WHERE id_media = :id_media";
 			$pdo = \Database::getConnection();
@@ -173,6 +235,12 @@
 			return $statment->execute($params);
 		}
 
+		/**
+	     * Gera um caminho para a imagem
+	     * @param string $path Caminho da mídia (apenas para mediaType photo)
+	     * @param int $index Índice da imagem no diretório temporário de upload
+	     * @return string Caminho da imagem
+	     */
 		private function imagePath($path, $index){
 			switch ($_FILES["photos"]["type"][$index]) {
 				case 'image/png': $type = '.png'; break;
@@ -192,12 +260,22 @@
 			return $relativePath;
 		}
 
+		/**
+	     * Busca uma miniatura para um vídeo no Youtube a partir do link
+	     * @param string $link Link do vídeo
+	     * @return string Url da miniatura
+	     */
 		public function getThumbnail($link){
         	$code = substr($link, (strpos($link, '=')+1), 30);
          	$thumbnailUrl = 'http://img.youtube.com/vi/' . $code . '/0.jpg';
          	return $thumbnailUrl;
     	}
 
+    	/**
+	     * Verifica se existem mídias relacionadas a um evento
+	     * @param int $idEvent ID do evento
+	     * @return boolean Resultado da verificação
+	     */
     	public static function hasMedia($idEvent){
 			$sql = "SELECT count(id_media) as count FROM media WHERE id_event = $idEvent";
 			$pdo = \Database::getConnection();

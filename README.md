@@ -14,6 +14,14 @@
 
 ----------
 
+----- Atualização 096 (20/08/15 - 24/08/15) -----
+
+- Removido código desnecessário
+- Atualização na documentação e nomenclaturas
+- Adicionadas correções de responsividade
+- Atualização na tradução dos níveis de administrador
+
+
 ----- Atualização 095 (18/08/15 - 19/08/15) -----
 
 - Atualização na área de certificados

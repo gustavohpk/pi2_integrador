@@ -393,7 +393,7 @@
 			$sponsors = array();			
 
 			foreach ($rows as $row) {
-				$sponsors[] = Sponsors::findById($row["id_sponsor"])[0];
+				$sponsors[] = Sponsor::findById($row["id_sponsor"])[0];
 			}
 				
 			return $sponsors;
@@ -579,7 +579,7 @@
 						"id_event" => $this->getIdEvent(),
 						"id_sponsor" => $key
 					);
-					$this->sponsorship[] = new Sponsorship($data);
+					$this->sponsorship[] = Sponsor::hip($data);
 				}
 			}
 		}
@@ -703,7 +703,8 @@
 				send_participant_data = :send_participant_data,
 				free = :free,
 				no_enrollment = :no_enrollment,
-				auto_confirm_enrollment = :auto_confirm_enrollment
+				auto_confirm_enrollment = :auto_confirm_enrollment,
+				base_price = :base_price
 			WHERE
 				id_event = :id_event";
 

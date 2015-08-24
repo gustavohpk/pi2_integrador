@@ -52,7 +52,7 @@
          //prepara formulario para inserção de novo evento
 			$this->setHeadTitle("Novo Evento");
          $this->eventsType = \EventType::all();
-         $this->sponsors = \Sponsors::all();
+         $this->sponsors = \Sponsor::all();
 			$this->events = new \Event();
          $this->eventBonus = \EventBonus::findByIdEvent($this->events->getIdEvent());
          $this->actionForm = $this->getUri("admin/eventos");
@@ -192,7 +192,7 @@
                 $this->setHeadTitle("Organizar Colaboradores");
                 $this->titleBtnSubmit = "Salvar";
                 $this->actionForm = $this->getUri("admin/eventos/{$this->event->getIdEvent()}/colaboracao");
-                $this->sponsors = \Sponsors::all();
+                $this->sponsors = \Sponsor::all();
                 // var_dump($this->event->sponsorship[0]->getIdEvent()); exit;
             }else{
                 \FlashMessage::errorMessage("O evento não foi encontrado.");

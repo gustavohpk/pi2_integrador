@@ -91,11 +91,11 @@ $("#main-menu ul li:nth-child(5)").click(function(){
 		//toggleMenuDescription($("#menu-item2-description"));
 // });
 
-$( "#main-menu ul li:nth-child(3)" ).hover(function(){
+$( "#main-menu ul li:nth-child(5)" ).hover(function(){
 	toggleMenuDescription($("#menu-item3-description"));
 });
 
-$( "#main-menu ul li:nth-child(4)" ).hover(function(){
+$( "#main-menu ul li:nth-child(6)" ).hover(function(){
 	toggleMenuDescription($("#menu-item4-description"));
 });
 
@@ -103,11 +103,11 @@ $("#menu-item5-description i").hover(function(){
 	$("#menu-item5-description i").toggleClass("fa-spin");
 });
 
-$("#main-menu ul li:nth-child(5)").mouseenter(function(){
+$("#main-menu ul li:nth-child(7)").mouseenter(function(){
 	$("#menu-item5-description").slideDown("medium");
 });
 
-$("#main-menu ul li:nth-child(5)").mouseleave(function(){
+$("#main-menu ul li:nth-child(7)").mouseleave(function(){
 	setTimeout(
 		function() 
 		{
@@ -120,19 +120,19 @@ $("#menu-item5-description").mouseleave(function(){
 	setTimeout(
 		function() 
 		{
-			if($("#main-menu ul li:nth-child(5):hover").length == 0)
+			if($("#main-menu ul li:nth-child(7):hover").length == 0)
 				$("#menu-item5-description").slideUp("medium");
 		}, 150)
 });
 
-$( "#main-menu ul li:nth-child(6)" ).hover(function(){
+$( "#main-menu ul li:nth-child(10)" ).hover(function(){
 	toggleMenuDescription($("#menu-item6-description"));
 });
 
-$( "#main-menu ul li:nth-child(7)" ).hover(function(){
+$( "#main-menu ul li:nth-child(11)" ).hover(function(){
 	toggleMenuDescription($("#menu-item7-description"));
 });
 
-$( "#main-menu ul li:nth-child(8)" ).hover(function(){
+$( "#main-menu ul li:nth-child(12)" ).hover(function(){
 	toggleMenuDescription($("#menu-item8-description"));
 });

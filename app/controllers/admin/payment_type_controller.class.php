@@ -36,16 +36,14 @@
 			}			
 		}
 
-		public function edit(){
-			//prepara formulario para edicao
+		public function _edit(){
 			$this->paymentsType = \PaymentType::findById($this->params[":id"]);
    			$this->setHeadTitle("Editar Forma de Pagamento");
    			$this->actionForm = $this->getUri("admin/config/pagamento/{$this->paymentsType->getIdPaymentType()}/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
 		}
 
-		public function update(){
-			//salva edição no db  
+		public function update(){ 
 			$this->paymentsType = \PaymentType::findById($this->params[":id"]);
 
 			if ($this->paymentsType->update($this->params['payment_type'])){

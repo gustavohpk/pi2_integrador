@@ -15,16 +15,18 @@
                 <div class="collapse navbar-collapse" id="main-menu-contents">
                     <ul class="nav navbar-nav main-menu">
                 	    <li><?= createLinkTo('/', 'HOME')?></li>
-                        <li><a href="#">EVENTOS</a></li>
-                        <!-- <li class="mobile-only"><?//= createLinkTo('/eventos/proximos', 'PRÓXIMOS EVENTOS')?></li>
-                        <li class="mobile-only"><?//= createLinkTo('/eventos/anteriores', 'EVENTOS ANTERIORES')?></li> -->
+                        <li class="hidden-xs"><a href="#">EVENTOS</a></li>
+                        <li class="visible-xs-block"><?= createLinkTo('/eventos/proximos', 'PRÓXIMOS EVENTOS')?></li>
+                        <li class="visible-xs-block"><?= createLinkTo('/eventos/anteriores', 'EVENTOS ANTERIORES')?></li>
                         <li><?= createLinkTo('/noticias/lista', 'NOTÍCIAS')?></li>
                         <li><?= createLinkTo('/midia/galeria', 'GALERIA')?></li>
-                        <li><a href="#">CERTIFICADOS</a></li>
-                <li><?= createLinkTo('/contato', 'CONTATO')?></li>
-                <li><?= createLinkTo('/conta/painel', 'MINHA CONTA')?></li>
-                <li><?= createLinkTo('/sobre', 'SOBRE')?></li>
-                </ul>
+                        <li class="hidden-xs"><a href="#">CERTIFICADOS</a></li>
+                        <li class="visible-xs-block"><?= createLinkTo('/certificados', 'VALIDAR CERTIFICADOS')?></li>
+                        <li class="visible-xs-block"><?= createLinkTo('/conta/certificados', 'MEUS CERTIFICADOS')?></li>
+                        <li><?= createLinkTo('/contato', 'CONTATO')?></li>
+                        <li><?= createLinkTo('/conta/painel', 'MINHA CONTA')?></li>
+                        <li><?= createLinkTo('/sobre', 'SOBRE')?></li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -93,8 +95,8 @@
                 <div class="menu-option">
                     <i class="fa fa-certificate fa-3x" style="margin-top: 3px"></i>
                     <div>
-                        <span class="title">OBTER CERTIFICADOS</span><br>
-                        <span class="description">Participou de algum evento? Obtenha seu certificado</span>
+                        <span class="title">MEUS CERTIFICADOS</span><br>
+                        <span class="description">Participou de algum evento? Veja se o certificado está disponível</span>
                     </div>
                 </div>
             </a>

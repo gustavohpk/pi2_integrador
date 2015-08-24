@@ -36,24 +36,37 @@ class Sponsorship extends BaseModel {
 		return $this->idSponsor;
 	}
 
-	public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
-		list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
+	/**
+     * Busca por patrocínios / colaborações
+     * @param mixed[] $params Os parâmetros (atributos / colunas)
+     * @param mixed[] $values valores
+     * @param string $comparsion O operador de comparação
+     * @param string $conjunctive O operador de conjunção
+     * @param string $order Ordernar resultados por este campo
+     * @param string $direction Ordem ascendente ou descendente dos resultados
+     * @return Sponsorship[] Resultado da busca
+     */
+	public static function find($params = array(), $values = array(), $comparsion = "=", $conjunctive = "AND", $order = "id_sponsorship", $direction ="DESC"){
+		list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $comparsion, $conjunctive);			
+		$limit = self::getLimitByPage();
+		$page = self::getCurrentPage();
+		$start = ($page * $limit) - $limit;
 
 		$sql = 
-		"SELECT 
-			*
-		FROM
-			sponsorship" . ($paramsName ? " WHERE " . $paramsName : "");
+		"SELECT * FROM sponsorship" .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
+
+		$sql .= " LIMIT $start, $limit";
+
 		$pdo = \Database::getConnection();
-		$statment = $pdo->prepare($sql);
-		$statment->execute($paramsValue);
-		$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
-		$sponsorships = array();		
+		$rs = $pdo->prepare($sql);
+		$rs->execute($paramsValue);
+		$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+		$sponsorships = array();			
 
 		foreach ($rows as $row) {
 			$sponsorships[] = new Sponsorship($row);
 		}
-		
+			
 		return $sponsorships;
 	}
 

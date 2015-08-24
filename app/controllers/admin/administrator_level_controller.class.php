@@ -55,7 +55,7 @@
          }
       }
 
-		public function edit(){
+		public function _edit(){
 			$this->setHeadTitle("Modificar nível de administrador");
          $this->actionForm = $this->getUri("admin/niveis/{$this->params[":id"]}/alterar");
          if ($this->administratorLevel = AdministratorLevel::findById($this->params[":id"])) {

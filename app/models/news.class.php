@@ -7,6 +7,18 @@
  */
 
 	class News extends BaseModel{
+
+		/**
+		 * @var int $idNews ID da notícia
+		 * @var int $idEvent ID do evento relacionado
+		 * @var string $creationDate Data de criação
+		 * @var string $modificationDate Data de modificação
+		 * @var string $title Título
+		 * @var string $subtitle Subtítulo
+		 * @var string $content Texto e/ou html com o conteúdo
+		 * @var int $views Número de visualizações
+		 * @var string $path Url único da notícia
+		 */
 		private $idNews;
 		private $idEvent;
 		private $creationDate;
@@ -171,12 +183,25 @@
 
 		/**
 	     * Busca por notícias a partir do id
-	     * @param id $id Id da notícia
+	     * @param $id Id da notícia
 	     * @return News[] Resultado da busca
 	     */
 		public static function findById($id){
-			$news = self::find(array("id_news"), array($id));
-			return count($news) > 0 ? $news : NULL;
+			$sql = "SELECT * FROM news WHERE id_news = :id_news";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_news" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $news = array();
+
+	        if($result){
+	            $news[] = new News($result[0]);
+	        }
+
+	        return count($news) > 0 ? $news : NULL;
 		}
 
 		/**

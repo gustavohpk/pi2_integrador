@@ -146,12 +146,15 @@ input[type=file] { display: initial; }
 #login-bar{ background: #FFF; font-size: 0.9em; padding: 8px; border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
 #login-bar button{ width: 70px; }
 
+
+/* Listagens*/
 #news-list .list-group, #certificates-list .list-group{ text-align: left; }
 #news-list, #news-list a.list-group-item, .event div.thumbnail{ border-radius: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
 #news-list img.thumbnail{ max-height: 80px; min-height: 70px;}
 #news-list a.list-group-item div { padding-left: 3px; padding-right: 3px;}
 
-#account-cadastro, #account-login{ text-align: center; }
+
+
 
 
 .nivo-directionNav a{ top: 80% !important; }
@@ -319,13 +322,15 @@ img.thumbnail:hover { border-radius: 2px; background-color: #26292E;}
 #login-bar{ border: 1px solid #3C3F45; border-top: 0; right: 0; position: fixed; z-index: 7; background-color: #26292E; margin-right: 20px; color: #CCC; opacity: 0.8; padding-bottom: 0;}  
 #login-bar:hover { padding-bottom: 10px; }
 #login-bar:hover a{ display: inline; }
-#login-bar:hover #menu-arrow-down { display: none; }
+#login-bar:hover #menu-arrow-down { visibility: hidden; }
 .logged-in { background-color: #2F3238;}
 
 /* ACCOUNT */
 #account-register .col-xs-3, #account-register .col-xs-4, #account-register .col-xs-5, #account-register .col-xs-6, #account-register .col-xs-7, #account-register .col-xs-9, #account-register .col-xs-10, #account-register .col-xs-12{ padding-bottom: 10px; }
 #account-register span{ margin-bottom: 1px; }
 .general-actions { margin-top: 10px; }
+
+#account-cadastro, #account-login{ text-align: center; }
 
 .account-icons { margin-top: 15px; margin-bottom: 15px; cursor: pointer; color:#333; color: #AAA; webkit-transition: all .3s ease-in-out; transition: all .3s ease-in-out;}
 .account-icons:hover{ background-color: #26292E; border-radius: 5%; color: #E6E6E6; }
@@ -407,12 +412,11 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 
 /* Certificados */
 
-#show-certificate p, #show-certificate span{ color: #000; }
 #certificates-list img { max-width: 100px; float: left; margin-right: 5px;}
 
 /* Fim certificados */
 
-/* Calendario */
+/* Calendário */
 
 
 .custom-header h2 { background-color: #26292E; color: #E6E6E6; font-size: 18px; margin-top: 10px;}
@@ -434,12 +438,30 @@ form[action="/pi2/ProjetoIntegrador/pi2_integrador/admin/login"] span.input-grou
 .loading-yellow img { width: 30px; opacity: 0.9; }
 .loading-yellow span { font-size: 10px; color: #E7E7E7;}
 
+
+/* Fim calendário */
+
+
+
+
+
+/* Página Sobre */
+
+#about .tech-1 div { min-height: 80px; }
+
+#about .tech-2 div { min-height: 80px; }
+
+/* Fim página sobre */
+
+
+
+
+
+
 /* Correções de responsividade */
 
 
 /* Layout mobile */
-
-li.mobile-only { display: none; }
 
 
 @media (max-width: 768px){

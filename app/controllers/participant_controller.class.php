@@ -93,14 +93,14 @@
 			}
 		}
 
-		public function edit(){
+		public function _edit(){
 			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant());
    			$this->setHeadTitle("Alterar Dados");
    			$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/alterar");
    			$this->titleBtnSubmit = "Salvar";   			
 		}
 
-		public function editpassword(){
+		public function _editpassword(){
 			$this->participant = Participant::findById($_SESSION["participant"]->getIdParticipant());
    			$this->setHeadTitle("Alterar Senha");
    			$this->actionForm = $this->getUri("conta/{$this->participant->getIdParticipant()}/senha");

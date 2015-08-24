@@ -15,7 +15,7 @@
 		private $idCertificate, $idEnrollment, $code;
 
 		/**
-		 * @var Enrollment $enrollment A inscrição relacionado ao certificado
+		 * @var Enrollment $enrollment A inscrição relacionada ao certificado
 		 */
 		public $enrollment;
 		
@@ -58,12 +58,32 @@
 			$this->code = $code;
 		}
 
-		public static function find($params = null){
-			$sql = "SELECT * FROM certificate " . (!is_null($params) ? " WHERE " . $params['paramsName'] : "");
+
+		/**
+	     * Busca por certificados
+	     * @param mixed[] $params Os parâmetros (atributos / colunas)
+	     * @param mixed[] $values valores
+	     * @param string $comparsion O operador de comparação
+	     * @param string $conjunctive O operador de conjunção
+	     * @param string $order Ordernar resultados por este campo
+	     * @param string $direction Ordem ascendente ou descendente dos resultados
+	     * @return Certificate[] Resultado da busca
+	     */
+		public static function find($params = array(), $values = array(), $comparsion = "=", $conjunctive = "AND", $order = "id_certificate", $direction ="DESC"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $comparsion, $conjunctive);			
+			$limit = self::getLimitByPage();
+			$page = self::getCurrentPage();
+			$start = ($page * $limit) - $limit;
+
+			$sql = 
+			"SELECT * FROM certificate" .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
+
+			$sql .= " LIMIT $start, $limit";
+
 			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment->execute($params["paramsValue"]);
-			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
+			$rs = $pdo->prepare($sql);
+			$rs->execute($paramsValue);
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
 			$certificates = array();			
 
 			foreach ($rows as $row) {
@@ -73,46 +93,107 @@
 			return $certificates;
 		}
 
+
 		public static function all(){
 			return self::find();
 		}
 
+		/**
+	     * Busca por certificados a partir do id
+	     * @param $id Id do certificado
+	     * @return Certificate[] Resultado da busca
+	     */
 		public static function findById($id){
-			$params = array(
-				"paramsName" => "id_certificate = :id_certificate", 
-				"paramsValue" => array(":id_certificate" => $id)
-			);
-			$certificates = self::find($params);
-			return count($certificates) > 0 ? $certificates : NULL;
+			$sql = "SELECT * FROM certificate WHERE id_certificate = :id_certificate";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_certificate" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $certificates = array();
+
+	        if($result){
+	            $certificates[] = new Certificate($result[0]);
+	        }
+
+	        return count($certificates) > 0 ? $certificates : NULL;
 		}
 
+		/**
+	     * Busca por certificados a partir do id do participante
+	     * @param $id Id do participante
+	     * @return Certificate[] Resultado da busca
+	     */
 		public static function findByIdParticipant($id){
-			$params = array(
-				"paramsName" => "id_participant = :id_participant", 
-				"paramsValue" => array(":id_participant" => $id)
-			);
-			$certificates = self::find($params);
-			return count($certificates) > 0 ? $certificates : NULL;
+			$sql = "SELECT * FROM certificate WHERE id_participant = :id_participant";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_participant" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $certificates = array();
+
+	        if($result){
+	            $certificates[] = new Certificate($result[0]);
+	        }
+
+	        return count($certificates) > 0 ? $certificates : NULL;
 		}
 
+		/**
+	     * Busca por certificados a partir do id da inscrição
+	     * @param $id Id da inscrição
+	     * @return Certificate[] Resultado da busca
+	     */
 		public static function findByIdEnrollment($id){
-			$params = array(
-				"paramsName" => "id_enrollment = :id_enrollment", 
-				"paramsValue" => array(":id_enrollment" => $id)
-			);
-			$certificates = self::find($params);
-			return count($certificates) > 0 ? $certificates : NULL;
+			$sql = "SELECT * FROM certificate WHERE id_enrollment = :id_enrollment";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_enrollment" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $certificates = array();
+
+	        if($result){
+	            $certificates[] = new Certificate($result[0]);
+	        }
+
+	        return count($certificates) > 0 ? $certificates : NULL;
 		}
 
+		/**
+	     * Busca por certificados a partir do id do código
+	     * @param $code Código
+	     * @return Certificate[] Resultado da busca
+	     */
 		public static function findByCode($code){
-			$params = array(
-				"paramsName" => "code = :code", 
-				"paramsValue" => array(":code" => $code)
-			);
-			$certificates = self::find($params);
-			return count($certificates) > 0 ? $certificates : NULL;
+			$sql = "SELECT * FROM code WHERE code = :code";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":code" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $certificates = array();
+
+	        if($result){
+	            $certificates[] = new Certificate($result[0]);
+	        }
+
+	        return count($certificates) > 0 ? $certificates : NULL;
 		}
 
+		/**
+	     * Cria uma certificado
+	     * @return boolean Resultado da criação
+	     */
 		public function save(){
 			$this->generateCode();
 			$sql = 
@@ -155,6 +236,10 @@
 		// 	return $statment->execute($param);
 		// }
 
+		/**
+	     * Conta quantos certificados
+	     * @return int Resultado da contagem
+	     */
 		public static function count(){
 			$sql = "SELECT count(id_certificate) as count FROM certificate";
 			$pdo = \Database::getConnection();
@@ -164,6 +249,10 @@
 			return $rows["count"];
 		}
 
+		/**
+	     * Exclui o certificado
+	     * @return boolean Resultado da exclusão
+	     */
 		public function remove(){
 			$sql = "DELETE FROM certificate WHERE id_certificate = :id_certificate";
 			$pdo = \Database::getConnection();

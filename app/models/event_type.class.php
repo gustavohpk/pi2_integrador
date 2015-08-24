@@ -6,6 +6,13 @@
 	 * @author Gustavo Pchek
 	 */
 	class EventType extends BaseModel{
+
+		/**
+		 * @var int $idEventType ID do tipo de evento
+		 * @var string $eventType Nome do tipo de evento
+		 * @var string $teacherType Tipo de ministrante
+		 * @var string $code Código do tipo de evento
+		 */
 		private $idEventType;
 		private $eventType;
 		private $teacherType;
@@ -43,35 +50,76 @@
 			return $this->code;
 		}
 
-		public static function find($params = null){
-			$sql = "SELECT * FROM event_type " . (!is_null($params) ? " WHERE " . $params['paramsName'] : "");
+		/**
+	     * Busca por tipos de evento
+	     * @param mixed[] $params Os parâmetros (atributos / colunas)
+	     * @param mixed[] $values valores
+	     * @param string $comparsion O operador de comparação
+	     * @param string $conjunctive O operador de conjunção
+	     * @param string $order Ordernar resultados por este campo
+	     * @param string $direction Ordem ascendente ou descendente dos resultados
+	     * @return EventType[] Resultado da busca
+	     */
+		public static function find($params = array(), $values = array(), $comparsion = "=", $conjunctive = "AND", $order = "id_event_type", $direction ="DESC"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $comparsion, $conjunctive);			
+			$limit = self::getLimitByPage();
+			$page = self::getCurrentPage();
+			$start = ($page * $limit) - $limit;
+
+			$sql = 
+			"SELECT * FROM event_type" .($paramsName ? " WHERE $paramsName" : "") . " " ."ORDER BY " . $order . " " . $direction;
+
+			$sql .= " LIMIT $start, $limit";
+
 			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment->execute($params["paramsValue"]);
-			$rows = $statment->fetchAll($pdo::FETCH_ASSOC);
-			$eventsType = array();			
+			$rs = $pdo->prepare($sql);
+			$rs->execute($paramsValue);
+			$rows = $rs->fetchAll($pdo::FETCH_ASSOC);
+			$eventTypes = array();			
 
 			foreach ($rows as $row) {
-				$eventsType[] = new EventType($row);
+				$eventTypes[] = new EventType($row);
 			}
 				
-			return $eventsType;
+			return $eventTypes;
 		}
 
+		/**
+	     * Busca todos os tipos de evento
+	     * @return EventType[] Resultado da busca
+	     */
 		public static function all(){
 			return self::find();
 		}
 
+
+		/**
+	     * Busca por tipos de evento a partir do id
+	     * @param id $id Id do tipo de evento
+	     * @return EventType[] Resultado da busca
+	     */
 		public static function findById($id){
-			$params = array(
-				"paramsName" => "id_event_type = :id_event_type", 
-				"paramsValue" => array(":id_event_type" => $id)
-			);
-			//retorna apenas o primeiro objeto (no caso o unico)
-			$eventsType = self::find($params);
-			return count($eventsType) > 0 ? $eventsType : NULL;
+			$sql = "SELECT * FROM event_type WHERE id_event_type = :id_event_type";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_event_type" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $eventTypes = array();
+
+	        if($result){
+	            $eventTypes[] = new EventType($result[0]);
+	        }
+
+	        return count($eventTypes) > 0 ? $eventTypes : NULL;
 		}
 
+		/**
+	     * Cria um tipo de evento
+	     * @return boolean Resultado da criação
+	     */
 		public function save(){
 			$sql = 
 			"INSERT INTO event_type
@@ -89,6 +137,11 @@
 			return $statment->execute($params);
 		}
 
+		/**
+	     * Atualiza o tipo de evento
+	     * @param mixed[] $data Dados do tipo de evento
+	     * @return boolean Resultado da atualização
+	     */
 		public function update($data = array()){
 			$this->setData($data);
 
@@ -112,6 +165,10 @@
 			return $statment->execute($param);
 		}
 
+		/**
+	     * Exclui o tipo de evento
+	     * @return boolean Resultado da exclusão
+	     */
 		public function remove(){
 			$sql = "DELETE FROM event_type WHERE id_event_type = :id_event_type";
 			$pdo = \Database::getConnection();
@@ -120,6 +177,10 @@
 			return $statment->execute($params);
 		}
 
+		/**
+	     * Conta quantos tipos de evento existem
+	     * @return int Resultado da contagem
+	     */
 		public static function count(){
 			$sql = "SELECT count(id_event_type) as count FROM event_type";
 			$pdo = \Database::getConnection();

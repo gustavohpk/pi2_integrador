@@ -25,7 +25,7 @@
          $this->actionForm = $this->getUri("admin/cidades/nova");
 		}
 
-		public function edit(){
+		public function _edit(){
 			$this->setHeadTitle("Modificar Cidade");
          $this->cities = \City::findById($this->params[":id"]);
          $this->actionForm = $this->getUri("admin/cidades/{$this->cities->getIdCity()}/alterar");
