@@ -154,6 +154,7 @@
         try {
 
         	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        	$pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
         	$pdo->beginTransaction();
 
         	$sql = "DELETE FROM cost_event WHERE id_event = :id_event";

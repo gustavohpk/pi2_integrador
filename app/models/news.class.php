@@ -205,6 +205,31 @@
 		}
 
 		/**
+	     * Cria uma notícia
+	     * @return boolean Resultado da criação
+	     */
+		public function save(){
+			$sql = 
+			"INSERT INTO news
+				(id_event, creation_date, modification_date, title, subtitle, content)
+			VALUES
+				(:id_event, :creation_date, :modification_date, :title, :subtitle, :content)";
+			$params = array(
+					":id_event" => $this->getIdEvent(),
+					":creation_date" => date('Y-m-d H:i'),
+					":modification_date" => date('Y-m-d H:i'),
+					":title" => $this->getTitle(),
+					":subtitle" => $this->getSubtitle(),
+					":content" => $this->getContent()
+				);
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			$statment = $statment->execute($params);
+			$this->setIdNews($pdo->lastInsertId());
+			return $statment ? $this : false;
+		}
+
+		/**
 	     * Atualiza a notícia
 	     * @param mixed[] $data Dados da notícia
 	     * @return boolean Resultado da atualização
@@ -233,31 +258,6 @@
 			}
 	
 			return $statment->execute($param);
-		}
-
-		/**
-	     * Cria uma notícia
-	     * @return boolean Resultado da criação
-	     */
-		public function save(){
-			$sql = 
-			"INSERT INTO news
-				(id_event, creation_date, modification_date, title, subtitle, content)
-			VALUES
-				(:id_event, :creation_date, :modification_date, :title, :subtitle, :content)";
-			$params = array(
-					":id_event" => $this->getIdEvent(),
-					":creation_date" => date('Y-m-d H:i'),
-					":modification_date" => date('Y-m-d H:i'),
-					":title" => $this->getTitle(),
-					":subtitle" => $this->getSubtitle(),
-					":content" => $this->getContent()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment = $statment->execute($params);
-			$this->setIdNews($pdo->lastInsertId());
-			return $statment ? $this : false;
 		}
 
 		/**

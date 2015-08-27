@@ -201,6 +201,17 @@
 			if(!$this->event->getFree() && $this->getCost() <= 0) $this->errors[] = "Valor do evento não localizado.";
 		}
 
+
+		/**
+	     * Busca por inscrições
+	     * @param mixed[] $params Os parâmetros (atributos / colunas)
+	     * @param mixed[] $values valores
+	     * @param string $comparsion O operador de comparação
+	     * @param string $conjunctive O operador de conjunção
+	     * @param string $order Ordernar resultados por este campo
+	     * @param string $direction Ordem ascendente ou descendente dos resultados
+	     * @return Enrollment[] Resultado da busca
+	     */
 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND", $order = "id_enrollment", $direction ="DESC"){
 			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);			
 			$limit = self::getLimitByPage();
@@ -225,14 +236,19 @@
 			return $enrollments;
 		}
 
+		/**
+	     * Busca todas as inscrições
+	     * @return Enrollment[] Resultado da busca
+	     */
 		public static function all(){
 			return self::find();
 		}
 
 		/**
-		 * Procura uma inscrição a partir do ID
-		 * @param int $idEnrollment O id da inscrição
-		 */
+	     * Busca por inscrições a partir do id
+	     * @param $id Id da inscrição
+	     * @return Enrollment[] Resultado da busca
+	     */
 		public static function findById($idEnrollment){
 	        $sql = "SELECT * FROM enrollment WHERE id_enrollment = :id_enrollment";
 	        $pdo = \Database::getConnection();
@@ -251,14 +267,56 @@
 	        return $enrollments;
 	    }
 
+		/**
+	     * Busca por inscrições a partir do id do evento relacionado
+	     * @param $id Id da evento relacionado
+	     * @return Enrollment[] Resultado da busca
+	     */
 		public static function findByIdEvent($id){
-			return self::find(array("id_event"), array($id));
-		}
+	        $sql = "SELECT * FROM enrollment WHERE id_event = :id_event";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_event" => $id);
+	        $statment->execute($params);
 
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $enrollments = array();
+
+	        if($result){
+	            $enrollments[] = new Enrollment($result[0]);
+	        }
+
+	        return $enrollments;
+	    }
+
+		/**
+	     * Busca por inscrições a partir do id do participante
+	     * @param $id Id da do participante
+	     * @return Enrollment[] Resultado da busca
+	     */
 		public static function findByIdParticipant($id){
-			return self::find(array("id_participant"), array($id));
-		}
+	        $sql = "SELECT * FROM enrollment WHERE id_participant = :id_participant";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_participant" => $id);
+	        $statment->execute($params);
 
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $enrollments = array();
+
+	        if($result){
+	            $enrollments[] = new Enrollment($result[0]);
+	        }
+
+	        return $enrollments;
+	    }
+
+	    /**
+	     * Cria uma inscrição
+	     * @return boolean Resultado da criação
+	     */
 		public function save(){
 			if (!$this->isValidData()) return false;
 
@@ -299,6 +357,10 @@
 			return $statment ? $this : false;
 		}
 
+		/**
+	     * Exclui a inscrição
+	     * @return boolean Resultado da exclusão
+	     */
 		public function remove(){
 			$sql = "DELETE FROM enrollment WHERE id_enrollment = :id_enrollment";
 			$pdo = \Database::getConnection();
@@ -308,61 +370,60 @@
 			return $statment;
 		}
 
-		private function modifyUriPayment($uri) {
-			$sql = "UPDATE enrollment SET uri_payment = :uri_payment WHERE id_enrollment = :id_enrollment";
-			$params = array(
-					":id_enrollment" => $this->getIdEnrollment(),
-					":uri_payment" => $this->getUriPayment()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment = $statment->execute($params);		
-			return $statment;
-		}
+		// private function modifyUriPayment($uri) {
+		// 	$sql = "UPDATE enrollment SET uri_payment = :uri_payment WHERE id_enrollment = :id_enrollment";
+		// 	$params = array(
+		// 			":id_enrollment" => $this->getIdEnrollment(),
+		// 			":uri_payment" => $this->getUriPayment()
+		// 		);
+		// 	$pdo = \Database::getConnection();
+		// 	$statment = $pdo->prepare($sql);
+		// 	$statment = $statment->execute($params);		
+		// 	return $statment;
+		// }
 
-		public function executePayment($item) {
-			require_once APP_ROOT_FOLDER . '/main/classes/pagseguro/PagSeguroLibrary/PagSeguroLibrary.php';
-         	$pagseguro = new PagSeguroPaymentRequest();       
+		// public function executePayment($item) {
+		// 	require_once APP_ROOT_FOLDER . '/main/classes/pagseguro/PagSeguroLibrary/PagSeguroLibrary.php';
+  //        	$pagseguro = new PagSeguroPaymentRequest();       
          	
-     		if ($event = Event::findById($item["id_event"])) {
-     			$event = $event[0];
-   				$pagseguro->addItem(
-				        $event->getIdEvent(),
-				        $event->getName(),
-				        1, //QTDE
-				        $event->cost[0]->getCostOfDay(),
-				        0 //PESO
-				     );
-			}
+  //    		if ($event = Event::findById($item["id_event"])) {
+  //    			$event = $event[0];
+  //  				$pagseguro->addItem(
+		// 		        $event->getIdEvent(),
+		// 		        $event->getName(),
+		// 		        1, //QTDE
+		// 		        $event->cost[0]->getCostOfDay(),
+		// 		        0 //PESO
+		// 		     );
+		// 	}
          	
-			$pagseguro->setCurrency("BRL");
-			$pagseguro->setShippingType(3); //Frete 3 = não especificado
-			$pagseguro->setReference($this->getIdEnrollment());
-			$pagseguro->setSender(
-					$this->participant->getName(), 
-					$this->participant->getEmail(),
-					substr($this->participant->getPhone(), 0, 2), 
-					substr($this->participant->getPhone(), 2)
-				);
-			$pagseguro->setShippingAddress(
-					$this->participant->getZipcode(), 
-					$this->participant->getAddress(), 
-					$this->participant->getNumber(), 
-					$this->participant->getComplement(),  
-					$this->participant->getDistrict(),
-					$this->participant->getCity(), $this->participant->getState(), 'BRA'
-				);
-			$credenciais = new PagSeguroAccountCredentials('rodrigomiss@hotmail.com', 'A3F7B6573E8B40E4AF0A58F0F059F6DA');
-			$this->uriPayment = $pagseguro->register($credenciais);
-			$this->modifyUriPayment($this->uriPayment);
-			return $this->getUriPayment();
-		}
+		// 	$pagseguro->setCurrency("BRL");
+		// 	$pagseguro->setShippingType(3); //Frete 3 = não especificado
+		// 	$pagseguro->setReference($this->getIdEnrollment());
+		// 	$pagseguro->setSender(
+		// 			$this->participant->getName(), 
+		// 			$this->participant->getEmail(),
+		// 			substr($this->participant->getPhone(), 0, 2), 
+		// 			substr($this->participant->getPhone(), 2)
+		// 		);
+		// 	$pagseguro->setShippingAddress(
+		// 			$this->participant->getZipcode(), 
+		// 			$this->participant->getAddress(), 
+		// 			$this->participant->getNumber(), 
+		// 			$this->participant->getComplement(),  
+		// 			$this->participant->getDistrict(),
+		// 			$this->participant->getCity(), $this->participant->getState(), 'BRA'
+		// 		);
+		// 	$credenciais = new PagSeguroAccountCredentials('rodrigomiss@hotmail.com', 'A3F7B6573E8B40E4AF0A58F0F059F6DA');
+		// 	$this->uriPayment = $pagseguro->register($credenciais);
+		// 	$this->modifyUriPayment($this->uriPayment);
+		// 	return $this->getUriPayment();
+		// }
 
-		public function checkAttendance($params){
-			//var_dump($params); exit;
+
+
+		public function checkAttendanceOld($params){
 			foreach ($params as $key => $enrollmentStatus) {
-				//var_dump($key);
-				//var_dump($enrollment); exit;
 				$status = $enrollmentStatus? true : false;
 				$sql = "UPDATE enrollment SET attendance = :attendance WHERE id_enrollment = :id_enrollment";
 				$pdo = \Database::getConnection();
@@ -370,7 +431,48 @@
 				$statment->execute(array(":attendance"=>$status, ":id_enrollment"=>$key));
 			}
 		}
+		/**
+	     * Atualiza a lista de bônus de um evento
+	     * @param [] $bonus Inscrições e presenças
+	     * @return boolean Resultado
+	     */
+		public function checkAttendance($params) {
 
+	        $pdo = \Database::getConnection();
+
+
+	        $result = true;
+
+	        try {
+
+	        	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	        	$pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
+	        	$pdo->beginTransaction();
+
+	        	foreach ($params as $key => $enrollmentStatus) {
+	        		$status = $enrollmentStatus? true : false;
+					$sql = "UPDATE enrollment SET attendance = :attendance WHERE id_enrollment = :id_enrollment";
+					$statment = $pdo->prepare($sql);
+					$statment->execute(array(":attendance"=>$status, ":id_enrollment"=>$key));
+	        	}
+
+	        	var_dump($pdo->commit());
+	        	
+	        } catch (Exception $e) {
+	        	$pdo->rollBack();
+	        	$result = false;
+	        	
+	        }
+
+	        return $result;
+		}
+
+
+		/**
+	     * Atualiza a avaliação do evento pelo participante
+	     * @param int $rating A nota da avaliação
+	     * @return boolean Resultado
+	     */
 		public function updateRating($rating){
 			//Validação - A nota tem que estar entre 1 e 5 e só é possível avaliar se a presença for confirmada
 			if($rating < 1 || $rating > 5 || $this->getAttendance() == 0){
@@ -383,6 +485,11 @@
 			}
 		}
 
+		/**
+	     * Atualiza o status da inscrição
+	     * @param mixed[] $data Dados da inscrição
+	     * @return boolean Resultado da atualização
+	     */
 		public function updateStatus($data = array()){
 			$this->setData($data);
 
@@ -402,36 +509,36 @@
 			return $statment->execute($params);
 		}
 
-		public function setPayment($date = null){
-			$date = is_null($date) ? date("Y-m-d H:i:s") : $date;
-			$sql = 
-			"UPDATE
-				enrollment
-			SET 
-				date_payment = :date_payment
-			WHERE
-				id_enrollment = :id_enrollment";
-			$params = array(				
-					":date_payment" => $date,
-					":id_enrollment" => $this->getIdEnrollment()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			return $statment->execute($params);
-		}
+		// public function setPayment($date = null){
+		// 	$date = is_null($date) ? date("Y-m-d H:i:s") : $date;
+		// 	$sql = 
+		// 	"UPDATE
+		// 		enrollment
+		// 	SET 
+		// 		date_payment = :date_payment
+		// 	WHERE
+		// 		id_enrollment = :id_enrollment";
+		// 	$params = array(				
+		// 			":date_payment" => $date,
+		// 			":id_enrollment" => $this->getIdEnrollment()
+		// 		);
+		// 	$pdo = \Database::getConnection();
+		// 	$statment = $pdo->prepare($sql);
+		// 	return $statment->execute($params);
+		// }
 
-		public function cancelPayment(){
-			$sql = 
-			"UPDATE
-				enrollment
-			SET 
-				date_payment = null
-			WHERE
-				id_enrollment = :id_enrollment";
-			$params = array(":id_enrollment" => $this->getIdEnrollment());
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			return $statment->execute($params);
-		}
+		// public function cancelPayment(){
+		// 	$sql = 
+		// 	"UPDATE
+		// 		enrollment
+		// 	SET 
+		// 		date_payment = null
+		// 	WHERE
+		// 		id_enrollment = :id_enrollment";
+		// 	$params = array(":id_enrollment" => $this->getIdEnrollment());
+		// 	$pdo = \Database::getConnection();
+		// 	$statment = $pdo->prepare($sql);
+		// 	return $statment->execute($params);
+		// }
 	}
 ?>

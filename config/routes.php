@@ -152,11 +152,13 @@
     $routes['GET'][] = array('route' => '/admin/eventos/:id/colaboracao', 'controller' => 'Admin\EventsController', 'action' => 'sponsorship');
     $routes['POST'][] = array('route' => '/admin/eventos/:id/colaboracao', 'controller' => 'Admin\EventsController', 'action' => 'updateSponsorship');
 
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/colaboracao', 'controller' => 'Admin\EventsController', 'action' => 'sponsorship');
 
     //rotas para crachas
     $routes['GET'][] = array('route' => '/admin/eventos/cracha', 'controller' => 'Admin\BadgeController', 'action' => 'index');
-        $routes['POST'][] = array('route' => '/admin/eventos/cracha/gerar', 'controller' => 'Admin\BadgeController', 'action' => 'generate');
+    $routes['POST'][] = array('route' => '/admin/eventos/cracha/gerar', 'controller' => 'Admin\BadgeController', 'action' => 'generate');
 
+    $routes['GET'][] = array('route' => '/admin/eventos/:id/crachas', 'controller' => 'Admin\EventsController', 'action' => 'badges');
 
     //rotas para notícias
     $routes['GET'][] = array('route' => '/admin/noticias/lista', 'controller' => 'Admin\NewsController', 'action' => '_list');

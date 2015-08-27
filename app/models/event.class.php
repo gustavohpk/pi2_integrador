@@ -736,13 +736,6 @@
 		}
 
 		public function remove(){
-			//Remove os bônus
-			$sql = "DELETE FROM event_bonus WHERE id_event = :id_event";
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$params = array(":id_event" => $this->getIdEvent());
-			$statment->execute($params);
-
 			$sql = "DELETE FROM event WHERE id_event = :id_event";
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);

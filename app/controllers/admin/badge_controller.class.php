@@ -30,8 +30,8 @@
         public function index() {
             $this->setHeadTitle("Crachá dos Participantes");
 
-            //lista eventos que ainda não iniciaram
-            $this->events = \Event::find(array("start_date"), array(date("Y-m-d")), ">=", "AND", "name", "ASC");
+            //lista eventos que ainda não terminaram
+            $this->events = \Event::find(array("end_date"), array(date("Y-m-d")), ">=", "AND", "name", "ASC");
             $this->actionForm = $this->getUri("admin/eventos/cracha/gerar");
             $this->titleBtnSubmit = "Gerar";
         }

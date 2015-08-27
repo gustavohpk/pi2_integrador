@@ -14,6 +14,12 @@
 
 ----------
 
+----- Atualização 097 (25/08/15 - 27/08/15) -----
+
+- Atualização na documentação e nomenclaturas
+- Funções antigas e não mais utilizadas desativadas
+- Adicionada área de impressão de QRcodes a partir da listagem dos eventos
+
 ----- Atualização 096 (20/08/15 - 24/08/15) -----
 
 - Removido código desnecessário

@@ -355,7 +355,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2e4b5', end
 }
 #show-badge #badge-content .badgeItem .badge-logo-utfpr img{
   margin-top: 10px;
-  margin-left: 20px;
+  /*margin-left: 20px;*/
   width: 75%;
 }
 #show-badge #badge-content .badgeItem img.qrcode{

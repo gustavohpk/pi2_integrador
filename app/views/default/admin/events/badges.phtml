@@ -1,0 +1,88 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 badge-new">
+		<h2>Imprimir Crachás</h2>
+		<h3><?= $this->event->getName() ?></h3>
+		<div class="row">
+			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<div class="well">
+					<div class="form-group">
+						<div class="col-xs-3 control-label">Cabeçalho</div>
+						<div class="col-xs-9">
+						  <input type="radio" id="header-1" name="header" value="0"/> <label for="header-1" class="control-label">Nada</label> &nbsp; &nbsp;
+						  <input type="radio" id="header-2" name="header" value="1" <?= $this->event->getLogo() ? "" : "disabled" ?>/> <label for="header-2" class="control-label">Logotipo do Evento</label> &nbsp;&nbsp;
+						  <input type="radio" id="header-3" name="header" value="1" checked/> <label for="header-3" class="control-label">Logotipo da UTFPR</label> &nbsp;&nbsp
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<div class="well">
+					<div class="form-group">
+						<div class="col-xs-3 control-label">Conteúdo</div>
+						<div class="col-xs-9">
+						  <input type="checkbox" id="qrcode" name="qrcode" value="0" checked/> <label for="qrcode" class="control-label">QRCode</label> &nbsp; &nbsp;
+					 	 <input type="checkbox" id="event-name" name="event-name" value="1" checked/> <label for="qrcode" class="event-name">Nome do evento</label> &nbsp; &nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<div class="well">
+					<div class="form-group">
+						<div class="col-xs-3 control-label">Logotipo no conteúdo</div>
+						<div class="col-xs-9">
+						  <input type="radio" id="no-logo-content" name="logo-content" value="0" checked /> <label for="event-logo-content" class="control-label">Nenhum</label> &nbsp; &nbsp;
+						<input type="radio" id="event-logo-content" name="logo-content" value="1" <?= $this->event->getLogo() ? "" : "disabled" ?>//> <label for="event-logo-content" class="control-label">Logotipo do evento</label> &nbsp; &nbsp;
+						<input type="radio" id="utfpr-logo-content" name="logo-content" value="2"/> <label for="utfpr-logo-content" class="control-label">Logotipo da UTFPR</label> &nbsp; &nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<div class="well">
+					<div class="form-group">
+						<div class="col-xs-3 control-label">Rodapé</div>
+						<div class="col-xs-9">
+						  <input type="radio" id="footer-1" name="footer" value="0" checked/> <label for="footer-1" class="control-label">Nome do participante</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="show-badge" style="">
+			<div class="col-xs-12" id="badge-content">
+				<?php foreach ($this->enrollments as $enrollment) :?>
+					<div class="badgeItem">
+						<div class="badge-logo-utfpr">
+							<img src="<?= $this->getResource('img/utfpr-logo.gif') ?>" alt="Logo UTFPR">
+						</div>
+						<?php if($this->event->getLogo()) : ?>
+							<div class="badge-logo-event" style="display: none">
+								<img src="data:image/jpeg;base64, <?= base64_encode($this->event->getLogo()) ?>" alt"<?=$this->event->getName() ?>" style="max-height: 80px; max-width: 200px; width: auto" />
+							</div>
+						<?php endif; ?>
+
+						<?php $qrcode = '/var/www/' . $this->getResource('img/qrcode/' . $enrollment->getIdEnrollment()) . '.png'?>
+						<?php $relativePath = $this->getResource('img/qrcode/' . $enrollment->getIdEnrollment()) . '.png'?>
+
+						<?php $content = 'BEGIN:BADGE-UTFPR\n'?>
+						<?php $content .= 'id_participant:' . $enrollment->getIdParticipant() . '\n'?>
+						<?php $content .= 'participant:' . $enrollment->participant->getName() . '\n'?>
+						<?php $content .= 'id_enrollment:' . $enrollment->getIdEnrollment() . '\n'?>
+						<?php $content .= 'event:' . $enrollment->event->getName() . '\n'?>
+						<?php $content .= 'END:BADGE-UTFPR'?>
+						<?php \QRCode::png($content, $qrcode, QR_ECLEVEL_M, 2)?>
+						<img class="qrcode" src="<?= $relativePath?>" />
+
+						<div class="badgeItemEvent"><?= $enrollment->event->getName()?></div>
+						<div class="badgeItemFooter"><div><?= $enrollment->participant->getName()?></div></div>
+						</div>
+				<?php endforeach ?>
+			</div>
+		</div>
+			</div>
+		</div>
+	</div>
+</div>
