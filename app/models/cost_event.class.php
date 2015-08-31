@@ -71,8 +71,16 @@
 			return $valid;
 		}
 
- 		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
+ 		/**
+	     * Busca por preços de evento
+	     * @param mixed[] $params Os parâmetros (atributos / colunas)
+	     * @param mixed[] $values valores
+	     * @param string $comparsion O operador de comparação
+	     * @param string $conjunctive O operador de conjunção
+	     * @return News[] Resultado da busca
+	     */
+		public static function find($params = array(), $values = array(), $comparsion = "=", $conjunctive = "AND"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $comparsion, $conjunctive);
 
 			$sql = 
 			"SELECT 
@@ -92,18 +100,47 @@
 			return $costEvents;
 		}
 
-		public static function all(){
-			return self::find();
-		}
+		// public static function all(){
+		// 	return self::find();
+		// }
 
+		/**
+	     * Busca por preços de evento a partir do id
+	     * @param int $id Id do preço de evento
+	     * @return CostEvent[] Resultado da busca
+	     */
 		public static function findById($id){
-			return self::find(array("id_cost_event"), array($id));
+			$sql = "SELECT * FROM cost_event WHERE id_cost_event = :id_cost_event";
+	        $pdo = \Database::getConnection();
+	        $statment = $pdo->prepare($sql);
+	        $params = array(":id_cost_event" => $id);
+	        $statment->execute($params);
+
+	        $result = $statment->fetchAll($pdo::FETCH_ASSOC);
+
+	        $eventCosts = array();
+
+	        if($result){
+	            $eventCosts[] = new CostEvent($result[0]);
+	        }
+
+	        return count($eventCosts) > 0 ? $eventCosts : NULL;
 		}
 
+		/**
+	     * Busca por preços de evento a partir do id do evento
+	     * @param int $id Id do preço de evento
+	     * @return CostEvent[] Resultado da busca
+	     */
 		public static function findByIdEvent($idEvent) {
 			return self::find(array("id_event"), array($idEvent));
 		}
 
+		/**
+	     * Busca pelo preço do evento válido para certa data
+	     * @param string $date Data
+	     * @return News[] Resultado da busca
+	     */
 		public function getCostOfDay($date = null) {
 			$date = is_null($date) ? date("Y-m-d") : $date;
 			$sql = 
@@ -120,91 +157,91 @@
 			return (float) $row["cost"];
 		}
 
-		public function save(){
-			if (!$this->isValidData()) return false;
+		// public function save(){
+		// 	if (!$this->isValidData()) return false;
 
-			$sql = 
-			"INSERT INTO cost_event
-				(id_event, date_max, cost)
-			VALUES
-				(:id_event, :data_max, :cost)";
-			$params = array(
-					":id_event" => $this->getIdEvent(),
-					":data_max" => $this->getDateMax(),
-					":cost" => $this->getCost()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment = $statment->execute($params);
-			$this->setIdCostEvent($pdo->lastInsertId());
-			return $statment ? $this : false;
+		// 	$sql = 
+		// 	"INSERT INTO cost_event
+		// 		(id_event, date_max, cost)
+		// 	VALUES
+		// 		(:id_event, :data_max, :cost)";
+		// 	$params = array(
+		// 			":id_event" => $this->getIdEvent(),
+		// 			":data_max" => $this->getDateMax(),
+		// 			":cost" => $this->getCost()
+		// 		);
+		// 	$pdo = \Database::getConnection();
+		// 	$statment = $pdo->prepare($sql);
+		// 	$statment = $statment->execute($params);
+		// 	$this->setIdCostEvent($pdo->lastInsertId());
+		// 	return $statment ? $this : false;
+		// }
+
+		/**
+	     * Atualiza a lista de preços de um evento
+	     * @param CostEvent[] $costs Os preços
+	     * @param int idEvent ID do Evento
+	     * @return boolean Resultado
+	     */
+		public function saveMultiple($costs, $idEvent) {
+	        $pdo = \Database::getConnection();
+
+	        $result = true;
+
+	        try {
+
+	        	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	        	$pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
+	        	$pdo->beginTransaction();
+
+	        	$sql = "DELETE FROM cost_event WHERE id_event = :id_event";
+				$statment = $pdo->prepare($sql);
+				$params = array(":id_event" => $idEvent);
+				$statment->execute($params);
+
+	        	foreach ($costs as $key => $cost) {
+	        		$sql = "INSERT INTO cost_event (id_event, cost, date_max) VALUES (:id_event, :cost, :date_max)";
+	        		$params = array(
+						":id_event" => $cost->getIdEvent(),
+						":cost" => $cost->getCost(),
+						":date_max" => $cost->getDateMax()
+					);
+	        		$statment = $pdo->prepare($sql);
+	        		$statment->execute($params);
+	        	}
+
+	        	$pdo->commit();
+	        	
+	        } catch (Exception $e) {
+	        	$pdo->rollBack();
+	        	$result = false;
+	        	
+	        }
+
+	        return $result;
 		}
 
-	/**
-     * Atualiza a lista de preços de um evento
-     * @param CostEvent[] $costs Os preços
-     * @param int idEvent ID do Evento
-     * @return boolean Resultado
-     */
-	public function saveMultiple($costs, $idEvent) {
-        $pdo = \Database::getConnection();
+		// public function update($data){
+		// 	$this->setData($data);
+		// 	if (!$this->isValidData()) return false;
 
-        $result = true;
-
-        try {
-
-        	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        	$pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
-        	$pdo->beginTransaction();
-
-        	$sql = "DELETE FROM cost_event WHERE id_event = :id_event";
-			$statment = $pdo->prepare($sql);
-			$params = array(":id_event" => $idEvent);
-			$statment->execute($params);
-
-        	foreach ($costs as $key => $cost) {
-        		$sql = "INSERT INTO cost_event (id_event, cost, date_max) VALUES (:id_event, :cost, :date_max)";
-        		$params = array(
-					":id_event" => $cost->getIdEvent(),
-					":cost" => $cost->getCost(),
-					":date_max" => $cost->getDateMax()
-				);
-        		$statment = $pdo->prepare($sql);
-        		$statment->execute($params);
-        	}
-
-        	$pdo->commit();
-        	
-        } catch (Exception $e) {
-        	$pdo->rollBack();
-        	$result = false;
-        	
-        }
-
-        return $result;
-	}
-
-		public function update($data){
-			$this->setData($data);
-			if (!$this->isValidData()) return false;
-
-			$sql = 
-			"UPDATE 
-				cost_event
-			SET
-				date_max = :data_max,
-				cost = :cost
-			WHERE
-				id_cost_event = :id_cost_event";
-			$params = array(
-					":data_max" => $this->getDateMax(),
-					":cost" => $this->getCost(),
-					":id_cost_event" => $this->getIdCostEvent()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$statment = $statment->execute($params);
-			return $statment ? $this : false;
-		}
+		// 	$sql = 
+		// 	"UPDATE 
+		// 		cost_event
+		// 	SET
+		// 		date_max = :data_max,
+		// 		cost = :cost
+		// 	WHERE
+		// 		id_cost_event = :id_cost_event";
+		// 	$params = array(
+		// 			":data_max" => $this->getDateMax(),
+		// 			":cost" => $this->getCost(),
+		// 			":id_cost_event" => $this->getIdCostEvent()
+		// 		);
+		// 	$pdo = \Database::getConnection();
+		// 	$statment = $pdo->prepare($sql);
+		// 	$statment = $statment->execute($params);
+		// 	return $statment ? $this : false;
+		// }
 	}
 ?>

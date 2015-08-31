@@ -232,6 +232,15 @@
     $routes['POST'][] = array('route' => '/admin/participantes/:id/alterar', 'controller' => 'Admin\ParticipantController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/participantes/:id/remover', 'controller' => 'Admin\ParticipantController', 'action' => 'remove');
 
+    //rotas para tipos (categorias) de participante
+    $routes['GET'][] = array('route' => '/admin/participantes/tipos', 'controller' => 'Admin\ParticipantTypesController', 'action' => '_list'); 
+    $routes['GET'][] = array('route' => '/admin/participantes/tipos/novo', 'controller' => 'Admin\ParticipantTypesController', 'action' => '_new'); 
+    $routes['POST'][] = array('route' => '/admin/participantes/tipos/novo', 'controller' => 'Admin\ParticipantTypesController', 'action' => 'create'); 
+    $routes['GET'][] = array('route' => '/admin/participantes/tipos/:id/alterar', 'controller' => 'Admin\ParticipantTypesController', 'action' => '_edit'); 
+    $routes['POST'][] = array('route' => '/admin/participantes/tipos/:id/alterar', 'controller' => 'Admin\ParticipantTypesController', 'action' => 'update'); 
+    $routes['GET'][] = array('route' => '/admin/participantes/tipos/:id/remover', 'controller' => 'Admin\ParticipantTypesController', 'action' => 'remove'); 
+
+
     //rotas para cidades
     $routes['GET'][] = array('route' => '/admin/cidades/lista', 'controller' => 'Admin\CityController', 'action' => '_list');
     $routes['GET'][] = array('route' => '/admin/cidades/nova', 'controller' => 'Admin\CityController', 'action' => '_new');

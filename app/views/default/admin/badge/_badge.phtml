@@ -1,7 +1,7 @@
 <div id="show-badge">		
 	<div id="badge-content">
 		<?php foreach ($this->enrollments as $enrollment) :?>
-			<div class="badgeItem">
+			<div class="badge-item">
 				<div class="badge-logo-utfpr">
 					<img src="<?= $this->getResource('img/utfpr-logo.gif') ?>" alt="Logo UTFPR">
 				</div>
@@ -17,8 +17,8 @@
 				<?php \QRCode::png($content, $qrcode, QR_ECLEVEL_M, 2)?>
 				<img class="qrcode" src="<?= $relativePath?>" />
 
-				<div class="badgeItemEvent"><?= $enrollment->event->getName()?></div>
-				<div class="badgeItemFooter"><div><?= $enrollment->participant->getName()?></div></div>
+				<div class="event-name"><?= $enrollment->event->getName()?></div>
+				<div class="badge-itemFooter"><div><?= $enrollment->participant->getName()?></div></div>
 				</div>
 		<?php endforeach ?>
 	</div>

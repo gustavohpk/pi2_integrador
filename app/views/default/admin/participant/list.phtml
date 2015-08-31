@@ -16,16 +16,27 @@
 				<th>ID</th>
 				<th>Nome</th>
 				<th>E-mail</th>
+				<th>Categoria</th>
 				<th>Ações</th>
 			</tr>
 			<?php foreach ($this->participants as $participant) : ?>
-				<tr>
+				<tr class="<?= $participant->getEnabled() ? '' : 'warning' ?>">
 					<td><?=$participant->getIdParticipant()?></td>
 					<td align="left"><?=$participant->getName()?></td>
 					<td align="left"><?=$participant->getEmail()?></td>
+					<td><?= $participant->participantType->getName() ?>
+						<?php if (!$participant->getEnabled()): ?>
+							<span class="badge pull-right"><span class="glyphicon glyphicon-hourglass" title="Aguarda aprovação"></span></span>
+						<?php endif ?>
+					</td>
 					<td>
 						<a href="<?=$this->getUri("admin/participantes/{$participant->getIdParticipant()}/alterar")?>" role="button" class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
 						<a href="<?=$this->getUri("admin/participantes/{$participant->getIdParticipant()}/remover")?>" role="button" class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></a>
+						<?php if ($participant->getEnabled()): ?>
+							<a href="" role="button" class="btn btn-material-deep-purple btn-sm" title="Bloquear Participante"><span class="glyphicon glyphicon-ban-circle"></span></a>
+						<?php else: ?>
+							<a href="" role="button" class="btn btn-success btn-sm" title="Aprovar Participante"><span class="glyphicon glyphicon-ok-circle"></span></a>
+						<?php endif; ?>
 					</td>
 				</tr>
 			<?php endforeach ?>

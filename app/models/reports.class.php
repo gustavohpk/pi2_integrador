@@ -19,26 +19,56 @@
 	     */
 		private $dateFrom, $timeFrom, $dateTo, $timeTo, $confirmed = false, $unconfirmed = false, $present = false, $absent = false, $events = array();
 
+		/**
+		 * Define a data inicial
+		 * 
+		 * @param string $dateFrom Data inicial
+		 */
 		public function setDateFrom($dateFrom){
 			$this->dateFrom = empty($dateFrom) ? null : date("Y-m-d", strtotime(str_replace("/", "-", $dateFrom)));
 		}
 
+		/**
+		 * Define a hora inicial
+		 * 
+		 * @param string $timeFrom Hora inicial
+		 */
 		public function setTimeFrom($timeFrom){
 			$this->timeFrom = empty($timeFrom) ? null : date("H:i", strtotime(str_replace("/", "-", $timeFrom)));
 		}
 
+		/**
+		 * Define a data final
+		 * 
+		 * @param string $dateTo Data final
+		 */
 		public function setDateTo($dateTo){
 			$this->dateTo = empty($dateTo) ? null : date("Y-m-d", strtotime(str_replace("/", "-", $dateTo)));
 		}
 
+		/**
+		 * Define a hora final
+		 * 
+		 * @param string $timeTo Hora inicial
+		 */
 		public function setTimeTo($timeTo){
 			$this->timeTo = empty($timeTo) ? null : date("H:i", strtotime(str_replace("/", "-", $timeTo)));
 		}
 
+		/**
+		 * Define os eventos
+		 * 
+		 * @param mixed[] $Eventos Eventos
+		 */
 		public function setEvents($events){
 			$this->events = $events;
 		}
 
+		/**
+		 * Define se inscrições confirmadas serão incluídas no relatório
+		 * 
+		 * @param string $confirmed parâmetro
+		 */
 		public function setConfirmed($confirmed){
 			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
 			if($confirmed)
@@ -47,6 +77,11 @@
 				$this->confirmed = false;
 		}
 
+		/**
+		 * Define se inscrições não confirmadas serão incluídas no relatório
+		 * 
+		 * @param string $unconfirmed parâmetro
+		 */
 		public function setUnconfirmed($unconfirmed){
 			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
 			if($unconfirmed)
@@ -55,6 +90,11 @@
 				$this->unconfirmed = false;
 		}
 
+		/**
+		 * Define se inscrições com presença confirmada serão incluídas no relatório
+		 * 
+		 * @param string $present parâmetro
+		 */
 		public function setPresent($present){
 			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
 			if($present)
@@ -63,6 +103,11 @@
 				$this->present = false;
 		}
 
+		/**
+		 * Define se inscrições com presença não confirmada serão incluídas no relatório
+		 * 
+		 * @param string $absent parâmetro
+		 */
 		public function setAbsent($absent){
 			//O formulário manda a string "on" se a checkbox está marcada, então é necessária esta verificação para guardar true ou false
 			if($absent)
@@ -71,42 +116,92 @@
 				$this->absent = false;
 		}
 
+		/**
+		 * Retorna a data inicial
+		 * 
+		 * @return date Data inicial
+		 */
 		public function getDateFrom($format = "Y-m-d"){
 			return is_null($this->dateFrom) ? null : date($format, strtotime($this->dateFrom));
 		}
 
+		/**
+		 * Retorna a data final
+		 * 
+		 * @return date Data final
+		 */
 		public function getDateTo($format = "Y-m-d"){
 			return is_null($this->dateTo) ? null : date($format, strtotime($this->dateTo));
 		}
 
+		/**
+		 * Retorna a hora inicial
+		 * 
+		 * @return date Hora inicial
+		 */
 		public function getTimeFrom($format = "H:i"){
 			return is_null($this->timeFrom) ? null : date($format, strtotime($this->timeFrom));
 		}
 
+		/**
+		 * Retorna a hora final
+		 * 
+		 * @return date Hora final
+		 */
 		public function getTimeTo($format = "H:i"){
 			return is_null($this->timeTo) ? null : date($format, strtotime($this->timeTo));
 		}
 
+		/**
+		 * Retorna os eventos
+		 * 
+		 * @return mixed[] Eventos
+		 */
 		public function getEvents(){
 			return $this->events;
 		}
 
+		/**
+		 * Retorna se inscrições confirmadas farão parte do relatório
+		 * 
+		 * @return boolean Verificação
+		 */
 		public function getConfirmed(){
 			return $this->confirmed;
 		}
 
+		/**
+		 * Retorna se inscrições não confirmadas farão parte do relatório
+		 * 
+		 * @return boolean Verificação
+		 */
 		public function getUnconfirmed(){
 			return $this->unconfirmed;
 		}
 
+		/**
+		 * Retorna se inscrições com presença confirmada farão parte do relatório
+		 * 
+		 * @return boolean Verificação
+		 */
 		public function getPresent(){
 			return $this->present;
 		}
 
+		/**
+		 * Retorna se inscrições com presença não confirmada farão parte do relatório
+		 * 
+		 * @return boolean Verificação
+		 */
 		public function getAbsent(){
 			return $this->absent;
 		}
 
+		/**
+		 * Gera o relatório de inscrições
+		 * 
+		 * @return Enrollment[] Resultado
+		 */
 		public function generate(){
 
 			$sql = "SELECT * FROM enrollment WHERE";
@@ -147,64 +242,6 @@
 			}
 				
 			return $enrollments;
-		}
-
-
-
-
-
-
-		public function update($data = array()){
-
-			$data["modification_date"] = date('Y-m-d H:i');
-
-			$this->setData($data);
-
-			$keys = array_keys($data);
-			foreach ($keys as $key) {
-				$params .= "$key = :$key, ";
-			}
-
-			//remove a ultima (",") virgula
-			$params = substr($params, 0, -2);
-			$sql = "UPDATE news SET %s WHERE id_news = ".$this->getIdNews();
-			$sql = sprintf($sql, $params);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			
-			$param = array();
-			foreach ($keys as $key){
-				$param[":$key"] = $data[$key];
-			}
-	
-			return $statment->execute($param);
-		}
-
-		public function save(){
-			$sql = 
-			"INSERT INTO news
-				(id_event, creation_date, modification_date, title, subtitle, content)
-			VALUES
-				(:id_event, :creation_date, :modification_date, :title, :subtitle, :content)";
-			$params = array(
-					":id_event" => $this->getIdEvent(),
-					":creation_date" => date('Y-m-d H:i'),
-					":modification_date" => date('Y-m-d H:i'),
-					":title" => $this->getTitle(),
-					":subtitle" => $this->getSubtitle(),
-					":content" => $this->getContent()
-				);
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			return $statment->execute($params);
-		}
-
-		public function remove(){
-			$sql = "DELETE FROM news WHERE id_news = :id_news";
-			$pdo = \Database::getConnection();
-			$statment = $pdo->prepare($sql);
-			$params = array(":id_news" => $this->getIdNews());
-			return $statment->execute($params);
 		}
 	}
 ?>

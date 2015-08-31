@@ -20,6 +20,10 @@
 		private $email;
 		private $password;
 
+		private $code;
+		private $enabled;
+		private $idParticipantType;
+
    		public function setIdParticipant($idParticipant){
    			$this->idParticipant = $idParticipant;
    		}
@@ -109,6 +113,20 @@
    			$this->password = $password;
    		}
 
+   		public function setCode($code){
+   			$this->code = $code;
+   		}
+
+   		public function setEnabled($enabled){
+   			$this->enabled = $enabled;
+   		}
+
+   		public function setIdParticipantType($idParticipantType){
+   			$this->idParticipantType = $idParticipantType;
+   			$this->participantType = ParticipantType::findById($idParticipantType)[0];
+   		}
+
+
    		public function getIdParticipant(){
    			return $this->idParticipant;
    		}
@@ -183,6 +201,18 @@
 
    		public function getPassword(){
    			return $this->password;
+   		}
+
+   		public function getCode(){
+   			return $this->code;
+   		}
+
+   		public function getEnabled(){
+   			return $this->enabled;
+   		}
+
+   		public function getIdParticipantType(){
+   			return $this->idParticipantType;
    		}
 
    		public function validateData(){

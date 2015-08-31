@@ -202,6 +202,8 @@ label.disabled { color: darkgray; }
 .config-banners input{ margin: 0 auto; }
 .config-banners img{ max-height: 100px; max-width: 100px; }
 
+/* Ícones da home do painel do admin */
+
 .admin-shortcut { padding: 10px; cursor: pointer; color:#333;}
 .admin-shortcut label { cursor: pointer; }
 .admin-shortcut-title { cursor: pointer; text-decoration: none; font-weight: bold;}
@@ -209,6 +211,8 @@ a.admin-shortcut-link { text-decoration: none;}
 .admin-shortcut:hover{ background-color: #CCC; border-radius: 5%; color: #000;}
 .admin-shortcut .glyphicon { font-size: 70px; padding-bottom: 10px; width: 100%;}
 .admin-shortcut .glyphicon:hover{ font-size: 70px; padding-bottom: 10px;}
+
+/* Fim ícones da home do painel do admin */
 
 .admin-help-list{ text-align: left; list-style-type: disc;}
 
@@ -219,6 +223,16 @@ td.photo { max-width: 100px; }
 td.photo img { margin: 5px; border: 2px solid #CCC }
 
 table.media-list img { max-width: 40px; max-height: 40px;}
+
+/* Correção de alinhamento nas listagens */
+
+.panel table td:not(.actions) { padding-top: 10px; }
+.panel table td.actions .btn{ margin-top: 0; margin-bottom: 0; }
+
+/* Fim correção de alinhamento nas listagens */
+
+/* ----- */
+
 
 /* Há um bug no bootstrap quando são colocados glyphicons dentro de input-group-addons */
 /* Algumas correções aqui */
@@ -345,7 +359,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2e4b5', end
 /* ------------------ */
 
 /*inicio emissao crachás*/
-#show-badge #badge-content .badgeItem{
+#show-badge #badge-content .badge-item{
   width: 8cm;
   height: 10cm;
   border: 1px solid #000;
@@ -353,20 +367,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2e4b5', end
   margin-bottom: 1cm;
   float:left;
 }
-#show-badge #badge-content .badgeItem .badge-logo-utfpr img{
+#show-badge #badge-content .badge-item .badge-logo-utfpr img{
   margin-top: 10px;
   /*margin-left: 20px;*/
   width: 75%;
 }
-#show-badge #badge-content .badgeItem img.qrcode{
+#show-badge #badge-content .badge-item img.qrcode{
   width: 114px;
   margin: 20px 2.4cm;
 }
-#show-badge #badge-content .badgeItem .badgeItemEvent{
+#show-badge #badge-content .badge-item .event-name{
   text-align: center;
   clear:both;
 }
-#show-badge #badge-content .badgeItem .badgeItemFooter{
+#show-badge #badge-content .badge-item .badge-itemFooter{
   height: 1.5cm;
   background-color: #E6E6E6;
   bottom: -1.48cm;
@@ -375,7 +389,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2e4b5', end
   font-weight: bold;
   font-size: 18px;
 }
-#show-badge #badge-content .badgeItem .badgeItemFooter >div{
+#show-badge #badge-content .badge-item .badge-itemFooter >div{
   width: 8cm;
   padding-top: 0.5cm;
   text-align: center;

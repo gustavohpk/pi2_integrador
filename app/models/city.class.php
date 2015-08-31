@@ -54,8 +54,17 @@
    			if (strlen(trim($this->getName())) < 4) $this->errors[] = "Cidade não informada.";
    		}
 
-		public static function find($params = array(), $values = array(), $operator = "=", $compare = "AND"){
-			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $operator, $compare);
+
+   		/**
+	     * Busca por cidades
+	     * @param mixed[] $params Os parâmetros (atributos / colunas)
+	     * @param mixed[] $values valores
+	     * @param string $comparsion O operador de comparação
+	     * @param string $conjunctive O operador de conjunção
+	     * @return City[] Resultado da busca
+	     */
+		public static function find($params = array(), $values = array(), $comparsion = "=", $conjunctive = "AND"){
+			list($paramsName, $paramsValue) = self::getParamsSQL($params, $values, $comparsion, $conjunctive);
 
 			$sql = 
 			"SELECT 
@@ -76,20 +85,38 @@
 			return $citys;
 		}
 
+		/**
+	     * Busca todas as notícias
+	     * @return City[] Resultado da busca
+	     */
 		public static function all(){
 			return self::find();
 		}
 
+		/**
+	     * Busca por cidades a partir do Id
+	     * @param int $id Id da cidade
+	     * @return City[] Resultado da busca
+	     */
 		public static function findById($id){
 			//retorna apenas o primeiro objeto (no caso o unico)
 			$city = self::find(array("id_city"), array($id));
 			return count($city) > 0 ? $city[0] : NULL;
 		}
 
+		/**
+	     * Busca por cidades a partir do nome
+	     * @param string $name Nome da cidade
+	     * @return City[] Resultado da busca
+	     */
 		public static function findByName($name){
 			return self::find(array("name"), array($name));
 		}
 
+		/**
+	     * Cria uma cidade
+	     * @return boolean Resultado da criação
+	     */
 		public function save(){
 			if ($exists = $this->exists()) return $exists;
 			if (!$this->isValidData()) return false;
@@ -111,7 +138,10 @@
 			return $statment ? $this : false;
 		}
 
-		//retorna primeira cidade ou false se não existir
+		/**
+	     * Retorna a primeira cidade que se encaixe nos parâmetros nome e ID do estado
+	     * @return City Resultado
+	     */
 		public function exists(){
 			$city = self::find(
 						array("name", "state.id_state"), 

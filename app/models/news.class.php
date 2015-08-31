@@ -183,7 +183,7 @@
 
 		/**
 	     * Busca por notícias a partir do id
-	     * @param $id Id da notícia
+	     * @param int $id Id da notícia
 	     * @return News[] Resultado da busca
 	     */
 		public static function findById($id){

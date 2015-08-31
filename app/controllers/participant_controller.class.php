@@ -58,6 +58,7 @@
        	public function prepareNew($saveError = false){
        		$this->setHeadTitle("Cadastro de Participante");
        		$this->actionForm = $this->getUri("conta/nova");
+       		$this->participantTypes = ParticipantType::all();
        		$this->titleBtnSubmit = "Cadastrar";
 
        		if ($saveError){

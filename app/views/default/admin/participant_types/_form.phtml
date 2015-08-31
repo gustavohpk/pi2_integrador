@@ -1,0 +1,30 @@
+<form action="<?= $this->actionForm?>" method="post">
+	<div class="row">
+		<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+			<h4>ID</h4>
+			<input type="number" class="form-control" name="participant_type[id_participant_type]" value="<?= $this->participantType->getIdParticipantType()?>" disabled/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<h4>Código</h4>
+			<input type="text" class="form-control" name="participant_type[code]" value="<?= $this->participantType->getCode()?>"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<h4>Nome</h4>
+			<input type="text" class="form-control" name="participant_type[name]" value="<?= $this->participantType->getName()?>"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<h4>Descrição</h4>
+			<input type="text" class="form-control" name="participant_type[description]" value="<?= $this->participantType->getDescription()?>"/>
+		</div>
+	</div>
+	<br/>
+	<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-circle"></span> <?= $this->titleBtnSubmit?></button>
+	<a href="<?= createUriFor('/admin/eventos/tipos')?>">
+		<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+	</a>

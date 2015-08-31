@@ -14,6 +14,12 @@
 
 ----------
 
+----- Atualização 098 (28/08/15 - 31/08/15) -----
+
+- Atualização na documentação e nomenclaturas
+- Atualização na impressão de QRCodes
+- Iniciados tipos e aprovação de participante
+
 ----- Atualização 097 (25/08/15 - 27/08/15) -----
 
 - Atualização na documentação e nomenclaturas

@@ -10,7 +10,7 @@
 						<div class="col-xs-9">
 						  <input type="radio" id="header-1" name="header" value="0"/> <label for="header-1" class="control-label">Nada</label> &nbsp; &nbsp;
 						  <input type="radio" id="header-2" name="header" value="1" <?= $this->event->getLogo() ? "" : "disabled" ?>/> <label for="header-2" class="control-label">Logotipo do Evento</label> &nbsp;&nbsp;
-						  <input type="radio" id="header-3" name="header" value="1" checked/> <label for="header-3" class="control-label">Logotipo da UTFPR</label> &nbsp;&nbsp
+						  <input type="radio" id="header-3" name="header" value="2" checked/> <label for="header-3" class="control-label">Logotipo da UTFPR</label> &nbsp;&nbsp
 						</div>
 					</div>
 				</div>
@@ -21,8 +21,8 @@
 					<div class="form-group">
 						<div class="col-xs-3 control-label">Conteúdo</div>
 						<div class="col-xs-9">
-						  <input type="checkbox" id="qrcode" name="qrcode" value="0" checked/> <label for="qrcode" class="control-label">QRCode</label> &nbsp; &nbsp;
-					 	 <input type="checkbox" id="event-name" name="event-name" value="1" checked/> <label for="qrcode" class="event-name">Nome do evento</label> &nbsp; &nbsp;
+						  <input type="checkbox" id="qrcode" name="qrcode" value="1" checked/> <label for="qrcode" class="control-label">QRCode</label> &nbsp; &nbsp;
+					 	 <input type="checkbox" id="event-name" name="event-name" value="1" checked/> <label for="qrcode">Nome do evento</label> &nbsp; &nbsp;
 						</div>
 					</div>
 				</div>
@@ -54,7 +54,7 @@
 				<div id="show-badge" style="">
 			<div class="col-xs-12" id="badge-content">
 				<?php foreach ($this->enrollments as $enrollment) :?>
-					<div class="badgeItem">
+					<div class="badge-item">
 						<div class="badge-logo-utfpr">
 							<img src="<?= $this->getResource('img/utfpr-logo.gif') ?>" alt="Logo UTFPR">
 						</div>
@@ -76,8 +76,8 @@
 						<?php \QRCode::png($content, $qrcode, QR_ECLEVEL_M, 2)?>
 						<img class="qrcode" src="<?= $relativePath?>" />
 
-						<div class="badgeItemEvent"><?= $enrollment->event->getName()?></div>
-						<div class="badgeItemFooter"><div><?= $enrollment->participant->getName()?></div></div>
+						<div class="event-name"><?= $enrollment->event->getName()?></div>
+						<div class="badge-itemFooter"><div><?= $enrollment->participant->getName()?></div></div>
 						</div>
 				<?php endforeach ?>
 			</div>
@@ -86,3 +86,68 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+	$("input[name='header']").change(function(){
+		value = $("input[name='header']:checked").val()
+		switch(value){
+			case "0":
+				$(".badge-item .badge-logo-utfpr").show();
+				$(".badge-item .badge-logo-utfpr img").css("visibility", "hidden");
+				$(".badge-item .badge-logo-event").hide();
+				break;
+			case "1":
+				$(".badge-item .badge-logo-utfpr").hide();
+				$(".badge-item .badge-logo-utfpr img").css("visibility", "hidden");
+				$(".badge-item .badge-logo-event").show();
+				break;
+			case "2":
+				$(".badge-item .badge-logo-utfpr").show();
+				$(".badge-item .badge-logo-utfpr img").css("visibility", "visible");
+				$(".badge-item .badge-logo-event").hide();
+				break;
+		}
+	});
+
+	$("input[name='qrcode']").change(function(){
+		if($("input[name='qrcode']:checked").val() == "1"){
+			$(".qrcode").css("visibility", "visible");
+		}else{
+			$(".qrcode").css("visibility", "hidden");
+		}
+	});
+
+	$("input[name='event-name']").change(function(){
+		if($("input[name='event-name']:checked").val() == "1"){
+			$(".event-name").css("visibility", "visible");
+		}else{
+			$(".event-name").css("visibility", "hidden");
+		}
+	});
+
+	function toggleTemplate(){
+		if ($("#certificates .visual").css("visibility") == "visible"){
+			$("#certificates .visual").css("visibility", "hidden");
+			$("#certificates .certificate-left").css("visibility", "hidden");
+		}else{
+			$("#certificates .visual").css("visibility", "visible");
+			$("#certificates .certificate-left").css("visibility", "visible");
+		}
+	}
+	function toggleHeader(){
+		if ($("#certificates .certificate-top span").css("visibility") == "visible"){
+			$("#certificates .certificate-top span").css("visibility", "hidden");
+		}else{
+			$("#certificates .certificate-top span").css("visibility", "visible");
+		}
+	}
+	function toggleFooter(){
+		if ($("#certificates .certificate-bottom").css("visibility") == "visible"){
+			$("#certificates .certificate-bottom").css("visibility", "hidden");
+		}else{
+			$("#certificates .certificate-bottom").css("visibility", "visible");
+		}
+	}
+
+</script>
