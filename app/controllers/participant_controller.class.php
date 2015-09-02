@@ -34,7 +34,7 @@
 				}
 			}
 			else{
-				FlashMessage::errorMessage("Não foi possível realizar o cadastro:");
+				FlashMessage::errorMessage("Não foi possível realizar o login.");
 				$errors = $this->participant->getErrors();
 				foreach ($errors as $error){
 					FlashMessage::errorMessage($error);
@@ -80,6 +80,7 @@
 			
 			if ($this->participant->save()){
 				FlashMessage::successMessage("Cadastro realizado com sucesso.");
+				FlashMessage::warningMessage("Sua conta está pendente de aprovação de um administrador.");
 				Message::registrationMail($this->participant);
 				$this->redirectTo("conta/login");
 			}

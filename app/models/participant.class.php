@@ -230,7 +230,22 @@
    				if ($cpf->getIdParticipant() != $this->getIdParticipant())
    					$this->errors[] = "O CPF informado já esta sendo usado por outro participante.";	
    			} 
-   			if ((int) $this->getIdCity() < 1) $this->errors[] = "O nome da cidade é um campo obrigatório.";   			
+   			if ((int) $this->getIdCity() < 1) $this->errors[] = "O nome da cidade é um campo obrigatório.";
+
+   			if($this->getIdParticipantType()){
+   				if($this->participantType){
+   					if($this->participantType->getCode() == "student"){
+   						if(strlen($this->getCode()) != 7){
+   							$this->errors[] = "O RA não foi informado corretamente.";	
+   						}
+   					}elseif($this->participantType->getCode() == "employee"){
+   						if(strlen($this->getCode()) < 1){
+   							$this->errors[] = "O código do servidor não foi informado corretamente.";	
+   						}
+   					}
+   				}
+   			}
+  			
    		}
 
    		public function validatePassword(){
@@ -292,10 +307,10 @@
 			$sql = 
 			"INSERT INTO participant
 				(name, cpf, rg, gender, birthday, id_city, address, number, district, zipcode, 
-				complement, phone, phone2, email, password)
+				complement, phone, phone2, email, password, code, enabled, id_participant_type)
 			VALUES
 				(:name, :cpf, :rg, :gender, :birthday, :id_city, :address, :number, :district, :zipcode, 
-				:complement, :phone, :phone2, :email, :password)";
+				:complement, :phone, :phone2, :email, :password, :code, :enabled, :id_participant_type)";
 			$params = array(
 					":name" => $this->getName(),
 					":cpf" => $this->getCpf(),
@@ -311,7 +326,10 @@
 					":phone" => $this->getPhone(),
 					":phone2" => $this->getPhone2(),
 					":email" => $this->getEmail(),
-					":password" => md5($this->getPassword())
+					":password" => md5($this->getPassword()),
+					":code" => $this->getCode(),
+					":enabled" => 0,
+					":id_participant_type" => $this->getIdParticipantType()
 				);
 			$pdo = \Database::getConnection();
 			$statment = $pdo->prepare($sql);
@@ -407,8 +425,13 @@
 				$this->errors = array("Email ou senha incorretos!");
 				return false;
 			}else{
-				$_SESSION["participant"] = $participant[0];
-				return true;
+				if($participant[0]->getEnabled()){
+					$_SESSION["participant"] = $participant[0];
+					return true;
+				}else{
+					FlashMessage::warningMessage("Sua conta está bloqueada ou foi recém-criada e aguarda aprovação de um administrador.");
+					return false;
+				}
 			}
 			
 			//$participant = self::find(array("password"), array(md5($password)));
@@ -427,6 +450,28 @@
 			$rs->execute();
 			$rows = $rs->fetch();
 			return $rows["count"];
+		}
+
+		/**
+	     * Ativa a conta do participante
+	     * @return boolean Resultado
+	     */
+		public function enable(){
+			$sql = "UPDATE participant SET enabled = :enabled WHERE id_participant = :id_participant";
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			return $statment->execute(array(":enabled"=> 1, ":id_participant"=> $this->getIdParticipant()));
+		}
+
+		/**
+	     * Desativa a conta do participante
+	     * @return boolean Resultado
+	     */
+		public function disable(){
+			$sql = "UPDATE participant SET enabled = :enabled WHERE id_participant = :id_participant";
+			$pdo = \Database::getConnection();
+			$statment = $pdo->prepare($sql);
+			return $statment->execute(array(":enabled"=> 0, ":id_participant"=> $this->getIdParticipant()));
 		}
 	}
 ?>

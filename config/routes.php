@@ -231,6 +231,9 @@
     $routes['GET'][] = array('route' => '/admin/participantes/:id/alterar', 'controller' => 'Admin\ParticipantController', 'action' => '_edit');
     $routes['POST'][] = array('route' => '/admin/participantes/:id/alterar', 'controller' => 'Admin\ParticipantController', 'action' => 'update');
     $routes['GET'][] = array('route' => '/admin/participantes/:id/remover', 'controller' => 'Admin\ParticipantController', 'action' => 'remove');
+    $routes['GET'][] = array('route' => '/admin/participantes/:id/ativar', 'controller' => 'Admin\ParticipantController', 'action' => 'enableParticipant');
+    $routes['GET'][] = array('route' => '/admin/participantes/:id/desativar', 'controller' => 'Admin\ParticipantController', 'action' => 'disableParticipant');
+
 
     //rotas para tipos (categorias) de participante
     $routes['GET'][] = array('route' => '/admin/participantes/tipos', 'controller' => 'Admin\ParticipantTypesController', 'action' => '_list'); 

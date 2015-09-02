@@ -14,6 +14,11 @@
 
 ----------
 
+----- Atualização 099 (02/08/15) -----
+
+- Atualizações nos tipos de participante
+- Finalizado bloqueio e desbloqueio de participante
+
 ----- Atualização 098 (28/08/15 - 31/08/15) -----
 
 - Atualização na documentação e nomenclaturas

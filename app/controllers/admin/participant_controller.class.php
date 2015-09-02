@@ -89,5 +89,39 @@
             $this->redirectTo("admin/participantes/lista");  
          }
       }
+
+      public function enableParticipant() {
+         if ($this->participant = \Participant::findById($this->params[":id"])) {
+            if ($this->participant->enable()) {
+               \flashMessage::successMessage("Participante ativado com sucesso.");
+               $this->redirectTo("admin/participantes/lista");
+            }
+            else {
+               \flashMessage::errorMessage("Erro ao tentar ativar o participante.");
+               $this->redirectTo("admin/participantes/lista");               
+            }
+         }
+         else {
+            \flashMessage::errorMessage("O participante que você está ativar não existe.");
+            $this->redirectTo("admin/participantes/lista");  
+         }
+      }
+
+      public function disableParticipant() {
+         if ($this->participant = \Participant::findById($this->params[":id"])) {
+            if ($this->participant->disable()) {
+               \flashMessage::successMessage("Participante desativado com sucesso.");
+               $this->redirectTo("admin/participantes/lista");
+            }
+            else {
+               \flashMessage::errorMessage("Erro ao tentar desativar o participante.");
+               $this->redirectTo("admin/participantes/lista");               
+            }
+         }
+         else {
+            \flashMessage::errorMessage("O participante que você está desativar não existe.");
+            $this->redirectTo("admin/participantes/lista");  
+         }
+      }
 	} 
 ?>

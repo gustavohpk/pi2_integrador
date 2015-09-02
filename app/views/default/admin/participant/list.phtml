@@ -33,9 +33,9 @@
 						<a href="<?=$this->getUri("admin/participantes/{$participant->getIdParticipant()}/alterar")?>" role="button" class="btn btn-primary btn-sm" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
 						<a href="<?=$this->getUri("admin/participantes/{$participant->getIdParticipant()}/remover")?>" role="button" class="btn btn-danger btn-sm" title="Excluir"><span class="glyphicon glyphicon-trash"></span></a>
 						<?php if ($participant->getEnabled()): ?>
-							<a href="" role="button" class="btn btn-material-deep-purple btn-sm" title="Bloquear Participante"><span class="glyphicon glyphicon-ban-circle"></span></a>
+							<a href="<?=$this->getUri("admin/participantes/{$participant->getIdParticipant()}/desativar")?>" role="button" class="btn btn-material-deep-purple btn-sm" title="Bloquear Participante"><span class="glyphicon glyphicon-ban-circle"></span></a>
 						<?php else: ?>
-							<a href="" role="button" class="btn btn-success btn-sm" title="Aprovar Participante"><span class="glyphicon glyphicon-ok-circle"></span></a>
+							<a href="<?=$this->getUri("admin/participantes/{$participant->getIdParticipant()}/ativar")?>" role="button" class="btn btn-success btn-sm" title="Aprovar Participante"><span class="glyphicon glyphicon-ok-circle"></span></a>
 						<?php endif; ?>
 					</td>
 				</tr>
