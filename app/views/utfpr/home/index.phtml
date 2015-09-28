@@ -5,6 +5,7 @@
 		<div class="row-events">
 			<div class="container">
 				<div class="row">
+					
 					<?php foreach ($this->events as $event) : ?>
 						<?php if ($event->getLogo()) : ?>
 							<?php $image = "data:image/jpeg;base64,". base64_encode($event->getLogo()); ?>

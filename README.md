@@ -1,20 +1,16 @@
 
------ BUGS CONHECIDOS -----
- 
-- As mensagens de erro referentes aos preços de evento não são exibidas, mas as validações funcionam
-- O participante é excluído, mas o model ou controller gera um erro. Ao atualizar volta à lista, mas exibe outra mensagem de erro.
-- Problema na contagem de vagas
-- Mensagens de confirmação ou erro de inscrição não estão funcionando corretamente
-- Pequeno bug no javascript da avaliação de eventos
-- Mensagens flash do admin/settings sendo exibidas várias vezes
-- Layout da galeria: as imagens estão quebrando a linha em algumas situações
-- O menu principal se sobrepõe ao conteúdo em algumas situações
-- Problema nas mensagens flash dos bônus de evento
-- Problema de redirecionamentos no painel do admin (provavelmente logado)
+----- Atualização 101 (16/09/15 - 18/09/15) -----
 
-----------
+- Atualizando documentação
+- Pequenas correções
 
------ Atualização 099 (02/08/15) -----
+
+----- Atualização 100 (03/09/15 - 08/09/15) -----
+
+- Atualização na documentação
+- Adicionada validação na exclusão de usuário do painel de administração
+
+----- Atualização 099 (02/09/15) -----
 
 - Atualizações nos tipos de participante
 - Finalizado bloqueio e desbloqueio de participante

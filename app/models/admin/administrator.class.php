@@ -190,5 +190,18 @@
 		public static function logout(){
 			unset($_SESSION["admin"]);
 		}
+
+		/**
+	     * Conta quantos administradores existem
+	     * @return int Resultado da contagem
+	     */
+		public static function count(){
+			$sql = "SELECT count(id_administrator) as count FROM administrator";
+			$pdo = \Database::getConnection();
+			$rs = $pdo->prepare($sql);
+			$rs->execute();
+			$rows = $rs->fetch();
+			return $rows["count"];
+		}
 	}
 ?>
