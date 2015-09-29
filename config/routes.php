@@ -61,7 +61,7 @@
     $routes['POST'][] = array('route' => '/conta/login', 'controller' => 'ParticipantController', 'action' => 'executeLogin');
     $routes['GET'][] = array('route' => '/conta/alterar', 'controller' => 'ParticipantController', 'action' => '_edit'); 
     $routes['POST'][] = array('route' => '/conta/:id/alterar', 'controller' => 'ParticipantController', 'action' => 'update');
-    $routes['GET'][] = array('route' => '/conta/senha', 'controller' => 'ParticipantController', 'action' => 'editpassword'); 
+    $routes['GET'][] = array('route' => '/conta/senha', 'controller' => 'ParticipantController', 'action' => '_editpassword'); 
     $routes['POST'][] = array('route' => '/conta/:id/senha', 'controller' => 'ParticipantController', 'action' => 'updatePassword'); 
 
     $routes['GET'][] = array('route' => '/conta/sair', 'controller' => 'ParticipantController', 'action' => 'logout');
